@@ -12,13 +12,11 @@ namespace RemoteControl
     {
         // Start is called before the first frame update
         private ClientConnection connection;
-
-        void Start()
+        public void EnterGame()
         {
             AddListener();
             CreatConnect();
         }
-
         public void CreatConnect()
         {
             connection = new GameObject().AddComponent<ClientConnection>();
@@ -53,11 +51,6 @@ namespace RemoteControl
                 Debug.Log("消息反序列号完成");
             }
            
-        }
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

@@ -41,6 +41,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\MySql.Data.dll" />
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.MidEast.dll" />
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.West.dll" />
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.CJK.dll" />
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -195,10 +200,10 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x9\OtherInfo.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cms\TimeStampedDataParser.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\cms\CMSSignedData.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cmp\CmpCertificate.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\isismtt\x509\ProfessionInfo.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\bcpg\SymmetricEncDataPacket.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\multiplier\ValidityPreCompInfo.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\isismtt\x509\ProfessionInfo.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cmp\CmpCertificate.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\bcpg\SymmetricEncDataPacket.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\digests\GOST3411_2012_512Digest.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\SignatureAndHashAlgorithm.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsServerCertificate.cs" />
@@ -271,8 +276,8 @@
     <Compile Include="Assets\Best HTTP\Source\Connections\TLS\Crypto\Impl\FastTlsBlockCipherImpl.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cmp\GenMsgContent.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x509\qualified\SemanticsInformation.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SignalRCore\Extensions.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\agreement\ECDHBasicAgreement.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SignalRCore\Extensions.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\pkcs\RSAESOAEPparams.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\icao\CscaMasterList.cs" />
     <Compile Include="Assets\Best HTTP\Source\SocketIO\SocketOptions.cs" />
@@ -1649,7 +1654,6 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\HandshakeType.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsSrpConfigVerifier.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\cms\CMSCompressedDataParser.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\custom\sec\SecT283R1Point.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\custom\sec\SecT283K1Curve.cs" />
     <Compile Include="Assets\Best HTTP\Examples\SignalR\Json Encoders\JSonDotnetEncoder.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x9\X962Parameters.cs" />
@@ -1657,6 +1661,7 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\CryptoHashAlgorithm.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\engines\RC532Engine.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\bsi\BsiObjectIdentifiers.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\custom\sec\SecT283R1Point.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\IDerivationParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\Shorts.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\Asn1Sequence.cs" />
@@ -1865,8 +1870,8 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\impl\TlsBlockCipherImpl.cs" />
     <Compile Include="Assets\Best HTTP\Source\JSON\LitJson\IJsonWrapper.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\generators\OpenSSLPBEParametersGenerator.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\ASN1Generator.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\io\TeeInputStream.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\ASN1Generator.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\encoders\BufferedDecoder.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\fpe\FpeEngine.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\cms\DefaultAuthenticatedAttributeTableGenerator.cs" />
@@ -2309,58 +2314,55 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.YamlDotNet">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll</HintPath>
     </Reference>
     <Reference Include="ReportGeneratorMerged">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.testtools.codecoverage@1.2.5\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.testtools.codecoverage@1.2.5\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="log4netPlastic">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.IonicZip">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\GoogleProto\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.TextureAssets">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\GoogleProto\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.CJK">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\I18N.CJK.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\I18N.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.MidEast">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\I18N.MidEast.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
     <Reference Include="I18N.West">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\I18N.West.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.West.dll</HintPath>
     </Reference>
-    <Reference Include="mysql.data">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\mysql.data.dll</HintPath>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.CJK">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.CJK.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.collab-proxy@2.3.1\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.IonicZip">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\GoogleProto\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.MidEast">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.MidEast.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.TextureAssets">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\GoogleProto\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -2729,10 +2731,10 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -41,6 +41,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\MySql.Data.dll" />
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.MidEast.dll" />
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.West.dll" />
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.CJK.dll" />
+    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -55,6 +60,7 @@
     <Compile Include="Assets\Scripts\Setting\SettingPanel.cs" />
     <Compile Include="Assets\Scripts\Data\AccountOperationInfo.cs" />
     <Compile Include="Assets\Scripts\GameMain.cs" />
+    <Compile Include="Assets\Scripts\AppLauncher.cs" />
     <Compile Include="Assets\Scripts\Connection.cs" />
     <Compile Include="Assets\Scripts\Utility\Timer\Timer.cs" />
     <Compile Include="Assets\Scripts\Data\DataManager_AccountOperation.cs" />
@@ -356,37 +362,34 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
     <Reference Include="ReportGeneratorMerged">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.testtools.codecoverage@1.2.5\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Protobuf">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\GoogleProto\Google.Protobuf.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>E:\Framework\RemoteControl\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\GoogleProto\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.CJK">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\I18N.CJK.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\I18N.dll</HintPath>
-    </Reference>
-    <Reference Include="I18N.MidEast">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\I18N.MidEast.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.testtools.codecoverage@1.2.5\lib\ReportGenerator\ReportGeneratorMerged.dll</HintPath>
     </Reference>
     <Reference Include="I18N.West">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\I18N.West.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.West.dll</HintPath>
     </Reference>
-    <Reference Include="mysql.data">
-      <HintPath>E:\Framework\RemoteControl\Assets\Plugins\mysql.data.dll</HintPath>
+    <Reference Include="I18N.CJK">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.CJK.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\GoogleProto\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.visualscripting@1.9.4\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N.MidEast">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.MidEast.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\GoogleProto\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="I18N">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -755,73 +758,73 @@
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Performance.Profile-Analyzer.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Performance.Profile-Analyzer.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>E:\Framework\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
