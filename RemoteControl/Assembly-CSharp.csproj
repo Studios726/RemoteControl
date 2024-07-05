@@ -50,45 +50,65 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Task\RuntimeDataBase.cs" />
     <Compile Include="Assets\Scripts\Event\ContomEventArgs.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\UIConst.cs" />
+    <Compile Include="Assets\Scripts\Utility\Singleton\ISingleton.cs" />
+    <Compile Include="Assets\Scripts\Setting\SettingPanel.cs" />
+    <Compile Include="Assets\Scripts\Data\AccountOperationInfo.cs" />
+    <Compile Include="Assets\Scripts\AppLauncher.cs" />
+    <Compile Include="Assets\Scripts\UI\LoadingPanel\LoadingPanelView.cs" />
+    <Compile Include="Assets\Scripts\Data\DataManager_AccountOperation.cs" />
+    <Compile Include="Assets\Scripts\Task\StackRuntimeData.cs" />
+    <Compile Include="Assets\Scripts\UI\LoadingPanel\LoadingPanelCtr.cs" />
+    <Compile Include="Assets\Scripts\UpdateTime.cs" />
+    <Compile Include="Assets\Scripts\Data\OperationInfo.cs" />
+    <Compile Include="Assets\Scripts\Event\EventName.cs" />
+    <Compile Include="Assets\Scripts\Data\DataManager.cs" />
+    <Compile Include="Assets\Scripts\Simulation\ModelAnglesDisplayer.cs" />
+    <Compile Include="Assets\Scripts\Singleton.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\IUIPresenter.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\UIID.cs" />
+    <Compile Include="Assets\Scripts\ConstStr.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\UIManager.cs" />
+    <Compile Include="Assets\Scripts\Utility\Debugger.cs" />
+    <Compile Include="Assets\Scripts\Simulation\StackerReclaimer.cs" />
+    <Compile Include="Assets\Scripts\Utility\Json\JsonMgr.cs" />
+    <Compile Include="Assets\Scripts\Task\TaskType.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\IUIView.cs" />
+    <Compile Include="Assets\Scripts\Event\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Utility\Utility.cs" />
+    <Compile Include="Assets\Scripts\Network\ServerCommand.cs" />
+    <Compile Include="Assets\Scripts\MessageCenter.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\UILayer.cs" />
+    <Compile Include="Assets\Scripts\UI\TopPanel\TopPanelCtr.cs" />
+    <Compile Include="Assets\Scripts\Task\TaskInfoBase.cs" />
+    <Compile Include="Assets\Scripts\Task\RuntimeDataBase.cs" />
     <Compile Include="Assets\Scripts\Simulation\CameraController.cs" />
     <Compile Include="Assets\Scripts\Event\ConnectEventArgs.cs" />
     <Compile Include="Assets\Scripts\Task\ScrapeTaskInfo.cs" />
     <Compile Include="Assets\Scripts\UI\MainPanel.cs" />
-    <Compile Include="Assets\Scripts\Utility\Singleton\ISingleton.cs" />
-    <Compile Include="Assets\Scripts\Setting\SettingPanel.cs" />
-    <Compile Include="Assets\Scripts\Data\AccountOperationInfo.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\UIID_Class.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\UIView.cs" />
     <Compile Include="Assets\Scripts\GameMain.cs" />
-    <Compile Include="Assets\Scripts\AppLauncher.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\MainPanelView.cs" />
     <Compile Include="Assets\Scripts\Connection.cs" />
     <Compile Include="Assets\Scripts\Utility\Timer\Timer.cs" />
-    <Compile Include="Assets\Scripts\Data\DataManager_AccountOperation.cs" />
     <Compile Include="Assets\Scripts\Network\SystemVariables.cs" />
-    <Compile Include="Assets\Scripts\Task\StackRuntimeData.cs" />
-    <Compile Include="Assets\Scripts\Data\OperationInfo.cs" />
-    <Compile Include="Assets\Scripts\Event\EventName.cs" />
+    <Compile Include="Assets\Scripts\UI\TopPanel\TopPanelView.cs" />
     <Compile Include="Assets\Scripts\Task\ReclaimTaskInfo.cs" />
-    <Compile Include="Assets\Scripts\Data\DataManager.cs" />
-    <Compile Include="Assets\Scripts\Simulation\ModelAnglesDisplayer.cs" />
-    <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\Address.cs" />
     <Compile Include="Assets\Scripts\Data\DataManager_Account.cs" />
     <Compile Include="Assets\Scripts\Network\MySqlHelper.cs" />
-    <Compile Include="Assets\Scripts\ConstStr.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\MainPanelCtr.cs" />
+    <Compile Include="Assets\Scripts\UI\LoginPanel\LoginPanelView.cs" />
     <Compile Include="Assets\Scripts\Data\AccountInfo.cs" />
-    <Compile Include="Assets\Scripts\Simulation\StackerReclaimer.cs" />
-    <Compile Include="Assets\Scripts\Utility\Json\JsonMgr.cs" />
-    <Compile Include="Assets\Scripts\Task\TaskType.cs" />
+    <Compile Include="Assets\Scripts\UI\Mechanism\UIPresenter.cs" />
+    <Compile Include="Assets\Scripts\UI\LoginPanel\LoginPanelCtr.cs" />
     <Compile Include="Assets\Scripts\Utility\Singleton\MonoSingleton.cs" />
-    <Compile Include="Assets\Scripts\Event\EventManager.cs" />
-    <Compile Include="Assets\Scripts\Network\ServerCommand.cs" />
     <Compile Include="Assets\Scripts\Task\ReclaimRuntimeData.cs" />
     <Compile Include="Assets\Scripts\ClientConnection.cs" />
     <Compile Include="Assets\Scripts\Task\ScrapeRuntimeData.cs" />
     <Compile Include="Assets\Scripts\Task\StackTaskInfo.cs" />
-    <Compile Include="Assets\Scripts\MessageCenter.cs" />
-    <Compile Include="Assets\Scripts\Task\TaskInfoBase.cs" />
     <Compile Include="Assets\Scripts\UIDataManager.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
@@ -757,17 +777,56 @@
     <Reference Include="System.Xml.Serialization">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ResourceManager">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.ResourceManager.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Shared.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
       <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
@@ -781,35 +840,14 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
       <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    <Reference Include="Unity.Addressables.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Addressables.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
@@ -820,11 +858,11 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    <Reference Include="Unity.Addressables">
+      <HintPath>E:\Work\RemoteControl\RemoteControl\Library\ScriptAssemblies\Unity.Addressables.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

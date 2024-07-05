@@ -9,11 +9,24 @@ public class AppLauncher : MonoBehaviour
     private GameMain _gameMain;
     private void Awake()
     {
-        //Game 初始化
+        //
+        UIInit();
         _gameMain=this.gameObject.AddComponent<GameMain>();
         GameStart();
     }
 
+    public void UIInit()
+    {
+        UILayer[] uiLayers =new[]
+        {
+             new UILayer("UILayer",1),
+             new UILayer("UIToastLayer",60),
+             new UILayer("UIPopupLayer",3020),
+             new UILayer("UILoadingLayer",3021),
+
+        };
+        UIManager.Instance.Init(uiLayers);
+    }
     private void GameStart()
     {
         _gameMain.EnterGame();
