@@ -7,7 +7,7 @@ public class LoadingPanelView : UIView<LoadingPanelCtr>
 {
    private Text _loadingTxt;
    private Slider _progressSlider;
-   public override void InitUIElements()
+   public override void InitUIElements(UIArgs uiArgs)
    {
       _progressSlider = RootObj.transform.Find("loadingSlider").GetComponent<Slider>();
       

@@ -6,13 +6,13 @@ public static class ConstStr
     public const string CANVAS_PREFAB = "Assets/Res/UI/CanvasPrefab.prefab";
     public const string VIEW_PREFAB = "Assets/Res/UI/ViewPrefab.prefab";
     public const string EVENTSYSTEM_PREFAB = "Assets/Res/UI/EventSystemPrefab.prefab";
-    public const string ACCOUNT_RECORD_PREFAB = "Assets/Res/UI/UI/Settings/AccountRecord.prefab";
+    public const string ACCOUNT_RECORD_PREFAB = "UI/AccountRecord";
     public const string OPERATION_RECORD_PREFAB = "Assets/Res/UI/UI/Settings/OperationRecord.prefab";
-    public const string ACCOUNT_OPERATION_RECORD_PREFAB = "Assets/Res/UI/UI/Settings/AccountOperationRecord.prefab";
-    public const string ACCOUNT_TAB_ON = "Assets/Res/UI/UI/Settings/AccountOn.png";
-    public const string ACCOUNT_TAB_OFF = "Assets/Res/UI/UI/Settings/AccountOff.png";
-    public const string MANAGER_TAB_ON = "Assets/Res/UI/UI/Settings/ManagerOn.png";
-    public const string MANAGER_TAB_OFF = "Assets/Res/UI/UI/Settings/ManagerOff.png";
+    public const string ACCOUNT_OPERATION_RECORD_PREFAB = "UI/AccountOperationRecord";
+    public const string ACCOUNT_TAB_ON = "Image/AccountOn";
+    public const string ACCOUNT_TAB_OFF = "Image/AccountOff";
+    public const string MANAGER_TAB_ON = "Image/ManagerOn";
+    public const string MANAGER_TAB_OFF = "Image/ManagerOff";
     public const string OPERATION_TAB_ON = "Assets/Res/UI/UI/Settings/OperationOn.png";
     public const string OPERATION_TAB_OFF = "Assets/Res/UI/UI/Settings/OperationOff.png";
     #endregion
@@ -285,5 +285,12 @@ public static class ConstStr
     #region SystemCode
     public const string CONTROL_SYSTEM = "MC";
     public const string SCAN_SYSTEM = "SCAN";
+    #endregion
+
+    #region
+
+    public const string PROJECT_NAME = "铜川电厂斗轮机远程控制系统";
+
+
     #endregion
 }

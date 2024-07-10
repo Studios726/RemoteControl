@@ -20,7 +20,7 @@ public class AppLauncher : MonoBehaviour
         UILayer[] uiLayers =new[]
         {
              new UILayer("UILayer",1),
-             new UILayer("UIToastLayer",60),
+             new UILayer("UITopLayer",60),
              new UILayer("UIPopupLayer",3020),
              new UILayer("UILoadingLayer",3021),
 

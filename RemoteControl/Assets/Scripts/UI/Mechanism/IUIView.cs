@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IUIView
 {
     GameObject RootObj { get; }
-    void InitUIElements();
+    void InitUIElements(UIArgs uiArgs);
 }

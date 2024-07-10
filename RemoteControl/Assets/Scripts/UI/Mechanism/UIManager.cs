@@ -38,7 +38,7 @@ public class UIManager : Singleton<UIManager>
          canvas.name = uiLayers[i].layerName;
       }
    }
-   public void OpenUI(UIID id)
+   public void OpenUI(UIID id,UIArgs uiArgs=null)
    {
       if (!_uiPresenter.TryGetValue(id, out IUIPresenter uiPresenter))
       {
@@ -49,34 +49,43 @@ public class UIManager : Singleton<UIManager>
             if (_canvasList[i].name==id.LayerName)
             {
                rootObj = GameObject.Instantiate(prefab, _canvasList[i].transform);
+               rootObj.transform.localPosition=Vector3.zero;
                IUIView view = Activator.CreateInstance(id.ViewType) as IUIView;
                IUIPresenter presenter = Activator.CreateInstance(id.PresenterType) as IUIPresenter;
 
                uiPresenter = presenter;
                _uiPresenter[id] = uiPresenter;
 
-               id.ViewType.GetField("presenter").SetValue(view, presenter);
+               id.ViewType.GetField("_ctr").SetValue(view, presenter);
                id.PresenterType.GetField("view").SetValue(presenter, view);
                id.ViewType.GetField("_rootObj", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(view, rootObj);
-               view.InitUIElements();
+               view.InitUIElements(uiArgs);
+               
                break;
             }
          }
       }
       if (!_uiActive.TryGetValue(id, out bool cntActive) || !cntActive)
       {
-         uiPresenter.ShowView();
+         uiPresenter?.ShowView(uiArgs);
          _uiActive[id] = true;
       }
    }
-   public void CloseUI(UIID id)
+   public void CloseUI(UIID id)  
    {
+    
       if (!_uiActive.TryGetValue(id, out bool cntActive) || cntActive)
       {
          _uiActive[id] = false;
          if  (_uiPresenter.TryGetValue(id, out IUIPresenter uiPresenter))
          {
             uiPresenter.HideView();
+            // if (isdelete)
+            // {
+            //    _uiActive.Remove(id);
+            //    _uiPresenter.Remove(id);
+            //    // GameObject.Destroy((UIPresenter<>)uiPresenter.view.RootObj);
+            // }
          }
 
       }

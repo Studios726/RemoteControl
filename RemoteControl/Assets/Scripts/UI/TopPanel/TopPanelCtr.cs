@@ -8,7 +8,7 @@ public class TopPanelCtr : UIPresenter<TopPanelView>
     {
        
     }
-    public override void ShowView()
+    public override void ShowView(UIArgs uiArgs=null)
     {
        
     }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Utility
 {
@@ -11,6 +13,12 @@ namespace Utility
         {
             return transform.Find(name)?.GetComponent<T>();
         }
+
+        public static void LoadSprite(this Image image,string url)
+        {
+            image.sprite = Resources.Load<Sprite>(url);
+        }
+
     }
 
 }

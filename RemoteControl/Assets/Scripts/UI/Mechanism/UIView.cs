@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class UIView<T> : IUIView where T : IUIPresenter
 {
-    public T presenter;
+    public T _ctr;
 
     protected GameObject _rootObj;
     public GameObject RootObj { get => _rootObj; }
 
-    public abstract void InitUIElements();
+    public abstract void InitUIElements(UIArgs uiArgs=null);
 }

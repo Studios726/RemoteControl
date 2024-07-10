@@ -6,7 +6,7 @@ public abstract class UIPresenter<T> : IUIPresenter where T : IUIView
 {
     public T view;
 
-    public virtual void ShowView()
+    public virtual void ShowView(UIArgs uiArgs=null)
     {
         view.RootObj.SetActive(true);
     }

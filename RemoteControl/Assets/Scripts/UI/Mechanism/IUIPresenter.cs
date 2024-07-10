@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IUIPresenter
 {
-    void ShowView();
+    void ShowView(UIArgs uiArgs);
     void HideView();
 }

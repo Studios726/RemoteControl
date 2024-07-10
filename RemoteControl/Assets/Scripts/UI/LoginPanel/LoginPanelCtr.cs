@@ -7,5 +7,16 @@ public class LoginPanelCtr :UIPresenter<LoginPanelView>
     public void Login(string account, string password)
     {
         Debugger.LogError("账号"+account+"  "+password);
+        if (DataManager.Instance.CheckLoginInfo(account, password))
+        {
+            // UISystem.Instance.SetActive(UIID.Login, false);
+            // UISystem.Instance.SetActive(UIID.TopPnl, true);
+            // UISystem.Instance.SetActive(UIID.BottomPnlRight, true);
+            //
+            // Subject.Instance.Notify(ConstStr.LOGIN_SUBJECT, DataManager.Instance.CurrentAccount);
+            UIManager.Instance.OpenUI(UIID.MainPanel);
+            UIManager.Instance.OpenUI(UIID.TopPanel);
+            Debug.Log("登陆成功");
+        }
     }
 }

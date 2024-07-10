@@ -16,8 +16,7 @@ namespace RemoteControl
         {
             AddListener();
             CreatConnect();
-            UIManager.Instance.OpenUI(UIID.MainPanel);
-            UIManager.Instance.OpenUI(UIID.TopPanel);
+            UIManager.Instance.OpenUI(UIID.LoginPanel);
         }
         public void CreatConnect()
         {
