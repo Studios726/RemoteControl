@@ -41,11 +41,6 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\MySql.Data.dll" />
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.MidEast.dll" />
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.West.dll" />
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.CJK.dll" />
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -72,11 +67,13 @@
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\IUIPresenter.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\UIID.cs" />
+    <Compile Include="Assets\Scripts\UI\HistoryWarningPanel\HistoryPanelView.cs" />
     <Compile Include="Assets\Scripts\ConstStr.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\UIManager.cs" />
     <Compile Include="Assets\Scripts\Utility\Debugger.cs" />
     <Compile Include="Assets\Scripts\Simulation\StackerReclaimer.cs" />
     <Compile Include="Assets\Scripts\Utility\Json\JsonMgr.cs" />
+    <Compile Include="Assets\Scripts\UI\HistoryWarningPanel\SearchPanel.cs" />
     <Compile Include="Assets\Scripts\Task\TaskType.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\IUIView.cs" />
     <Compile Include="Assets\Scripts\Event\EventManager.cs" />
@@ -119,6 +116,7 @@
     <Compile Include="Assets\Scripts\Utility\Singleton\MonoSingleton.cs" />
     <Compile Include="Assets\Scripts\Task\ReclaimRuntimeData.cs" />
     <Compile Include="Assets\Scripts\ClientConnection.cs" />
+    <Compile Include="Assets\Scripts\UI\HistoryWarningPanel\HistoryPanelCtr.cs" />
     <Compile Include="Assets\Scripts\Task\ScrapeRuntimeData.cs" />
     <Compile Include="Assets\Scripts\Task\StackTaskInfo.cs" />
     <Compile Include="Assets\Scripts\UIDataManager.cs" />

@@ -28,7 +28,7 @@ public class ConfirmPanelArgs : UIArgs
         get  =>_confirmAction;
         set => _confirmAction = value;
     }
-    public ConfirmPanelArgs(string des, Action cancleAction, Action confirmAction)
+    public ConfirmPanelArgs(string des, Action cancleAction=null, Action confirmAction=null)
     {
         Describe = des;
         CancleAction = cancleAction;

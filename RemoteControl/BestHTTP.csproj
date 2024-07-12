@@ -41,11 +41,6 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\MySql.Data.dll" />
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.MidEast.dll" />
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.West.dll" />
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.CJK.dll" />
-    <Analyzer Include="E:\Work\RemoteControl\RemoteControl\Assets\Plugins\MySql\I18N.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
@@ -131,11 +126,11 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsServerCertificate.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\security\InvalidParameterException.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\security\WrapperUtilities.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsFatalAlertReceived.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\crmf\EncKeyWithID.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\bcpg\EdSecretBcpgKey.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\multiplier\FixedPointPreCompInfo.cs" />
     <Compile Include="Assets\Best HTTP\Examples\Helpers\SelectorUI\SampleSelectorUI.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsFatalAlertReceived.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\ParametersWithID.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\Srp6GroupParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\SignalR\Connection.cs" />
@@ -190,8 +185,8 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cms\RecipientKeyIdentifier.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\cms\SignerId.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\multiplier\WNafUtilities.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\modes\IBlockCipherMode.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\SrtpProtectionProfile.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\modes\IBlockCipherMode.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\nist\KMACwithSHAKE128_params.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\x509\PrincipalUtil.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\cms\CMSAuthenticatedDataGenerator.cs" />
@@ -346,9 +341,9 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\TlsDHDomain.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\custom\sec\SecP128R1Curve.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\DatagramTransport.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\ECKeyGenerationParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\Connections\TLS\Crypto\Impl\FastTlsAeadCipherImpl.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\io\PushbackStream.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\ECKeyGenerationParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\DefaultTlsServer.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\DerT61String.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x509\AttributeCertificate.cs" />
@@ -452,8 +447,8 @@
     <Compile Include="Assets\Best HTTP\Source\Extensions\BufferPoolMemoryStream.cs" />
     <Compile Include="Assets\Best HTTP\Source\Connections\TLS\Crypto\Impl\FastTlsBlockCipher.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\ByteQueueInputStream.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsEccUtilities.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\ocsp\OCSPException.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsEccUtilities.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x500\style\IetfUtilities.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\kisa\KISAObjectIdentifiers.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\bcpg\EdDsaPublicBcpgKey.cs" />
@@ -543,8 +538,8 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\X25519PublicKeyParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TrustedAuthority.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\impl\bc\BcTlsDsaSigner.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cms\CompressedData.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\security\SecureRandom.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cms\CompressedData.cs" />
     <Compile Include="Assets\Best HTTP\Source\SignalRCore\Messages\NegotiationResult.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\IAsn1String.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\security\GeneralSecurityException.cs" />
@@ -565,8 +560,8 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\util\Pack.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\IEntropySource.cs" />
     <Compile Include="Assets\Best HTTP\Source\Extensions\Timer.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\impl\bc\BcTlsAeadCipherImpl.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\io\pem\PemWriter.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\impl\bc\BcTlsAeadCipherImpl.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\engines\DesEdeWrapEngine.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\prng\DigestRandomGenerator.cs" />
     <Compile Include="Assets\Best HTTP\Source\Core\PluginEvents.cs" />
@@ -864,8 +859,8 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\crmf\CrmfObjectIdentifiers.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cms\ContentInfo.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\encoders\BufferedEncoder.cs" />
-    <Compile Include="Assets\Best HTTP\Source\Caching\HTTPCacheFileLock.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\SimpleBlockResult.cs" />
+    <Compile Include="Assets\Best HTTP\Source\Caching\HTTPCacheFileLock.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\IdentifierType.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\DatagramSender.cs" />
     <Compile Include="Assets\Best HTTP\Source\Connections\HTTPConnection.cs" />
@@ -1201,8 +1196,8 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\impl\bc\BcTlsRawKeyCertificate.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\ocsp\RespID.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x509\TBSCertList.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\modes\EcbBlockCipher.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\io\BaseOutputStream.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\modes\EcbBlockCipher.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\ECFieldElement.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\isismtt\x509\AdmissionSyntax.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\multiplier\GlvMultiplier.cs" />
@@ -1283,10 +1278,10 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\ECDomainParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\PrimitiveEncoding.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\pkcs\PBEParameter.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\Asn1RelativeOid.cs" />
     <Compile Include="Assets\Best HTTP\Examples\SignalRCore\Encoders\LitJsonEncoder.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\AbstractTlsPeer.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\io\TeeOutputStream.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\Asn1RelativeOid.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\signers\GOST3410DigestSigner.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\macs\GMac.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\signers\Ed25519Signer.cs" />
@@ -1357,8 +1352,8 @@
     <Compile Include="Assets\Best HTTP\Source\Extensions\HeaderValue.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\Asn1Type.cs" />
     <Compile Include="Assets\Best HTTP\Examples\Helpers\Components\Cache.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\macs\CfbBlockCipherMac.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\DtlsHandshakeRetransmit.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\macs\CfbBlockCipherMac.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\util\BasicAlphabetMapper.cs" />
     <Compile Include="Assets\Best HTTP\Source\Extensions\KeyValuePairList.cs" />
     <Compile Include="Assets\Best HTTP\Examples\SignalR\Authentication Providers\SampleHeaderAuthentication.cs" />
@@ -1465,8 +1460,8 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\util\Enums.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\DHParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\pkcs\X509CertificateEntry.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\rfc7748\X448.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\PskKeyExchangeMode.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\ec\rfc7748\X448.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\signers\DsaDigestSigner.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\TlsCryptoUtilities.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cms\AuthenticatedData.cs" />
@@ -1728,8 +1723,8 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\Asn1ParsingException.cs" />
     <Compile Include="Assets\Best HTTP\Source\Logger\LoggingContext.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\DerNull.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\DtlsEpoch.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\PrfAlgorithm.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\DtlsEpoch.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\IAsymmetricCipherKeyPairGenerator.cs" />
     <Compile Include="Assets\Best HTTP\Source\SignalR\Transports\WebSocketTransport.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\ocsp\UnknownStatus.cs" />

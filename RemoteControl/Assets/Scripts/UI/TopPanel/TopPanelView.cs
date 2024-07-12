@@ -51,18 +51,18 @@ public class TopPanelView : UIView<TopPanelCtr>
         });
         _alarmBtn.onClick.AddListener(() => //打开报警处理界面
         {
-            // UISystem.Instance.SetActive(UIID.HistoryWarning, true);
-            // UISystem.Instance.SetActive(UIID.Settings, false);
-            // WorkScreenPanel.gameObject.SetActive(false);
+            UIManager.Instance.OpenUI(UIID.HistoryPanel);
+            UIManager.Instance.CloseUI(UIID.SettingPanel);
+     
         });
         _userBtn.onClick.AddListener(() => { _userPnl.gameObject.SetActive(!_userPnl.gameObject.activeSelf); });
         _settingBtn.onClick.AddListener(() =>
         {
             _userPnl.gameObject.SetActive(false);
             UIManager.Instance.OpenUI(UIID.SettingPanel);
+            UIManager.Instance.CloseUI(UIID.HistoryPanel);
             Debugger.LogError("打开setting页面");
-            // UISystem.Instance.SetActive(UIID.Settings, true);
-            // UISystem.Instance.SetActive(UIID.HistoryWarning, false);
+          
         });
         _logoutBtn.onClick.AddListener(() =>
         {

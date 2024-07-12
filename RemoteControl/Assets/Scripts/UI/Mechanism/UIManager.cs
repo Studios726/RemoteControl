@@ -60,7 +60,6 @@ public class UIManager : Singleton<UIManager>
                id.PresenterType.GetField("view").SetValue(presenter, view);
                id.ViewType.GetField("_rootObj", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(view, rootObj);
                view.InitUIElements(uiArgs);
-               
                break;
             }
          }
