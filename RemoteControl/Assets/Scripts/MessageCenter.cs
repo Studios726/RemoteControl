@@ -1,53 +1,57 @@
+using System;
 using System.Collections.Generic;
-using RemoteControl.Event;
 using UnityEngine;
-
+using RemoteControl.Event;
 
 public enum MessageType
 {
-    Plc=1000,
+    Plc // 由于是示例，这里省略了枚举值的赋值。
 }
 
 public class MessageCenter : Singleton<MessageCenter>
 {
+    public delegate void MessageDelHandle(string message);
 
-    // 消息委托
-    public delegate void messageDelHandle(string message);
-    // 消息字典
-    private Dictionary<int, messageDelHandle> messageMap = new Dictionary<int, messageDelHandle>();
+    private Dictionary<int, List<MessageDelHandle>> messageMap = new Dictionary<int, List<MessageDelHandle>>();
 
-    /// <summary>
-    /// 注册监听
-    /// </summary>
-    public void RegisterListener(int messageType, messageDelHandle handle)
+    public void RegisterListener(int messageType, MessageDelHandle handle)
     {
         if (handle == null) return;
- 
-        // 把事件添加到对应的委托中
-        messageDelHandle myHandle = null;
-        messageMap.TryGetValue(messageType, out myHandle);
-        messageMap[messageType] = myHandle + handle;
 
+        if (!messageMap.ContainsKey(messageType))
+        {
+            messageMap[messageType] = new List<MessageDelHandle>();
+        }
+
+        messageMap[messageType].Add(handle);
     }
-    /// <summary>
-    /// 移除监听
-    /// </summary>
-    public void RemoveListener(int messageType, messageDelHandle handle)
+
+    public void RemoveListener(int messageType, MessageDelHandle handle)
     {
-        if (handle == null) return;
-        messageMap[messageType] =messageMap[messageType]-handle;
+        if (handle == null || !messageMap.ContainsKey(messageType)) return;
+
+        List<MessageDelHandle> handlers = messageMap[messageType];
+        if (handlers.Contains(handle))
+        {
+            handlers.Remove(handle);
+            // 如果移除后列表为空，考虑从messageMap中移除该键
+            if (handlers.Count == 0)
+            {
+                messageMap.Remove(messageType);
+            }
+        }
     }
- 
-    public void RegisterListener(MessageType messageType, messageDelHandle handle) {
+
+    public void RegisterListener(MessageType messageType, MessageDelHandle handle)
+    {
         RegisterListener((int)messageType, handle);
     }
-    public void RemoveListener(MessageType messageType, messageDelHandle handle)
+
+    public void RemoveListener(MessageType messageType, MessageDelHandle handle)
     {
-        RemoveListener((int) messageType, handle);
+        RemoveListener((int)messageType, handle);
     }
-    /// <summary>
-    /// 清空消息
-    /// </summary>
+
     public void Clear()
     {
         messageMap.Clear();
@@ -55,31 +59,40 @@ public class MessageCenter : Singleton<MessageCenter>
 
     public void ReadJson(string json, SocketType type)
     {
-        // if (type==SocketType.Socket1)
-        // {
-        //     SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
-        // }
-        EventManager.Instance.TriggerEvent(EventName.Message,this,new MessageEventArgs(json,type));
+        // 此处省略具体实现，根据type来处理不同的json数据
+        EventManager.Instance.TriggerEvent(EventName.Message, this, new MessageEventArgs(json, type));
     }
+
     public void SendMessage<T>(int messageType, T body)
     {
- 
-        messageDelHandle handle;
-        if (messageMap.TryGetValue(messageType, out handle))
+        List<MessageDelHandle> handlers;
+        if (messageMap.TryGetValue(messageType, out handlers))
         {
-            string json = JsonMgr.Serialize<T>(body);
+            string json;
             try
             {
-                if (handle != null)
+                json = JsonMgr.Serialize<T>(body);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"序列化失败: {e.Message}");
+                return; // 序列化失败，直接返回不再发送
+            }
+
+            try
+            {
+                foreach (var handle in handlers)
                 {
-                    handle(json);
+                    if (handle != null)
+                    {
+                        handle(json);
+                    }
                 }
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
-                Debug.LogError("发送失败");
+                Debug.LogError($"发送失败: {e.Message}");
             }
         }
- 
     }
 }
