@@ -49,7 +49,7 @@ namespace BestHTTP.SignalRCore.Transports
 #if !UNITY_WEBGL || UNITY_EDITOR
                     , (this.connection.Options.WebsocketOptions?.ExtensionsFactory ?? WebSocket.WebSocket.GetDefaultExtensions)?.Invoke()
 #endif
-                    );
+                );
 
                 this.webSocket.Context.Add("Transport", this.Context);
             }

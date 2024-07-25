@@ -17,7 +17,7 @@ public class ClientConnection:MonoBehaviour
     WebSocket webSocket;
     private bool lockReconnect = false;
     private Coroutine _pingCor, _clientPing, _serverPing;
-
+    public bool isConnect;
     public void Init(string _address,SocketType type)
     {
         socketType = type;
@@ -68,6 +68,7 @@ public class ClientConnection:MonoBehaviour
  
     void OnOpen(WebSocket ws)
     {
+        isConnect = true;
         EventManager.Instance.TriggerEvent(EventName.ConnectionSuccess,this,new ConnectEventArgs(socketType));
         // Debug.Log("websocket连接成功");
         // if (_pingCor != null)
@@ -91,6 +92,7 @@ public class ClientConnection:MonoBehaviour
  
     void OnClosed(WebSocket ws, UInt16 code, string message)
     {
+        isConnect = false;
         Debug.LogFormat("OnClosed: code={0}, msg={1}", code, message);
         webSocket = null;
         ReConnect();

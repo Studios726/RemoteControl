@@ -441,9 +441,9 @@ namespace BestHTTP.SignalRCore
                     }
                     else // Internal server error?
                         errorReason = string.Format("Negotiation Request Finished Successfully, but the server sent an error. Status Code: {0}-{1} Message: {2}",
-                                                        resp.StatusCode,
-                                                        resp.Message,
-                                                        resp.DataAsText);
+                            resp.StatusCode,
+                            resp.Message,
+                            resp.DataAsText);
                     break;
 
                 // The request finished with an unexpected error. The request's Exception property may contain more info about the error.
@@ -614,13 +614,13 @@ namespace BestHTTP.SignalRCore
                 long id = InvokeImp(target,
                     args,
                     (message) =>
-                        {
-                            bool isSuccess = string.IsNullOrEmpty(message.error);
-                            if (isSuccess)
-                                future.Assign((TResult)this.Protocol.ConvertTo(typeof(TResult), message.result));
-                            else
-                                future.Fail(new Exception(message.error));
-                        },
+                    {
+                        bool isSuccess = string.IsNullOrEmpty(message.error);
+                        if (isSuccess)
+                            future.Assign((TResult)this.Protocol.ConvertTo(typeof(TResult), message.result));
+                        else
+                            future.Fail(new Exception(message.error));
+                    },
                     typeof(TResult));
 
                 if (id < 0)
@@ -689,13 +689,13 @@ namespace BestHTTP.SignalRCore
                 long id = InvokeImp(target,
                     args,
                     (message) =>
-                        {
-                            bool isSuccess = string.IsNullOrEmpty(message.error);
-                            if (isSuccess)
-                                future.Assign(message.item);
-                            else
-                                future.Fail(new Exception(message.error));
-                        },
+                    {
+                        bool isSuccess = string.IsNullOrEmpty(message.error);
+                        if (isSuccess)
+                            future.Assign(message.item);
+                        else
+                            future.Fail(new Exception(message.error));
+                    },
                     typeof(object));
 
                 if (id < 0)
@@ -823,35 +823,35 @@ namespace BestHTTP.SignalRCore
                 {
                     // StreamItem message contains only one item.
                     case MessageTypes.StreamItem:
-                        {
-                            if (controller.IsCanceled)
-                                break;
-
-                            TDown item = (TDown)this.Protocol.ConvertTo(typeof(TDown), msg.item);
-
-                            future.AssignItem(item);
+                    {
+                        if (controller.IsCanceled)
                             break;
-                        }
+
+                        TDown item = (TDown)this.Protocol.ConvertTo(typeof(TDown), msg.item);
+
+                        future.AssignItem(item);
+                        break;
+                    }
 
                     case MessageTypes.Completion:
+                    {
+                        bool isSuccess = string.IsNullOrEmpty(msg.error);
+                        if (isSuccess)
                         {
-                            bool isSuccess = string.IsNullOrEmpty(msg.error);
-                            if (isSuccess)
+                            // While completion message must not contain any result, this should be future-proof
+                            if (!controller.IsCanceled && msg.result != null)
                             {
-                                // While completion message must not contain any result, this should be future-proof
-                                if (!controller.IsCanceled && msg.result != null)
-                                {
-                                    TDown result = (TDown)this.Protocol.ConvertTo(typeof(TDown), msg.result);
+                                TDown result = (TDown)this.Protocol.ConvertTo(typeof(TDown), msg.result);
 
-                                    future.AssignItem(result);
-                                }
-
-                                future.Finish();
+                                future.AssignItem(result);
                             }
-                            else
-                                future.Fail(new Exception(msg.error));
-                            break;
+
+                            future.Finish();
                         }
+                        else
+                            future.Fail(new Exception(msg.error));
+                        break;
+                    }
                 }
             };
             
@@ -898,38 +898,38 @@ namespace BestHTTP.SignalRCore
                 {
                     // StreamItem message contains only one item.
                     case MessageTypes.StreamItem:
-                        {
-                            if (controller.IsCanceled)
-                                break;
-
-                            TResult item = (TResult)this.Protocol.ConvertTo(typeof(TResult), msg.item);
-
-                            future.AssignItem(item);
+                    {
+                        if (controller.IsCanceled)
                             break;
-                        }
+
+                        TResult item = (TResult)this.Protocol.ConvertTo(typeof(TResult), msg.item);
+
+                        future.AssignItem(item);
+                        break;
+                    }
 
                     case MessageTypes.Completion:
+                    {
+                        bool isSuccess = string.IsNullOrEmpty(msg.error);
+                        if (isSuccess)
                         {
-                            bool isSuccess = string.IsNullOrEmpty(msg.error);
-                            if (isSuccess)
+                            // While completion message must not contain any result, this should be future-proof
+                            if (!controller.IsCanceled && msg.result != null)
                             {
-                                // While completion message must not contain any result, this should be future-proof
-                                if (!controller.IsCanceled && msg.result != null)
-                                {
-                                    TResult result = (TResult)this.Protocol.ConvertTo(typeof(TResult), msg.result);
+                                TResult result = (TResult)this.Protocol.ConvertTo(typeof(TResult), msg.result);
 
-                                    future.AssignItem(result);
-                                }
+                                future.AssignItem(result);
+                            }
 
-                                future.Finish();
-                            }
-                            else
-                            {
-                                var ex = new Exception(msg.error);
-                                future.Fail(ex);
-                            }
-                            break;
+                            future.Finish();
                         }
+                        else
+                        {
+                            var ex = new Exception(msg.error);
+                            future.Fail(ex);
+                        }
+                        break;
+                    }
                 }
             };
 
@@ -1088,16 +1088,42 @@ namespace BestHTTP.SignalRCore
                         break;
 
                     case MessageTypes.Invocation:
+                    {
+                        Subscription subscribtion = null;
+                        if (this.subscriptions.TryGetValue(message.target, out subscribtion))
                         {
-                            Subscription subscribtion = null;
-                            if (this.subscriptions.TryGetValue(message.target, out subscribtion))
-                            {
-                                if (subscribtion.callbacks?.Count == 0 && subscribtion.functionCallbacks?.Count == 0)
-                                    HTTPManager.Logger.Warning("HubConnection", $"No callback for invocation '{message.ToString()}'", this.Context);
+                            if (subscribtion.callbacks?.Count == 0 && subscribtion.functionCallbacks?.Count == 0)
+                                HTTPManager.Logger.Warning("HubConnection", $"No callback for invocation '{message.ToString()}'", this.Context);
 
-                                for (int i = 0; i < subscribtion.callbacks.Count; ++i)
+                            for (int i = 0; i < subscribtion.callbacks.Count; ++i)
+                            {
+                                var callbackDesc = subscribtion.callbacks[i];
+
+                                object[] realArgs = null;
+                                try
                                 {
-                                    var callbackDesc = subscribtion.callbacks[i];
+                                    realArgs = this.Protocol.GetRealArguments(callbackDesc.ParamTypes, message.arguments);
+                                }
+                                catch (Exception ex)
+                                {
+                                    HTTPManager.Logger.Exception("HubConnection", "OnMessages - Invocation - GetRealArguments", ex, this.Context);
+                                }
+
+                                try
+                                {
+                                    callbackDesc.Callback.Invoke(realArgs);
+                                }
+                                catch (Exception ex)
+                                {
+                                    HTTPManager.Logger.Exception("HubConnection", "OnMessages - Invocation - Invoke", ex, this.Context);
+                                }
+                            }
+
+                            if (subscribtion.functionCallbacks != null)
+                            {
+                                for (int i = 0; i < subscribtion.functionCallbacks.Count; ++i)
+                                {
+                                    var callbackDesc = subscribtion.functionCallbacks[i];
 
                                     object[] realArgs = null;
                                     try
@@ -1106,126 +1132,100 @@ namespace BestHTTP.SignalRCore
                                     }
                                     catch (Exception ex)
                                     {
-                                        HTTPManager.Logger.Exception("HubConnection", "OnMessages - Invocation - GetRealArguments", ex, this.Context);
+                                        HTTPManager.Logger.Exception("HubConnection", "OnMessages - Function Invocation - GetRealArguments", ex, this.Context);
                                     }
 
                                     try
                                     {
-                                        callbackDesc.Callback.Invoke(realArgs);
+                                        var result = callbackDesc.Callback(realArgs);
+
+                                        if (result is Task task && task.GetType() is Type taskType && taskType.IsGenericType)
+                                        {
+                                            task.ContinueWith((t) =>
+                                            {
+                                                Exception error = null;
+                                                try
+                                                {
+                                                    if (t.IsCanceled || t.IsFaulted)
+                                                    {
+                                                        error = t.Exception.InnerException ?? new TaskCanceledException();
+                                                    }
+                                                    else
+                                                    {
+                                                        var prop = taskType.GetProperty("Result");
+                                                        var taskResult = prop.GetValue(t);
+
+                                                        SendMessage(new Message { type = MessageTypes.Completion, invocationId = message.invocationId, result = taskResult });
+                                                    }
+                                                }
+                                                catch (Exception ex)
+                                                {
+                                                    error = ex;
+                                                }
+
+                                                if (error != null)
+                                                    SendMessage(new Message { type = MessageTypes.Completion, invocationId = message.invocationId, error = error.Message });
+                                            });
+                                        }
+                                        else
+                                            SendMessage(new Message { type = MessageTypes.Completion, invocationId = message.invocationId, result = result });
                                     }
                                     catch (Exception ex)
                                     {
-                                        HTTPManager.Logger.Exception("HubConnection", "OnMessages - Invocation - Invoke", ex, this.Context);
-                                    }
-                                }
+                                        HTTPManager.Logger.Exception("HubConnection", "OnMessages - Function Invocation - Invoke", ex, this.Context);
 
-                                if (subscribtion.functionCallbacks != null)
-                                {
-                                    for (int i = 0; i < subscribtion.functionCallbacks.Count; ++i)
-                                    {
-                                        var callbackDesc = subscribtion.functionCallbacks[i];
-
-                                        object[] realArgs = null;
-                                        try
-                                        {
-                                            realArgs = this.Protocol.GetRealArguments(callbackDesc.ParamTypes, message.arguments);
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            HTTPManager.Logger.Exception("HubConnection", "OnMessages - Function Invocation - GetRealArguments", ex, this.Context);
-                                        }
-
-                                        try
-                                        {
-                                            var result = callbackDesc.Callback(realArgs);
-
-                                            if (result is Task task && task.GetType() is Type taskType && taskType.IsGenericType)
-                                            {
-                                                task.ContinueWith((t) =>
-                                                {
-                                                    Exception error = null;
-                                                    try
-                                                    {
-                                                        if (t.IsCanceled || t.IsFaulted)
-                                                        {
-                                                            error = t.Exception.InnerException ?? new TaskCanceledException();
-                                                        }
-                                                        else
-                                                        {
-                                                            var prop = taskType.GetProperty("Result");
-                                                            var taskResult = prop.GetValue(t);
-
-                                                            SendMessage(new Message { type = MessageTypes.Completion, invocationId = message.invocationId, result = taskResult });
-                                                        }
-                                                    }
-                                                    catch (Exception ex)
-                                                    {
-                                                        error = ex;
-                                                    }
-
-                                                    if (error != null)
-                                                        SendMessage(new Message { type = MessageTypes.Completion, invocationId = message.invocationId, error = error.Message });
-                                                });
-                                            }
-                                            else
-                                                SendMessage(new Message { type = MessageTypes.Completion, invocationId = message.invocationId, result = result });
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            HTTPManager.Logger.Exception("HubConnection", "OnMessages - Function Invocation - Invoke", ex, this.Context);
-
-                                            SendMessage(new Message { type = MessageTypes.Completion, invocationId = message.invocationId, error = ex.Message });
-                                        }
+                                        SendMessage(new Message { type = MessageTypes.Completion, invocationId = message.invocationId, error = ex.Message });
                                     }
                                 }
                             }
-                            else
-                                HTTPManager.Logger.Warning("HubConnection", $"No subscription could be found for invocation '{message.ToString()}'", this.Context);
-
-                            break;
                         }
+                        else
+                            HTTPManager.Logger.Warning("HubConnection", $"No subscription could be found for invocation '{message.ToString()}'", this.Context);
+
+                        break;
+                    }
 
                     case MessageTypes.StreamItem:
+                    {
+                        long invocationId;
+                        if (long.TryParse(message.invocationId, out invocationId))
                         {
-                            long invocationId;
-                            if (long.TryParse(message.invocationId, out invocationId))
+                            InvocationDefinition def;
+                            if (this.invocations.TryGetValue(invocationId, out def) && def.callback != null)
                             {
-                                InvocationDefinition def;
-                                if (this.invocations.TryGetValue(invocationId, out def) && def.callback != null)
+                                try
                                 {
-                                    try
-                                    {
-                                        def.callback(message);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        HTTPManager.Logger.Exception("HubConnection", "OnMessages - StreamItem - callback", ex, this.Context);
-                                    }
+                                    def.callback(message);
+                                }
+                                catch (Exception ex)
+                                {
+                                    HTTPManager.Logger.Exception("HubConnection", "OnMessages - StreamItem - callback", ex, this.Context);
                                 }
                             }
-                            break;
                         }
+                        break;
+                    }
 
                     case MessageTypes.Completion:
+                    {
+                        long invocationId;
+                        if (long.TryParse(message.invocationId, out invocationId))
                         {
-                            long invocationId;
-                            if (long.TryParse(message.invocationId, out invocationId))
+                            InvocationDefinition def;
+                            if (this.invocations.TryRemove(invocationId, out def) && def.callback != null)
                             {
-                                InvocationDefinition def;
-                                if (this.invocations.TryRemove(invocationId, out def) && def.callback != null)
+                                try
                                 {
-                                    try
-                                    {
-                                        def.callback(message);
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        HTTPManager.Logger.Exception("HubConnection", "OnMessages - Completion - callback", ex, this.Context);
-                                    }
+                                    def.callback(message);
+                                }
+                                catch (Exception ex)
+                                {
+                                    HTTPManager.Logger.Exception("HubConnection", "OnMessages - Completion - callback", ex, this.Context);
                                 }
                             }
-                            break;
                         }
+                        break;
+                    }
 
                     case MessageTypes.Ping:
                         // Send back an answer
@@ -1313,21 +1313,21 @@ namespace BestHTTP.SignalRCore
                     break;
 
                 case TransportStates.Closed:
+                {
+                    try
                     {
-                        try
-                        {
-                            if (this.OnTransportEvent != null)
-                                this.OnTransportEvent(this, this.Transport, TransportEvents.Closed);
-                        }
-                        catch (Exception ex)
-                        {
-                            HTTPManager.Logger.Exception("HubConnection", "Exception in OnTransportEvent user code!", ex, this.Context);
-                        }
-
-                        // Check wheter we have any delayed message and a Close message among them. If there's one, delay the SetState(Close) too.
-                        if (this.delayedMessages == null || this.delayedMessages.FindLast(dm => dm.type == MessageTypes.Close).type != MessageTypes.Close)
-                            SetState(ConnectionStates.Closed, null, this.defaultReconnect);
+                        if (this.OnTransportEvent != null)
+                            this.OnTransportEvent(this, this.Transport, TransportEvents.Closed);
                     }
+                    catch (Exception ex)
+                    {
+                        HTTPManager.Logger.Exception("HubConnection", "Exception in OnTransportEvent user code!", ex, this.Context);
+                    }
+
+                    // Check wheter we have any delayed message and a Close message among them. If there's one, delay the SetState(Close) too.
+                    if (this.delayedMessages == null || this.delayedMessages.FindLast(dm => dm.type == MessageTypes.Close).type != MessageTypes.Close)
+                        SetState(ConnectionStates.Closed, null, this.defaultReconnect);
+                }
                     break;
             }
         }

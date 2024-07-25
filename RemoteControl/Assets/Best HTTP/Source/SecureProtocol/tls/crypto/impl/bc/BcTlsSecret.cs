@@ -64,14 +64,14 @@ namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Tls.Crypto.Impl.BC
 
                 switch (prfAlgorithm)
                 {
-                case PrfAlgorithm.tls13_hkdf_sha256:
-                    return TlsCryptoUtilities.HkdfExpandLabel(this, CryptoHashAlgorithm.sha256, label, seed, length);
-                case PrfAlgorithm.tls13_hkdf_sha384:
-                    return TlsCryptoUtilities.HkdfExpandLabel(this, CryptoHashAlgorithm.sha384, label, seed, length);
-                case PrfAlgorithm.tls13_hkdf_sm3:
-                    return TlsCryptoUtilities.HkdfExpandLabel(this, CryptoHashAlgorithm.sm3, label, seed, length);
-                default:
-                    return m_crypto.AdoptLocalSecret(Prf(prfAlgorithm, label, seed, length));
+                    case PrfAlgorithm.tls13_hkdf_sha256:
+                        return TlsCryptoUtilities.HkdfExpandLabel(this, CryptoHashAlgorithm.sha256, label, seed, length);
+                    case PrfAlgorithm.tls13_hkdf_sha384:
+                        return TlsCryptoUtilities.HkdfExpandLabel(this, CryptoHashAlgorithm.sha384, label, seed, length);
+                    case PrfAlgorithm.tls13_hkdf_sm3:
+                        return TlsCryptoUtilities.HkdfExpandLabel(this, CryptoHashAlgorithm.sm3, label, seed, length);
+                    default:
+                        return m_crypto.AdoptLocalSecret(Prf(prfAlgorithm, label, seed, length));
                 }
             }
         }

@@ -66,6 +66,7 @@ public class UIManager : Singleton<UIManager>
       }
       if (!_uiActive.TryGetValue(id, out bool cntActive) || !cntActive)
       {
+         uiPresenter?.SetPanelData(uiArgs);
          uiPresenter?.ShowView(uiArgs);
          _uiActive[id] = true;
       }
@@ -79,6 +80,7 @@ public class UIManager : Singleton<UIManager>
          if  (_uiPresenter.TryGetValue(id, out IUIPresenter uiPresenter))
          {
             uiPresenter.HideView();
+            uiPresenter?.Dispose();
             // if (isdelete)
             // {
             //    _uiActive.Remove(id);

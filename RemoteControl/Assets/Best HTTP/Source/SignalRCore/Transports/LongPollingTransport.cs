@@ -180,9 +180,9 @@ namespace BestHTTP.SignalRCore.Transports
                     else
                     {
                         this.ErrorReason = string.Format("Handshake Request finished Successfully, but the server sent an error. Status Code: {0}-{1} Message: {2}",
-                                                        resp.StatusCode,
-                                                        resp.Message,
-                                                        resp.DataAsText);
+                            resp.StatusCode,
+                            resp.Message,
+                            resp.DataAsText);
                     }
                     break;
 
@@ -221,10 +221,10 @@ namespace BestHTTP.SignalRCore.Transports
              * If there is no id query string value, a 400 Bad Request response is returned. Upon receipt of the entire payload,
              * the server will process the payload and responds with 200 OK if the payload was successfully processed.
              * If a client makes another request to / while an existing request is outstanding, the new request is immediately terminated by the server with the 409 Conflict status code.
-             * 
+             *
              * If a client receives a 409 Conflict request, the connection remains open.
              * Any other response indicates that the connection has been terminated due to an error.
-             * 
+             *
              * If the relevant connection has been terminated, a 404 Not Found status code is returned.
              * If there is an error instantiating an EndPoint or dispatching the message, a 500 Server Error status code is returned.
              * */
@@ -256,9 +256,9 @@ namespace BestHTTP.SignalRCore.Transports
                         // Any other response indicates that the connection has been terminated due to an error.
                         default:
                             this.ErrorReason = string.Format("Send Request finished Successfully, but the server sent an error. Status Code: {0}-{1} Message: {2}",
-                                                            resp.StatusCode,
-                                                            resp.Message,
-                                                            resp.DataAsText);
+                                resp.StatusCode,
+                                resp.Message,
+                                resp.DataAsText);
                             break;
                     }
                     break;
@@ -289,7 +289,7 @@ namespace BestHTTP.SignalRCore.Transports
             /*
              * When data is available, the server responds with a body in one of the two formats below (depending upon the value of the Accept header).
              * The response may be chunked, as per the chunked encoding part of the HTTP spec.
-             * 
+             *
              * If the id parameter is missing, a 400 Bad Request response is returned.
              * If there is no connection with the ID specified in id, a 404 Not Found response is returned.
              *
@@ -369,9 +369,9 @@ namespace BestHTTP.SignalRCore.Transports
 
                         default:
                             this.ErrorReason = string.Format("Poll Request finished Successfully, but the server sent an error. Status Code: {0}-{1} Message: {2}",
-                                                            resp.StatusCode,
-                                                            resp.Message,
-                                                            resp.DataAsText);
+                                resp.StatusCode,
+                                resp.Message,
+                                resp.DataAsText);
                             break;
                     }
                     break;
@@ -401,9 +401,9 @@ namespace BestHTTP.SignalRCore.Transports
                     else
                     {
                         HTTPManager.Logger.Warning("LongPollingTransport", string.Format("Connection Close Request finished Successfully, but the server sent an error. Status Code: {0}-{1} Message: {2}",
-                                                        resp.StatusCode,
-                                                        resp.Message,
-                                                        resp.DataAsText), this.Context);
+                            resp.StatusCode,
+                            resp.Message,
+                            resp.DataAsText), this.Context);
                     }
                     break;
 

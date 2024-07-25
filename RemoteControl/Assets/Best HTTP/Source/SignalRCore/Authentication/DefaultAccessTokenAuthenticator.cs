@@ -49,8 +49,8 @@ namespace BestHTTP.SignalRCore.Authentication
                 request.SetHeader("Authorization", "Bearer " + this._connection.NegotiationResult.AccessToken);
             else
 #if !BESTHTTP_DISABLE_WEBSOCKET
-                if (BestHTTP.Connections.HTTPProtocolFactory.GetProtocolFromUri(request.Uri) != BestHTTP.Connections.SupportedProtocols.WebSocket)
-                    request.Uri = PrepareUriImpl(request.Uri);
+            if (BestHTTP.Connections.HTTPProtocolFactory.GetProtocolFromUri(request.Uri) != BestHTTP.Connections.SupportedProtocols.WebSocket)
+                request.Uri = PrepareUriImpl(request.Uri);
 #else
                 ;
 #endif

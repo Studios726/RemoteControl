@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Event\ContomEventArgs.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\BucketWheelStackerReclaimerCtrMove.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\UIConst.cs" />
     <Compile Include="Assets\Scripts\Utility\ObjectPool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Data\ThreeD\data\Status\MP_Status_List.cs" />
@@ -70,7 +71,10 @@
     <Compile Include="Assets\Scripts\Singleton.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\IUIPresenter.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\UIID.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" />
     <Compile Include="Assets\Scripts\UI\HistoryWarningPanel\HistoryPanelView.cs" />
+    <Compile Include="Assets\Scripts\GameDataManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\HideButtonCtrBase.cs" />
     <Compile Include="Assets\Scripts\ConstStr.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\UIManager.cs" />
     <Compile Include="Assets\Scripts\Utility\Debugger.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Assets\Scripts\Task\RuntimeDataBase.cs" />
     <Compile Include="Assets\Scripts\Data\ThreeD\data\Command\SystemCommand.cs" />
     <Compile Include="Assets\Scripts\Simulation\CameraController.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\BucketWheelStateBase.cs" />
     <Compile Include="Assets\Scripts\UI\HistoryWarningPanel\HistoryCell.cs" />
     <Compile Include="Assets\Scripts\Event\ConnectEventArgs.cs" />
     <Compile Include="Assets\Scripts\CyclicScrollView\CyclicScrollView.DataChange.cs" />
@@ -104,13 +109,17 @@
     <Compile Include="Assets\Scripts\UI\Mechanism\UIView.cs" />
     <Compile Include="Assets\Scripts\GameMain.cs" />
     <Compile Include="Assets\Scripts\UI\MainPanel\MainPanelView.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\BucketWheelStackerReclaimerState.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\CustomUIArgs.cs" />
     <Compile Include="Assets\Scripts\UI\ConfirmPanel\ConfirmPanelCtr.cs" />
     <Compile Include="Assets\Scripts\Connection.cs" />
     <Compile Include="Assets\Scripts\UI\SettingPanel\SettingPanelCtr.cs" />
     <Compile Include="Assets\Scripts\UI\HistoryWarningPanel\HistoryList.cs" />
     <Compile Include="Assets\Scripts\Utility\Timer\Timer.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\BucketWheelStackerReclaimerTask.cs" />
     <Compile Include="Assets\Scripts\Network\SystemVariables.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\ButtonCell.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\BucketWheelStackerReclaimerHideBtnCtr.cs" />
     <Compile Include="Assets\Scripts\UI\TopPanel\TopPanelView.cs" />
     <Compile Include="Assets\Scripts\Task\ReclaimTaskInfo.cs" />
     <Compile Include="Assets\Scripts\Data\ThreeD\data\SendDataReportAndDEM.cs" />
@@ -119,9 +128,11 @@
     <Compile Include="Assets\Scripts\Network\MySqlHelper.cs" />
     <Compile Include="Assets\Scripts\Model\MachineMove.cs" />
     <Compile Include="Assets\Scripts\UI\MainPanel\MainPanelCtr.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\BucketWheelCtrMoveBase.cs" />
     <Compile Include="Assets\Scripts\UI\LoginPanel\LoginPanelView.cs" />
     <Compile Include="Assets\Scripts\Data\ThreeD\data\SendAllData.cs" />
     <Compile Include="Assets\Scripts\Data\ThreeD\data\Status\MP_Status_Single.cs" />
+    <Compile Include="Assets\Scripts\UI\PanelBase.cs" />
     <Compile Include="Assets\Scripts\Data\AccountInfo.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\UIPresenter.cs" />
     <Compile Include="Assets\Scripts\UI\LoginPanel\LoginPanelCtr.cs" />

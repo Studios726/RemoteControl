@@ -124,7 +124,7 @@ namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Tls.Crypto.Impl.BC
                  * NOTE: The comparison and replacement must be constant-time.
                  */
                 int mask = (expectedVersion.MajorVersion ^ (M[0] & 0xFF))
-                         | (expectedVersion.MinorVersion ^ (M[1] & 0xFF));
+                           | (expectedVersion.MinorVersion ^ (M[1] & 0xFF));
 
                 // 'mask' will be all 1s if the versions matched, or else all 0s.
                 mask = (mask - 1) >> 31;

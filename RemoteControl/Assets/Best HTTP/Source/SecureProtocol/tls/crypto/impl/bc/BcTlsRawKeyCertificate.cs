@@ -50,17 +50,17 @@ namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Tls.Crypto.Impl.BC
 
             switch (tlsCertificateRole)
             {
-            case TlsCertificateRole.RsaEncryption:
-            {
-                this.m_pubKeyRsa = GetPubKeyRsa();
-                return new BcTlsRsaEncryptor(m_crypto, m_pubKeyRsa);
-            }
-            // TODO[gmssl]
-            //case TlsCertificateRole.Sm2Encryption:
-            //{
-            //    this.m_pubKeyEC = GetPubKeyEC();
-            //    return new BcTlsSM2Encryptor(m_crypto, m_pubKeyEC);
-            //}
+                case TlsCertificateRole.RsaEncryption:
+                {
+                    this.m_pubKeyRsa = GetPubKeyRsa();
+                    return new BcTlsRsaEncryptor(m_crypto, m_pubKeyRsa);
+                }
+                // TODO[gmssl]
+                //case TlsCertificateRole.Sm2Encryption:
+                //{
+                //    this.m_pubKeyEC = GetPubKeyEC();
+                //    return new BcTlsSM2Encryptor(m_crypto, m_pubKeyEC);
+                //}
             }
 
             throw new TlsFatalAlert(AlertDescription.certificate_unknown);
@@ -71,51 +71,51 @@ namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Tls.Crypto.Impl.BC
         {
             switch (signatureAlgorithm)
             {
-            case SignatureAlgorithm.ed25519:
-            case SignatureAlgorithm.ed448:
-            {
-                int signatureScheme = SignatureScheme.From(HashAlgorithm.Intrinsic, signatureAlgorithm);
-                Tls13Verifier tls13Verifier = CreateVerifier(signatureScheme);
-                return new LegacyTls13Verifier(signatureScheme, tls13Verifier);
-            }
+                case SignatureAlgorithm.ed25519:
+                case SignatureAlgorithm.ed448:
+                {
+                    int signatureScheme = SignatureScheme.From(HashAlgorithm.Intrinsic, signatureAlgorithm);
+                    Tls13Verifier tls13Verifier = CreateVerifier(signatureScheme);
+                    return new LegacyTls13Verifier(signatureScheme, tls13Verifier);
+                }
             }
 
             ValidateKeyUsage(KeyUsage.DigitalSignature);
 
             switch (signatureAlgorithm)
             {
-            case SignatureAlgorithm.dsa:
-                return new BcTlsDsaVerifier(m_crypto, GetPubKeyDss());
+                case SignatureAlgorithm.dsa:
+                    return new BcTlsDsaVerifier(m_crypto, GetPubKeyDss());
 
-            case SignatureAlgorithm.ecdsa:
-                return new BcTlsECDsaVerifier(m_crypto, GetPubKeyEC());
+                case SignatureAlgorithm.ecdsa:
+                    return new BcTlsECDsaVerifier(m_crypto, GetPubKeyEC());
 
-            case SignatureAlgorithm.rsa:
-            {
-                ValidateRsa_Pkcs1();
-                return new BcTlsRsaVerifier(m_crypto, GetPubKeyRsa());
-            }
+                case SignatureAlgorithm.rsa:
+                {
+                    ValidateRsa_Pkcs1();
+                    return new BcTlsRsaVerifier(m_crypto, GetPubKeyRsa());
+                }
 
-            case SignatureAlgorithm.rsa_pss_pss_sha256:
-            case SignatureAlgorithm.rsa_pss_pss_sha384:
-            case SignatureAlgorithm.rsa_pss_pss_sha512:
-            {
-                ValidateRsa_Pss_Pss(signatureAlgorithm);
-                int signatureScheme = SignatureScheme.From(HashAlgorithm.Intrinsic, signatureAlgorithm);
-                return new BcTlsRsaPssVerifier(m_crypto, GetPubKeyRsa(), signatureScheme);
-            }
+                case SignatureAlgorithm.rsa_pss_pss_sha256:
+                case SignatureAlgorithm.rsa_pss_pss_sha384:
+                case SignatureAlgorithm.rsa_pss_pss_sha512:
+                {
+                    ValidateRsa_Pss_Pss(signatureAlgorithm);
+                    int signatureScheme = SignatureScheme.From(HashAlgorithm.Intrinsic, signatureAlgorithm);
+                    return new BcTlsRsaPssVerifier(m_crypto, GetPubKeyRsa(), signatureScheme);
+                }
 
-            case SignatureAlgorithm.rsa_pss_rsae_sha256:
-            case SignatureAlgorithm.rsa_pss_rsae_sha384:
-            case SignatureAlgorithm.rsa_pss_rsae_sha512:
-            {
-                ValidateRsa_Pss_Rsae();
-                int signatureScheme = SignatureScheme.From(HashAlgorithm.Intrinsic, signatureAlgorithm);
-                return new BcTlsRsaPssVerifier(m_crypto, GetPubKeyRsa(), signatureScheme);
-            }
+                case SignatureAlgorithm.rsa_pss_rsae_sha256:
+                case SignatureAlgorithm.rsa_pss_rsae_sha384:
+                case SignatureAlgorithm.rsa_pss_rsae_sha512:
+                {
+                    ValidateRsa_Pss_Rsae();
+                    int signatureScheme = SignatureScheme.From(HashAlgorithm.Intrinsic, signatureAlgorithm);
+                    return new BcTlsRsaPssVerifier(m_crypto, GetPubKeyRsa(), signatureScheme);
+                }
 
-            default:
-                throw new TlsFatalAlert(AlertDescription.certificate_unknown);
+                default:
+                    throw new TlsFatalAlert(AlertDescription.certificate_unknown);
             }
         }
 
@@ -126,100 +126,100 @@ namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Tls.Crypto.Impl.BC
 
             switch (signatureScheme)
             {
-            case SignatureScheme.ecdsa_brainpoolP256r1tls13_sha256:
-            case SignatureScheme.ecdsa_brainpoolP384r1tls13_sha384:
-            case SignatureScheme.ecdsa_brainpoolP512r1tls13_sha512:
-            case SignatureScheme.ecdsa_secp256r1_sha256:
-            case SignatureScheme.ecdsa_secp384r1_sha384:
-            case SignatureScheme.ecdsa_secp521r1_sha512:
-            case SignatureScheme.ecdsa_sha1:
-            {
-                int cryptoHashAlgorithm = SignatureScheme.GetCryptoHashAlgorithm(signatureScheme);
-                IDigest digest = m_crypto.CreateDigest(cryptoHashAlgorithm);
+                case SignatureScheme.ecdsa_brainpoolP256r1tls13_sha256:
+                case SignatureScheme.ecdsa_brainpoolP384r1tls13_sha384:
+                case SignatureScheme.ecdsa_brainpoolP512r1tls13_sha512:
+                case SignatureScheme.ecdsa_secp256r1_sha256:
+                case SignatureScheme.ecdsa_secp384r1_sha384:
+                case SignatureScheme.ecdsa_secp521r1_sha512:
+                case SignatureScheme.ecdsa_sha1:
+                {
+                    int cryptoHashAlgorithm = SignatureScheme.GetCryptoHashAlgorithm(signatureScheme);
+                    IDigest digest = m_crypto.CreateDigest(cryptoHashAlgorithm);
 
-                ISigner verifier = new DsaDigestSigner(new ECDsaSigner(), digest);
-                verifier.Init(false, GetPubKeyEC());
+                    ISigner verifier = new DsaDigestSigner(new ECDsaSigner(), digest);
+                    verifier.Init(false, GetPubKeyEC());
 
-                return new BcTls13Verifier(verifier);
-            }
+                    return new BcTls13Verifier(verifier);
+                }
 
-            case SignatureScheme.ed25519:
-            {
-                Ed25519Signer verifier = new Ed25519Signer();
-                verifier.Init(false, GetPubKeyEd25519());
+                case SignatureScheme.ed25519:
+                {
+                    Ed25519Signer verifier = new Ed25519Signer();
+                    verifier.Init(false, GetPubKeyEd25519());
 
-                return new BcTls13Verifier(verifier);
-            }
+                    return new BcTls13Verifier(verifier);
+                }
 
-            case SignatureScheme.ed448:
-            {
-                Ed448Signer verifier = new Ed448Signer(TlsUtilities.EmptyBytes);
-                verifier.Init(false, GetPubKeyEd448());
+                case SignatureScheme.ed448:
+                {
+                    Ed448Signer verifier = new Ed448Signer(TlsUtilities.EmptyBytes);
+                    verifier.Init(false, GetPubKeyEd448());
 
-                return new BcTls13Verifier(verifier);
-            }
+                    return new BcTls13Verifier(verifier);
+                }
 
-            case SignatureScheme.rsa_pkcs1_sha1:
-            case SignatureScheme.rsa_pkcs1_sha256:
-            case SignatureScheme.rsa_pkcs1_sha384:
-            case SignatureScheme.rsa_pkcs1_sha512:
-            {
-                ValidateRsa_Pkcs1();
+                case SignatureScheme.rsa_pkcs1_sha1:
+                case SignatureScheme.rsa_pkcs1_sha256:
+                case SignatureScheme.rsa_pkcs1_sha384:
+                case SignatureScheme.rsa_pkcs1_sha512:
+                {
+                    ValidateRsa_Pkcs1();
 
-                int cryptoHashAlgorithm = SignatureScheme.GetCryptoHashAlgorithm(signatureScheme);
-                IDigest digest = m_crypto.CreateDigest(cryptoHashAlgorithm);
+                    int cryptoHashAlgorithm = SignatureScheme.GetCryptoHashAlgorithm(signatureScheme);
+                    IDigest digest = m_crypto.CreateDigest(cryptoHashAlgorithm);
 
-                RsaDigestSigner verifier = new RsaDigestSigner(digest,
-                    TlsCryptoUtilities.GetOidForHash(cryptoHashAlgorithm));
-                verifier.Init(false, GetPubKeyRsa());
+                    RsaDigestSigner verifier = new RsaDigestSigner(digest,
+                        TlsCryptoUtilities.GetOidForHash(cryptoHashAlgorithm));
+                    verifier.Init(false, GetPubKeyRsa());
 
-                return new BcTls13Verifier(verifier);
-            }
+                    return new BcTls13Verifier(verifier);
+                }
 
-            case SignatureScheme.rsa_pss_pss_sha256:
-            case SignatureScheme.rsa_pss_pss_sha384:
-            case SignatureScheme.rsa_pss_pss_sha512:
-            {
-                ValidateRsa_Pss_Pss(SignatureScheme.GetSignatureAlgorithm(signatureScheme));
+                case SignatureScheme.rsa_pss_pss_sha256:
+                case SignatureScheme.rsa_pss_pss_sha384:
+                case SignatureScheme.rsa_pss_pss_sha512:
+                {
+                    ValidateRsa_Pss_Pss(SignatureScheme.GetSignatureAlgorithm(signatureScheme));
 
-                int cryptoHashAlgorithm = SignatureScheme.GetCryptoHashAlgorithm(signatureScheme);
-                IDigest digest = m_crypto.CreateDigest(cryptoHashAlgorithm);
+                    int cryptoHashAlgorithm = SignatureScheme.GetCryptoHashAlgorithm(signatureScheme);
+                    IDigest digest = m_crypto.CreateDigest(cryptoHashAlgorithm);
 
-                PssSigner verifier = new PssSigner(new RsaEngine(), digest, digest.GetDigestSize());
-                verifier.Init(false, GetPubKeyRsa());
+                    PssSigner verifier = new PssSigner(new RsaEngine(), digest, digest.GetDigestSize());
+                    verifier.Init(false, GetPubKeyRsa());
 
-                return new BcTls13Verifier(verifier);
-            }
+                    return new BcTls13Verifier(verifier);
+                }
 
-            case SignatureScheme.rsa_pss_rsae_sha256:
-            case SignatureScheme.rsa_pss_rsae_sha384:
-            case SignatureScheme.rsa_pss_rsae_sha512:
-            {
-                ValidateRsa_Pss_Rsae();
+                case SignatureScheme.rsa_pss_rsae_sha256:
+                case SignatureScheme.rsa_pss_rsae_sha384:
+                case SignatureScheme.rsa_pss_rsae_sha512:
+                {
+                    ValidateRsa_Pss_Rsae();
 
-                int cryptoHashAlgorithm = SignatureScheme.GetCryptoHashAlgorithm(signatureScheme);
-                IDigest digest = m_crypto.CreateDigest(cryptoHashAlgorithm);
+                    int cryptoHashAlgorithm = SignatureScheme.GetCryptoHashAlgorithm(signatureScheme);
+                    IDigest digest = m_crypto.CreateDigest(cryptoHashAlgorithm);
 
-                PssSigner verifier = new PssSigner(new RsaEngine(), digest, digest.GetDigestSize());
-                verifier.Init(false, GetPubKeyRsa());
+                    PssSigner verifier = new PssSigner(new RsaEngine(), digest, digest.GetDigestSize());
+                    verifier.Init(false, GetPubKeyRsa());
 
-                return new BcTls13Verifier(verifier);
-            }
+                    return new BcTls13Verifier(verifier);
+                }
 
-            // TODO[RFC 8998]
-            //case SignatureScheme.sm2sig_sm3:
-            //{
-            //    ParametersWithID parametersWithID = new ParametersWithID(GetPubKeyEC(),
-            //        Strings.ToByteArray("TLSv1.3+GM+Cipher+Suite"));
+                // TODO[RFC 8998]
+                //case SignatureScheme.sm2sig_sm3:
+                //{
+                //    ParametersWithID parametersWithID = new ParametersWithID(GetPubKeyEC(),
+                //        Strings.ToByteArray("TLSv1.3+GM+Cipher+Suite"));
     
-            //    SM2Signer verifier = new SM2Signer();
-            //    verifier.Init(false, parametersWithID);
+                //    SM2Signer verifier = new SM2Signer();
+                //    verifier.Init(false, parametersWithID);
 
-            //    return new BcTls13Verifier(verifier);
-            //}
+                //    return new BcTls13Verifier(verifier);
+                //}
 
-            default:
-                throw new TlsFatalAlert(AlertDescription.certificate_unknown);
+                default:
+                    throw new TlsFatalAlert(AlertDescription.certificate_unknown);
             }
         }
 
@@ -264,9 +264,9 @@ namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Tls.Crypto.Impl.BC
                 return SignatureAlgorithm.rsa;
 
             /*
-                * DSA public key; the certificate MUST allow the key to be used for signing with the
-                * hash algorithm that will be employed in the certificate verify message.
-                */
+             * DSA public key; the certificate MUST allow the key to be used for signing with the
+             * hash algorithm that will be employed in the certificate verify message.
+             */
             if (publicKey is DsaPublicKeyParameters)
                 return SignatureAlgorithm.dsa;
 
@@ -379,18 +379,18 @@ namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Tls.Crypto.Impl.BC
         {
             switch (tlsCertificateRole)
             {
-            case TlsCertificateRole.DH:
-            {
-                ValidateKeyUsage(KeyUsage.KeyAgreement);
-                this.m_pubKeyDH = GetPubKeyDH();
-                return this;
-            }
-            case TlsCertificateRole.ECDH:
-            {
-                ValidateKeyUsage(KeyUsage.KeyAgreement);
-                this.m_pubKeyEC = GetPubKeyEC();
-                return this;
-            }
+                case TlsCertificateRole.DH:
+                {
+                    ValidateKeyUsage(KeyUsage.KeyAgreement);
+                    this.m_pubKeyDH = GetPubKeyDH();
+                    return this;
+                }
+                case TlsCertificateRole.ECDH:
+                {
+                    ValidateKeyUsage(KeyUsage.KeyAgreement);
+                    this.m_pubKeyEC = GetPubKeyEC();
+                    return this;
+                }
             }
 
             throw new TlsFatalAlert(AlertDescription.certificate_unknown);
@@ -442,39 +442,39 @@ namespace BestHTTP.SecureProtocol.Org.BouncyCastle.Tls.Crypto.Impl.BC
 
             switch (signatureAlgorithm)
             {
-            case SignatureAlgorithm.rsa:
-                return SupportsRsa_Pkcs1()
-                    && publicKey is RsaKeyParameters;
+                case SignatureAlgorithm.rsa:
+                    return SupportsRsa_Pkcs1()
+                           && publicKey is RsaKeyParameters;
 
-            case SignatureAlgorithm.dsa:
-                return publicKey is DsaPublicKeyParameters;
+                case SignatureAlgorithm.dsa:
+                    return publicKey is DsaPublicKeyParameters;
 
-            case SignatureAlgorithm.ecdsa:
-            case SignatureAlgorithm.ecdsa_brainpoolP256r1tls13_sha256:
-            case SignatureAlgorithm.ecdsa_brainpoolP384r1tls13_sha384:
-            case SignatureAlgorithm.ecdsa_brainpoolP512r1tls13_sha512:
-                return publicKey is ECPublicKeyParameters;
+                case SignatureAlgorithm.ecdsa:
+                case SignatureAlgorithm.ecdsa_brainpoolP256r1tls13_sha256:
+                case SignatureAlgorithm.ecdsa_brainpoolP384r1tls13_sha384:
+                case SignatureAlgorithm.ecdsa_brainpoolP512r1tls13_sha512:
+                    return publicKey is ECPublicKeyParameters;
 
-            case SignatureAlgorithm.ed25519:
-                return publicKey is Ed25519PublicKeyParameters;
+                case SignatureAlgorithm.ed25519:
+                    return publicKey is Ed25519PublicKeyParameters;
 
-            case SignatureAlgorithm.ed448:
-                return publicKey is Ed448PublicKeyParameters;
+                case SignatureAlgorithm.ed448:
+                    return publicKey is Ed448PublicKeyParameters;
 
-            case SignatureAlgorithm.rsa_pss_rsae_sha256:
-            case SignatureAlgorithm.rsa_pss_rsae_sha384:
-            case SignatureAlgorithm.rsa_pss_rsae_sha512:
-                return SupportsRsa_Pss_Rsae()
-                    && publicKey is RsaKeyParameters;
+                case SignatureAlgorithm.rsa_pss_rsae_sha256:
+                case SignatureAlgorithm.rsa_pss_rsae_sha384:
+                case SignatureAlgorithm.rsa_pss_rsae_sha512:
+                    return SupportsRsa_Pss_Rsae()
+                           && publicKey is RsaKeyParameters;
 
-            case SignatureAlgorithm.rsa_pss_pss_sha256:
-            case SignatureAlgorithm.rsa_pss_pss_sha384:
-            case SignatureAlgorithm.rsa_pss_pss_sha512:
-                return SupportsRsa_Pss_Pss(signatureAlgorithm)
-                    && publicKey is RsaKeyParameters;
+                case SignatureAlgorithm.rsa_pss_pss_sha256:
+                case SignatureAlgorithm.rsa_pss_pss_sha384:
+                case SignatureAlgorithm.rsa_pss_pss_sha512:
+                    return SupportsRsa_Pss_Pss(signatureAlgorithm)
+                           && publicKey is RsaKeyParameters;
 
-            default:
-                return false;
+                default:
+                    return false;
             }
         }
 

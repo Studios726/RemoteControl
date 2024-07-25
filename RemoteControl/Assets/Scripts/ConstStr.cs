@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public static class ConstStr
 {
     #region res
@@ -293,4 +295,12 @@ public static class ConstStr
 
 
     #endregion
+}
+
+public enum Machine
+{
+    [Header("斗轮取料机")]
+    BucketWheel,
+    [Header("斗轮堆取料机")]
+    BucketWheelStackerReclaimer
 }
