@@ -83,6 +83,7 @@ public class BucketWheelStateBase : MonoBehaviour
     public virtual void UpdateData<T>(T data)
     {
         Debug.Log("更新参数状态");
+        
     }
 
     public void Update()

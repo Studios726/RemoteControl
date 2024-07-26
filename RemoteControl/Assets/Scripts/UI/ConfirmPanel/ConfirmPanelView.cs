@@ -13,9 +13,9 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
     
     public override void InitUIElements(UIArgs uiArgs = null)
     {
-        _des = GetUIComponent<Text>("bg/des");
-        _confirmBtn = GetUIComponent<Button>("bg/confirmBtn");
-        _cancelBtn = GetUIComponent<Button>("bg/cancelBtn");
+        _des = RootObj.transform.FindComponent<Text>("bg/des");
+        _confirmBtn = RootObj.transform.FindComponent<Button>("bg/confirmBtn");
+        _cancelBtn = RootObj.transform.FindComponent<Button>("bg/cancelBtn");
         // 保证UI元素初始化后再调用UpdateUI，避免NullReferenceException
         if (_des != null && _confirmBtn != null && _cancelBtn != null) 
         {
@@ -23,16 +23,16 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
         }
     }
 
-    private T GetUIComponent<T>(string path) where T : UnityEngine.Component
-    {
-        UnityEngine.Component component = RootObj.transform.FindComponent<T>(path);
-        if (component == null)
-        {
-            Debug.LogError($"Component {path} not found!");
-            return null;
-        }
-        return component.GetComponent<T>();
-    }
+    // private T GetUIComponent<T>(string path) where T : UnityEngine.Component
+    // {
+    //     UnityEngine.Component component = RootObj.transform.FindComponent<T>(path);
+    //     if (component == null)
+    //     {
+    //         Debug.LogError($"Component {path} not found!");
+    //         return null;
+    //     }
+    //     return component.GetComponent<T>();
+    // }
 
     public void UpdateUI(UIArgs uiArgs)
     {

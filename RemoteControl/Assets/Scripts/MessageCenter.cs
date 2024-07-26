@@ -72,6 +72,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 json = JsonMgr.Serialize<T>(body);
+                Debug.Log($"json  {json}");
             }
             catch (Exception e)
             {

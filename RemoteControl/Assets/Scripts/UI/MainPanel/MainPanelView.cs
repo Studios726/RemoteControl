@@ -38,7 +38,7 @@ public class MainPanelView :UIView<MainPanelCtr>
       // AddOnClickListener(_bucketWheelCtrMove2.carFastBtn, (() => _ctr.SendMessage("堆、取料控制 停止")));
    
       _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
-      UpdateDdata(uiArgs);
+      UpdateData(uiArgs);
    }
 
    private void ActiveHideBtnCtr2()
@@ -54,7 +54,7 @@ public class MainPanelView :UIView<MainPanelCtr>
       _bucketWheelCtrMove1.hide.SetActive(_bucketWheelHideBtnCtr1.gameObject.activeSelf);
    }
 
-   public void UpdateDdata<T>(T data)
+   public void UpdateData<T>(T data)
    {
       _bucketWheelState2.UpdateData(data);
       _bucketWheelState1.UpdateData(data);
@@ -62,9 +62,9 @@ public class MainPanelView :UIView<MainPanelCtr>
       _bucketWheelCtrMove1.UpdateData(data);
    }
 
-   public void UpdateDdata(object o, EventArgs eventArgs)
+   public void UpdateData(object o, EventArgs eventArgs)
    {
-      UpdateDdata(eventArgs);
+      UpdateData(eventArgs);
    }
 
    public void AddOnClickListener(Button btn, UnityAction action)

@@ -185,22 +185,22 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
     public virtual void Init()
     {
-        AddOnClickListener(takeResetBtn, (() =>SendMessage("归零")));
-        AddOnClickListener(aloneBtn, (() => SendMessage("控制方式单动")));
-        AddOnClickListener(togetherBtn, (() => SendMessage("控制方式联动")));
-        AddOnClickListener(automaticBtn, (() => SendMessage("控制方式自动")));
-        AddOnClickListener(takeMaterBtn, (() => SendMessage("堆、取料控制 取料")));
-        AddOnClickListener(stopTakeMaterBtn, (() =>SendMessage("堆、取料控制 停止")));
-        AddOnClickListener(carFastBtn, (() => SendMessage("大车快速")));
-        AddOnClickListener(carSlowBtn, (() => SendMessage("大车慢速")));
-        AddOnClickListener(carBackBtn, (() => SendMessage("大车后退")));
-        AddOnClickListener(carStopBtn, (() => SendMessage("大车停止")));
-        AddOnClickListener(carForwardBtn, (() => SendMessage("大车前进")));
-        AddOnClickListener(upBtn,(() => SendMessage("大车上仰")));
-        AddOnClickListener(downBtn,(() => SendMessage("大车下附")));
-        AddOnClickListener(leftBtn,(() => SendMessage("大车左转")));
-        AddOnClickListener(rightBtn,(() => SendMessage("大车右转")));
-        AddOnClickListener(stopBtn,(() => SendMessage("大车停止")));
+        AddOnClickListener(takeResetBtn, (() =>SendMessageToServer("归零")));
+        AddOnClickListener(aloneBtn, (() => SendMessageToServer("控制方式单动")));
+        AddOnClickListener(togetherBtn, (() => SendMessageToServer("控制方式联动")));
+        AddOnClickListener(automaticBtn, (() => SendMessageToServer("控制方式自动")));
+        AddOnClickListener(takeMaterBtn, (() => SendMessageToServer("堆、取料控制 取料")));
+        AddOnClickListener(stopTakeMaterBtn, (() =>SendMessageToServer("堆、取料控制 停止")));
+        AddOnClickListener(carFastBtn, (() => SendMessageToServer("大车快速")));
+        AddOnClickListener(carSlowBtn, (() => SendMessageToServer("大车慢速")));
+        AddOnClickListener(carBackBtn, (() => SendMessageToServer("大车后退")));
+        AddOnClickListener(carStopBtn, (() => SendMessageToServer("大车停止")));
+        AddOnClickListener(carForwardBtn, (() => SendMessageToServer("大车前进")));
+        AddOnClickListener(upBtn,(() => SendMessageToServer("大车上仰")));
+        AddOnClickListener(downBtn,(() => SendMessageToServer("大车下附")));
+        AddOnClickListener(leftBtn,(() => SendMessageToServer("大车左转")));
+        AddOnClickListener(rightBtn,(() => SendMessageToServer("大车右转")));
+        AddOnClickListener(stopBtn,(() => SendMessageToServer("大车停止")));
     }
     public virtual void UpdateData<T>(T data)
     {
@@ -215,7 +215,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         btn.AddListener(action);
     }
 
-    public void SendMessage(string str)
+    public virtual void SendMessageToServer(string str)
     {
         Debug.Log($"sendMessage { Machine } {str}");
     }

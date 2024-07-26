@@ -40,6 +40,8 @@ public class TopPanelView : UIView<TopPanelCtr>
         _controlBtn.onClick.AddListener(() => //打开远程操作界面
         {
             Debugger.Log("打开远程操作界面");
+            UIManager.Instance.OpenUI(UIID.MainPanel);
+            UIManager.Instance.CloseUI(UIID.HistoryPanel);
         });
         _superviseBtn.onClick.AddListener(() =>
         {

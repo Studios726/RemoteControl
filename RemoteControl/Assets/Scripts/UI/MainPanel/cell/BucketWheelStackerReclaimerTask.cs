@@ -15,4 +15,18 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public ButtonCell pileMaterStartBtn;
     public ButtonCell pileMaterStopBtn;
     public ButtonCell pileMaterEndBtn;
+    public override void Start()
+    {
+        base.Start();
+        InputFieldValueRange(startLeftPileMaterText, 0, 350);
+        InputFieldValueRange(endLeftPileMaterText, 0, 350);
+        AddOnClickListener(pileMaterStartBtn,(() => { SendPileMaterCommand("启动");}));
+        AddOnClickListener(pileMaterStopBtn,(() => {SendPileMaterCommand("停止");}));
+        AddOnClickListener(pileMaterEndBtn,(() => {SendPileMaterCommand("结束");}));
+    }
+
+    public void SendPileMaterCommand(string message)
+    {
+        Debug.Log($"message {machine} {message}");
+    }
 }
