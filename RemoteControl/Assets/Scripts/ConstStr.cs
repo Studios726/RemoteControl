@@ -291,7 +291,7 @@ public static class ConstStr
 
     #region
 
-    public const string PROJECT_NAME = "铜川电厂斗轮机远程控制系统";
+    public const string PROJECT_NAME = "华润沈阳电厂斗轮机无人值守系统";
 
 
     #endregion

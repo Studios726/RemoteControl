@@ -9,12 +9,13 @@ public class MachineMove : MonoBehaviour
    public Vector3 initialPoint;
    public Transform rotationGo;
    public float curPercentage;
+
    public void UpdatePosAndRotaion(float percentage,float rotAngleY,float rotAngleZ)
    {
       percentage = percentage > 1 ? 1 :percentage;
       curPercentage = percentage;
       Vector3 curPos = initialPoint;
-      curPos.x=curPos.x - distance * percentage;
+      curPos.x=curPos.x + distance * percentage;
       transform.localPosition = curPos;
       rotationGo.localRotation=Quaternion.Euler(new Vector3(0,rotAngleY,rotAngleZ));
    }
@@ -36,8 +37,8 @@ public class MachineMove : MonoBehaviour
       {
          UpdatePosAndRotaion(1, 0, 0);
       }
-      //
-      // curPercentage = curPercentage + Time.deltaTime;
-      // UpdatePosAndRotaion(curPercentage, 0, 0);
-   }
+
+        curPercentage = curPercentage + Time.deltaTime*0.01f;
+        UpdatePosAndRotaion(curPercentage, 0, 0);
+    }
 }

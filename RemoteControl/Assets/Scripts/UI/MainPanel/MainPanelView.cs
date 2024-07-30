@@ -29,13 +29,7 @@ public class MainPanelView :UIView<MainPanelCtr>
       _bucketWheelHideBtnCtr1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerHideBtnCtr>("machine_1/hideCtrBtns");
 
       _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
-      // AddOnClickListener(_bucketWheelCtrMove2.takeResetBtn, (() => _ctr.SendMessage("归零")));
-      // AddOnClickListener(_bucketWheelCtrMove2.aloneBtn, (() => _ctr.SendMessage("控制方式单动")));
-      // AddOnClickListener(_bucketWheelCtrMove2.togetherBtn, (() => _ctr.SendMessage("控制方式联动")));
-      // AddOnClickListener(_bucketWheelCtrMove2.automaticBtn, (() => _ctr.SendMessage("控制方式自动")));
-      // AddOnClickListener(_bucketWheelCtrMove2.takeMaterBtn, (() => _ctr.SendMessage("堆、取料控制 取料")));
-      // AddOnClickListener(_bucketWheelCtrMove2.stopTakeMaterBtn, (() => _ctr.SendMessage("堆、取料控制 停止")));
-      // AddOnClickListener(_bucketWheelCtrMove2.carFastBtn, (() => _ctr.SendMessage("堆、取料控制 停止")));
+   
    
       _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
       UpdateData(uiArgs);

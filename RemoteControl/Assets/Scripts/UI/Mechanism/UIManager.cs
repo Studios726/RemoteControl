@@ -43,6 +43,11 @@ public class UIManager : Singleton<UIManager>
       if (!_uiPresenter.TryGetValue(id, out IUIPresenter uiPresenter))
       {
          GameObject prefab = Resources.Load<GameObject>("UI/"+id.Name);
+            if (prefab == null)
+            {
+                Debug.Log($" 预制体不存在 路径 UI/ {id.LayerName}");
+                return;
+            }
          GameObject rootObj;
          for (int i = 0; i < _canvasList.Count; i++)
          {

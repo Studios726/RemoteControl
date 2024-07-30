@@ -42,6 +42,7 @@ public class TopPanelView : UIView<TopPanelCtr>
             Debugger.Log("打开远程操作界面");
             UIManager.Instance.OpenUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
+            UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
         });
         _superviseBtn.onClick.AddListener(() =>
         {
@@ -50,12 +51,17 @@ public class TopPanelView : UIView<TopPanelCtr>
             // StatePanel.SetActive(true);
             // UISystem.Instance.HideCanvasParent();
             // Debugger.Log("打开远程操作界面");
+            UIManager.Instance.OpenUI(UIID.StatusParaeterPanel);
+            UIManager.Instance.CloseUI(UIID.SettingPanel);
+            UIManager.Instance.CloseUI(UIID.MainPanel);
+            UIManager.Instance.CloseUI(UIID.HistoryPanel);
         });
         _alarmBtn.onClick.AddListener(() => //打开报警处理界面
         {
             UIManager.Instance.OpenUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.SettingPanel);
-     
+            UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
+
         });
         _userBtn.onClick.AddListener(() => { _userPnl.gameObject.SetActive(!_userPnl.gameObject.activeSelf); });
         _settingBtn.onClick.AddListener(() =>

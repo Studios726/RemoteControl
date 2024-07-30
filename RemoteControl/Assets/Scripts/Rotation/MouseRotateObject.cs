@@ -10,6 +10,10 @@ public class MouseRotateObject : MonoBehaviour
     public float fovChangeSpeed = 1.0f; // FOV变化速度
     public float minFov = 60f; // 最小FOV
     public float maxFov =70f; // 最大FOV
+    private void Start()
+    {
+        rotation = transform.eulerAngles;
+    }
     void Update()
     {
         if (Input.GetMouseButton(1))
@@ -28,17 +32,17 @@ public class MouseRotateObject : MonoBehaviour
             // 应用旋转
             transform.localRotation = Quaternion.Euler(rotation.x, rotation.y, 0);
         }
-        // 检测鼠标滚轮的滚动
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        //// 检测鼠标滚轮的滚动
+        //float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-        // 调整相机的视野
-        float newFov = modelCamera.fieldOfView + scroll * fovChangeSpeed;
+        //// 调整相机的视野
+        //float newFov = modelCamera.fieldOfView + scroll * fovChangeSpeed;
 
-        // 确保新的FOV值在最小和最大值之间
-        newFov = Mathf.Clamp(newFov, minFov, maxFov);
+        //// 确保新的FOV值在最小和最大值之间
+        //newFov = Mathf.Clamp(newFov, minFov, maxFov);
 
-        // 更新相机的视野
-        modelCamera.fieldOfView = newFov;
+        //// 更新相机的视野
+        //modelCamera.fieldOfView = newFov;
        
     }
 }
