@@ -37,7 +37,10 @@ public static class ServerCommandDataType
 public class TaskCommand
 {
     public string QuerySystem { get; set; }
-
+    //任务ID
+    public int TaskID {  get; set; }
+    //操作系統
+    public string OperatorSystem { get; set; }
     public Machine Machine { get; set; }
     public TaskType TaskType { get; set; }
     //启动0 暂停1 换向2 结束3
@@ -78,4 +81,5 @@ public class TaskRange
         this.endValue = endValue;
     }
 }
+
 
