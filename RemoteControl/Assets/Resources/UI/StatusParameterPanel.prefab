@@ -2048,7 +2048,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F4E\u538B\u52A8\u529B\u7535\u6E90"
+  m_Text: "\u62AC\u8D77\u8FD0\u884C"
 --- !u!1 &382578659023299789
 GameObject:
   m_ObjectHideFlags: 0
@@ -2841,7 +2841,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u632F\u8FBE\u7535\u673A"
+  m_Text: "\u632F\u6253\u7535\u673A"
 --- !u!1 &501835336529442467
 GameObject:
   m_ObjectHideFlags: 0
@@ -4173,7 +4173,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F4E\u538B\u52A8\u529B\u7535\u6E90"
+  m_Text: "\u62AC\u8D77\u9650\u4F4D\uFF08\u53D6\uFF09"
 --- !u!1 &672725504076458529
 GameObject:
   m_ObjectHideFlags: 0
@@ -5221,7 +5221,7 @@ GameObject:
   - component: {fileID: 4487456625938454659}
   - component: {fileID: 2717200335097584409}
   m_Layer: 5
-  m_Name: "\u7535\u673A\u8FC7\u654F"
+  m_Name: "\u7535\u673A\u8FC7\u8F7D"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6987,7 +6987,7 @@ GameObject:
   - component: {fileID: 7570526672087544095}
   - component: {fileID: 263922908664441590}
   m_Layer: 5
-  m_Name: lowVoltageEnergySupply (1)
+  m_Name: "\u4E3B\u65AD\u8DEF\u5668"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11542,8 +11542,9 @@ GameObject:
   - component: {fileID: 7083711753348859741}
   - component: {fileID: 7180068947413696340}
   - component: {fileID: 1191911424400657603}
+  - component: {fileID: 6640579892051913648}
   m_Layer: 5
-  m_Name: bucketWheel (3)
+  m_Name: "\u60AC\u80F6"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11609,6 +11610,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.5
+--- !u!114 &6640579892051913648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1770150509301360754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd4aacaa8ee6b349b7d8e998953b778, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCircuitBreaker: {fileID: 1846701284573291917}
+  MotorOverload: {fileID: 6530593175935446454}
+  BrakeOpen: {fileID: 3753506144601520114}
+  BrakeReleaseLimit: {fileID: 8241644511543986933}
+  StackingOperation: {fileID: 8307224568315986349}
+  FetchingOperation: {fileID: 2910551961895873552}
+  FirstLevelDeviationSwitch: {fileID: 3132112595011196152}
+  SecondLevelDeviationSwitch: {fileID: 1661416118071650858}
+  SlippingDetectionSwitch: {fileID: 5226812536432117081}
+  LongitudinalTearSwitch: {fileID: 8227938712285149944}
+  EmergencyStopCableSwitch: {fileID: 4526350311695375351}
+  MaterialFlowDetectionSwitch: {fileID: 6710765766204649239}
+  MiddleHopperCoalBlocking: {fileID: 6824469073723659097}
 --- !u!1 &1778323187848706959
 GameObject:
   m_ObjectHideFlags: 0
@@ -14259,7 +14285,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F4E\u538B\u52A8\u529B\u7535\u6E90"
+  m_Text: "\u843D\u4E0B\u9650\u4F4D\uFF08\u5806\uFF09"
 --- !u!1 &2237291760488446763
 GameObject:
   m_ObjectHideFlags: 0
@@ -14271,8 +14297,9 @@ GameObject:
   - component: {fileID: 7911785597864161373}
   - component: {fileID: 5757402835635164843}
   - component: {fileID: 8171529195468185771}
+  - component: {fileID: 202847163769991794}
   m_Layer: 5
-  m_Name: bucketWheel (4)
+  m_Name: "\u5206\u6D41\u6321\u677F"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14337,6 +14364,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.5
+--- !u!114 &202847163769991794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2237291760488446763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f30e5fc83b58f6246aa9705ee29d7f3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCircuitBreaker: {fileID: 263922908664441590}
+  MotorOverload: {fileID: 1225889156867194169}
+  LiftLimit: {fileID: 3945655713502141817}
+  LowerLimit: {fileID: 6050100421533064366}
+  LiftRunning: {fileID: 6797287036196226972}
+  LowerRunning: {fileID: 977583942883492802}
 --- !u!1 &2240171437882041801
 GameObject:
   m_ObjectHideFlags: 0
@@ -15207,7 +15252,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F4E\u538B\u52A8\u529B\u7535\u6E90"
+  m_Text: "\u4E3B\u65AD\u8DEF\u5668"
 --- !u!1 &2377478129298477372
 GameObject:
   m_ObjectHideFlags: 0
@@ -15905,6 +15950,7 @@ GameObject:
   - component: {fileID: 8154251418230406890}
   - component: {fileID: 2629423271808271448}
   - component: {fileID: 7787282507846562088}
+  - component: {fileID: 5709537357638408992}
   m_Layer: 5
   m_Name: "\u6597\u8F6E\u5BFC\u6599\u69FD"
   m_TagString: Untagged
@@ -15971,6 +16017,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.5
+--- !u!114 &5709537357638408992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2524241126220263575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2150c8983b456b469dc908ed25ff5a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCircuitBreaker: {fileID: 3154835182020547288}
+  MotorOverload: {fileID: 2717200335097584409}
+  LiftLimit: {fileID: 7139385649670885277}
+  LowerLimit: {fileID: 5597120130532523935}
+  LiftRunning: {fileID: 5529109319057491221}
+  LowerRunning: {fileID: 7344236561059631902}
 --- !u!1 &2543259899851723724
 GameObject:
   m_ObjectHideFlags: 0
@@ -16057,7 +16121,7 @@ GameObject:
   - component: {fileID: 3497530840172229657}
   - component: {fileID: 3945655713502141817}
   m_Layer: 5
-  m_Name: lowVoltageEnergySupply (4)
+  m_Name: "\u62AC\u8D77\u9650\u4F4D\uFF08\u53D6\uFF09"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16143,7 +16207,7 @@ GameObject:
   - component: {fileID: 5557397454364673908}
   - component: {fileID: 6050100421533064366}
   m_Layer: 5
-  m_Name: lowVoltageEnergySupply (3)
+  m_Name: "\u843D\u4E0B\u9650\u4F4D\uFF08\u5806\uFF09"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18709,8 +18773,9 @@ GameObject:
   - component: {fileID: 1271531627621549794}
   - component: {fileID: 6261760331162596}
   - component: {fileID: 734317629039476684}
+  - component: {fileID: 3645442381886334373}
   m_Layer: 5
-  m_Name: "\u632F\u8FBE\u7535\u673A"
+  m_Name: "\u632F\u6253\u7535\u673A"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18775,6 +18840,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.5
+--- !u!114 &3645442381886334373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2890248468892000240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12a441273834ead489358dfffef21807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  VibrationMotorMainCircuitBreaker: {fileID: 2598793749281380035}
+  VibrationMotorOverload: {fileID: 1830970484969550492}
+  VibrationMotorRunning: {fileID: 8192414434051312698}
 --- !u!1 &2904327207639988437
 GameObject:
   m_ObjectHideFlags: 0
@@ -23688,6 +23768,7 @@ GameObject:
   - component: {fileID: 4148298693788018855}
   - component: {fileID: 376910454972115091}
   - component: {fileID: 6928393770396037982}
+  - component: {fileID: 2036544796501725023}
   m_Layer: 5
   m_Name: "\u5C3E\u8F66\u80F6\u5E26"
   m_TagString: Untagged
@@ -23754,6 +23835,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.5
+--- !u!114 &2036544796501725023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3753772842060380681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d6e7b0a06f1384793b79fbcda008f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BearingUpperLimitAlarm: {fileID: 7180012402167642920}
+  BearingLowerLimitAlarm: {fileID: 8745592554839897594}
+  LevelOneDeviation: {fileID: 4474246662547083404}
+  LevelTwoDeviation: {fileID: 1775422975169084953}
+  EmergencyStopCableSwitch: {fileID: 4580637186167886289}
+  LongitudinalTearSwitch: {fileID: 7971838372172860099}
 --- !u!1 &3772443136008014377
 GameObject:
   m_ObjectHideFlags: 0
@@ -23765,6 +23864,7 @@ GameObject:
   - component: {fileID: 7718943342180641043}
   - component: {fileID: 6304507489245350892}
   - component: {fileID: 3917976459451664061}
+  - component: {fileID: 139121352942686219}
   m_Layer: 5
   m_Name: "\u6597\u8F6E"
   m_TagString: Untagged
@@ -23831,6 +23931,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.5
+--- !u!114 &139121352942686219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3772443136008014377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f58522f2cab540f49b8c32cde65ef63e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCircuitBreaker: {fileID: 796878538291400643}
+  BucketWheelRunning: {fileID: 5993079066082816745}
+  LubricationPumpRunning: {fileID: 7681597290351113525}
+  MotorOverload: {fileID: 3187668107830731102}
+  BucketWheelOverTorqueSwitch: {fileID: 1698494496316145590}
+  LubricatingOilPumpFlowSwitch: {fileID: 8842405041600901784}
 --- !u!1 &3795283742889000045
 GameObject:
   m_ObjectHideFlags: 0
@@ -25801,7 +25919,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u632F\u8FBE\u7535\u673A\u4E3B\u65AD\u8DEF\u5668"
+  m_Text: "\u632F\u6253\u7535\u673A\u4E3B\u65AD\u8DEF\u5668"
 --- !u!1 &4254251386204845701
 GameObject:
   m_ObjectHideFlags: 0
@@ -26756,6 +26874,7 @@ GameObject:
   - component: {fileID: 201242894217926216}
   - component: {fileID: 3320451839605690946}
   - component: {fileID: 6685600244873418695}
+  - component: {fileID: 8025218697324950071}
   m_Layer: 5
   m_Name: "\u6652\u6C34\u6291\u5C18"
   m_TagString: Untagged
@@ -26823,6 +26942,31 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.5
+--- !u!114 &8025218697324950071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4364192981417749711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdbbb8b7dcf710f48b8c06536385c2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DryFogSysAirPressureLow: {fileID: 5695257550583047984}
+  DryFogSysWaterPressureLow: {fileID: 905076953797689820}
+  DryFogSysFilterClogged: {fileID: 691478846770075007}
+  WaterTankLevelLowSwitch: {fileID: 2115932515417937438}
+  DryFogSysSprayStatus: {fileID: 6897887326626761758}
+  DryFogSysSprayRunning: {fileID: 2390119140157034485}
+  DryFogSysAutoRunning: {fileID: 5108053056016998413}
+  DryFogSysManualRunning: {fileID: 909929061304701595}
+  DryFogDustSuppressionRemoteStartRunning: {fileID: 8125134634014194391}
+  DryFogDustSuppressionRemoteStopRunning: {fileID: 3675398961783937044}
+  DryFogDustSuppressionStockpileRunning: {fileID: 5824807548197752264}
+  DryFogMaterialFetchingRunning: {fileID: 3944488096931062835}
+  DryFogDustSuppressionDiversionRunning: {fileID: 1786183802946126820}
 --- !u!1 &4369606524340580138
 GameObject:
   m_ObjectHideFlags: 0
@@ -34330,7 +34474,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u7535\u673A\u8FC7\u654F"
+  m_Text: "\u7535\u673A\u8FC7\u8F7D"
 --- !u!1 &5256345158323647161
 GameObject:
   m_ObjectHideFlags: 0
@@ -35047,7 +35191,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F4E\u538B\u52A8\u529B\u7535\u6E90"
+  m_Text: "\u7535\u673A\u8FC7\u8F7D"
 --- !u!1 &5447386755825759513
 GameObject:
   m_ObjectHideFlags: 0
@@ -38290,7 +38434,7 @@ GameObject:
   - component: {fileID: 2133630260389414577}
   - component: {fileID: 6797287036196226972}
   m_Layer: 5
-  m_Name: lowVoltageEnergySupply (6)
+  m_Name: "\u62AC\u8D77\u8FD0\u884C"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42319,7 +42463,7 @@ GameObject:
   - component: {fileID: 5089478677328347266}
   - component: {fileID: 977583942883492802}
   m_Layer: 5
-  m_Name: lowVoltageEnergySupply (5)
+  m_Name: "\u843D\u4E0B\u8FD0\u884C"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42563,7 +42707,7 @@ GameObject:
   - component: {fileID: 3695569429254103265}
   - component: {fileID: 1225889156867194169}
   m_Layer: 5
-  m_Name: lowVoltageEnergySupply (2)
+  m_Name: "\u7535\u673A\u8FC7\u8F7D"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46219,6 +46363,7 @@ GameObject:
   - component: {fileID: 5173228189923800536}
   - component: {fileID: 4552460919515855415}
   - component: {fileID: 698332080288436872}
+  - component: {fileID: 553879369519129795}
   m_Layer: 5
   m_Name: "\u5939\u8F68\u5668"
   m_TagString: Untagged
@@ -46286,6 +46431,28 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2.5
+--- !u!114 &553879369519129795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7186861807463278322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a608ad667c37a1640800a64b8600f667, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainCircuitBreaker: {fileID: 5030198192570690686}
+  LeftRailClamperMotorRunning: {fileID: 8210202657447798828}
+  LeftRailClamperSolenoidValve: {fileID: 2877560814424246469}
+  LeftAnchorLimit: {fileID: 4249672368080634270}
+  LeftRailClamperReleaseLimit: {fileID: 4426248553102300158}
+  MotorOverload: {fileID: 2258036055166516834}
+  RightRailClamperMotorRunning: {fileID: 2720425328948053908}
+  RightRailClamperSolenoidValve: {fileID: 1949458450220576710}
+  RightAnchorLimit: {fileID: 2500486716168457910}
+  RightRailClamperReleaseLimit: {fileID: 2155222223280661822}
 --- !u!1 &7194256414843565695
 GameObject:
   m_ObjectHideFlags: 0
@@ -48663,7 +48830,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u4F4E\u538B\u52A8\u529B\u7535\u6E90"
+  m_Text: "\u843D\u4E0B\u8FD0\u884C"
 --- !u!1 &7541731765384960672
 GameObject:
   m_ObjectHideFlags: 0
@@ -57225,7 +57392,7 @@ GameObject:
   - component: {fileID: 2010018586774432177}
   - component: {fileID: 2598793749281380035}
   m_Layer: 5
-  m_Name: "\u632F\u8FBE\u7535\u673A\u4E3B\u65AD\u8DEF\u5668"
+  m_Name: "\u632F\u6253\u7535\u673A\u4E3B\u65AD\u8DEF\u5668"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
