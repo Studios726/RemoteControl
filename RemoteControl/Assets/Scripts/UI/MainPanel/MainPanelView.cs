@@ -1,3 +1,4 @@
+using ShenYangRemoteSystem.Subclass;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ public class MainPanelView :UIView<MainPanelCtr>
    
    
       _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
-      UpdateData(uiArgs);
+      UpdateData(GameDataManager.Instance.SystemVariables);
    }
 
    private void ActiveHideBtnCtr2()
@@ -48,7 +49,7 @@ public class MainPanelView :UIView<MainPanelCtr>
       _bucketWheelCtrMove1.hide.SetActive(_bucketWheelHideBtnCtr1.gameObject.activeSelf);
    }
 
-   public void UpdateData<T>(T data)
+   public void UpdateData(SystemVariables data)
    {
       _bucketWheelState2.UpdateData(data);
       _bucketWheelState1.UpdateData(data);
@@ -58,7 +59,7 @@ public class MainPanelView :UIView<MainPanelCtr>
 
    public void UpdateData(object o, EventArgs eventArgs)
    {
-      UpdateData(eventArgs);
+      UpdateData(GameDataManager.Instance.SystemVariables);
    }
 
    public void AddOnClickListener(Button btn, UnityAction action)

@@ -7,8 +7,9 @@ using UnityEngine;
 
 public enum SocketType
 {
-    Socket1=0,
-    Socket2=1,
+    TaoRC=0,
+    TaskPC=1,
+    SCA=2
 }
 public class ClientConnection:MonoBehaviour
 {
@@ -87,13 +88,13 @@ public class ClientConnection:MonoBehaviour
         // 拿到任何消息都说明当前连接是正常的
         MessageCenter.Instance.ReadJson(message,socketType);
         // HeartCheck();
-        Debug.Log(message);
     }
  
     void OnClosed(WebSocket ws, UInt16 code, string message)
     {
         isConnect = false;
         Debug.LogFormat("OnClosed: code={0}, msg={1}", code, message);
+        EventManager.Instance.TriggerEvent(EventName.ConnectionClose, this, new ConnectEventArgs(socketType));
         webSocket = null;
         ReConnect();
     }
@@ -107,10 +108,12 @@ public class ClientConnection:MonoBehaviour
             errorMsg = string.Format("Status Code from Server: {0} and Message: {1}", ws.InternalRequest.Response.StatusCode, ws.InternalRequest.Response.Message);
         }
 #endif
+        EventManager.Instance.TriggerEvent(EventName.ConnectionError, this, new ConnectEventArgs(socketType));
         Debug.LogFormat("OnError: error occured: {0}\n", (ex != null ? ex : "Unknown Error " + errorMsg));
         webSocket = null;
         ReConnect();
- 
+        
+
     }
  
     void ReConnect()
@@ -123,7 +126,7 @@ public class ClientConnection:MonoBehaviour
  
     private IEnumerator SetReConnect()
     {
-        Debug.Log("正在重连websocket");
+        Debug.Log($"正在重连websocket{socketType}");
         yield return new WaitForSeconds(5);
         CreateWebSocket();
         lockReconnect = false;
@@ -184,7 +187,7 @@ public class ClientConnection:MonoBehaviour
             try
             {
                 webSocket.Send(msg);
-                Debug.Log("发送数据成功" + msg);
+                Debug.Log($"发送数据成功{socketType} " + msg);
             }
             catch (Exception ex)
             {

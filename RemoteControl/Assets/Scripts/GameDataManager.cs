@@ -1,20 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using RemoteControl.Event;
 using ShangHaiPro;
+using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class GameDataManager : Singleton<GameDataManager>
 {
-    private ClientConnection _clientConnection;
+    private bool _RcConnectionState;
+    private SystemVariables _systemVariables;
 
-    public ClientConnection Connection
+    private MachineMove machineMove_1;//堆取斗轮机
+    private MachineMove machineMove_2;//取斗轮机
+    public bool RcConnectionState
     {
-        get => _clientConnection;
-        set => _clientConnection = value;
+        get => _RcConnectionState;
+        set => _RcConnectionState = value;
+    }
+    public SystemVariables SystemVariables
+    {
+        get => _systemVariables;
+        set => _systemVariables = value;
+    }
+    public void SetSystemVariables(SystemVariables systemVariables)
+    {
+        _systemVariables= systemVariables;
+        _RcConnectionState = _systemVariables.PLCCommunicationState;
+        UpdateMachinePosAndRot();
+        EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
+        Debug.Log($"Plc 链接状态 {_systemVariables.PLCCommunicationState}");
     }
 
+    public void SetMachine(MachineMove machine1, MachineMove machine2) {
+        machineMove_1= machine1;
+        machineMove_2= machine2;
+    }
+    public void UpdateMachinePosAndRot()
+    {
+        if (machineMove_1) {
+            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance, 0, 0);
+        }
+        if (machineMove_2) {
+            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance, 0, 0);
+        }
+    }
     public GameObject SpawnCoalModel(Transform parent,Material material,SendDataReportAndDEM sendDataReportAndDem)
     {
         List<Vector3> vertices = new List<Vector3>();

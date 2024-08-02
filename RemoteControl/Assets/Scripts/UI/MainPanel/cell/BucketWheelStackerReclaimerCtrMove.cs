@@ -1,3 +1,4 @@
+using ShenYangRemoteSystem.Subclass;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -27,9 +28,8 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
         AddOnClickListener(pileMaterTakeBtn,(() => SendMessage("堆料")));
         
     }
-    public override void UpdateData<T>(T data)
+    public override void UpdateData(SystemVariables data)
     {
-        base.UpdateData(data);
         Debug.Log("更新堆取料机碰撞信息");
     }
 }

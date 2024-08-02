@@ -36,7 +36,7 @@ public class MainPanel : MonoBehaviour
     public void SendCommond()
     {
         ServerCommand cmd = SetCommandPlc(6,1,"",0,0);
-        MessageCenter.Instance.SendMessage((int)MessageType.Plc, cmd);
+        MessageCenter.Instance.SendMessage(MessageType.RC, cmd);
     }
     private ServerCommand SetCommandPlc(int TYPE1, int TYPE2, string TYPE3, int TYPE4, float TYPE5)
     {
@@ -45,8 +45,8 @@ public class MainPanel : MonoBehaviour
         command.DATA_TYPE = TYPE1;
         command.QUERY_TYPE = TYPE2;
         command.COMMAND_NAME = TYPE3;
-        command.COMMAND_TYPE = TYPE4;
-        command.COMMAND_DATA = TYPE5;
+        //command.COMMAND_TYPE = TYPE4;
+        //command.COMMAND_DATA = TYPE5;
         return command;
     }
     public void Test(string a)

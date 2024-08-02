@@ -2,10 +2,16 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using RemoteControl.Event;
+using ShenYangRemoteSystem.Subclass;
+using UnityEngine.Networking.PlayerConnection;
+using System.IO;
+using System.Text;
+using System.IO.Compression;
 
 public enum MessageType
 {
-    Plc // 由于是示例，这里省略了枚举值的赋值。
+    RC, // 由于是示例，这里省略了枚举值的赋值。
+    PC,
 }
 
 public class MessageCenter : Singleton<MessageCenter>
@@ -57,22 +63,44 @@ public class MessageCenter : Singleton<MessageCenter>
         messageMap.Clear();
     }
 
-    public void ReadJson(string json, SocketType type)
+    public void ReadJson(string message, SocketType socketType)
     {
         // 此处省略具体实现，根据type来处理不同的json数据
-        EventManager.Instance.TriggerEvent(EventName.Message, this, new MessageEventArgs(json, type));
+        if (message == null)
+            return;
+        if(socketType== SocketType.TaoRC)
+        {
+            try
+            {
+                string json = Decompress(message);
+                SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
+                Debug.Log($"数据解析成功 socketType {nameof(SocketType.TaoRC)}");
+                GameDataManager.Instance.SetSystemVariables(systemVariables);
+            }
+            catch (Exception)
+            {
+
+                Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)}");
+            }
+           
+        }else if(socketType== SocketType.TaskPC)
+        {
+            Debug.Log($"收到数据 {SocketType.TaoRC} {message}");
+        }
+       
+        EventManager.Instance.TriggerEvent(EventName.Message, this, new MessageEventArgs(message, socketType));
     }
 
-    public void SendMessage<T>(int messageType, T body)
+    public void SendMessage<T>(MessageType messageType, T body)
     {
         List<MessageDelHandle> handlers;
-        if (messageMap.TryGetValue(messageType, out handlers))
+        if (messageMap.TryGetValue((int)messageType, out handlers))
         {
             string json;
             try
             {
                 json = JsonMgr.Serialize<T>(body);
-                Debug.Log($"json  {json}");
+                //Debug.Log($"json  {json}");
             }
             catch (Exception e)
             {
@@ -96,4 +124,35 @@ public class MessageCenter : Singleton<MessageCenter>
             }
         }
     }
+    #region 压缩方法
+    //解压字符串
+    public static string Decompress(string compressedText)
+    {
+        byte[] compressedBuffer = Convert.FromBase64String(compressedText); using (MemoryStream compressedStream = new MemoryStream(compressedBuffer))
+        {
+            using (GZipStream gzipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
+            {
+                using (MemoryStream resultStream = new MemoryStream())
+                {
+                    gzipStream.CopyTo(resultStream);
+                    return Encoding.UTF8.GetString(resultStream.ToArray());
+                }
+            }
+        }
+    }
+    //压缩字符串
+    public static string Compress(string text)
+    {
+        byte[] buffer = Encoding.UTF8.GetBytes(text);
+        using (MemoryStream memoryStream = new MemoryStream())
+        {
+            using (GZipStream gzipStream = new GZipStream(memoryStream, CompressionMode.Compress))
+            {
+                gzipStream.Write(buffer, 0, buffer.Length);
+            }
+            return Convert.ToBase64String(memoryStream.ToArray());
+        }
+    }
+
+    #endregion
 }

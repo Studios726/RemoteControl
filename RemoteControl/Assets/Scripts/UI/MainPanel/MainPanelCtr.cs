@@ -13,11 +13,11 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
      public override void Dispose()
      {
           Debug.Log("MainPanelCtr ");
-          EventManager.Instance.RemoveListener(EventName.MainPanelUpdateArgs,view.UpdateData);
+          EventManager.Instance.RemoveListener(EventName.UpdateRcData, view.UpdateData);
      }
      public void Addlistener()
      {
-          EventManager.Instance.AddListener(EventName.MainPanelUpdateArgs,view.UpdateData);
+          EventManager.Instance.AddListener(EventName.UpdateRcData, view.UpdateData);
      }
 
      public void SendMessage(string message)

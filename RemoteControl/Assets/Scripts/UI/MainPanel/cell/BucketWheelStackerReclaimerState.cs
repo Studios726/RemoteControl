@@ -1,3 +1,4 @@
+using ShenYangRemoteSystem.Subclass;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,9 +23,8 @@ public class BucketWheelStackerReclaimerState : BucketWheelStateBase
    /// </summary>
    public Toggle shuntRun;
 
-   public override void UpdateData<T>(T data)
+   public override void UpdateData(SystemVariables data)
    {
-      base.UpdateData(data);
-      Debug.Log("更新状态");
+        //SetToggleState(storeSpaceSignal, data.i);
    }
 }

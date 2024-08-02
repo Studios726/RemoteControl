@@ -18,27 +18,32 @@ public class MachineMove : MonoBehaviour
       curPos.x=curPos.x + distance * percentage;
       transform.localPosition = curPos;
       rotationGo.localRotation=Quaternion.Euler(new Vector3(0,rotAngleY,rotAngleZ));
-   }
-
-   private void Update()
-   {
-      if (Input.GetKeyDown(KeyCode.U))
-      {
-         UpdatePosAndRotaion(0.3f, 20, 0);
-      }else if (Input.GetKeyDown(KeyCode.I))
-      {
-         UpdatePosAndRotaion(0.5f, 40, 0);
-      }
-      else if (Input.GetKeyDown(KeyCode.O))
-      {
-         UpdatePosAndRotaion(0.7f, 10, 10);
-      }
-      else if (Input.GetKeyDown(KeyCode.P))
-      {
-         UpdatePosAndRotaion(1, 0, 0);
-      }
-
-        curPercentage = curPercentage + Time.deltaTime*0.01f;
-        UpdatePosAndRotaion(curPercentage, 0, 0);
     }
+    public void UpdatePosAndRotaionByMeter(float meter, float rotAngleY, float rotAngleZ) {
+        rotationGo.localRotation = Quaternion.Euler(new Vector3(0, rotAngleY, rotAngleZ));
+ 
+        transform.localPosition= new Vector3(meter, transform.localPosition.y, transform.localPosition.z);
+    }
+
+   //private void Update()
+   //{
+   //   if (Input.GetKeyDown(KeyCode.U))
+   //   {
+   //      UpdatePosAndRotaion(0.3f, 20, 0);
+   //   }else if (Input.GetKeyDown(KeyCode.I))
+   //   {
+   //      UpdatePosAndRotaion(0.5f, 40, 0);
+   //   }
+   //   else if (Input.GetKeyDown(KeyCode.O))
+   //   {
+   //      UpdatePosAndRotaion(0.7f, 10, 10);
+   //   }
+   //   else if (Input.GetKeyDown(KeyCode.P))
+   //   {
+   //      UpdatePosAndRotaion(1, 0, 0);
+   //   }
+
+   //     curPercentage = curPercentage + Time.deltaTime*0.01f;
+   //     UpdatePosAndRotaion(curPercentage, 0, 0);
+   // }
 }

@@ -90,7 +90,7 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.Quantity = 10;
             taskCommand.TaskID = 24073102;
             taskCommand.OperatorSystem ="MC";
-            MessageCenter.Instance.SendMessage<TaskCommand>((int)MessageType.Plc, taskCommand);
+            MessageCenter.Instance.SendMessage<TaskCommand>(MessageType.PC, taskCommand);
         }
 
     }

@@ -1,3 +1,4 @@
+using ShenYangRemoteSystem.Subclass;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,7 +81,7 @@ public class BucketWheelStateBase : MonoBehaviour
     public Toggle fowardTurnRun;
     
     public float pastTime = 0;
-    public virtual void UpdateData<T>(T data)
+    public virtual void UpdateData(SystemVariables data)
     {
         Debug.Log("更新参数状态");
         
@@ -88,7 +89,7 @@ public class BucketWheelStateBase : MonoBehaviour
 
     public void Update()
     {
-        if (true)//GameDataManager.Instance.Connection.isConnect==false
+        if (GameDataManager.Instance.RcConnectionState == false)//
         {
             if (communicationStatus.isOn==true)
             {
@@ -124,5 +125,21 @@ public class BucketWheelStateBase : MonoBehaviour
         communicationStatus.isOn=isSucc;
         red.SetActive(!isSucc);
         yellow.SetActive(!isSucc);
+    }
+    public virtual void SetToggleState(Toggle toggle, bool ison)
+    {
+        if (toggle.isOn == ison)
+        {
+            return;
+        }
+        else if (toggle)
+        {
+            toggle.isOn = ison;
+        }
+        else
+        {
+            Debug.LogError("Toggle is null");
+        }
+
     }
 }

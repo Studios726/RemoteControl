@@ -10,7 +10,10 @@ public class StatusParmItemBase<T> : MonoBehaviour
     {
     }
     public virtual void SetToggleState(Toggle toggle, bool ison) {
-        if (toggle)
+        if (toggle.isOn == ison) {
+            return;
+        }
+        else if(toggle)
         {
             toggle.isOn = ison;
         }
@@ -18,5 +21,6 @@ public class StatusParmItemBase<T> : MonoBehaviour
         {
             Debug.LogError("Toggle is null");
         }
+
     }
 }

@@ -1,3 +1,4 @@
+using ShenYangRemoteSystem.Subclass;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -202,9 +203,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         AddOnClickListener(rightBtn,(() => SendMessageToServer("大车右转")));
         AddOnClickListener(stopBtn,(() => SendMessageToServer("大车停止")));
     }
-    public virtual void UpdateData<T>(T data)
+    public virtual void UpdateData(SystemVariables data)
     {
-        Debug.Log("更新move  大车碰撞信息 ");
+        //Debug.Log("更新move  大车碰撞信息 ");
     }
     public  void AddOnClickListener(Button btn, UnityAction action)
     {
