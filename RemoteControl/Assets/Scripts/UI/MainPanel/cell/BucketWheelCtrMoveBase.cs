@@ -171,13 +171,25 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 右转
     /// </summary>
     public  ButtonCell rightBtn;
-    
     /// <summary>
-    /// 停止
+    /// 回转停止
+    /// </summary>
+    public ButtonCell rotStopBtn;
+
+    /// <summary>
+    /// 俯仰停止
     /// </summary>
     public  ButtonCell stopBtn;
 
-    public Machine Machine;
+    public ButtonCell curCtrMode;
+    public ButtonCell curPileTakeMode;
+    public ButtonCell curCarMoveMode;
+    /// <summary>
+    /// 当前车俯仰
+    /// </summary>
+    public ButtonCell curCarPitchingMode;
+    public ButtonCell curCarRotMode;
+    public Machine machine;
 
     public virtual void Start()
     {
@@ -190,8 +202,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         AddOnClickListener(aloneBtn, (() => SendMessageToServer("控制方式单动")));
         AddOnClickListener(togetherBtn, (() => SendMessageToServer("控制方式联动")));
         AddOnClickListener(automaticBtn, (() => SendMessageToServer("控制方式自动")));
-        AddOnClickListener(takeMaterBtn, (() => SendMessageToServer("堆、取料控制 取料")));
-        AddOnClickListener(stopTakeMaterBtn, (() =>SendMessageToServer("堆、取料控制 停止")));
+        AddOnClickListener(takeMaterBtn, (() => SendMessageToServer("堆取料控制取料")));
+        AddOnClickListener(stopTakeMaterBtn, (() =>SendMessageToServer("堆取料控制停止")));
         AddOnClickListener(carFastBtn, (() => SendMessageToServer("大车快速")));
         AddOnClickListener(carSlowBtn, (() => SendMessageToServer("大车慢速")));
         AddOnClickListener(carBackBtn, (() => SendMessageToServer("大车后退")));
@@ -201,7 +213,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         AddOnClickListener(downBtn,(() => SendMessageToServer("大车下附")));
         AddOnClickListener(leftBtn,(() => SendMessageToServer("大车左转")));
         AddOnClickListener(rightBtn,(() => SendMessageToServer("大车右转")));
-        AddOnClickListener(stopBtn,(() => SendMessageToServer("大车停止")));
+        AddOnClickListener(rotStopBtn, (() => SendMessageToServer("大车回转停止")));
+        AddOnClickListener(stopBtn,(() => SendMessageToServer("大车俯仰停止")));
     }
     public virtual void UpdateData(SystemVariables data)
     {
@@ -216,8 +229,87 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         btn.AddListener(action);
     }
 
+    public virtual void UpdateCurCtrMode(ref ButtonCell ctr, ButtonCell btn)
+    {
+        if (ctr != null)
+        {
+            ctr.SetSelectState(false);
+        }
+        ctr = btn;
+        ctr.SetSelectState(true);
+    }
+
     public virtual void SendMessageToServer(string str)
     {
-        Debug.Log($"sendMessage { Machine } {str}");
+        string command_name="";
+        Debug.Log($"sendMessage {machine} {str}");
+        switch (str)
+        {
+            case "堆取料控制停止":
+                UpdateCurCtrMode(ref curPileTakeMode, stopTakeMaterBtn);
+
+                //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
+                break;
+            case "堆取料控制取料":
+                UpdateCurCtrMode(ref curPileTakeMode, takeMaterBtn);
+                //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
+                break;
+            case "控制方式联动":
+                UpdateCurCtrMode(ref curCtrMode, togetherBtn);
+                //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
+                break;
+            case "控制方式单动":
+                UpdateCurCtrMode(ref curCtrMode, aloneBtn);
+                //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
+                break;
+            case "控制方式自动":
+                UpdateCurCtrMode(ref curCtrMode, automaticBtn);
+                //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
+                break;
+            case "大车前进":
+                UpdateCurCtrMode(ref curCarMoveMode, carForwardBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
+                break;
+            case "大车停止":
+                UpdateCurCtrMode(ref curCarMoveMode, carStopBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_STOP_1" : "MOVE_STOP_2";
+                break;
+            case "大车后退":
+                UpdateCurCtrMode(ref curCarMoveMode, carBackBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_BACKWARD_1" : "MOVE_BACKWARD_2";
+                break;
+            case "大车上仰":
+                UpdateCurCtrMode(ref curCarPitchingMode, upBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "ELEVATE_UP_1" : "ELEVATE_UP_2";
+                break;
+            case "大车下附":
+                UpdateCurCtrMode(ref curCarPitchingMode, downBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "ELEVATE_DOWN_1" : "ELEVATE_DOWN_2";
+                break;
+            case "大车俯仰停止":
+                UpdateCurCtrMode(ref curCarPitchingMode, stopBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "ELEVATE_STOP_1" : "ELEVATE_STOP_2";
+                break;
+            case "大车左转":
+                UpdateCurCtrMode(ref curCarRotMode, leftBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "ROTATE_LEFT_1" : "ROTATE_LEFT_2";
+                break;
+            case "大车右转":
+                UpdateCurCtrMode(ref curCarRotMode, rightBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "ROTATE_RIGHT_1" : "ROTATE_LEFT_1";
+                break;
+            case "大车回转停止":
+                UpdateCurCtrMode(ref curCarRotMode, rotStopBtn);
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "ROTATE_STOP_1" : "ROTATE_STOP_2";
+                break;
+            default:
+                break;
+        }
+        ServerCommand serverCommand = new ServerCommand();
+        serverCommand.QUERY_SYSTEM = "MC";
+        serverCommand.DATA_TYPE = 6;
+        serverCommand.QUERY_TYPE = 2;
+        serverCommand.COMMAND_NAME = command_name;
+        MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 }

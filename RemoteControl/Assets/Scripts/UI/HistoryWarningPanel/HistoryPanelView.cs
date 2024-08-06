@@ -36,7 +36,7 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
         _logPanel=RootObj.transform.Find("LogPanel").gameObject;
         _logReclaimerList = RootObj.transform.FindComponent<HistoryList>("LogPanel/alarmScrollView_1/Scroll View");
         _logmStackerReclaimerList = RootObj.transform.FindComponent<HistoryList>("LogPanel/alarmScrollView_2/Scroll View");
-        _parameterPanel = RootObj.transform.Find("ParameterPanel").gameObject;
+        _parameterPanel = RootObj.transform.Find("ImportantParamsGraphPanel").gameObject;
         _reclaimer = RootObj.transform.FindComponent<SearchPanel>("reclaimerSearchPanel");
         _stackerReclaimer = RootObj.transform.FindComponent<SearchPanel>("StackerReclaimerSearchPanel");
         _alarmBtn.onClick.AddListener(ShowAlarmPanel);
@@ -50,8 +50,8 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
 
     private void InitRecord()
     {
-        string warning = "warning";
-        string log = "logs";
+        string warning = "history_warning";
+        string log = "history_logs";
         string warningSql = "Select * from " + warning + " ORDER BY id DESC LIMIT 10;";
         string warningSql2 = "Select * from " + warning + " ORDER BY id DESC LIMIT 5;";
         string  logSql = "Select * from " + log + " ORDER BY id DESC LIMIT 10;";

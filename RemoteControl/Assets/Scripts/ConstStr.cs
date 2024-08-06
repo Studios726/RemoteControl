@@ -38,14 +38,14 @@ public static class ConstStr
     #endregion
 
     #region login
-    public const string DATA_USERNAME = "UserName";
+    public const string DATA_USERNAME = "Account";
     public const string DATA_PASSWORD = "Password";
     public const string DATA_IS_ADMIN = "IsAdmin";
     public const string DATA_INDEX = "Index";
     public const string DATA_DEPARTMENT = "Department";
     public const string DATA_JOB = "Job";
     public const string DATA_DEFAULT_PASSWORD = "DefaultPassword";
-    public const string DATA_NAME = "Name";
+    public const string DATA_NAME = "UserName";
     #endregion
 
     #region

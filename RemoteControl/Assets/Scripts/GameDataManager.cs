@@ -40,10 +40,10 @@ public class GameDataManager : Singleton<GameDataManager>
     public void UpdateMachinePosAndRot()
     {
         if (machineMove_1) {
-            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance, 0, 0);
+            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance-360, SystemVariables.RotaryAngle, SystemVariables.VariableAmplitudeAngle);
         }
         if (machineMove_2) {
-            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance, 0, 0);
+            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance_2-360, SystemVariables.RotaryAngle_2, SystemVariables.VariableAmplitudeAngle_2);
         }
     }
     public GameObject SpawnCoalModel(Transform parent,Material material,SendDataReportAndDEM sendDataReportAndDem)
@@ -132,5 +132,14 @@ public class GameDataManager : Singleton<GameDataManager>
         meshFilter.mesh.RecalculateNormals(); //更新法线
         meshCollider.sharedMesh = mesh;
         return go;
+    }
+
+    public void UpdatePlcData()
+    {
+        ServerCommand serverCommand = new ServerCommand();
+        serverCommand.QUERY_SYSTEM = "MC";
+        serverCommand.DATA_TYPE = 6;
+        serverCommand.QUERY_TYPE = 1;
+        MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 }

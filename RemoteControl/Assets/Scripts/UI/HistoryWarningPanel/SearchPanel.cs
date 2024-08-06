@@ -31,7 +31,15 @@ public class SearchPanel : MonoBehaviour
     public Button startDBtn;
     public Button startDBtn2;
     public Text startDText;
-    
+
+    public Button startHBtn;
+    public Button startHBtn2;
+    public Text startHText;
+
+    public Button startMinuteBtn;
+    public Button startMinuteBtn2;
+    public Text startMinuteText;
+
     public Button endYBtn;
     public Button endYBtn2;
     public Text endYText;
@@ -44,15 +52,27 @@ public class SearchPanel : MonoBehaviour
     public Button endDBtn2;
     public Text endDText;
 
+    public Button endHBtn;
+    public Button endHBtn2;
+    public Text endHText;
+
+    public Button endMinuteBtn;
+    public Button endMinuteBtn2;
+    public Text endMinuteText;
+
     public Button searchBtn;
 
     public GameObject scrollviewY ;
     public GameObject scrollviewM ;
     public GameObject scrollviewD ;
-    
+    public GameObject scrollviewH;
+    public GameObject scrollviewMinute;
+
     public Transform contentY;
     public Transform contentM;
     public Transform contentD;
+    public Transform contentH;
+    public Transform contentMinute;
 
     public GameObject searchItme;
 
@@ -66,13 +86,15 @@ public class SearchPanel : MonoBehaviour
     private Vector3 scrollviewYPos;
     private Vector3 scrollviewMPos;
     private Vector3 scrollviewDPos;
+    private Vector3 scrollviewHPos;
+    private Vector3 scrollviewMinutePos;
 
-    private Vector3 offset = new Vector3(0, -6, 0);
+    private Vector3 offset = new Vector3(0, -53, 0);
 
     public string Tables = "warning";
     private MySqlDataReader _dataReader = null;
     private Coroutine _readingCoroutine = null;
-
+     
     private HistoryPanelCtr _historyPanelCtr;
     // Start is called before the first frame update
     void Start()
@@ -80,6 +102,8 @@ public class SearchPanel : MonoBehaviour
         scrollviewYPos = scrollviewY.transform.position;
         scrollviewMPos = scrollviewM.transform.position;
         scrollviewDPos = scrollviewD.transform.position;
+        scrollviewHPos = scrollviewH.transform.position;
+        scrollviewMinutePos= scrollviewMinute.transform.position;
         startYBtn.onClick.AddListener((() =>
         {
             ResetDateUI();
@@ -146,6 +170,50 @@ public class SearchPanel : MonoBehaviour
             ShowScrollView(scrollviewD,scrollviewDPos);
             RefreshScrollViewDData();
         }));
+
+        startHBtn.onClick.AddListener((() =>
+        {
+            ResetDateUI();
+            timeType = TimeType.StartTime;
+            SetActive(startHBtn.gameObject, false);
+            SetActive(startHBtn2.gameObject, true);
+            ShowScrollView(scrollviewH, scrollviewHPos);
+            //RefreshScrollViewDData();
+        }));
+        endHBtn.onClick.AddListener((() =>
+        {
+            ResetDateUI();
+            timeType = TimeType.EndTime;
+            SetActive(endHBtn.gameObject, false);
+            SetActive(endHBtn2.gameObject, true);
+            ShowScrollView(scrollviewH, scrollviewHPos);
+            //RefreshScrollViewDData();
+        }));
+
+        startMinuteBtn.onClick.AddListener((() =>
+        {
+            ResetDateUI();
+            timeType = TimeType.StartTime;
+            SetActive(startMinuteBtn.gameObject, false);
+            SetActive(startMinuteBtn2.gameObject, true);
+            ShowScrollView(scrollviewMinute, scrollviewMinutePos);
+            //RefreshScrollViewDData();
+        }));
+        endMinuteBtn.onClick.AddListener((() =>
+        {
+            ResetDateUI();
+            timeType = TimeType.EndTime;
+            //if (endMText.text == "" || endYText.text == "")
+            //{
+            //    UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("请确认年份和月份填写正确", null, null));
+            //    return;
+            //}
+            SetActive(endMinuteBtn.gameObject, false);
+            SetActive(endMinuteBtn2.gameObject, true);
+            ShowScrollView(scrollviewMinute, scrollviewMinutePos);
+            //RefreshScrollViewDData();
+        }));
+
         searchBtn.onClick.AddListener(SearchHistroyRecord);
     }
 
@@ -285,7 +353,9 @@ public class SearchPanel : MonoBehaviour
         SetActive(scrollviewY, false);
         SetActive(scrollviewM, false);
         SetActive(scrollviewD, false);
-        
+        SetActive(scrollviewH, false);
+        SetActive(scrollviewMinute, false);
+
         SetActive(startYBtn.gameObject,true);
         SetActive(startYBtn2.gameObject,false);
         
@@ -303,6 +373,12 @@ public class SearchPanel : MonoBehaviour
         
         SetActive(endMBtn.gameObject,true);
         SetActive(endMBtn2.gameObject,false);
+
+        SetActive(endHBtn.gameObject, true);
+        SetActive(endHBtn2.gameObject, false);
+
+        SetActive(endMinuteBtn.gameObject, true);
+        SetActive(endMinuteBtn2.gameObject, false);
     }
 
     public void SearchHistroyRecord()

@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 public class MySqlHelper
 {
     public static string IP = Address.serviceIP;
-    public static string Database = "csr";
+    public static string Database = "huarun";//"huarun";
     public static string Username = "root";
     public static string Password = "123456";
     public static string connstr = "server=" + IP + ";database= " + Database + ";username=" + Username + ";password=" + Password + ";Charset=utf8";

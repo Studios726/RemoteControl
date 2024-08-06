@@ -60,11 +60,7 @@ namespace RemoteControl
                     timerRc.Cancel();
                 }
                 timerRc = Timer.Register(1, true, true, () => {
-                    ServerCommand serverCommand = new ServerCommand();
-                    serverCommand.QUERY_SYSTEM = "MC";
-                    serverCommand.DATA_TYPE = 6;
-                    serverCommand.QUERY_TYPE = 1;
-                    MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
+                    GameDataManager.Instance.UpdatePlcData();
                 });
             }
           

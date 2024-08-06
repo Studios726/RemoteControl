@@ -85,7 +85,20 @@ public class MessageCenter : Singleton<MessageCenter>
            
         }else if(socketType== SocketType.TaskPC)
         {
-            Debug.Log($"收到数据 {SocketType.TaoRC} {message}");
+            try
+            {
+                string json = Decompress(message);
+                Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
+                TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
+                Debug.Log($"收到数据 {SocketType.TaskPC} {taskVariables.TaskID}");
+            }
+            catch (Exception)
+            {
+
+                Debug.LogError($"数据解析失败 socketType {nameof(socketType)}");
+            }
+           
+           
         }
        
         EventManager.Instance.TriggerEvent(EventName.Message, this, new MessageEventArgs(message, socketType));

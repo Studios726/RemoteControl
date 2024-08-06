@@ -200,6 +200,6 @@ public class ClientConnection:MonoBehaviour
     public void OnClose()
     {
         // 关闭连接
-        webSocket.Close(1000, "Bye!");
+        //webSocket.Close(1000, "Bye!");
     }
 }

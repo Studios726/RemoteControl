@@ -89,13 +89,13 @@ public partial class DataManager
             return new AccountInfo
             {
                 account = row[ConstStr.DATA_USERNAME] as string,
-                defaultPassword = row[ConstStr.DATA_DEFAULT_PASSWORD] as string,
+                defaultPassword =row[ConstStr.DATA_DEFAULT_PASSWORD] as string,
                 password = row[ConstStr.DATA_PASSWORD] as string,
                 department = row[ConstStr.DATA_DEPARTMENT] as string,
                 job = row[ConstStr.DATA_JOB] as string,
                 index = (int)row[ConstStr.DATA_INDEX],
                 name = row[ConstStr.DATA_NAME] as string,
-                isAdmin = (val == 1)
+                isAdmin =(val == 1)
             };
         }
         catch (Exception e)
