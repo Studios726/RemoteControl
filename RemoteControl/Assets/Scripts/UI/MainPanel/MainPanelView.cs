@@ -17,6 +17,7 @@ public class MainPanelView :UIView<MainPanelCtr>
    private BucketWheelStackerReclaimerTask _bucketWheelTask1;
    private HideButtonCtrBase _bucketWheelHideBtnCtr2;
    private BucketWheelStackerReclaimerHideBtnCtr _bucketWheelHideBtnCtr1;
+    private Button updateModelBtn;
    public override void InitUIElements(UIArgs uiArgs)
    {
       _bucketWheelState2 = RootObj.transform.FindComponent<BucketWheelStateBase>("machine_2/Bg_1");
@@ -29,11 +30,19 @@ public class MainPanelView :UIView<MainPanelCtr>
       _bucketWheelTask1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerTask>("machine_1/Bg_3");
       _bucketWheelHideBtnCtr1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerHideBtnCtr>("machine_1/hideCtrBtns");
 
+      updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
+
       _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
-   
-   
+
+        updateModelBtn.onClick.AddListener(() =>
+        {
+            GameDataManager.Instance.UpdateSCAData();
+        });
+
+
       _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
       UpdateData(GameDataManager.Instance.SystemVariables);
+        GameDataManager.Instance.GetNearestTaskDataDic();
    }
 
    private void ActiveHideBtnCtr2()
@@ -62,6 +71,24 @@ public class MainPanelView :UIView<MainPanelCtr>
       UpdateData(GameDataManager.Instance.SystemVariables);
    }
 
+    public void UpdatePcData(object o, EventArgs eventArgs)
+    {
+        TaskVariables taskVariables = GameDataManager.Instance.TaskVariables;
+        if (taskVariables.McData.Count>0)
+        {
+            for (int i = 0; i < taskVariables.McData.Count-1; i++)
+            {
+                if (taskVariables.McData[i].Machine==Machine.BucketWheel)
+                {
+                    _bucketWheelTask2.UpdateData(taskVariables.McData[i]);
+                }
+                else
+                {
+                    _bucketWheelTask1.UpdateData(taskVariables.McData[i]);
+                }
+            }
+        }
+    }
    public void AddOnClickListener(Button btn, UnityAction action)
    {
       btn.onClick.AddListener(action);

@@ -451,7 +451,7 @@ namespace XCharts.Runtime
             var dateString = string.Empty;
             if (string.IsNullOrEmpty(numericFormatter) || numericFormatter.Equals("f2"))
             {
-                dateString = DateTimeUtil.GetDateTimeFormatString(dateTime, maxValue - minValue);
+                dateString = dateTime.ToString("G"); // DateTimeUtil.GetDateTimeFormatString(dateTime, maxValue - minValue);
             }
             else
             {

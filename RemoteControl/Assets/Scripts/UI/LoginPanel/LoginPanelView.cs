@@ -22,6 +22,8 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         _error = RootObj.transform.Find("error").gameObject;
         _loginBtn.onClick.AddListener(Login);
         //_accountInput.ActivateInputField();
+        Debug.Log($"Account {PlayerPrefs.GetString("Account")}");
+        Debug.Log($"Password {PlayerPrefs.GetString("Password")}");
         _accountInput.text = PlayerPrefs.GetString("Account");
         _passwordInput.text = PlayerPrefs.GetString("Password");
 
@@ -38,9 +40,10 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         });
         _error.SetActive(true);
     }
-    private void Login()
+    public void SetAccountAndPassword()
     {
-        if (_toggle != null && _toggle.isOn) {
+        if (_toggle != null && _toggle.isOn)
+        {
             PlayerPrefs.SetString("Account", _accountInput.text);
             PlayerPrefs.SetString("Password", _passwordInput.text);
         }
@@ -49,6 +52,10 @@ public class LoginPanelView : UIView<LoginPanelCtr>
             PlayerPrefs.SetString("Account", "");
             PlayerPrefs.SetString("Password", "");
         }
+    }
+    private void Login()
+    {
+       
         _ctr.Login(_accountInput.text, _passwordInput.text);
     }
 }

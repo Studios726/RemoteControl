@@ -18,7 +18,8 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
      public void Addlistener()
      {
           EventManager.Instance.AddListener(EventName.UpdateRcData, view.UpdateData);
-     }
+        EventManager.Instance.AddListener(EventName.UpdatePcData, view.UpdatePcData);
+    }
 
      public void SendMessage(string message)
      {

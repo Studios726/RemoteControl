@@ -1,7 +1,9 @@
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using UnityEditor.Search;
 using UnityEngine;
 using Utility.DesignPatterns;
 
@@ -11,7 +13,7 @@ public partial class DataManager
     {
         get => GetAccountList();
     }
-    public bool CheckLoginInfo(string account, string password)
+    public bool  CheckLoginInfo(string account, string password)
     {
         AccountInfo info = GetAccountInfo(account);
         if (info == null)
@@ -23,6 +25,7 @@ public partial class DataManager
             if (info.password.Equals(password))
             {
                 _currentAccount = info;
+                GameDataManager.Instance.curAccountInfo = info;
                 return true;
             }
             else
@@ -133,4 +136,31 @@ public partial class DataManager
         }
         return res;
     }
+    public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userName,string state)
+    {
+        string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`) " +
+           $"VALUES ('{taskCommand.QuerySystem}','{DateTime.Now}','{taskCommand.Machine.ToString()}','{taskCommand.TaskType.ToString()}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{userName}','{state}','{taskCommand.TaskID}')";
+        return MySqlHelper.ExecuteSql(query) > 0; ;
+    }
+    public bool UpdateHistoryTaskMc(string taskID,string state)
+    {
+        string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE} = {state} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
+        return MySqlHelper.ExecuteSql(query) > 0; 
+    }
+    public MySqlDataReader GetHistoryTaskMc(int limit)
+    {
+        string query = "";
+        if (limit == 0)
+        {
+            query= $"Select * from {ConstStr.DATABASE_HISTORY_TASK_MC}";
+
+        }
+        else
+        {
+            query = $"Select * from {ConstStr.DATABASE_HISTORY_TASK_MC} ORDER BY id DESC LIMIT {limit};";
+        }
+        MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
+        return mySqlDataReader;
+    }
+
 }

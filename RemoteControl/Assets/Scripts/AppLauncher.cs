@@ -10,10 +10,6 @@ public class AppLauncher : MonoBehaviour
     private void Awake()
     {
 
-        string json = "{\"TaskID\": \"MC\", \"OperatorSystem\": \"MC\", \"ProcessingProgress\": [100, 100], \"MachineError\": [0, 0]}";
-        TaskVariables taskVariables = JsonMgr.DeSerialize< TaskVariables >(json);
-        Debug.LogError($"TaskData {taskVariables.TaskID} {taskVariables.OperatorSystem}");
-
         Application.targetFrameRate = 60;
         UIInit();
         _gameMain=this.gameObject.AddComponent<GameMain>();

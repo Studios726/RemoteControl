@@ -1,3 +1,4 @@
+using RemoteControl.Event;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,12 @@ public class LoginPanelCtr :UIPresenter<LoginPanelView>
 {
     public void Login(string account, string password)
     {
-        Debugger.LogError("账号"+account+"  "+password);
         if (DataManager.Instance.CheckLoginInfo(account, password))
         {
+            EventManager.Instance.TriggerEvent(EventName.LoginSuccess, null);
+            view.SetAccountAndPassword();
             UIManager.Instance.OpenUI(UIID.MainPanel);
             UIManager.Instance.OpenUI(UIID.TopPanel);
-            Debug.Log("登陆成功");
         }
         else
         {

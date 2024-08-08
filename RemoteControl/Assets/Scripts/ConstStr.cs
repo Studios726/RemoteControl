@@ -35,6 +35,7 @@ public static class ConstStr
     public const string DATABASE_LOGIN_TABLE = "login";
     public const string DATABASE_ACCOUNTOPERATION_TABLE = "accountoperation";
     public const string DATABASE_VARIABLE_TABLE = "plcvariables";
+    public const string DATABASE_HISTORY_TASK_MC = "history_task_mc";
     #endregion
 
     #region login
@@ -47,7 +48,25 @@ public static class ConstStr
     public const string DATA_DEFAULT_PASSWORD = "DefaultPassword";
     public const string DATA_NAME = "UserName";
     #endregion
-
+    #region history_task_mc
+    public const string DATA_TASK_ID = "TaskID";
+    public const string DATA_OPERATO_RSYSTEM = "OperatorSystem";
+    public const string DATA_TASK_CREATE_TIME = "TaskCreateTime";
+    public const string DATA_MACHINE = "Machine";
+    public const string DATA_TASK_TYPE = "TaskType";
+    public const string DATA_MATERIAL_RANGE_START = "MaterialRangeStart";
+    public const string DATA_MATERIAL_RANGE_END = "MaterialRangeEnd";
+    public const string DATA_SIDE_SELECTION = "SideSelection";
+    public const string DATA_LEFT_RIGHT_RANGE_START = "LeftRightRangeStart";
+    public const string DATA_LEFT_RIGHT_RANGE_END = "LeftRightRangeEnd";
+    public const string DATA_STEP_LENGTH = "StepLength";
+    public const string DATA_IS_TIMED = "IsTimed";
+    public const string DATA_TIMEDAT = "TimedAt";
+    public const string DATA_IS_QUANTIFIED = "IsQuantified";
+    public const string DATA_QUANTITY = "Quantity";
+    public const string DATA_OPERATOR = "Operator";
+    public const string DATA_TASK_STATE = "TaskState";
+    #endregion
     #region
     public const string DATA_ACCOUNT_OPERATION_INDEX = "Index";
     public const string DATA_ACCOUNT_OPERATION_TIME = "Time";

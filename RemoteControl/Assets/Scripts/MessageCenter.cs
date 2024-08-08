@@ -7,11 +7,13 @@ using UnityEngine.Networking.PlayerConnection;
 using System.IO;
 using System.Text;
 using System.IO.Compression;
+using ShangHaiPro;
 
 public enum MessageType
 {
     RC, // 由于是示例，这里省略了枚举值的赋值。
     PC,
+    SCA,
 }
 
 public class MessageCenter : Singleton<MessageCenter>
@@ -90,17 +92,30 @@ public class MessageCenter : Singleton<MessageCenter>
                 string json = Decompress(message);
                 Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
                 TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
-                Debug.Log($"收到数据 {SocketType.TaskPC} {taskVariables.TaskID}");
+                GameDataManager.Instance.SetTaskVariables(taskVariables);
             }
             catch (Exception)
             {
 
-                Debug.LogError($"数据解析失败 socketType {nameof(socketType)}");
+                Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)}");
             }
            
            
+        }else if (socketType == SocketType.SCA)
+        {
+            try
+            {
+                string json = Decompress(message);
+                Debug.LogError($"收到数据 {socketType} {json}");
+                SendDataReportAndDEM  sendDataReportAndDEM = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
+                GameDataManager.Instance.SetScaReportAndDEM(sendDataReportAndDEM);
+            }
+            catch (Exception)
+            {
+
+                Debug.LogError($"数据解析失败 socketType {socketType}");
+            }
         }
-       
         EventManager.Instance.TriggerEvent(EventName.Message, this, new MessageEventArgs(message, socketType));
     }
 

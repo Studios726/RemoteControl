@@ -83,7 +83,7 @@ public class BucketWheelStateBase : MonoBehaviour
     public float pastTime = 0;
     public virtual void UpdateData(SystemVariables data)
     {
-        Debug.Log("更新参数状态");
+        //Debug.Log("更新参数状态");
         
     }
 

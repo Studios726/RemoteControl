@@ -152,7 +152,7 @@ public class ClientConnection:MonoBehaviour
     // onmessage拿到返回的心跳就说明连接正常
     private IEnumerator ClientPing()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         WebSend("heartbeat");
         _serverPing = StartCoroutine(ServerPing());
     }
@@ -163,7 +163,7 @@ public class ClientConnection:MonoBehaviour
         yield return new WaitForSeconds(5);
         if (webSocket != null)
         {
-            webSocket.Close();
+            //webSocket.Close();
         }
       
     }
@@ -187,7 +187,7 @@ public class ClientConnection:MonoBehaviour
             try
             {
                 webSocket.Send(msg);
-                Debug.Log($"发送数据成功{socketType} " + msg);
+                //Debug.Log($"发送数据成功{socketType} " + msg);
             }
             catch (Exception ex)
             {

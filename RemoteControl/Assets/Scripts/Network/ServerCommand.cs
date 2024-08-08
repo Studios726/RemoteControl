@@ -1,4 +1,6 @@
+using ShangHaiPro;
 using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
 
@@ -42,8 +44,10 @@ public static class ServerCommandDataType
 public class TaskCommand
 {
     public string QuerySystem { get; set; }
+    //任务ID 0发任务 1获取任务当前状态
+    public int Command_Type { get; set; }
     //任务ID
-    public int TaskID {  get; set; }
+    public string TaskID {  get; set; }
     //操作系統
     public string OperatorSystem { get; set; }
     public Machine Machine { get; set; }
@@ -73,8 +77,18 @@ public class TaskCommand
 
     // 定量多少，如果IsQuantified为true，则此字段有效
     public int Quantity { get; set; }
+    //堆料高度
+    public int TakeMateHigh {  get; set; }
+    public float LayerHigh {  get; set; }
+    public AllData  AllData { get; set; }
 }
-
+public class AllData
+{
+    //public string InfoIcon { get; set; }   
+    public int Error {  get; set; }
+    public int ProcessingProgress {  get; set; }
+    public List<int> OperationCommandList=new List<int>(); 
+}
 public class TaskRange
 {
     public float startValue;

@@ -30,6 +30,6 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
     }
     public override void UpdateData(SystemVariables data)
     {
-        Debug.Log("更新堆取料机碰撞信息");
+        //Debug.Log("更新堆取料机碰撞信息");
     }
 }
