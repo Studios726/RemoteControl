@@ -28,4 +28,8 @@ public class ButtonCell : MonoBehaviour
     {
         btn.onClick.AddListener(action);
     }
+    public void Invoke()
+    {
+        btn.onClick?.Invoke();
+    }
 }

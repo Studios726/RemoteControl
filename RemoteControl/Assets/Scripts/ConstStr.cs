@@ -66,6 +66,8 @@ public static class ConstStr
     public const string DATA_QUANTITY = "Quantity";
     public const string DATA_OPERATOR = "Operator";
     public const string DATA_TASK_STATE = "TaskState";
+    public const string DATA_TASK_TAKE_MATE_HIGH = "TakeMateHigh";
+    public const string DATA_TASK_LAYER_HIGH = "LayerHigh";
     #endregion
     #region
     public const string DATA_ACCOUNT_OPERATION_INDEX = "Index";
@@ -318,6 +320,7 @@ public static class ConstStr
 
 public enum Machine
 {
+    None,
     [Header("斗轮取料机")]
     BucketWheel,
     [Header("斗轮堆取料机")]

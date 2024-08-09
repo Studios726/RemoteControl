@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,8 +15,9 @@ public enum TimeType
 
 public enum MechanicalType
 {
-    Reclaimer=0,
-    StackerReclaimer=1
+    None = 0,
+    Reclaimer=1,
+    StackerReclaimer=2
     
 }
 public class SearchPanel : MonoBehaviour
@@ -96,6 +98,8 @@ public class SearchPanel : MonoBehaviour
     private Coroutine _readingCoroutine = null;
      
     private HistoryPanelCtr _historyPanelCtr;
+
+    private Action<string, string, MechanicalType,string> searchAction;
     // Start is called before the first frame update
     void Start()
     {
@@ -178,7 +182,7 @@ public class SearchPanel : MonoBehaviour
             SetActive(startHBtn.gameObject, false);
             SetActive(startHBtn2.gameObject, true);
             ShowScrollView(scrollviewH, scrollviewHPos);
-            //RefreshScrollViewDData();
+            RefreshScrollViewHData();
         }));
         endHBtn.onClick.AddListener((() =>
         {
@@ -187,7 +191,7 @@ public class SearchPanel : MonoBehaviour
             SetActive(endHBtn.gameObject, false);
             SetActive(endHBtn2.gameObject, true);
             ShowScrollView(scrollviewH, scrollviewHPos);
-            //RefreshScrollViewDData();
+            RefreshScrollViewHData();
         }));
 
         startMinuteBtn.onClick.AddListener((() =>
@@ -197,21 +201,16 @@ public class SearchPanel : MonoBehaviour
             SetActive(startMinuteBtn.gameObject, false);
             SetActive(startMinuteBtn2.gameObject, true);
             ShowScrollView(scrollviewMinute, scrollviewMinutePos);
-            //RefreshScrollViewDData();
+            RefreshScrollViewMinuteData();
         }));
         endMinuteBtn.onClick.AddListener((() =>
         {
             ResetDateUI();
             timeType = TimeType.EndTime;
-            //if (endMText.text == "" || endYText.text == "")
-            //{
-            //    UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("请确认年份和月份填写正确", null, null));
-            //    return;
-            //}
             SetActive(endMinuteBtn.gameObject, false);
             SetActive(endMinuteBtn2.gameObject, true);
             ShowScrollView(scrollviewMinute, scrollviewMinutePos);
-            //RefreshScrollViewDData();
+            RefreshScrollViewMinuteData();
         }));
 
         searchBtn.onClick.AddListener(SearchHistroyRecord);
@@ -220,6 +219,10 @@ public class SearchPanel : MonoBehaviour
     public void SetHistoryPanel(HistoryPanelCtr ctr)
     {
         _historyPanelCtr = ctr;
+    }
+    public void SetSearchAction(Action<string,string, MechanicalType,string> action)
+    {
+        searchAction = action;
     }
     void RefreshScrollviewYData()
     {
@@ -329,6 +332,56 @@ public class SearchPanel : MonoBehaviour
         }
     }
 
+    void RefreshScrollViewHData()
+    {
+        if (contentH.transform.childCount == 0)
+        {
+            for (int i = 0; i < 24; i++)
+            {
+                GameObject obj = Instantiate(searchItme, contentH);
+                obj.transform.Find("Text").GetComponent<Text>().text = (i + 1).ToString();
+                obj.GetComponent<Button>().onClick.AddListener((() =>
+                {
+                    SetActive(scrollviewH, false);
+                    if (timeType == TimeType.StartTime)
+                    {
+                        startHBtn2.onClick.Invoke();
+                        startHText.text = obj.transform.Find("Text").GetComponent<Text>().text;
+                    }
+                    else
+                    {
+                        endHBtn2.onClick.Invoke();
+                        endHText.text = obj.transform.Find("Text").GetComponent<Text>().text;
+                    }
+                }));
+            }
+        }
+    }
+    void RefreshScrollViewMinuteData()
+    {
+        if (contentMinute.transform.childCount == 0)
+        {
+            for (int i = 0; i < 60; i++)
+            {
+                GameObject obj = Instantiate(searchItme, contentMinute);
+                obj.transform.Find("Text").GetComponent<Text>().text = (i + 1).ToString();
+                obj.GetComponent<Button>().onClick.AddListener((() =>
+                {
+                    SetActive(scrollviewMinute, false);
+                    if (timeType == TimeType.StartTime)
+                    {
+                        startMinuteBtn2.onClick.Invoke();
+                        startMinuteText.text = obj.transform.Find("Text").GetComponent<Text>().text;
+                    }
+                    else
+                    {
+                        endMinuteBtn2.onClick.Invoke();
+                        endMinuteText.text = obj.transform.Find("Text").GetComponent<Text>().text;
+                    }
+                }));
+            }
+        }
+    }
     void ShowScrollView(GameObject scrollView,Vector3 pos)
     {
         if (timeType==TimeType.StartTime)
@@ -397,11 +450,12 @@ public class SearchPanel : MonoBehaviour
             int endyear = Convert.ToInt32(endYText.text);
             int endmouth = Convert.ToInt32(endMText.text);
             int endday = Convert.ToInt32(endDText.text);
-        
-            startTime = startyear + "-" + startmouth + "-" + startday + " 00:00:00";
-            endTime = endyear + "-" + endmouth + "-" + endday + " 23:59:59";
-            long startTimeStamp = new DateTime(startyear, startmouth, startday).ToFileTime();
-            long endTimeStamp = new DateTime(endyear, endmouth, endday).ToFileTime();
+            int endHour = endHText.text == "" ? 0:Convert.ToInt32(endHText.text);
+            int endMinute = endMinuteText.text==""?0:Convert.ToInt32(endMinuteText.text);
+            startTime = startyear + "-" + startmouth + "-" + startday + $" {endHour}:{endMinute}:00";
+            endTime = endyear + "-" + endmouth + "-" + endday + $" {endHour}:{endMinute}:59";
+            long startTimeStamp = new DateTime(startyear, startmouth, startday,endHour, endMinute,0).ToFileTime();
+            long endTimeStamp = new DateTime(endyear, endmouth, endday, endHour, endMinute,59).ToFileTime();
             if (startTimeStamp>endTimeStamp)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("结束日期小于开始日期，请重新设置"));
@@ -415,8 +469,9 @@ public class SearchPanel : MonoBehaviour
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("日期无效，请重新检查日期，稍后查询"));
             return;
         }
-        Debug.LogError("8888888888888888");
-        _historyPanelCtr?.SearchRecord(startTime, endTime, mechanicalType);
+        Debug.LogError($"搜索日期 {startTime} \n {endTime}");
+        searchAction?.Invoke(startTime, endTime, mechanicalType,"");
+        //_historyPanelCtr?.SearchRecord(startTime, endTime, mechanicalType);
         //
         // string sql = $"SELECT * FROM {Tables} WHERE ";
         //

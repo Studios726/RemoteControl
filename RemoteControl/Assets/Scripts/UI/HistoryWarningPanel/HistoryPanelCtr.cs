@@ -26,11 +26,11 @@ public class HistoryPanelCtr :UIPresenter<HistoryPanelView>
       Debug.Log("useOperator: "+useOperator);
       if (view.curPanelType==PanelType.AlarmPanel)
       {
-          Tables = "warning";
+          Tables = "history_warning";
       }
       else
       {
-          Tables = "logs";
+          Tables = "history_logs";
       }
       string sql = $"SELECT * FROM {Tables} WHERE ";
       

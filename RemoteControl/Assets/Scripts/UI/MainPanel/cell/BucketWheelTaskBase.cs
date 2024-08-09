@@ -19,6 +19,7 @@ public class BucketWheelTaskBase : PanelBase
     public InputField leftTakeMaterText;
     public InputField rightTakeMaterText;
     public InputField takeMaterStep;
+    public InputField layerHigh;
     public InputField timeHourText;
     public InputField timeMinuteText;
     public Toggle timeOpenToggle;
@@ -89,7 +90,8 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(timeHourText, 0, 99);
         InputFieldValueRange(timeMinuteText, 0, 60);
         InputFieldValueRange(takeMaterStep, 0, 99);
-        InputFieldValueRange(takeMaterNum, 0, 99999);
+        InputFieldValueRange(takeMaterNum, 0, 99999); 
+        InputFieldValueRange(layerHigh, 0, 45);
     }
     public virtual void SendPlcCommand(string plcCommand)
     {
@@ -102,7 +104,7 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.QuerySystem = "MC";
         taskCommand.Command_Type = 0;
         taskCommand.OperationCommand = operationType;
-        taskCommand.TaskType = TaskType.PILEMATER;
+        taskCommand.TaskType = TaskType.TAKEMATER;
         taskCommand.Machine = machine;
         if (operationType == OperationType.START)
         {
@@ -120,7 +122,7 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.Quantity = int.Parse(takeMaterNum.text);
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
             taskCommand.OperatorSystem = "MC";
-            taskCommand.LayerHigh = 0;
+            taskCommand.LayerHigh = layerHigh.text == "" ? 0 : int.Parse(layerHigh.text);
             AllData allData = new AllData();
             //allData.InfoIcon = "哈哈哈";
             taskCommand.AllData = allData;
