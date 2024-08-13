@@ -68,6 +68,7 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
 
     public GameObject curOffBtn;
     public GameObject curOnBtn;
+    private GameObject lastPanel;
 
 
     public override void InitUIElements(UIArgs uiArgs = null)
@@ -95,6 +96,11 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
 
         state_1_1 = RootObj.transform.Find("status_1_1").gameObject;
         state_1_2 = RootObj.transform.Find("status_1_2").gameObject;
+        state_1_3 = RootObj.transform.Find("status_1_1").gameObject;
+        state_2_1 = RootObj.transform.Find("status_2_1").gameObject;
+        state_2_2 = RootObj.transform.Find("status_2_2").gameObject;
+        state_2_3 = RootObj.transform.Find("status_2_3").gameObject;
+
         curOffBtn = stateBtn_1_1_off.gameObject;
         curOnBtn = stateBtn_1_1_on.gameObject;
 
@@ -105,31 +111,33 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
         Debug.Log($"状态参数打开 {id}");
         if (id == StatusParameterChildID.State_1_1)
         {
-            RestCurBtn(stateBtn_1_1_off.gameObject,stateBtn_1_1_on.gameObject);
+            ResetCurBtn(stateBtn_1_1_off.gameObject,stateBtn_1_1_on.gameObject, state_1_1);
             state_1_1?.SetActive(true);
         }
         else if(id == StatusParameterChildID.State_1_2)
         {
-            RestCurBtn(stateBtn_1_2_off.gameObject, stateBtn_1_2_on.gameObject);
+            ResetCurBtn(stateBtn_1_2_off.gameObject, stateBtn_1_2_on.gameObject, state_1_2);
+            //RestCurBtn(stateBtn_1_1_off.gameObject, stateBtn_1_1_on.gameObject);
         }
         else if( id == StatusParameterChildID.State_1_3)
         {
-            RestCurBtn(stateBtn_1_3_off.gameObject, stateBtn_1_3_on.gameObject);
+            ResetCurBtn(stateBtn_1_3_off.gameObject, stateBtn_1_3_on.gameObject, state_1_3);
         }
         else if (id == StatusParameterChildID.State_2_1)
         {
-            RestCurBtn(stateBtn_2_1_off.gameObject, stateBtn_2_1_on.gameObject);
+            ResetCurBtn(stateBtn_2_1_off.gameObject, stateBtn_2_1_on.gameObject, state_2_1);
         }
         else if (id == StatusParameterChildID.State_2_2){
-            RestCurBtn(stateBtn_2_2_off.gameObject, stateBtn_2_2_on.gameObject);
+            ResetCurBtn(stateBtn_2_2_off.gameObject, stateBtn_2_2_on.gameObject, state_2_2);
         }
         else if (id == StatusParameterChildID.State_2_3)
         {
-            RestCurBtn(stateBtn_2_3_off.gameObject, stateBtn_2_3_on.gameObject);
+            ResetCurBtn(stateBtn_2_3_off.gameObject, stateBtn_2_3_on.gameObject, state_2_3);
         }
 
     }
-    public void RestCurBtn(GameObject offgo,GameObject ongo)
+
+    public void ResetCurBtn(GameObject offgo,GameObject ongo,GameObject panel=null)
     {
         if (curOffBtn != null) {
             curOffBtn.SetActive(true);
@@ -137,9 +145,15 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
         if (curOnBtn != null) {
             curOnBtn.SetActive(false);
         }
+        if (lastPanel!=null)
+        {
+            lastPanel.SetActive(false);
+        }
         offgo.SetActive(false);
         ongo.SetActive(true);
         curOffBtn = offgo;
         curOnBtn = ongo;
+        lastPanel = panel;
+        lastPanel?.SetActive(true);
     }
 }

@@ -5,23 +5,26 @@ using UnityEngine;
 
 public class MachineMove : MonoBehaviour
 {
-   public float distance;
-   public Vector3 initialPoint;
-   public Transform rotationGo;
-   public float curPercentage;
+   //public float distance;
+   //public Vector3 initialPoint;
+   public Transform rotationGo_z;
+    public Transform rotationGo_y;
+    //public float curPercentage;
 
-   public void UpdatePosAndRotaion(float percentage,float rotAngleY,float rotAngleZ)
-   {
-      percentage = percentage > 1 ? 1 :percentage;
-      curPercentage = percentage;
-      Vector3 curPos = initialPoint;
-      curPos.x=curPos.x + distance * percentage;
-      transform.localPosition = curPos;
-      rotationGo.localRotation=Quaternion.Euler(new Vector3(0,rotAngleY,rotAngleZ));
-    }
+    //public void UpdatePosAndRotaion(float percentage,float rotAngleY,float rotAngleZ)
+    //{
+    //   percentage = percentage > 1 ? 1 :percentage;
+    //   curPercentage = percentage;
+    //   Vector3 curPos = initialPoint;
+    //   curPos.x=curPos.x + distance * percentage;
+    //   transform.localPosition = curPos;
+    //   rotationGo.localRotation=Quaternion.Euler(new Vector3(0,rotAngleY,rotAngleZ));
+    // }
     public void UpdatePosAndRotaionByMeter(float meter, float rotAngleY, float rotAngleZ) {
-        rotationGo.localRotation = Quaternion.Euler(new Vector3(0, rotAngleY, rotAngleZ));
- 
+        rotationGo_z.localRotation = Quaternion.Euler(new Vector3(0, 0, rotAngleY));
+        rotationGo_y.localRotation = Quaternion.Euler(new Vector3(0, rotAngleZ, 0));
+
+
         transform.localPosition= new Vector3(meter, transform.localPosition.y, transform.localPosition.z);
     }
 

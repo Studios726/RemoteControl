@@ -132,7 +132,7 @@ public class BucketWheelTaskBase : PanelBase
         //    $"VALUES ('{taskCommand.QuerySystem}','{DateTime.Now}','{taskCommand.Machine.ToString()}','{taskCommand.TaskType.ToString()}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{"TEST"}','{"完成"}','{taskCommand.TaskID}')";
         //MySqlHelper.ExecuteSql(sql);
         Debug.LogError("TaskID" + taskCommand.TaskID);
-        DataManager.Instance.InsertHistoryTaskMc(taskCommand, GameDataManager.Instance.curAccountInfo.name, "0");
+        //DataManager.Instance.InsertHistoryTaskMc(taskCommand, GameDataManager.Instance.curAccountInfo.name, "0");
         GameDataManager.Instance.SendTaskCommand(taskCommand);
     }
 

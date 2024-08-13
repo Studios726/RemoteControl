@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using Unity.VisualScripting;
 using UnityEditor.Search;
 using UnityEngine;
 using Utility.DesignPatterns;
@@ -166,6 +167,34 @@ public partial class DataManager
     public MySqlDataReader GetHistoryTaskMcBySql(string sql)
     {
         MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(sql);
+        return mySqlDataReader;
+    }
+
+    public MySqlDataReader GetHistoryCartelectricity(string machine,int limit=100,bool isUseTime=false,string startTime="",string endTime="") {
+        string query = "";
+        if (isUseTime == false)
+        {
+            query= $"SELECT * FROM {ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine}  ORDER BY id DESC LIMIT {limit};";
+        }
+        else
+        {
+            query = $"SELECT * FROM {ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY id DESC LIMIT {limit}";
+        }
+        MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
+        return mySqlDataReader;
+    }
+    public MySqlDataReader GetHistoryChartData(string chartName, string machine, int limit = 100, bool isUseTime = false, string startTime = "", string endTime = "")
+    {
+        string query = "";
+        if (isUseTime == false)
+        {
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine}  ORDER BY id DESC LIMIT {limit};";
+        }
+        else
+        {
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY id DESC LIMIT {limit}";
+        }
+        MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
         return mySqlDataReader;
     }
 

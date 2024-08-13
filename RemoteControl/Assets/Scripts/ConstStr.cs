@@ -1,4 +1,5 @@
 using UnityEngine;
+using XCharts.Runtime;
 
 public static class ConstStr
 {
@@ -30,12 +31,16 @@ public static class ConstStr
     #endregion
 
     #region dataName
-
     #region table name
     public const string DATABASE_LOGIN_TABLE = "login";
     public const string DATABASE_ACCOUNTOPERATION_TABLE = "accountoperation";
     public const string DATABASE_VARIABLE_TABLE = "plcvariables";
     public const string DATABASE_HISTORY_TASK_MC = "history_task_mc";
+    public const string DATABASE_HISTORY_CARTELECTRICITY_MC = "history_cartElectricity";
+    public const string DATABASE_HISTORY_ROTELECTRICITY_MC = "history_rotElectricity";
+    public const string DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC = "history_suspensoidElectricity";
+    public const string DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC = "history_bucketWheelElectricity";
+    public const string DATABASE_HISTORY_CANTILEVER_Flow_MC = "history_cantileverFlow";
     #endregion
 
     #region login
@@ -68,6 +73,11 @@ public static class ConstStr
     public const string DATA_TASK_STATE = "TaskState";
     public const string DATA_TASK_TAKE_MATE_HIGH = "TakeMateHigh";
     public const string DATA_TASK_LAYER_HIGH = "LayerHigh";
+    #endregion
+    #region history_cartelectricity
+    public const string DATA_HISTORY_CARTELECTRICITY_NAME = "Name";
+    public const string DATA_HISTORY_CARTELECTRICITY_TIME = "Time";
+    public const string DATA_HISTORY_CARTELECTRICITY_MACHINE = "Machine";
     #endregion
     #region
     public const string DATA_ACCOUNT_OPERATION_INDEX = "Index";
@@ -320,9 +330,10 @@ public static class ConstStr
 
 public enum Machine
 {
-    None,
+   
     [Header("斗轮取料机")]
     BucketWheel,
     [Header("斗轮堆取料机")]
-    BucketWheelStackerReclaimer
+    BucketWheelStackerReclaimer,
+    None,
 }

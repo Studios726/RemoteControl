@@ -93,7 +93,7 @@ public class ClientConnection:MonoBehaviour
     void OnClosed(WebSocket ws, UInt16 code, string message)
     {
         isConnect = false;
-        Debug.LogFormat("OnClosed: code={0}, msg={1}", code, message);
+        Debug.LogFormat("OnClosed: code={0}, msg={1} , type={2}", code, message,socketType);
         EventManager.Instance.TriggerEvent(EventName.ConnectionClose, this, new ConnectEventArgs(socketType));
         webSocket = null;
         ReConnect();

@@ -233,7 +233,9 @@ public class GameDataManager : Singleton<GameDataManager>
             while (mySqlDataReader.Read())
             {
                 string taskID = mySqlDataReader["TaskID"].ToString();
-                nearestTaskDataDic.Add(taskID, new TaskData(taskID, mySqlDataReader["TaskState"].ToString()));
+                if (nearestTaskDataDic.ContainsKey(taskID)==false) {
+                    nearestTaskDataDic.Add(taskID, new TaskData(taskID, mySqlDataReader["TaskState"].ToString()));
+                }
             }
         }
         return nearestTaskDataDic;
