@@ -65,55 +65,55 @@ public class SuspendedColloidItem : StatusParmItemBase<SuspendedColloidData>
     /// <summary>
     /// 主断路器
     /// </summary>
-    public Toggle MainCircuitBreaker;
+    public ToggleDIY MainCircuitBreaker;
     /// <summary>
     /// 电机过载
     /// </summary>
-    public Toggle MotorOverload;
+    public ToggleDIY MotorOverload;
     /// <summary>
     /// 制动器打开
     /// </summary>
-    public Toggle BrakeOpen;
+    public ToggleDIY BrakeOpen;
     /// <summary>
     /// 制动器松闸限位
     /// </summary>
-    public Toggle BrakeReleaseLimit;
+    public ToggleDIY BrakeReleaseLimit;
     /// <summary>
     /// 堆料运行
     /// </summary>
-    public Toggle StackingOperation;
+    public ToggleDIY StackingOperation;
     /// <summary>
     /// 取料运行
     /// </summary>
-    public Toggle FetchingOperation;
+    public ToggleDIY FetchingOperation;
     /// <summary>
     /// 一级跑偏开关
     /// </summary>
-    public Toggle FirstLevelDeviationSwitch;
+    public ToggleDIY FirstLevelDeviationSwitch;
     /// <summary>
     /// 二级跑偏开关
     /// </summary>
-    public Toggle SecondLevelDeviationSwitch;
+    public ToggleDIY SecondLevelDeviationSwitch;
     /// <summary>
     /// 打滑检测开关
     /// </summary>
-    public Toggle SlippingDetectionSwitch;
+    public ToggleDIY SlippingDetectionSwitch;
     /// <summary>
     /// 纵向撕裂开关
     /// </summary>
-    public Toggle LongitudinalTearSwitch;
+    public ToggleDIY LongitudinalTearSwitch;
     /// <summary>
     /// 急停拉线开关
     /// </summary>
-    public Toggle EmergencyStopCableSwitch;
+    public ToggleDIY EmergencyStopCableSwitch;
     /// <summary>
     /// 料流检测开关
     /// </summary>
-    public Toggle MaterialFlowDetectionSwitch;
+    public ToggleDIY MaterialFlowDetectionSwitch;
     /// <summary>
     /// 中部料斗堵煤
     /// </summary>
-    public Toggle MiddleHopperCoalBlocking;
+    public ToggleDIY MiddleHopperCoalBlocking;
     public override void UpdateData(SuspendedColloidData data)
     {
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker);

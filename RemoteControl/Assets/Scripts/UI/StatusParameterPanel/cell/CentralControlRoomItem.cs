@@ -7,8 +7,8 @@ using UnityEngine.UI;
 /// </summary>
 public class CentralControlRoomItem : StatusParmItemBase<CentralControlData>
 {
-    public Toggle UnlockToggle;
-    public Toggle LockToggle;
+    public ToggleDIY UnlockToggle;
+    public ToggleDIY LockToggle;
     public override void UpdateData(CentralControlData centralControlData)
     {
         SetToggleState(UnlockToggle, centralControlData.isUnlock);

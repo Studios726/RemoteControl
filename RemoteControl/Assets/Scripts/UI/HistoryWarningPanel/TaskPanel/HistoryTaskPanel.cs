@@ -36,7 +36,7 @@ public class HistoryTaskPanel : MonoBehaviour
             data.taskType = mySqlDataReader[ConstStr.DATA_TASK_TYPE].ToString() == "0" ? "∂—¡œ" : "»°¡œ";
             data.thingRange = mySqlDataReader[ConstStr.DATA_MATERIAL_RANGE_START].ToString() + "-" + mySqlDataReader[ConstStr.DATA_MATERIAL_RANGE_END].ToString();
             data.leftRightRange = mySqlDataReader[ConstStr.DATA_LEFT_RIGHT_RANGE_START].ToString() + "-" + mySqlDataReader[ConstStr.DATA_LEFT_RIGHT_RANGE_END].ToString();
-            data.leftRightSelect = mySqlDataReader[ConstStr.DATA_LEFT_RIGHT_RANGE_START].ToString();
+            data.leftRightSelect = mySqlDataReader[ConstStr.DATA_SIDE_SELECTION].ToString();
             data.takePileLength = mySqlDataReader[ConstStr.DATA_TASK_TAKE_MATE_HIGH].ToString();
             data.layerHigh = mySqlDataReader[ConstStr.DATA_TASK_LAYER_HIGH].ToString();
             data.timeAt = mySqlDataReader[ConstStr.DATA_TIMEDAT].ToString();

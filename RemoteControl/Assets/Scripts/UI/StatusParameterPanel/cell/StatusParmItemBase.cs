@@ -9,11 +9,30 @@ public class StatusParmItemBase<T> : MonoBehaviour
     public virtual void UpdateData(T data)
     {
     }
-    public virtual void SetToggleState(Toggle toggle, bool ison) {
-        if (toggle.isOn == ison) {
+    public virtual void SetToggleState(ToggleDIY toggle, bool ison, bool isconnect=true) {
+        if (isconnect) {
+            if (ison)
+            {
+                toggle?.SetState(2);
+            }
+            else
+            {
+                toggle?.SetState(1);
+            }
+        }
+        else
+        {
+            toggle?.SetState(0);
+        }
+       
+    }
+    public virtual void SetToggleState(Toggle toggle, bool ison)
+    {
+        if (toggle.isOn == ison)
+        {
             return;
         }
-        else if(toggle)
+        else if (toggle)
         {
             toggle.isOn = ison;
         }

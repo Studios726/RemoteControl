@@ -35,7 +35,7 @@ public class TopPanelView : UIView<TopPanelCtr>
         // StatePanel.SetActive(false);
         // WorkScreenPanel = GameObject.Find("WorkScreenPanel");
 
-        _userTxt.text ="test";
+        _userTxt.text =GameDataManager.Instance.GetUserName();
 
         _controlBtn.onClick.AddListener(() => //打开远程操作界面
         {
@@ -60,6 +60,7 @@ public class TopPanelView : UIView<TopPanelCtr>
         {
             UIManager.Instance.OpenUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.SettingPanel);
+            UIManager.Instance.CloseUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
 
         });
@@ -69,6 +70,8 @@ public class TopPanelView : UIView<TopPanelCtr>
             _userPnl.gameObject.SetActive(false);
             UIManager.Instance.OpenUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
+            UIManager.Instance.CloseUI(UIID.MainPanel);
+            UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
             Debugger.LogError("打开setting页面");
           
         });

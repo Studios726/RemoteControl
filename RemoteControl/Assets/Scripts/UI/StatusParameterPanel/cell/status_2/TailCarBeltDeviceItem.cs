@@ -38,27 +38,27 @@ public class TailCarBeltDeviceItem : StatusParmItemBase<TailCarBeltDeviceData>
     /// <summary>
     /// 尾车从动滚筒轴承上限报警
     /// </summary>
-    public Toggle BearingUpperLimitAlarm;
+    public ToggleDIY BearingUpperLimitAlarm;
     /// <summary>
     /// 尾车从动滚筒轴承下限报警
     /// </summary>
-    public Toggle BearingLowerLimitAlarm;
+    public ToggleDIY BearingLowerLimitAlarm;
     /// <summary>
     /// 尾车胶带一级跑偏
     /// </summary>
-    public Toggle LevelOneDeviation;
+    public ToggleDIY LevelOneDeviation;
     /// <summary>
     /// 尾车胶带二级跑偏
     /// </summary>
-    public Toggle LevelTwoDeviation;
+    public ToggleDIY LevelTwoDeviation;
     /// <summary>
     /// 尾车急停拉线开关
     /// </summary>
-    public Toggle EmergencyStopCableSwitch;
+    public ToggleDIY EmergencyStopCableSwitch;
     /// <summary>
     /// 尾车胶带纵向撕裂开关
     /// </summary>
-    public Toggle LongitudinalTearSwitch;
+    public ToggleDIY LongitudinalTearSwitch;
     public override void UpdateData(TailCarBeltDeviceData data)
     {
         SetToggleState(BearingUpperLimitAlarm,data.isBearingUpperLimitAlarm);

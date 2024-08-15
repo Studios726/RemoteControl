@@ -330,10 +330,9 @@ public static class ConstStr
 
 public enum Machine
 {
-   
-    [Header("斗轮取料机")]
-    BucketWheel,
     [Header("斗轮堆取料机")]
     BucketWheelStackerReclaimer,
+    [Header("斗轮取料机")]
+    BucketWheel,
     None,
 }

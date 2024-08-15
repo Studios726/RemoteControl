@@ -19,6 +19,8 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public override void Start()
     {
         base.Start();
+        InputFieldValueRange(startPileMaterText, 0, 350);
+        InputFieldValueRange(endPileMaterText, 0, 350);
         InputFieldValueRange(startLeftPileMaterText, 0, 350);
         InputFieldValueRange(endLeftPileMaterText, 0, 350);
         InputFieldValueRange(pileMaterHeightText, 0, 99);
@@ -27,14 +29,45 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         AddOnClickListener(pileMaterEndBtn,(() => {SendPileMaterCommand(OperationType.END);}));
     }
 
+    public override void UpdateData(TaskCommand taskCommand)
+    {
+        if (taskCommand.TaskType == TaskType.TAKEMATER)
+        {
+            base.UpdateData(taskCommand);
+        }
+        else
+        {
+            startPileMaterText.text = taskCommand.MaterialRange.startValue.ToString();
+            endPileMaterText.text = taskCommand.MaterialRange.endValue.ToString();
+            
+            if (taskCommand.SideSelection=="LIFT")
+            {
+                leftPileMaterToggle.isOn = true;
+                rightPileMaterToggle.isOn = false;
+            }
+            else
+            {
+                leftPileMaterToggle.isOn = false;
+                rightPileMaterToggle.isOn = true;
+            }
+            startLeftPileMaterText.text=taskCommand.LeftRightRange.startValue.ToString();
+            endLeftPileMaterText.text=taskCommand.LeftRightRange.endValue.ToString();
+            pileMaterStartBtn.SetSelectState(taskCommand.AllData.OperationCommandList[0]==1);
+            pileMaterStopBtn.SetSelectState(taskCommand.AllData.OperationCommandList[1] == 1);
+            pileMaterEndBtn.SetSelectState(taskCommand.AllData.OperationCommandList[2] == 1);
+        }
+    
+      
+    }
     public void SendPileMaterCommand(OperationType operationType)
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
         taskCommand.Command_Type = 0;
         taskCommand.OperationCommand = operationType;
-        taskCommand.TaskType = TaskType.TAKEMATER;
+        taskCommand.TaskType = TaskType.PILEMATER;
         taskCommand.Machine = machine;
+        taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
         if (operationType==OperationType.START)
         {
             float startValue = startPileMaterText.text == "" ? 0 : int.Parse(startPileMaterText.text);
@@ -57,5 +90,6 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             //allData.InfoIcon = "哈哈哈";
             taskCommand.AllData = allData;
         }
+        TaskDataManager.Instance.SendTaskCommand(taskCommand);
     }
 }

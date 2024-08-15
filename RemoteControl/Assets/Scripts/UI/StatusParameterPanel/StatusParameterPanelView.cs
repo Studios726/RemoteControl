@@ -96,13 +96,14 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
 
         state_1_1 = RootObj.transform.Find("status_1_1").gameObject;
         state_1_2 = RootObj.transform.Find("status_1_2").gameObject;
-        state_1_3 = RootObj.transform.Find("status_1_1").gameObject;
+        state_1_3 = RootObj.transform.Find("status_1_3").gameObject;
         state_2_1 = RootObj.transform.Find("status_2_1").gameObject;
         state_2_2 = RootObj.transform.Find("status_2_2").gameObject;
         state_2_3 = RootObj.transform.Find("status_2_3").gameObject;
 
         curOffBtn = stateBtn_1_1_off.gameObject;
         curOnBtn = stateBtn_1_1_on.gameObject;
+        lastPanel = state_1_1;
 
     }
 
@@ -112,7 +113,6 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
         if (id == StatusParameterChildID.State_1_1)
         {
             ResetCurBtn(stateBtn_1_1_off.gameObject,stateBtn_1_1_on.gameObject, state_1_1);
-            state_1_1?.SetActive(true);
         }
         else if(id == StatusParameterChildID.State_1_2)
         {

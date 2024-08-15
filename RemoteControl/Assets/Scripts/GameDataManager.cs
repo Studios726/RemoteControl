@@ -14,12 +14,13 @@ public class GameDataManager : Singleton<GameDataManager>
     private bool _RcConnectionState;
     private SystemVariables _systemVariables;
     private SendDataReportAndDEM _sendDataReportAndDEM;
-    private TaskVariables _taskVariables;
+    // private TaskVariables _taskVariables;
 
     private MachineMove machineMove_1;//堆取斗轮机
     private MachineMove machineMove_2;//取斗轮机
-    private Dictionary<string, TaskData> nearestTaskDataDic = new Dictionary<string, TaskData>();
+    // private Dictionary<string, TaskData> nearestTaskDataDic = new Dictionary<string, TaskData>();
     public AccountInfo curAccountInfo;
+    public GameObject machineRoot;
     public bool RcConnectionState
     {
         get => _RcConnectionState;
@@ -28,10 +29,19 @@ public class GameDataManager : Singleton<GameDataManager>
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
-        set => _systemVariables = value;
+        //set => _systemVariables = value;
     }
 
-    public TaskVariables TaskVariables { get => _taskVariables; }
+    public string GetUserName()
+    {
+        if (curAccountInfo!=null)
+        {
+            return curAccountInfo.name;
+        }
+
+        return "";
+    }
+    // public TaskVariables TaskVariables { get => _taskVariables; }
     public SendDataReportAndDEM SendDataReportAndDEM
     {
         get => _sendDataReportAndDEM;
@@ -50,44 +60,18 @@ public class GameDataManager : Singleton<GameDataManager>
         _sendDataReportAndDEM = sendDataReportAndDEM;
         EventManager.Instance.TriggerEvent(EventName.RefreshModel, null);
     }
-    public void SetTaskVariables(TaskVariables taskVariables)
-    {
-
-        _taskVariables = taskVariables;
-        if (taskVariables.McData.Count > 0)
-        {
-
-            if (nearestTaskDataDic.Count <= 0)
-            {
-                GetNearestTaskDataDic();
-            }
-            for (int i = 0; i < taskVariables.McData.Count - 1; i++)
-            {
-                if (nearestTaskDataDic.ContainsKey(taskVariables.McData[i].TaskID))
-                {
-                    TaskData taskData = nearestTaskDataDic[taskVariables.McData[i].TaskID];
-                    if (taskVariables.McData[i].AllData.ProcessingProgress == 1 && taskData.TaskState == "0")
-                    {
-                        taskData.TaskState = "1";
-                        DataManager.Instance.UpdateHistoryTaskMc(taskData.TaskID, "1");
-                    }
-                }
-                else
-                {
-                    TaskCommand taskCommand = taskVariables.McData[i];
-                    nearestTaskDataDic.Add(taskVariables.McData[i].TaskID, new TaskData(taskVariables.McData[i].TaskID, taskVariables.McData[i].AllData.ProcessingProgress.ToString()));
-                    DataManager.Instance.InsertHistoryTaskMc(taskCommand,"test", taskVariables.McData[i].AllData.ProcessingProgress.ToString());
-                }
-
-            }
-
-        }
-        EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
-    }
     public void SetMachine(MachineMove machine1, MachineMove machine2)
     {
         machineMove_1 = machine1;
         machineMove_2 = machine2;
+    }
+    public void SetMachineActive(bool active)
+    {
+        if (machineRoot == null) {
+
+            machineRoot = GameObject.Find("ModelRoot");
+        }
+        machineRoot.SetActive(active);
     }
     public void UpdateMachinePosAndRot()
     {
@@ -203,10 +187,11 @@ public class GameDataManager : Singleton<GameDataManager>
     /// </summary>
     public void UpdatePcData()
     {
-        //TaskCommand taskCommand = new TaskCommand();
-        //taskCommand.QuerySystem = "MC";
-        //taskCommand.Command_Type = 1;
-        //MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
+        TaskCommand taskCommand = new TaskCommand();
+        taskCommand.QuerySystem = "MC";
+        taskCommand.Command_Type = 1;
+        MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
+        Debug.Log("获取当前任务状态");
     }
 
     public void UpdateSCAData()
@@ -218,27 +203,6 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.QUERY_TYPE = 30;
         MessageCenter.Instance.SendMessage(MessageType.SCA, serverCommand);
     }
-    public void SendTaskCommand(TaskCommand taskCommand)
-    {
-        MessageCenter.Instance.SendMessage<TaskCommand>(MessageType.PC, taskCommand);
-    }
-
-    public Dictionary<string, TaskData> GetNearestTaskDataDic()
-    {
-        if (nearestTaskDataDic.Count <= 0)
-        {
-            //string sql = "Select * from history_task_mc ORDER BY id DESC LIMIT 2;";
-            //MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(sql);
-            MySqlDataReader mySqlDataReader=DataManager.Instance.GetHistoryTaskMc(5);
-            while (mySqlDataReader.Read())
-            {
-                string taskID = mySqlDataReader["TaskID"].ToString();
-                if (nearestTaskDataDic.ContainsKey(taskID)==false) {
-                    nearestTaskDataDic.Add(taskID, new TaskData(taskID, mySqlDataReader["TaskState"].ToString()));
-                }
-            }
-        }
-        return nearestTaskDataDic;
-    }
+   
 }
 

@@ -42,7 +42,7 @@ public class MainPanelView :UIView<MainPanelCtr>
 
       _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
       UpdateData(GameDataManager.Instance.SystemVariables);
-        GameDataManager.Instance.GetNearestTaskDataDic();
+        TaskDataManager.Instance.GetNearestTaskDataDic();
    }
 
    private void ActiveHideBtnCtr2()
@@ -73,10 +73,11 @@ public class MainPanelView :UIView<MainPanelCtr>
 
     public void UpdatePcData(object o, EventArgs eventArgs)
     {
-        TaskVariables taskVariables = GameDataManager.Instance.TaskVariables;
+        TaskVariables taskVariables = TaskDataManager.Instance.TaskVariables;
+        Debug.Log($">>>>>>>>>>>>>>>>>>>>>>> 任务更新 {taskVariables.McData.Count}");
         if (taskVariables.McData.Count>0)
         {
-            for (int i = 0; i < taskVariables.McData.Count-1; i++)
+            for (int i = 0; i < taskVariables.McData.Count; i++)
             {
                 if (taskVariables.McData[i].Machine==Machine.BucketWheel)
                 {

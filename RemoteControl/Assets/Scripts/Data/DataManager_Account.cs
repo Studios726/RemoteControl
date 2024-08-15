@@ -145,8 +145,11 @@ public partial class DataManager
     }
     public bool UpdateHistoryTaskMc(string taskID,string state)
     {
+        
         string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE} = {state} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
-        return MySqlHelper.ExecuteSql(query) > 0; 
+        bool success=MySqlHelper.ExecuteSql(query) > 0; 
+        Debug.LogError($"更新任务状态 { taskID } { state} {success}");
+        return success; 
     }
     public MySqlDataReader GetHistoryTaskMc(int limit)
     {

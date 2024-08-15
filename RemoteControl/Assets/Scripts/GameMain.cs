@@ -82,9 +82,10 @@ namespace RemoteControl
                     timerPc.Cancel();
                     timerPc=null;
                 }
-                timerPc = Timer.Register(1, true, true, () => {
-                    GameDataManager.Instance.UpdatePcData();
-                });
+                TaskDataManager.Instance.UpdatePcData();
+                //timerPc = Timer.Register(1, true, true, () => {
+                //    //GameDataManager.Instance.UpdatePcData();
+                //});
             }
           
             Debug.Log("----------------------Success "+ connectEventArgs.type);

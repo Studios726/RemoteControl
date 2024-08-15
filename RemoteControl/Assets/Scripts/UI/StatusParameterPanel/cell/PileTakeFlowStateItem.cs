@@ -43,31 +43,31 @@ public class PileTakeFlowStateItem : StatusParmItemBase<PileTakeFlowStateData>
     /// <summary>
     /// 悬胶堆料运行
     /// </summary>
-    public Toggle SuspensoidPileMaterRunToggle;
+    public ToggleDIY SuspensoidPileMaterRunToggle;
     /// <summary>
     /// 挡板堆料运行
     /// </summary>
-    public Toggle BafflePileMaterPosToggle;
+    public ToggleDIY BafflePileMaterPosToggle;
     /// <summary>
     /// 挡板分流位置
     /// </summary>
-    public Toggle BaffleShuntPosToggle;
+    public ToggleDIY BaffleShuntPosToggle;
     /// <summary>
     /// 导料槽堆料位
     /// </summary>
-    public Toggle FeedChannelPileMaterToggle;
+    public ToggleDIY FeedChannelPileMaterToggle;
     /// <summary>
     /// 悬胶取料运行
     /// </summary>
-    public Toggle SuspensoidTakeMaterRunToggle;
+    public ToggleDIY SuspensoidTakeMaterRunToggle;
     /// <summary>
     /// 斗轮机运行
     /// </summary>
-    public Toggle BucketWheelRunToggle;
+    public ToggleDIY BucketWheelRunToggle;
     /// <summary>
     /// 导料槽取料
     /// </summary>
-    public Toggle FeedChannelTakeToggle;
+    public ToggleDIY FeedChannelTakeToggle;
 
 
     public override void UpdateData(PileTakeFlowStateData data)

@@ -26,15 +26,15 @@ public class SwitchOnItem : StatusParmItemBase<SwitchOnData>
     /// <summary>
     /// 真空断路器合闸
     /// </summary>
-    public Toggle VacuumCircuitBreakerClosedToggle;
+    public ToggleDIY VacuumCircuitBreakerClosedToggle;
     /// <summary>
     /// 低压控制电源
     /// </summary>
-    public Toggle LowVoltageControlPowerClosedToggle;   
+    public ToggleDIY LowVoltageControlPowerClosedToggle;   
     /// <summary>
     /// 低压动力电源
     /// </summary>
-    public Toggle LowVoltagePowerClosedToggle;
+    public ToggleDIY LowVoltagePowerClosedToggle;
     public override void UpdateData(SwitchOnData switchOnData)
     {
         SetToggleState(VacuumCircuitBreakerClosedToggle, switchOnData.isVacuumCircuitBreakerClosedToggle);

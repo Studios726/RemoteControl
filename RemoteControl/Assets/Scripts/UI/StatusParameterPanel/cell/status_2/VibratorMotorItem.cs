@@ -26,15 +26,15 @@ public class VibratorMotorItem : StatusParmItemBase<VibratorMotorData>
     /// <summary>
     /// 振打电机主断路器
     /// </summary>
-    public Toggle VibrationMotorMainCircuitBreaker;
+    public ToggleDIY VibrationMotorMainCircuitBreaker;
     /// <summary>
     /// 振打电机过载
     /// </summary>
-    public Toggle VibrationMotorOverload;
+    public ToggleDIY VibrationMotorOverload;
     /// <summary>
     /// 振打电机运行-
     /// </summary>
-    public Toggle VibrationMotorRunning;
+    public ToggleDIY VibrationMotorRunning;
     public override void UpdateData(VibratorMotorData data)
     {
         SetToggleState(VibrationMotorMainCircuitBreaker, data.isVibrationMotorMainCircuitBreaker);

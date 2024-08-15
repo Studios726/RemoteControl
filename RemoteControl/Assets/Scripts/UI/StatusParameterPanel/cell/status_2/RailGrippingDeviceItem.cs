@@ -50,43 +50,43 @@ public class RailGrippingDeviceItem : StatusParmItemBase<RailGrippingDeviceData>
     /// <summary>
     /// 主断路器
     /// </summary>
-    public Toggle MainCircuitBreaker;
+    public ToggleDIY MainCircuitBreaker;
     /// <summary>
     /// 左夹轨器电机运行
     /// </summary>
-    public Toggle LeftRailClamperMotorRunning;
+    public ToggleDIY LeftRailClamperMotorRunning;
     /// <summary>
     /// 左夹轨器电磁阀
     /// </summary>
-    public Toggle LeftRailClamperSolenoidValve;
+    public ToggleDIY LeftRailClamperSolenoidValve;
     /// <summary>
     /// 左侧锚碇限位
     /// </summary>
-    public Toggle LeftAnchorLimit;
+    public ToggleDIY LeftAnchorLimit;
     /// <summary>
     /// 左夹轨器放松限位
     /// </summary>
-    public Toggle LeftRailClamperReleaseLimit;
+    public ToggleDIY LeftRailClamperReleaseLimit;
     /// <summary>
     /// 电机过载
     /// </summary>
-    public Toggle MotorOverload;
+    public ToggleDIY MotorOverload;
     /// <summary>
     /// 右夹轨器电机运行
     /// </summary>
-    public Toggle RightRailClamperMotorRunning;
+    public ToggleDIY RightRailClamperMotorRunning;
     /// <summary>
     /// 右夹轨器电磁阀
     /// </summary>
-    public Toggle RightRailClamperSolenoidValve;
+    public ToggleDIY RightRailClamperSolenoidValve;
     /// <summary>
     /// 右侧锚碇限位
     /// </summary>
-    public Toggle RightAnchorLimit;
+    public ToggleDIY RightAnchorLimit;
     /// <summary>
     /// 右夹轨器放松限位
     /// </summary>
-    public Toggle RightRailClamperReleaseLimit;
+    public ToggleDIY RightRailClamperReleaseLimit;
     public override void UpdateData(RailGrippingDeviceData data)
     {
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker);

@@ -181,14 +181,14 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// </summary>
     public  ButtonCell stopBtn;
 
-    public ButtonCell curCtrMode;
-    public ButtonCell curPileTakeMode;
-    public ButtonCell curCarMoveMode;
+    private ButtonCell curCtrMode;
+    private ButtonCell curPileTakeMode;
+    private ButtonCell curCarMoveMode;
     /// <summary>
     /// 当前车俯仰
     /// </summary>
-    public ButtonCell curCarPitchingMode;
-    public ButtonCell curCarRotMode;
+    private ButtonCell curCarPitchingMode;
+    private ButtonCell curCarRotMode;
     public Machine machine;
 
     public virtual void Start()

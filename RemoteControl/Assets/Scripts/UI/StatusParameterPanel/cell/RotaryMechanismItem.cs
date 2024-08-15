@@ -113,102 +113,102 @@ public class RotaryMechanismItem : StatusParmItemBase<RotaryMechanismData>
     /// <summary>
     /// 主断路器
     /// </summary>
-    public Toggle MainCircuitBreaker;
+    public ToggleDIY MainCircuitBreaker;
     /// <summary>
     /// 变频器运行
     /// </summary>
-    public Toggle FrequencyConverterRunning;
+    public ToggleDIY FrequencyConverterRunning;
     /// <summary>
     /// 制动器运行
     /// </summary>
-    public Toggle BrakeOperating;
+    public ToggleDIY BrakeOperating;
     /// <summary>
     /// 风机运行
     /// </summary>
-    public Toggle FanOperating;
+    public ToggleDIY FanOperating;
     /// <summary>
     /// 左转运行
     /// </summary>
-    public Toggle LeftTurnOperating;
+    public ToggleDIY LeftTurnOperating;
     /// <summary>
     /// 右转运行
     /// </summary>
-    public Toggle RightTurnOperating;
+    public ToggleDIY RightTurnOperating;
 
     /// <summary>
     /// 变频器故障
     /// </summary>
-    public Toggle FrequencyConverterFault;
+    public ToggleDIY FrequencyConverterFault;
     /// <summary>
     /// 制动器过载
     /// </summary>
-    public Toggle BrakeOverload;
+    public ToggleDIY BrakeOverload;
     /// <summary>
     /// 风机过载
     /// </summary>
-    public Toggle FanOverload;
+    public ToggleDIY FanOverload;
     /// <summary>
     /// 制动电阻超温
     /// </summary>
-    public Toggle BrakingResistorOverheating;
+    public ToggleDIY BrakingResistorOverheating;
     /// <summary>
     /// 回转故障
     /// </summary>
-    public Toggle RotaryFault;
+    public ToggleDIY RotaryFault;
 
     /// <summary>
     /// 左转限位
     /// </summary>
-    public Toggle LeftTurnLimit;
+    public ToggleDIY LeftTurnLimit;
     /// <summary>
     /// 左转极限
     /// </summary>
-    public Toggle LeftTurnLimitExceed;
+    public ToggleDIY LeftTurnLimitExceed;
     /// <summary>
     /// 左转禁区限位
     /// </summary>
-    public Toggle LeftTurnRestrictedZoneLimit;
+    public ToggleDIY LeftTurnRestrictedZoneLimit;
     /// <summary>
     /// 左转防撞限位
     /// </summary>
-    public Toggle LeftTurnCollisionPreventionLimit;
+    public ToggleDIY LeftTurnCollisionPreventionLimit;
     /// <summary>
     /// 右转限位
     /// </summary>
-    public Toggle RightTurnLimit;
+    public ToggleDIY RightTurnLimit;
     /// <summary>
     /// 右转极限
     /// </summary>
-    public Toggle RightTurnLimitExceed;
+    public ToggleDIY RightTurnLimitExceed;
     /// <summary>
     /// 右转禁区限位
     /// </summary>
-    public Toggle RightTurnRestrictedZoneLimit;
+    public ToggleDIY RightTurnRestrictedZoneLimit;
     /// <summary>
     /// 右转防撞限位
     /// </summary>
-    public Toggle RightTurnCollisionPreventionLimit;
+    public ToggleDIY RightTurnCollisionPreventionLimit;
 
     /// <summary>
     /// 回转过力矩
     /// </summary>
-    public Toggle RotaryOverTorque;
+    public ToggleDIY RotaryOverTorque;
     /// <summary>
     /// 回转零位限位
     /// </summary>
-    public Toggle RotaryZeroPositionLimit;
+    public ToggleDIY RotaryZeroPositionLimit;
     /// <summary>
     /// 制动器松闸限位
     /// </summary>
-    public Toggle BrakeReliefLimit;
+    public ToggleDIY BrakeReliefLimit;
     /// <summary>
     /// 回转集中润滑堵油
     /// </summary>
-    public Toggle RotaryCentralLubricationBlockedOil;
+    public ToggleDIY RotaryCentralLubricationBlockedOil;
     /// <summary>
     /// 回转集中润滑低油位
     /// </summary>
-    public Toggle RotaryCentralLubricationLowOilLevel;
+    public ToggleDIY RotaryCentralLubricationLowOilLevel;
 
     public override void UpdateData(RotaryMechanismData data)
     {

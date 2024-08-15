@@ -44,20 +44,24 @@ public static class ServerCommandDataType
 public class TaskCommand
 {
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态
     public int Command_Type { get; set; }
     //任务ID
     public string TaskID {  get; set; }
-    //操作系統
+    //发布任务者
+    public string OperatorName { get; set; }
+    //操作系統 MC WEB
     public string OperatorSystem { get; set; }
+    //0 堆取料机 1 取料机
     public Machine Machine { get; set; }
+    //0 堆料 1 取料
     public TaskType TaskType { get; set; }
     //启动0 暂停1 换向2 结束3
     public OperationType OperationCommand { get; set; }
     // 取料范围，可以是一个区间
     public TaskRange MaterialRange { get; set; }
 
-    // 左右侧选择，例如 Left 或 Right
+    // 左右侧选择，例如 LEFT 或 RIGHT
     public string SideSelection { get; set; }
 
     // 左右范围，分别对应左侧和右侧的范围
@@ -79,15 +83,41 @@ public class TaskCommand
     public int Quantity { get; set; }
     //堆料高度
     public int TakeMateHigh {  get; set; }
+    //层高
     public float LayerHigh {  get; set; }
     public AllData  AllData { get; set; }
+    public CommonTaskParameters CommonTaskParameters{ get; set; }
 }
 public class AllData
 {
     //public string InfoIcon { get; set; }   
-    public int Error {  get; set; }
+    public int Code {  get; set; }
     public int ProcessingProgress {  get; set; }
-    public List<int> OperationCommandList=new List<int>(); 
+    public List<int> OperationCommandList {  get; set; }
+}
+
+public class CommonTaskParameters
+{
+    /// <summary>
+    /// 定点堆的距离（堆料间隔）
+    /// </summary>
+    public float HeapDis {  get; set; }
+    /// <summary>
+    /// 斗轮机根据工作范围按照就近原则还是工作范围中第一个数据，默认就近原则，数值为0（就近堆料   起始点堆料）
+    /// </summary>
+    public int MoveModel{ get; set; }
+    /// <summary>
+    /// 斗轮机取料时每层下降的深度（取料分层高度）
+    /// </summary>
+    public float FetchPileDepth{ get; set; }
+    /// <summary>
+    ///  根据第一次三维的数据情况，获取第一次要刮取的范围后，往两侧增加（左右范围增加的长度）
+    /// </summary>
+    public float FetchVerticalRangeAdd{ get; set; }
+    /// <summary>
+    /// 斗轮机取料时沿着轨道的工作范围每取一层左右缩减的距离（沿着轨道方向的取料范围缩减）
+    /// </summary>
+    public float FetchHorizontalRangeSub{ get; set; }
 }
 public class TaskRange
 {

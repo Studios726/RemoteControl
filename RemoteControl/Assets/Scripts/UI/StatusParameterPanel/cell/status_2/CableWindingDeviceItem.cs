@@ -54,43 +54,43 @@ public class CableWindingDeviceItem : StatusParmItemBase<CableWindingDeviceData>
     /// <summary>
     /// 主断路器 
     /// </summary>
-    public Toggle MainCircuitBreaker;
+    public ToggleDIY MainCircuitBreaker;
     /// <summary>
     /// 卷筒过紧限位1 
     /// </summary>
-    public Toggle ReelOverTightLimit1;
+    public ToggleDIY ReelOverTightLimit1;
     /// <summary>
     /// 卷筒过松限位1 
     /// </summary>
-    public Toggle ReelOverLooseLimit1;
+    public ToggleDIY ReelOverLooseLimit1;
     /// <summary>
     /// 卷筒空盘开关
     /// </summary>
-    public Toggle ReelEmptyDiskSwitch;
+    public ToggleDIY ReelEmptyDiskSwitch;
     /// <summary>
     ///  卷筒中闸开关 
     /// </summary>
-    public Toggle ReelMiddleBrakeSwitch;
+    public ToggleDIY ReelMiddleBrakeSwitch;
     /// <summary>
     /// 卷筒电机过载 
     /// </summary>
-    public Toggle ReelMotorOverload;
+    public ToggleDIY ReelMotorOverload;
     /// <summary>
     /// 卷筒过紧限位2 
     /// </summary>
-    public Toggle ReelOverTightLimit2;
+    public ToggleDIY ReelOverTightLimit2;
     /// <summary>
     /// 卷筒过松限位2 
     /// </summary>
-    public Toggle ReelOverLooseLimit2;
+    public ToggleDIY ReelOverLooseLimit2;
     /// <summary>
     /// 卷筒满盘开关 
     /// </summary>
-    public Toggle ReelFullDiskSwitch;
+    public ToggleDIY ReelFullDiskSwitch;
     /// <summary>
     /// 动力卷筒运行
     /// </summary>
-    public Toggle PowerReelRunning;
+    public ToggleDIY PowerReelRunning;
     public override void UpdateData(CableWindingDeviceData data)
     {
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker);

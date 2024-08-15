@@ -34,23 +34,23 @@ public class OperatingModeItem : StatusParmItemBase<OperatingModeData>
     /// <summary>
     /// 单动
     /// </summary>
-    public Toggle SingleActionToggle;
+    public ToggleDIY SingleActionToggle;
     /// <summary>
     /// 联动
     /// </summary>
-    public Toggle LinkageActionToggle;
+    public ToggleDIY LinkageActionToggle;
     /// <summary>
     /// 自动
     /// </summary>
-    public Toggle AutoActionToggle;
+    public ToggleDIY AutoActionToggle;
     /// <summary>
     /// 本地
     /// </summary>
-    public Toggle LocalActionToggle;
+    public ToggleDIY LocalActionToggle;
     /// <summary>
     /// 远程
     /// </summary>
-    public Toggle LongRangeActionToggle;
+    public ToggleDIY LongRangeActionToggle;
     public override void UpdateData(OperatingModeData operatingModeData)
     {
         SetToggleState(SingleActionToggle, operatingModeData.isSingleAction);

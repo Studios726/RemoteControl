@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 8770579917409294225}
   - component: {fileID: 967327586698529089}
   - component: {fileID: 7039572646596309566}
+  - component: {fileID: 5371589118607974300}
   m_Layer: 5
   m_Name: ButtonDiy
   m_TagString: Untagged
@@ -198,6 +199,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5371589118607974300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5376200442594037109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 649b4fc633f8b9f4b8a76668e9f79561, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8197116577525244494
 GameObject:
   m_ObjectHideFlags: 0

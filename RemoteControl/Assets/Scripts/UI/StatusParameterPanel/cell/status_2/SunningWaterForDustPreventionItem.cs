@@ -65,55 +65,55 @@ public class SunningWaterForDustPreventionItem : StatusParmItemBase<SunningWater
     /// <summary>
     /// 干雾系统气压低
     /// </summary>
-    public Toggle DryFogSysAirPressureLow;
+    public ToggleDIY DryFogSysAirPressureLow;
     /// <summary>
     /// 干雾系统水压低
     /// </summary>
-    public Toggle DryFogSysWaterPressureLow;
+    public ToggleDIY DryFogSysWaterPressureLow;
     /// <summary>
     /// 干雾系统过滤器堵塞
     /// </summary>
-    public Toggle DryFogSysFilterClogged;
+    public ToggleDIY DryFogSysFilterClogged;
     /// <summary>
     /// 水箱液位低开关
     /// </summary>
-    public Toggle WaterTankLevelLowSwitch;
+    public ToggleDIY WaterTankLevelLowSwitch;
     /// <summary>
     /// 干雾系统喷雾状态
     /// </summary>
-    public Toggle DryFogSysSprayStatus;
+    public ToggleDIY DryFogSysSprayStatus;
     /// <summary>
     /// 干雾系统喷雾运行
     /// </summary>
-    public Toggle DryFogSysSprayRunning;
+    public ToggleDIY DryFogSysSprayRunning;
     /// <summary>
     /// 干雾系统自动运行
     /// </summary>
-    public Toggle DryFogSysAutoRunning;
+    public ToggleDIY DryFogSysAutoRunning;
     /// <summary>
     /// 干雾系统手动运行
     /// </summary>
-    public Toggle DryFogSysManualRunning;
+    public ToggleDIY DryFogSysManualRunning;
     /// <summary>
     /// 干雾抑尘远程启动运行
     /// </summary>
-    public Toggle DryFogDustSuppressionRemoteStartRunning;
+    public ToggleDIY DryFogDustSuppressionRemoteStartRunning;
     /// <summary>
     /// 干雾抑尘远程停止运行
     /// </summary>
-    public Toggle DryFogDustSuppressionRemoteStopRunning;
+    public ToggleDIY DryFogDustSuppressionRemoteStopRunning;
     /// <summary>
     /// 干雾抑尘堆料运行
     /// </summary>
-    public Toggle DryFogDustSuppressionStockpileRunning;
+    public ToggleDIY DryFogDustSuppressionStockpileRunning;
     /// <summary>
     /// 干雾取料运行
     /// </summary>
-    public Toggle DryFogMaterialFetchingRunning;
+    public ToggleDIY DryFogMaterialFetchingRunning;
     /// <summary>
     /// 干雾抑尘分流运行
     /// </summary>
-    public Toggle DryFogDustSuppressionDiversionRunning;
+    public ToggleDIY DryFogDustSuppressionDiversionRunning;
     public override void UpdateData(SunningWaterForDustPreventionData data)
     {
         SetToggleState(DryFogSysAirPressureLow,data.isDryFogSysAirPressureLow);

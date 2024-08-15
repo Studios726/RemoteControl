@@ -40,27 +40,27 @@ public class BucketWheelItem : StatusParmItemBase<BucketWheelData>
     /// <summary>
     /// 主断路器
     /// </summary>
-    public Toggle MainCircuitBreaker;
+    public ToggleDIY MainCircuitBreaker;
     /// <summary>
     /// 斗轮运行
     /// </summary>
-    public Toggle BucketWheelRunning;
+    public ToggleDIY BucketWheelRunning;
     /// <summary>
     /// 润滑油泵运行
     /// </summary>
-    public Toggle LubricationPumpRunning;
+    public ToggleDIY LubricationPumpRunning;
     /// <summary>
     /// 电机过载
     /// </summary>
-    public Toggle MotorOverload;
+    public ToggleDIY MotorOverload;
     /// <summary>
     /// 斗轮过力矩开关
     /// </summary>
-    public Toggle BucketWheelOverTorqueSwitch;
+    public ToggleDIY BucketWheelOverTorqueSwitch;
     /// <summary>
     /// 润滑油泵流量开关
     /// </summary>
-    public Toggle LubricatingOilPumpFlowSwitch;
+    public ToggleDIY LubricatingOilPumpFlowSwitch;
     public override void UpdateData(BucketWheelData data)
     {
         SetToggleState(MainCircuitBreaker,data.isMainCircuitBreaker);

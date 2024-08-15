@@ -17,14 +17,11 @@ public class UIManager : Singleton<UIManager>
    {
       _uiRoot.SetActive(false);
    }
-
    public void ShowCanvasParent()
    {
       _uiRoot.SetActive(true);
    }
 
-
-   
    public void Init(UILayer[] uiLayers)
    {
       _canvasPrefab = Resources.Load<GameObject>("UI/Canvas");

@@ -79,69 +79,69 @@ public class CarMoveOrganizationItem : StatusParmItemBase<CarMoveOrganizationDat
     /// <summary>
     /// 主断路器
     /// </summary>
-    public Toggle MainCircuitBreakerToggle;
+    public ToggleDIY MainCircuitBreakerToggle;
     /// <summary>
     /// 电机断路器
     /// </summary>
-    public Toggle MotorCircuitBreakerToggle;
+    public ToggleDIY MotorCircuitBreakerToggle;
     /// <summary>
     /// 制动器断路器
     /// </summary>
-    public Toggle BrakeCircuitBreakersToggle;
+    public ToggleDIY BrakeCircuitBreakersToggle;
     /// <summary>
     /// 变频器运行
     /// </summary>
-    public Toggle FrequencyConverterOperationToggle;
+    public ToggleDIY FrequencyConverterOperationToggle;
     /// <summary>
     /// 制动器运行
     /// </summary>
-    public Toggle BrakeOperationToggle;
+    public ToggleDIY BrakeOperationToggle;
     /// <summary>
     /// 前进运行
     /// </summary>
-    public Toggle ForwardOperationToggle;
+    public ToggleDIY ForwardOperationToggle;
     /// <summary>
     /// 后退运行
     /// </summary>
-    public Toggle ReverseOperationToggle;
+    public ToggleDIY ReverseOperationToggle;
 
     /// <summary>
     /// 大车故障
     /// </summary>
-    public Toggle CraneFaultToggle;
+    public ToggleDIY CraneFaultToggle;
     /// <summary>
     /// 变频器故障
     /// </summary>
-    public Toggle FrequencyConverterFaultToggle;
+    public ToggleDIY FrequencyConverterFaultToggle;
     /// <summary>
     /// 制动器故障
     /// </summary>
-    public Toggle BrakeFaultToggle;
+    public ToggleDIY BrakeFaultToggle;
     /// <summary>
     /// 大车集中润滑低油位：
     /// </summary>
-    public Toggle LowOilLevelInBigVehicleCentralLubricationToggle;
+    public ToggleDIY LowOilLevelInBigVehicleCentralLubricationToggle;
     /// <summary>
     /// 大车集中润滑堵油
     /// </summary>
-    public Toggle BlockedOilInBigVehicleCentralLubricationToggle;
+    public ToggleDIY BlockedOilInBigVehicleCentralLubricationToggle;
 
     /// <summary>
     /// 前进限位
     /// </summary>
-    public Toggle ForwardLimitToggle;
+    public ToggleDIY ForwardLimitToggle;
     /// <summary>
     /// 前进极限
     /// </summary>
-    public Toggle ForwardLimitExceedToggle;
+    public ToggleDIY ForwardLimitExceedToggle;
     /// <summary>
     /// 后退限位
     /// </summary>
-    public Toggle ReverseLimitToggle;
+    public ToggleDIY ReverseLimitToggle;
     /// <summary>
     /// 后退极限
     /// </summary>
-    public Toggle ReverseLimitExceedToggle;
+    public ToggleDIY ReverseLimitExceedToggle;
 
     public override void UpdateData(CarMoveOrganizationData data)
     {

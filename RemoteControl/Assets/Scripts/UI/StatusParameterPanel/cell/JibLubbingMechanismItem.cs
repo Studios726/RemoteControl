@@ -105,95 +105,95 @@ public class JibLubbingMechanismItem :StatusParmItemBase<JibLubbingMechanismData
     /// <summary>
     /// 主断路器
     /// </summary>
-    public Toggle MainBreakerToggle;
+    public ToggleDIY MainBreakerToggle;
     /// <summary>
     /// 上仰运行
     /// </summary>
-    public Toggle FaceUpwardRunToggle;
+    public ToggleDIY FaceUpwardRunToggle;
     /// <summary>
     /// 下仰运行
     /// </summary>
-    public Toggle FaceDownRunToggle;
+    public ToggleDIY FaceDownRunToggle;
     /// <summary>
     /// 司机室前平衡阀
     /// </summary>
-    public Toggle DriverRoomForwordBalanceValveToggle;
+    public ToggleDIY DriverRoomForwordBalanceValveToggle;
     /// <summary>
     /// 司机室后平衡阀
     /// </summary>
-    public Toggle DriverRoomBackBalanceValveToggle;
+    public ToggleDIY DriverRoomBackBalanceValveToggle;
     /// <summary>
     /// 主电机过载
     /// </summary>
-    public Toggle MainElectricalMachineryOverloadToggle;
+    public ToggleDIY MainElectricalMachineryOverloadToggle;
     /// <summary>
     /// 上仰限位
     /// </summary>
-    public Toggle FaceUpwardLimitToggle;
+    public ToggleDIY FaceUpwardLimitToggle;
     /// <summary>
     /// 下仰限位
     /// </summary>
-    public Toggle FaceDownLimitToggle;
+    public ToggleDIY FaceDownLimitToggle;
     /// <summary>
     /// 下附限位
     /// </summary>
-    public Toggle BendDownLimitToggle;
+    public ToggleDIY BendDownLimitToggle;
     /// <summary>
     /// 下附极限
     /// </summary>
-    public Toggle BendDownMaxToggle;
+    public ToggleDIY BendDownMaxToggle;
     /// <summary>
     /// 下附禁区
     /// </summary>
-    public Toggle BendDownRestrictedZoneToggle;
+    public ToggleDIY BendDownRestrictedZoneToggle;
     /// <summary>
     /// 加热器启动信号
     /// </summary>
-    public Toggle HeaterStartSignalToggle;
+    public ToggleDIY HeaterStartSignalToggle;
     /// <summary>
     /// 风机启动信号
     /// </summary>
-    public Toggle DraughtFanStartSignalToggle;
+    public ToggleDIY DraughtFanStartSignalToggle;
     /// <summary>
     /// 泵站高温报警
     /// </summary>
-    public Toggle PumpStationHighTemperatureWarningToggle;
+    public ToggleDIY PumpStationHighTemperatureWarningToggle;
     /// <summary>
     /// 油液位低信号
     /// </summary>
-    public Toggle OilLowSignalToggle;
+    public ToggleDIY OilLowSignalToggle;
     /// <summary>
     /// 液位超低信号
     /// </summary>
-    public Toggle OilUltralowSignalToggle;
+    public ToggleDIY OilUltralowSignalToggle;
     /// <summary>
     /// 泵站堵油信号
     /// </summary>
-    public Toggle PumpStationBlockUpOilSignalToggle;
+    public ToggleDIY PumpStationBlockUpOilSignalToggle;
     /// <summary>
     /// 主油泵运行
     /// </summary>
-    public Toggle MainOilPumpRunToggle;
+    public ToggleDIY MainOilPumpRunToggle;
     /// <summary>
     /// 风机运行
     /// </summary>
-    public Toggle DraughtFanRunToggle;
+    public ToggleDIY DraughtFanRunToggle;
     /// <summary>
     /// 油加热器运行
     /// </summary>
-    public Toggle OilHeaterRunToggle;
+    public ToggleDIY OilHeaterRunToggle;
     /// <summary>
     /// 上升电磁阀
     /// </summary>
-    public Toggle UpSolenoidValveToggle;
+    public ToggleDIY UpSolenoidValveToggle;
     /// <summary>
     /// 下降电磁阀
     /// </summary>
-    public Toggle DownSolenoidValveToggle;
+    public ToggleDIY DownSolenoidValveToggle;
     /// <summary>
     /// 升压电磁阀
     /// </summary>
-    public Toggle StepUpSolenoidValveToggle;
+    public ToggleDIY StepUpSolenoidValveToggle;
     public override void UpdateData(JibLubbingMechanismData data)
     {
         SetToggleState(MainBreakerToggle,data.isMainBreakerToggle);

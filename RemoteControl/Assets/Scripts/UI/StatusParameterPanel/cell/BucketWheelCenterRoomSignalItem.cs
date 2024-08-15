@@ -46,35 +46,35 @@ public class BucketWheelCenterRoomSignalItem : StatusParmItemBase<BucketWheelCen
     /// <summary>
     /// 允许堆料信号
     /// </summary>
-    public Toggle AllowPileMaterSignalToggle;
+    public ToggleDIY AllowPileMaterSignalToggle;
     /// <summary>
     /// 斗轮机堆料运行
     /// </summary>
-    public Toggle BucketWheelPileMaterRunToggle;
+    public ToggleDIY BucketWheelPileMaterRunToggle;
     /// <summary>
     /// 允许取料信号
     /// </summary>
-    public Toggle AllowTakeMaterSignalToggle;
+    public ToggleDIY AllowTakeMaterSignalToggle;
     /// <summary>
     /// 斗轮机取料运行
     /// </summary>
-    public Toggle BucketWheelTakeMaterRunToggle;
+    public ToggleDIY BucketWheelTakeMaterRunToggle;
     /// <summary>
     /// 允许分流信号
     /// </summary>
-    public Toggle AllowShuntSignalToggle;
+    public ToggleDIY AllowShuntSignalToggle;
     /// <summary>
     /// 斗轮机分流运行
     /// </summary>
-    public Toggle BucketWheelShuntRunToggle;
+    public ToggleDIY BucketWheelShuntRunToggle;
     /// <summary>
     /// 远程急停
     /// </summary>
-    public Toggle LongDistanceCtrScramStopToggle;
+    public ToggleDIY LongDistanceCtrScramStopToggle;
     /// <summary>
     /// 斗轮机故障
     /// </summary>
-    public Toggle BucketWheelMalfunctionToggle;
+    public ToggleDIY BucketWheelMalfunctionToggle;
 
     public override void UpdateData(BucketWheelCenterRoomSignalData data)
     {

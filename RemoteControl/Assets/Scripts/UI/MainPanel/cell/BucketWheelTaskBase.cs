@@ -27,11 +27,12 @@ public class BucketWheelTaskBase : PanelBase
     public InputField takeMaterNum;
     public Toggle quantityOpenToggle  ;
     public Toggle quantityCloseToggle;
-    public Button takeMaterStartBtn;
-    public Button takeMaterStopBtn;
-    public Button takeMaterReversingBtn;
-    public Button takeMaterEndBtn;
+    public ButtonCell takeMaterStartBtn;
+    public ButtonCell takeMaterStopBtn;
+    public ButtonCell takeMaterReversingBtn;
+    public ButtonCell takeMaterEndBtn;
     public Machine machine;
+    private Timer reversingTimer;
 
     public virtual void Start()
     {
@@ -42,7 +43,16 @@ public class BucketWheelTaskBase : PanelBase
     {
         startTakeMaterText.text = taskCommand.MaterialRange.startValue.ToString();
         stopTakeMaterText.text = taskCommand.MaterialRange.endValue.ToString();
-        leftToggle.isOn= taskCommand.SideSelection=="LIFT"?true:false;
+        if (taskCommand.SideSelection=="LIFT")
+        {
+            leftToggle.isOn = true;
+            rightToggle.isOn = false;
+        }
+        else
+        {
+            leftToggle.isOn = false;
+            rightToggle.isOn = true;
+        }
         leftTakeMaterText.text = taskCommand.LeftRightRange.startValue.ToString();
         rightTakeMaterText.text = taskCommand.LeftRightRange.endValue.ToString();
         takeMaterStep.text = taskCommand.StepLength.ToString();
@@ -58,6 +68,22 @@ public class BucketWheelTaskBase : PanelBase
             timeOpenToggle.isOn = false;
             takeMaterNum.text= taskCommand.Quantity.ToString();
         }
+        takeMaterStartBtn.SetSelectState(taskCommand.AllData.OperationCommandList[0] == 1);
+        takeMaterStopBtn.SetSelectState(taskCommand.AllData.OperationCommandList[1] == 1);
+        if (taskCommand.AllData.OperationCommandList[2] == 1)
+        {
+            if (reversingTimer!=null)
+            {
+                reversingTimer?.Cancel();
+            }
+            reversingTimer=Timer.Register(2,() => { takeMaterReversingBtn.SetSelectState(false); });
+            takeMaterReversingBtn.SetSelectState(true);
+        }
+        else
+        {
+            takeMaterReversingBtn.SetSelectState(taskCommand.AllData.OperationCommandList[2] == 1);
+        }
+        takeMaterEndBtn.SetSelectState(taskCommand.AllData.OperationCommandList[3] == 1);
 
     }
     public virtual void Init()
@@ -102,12 +128,14 @@ public class BucketWheelTaskBase : PanelBase
         Debug.Log($"message {machine} {operationType}");
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
-        taskCommand.Command_Type = 0;
+        //taskCommand.Command_Type = 0;
         taskCommand.OperationCommand = operationType;
         taskCommand.TaskType = TaskType.TAKEMATER;
         taskCommand.Machine = machine;
+        taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
         if (operationType == OperationType.START)
         {
+            taskCommand.Command_Type = 0;
             float startValue = startTakeMaterText.text == "" ? 0 : int.Parse(startTakeMaterText.text);
             float endValue = stopTakeMaterText.text == "" ? 0 : int.Parse(stopTakeMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
@@ -127,13 +155,12 @@ public class BucketWheelTaskBase : PanelBase
             //allData.InfoIcon = "哈哈哈";
             taskCommand.AllData = allData;
         }
-        //Debug.LogError("TaskType "+taskCommand.TaskType.ToString());
-        //string sql = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`) " +
-        //    $"VALUES ('{taskCommand.QuerySystem}','{DateTime.Now}','{taskCommand.Machine.ToString()}','{taskCommand.TaskType.ToString()}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{"TEST"}','{"完成"}','{taskCommand.TaskID}')";
-        //MySqlHelper.ExecuteSql(sql);
+        else
+        {
+            taskCommand.Command_Type = 2;
+        }
         Debug.LogError("TaskID" + taskCommand.TaskID);
-        //DataManager.Instance.InsertHistoryTaskMc(taskCommand, GameDataManager.Instance.curAccountInfo.name, "0");
-        GameDataManager.Instance.SendTaskCommand(taskCommand);
+        TaskDataManager.Instance.SendTaskCommand(taskCommand);
     }
 
     public virtual void InputFieldValueRange(InputField inputField, int min, int max)

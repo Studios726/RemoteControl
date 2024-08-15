@@ -92,7 +92,7 @@ public class MessageCenter : Singleton<MessageCenter>
                 string json = Decompress(message);
                 Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
                 TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
-                GameDataManager.Instance.SetTaskVariables(taskVariables);
+                TaskDataManager.Instance.SetTaskVariables(taskVariables);
             }
             catch (Exception)
             {
@@ -128,7 +128,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 json = JsonMgr.Serialize<T>(body);
-                //Debug.Log($"json  {json}");
+                Debug.Log($"json  {json}");
             }
             catch (Exception e)
             {

@@ -5,5 +5,6 @@ using UnityEngine;
 
 public class TaskVariables
 {
+    public int Error;
     public List<TaskCommand> McData;
 }

@@ -26,15 +26,15 @@ public class ScramStopItem : StatusParmItemBase<ScramStopData>
     /// <summary>
     /// µçÆøÊÒ¼±Í£
     /// </summary>
-    public Toggle ElectricalRoomEmergencyToggle;
+    public ToggleDIY ElectricalRoomEmergencyToggle;
     /// <summary>
     /// Ë¾»úÊÒ¼±Í£
     /// </summary>
-    public Toggle DriverRoomEmergencyToggle;
+    public ToggleDIY DriverRoomEmergencyToggle;
     /// <summary>
     /// ¼±Í£¼ÌµçÆ÷
     /// </summary>
-    public Toggle EmergencyStopRelayToggle;
+    public ToggleDIY EmergencyStopRelayToggle;
     public override void UpdateData(ScramStopData scramStopData)
     {
         SetToggleState(ElectricalRoomEmergencyToggle, scramStopData.isElectricalRoomEmergency);
