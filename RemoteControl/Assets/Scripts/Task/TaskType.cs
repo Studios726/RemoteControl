@@ -32,7 +32,7 @@ public class TaskData
     public void AddTimer(Action action,float duration)
     {
         Cancle();
-        _timer = Timer.Register(5, action);
+        _timer = Timer.Register(duration, action);
     }
     public void Cancle()
     {

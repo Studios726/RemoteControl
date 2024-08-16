@@ -157,7 +157,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 string key = "";
                 foreach (KeyValuePair<string,TaskData> data in curTaskDic)
                 {
-                    Debug.LogError($"data.Value.Machine {data.Value.Machine} ");
                     if (data.Value.Machine==taskCommand.Machine)
                     {
                         key=data.Key;
