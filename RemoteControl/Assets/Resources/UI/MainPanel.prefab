@@ -2204,7 +2204,7 @@ MonoBehaviour:
   rightBtn: {fileID: 4280498510281742129}
   rotStopBtn: {fileID: 9141826484522466698}
   stopBtn: {fileID: 5950483829927653092}
-  machine: 1
+  machine: 0
   thisPileMater: {fileID: 5864974425953086300}
   dayPileMater: {fileID: 7116795071303506582}
   pileMaterResetBtn: {fileID: 9066229937337582867}
@@ -5855,10 +5855,10 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MaxSize: 16
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -13731,7 +13731,7 @@ MonoBehaviour:
   cantileverTakeMaterStopBtn: {fileID: 2489402062908250912}
   takeMaterDownBtn: {fileID: 8457049417828506885}
   takeMaterStopBtn: {fileID: 4118845859073263841}
-  machine: 1
+  machine: 0
   pileMaterBtn: {fileID: 3603982602317220058}
   pileMaterUpBtn: {fileID: 873815548539318421}
   damBoardPileMaterDownBtn: {fileID: 110915358057192356}
@@ -30023,16 +30023,16 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MaxSize: 16
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: asdfasdf
+  m_Text: 
 --- !u!1 &3790535523178825817
 GameObject:
   m_ObjectHideFlags: 0
@@ -30102,16 +30102,16 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 16
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5806\u53D6\u60AC\u81C2\u4F4D\u7F6E\u5DF2\u5230\u8FBE\u6781\u9650\u4F4D\u7F6E\uFF0C\u6CE8\u610F\u64CD\u4F5C"
+  m_Text: 
 --- !u!1 &3801597295446479967
 GameObject:
   m_ObjectHideFlags: 0
@@ -31738,16 +31738,16 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MaxSize: 16
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: asdgasd
+  m_Text: 
 --- !u!1 &3946257228437050458
 GameObject:
   m_ObjectHideFlags: 0
@@ -31817,16 +31817,16 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
+    m_MaxSize: 16
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u53D6\u6599\u4EFB\u52A1\u5B8C\u6210"
+  m_Text: 
 --- !u!1 &3989372247787070172
 GameObject:
   m_ObjectHideFlags: 0
@@ -50980,10 +50980,10 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 16
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 1
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MaxSize: 16
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -54888,7 +54888,7 @@ MonoBehaviour:
   cantileverTakeMaterStopBtn: {fileID: 2999343820584229439}
   takeMaterDownBtn: {fileID: 826586785247346047}
   takeMaterStopBtn: {fileID: 2331167021893542167}
-  machine: 0
+  machine: 1
 --- !u!1 &6857006561368163652
 GameObject:
   m_ObjectHideFlags: 0
@@ -64282,7 +64282,7 @@ MonoBehaviour:
   rightBtn: {fileID: 5540036509394606736}
   rotStopBtn: {fileID: 5389334900431423896}
   stopBtn: {fileID: 3921189163952469042}
-  machine: 0
+  machine: 1
 --- !u!1 &7968018661532498405
 GameObject:
   m_ObjectHideFlags: 0
@@ -74626,7 +74626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 49
+      value: 57.05
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -81309,7 +81309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 49
+      value: 57.05
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -81345,7 +81345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.12
+      value: -0.58
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -84773,7 +84773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 49
+      value: 57.05
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.y

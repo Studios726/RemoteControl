@@ -42,7 +42,7 @@ public class UIManager : Singleton<UIManager>
          GameObject prefab = Resources.Load<GameObject>("UI/"+id.Name);
             if (prefab == null)
             {
-                Debug.Log($" 预制体不存在 路径 UI/ {id.LayerName}");
+                Debug.Log($" 棰勫埗浣撲笉瀛樺湪 璺緞 UI/ {id.LayerName}");
                 return;
             }
          GameObject rootObj;

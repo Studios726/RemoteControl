@@ -140,12 +140,11 @@ public partial class DataManager
     public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userName,string state)
     {
         string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`) " +
-           $"VALUES ('{taskCommand.QuerySystem}','{DateTime.Now}','{taskCommand.Machine.ToString()}','{taskCommand.TaskType.ToString()}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{userName}','{state}','{taskCommand.TaskID}','{taskCommand.TakeMateHigh}','{taskCommand.LayerHigh}')";
+           $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine.ToString()}','{taskCommand.TaskType.ToString()}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{userName}','{state}','{taskCommand.TaskID}','{taskCommand.TakeMateHigh}','{taskCommand.LayerHigh}')";
         return MySqlHelper.ExecuteSql(query) > 0; ;
     }
     public bool UpdateHistoryTaskMc(string taskID,string state)
     {
-        
         string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE} = {state} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
         bool success=MySqlHelper.ExecuteSql(query) > 0; 
         Debug.LogError($"更新任务状态 { taskID } { state} {success}");

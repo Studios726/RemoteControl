@@ -39,6 +39,15 @@ public class BucketWheelTaskBase : PanelBase
         Init();
     }
 
+    public virtual void UpdateDes(Queue<string> queue)
+    {
+        int index = 0;
+        foreach (var des in queue)
+        {
+            warningTexts[index].text = des;
+            index = index + 1;
+        }
+    }
     public virtual void UpdateData(TaskCommand taskCommand)
     {
         startTakeMaterText.text = taskCommand.MaterialRange.startValue.ToString();
@@ -133,6 +142,7 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.TaskType = TaskType.TAKEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
+        taskCommand.TaskCreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         if (operationType == OperationType.START)
         {
             taskCommand.Command_Type = 0;
@@ -152,7 +162,6 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.OperatorSystem = "MC";
             taskCommand.LayerHigh = layerHigh.text == "" ? 0 : int.Parse(layerHigh.text);
             AllData allData = new AllData();
-            //allData.InfoIcon = "哈哈哈";
             taskCommand.AllData = allData;
         }
         else

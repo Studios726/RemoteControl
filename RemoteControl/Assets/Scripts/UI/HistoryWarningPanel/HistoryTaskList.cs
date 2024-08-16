@@ -15,17 +15,17 @@ public class HistoryTaskList : UICyclicScrollList<HistoryTaskCell, HistoryTaskDa
     //        HistoryTaskData data = new HistoryTaskData();
     //        data.id = DateTime.Now.ToString("yyMMddHHmmss");
     //        data.time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"); ;
-    //        data.machine = "¶·ÂÖ»ú¶ÑÈ¡ÁÏ»ú";
-    //        data.taskType = "È¡ÁÏ";
+    //        data.machine = "æ–—è½®æœºå †å–æ–™æœº";
+    //        data.taskType = "å–æ–™";
     //        data.thingRange = "100-100";
     //        data.leftRightRange = "100-100"; ;
-    //        data.leftRightSelect = "×ó"; ;
+    //        data.leftRightSelect = "å·¦"; ;
     //        data.takePileLength = "100";
     //        data.layerHigh = "100"; ;
     //        data.timeAt = "10000"; ;
     //        data.quantity = "10555"; ;
-    //        data.operationName = "¹ÜÀíÕß";
-    //        data.state = "ÒÑÍê³É";
+    //        data.operationName = "ç®¡ç†è€…";
+    //        data.state = "å·²å®Œæˆ";
     //        datas.Add(data);
     //    }
     //    Initlize(datas);

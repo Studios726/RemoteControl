@@ -13,6 +13,8 @@ namespace RemoteControl.Event
         public const string UpdateRcData = "UpdateRcData";
         public const string UpdatePcData = "UpdatePcData";
         public const string RefreshModel = "RefreshModel";
+        public const string RefreshTaskDes1 = "RefreshTaskDes_1";
+        public const string RefreshTaskDes2 = "RefreshTaskDes_2";
 
     }
 }

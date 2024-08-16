@@ -63,13 +63,15 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
-        taskCommand.Command_Type = 0;
+       
         taskCommand.OperationCommand = operationType;
         taskCommand.TaskType = TaskType.PILEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
+        taskCommand.TaskCreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         if (operationType==OperationType.START)
         {
+            taskCommand.Command_Type = 0;
             float startValue = startPileMaterText.text == "" ? 0 : int.Parse(startPileMaterText.text);
             float endValue = endPileMaterText.text == "" ? 0 : int.Parse(endPileMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
@@ -87,8 +89,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             taskCommand.LayerHigh = 0;
             taskCommand.TakeMateHigh= int.Parse(pileMaterHeightText.text);
             AllData allData = new AllData();
-            //allData.InfoIcon = "哈哈哈";
             taskCommand.AllData = allData;
+        }
+        else
+        {
+            taskCommand.Command_Type = 2;
         }
         TaskDataManager.Instance.SendTaskCommand(taskCommand);
     }

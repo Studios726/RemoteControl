@@ -13,8 +13,8 @@ public class MainPanelView :UIView<MainPanelCtr>
    private BucketWheelStackerReclaimerState _bucketWheelState1;
    private BucketWheelCtrMoveBase _bucketWheelCtrMove2;
    private BucketWheelStackerReclaimerCtrMove _bucketWheelCtrMove1;
-   private BucketWheelTaskBase _bucketWheelTask2;
-   private BucketWheelStackerReclaimerTask _bucketWheelTask1;
+   public BucketWheelTaskBase _bucketWheelTask2;
+   public BucketWheelStackerReclaimerTask _bucketWheelTask1;
    private HideButtonCtrBase _bucketWheelHideBtnCtr2;
    private BucketWheelStackerReclaimerHideBtnCtr _bucketWheelHideBtnCtr1;
     private Button updateModelBtn;
@@ -68,12 +68,20 @@ public class MainPanelView :UIView<MainPanelCtr>
 
    public void UpdateData(object o, EventArgs eventArgs)
    {
+       if (GameDataManager.Instance.SystemVariables==null)
+       {
+           return;
+       }
       UpdateData(GameDataManager.Instance.SystemVariables);
    }
 
     public void UpdatePcData(object o, EventArgs eventArgs)
     {
         TaskVariables taskVariables = TaskDataManager.Instance.TaskVariables;
+        if (taskVariables==null)
+        {
+            return;
+        }
         Debug.Log($">>>>>>>>>>>>>>>>>>>>>>> 任务更新 {taskVariables.McData.Count}");
         if (taskVariables.McData.Count>0)
         {

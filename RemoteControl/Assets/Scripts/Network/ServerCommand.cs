@@ -44,10 +44,13 @@ public static class ServerCommandDataType
 public class TaskCommand
 {
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3发送通用参数
     public int Command_Type { get; set; }
     //任务ID
     public string TaskID {  get; set; }
+    //任务创建时间
+    public string TaskCreateTime { get; set; }
+    // public 
     //发布任务者
     public string OperatorName { get; set; }
     //操作系統 MC WEB
@@ -70,6 +73,7 @@ public class TaskCommand
     // 取料步长
     public float StepLength { get; set; }
 
+    // public string
     // 是否定时
     public bool IsTimed { get; set; }
 
