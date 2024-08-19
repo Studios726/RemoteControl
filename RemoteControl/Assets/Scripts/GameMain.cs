@@ -20,7 +20,8 @@ namespace RemoteControl
         private MachineMove machineMove_2;
         private Timer timerRc;
         private Timer timerPc;
-        private bool isConnect=false;
+        private bool isConnect = false;
+
         public void EnterGame()
         {
             AddListener();
@@ -29,17 +30,41 @@ namespace RemoteControl
             UIManager.Instance.OpenUI(UIID.LoginPanel);
         }
 
+        public void OnExitGame()
+        {
+            if (connectionRC!=null&&connectionRC.isConnect)
+            {
+                connectionRC.OnClose();
+            }
+            if (connectionPC!=null&&connectionPC.isConnect)
+            {
+                connectionPC.OnClose();
+            }
+            if (connectionSCA!=null&&connectionSCA.isConnect)
+            {
+                connectionSCA.OnClose();
+            }
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
+        }
+        
         public void InitMode()
         {
-            machineMove_1=GameObject.Find("ModelRoot/Model/machine1").GetComponent<MachineMove>();
+            machineMove_1 = GameObject.Find("ModelRoot/Model/machine1").GetComponent<MachineMove>();
             machineMove_2 = GameObject.Find("ModelRoot/Model/machine2").GetComponent<MachineMove>();
             GameDataManager.Instance.SetMachine(machineMove_1, machineMove_2);
         }
+
         public void CreatConnect(object o, EventArgs eventArgs)
         {
-            if (isConnect) {
-                return;//避免重复登录
+            if (isConnect)
+            {
+                return; //避免重复登录
             }
+
             isConnect = true;
             connectionRC = new GameObject().AddComponent<ClientConnection>();
             connectionRC.Init(Address.taoUrl, SocketType.TaoRC);
@@ -52,17 +77,18 @@ namespace RemoteControl
             MessageCenter.Instance.RegisterListener(MessageType.PC, connectionPC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.SCA, connectionSCA.WebSend);
         }
+
         public void AddListener()
         {
-            EventManager.Instance.AddListener(EventName.ConnectionSuccess,ConnectionSuccess);
-            EventManager.Instance.AddListener(EventName.ConnectionFail,ConnectionFail); 
+            EventManager.Instance.AddListener(EventName.ConnectionSuccess, ConnectionSuccess);
+            EventManager.Instance.AddListener(EventName.ConnectionFail, ConnectionFail);
             EventManager.Instance.AddListener(EventName.ConnectionClose, ConnectionFail);
             EventManager.Instance.AddListener(EventName.ConnectionError, ConnectionFail);
-            EventManager.Instance.AddListener(EventName.Message,MessageReveive);
+            EventManager.Instance.AddListener(EventName.Message, MessageReveive);
             EventManager.Instance.AddListener(EventName.LoginSuccess, CreatConnect);
         }
 
-        public void ConnectionSuccess(object o,EventArgs eventArgs)
+        public void ConnectionSuccess(object o, EventArgs eventArgs)
         {
             ConnectEventArgs connectEventArgs = (ConnectEventArgs)eventArgs;
             if (connectEventArgs.type == SocketType.TaoRC)
@@ -70,53 +96,61 @@ namespace RemoteControl
                 if (timerRc != null)
                 {
                     timerRc.Cancel();
-                    timerRc=null;
+                    timerRc = null;
                 }
-                timerRc = Timer.Register(1, true, true, () => {
-                    GameDataManager.Instance.UpdatePlcData();
-                });
-            }else if(connectEventArgs.type == SocketType.TaskPC)
+
+                timerRc = Timer.Register(1, true, true, () => { GameDataManager.Instance.UpdatePlcData(); });
+            }
+            else if (connectEventArgs.type == SocketType.TaskPC)
             {
                 if (timerPc != null)
                 {
                     timerPc.Cancel();
-                    timerPc=null;
+                    timerPc = null;
                 }
+
                 TaskDataManager.Instance.UpdatePcData();
                 //timerPc = Timer.Register(1, true, true, () => {
                 //    //GameDataManager.Instance.UpdatePcData();
                 //});
             }
-          
-            Debug.Log("----------------------Success "+ connectEventArgs.type);
+            else if (connectEventArgs.type == SocketType.TaskPC)
+            {
+                GameDataManager.Instance.UpdateSCAData(30);
+            }
+
+            Debug.Log("----------------------Success " + connectEventArgs.type);
         }
-        public void ConnectionFail(object o,EventArgs eventArgs)
+
+        public void ConnectionFail(object o, EventArgs eventArgs)
         {
-            
             ConnectEventArgs connectEventArgs = (ConnectEventArgs)eventArgs;
             if (connectEventArgs.type == SocketType.TaoRC)
             {
                 if (timerRc != null)
                 {
                     timerRc.Cancel();
-                    timerRc=null;
+                    timerRc = null;
                 }
+
                 GameDataManager.Instance.RcConnectionState = false;
-            }else if (connectEventArgs.type == SocketType.TaskPC)
+            }
+            else if (connectEventArgs.type == SocketType.TaskPC)
             {
                 if (timerPc != null)
                 {
                     timerPc.Cancel();
-                    timerPc=null;
+                    timerPc = null;
                 }
             }
-            Debug.Log("----------------------Fail "+ connectEventArgs.type);
+
+            Debug.Log("----------------------Fail " + connectEventArgs.type);
         }
 
-        public void MessageReveive(object o,EventArgs eventArgs)
+        public void MessageReveive(object o, EventArgs eventArgs)
         {
             MessageEventArgs messageEventArgs = (MessageEventArgs)eventArgs;
-            if (messageEventArgs.socketTpe==SocketType.TaoRC)
+            if (messageEventArgs.socketTpe == SocketType.TaoRC)
             {
                 //Debug.Log("消息接受"+messageEventArgs.message);
                 //// SystemVariables systemVariables= JsonMgr.DeSerialize<SystemVariables>(messageEventArgs.message);
@@ -126,7 +160,6 @@ namespace RemoteControl
             {
                 //
             }
-
         }
     }
 }

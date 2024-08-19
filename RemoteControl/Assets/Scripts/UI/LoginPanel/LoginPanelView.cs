@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -7,26 +8,36 @@ using Utility;
 
 public class LoginPanelView : UIView<LoginPanelCtr>
 {
-    private InputField _accountInput;
-    private InputField _passwordInput;
+    private TMP_InputField _accountInput;
+    private TMP_InputField _passwordInput;
     private UnityEngine.UI.Button _loginBtn;
     private UnityEngine.UI.Toggle _toggle;
     public GameObject _error;
     public Timer timer;
     public override void InitUIElements(UIArgs uiArgs)
     {
-        _accountInput = RootObj.transform.Find("Bg/accountInput").GetComponent<InputField>();
-        _passwordInput = RootObj.transform.Find("Bg/passwordInput").GetComponent<InputField>();
+        _accountInput = RootObj.transform.Find("Bg/accountInput").GetComponent<TMP_InputField>();
+        _passwordInput = RootObj.transform.Find("Bg/passwordInput").GetComponent<TMP_InputField>();
         _loginBtn = RootObj.transform.Find("Bg/loginBtn").GetComponent<UnityEngine.UI.Button>();
         _toggle = RootObj.transform.Find("Bg/Toggle").GetComponent<UnityEngine.UI.Toggle>();
         _error = RootObj.transform.Find("error").gameObject;
         _loginBtn.onClick.AddListener(Login);
-        //_accountInput.ActivateInputField();
-        Debug.Log($"Account {PlayerPrefs.GetString("Account")}");
-        Debug.Log($"Password {PlayerPrefs.GetString("Password")}");
+        
+        _passwordInput.onSubmit.AddListener(OnSubmit);
         _accountInput.text = PlayerPrefs.GetString("Account");
         _passwordInput.text = PlayerPrefs.GetString("Password");
+        _toggle.isOn = PlayerPrefs.GetInt("Remember",0) == 1;
+        _accountInput.caretPosition=_accountInput.text.Length;
+        _accountInput.onFocusSelectAll = false;
+        _passwordInput.onFocusSelectAll = false;
+        _accountInput.ActivateInputField();
+       
 
+    }
+
+    public void OnSubmit(string str)
+    {
+        Login();
     }
     public void ShowError(string error)
     {
@@ -46,16 +57,42 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         {
             PlayerPrefs.SetString("Account", _accountInput.text);
             PlayerPrefs.SetString("Password", _passwordInput.text);
+            PlayerPrefs.SetInt("Remember",1);
         }
         else
         {
             PlayerPrefs.SetString("Account", "");
             PlayerPrefs.SetString("Password", "");
+            PlayerPrefs.SetInt("Remember",0);
+        }
+    }
+
+    public void Focus()
+    {
+        if (_accountInput.isFocused)
+        {
+            _passwordInput.caretPosition=_passwordInput.text.Length;
+            _passwordInput.ActivateInputField();
+        }
+        else
+        {
+            _passwordInput.DeactivateInputField();
         }
     }
     private void Login()
     {
-       
-        _ctr.Login(_accountInput.text, _passwordInput.text);
+        if (_accountInput.text!=""&&_passwordInput.text!="")
+        {
+            _ctr.Login(_accountInput.text, _passwordInput.text);
+        }
+        else if (_accountInput.text=="")
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("账号不能为空"));
+        }else if (_passwordInput.text=="")
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("密码不能为空"));
+        }
+
+        
     }
 }

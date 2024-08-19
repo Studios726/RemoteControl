@@ -10,6 +10,7 @@ namespace ShangHaiPro
     {
         public CoalHeapDEM SendCoalFeapDEM;
         public Report SendReport;
+        public int code;
 
         public SendDataReportAndDEM()
         {

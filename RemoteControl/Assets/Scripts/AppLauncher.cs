@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using RemoteControl;
+using RemoteControl.Event;
 using UnityEngine;
 
 public class AppLauncher : MonoBehaviour
 {
     private GameMain _gameMain;
+    private bool isQuit;
     private void Awake()
     {
 
@@ -14,8 +16,42 @@ public class AppLauncher : MonoBehaviour
         UIInit();
         _gameMain=this.gameObject.AddComponent<GameMain>();
         GameStart();
+        OnApplicationQuit();
     }
 
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控", (() => isQuit = false),()=>
+            {
+                isQuit = true;
+                _gameMain.OnExitGame();
+            }));
+        }else if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            EventManager.Instance.TriggerEvent(EventName.KeyCodeTab, null);
+        }
+       
+    }
+    private void OnApplicationQuit()
+    {
+        Application.wantsToQuit += WantsToQuitEvent;
+    }
+
+    public bool WantsToQuitEvent()
+    {
+        if (isQuit==false)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控", (() => isQuit = false),()=>
+            {
+                isQuit = true;
+                _gameMain.OnExitGame();
+            }));
+        }
+      
+        return isQuit;
+    }
     public void UIInit()
     {
         UILayer[] uiLayers =new[]

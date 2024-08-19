@@ -11,25 +11,21 @@ using UnityEngine.Rendering;
 
 public class GameDataManager : Singleton<GameDataManager>
 {
-    private bool _RcConnectionState;
+    private bool _rcConnectionState;
     private SystemVariables _systemVariables;
-    private SendDataReportAndDEM _sendDataReportAndDEM;
-    // private TaskVariables _taskVariables;
-
+    private SendDataReportAndDEM _sendDataReportAndDem;
     private MachineMove machineMove_1;//堆取斗轮机
     private MachineMove machineMove_2;//取斗轮机
-    // private Dictionary<string, TaskData> nearestTaskDataDic = new Dictionary<string, TaskData>();
     public AccountInfo curAccountInfo;
     public GameObject machineRoot;
     public bool RcConnectionState
     {
-        get => _RcConnectionState;
-        set => _RcConnectionState = value;
+        get => _rcConnectionState;
+        set => _rcConnectionState = value;
     }
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
-        //set => _systemVariables = value;
     }
 
     public string GetUserName()
@@ -41,23 +37,22 @@ public class GameDataManager : Singleton<GameDataManager>
 
         return "";
     }
-    // public TaskVariables TaskVariables { get => _taskVariables; }
     public SendDataReportAndDEM SendDataReportAndDEM
     {
-        get => _sendDataReportAndDEM;
+        get => _sendDataReportAndDem;
     }
     public void SetSystemVariables(SystemVariables systemVariables)
     {
         _systemVariables = systemVariables;
-        _RcConnectionState = _systemVariables.PLCCommunicationState;
+        _rcConnectionState = _systemVariables.PLCCommunicationState;
         UpdateMachinePosAndRot();
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
     }
 
-    public void SetScaReportAndDEM(SendDataReportAndDEM sendDataReportAndDEM)
+    public void SetScaReportAndDem(SendDataReportAndDEM sendDataReportAndDEM)
     {
 
-        _sendDataReportAndDEM = sendDataReportAndDEM;
+        _sendDataReportAndDem = sendDataReportAndDEM;
         EventManager.Instance.TriggerEvent(EventName.RefreshModel, null);
     }
     public void SetMachine(MachineMove machine1, MachineMove machine2)
@@ -194,13 +189,13 @@ public class GameDataManager : Singleton<GameDataManager>
         Debug.Log("获取当前任务状态");
     }
 
-    public void UpdateSCAData()
+    public void UpdateSCAData(int query_type)
     {
         Debug.LogError("堆料模型更新");
         ServerCommand serverCommand = new ServerCommand();
         serverCommand.QUERY_SYSTEM = "MC";
         serverCommand.DATA_TYPE = 3;
-        serverCommand.QUERY_TYPE = 30;
+        serverCommand.QUERY_TYPE = query_type;
         MessageCenter.Instance.SendMessage(MessageType.SCA, serverCommand);
     }
    

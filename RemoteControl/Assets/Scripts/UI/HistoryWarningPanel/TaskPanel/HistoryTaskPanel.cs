@@ -1,11 +1,6 @@
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Relational;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-
 public class HistoryTaskPanel : MonoBehaviour
 {
     public SearchPanel searchPanel;
@@ -32,8 +27,8 @@ public class HistoryTaskPanel : MonoBehaviour
             HistoryTaskData data = new HistoryTaskData();
             data.id = mySqlDataReader[ConstStr.DATA_TASK_ID].ToString(); //DateTime.Now.ToString("yyMMddHHmmss");
             data.time = mySqlDataReader[ConstStr.DATA_TASK_CREATE_TIME].ToString();
-            data.machine = mySqlDataReader[ConstStr.DATA_MACHINE].ToString() == "0" ? "1#" : "2#";
-            data.taskType = mySqlDataReader[ConstStr.DATA_TASK_TYPE].ToString() == "0" ? "∂—¡œ" : "»°¡œ";
+            data.machine = mySqlDataReader[ConstStr.DATA_MACHINE].ToString() == Machine.BucketWheelStackerReclaimer.ToString() ? "1#" : "2#";
+            data.taskType = mySqlDataReader[ConstStr.DATA_TASK_TYPE].ToString() == TaskType.PILEMATER.ToString() ? "Â†ÜÊñô" : "ÂèñÊñô";
             data.thingRange = mySqlDataReader[ConstStr.DATA_MATERIAL_RANGE_START].ToString() + "-" + mySqlDataReader[ConstStr.DATA_MATERIAL_RANGE_END].ToString();
             data.leftRightRange = mySqlDataReader[ConstStr.DATA_LEFT_RIGHT_RANGE_START].ToString() + "-" + mySqlDataReader[ConstStr.DATA_LEFT_RIGHT_RANGE_END].ToString();
             data.leftRightSelect = mySqlDataReader[ConstStr.DATA_SIDE_SELECTION].ToString();

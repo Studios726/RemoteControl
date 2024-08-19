@@ -9,7 +9,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Utility;
 using XCharts.Runtime;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class ElectricityData
 {
@@ -45,15 +44,15 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public LineChart cantileverChart_2;
     public LineChart bucketWheelChart_2;
     private MySqlDataReader _dataReader = null;
-    public ButtonCell bucketWheelCurrent_1;//¶·ÂÖµçÁ÷
+    public ButtonCell bucketWheelCurrent_1;//ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½
     public ButtonCell bucketWheelCurrent_2;
-    public ButtonCell trolleyCurrent_1;//´ó³µµçÁ÷
+    public ButtonCell trolleyCurrent_1;//ï¿½ó³µµï¿½ï¿½ï¿½
     public ButtonCell trolleyCurrent_2;
-    public ButtonCell slewingCurrent_1;//»Ø×ªµçÁ÷
+    public ButtonCell slewingCurrent_1;//ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
     public ButtonCell slewingCurrent_2;
-    public ButtonCell suspendedGelCurrent_1;//Ðü½ºµçÁ÷
+    public ButtonCell suspendedGelCurrent_1;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public ButtonCell suspendedGelCurrent_2;
-    public ButtonCell cantileverCurrent_1;//Ðü±ÛµçÁ÷
+    public ButtonCell cantileverCurrent_1;//ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½
     public ButtonCell cantileverCurrent_2;
     public SearchPanel searchPanel;
     private ButtonCell lastButton;

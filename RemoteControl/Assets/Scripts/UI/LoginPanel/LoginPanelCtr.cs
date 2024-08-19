@@ -1,3 +1,4 @@
+using System;
 using RemoteControl.Event;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,5 +19,19 @@ public class LoginPanelCtr :UIPresenter<LoginPanelView>
         {
             view.ShowError("");
         }
+    }
+
+    public void KeyCodeTab(object o, EventArgs eventArgs)
+    {
+        view.Focus();
+    }
+    public override void SetPanelData(UIArgs uiArgs)
+    {
+        EventManager.Instance.AddListener(EventName.KeyCodeTab,KeyCodeTab);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.Instance.RemoveListener(EventName.KeyCodeTab, KeyCodeTab);
     }
 }

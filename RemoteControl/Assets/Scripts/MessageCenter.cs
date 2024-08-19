@@ -108,7 +108,7 @@ public class MessageCenter : Singleton<MessageCenter>
                 string json = Decompress(message);
                 Debug.LogError($"收到数据 {socketType} {json}");
                 SendDataReportAndDEM  sendDataReportAndDEM = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
-                GameDataManager.Instance.SetScaReportAndDEM(sendDataReportAndDEM);
+                GameDataManager.Instance.SetScaReportAndDem(sendDataReportAndDEM);
             }
             catch (Exception)
             {
@@ -128,7 +128,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 json = JsonMgr.Serialize<T>(body);
-                Debug.Log($"json  {json}");
+                // Debug.Log($"json  {json}");
             }
             catch (Exception e)
             {

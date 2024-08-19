@@ -101,6 +101,7 @@ public class ClientConnection:MonoBehaviour
  
     void OnError(WebSocket ws, string ex)
     {
+        isConnect = false;
         string errorMsg = string.Empty;
 #if !UNITY_WEBGL || UNITY_EDITOR
         if (ws.InternalRequest.Response != null)
@@ -200,6 +201,6 @@ public class ClientConnection:MonoBehaviour
     public void OnClose()
     {
         // 关闭连接
-        //webSocket.Close(1000, "Bye!");
+        webSocket.Close(1000, "Bye!");
     }
 }
