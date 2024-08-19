@@ -5,224 +5,225 @@ using UnityEngine.UI;
 public struct JibLubbingMechanismData
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public bool isMainBreakerToggle;
     /// <summary>
-    /// ÉÏÑöÔËĞĞ
+    /// ä¸Šä»°è¿è¡Œ
     /// </summary>
     public bool isFaceUpwardRunToggle;
     /// <summary>
-    /// ÏÂÑöÔËĞĞ
+    /// ä¸‹ä»°è¿è¡Œ
     /// </summary>
     public bool isFaceDownRunToggle;
     /// <summary>
-    /// Ë¾»úÊÒÇ°Æ½ºâ·§
+    /// å¸æœºå®¤å‰å¹³è¡¡é˜€
     /// </summary>
     public bool isDriverRoomForwordBalanceValveToggle;
     /// <summary>
-    /// Ë¾»úÊÒºóÆ½ºâ·§
+    /// å¸æœºå®¤åå¹³è¡¡é˜€
     /// </summary>
     public bool isDriverRoomBackBalanceValveToggle;
     /// <summary>
-    /// Ö÷µç»ú¹ıÔØ
+    /// ä¸»ç”µæœºè¿‡è½½
     /// </summary>
     public bool isMainElectricalMachineryOverloadToggle;
     /// <summary>
-    /// ÉÏÑöÏŞÎ»
+    /// ä¸Šä»°é™ä½
     /// </summary>
     public bool isFaceUpwardLimitToggle;
     /// <summary>
-    /// ÏÂÑöÏŞÎ»
+    /// ä¸‹ä»°é™ä½
     /// </summary>
     public bool isFaceDownLimitToggle;
     /// <summary>
-    /// ÏÂ¸½ÏŞÎ»
+    /// ä¸‹é™„é™ä½
     /// </summary>
     public bool isBendDownLimitToggle;
     /// <summary>
-    /// ÏÂ¸½¼«ÏŞ
+    /// ä¸‹é™„æé™
     /// </summary>
     public bool isBendDownMaxToggle;
     /// <summary>
-    /// ÏÂ¸½½ûÇø
+    /// ä¸‹é™„ç¦åŒº
     /// </summary>
     public bool isBendDownRestrictedZoneToggle;
     /// <summary>
-    /// ¼ÓÈÈÆ÷Æô¶¯ĞÅºÅ
+    /// åŠ çƒ­å™¨å¯åŠ¨ä¿¡å·
     /// </summary>
     public bool isHeaterStartSignalToggle;
     /// <summary>
-    /// ·ç»úÆô¶¯ĞÅºÅ
+    /// é£æœºå¯åŠ¨ä¿¡å·
     /// </summary>
     public bool isDraughtFanStartSignalToggle;
     /// <summary>
-    /// ±ÃÕ¾¸ßÎÂ±¨¾¯
+    /// æ³µç«™é«˜æ¸©æŠ¥è­¦
     /// </summary>
     public bool isPumpStationHighTemperatureWarningToggle;
     /// <summary>
-    /// ÓÍÒºÎ»µÍĞÅºÅ
+    /// æ²¹æ¶²ä½ä½ä¿¡å·
     /// </summary>
     public bool isOilLowSignalToggle;
     /// <summary>
-    /// ÒºÎ»³¬µÍĞÅºÅ
+    /// æ¶²ä½è¶…ä½ä¿¡å·
     /// </summary>
     public bool isOilUltralowSignalToggle;
     /// <summary>
-    /// ±ÃÕ¾¶ÂÓÍĞÅºÅ
+    /// æ³µç«™å µæ²¹ä¿¡å·
     /// </summary>
     public bool isPumpStationBlockUpOilSignalToggle;
     /// <summary>
-    /// Ö÷ÓÍ±ÃÔËĞĞ
+    /// ä¸»æ²¹æ³µè¿è¡Œ
     /// </summary>
     public bool isMainOilPumpRunToggle;
     /// <summary>
-    /// ·ç»úÔËĞĞ
+    /// é£æœºè¿è¡Œ
     /// </summary>
     public bool isDraughtFanRunToggle;
     /// <summary>
-    /// ÓÍ¼ÓÈÈÆ÷ÔËĞĞ
+    /// æ²¹åŠ çƒ­å™¨è¿è¡Œ
     /// </summary>
     public bool isOilHeaterRunToggle;
     /// <summary>
-    /// ÉÏÉıµç´Å·§
+    /// ä¸Šå‡ç”µç£é˜€
     /// </summary>
     public bool isUpSolenoidValveToggle;
     /// <summary>
-    /// ÏÂ½µµç´Å·§
+    /// ä¸‹é™ç”µç£é˜€
     /// </summary>
     public bool isDownSolenoidValveToggle;
     /// <summary>
-    /// ÉıÑ¹µç´Å·§
+    /// å‡å‹ç”µç£é˜€
     /// </summary>
     public bool isStepUpSolenoidValveToggle;
 }
 /// <summary>
-/// ±ä·ù»ú¹¹
+/// å˜å¹…æœºæ„
 /// </summary>
 public class JibLubbingMechanismItem :StatusParmItemBase<JibLubbingMechanismData>
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MainBreakerToggle;
     /// <summary>
-    /// ÉÏÑöÔËĞĞ
+    /// ä¸Šä»°è¿è¡Œ
     /// </summary>
     public ToggleDIY FaceUpwardRunToggle;
     /// <summary>
-    /// ÏÂÑöÔËĞĞ
+    /// ä¸‹ä»°è¿è¡Œ
     /// </summary>
     public ToggleDIY FaceDownRunToggle;
     /// <summary>
-    /// Ë¾»úÊÒÇ°Æ½ºâ·§
+    /// å¸æœºå®¤å‰å¹³è¡¡é˜€
     /// </summary>
     public ToggleDIY DriverRoomForwordBalanceValveToggle;
     /// <summary>
-    /// Ë¾»úÊÒºóÆ½ºâ·§
+    /// å¸æœºå®¤åå¹³è¡¡é˜€
     /// </summary>
     public ToggleDIY DriverRoomBackBalanceValveToggle;
     /// <summary>
-    /// Ö÷µç»ú¹ıÔØ
+    /// ä¸»ç”µæœºè¿‡è½½
     /// </summary>
     public ToggleDIY MainElectricalMachineryOverloadToggle;
     /// <summary>
-    /// ÉÏÑöÏŞÎ»
+    /// ä¸Šä»°é™ä½
     /// </summary>
     public ToggleDIY FaceUpwardLimitToggle;
     /// <summary>
-    /// ÏÂÑöÏŞÎ»
+    /// ä¸‹ä»°é™ä½
     /// </summary>
     public ToggleDIY FaceDownLimitToggle;
     /// <summary>
-    /// ÏÂ¸½ÏŞÎ»
+    /// ä¸‹é™„é™ä½
     /// </summary>
     public ToggleDIY BendDownLimitToggle;
     /// <summary>
-    /// ÏÂ¸½¼«ÏŞ
+    /// ä¸‹é™„æé™
     /// </summary>
     public ToggleDIY BendDownMaxToggle;
     /// <summary>
-    /// ÏÂ¸½½ûÇø
+    /// ä¸‹é™„ç¦åŒº
     /// </summary>
     public ToggleDIY BendDownRestrictedZoneToggle;
     /// <summary>
-    /// ¼ÓÈÈÆ÷Æô¶¯ĞÅºÅ
+    /// åŠ çƒ­å™¨å¯åŠ¨ä¿¡å·
     /// </summary>
     public ToggleDIY HeaterStartSignalToggle;
     /// <summary>
-    /// ·ç»úÆô¶¯ĞÅºÅ
+    /// é£æœºå¯åŠ¨ä¿¡å·
     /// </summary>
     public ToggleDIY DraughtFanStartSignalToggle;
     /// <summary>
-    /// ±ÃÕ¾¸ßÎÂ±¨¾¯
+    /// æ³µç«™é«˜æ¸©æŠ¥è­¦
     /// </summary>
     public ToggleDIY PumpStationHighTemperatureWarningToggle;
     /// <summary>
-    /// ÓÍÒºÎ»µÍĞÅºÅ
+    /// æ²¹æ¶²ä½ä½ä¿¡å·
     /// </summary>
     public ToggleDIY OilLowSignalToggle;
     /// <summary>
-    /// ÒºÎ»³¬µÍĞÅºÅ
+    /// æ¶²ä½è¶…ä½ä¿¡å·
     /// </summary>
     public ToggleDIY OilUltralowSignalToggle;
     /// <summary>
-    /// ±ÃÕ¾¶ÂÓÍĞÅºÅ
+    /// æ³µç«™å µæ²¹ä¿¡å·
     /// </summary>
     public ToggleDIY PumpStationBlockUpOilSignalToggle;
     /// <summary>
-    /// Ö÷ÓÍ±ÃÔËĞĞ
+    /// ä¸»æ²¹æ³µè¿è¡Œ
     /// </summary>
     public ToggleDIY MainOilPumpRunToggle;
     /// <summary>
-    /// ·ç»úÔËĞĞ
+    /// é£æœºè¿è¡Œ
     /// </summary>
     public ToggleDIY DraughtFanRunToggle;
     /// <summary>
-    /// ÓÍ¼ÓÈÈÆ÷ÔËĞĞ
+    /// æ²¹åŠ çƒ­å™¨è¿è¡Œ
     /// </summary>
     public ToggleDIY OilHeaterRunToggle;
     /// <summary>
-    /// ÉÏÉıµç´Å·§
+    /// ä¸Šå‡ç”µç£é˜€
     /// </summary>
     public ToggleDIY UpSolenoidValveToggle;
     /// <summary>
-    /// ÏÂ½µµç´Å·§
+    /// ä¸‹é™ç”µç£é˜€
     /// </summary>
     public ToggleDIY DownSolenoidValveToggle;
     /// <summary>
-    /// ÉıÑ¹µç´Å·§
+    /// å‡å‹ç”µç£é˜€
     /// </summary>
     public ToggleDIY StepUpSolenoidValveToggle;
     public override void UpdateData(JibLubbingMechanismData data)
     {
-        SetToggleState(MainBreakerToggle,data.isMainBreakerToggle);
-        SetToggleState(FaceUpwardRunToggle, data.isFaceUpwardRunToggle);
-        SetToggleState(FaceDownRunToggle, data.isFaceDownRunToggle);
-        SetToggleState(DriverRoomForwordBalanceValveToggle, data.isDriverRoomForwordBalanceValveToggle);
-        SetToggleState(DriverRoomBackBalanceValveToggle, data.isDriverRoomBackBalanceValveToggle);
-        SetToggleState(MainElectricalMachineryOverloadToggle, data.isMainElectricalMachineryOverloadToggle);
-        SetToggleState(FaceUpwardLimitToggle, data.isFaceUpwardLimitToggle);
-        SetToggleState(FaceDownLimitToggle, data.isFaceDownLimitToggle);
-        SetToggleState(BendDownLimitToggle, data.isBendDownLimitToggle);
-        SetToggleState(BendDownMaxToggle, data.isBendDownMaxToggle);
+        bool isConnetction = GameDataManager.Instance.RcConnectionState;
+        SetToggleState(MainBreakerToggle,data.isMainBreakerToggle,false,isConnetction);
+        SetToggleState(FaceUpwardRunToggle, data.isFaceUpwardRunToggle,false,isConnetction);
+        SetToggleState(FaceDownRunToggle, data.isFaceDownRunToggle,false,isConnetction);
+        SetToggleState(DriverRoomForwordBalanceValveToggle, data.isDriverRoomForwordBalanceValveToggle,false,isConnetction);
+        SetToggleState(DriverRoomBackBalanceValveToggle, data.isDriverRoomBackBalanceValveToggle,false,isConnetction);
+        SetToggleState(MainElectricalMachineryOverloadToggle, data.isMainElectricalMachineryOverloadToggle,true,isConnetction);
+        SetToggleState(FaceUpwardLimitToggle, data.isFaceUpwardLimitToggle,true,isConnetction);
+        SetToggleState(FaceDownLimitToggle, data.isFaceDownLimitToggle,true,isConnetction);
+        SetToggleState(BendDownLimitToggle, data.isBendDownLimitToggle,true,isConnetction);
+        SetToggleState(BendDownMaxToggle, data.isBendDownMaxToggle,true,isConnetction);
 
-        SetToggleState(BendDownRestrictedZoneToggle, data.isBendDownRestrictedZoneToggle);
-        SetToggleState(HeaterStartSignalToggle, data.isHeaterStartSignalToggle);
-        SetToggleState(DraughtFanStartSignalToggle, data.isDraughtFanStartSignalToggle);
-        SetToggleState(PumpStationHighTemperatureWarningToggle, data.isPumpStationHighTemperatureWarningToggle);
-        SetToggleState(OilLowSignalToggle, data.isOilLowSignalToggle);
+        SetToggleState(BendDownRestrictedZoneToggle, data.isBendDownRestrictedZoneToggle,true,isConnetction);
+        SetToggleState(HeaterStartSignalToggle, data.isHeaterStartSignalToggle,false,isConnetction);
+        SetToggleState(DraughtFanStartSignalToggle, data.isDraughtFanStartSignalToggle,false,isConnetction);
+        SetToggleState(PumpStationHighTemperatureWarningToggle, data.isPumpStationHighTemperatureWarningToggle,true,isConnetction);
+        SetToggleState(OilLowSignalToggle, data.isOilLowSignalToggle,true,isConnetction);
 
-        SetToggleState(OilUltralowSignalToggle, data.isOilUltralowSignalToggle);
-        SetToggleState(PumpStationBlockUpOilSignalToggle, data.isPumpStationBlockUpOilSignalToggle);
-        SetToggleState(MainOilPumpRunToggle, data.isMainOilPumpRunToggle);
+        SetToggleState(OilUltralowSignalToggle, data.isOilUltralowSignalToggle,true,isConnetction);
+        SetToggleState(PumpStationBlockUpOilSignalToggle, data.isPumpStationBlockUpOilSignalToggle,true,isConnetction);
+        SetToggleState(MainOilPumpRunToggle, data.isMainOilPumpRunToggle,false,isConnetction);
 
-        SetToggleState(DraughtFanRunToggle, data.isDraughtFanRunToggle);
-        SetToggleState(OilHeaterRunToggle, data.isOilHeaterRunToggle);
-        SetToggleState(UpSolenoidValveToggle, data.isUpSolenoidValveToggle);
+        SetToggleState(DraughtFanRunToggle, data.isDraughtFanRunToggle,false,isConnetction);
+        SetToggleState(OilHeaterRunToggle, data.isOilHeaterRunToggle,false,isConnetction);
+        SetToggleState(UpSolenoidValveToggle, data.isUpSolenoidValveToggle,false,isConnetction);
 
-        SetToggleState(DownSolenoidValveToggle, data.isDownSolenoidValveToggle);
-        SetToggleState(StepUpSolenoidValveToggle, data.isStepUpSolenoidValveToggle);
+        SetToggleState(DownSolenoidValveToggle, data.isDownSolenoidValveToggle,false,isConnetction);
+        SetToggleState(StepUpSolenoidValveToggle, data.isStepUpSolenoidValveToggle,false,isConnetction);
     }
 
 

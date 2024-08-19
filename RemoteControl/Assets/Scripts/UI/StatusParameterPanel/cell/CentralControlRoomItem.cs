@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 /// <summary>
-/// ÓëÖĞ¿ØÊÒÁ¬Ëø
+/// ä¸ä¸­æ§å®¤è¿é”
 /// </summary>
 public class CentralControlRoomItem : StatusParmItemBase<CentralControlData>
 {

@@ -6,33 +6,33 @@ using UnityEngine.UI;
 public struct SwitchOnData
 {
     /// <summary>
-    /// Õæ¿Õ¶ÏÂ·Æ÷ºÏÕ¢
+    /// çœŸç©ºæ–­è·¯å™¨åˆé—¸
     /// </summary>
     public bool isVacuumCircuitBreakerClosedToggle;
     /// <summary>
-    /// µÍÑ¹¿ØÖÆµçÔ´
+    /// ä½å‹æ§åˆ¶ç”µæº
     /// </summary>
     public bool isLowVoltageControlPowerClosedToggle;
     /// <summary>
-    /// µÍÑ¹¶¯Á¦µçÔ´
+    /// ä½å‹åŠ¨åŠ›ç”µæº
     /// </summary>
     public bool isLowVoltagePowerClosedToggle;
 }
 /// <summary>
-/// ºÏÕ¢ĞÅÏ¢
+/// åˆé—¸ä¿¡æ¯
 /// </summary>
 public class SwitchOnItem : StatusParmItemBase<SwitchOnData>
 {
     /// <summary>
-    /// Õæ¿Õ¶ÏÂ·Æ÷ºÏÕ¢
+    /// çœŸç©ºæ–­è·¯å™¨åˆé—¸
     /// </summary>
     public ToggleDIY VacuumCircuitBreakerClosedToggle;
     /// <summary>
-    /// µÍÑ¹¿ØÖÆµçÔ´
+    /// ä½å‹æ§åˆ¶ç”µæº
     /// </summary>
     public ToggleDIY LowVoltageControlPowerClosedToggle;   
     /// <summary>
-    /// µÍÑ¹¶¯Á¦µçÔ´
+    /// ä½å‹åŠ¨åŠ›ç”µæº
     /// </summary>
     public ToggleDIY LowVoltagePowerClosedToggle;
     public override void UpdateData(SwitchOnData switchOnData)

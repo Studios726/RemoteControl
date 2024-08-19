@@ -6,33 +6,33 @@ using UnityEngine.UI;
 public struct ScramStopData
 {
     /// <summary>
-    /// µçÆøÊÒ¼±Í£
+    /// ç”µæ°”å®¤æ€¥åœ
     /// </summary>
     public bool isElectricalRoomEmergency;
     /// <summary>
-    /// Ë¾»úÊÒ¼±Í£
+    /// å¸æœºå®¤æ€¥åœ
     /// </summary>
     public bool isDriverRoomEmergency;
     /// <summary>
-    /// ¼±Í£¼ÌµçÆ÷
+    /// æ€¥åœç»§ç”µå™¨
     /// </summary>
     public bool isEmergencyStopRelay;
 }
 /// <summary>
-/// ¼±Í£ĞÅÏ¢
+/// æ€¥åœä¿¡æ¯
 /// </summary>
 public class ScramStopItem : StatusParmItemBase<ScramStopData>
 {
     /// <summary>
-    /// µçÆøÊÒ¼±Í£
+    /// ç”µæ°”å®¤æ€¥åœ
     /// </summary>
     public ToggleDIY ElectricalRoomEmergencyToggle;
     /// <summary>
-    /// Ë¾»úÊÒ¼±Í£
+    /// å¸æœºå®¤æ€¥åœ
     /// </summary>
     public ToggleDIY DriverRoomEmergencyToggle;
     /// <summary>
-    /// ¼±Í£¼ÌµçÆ÷
+    /// æ€¥åœç»§ç”µå™¨
     /// </summary>
     public ToggleDIY EmergencyStopRelayToggle;
     public override void UpdateData(ScramStopData scramStopData)

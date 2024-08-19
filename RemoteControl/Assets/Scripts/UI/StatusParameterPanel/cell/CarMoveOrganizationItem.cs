@@ -5,141 +5,141 @@ using UnityEngine.UI;
 public struct CarMoveOrganizationData
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public bool isMainCircuitBreakerToggle;
     /// <summary>
-    /// µç»ú¶ÏÂ·Æ÷
+    /// ç”µæœºæ–­è·¯å™¨
     /// </summary>
     public bool isMotorCircuitBreakerToggle;
     /// <summary>
-    /// ÖÆ¶¯Æ÷¶ÏÂ·Æ÷
+    /// åˆ¶åŠ¨å™¨æ–­è·¯å™¨
     /// </summary>
     public bool isBrakeCircuitBreakersToggle;
     /// <summary>
-    /// ±äÆµÆ÷ÔËĞĞ
+    /// å˜é¢‘å™¨è¿è¡Œ
     /// </summary>
     public bool isFrequencyConverterOperationToggle;
     /// <summary>
-    /// ÖÆ¶¯Æ÷ÔËĞĞ
+    /// åˆ¶åŠ¨å™¨è¿è¡Œ
     /// </summary>
     public bool isBrakeOperationToggle;
     /// <summary>
-    /// Ç°½øÔËĞĞ
+    /// å‰è¿›è¿è¡Œ
     /// </summary>
     public bool isForwardOperationToggle;
     /// <summary>
-    /// ºóÍËÔËĞĞ
+    /// åé€€è¿è¡Œ
     /// </summary>
     public bool isReverseOperationToggle;
 
     /// <summary>
-    /// ´ó³µ¹ÊÕÏ
+    /// å¤§è½¦æ•…éšœ
     /// </summary>
     public bool isCraneFaultToggle;
     /// <summary>
-    /// ±äÆµÆ÷¹ÊÕÏ
+    /// å˜é¢‘å™¨æ•…éšœ
     /// </summary>
     public bool isFrequencyConverterFaultToggle;
     /// <summary>
-    /// ÖÆ¶¯Æ÷¹ÊÕÏ
+    /// åˆ¶åŠ¨å™¨æ•…éšœ
     /// </summary>
     public bool isBrakeFaultToggle;
     /// <summary>
-    /// ´ó³µ¼¯ÖĞÈó»¬µÍÓÍÎ»£º
+    /// å¤§è½¦é›†ä¸­æ¶¦æ»‘ä½æ²¹ä½ï¼š
     /// </summary>
     public bool isLowOilLevelInBigVehicleCentralLubricationToggle;
     /// <summary>
-    /// ´ó³µ¼¯ÖĞÈó»¬¶ÂÓÍ
+    /// å¤§è½¦é›†ä¸­æ¶¦æ»‘å µæ²¹
     /// </summary>
     public bool isBlockedOilInBigVehicleCentralLubricationToggle;
 
     /// <summary>
-    /// Ç°½øÏŞÎ»
+    /// å‰è¿›é™ä½
     /// </summary>
     public bool isForwardLimitToggle;
     /// <summary>
-    /// Ç°½ø¼«ÏŞ
+    /// å‰è¿›æé™
     /// </summary>
     public bool isForwardLimitExceedToggle;
     /// <summary>
-    /// ºóÍËÏŞÎ»
+    /// åé€€é™ä½
     /// </summary>
     public bool isReverseLimitToggle;
     /// <summary>
-    /// ºóÍË¼«ÏŞ
+    /// åé€€æé™
     /// </summary>
     public bool isReverseLimitExceedToggle;
 }
 /// <summary>
-/// ´ó³µĞĞ×ß»ú¹¹
+/// å¤§è½¦è¡Œèµ°æœºæ„
 /// </summary>
 public class CarMoveOrganizationItem : StatusParmItemBase<CarMoveOrganizationData>
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MainCircuitBreakerToggle;
     /// <summary>
-    /// µç»ú¶ÏÂ·Æ÷
+    /// ç”µæœºæ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MotorCircuitBreakerToggle;
     /// <summary>
-    /// ÖÆ¶¯Æ÷¶ÏÂ·Æ÷
+    /// åˆ¶åŠ¨å™¨æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY BrakeCircuitBreakersToggle;
     /// <summary>
-    /// ±äÆµÆ÷ÔËĞĞ
+    /// å˜é¢‘å™¨è¿è¡Œ
     /// </summary>
     public ToggleDIY FrequencyConverterOperationToggle;
     /// <summary>
-    /// ÖÆ¶¯Æ÷ÔËĞĞ
+    /// åˆ¶åŠ¨å™¨è¿è¡Œ
     /// </summary>
     public ToggleDIY BrakeOperationToggle;
     /// <summary>
-    /// Ç°½øÔËĞĞ
+    /// å‰è¿›è¿è¡Œ
     /// </summary>
     public ToggleDIY ForwardOperationToggle;
     /// <summary>
-    /// ºóÍËÔËĞĞ
+    /// åé€€è¿è¡Œ
     /// </summary>
     public ToggleDIY ReverseOperationToggle;
 
     /// <summary>
-    /// ´ó³µ¹ÊÕÏ
+    /// å¤§è½¦æ•…éšœ
     /// </summary>
     public ToggleDIY CraneFaultToggle;
     /// <summary>
-    /// ±äÆµÆ÷¹ÊÕÏ
+    /// å˜é¢‘å™¨æ•…éšœ
     /// </summary>
     public ToggleDIY FrequencyConverterFaultToggle;
     /// <summary>
-    /// ÖÆ¶¯Æ÷¹ÊÕÏ
+    /// åˆ¶åŠ¨å™¨æ•…éšœ
     /// </summary>
     public ToggleDIY BrakeFaultToggle;
     /// <summary>
-    /// ´ó³µ¼¯ÖĞÈó»¬µÍÓÍÎ»£º
+    /// å¤§è½¦é›†ä¸­æ¶¦æ»‘ä½æ²¹ä½ï¼š
     /// </summary>
     public ToggleDIY LowOilLevelInBigVehicleCentralLubricationToggle;
     /// <summary>
-    /// ´ó³µ¼¯ÖĞÈó»¬¶ÂÓÍ
+    /// å¤§è½¦é›†ä¸­æ¶¦æ»‘å µæ²¹
     /// </summary>
     public ToggleDIY BlockedOilInBigVehicleCentralLubricationToggle;
 
     /// <summary>
-    /// Ç°½øÏŞÎ»
+    /// å‰è¿›é™ä½
     /// </summary>
     public ToggleDIY ForwardLimitToggle;
     /// <summary>
-    /// Ç°½ø¼«ÏŞ
+    /// å‰è¿›æé™
     /// </summary>
     public ToggleDIY ForwardLimitExceedToggle;
     /// <summary>
-    /// ºóÍËÏŞÎ»
+    /// åé€€é™ä½
     /// </summary>
     public ToggleDIY ReverseLimitToggle;
     /// <summary>
-    /// ºóÍË¼«ÏŞ
+    /// åé€€æé™
     /// </summary>
     public ToggleDIY ReverseLimitExceedToggle;
 

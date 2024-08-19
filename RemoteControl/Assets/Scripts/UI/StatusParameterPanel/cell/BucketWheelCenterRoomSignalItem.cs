@@ -6,73 +6,73 @@ using UnityEngine.UI;
 public struct BucketWheelCenterRoomSignalData
 {
     /// <summary>
-    /// ÔÊĞí¶ÑÁÏĞÅºÅ
+    /// å…è®¸å †æ–™ä¿¡å·
     /// </summary>
     public bool isAllowPileMaterSignal;
     /// <summary>
-    /// ¶·ÂÖ»ú¶ÑÁÏÔËĞĞ
+    /// æ–—è½®æœºå †æ–™è¿è¡Œ
     /// </summary>
     public bool isBucketWheelPileMaterRune;
     /// <summary>
-    /// ÔÊĞíÈ¡ÁÏĞÅºÅ
+    /// å…è®¸å–æ–™ä¿¡å·
     /// </summary>
     public bool isAllowTakeMaterSignal;
     /// <summary>
-    /// ¶·ÂÖ»úÈ¡ÁÏÔËĞĞ
+    /// æ–—è½®æœºå–æ–™è¿è¡Œ
     /// </summary>
     public bool isBucketWheelTakeMaterRun;
     /// <summary>
-    /// ÔÊĞí·ÖÁ÷ĞÅºÅ
+    /// å…è®¸åˆ†æµä¿¡å·
     /// </summary>
     public bool isAllowShuntSignal;
     /// <summary>
-    /// ¶·ÂÖ»ú·ÖÁ÷ÔËĞĞ
+    /// æ–—è½®æœºåˆ†æµè¿è¡Œ
     /// </summary>
     public bool isBucketWheelShuntRun;
     /// <summary>
-    /// Ô¶³Ì¼±Í£
+    /// è¿œç¨‹æ€¥åœ
     /// </summary>
     public bool isLongDistanceCtrScramStop;
     /// <summary>
-    /// ¶·ÂÖ»ú¹ÊÕÏ
+    /// æ–—è½®æœºæ•…éšœ
     /// </summary>
     public bool isBucketWheelMalfunction;
 }
 /// <summary>
-/// ¶·ÂÖ»úÓëÖĞ¿ØÊÒĞÅºÅ
+/// æ–—è½®æœºä¸ä¸­æ§å®¤ä¿¡å·
 /// </summary>
 public class BucketWheelCenterRoomSignalItem : StatusParmItemBase<BucketWheelCenterRoomSignalData>
 {
     /// <summary>
-    /// ÔÊĞí¶ÑÁÏĞÅºÅ
+    /// å…è®¸å †æ–™ä¿¡å·
     /// </summary>
     public ToggleDIY AllowPileMaterSignalToggle;
     /// <summary>
-    /// ¶·ÂÖ»ú¶ÑÁÏÔËĞĞ
+    /// æ–—è½®æœºå †æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY BucketWheelPileMaterRunToggle;
     /// <summary>
-    /// ÔÊĞíÈ¡ÁÏĞÅºÅ
+    /// å…è®¸å–æ–™ä¿¡å·
     /// </summary>
     public ToggleDIY AllowTakeMaterSignalToggle;
     /// <summary>
-    /// ¶·ÂÖ»úÈ¡ÁÏÔËĞĞ
+    /// æ–—è½®æœºå–æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY BucketWheelTakeMaterRunToggle;
     /// <summary>
-    /// ÔÊĞí·ÖÁ÷ĞÅºÅ
+    /// å…è®¸åˆ†æµä¿¡å·
     /// </summary>
     public ToggleDIY AllowShuntSignalToggle;
     /// <summary>
-    /// ¶·ÂÖ»ú·ÖÁ÷ÔËĞĞ
+    /// æ–—è½®æœºåˆ†æµè¿è¡Œ
     /// </summary>
     public ToggleDIY BucketWheelShuntRunToggle;
     /// <summary>
-    /// Ô¶³Ì¼±Í£
+    /// è¿œç¨‹æ€¥åœ
     /// </summary>
     public ToggleDIY LongDistanceCtrScramStopToggle;
     /// <summary>
-    /// ¶·ÂÖ»ú¹ÊÕÏ
+    /// æ–—è½®æœºæ•…éšœ
     /// </summary>
     public ToggleDIY BucketWheelMalfunctionToggle;
 

@@ -6,207 +6,207 @@ using UnityEngine.UI;
 public struct RotaryMechanismData
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public bool isMainCircuitBreaker;
     /// <summary>
-    /// ±äÆµÆ÷ÔËĞĞ
+    /// å˜é¢‘å™¨è¿è¡Œ
     /// </summary>
     public bool isFrequencyConverterRunning;
     /// <summary>
-    /// ÖÆ¶¯Æ÷ÔËĞĞ
+    /// åˆ¶åŠ¨å™¨è¿è¡Œ
     /// </summary>
     public bool isBrakeOperating;
     /// <summary>
-    /// ·ç»úÔËĞĞ
+    /// é£æœºè¿è¡Œ
     /// </summary>
     public bool isFanOperating;
     /// <summary>
-    /// ×ó×ªÔËĞĞ
+    /// å·¦è½¬è¿è¡Œ
     /// </summary>
     public bool isLeftTurnOperating;
     /// <summary>
-    /// ÓÒ×ªÔËĞĞ
+    /// å³è½¬è¿è¡Œ
     /// </summary>
     public bool isRightTurnOperating;
 
     /// <summary>
-    /// ±äÆµÆ÷¹ÊÕÏ
+    /// å˜é¢‘å™¨æ•…éšœ
     /// </summary>
     public bool isFrequencyConverterFault;
     /// <summary>
-    /// ÖÆ¶¯Æ÷¹ıÔØ
+    /// åˆ¶åŠ¨å™¨è¿‡è½½
     /// </summary>
     public bool isBrakeOverload;
     /// <summary>
-    /// ·ç»ú¹ıÔØ
+    /// é£æœºè¿‡è½½
     /// </summary>
     public bool isFanOverload;
     /// <summary>
-    /// ÖÆ¶¯µç×è³¬ÎÂ
+    /// åˆ¶åŠ¨ç”µé˜»è¶…æ¸©
     /// </summary>
     public bool isBrakingResistorOverheating;
     /// <summary>
-    /// »Ø×ª¹ÊÕÏ
+    /// å›è½¬æ•…éšœ
     /// </summary>
     public bool isRotaryFault;
 
     /// <summary>
-    /// ×ó×ªÏŞÎ»
+    /// å·¦è½¬é™ä½
     /// </summary>
     public bool isLeftTurnLimit;
     /// <summary>
-    /// ×ó×ª¼«ÏŞ
+    /// å·¦è½¬æé™
     /// </summary>
     public bool isLeftTurnLimitExceed;
     /// <summary>
-    /// ×ó×ª½ûÇøÏŞÎ»
+    /// å·¦è½¬ç¦åŒºé™ä½
     /// </summary>
     public bool isLeftTurnRestrictedZoneLimit;
     /// <summary>
-    /// ×ó×ª·À×²ÏŞÎ»
+    /// å·¦è½¬é˜²æ’é™ä½
     /// </summary>
     public bool isLeftTurnCollisionPreventionLimit;
     /// <summary>
-    /// ÓÒ×ªÏŞÎ»
+    /// å³è½¬é™ä½
     /// </summary>
     public bool isRightTurnLimit;
     /// <summary>
-    /// ÓÒ×ª¼«ÏŞ
+    /// å³è½¬æé™
     /// </summary>
     public bool isRightTurnLimitExceed;
     /// <summary>
-    /// ÓÒ×ª½ûÇøÏŞÎ»
+    /// å³è½¬ç¦åŒºé™ä½
     /// </summary>
     public bool isRightTurnRestrictedZoneLimit;
     /// <summary>
-    /// ÓÒ×ª·À×²ÏŞÎ»
+    /// å³è½¬é˜²æ’é™ä½
     /// </summary>
     public bool isRightTurnCollisionPreventionLimit;
 
     /// <summary>
-    /// »Ø×ª¹ıÁ¦¾Ø
+    /// å›è½¬è¿‡åŠ›çŸ©
     /// </summary>
     public bool isRotaryOverTorque;
     /// <summary>
-    /// »Ø×ªÁãÎ»ÏŞÎ»
+    /// å›è½¬é›¶ä½é™ä½
     /// </summary>
     public bool isRotaryZeroPositionLimit;
     /// <summary>
-    /// ÖÆ¶¯Æ÷ËÉÕ¢ÏŞÎ»
+    /// åˆ¶åŠ¨å™¨æ¾é—¸é™ä½
     /// </summary>
     public bool isBrakeReliefLimit;
     /// <summary>
-    /// »Ø×ª¼¯ÖĞÈó»¬¶ÂÓÍ
+    /// å›è½¬é›†ä¸­æ¶¦æ»‘å µæ²¹
     /// </summary>
     public bool isRotaryCentralLubricationBlockedOil;
     /// <summary>
-    /// »Ø×ª¼¯ÖĞÈó»¬µÍÓÍÎ»
+    /// å›è½¬é›†ä¸­æ¶¦æ»‘ä½æ²¹ä½
     /// </summary>
     public bool isRotaryCentralLubricationLowOilLevel;
 }
 /// <summary>
-/// »Ø×ª»ú¹¹
+/// å›è½¬æœºæ„
 /// </summary>
 public class RotaryMechanismItem : StatusParmItemBase<RotaryMechanismData>
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MainCircuitBreaker;
     /// <summary>
-    /// ±äÆµÆ÷ÔËĞĞ
+    /// å˜é¢‘å™¨è¿è¡Œ
     /// </summary>
     public ToggleDIY FrequencyConverterRunning;
     /// <summary>
-    /// ÖÆ¶¯Æ÷ÔËĞĞ
+    /// åˆ¶åŠ¨å™¨è¿è¡Œ
     /// </summary>
     public ToggleDIY BrakeOperating;
     /// <summary>
-    /// ·ç»úÔËĞĞ
+    /// é£æœºè¿è¡Œ
     /// </summary>
     public ToggleDIY FanOperating;
     /// <summary>
-    /// ×ó×ªÔËĞĞ
+    /// å·¦è½¬è¿è¡Œ
     /// </summary>
     public ToggleDIY LeftTurnOperating;
     /// <summary>
-    /// ÓÒ×ªÔËĞĞ
+    /// å³è½¬è¿è¡Œ
     /// </summary>
     public ToggleDIY RightTurnOperating;
 
     /// <summary>
-    /// ±äÆµÆ÷¹ÊÕÏ
+    /// å˜é¢‘å™¨æ•…éšœ
     /// </summary>
     public ToggleDIY FrequencyConverterFault;
     /// <summary>
-    /// ÖÆ¶¯Æ÷¹ıÔØ
+    /// åˆ¶åŠ¨å™¨è¿‡è½½
     /// </summary>
     public ToggleDIY BrakeOverload;
     /// <summary>
-    /// ·ç»ú¹ıÔØ
+    /// é£æœºè¿‡è½½
     /// </summary>
     public ToggleDIY FanOverload;
     /// <summary>
-    /// ÖÆ¶¯µç×è³¬ÎÂ
+    /// åˆ¶åŠ¨ç”µé˜»è¶…æ¸©
     /// </summary>
     public ToggleDIY BrakingResistorOverheating;
     /// <summary>
-    /// »Ø×ª¹ÊÕÏ
+    /// å›è½¬æ•…éšœ
     /// </summary>
     public ToggleDIY RotaryFault;
 
     /// <summary>
-    /// ×ó×ªÏŞÎ»
+    /// å·¦è½¬é™ä½
     /// </summary>
     public ToggleDIY LeftTurnLimit;
     /// <summary>
-    /// ×ó×ª¼«ÏŞ
+    /// å·¦è½¬æé™
     /// </summary>
     public ToggleDIY LeftTurnLimitExceed;
     /// <summary>
-    /// ×ó×ª½ûÇøÏŞÎ»
+    /// å·¦è½¬ç¦åŒºé™ä½
     /// </summary>
     public ToggleDIY LeftTurnRestrictedZoneLimit;
     /// <summary>
-    /// ×ó×ª·À×²ÏŞÎ»
+    /// å·¦è½¬é˜²æ’é™ä½
     /// </summary>
     public ToggleDIY LeftTurnCollisionPreventionLimit;
     /// <summary>
-    /// ÓÒ×ªÏŞÎ»
+    /// å³è½¬é™ä½
     /// </summary>
     public ToggleDIY RightTurnLimit;
     /// <summary>
-    /// ÓÒ×ª¼«ÏŞ
+    /// å³è½¬æé™
     /// </summary>
     public ToggleDIY RightTurnLimitExceed;
     /// <summary>
-    /// ÓÒ×ª½ûÇøÏŞÎ»
+    /// å³è½¬ç¦åŒºé™ä½
     /// </summary>
     public ToggleDIY RightTurnRestrictedZoneLimit;
     /// <summary>
-    /// ÓÒ×ª·À×²ÏŞÎ»
+    /// å³è½¬é˜²æ’é™ä½
     /// </summary>
     public ToggleDIY RightTurnCollisionPreventionLimit;
 
     /// <summary>
-    /// »Ø×ª¹ıÁ¦¾Ø
+    /// å›è½¬è¿‡åŠ›çŸ©
     /// </summary>
     public ToggleDIY RotaryOverTorque;
     /// <summary>
-    /// »Ø×ªÁãÎ»ÏŞÎ»
+    /// å›è½¬é›¶ä½é™ä½
     /// </summary>
     public ToggleDIY RotaryZeroPositionLimit;
     /// <summary>
-    /// ÖÆ¶¯Æ÷ËÉÕ¢ÏŞÎ»
+    /// åˆ¶åŠ¨å™¨æ¾é—¸é™ä½
     /// </summary>
     public ToggleDIY BrakeReliefLimit;
     /// <summary>
-    /// »Ø×ª¼¯ÖĞÈó»¬¶ÂÓÍ
+    /// å›è½¬é›†ä¸­æ¶¦æ»‘å µæ²¹
     /// </summary>
     public ToggleDIY RotaryCentralLubricationBlockedOil;
     /// <summary>
-    /// »Ø×ª¼¯ÖĞÈó»¬µÍÓÍÎ»
+    /// å›è½¬é›†ä¸­æ¶¦æ»‘ä½æ²¹ä½
     /// </summary>
     public ToggleDIY RotaryCentralLubricationLowOilLevel;
 

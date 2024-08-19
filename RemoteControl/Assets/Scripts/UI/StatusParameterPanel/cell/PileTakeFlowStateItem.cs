@@ -7,65 +7,65 @@ using UnityEngine.UI;
 public struct PileTakeFlowStateData
 {
     /// <summary>
-    /// Ğü½º¶ÑÁÏÔËĞĞ
+    /// æ‚¬èƒ¶å †æ–™è¿è¡Œ
     /// </summary>
     public bool isSuspensoidPileMaterRunToggle;
     /// <summary>
-    /// µ²°å¶ÑÁÏÔËĞĞ
+    /// æŒ¡æ¿å †æ–™ä½ç½®
     /// </summary>
     public bool isBafflePileMaterPos;
     /// <summary>
-    /// µ²°å·ÖÁ÷Î»ÖÃ
+    /// æŒ¡æ¿åˆ†æµä½ç½®
     /// </summary>
     public bool isBaffleShuntPos;
     /// <summary>
-    /// µ¼ÁÏ²Û¶ÑÁÏÎ»
+    /// å¯¼æ–™æ§½å †æ–™ä½
     /// </summary>
     public bool isFeedChannelPileMater;
     /// <summary>
-    /// Ğü½ºÈ¡ÁÏÔËĞĞ
+    /// æ‚¬èƒ¶å–æ–™è¿è¡Œ
     /// </summary>
     public bool isSuspensoidTakeMaterRun;
     /// <summary>
-    /// ¶·ÂÖ»úÔËĞĞ
+    /// æ–—è½®æœºè¿è¡Œ
     /// </summary>
     public bool isBucketWheelRun;
     /// <summary>
-    /// µ¼ÁÏ²ÛÈ¡ÁÏ
+    /// å¯¼æ–™æ§½å–æ–™ä½
     /// </summary>
     public bool isFeedChannelTake;
 }
 /// <summary>
-/// ¶ÑÈ¡ÁÏÁ÷³Ì×´Ì¬
+/// å †å–æ–™æµç¨‹çŠ¶æ€
 /// </summary>
 public class PileTakeFlowStateItem : StatusParmItemBase<PileTakeFlowStateData>
 {
     /// <summary>
-    /// Ğü½º¶ÑÁÏÔËĞĞ
+    /// æ‚¬èƒ¶å †æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY SuspensoidPileMaterRunToggle;
     /// <summary>
-    /// µ²°å¶ÑÁÏÔËĞĞ
+    /// æŒ¡æ¿å †æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY BafflePileMaterPosToggle;
     /// <summary>
-    /// µ²°å·ÖÁ÷Î»ÖÃ
+    /// æŒ¡æ¿åˆ†æµä½ç½®
     /// </summary>
     public ToggleDIY BaffleShuntPosToggle;
     /// <summary>
-    /// µ¼ÁÏ²Û¶ÑÁÏÎ»
+    /// å¯¼æ–™æ§½å †æ–™ä½
     /// </summary>
     public ToggleDIY FeedChannelPileMaterToggle;
     /// <summary>
-    /// Ğü½ºÈ¡ÁÏÔËĞĞ
+    /// æ‚¬èƒ¶å–æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY SuspensoidTakeMaterRunToggle;
     /// <summary>
-    /// ¶·ÂÖ»úÔËĞĞ
+    /// æ–—è½®æœºè¿è¡Œ
     /// </summary>
     public ToggleDIY BucketWheelRunToggle;
     /// <summary>
-    /// µ¼ÁÏ²ÛÈ¡ÁÏ
+    /// å¯¼æ–™æ§½å–æ–™
     /// </summary>
     public ToggleDIY FeedChannelTakeToggle;
 
