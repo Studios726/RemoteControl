@@ -25,7 +25,7 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
 
     // private T GetUIComponent<T>(string path) where T : UnityEngine.Component
     // {
-    //     UnityEngine.Component component = RootObj.transform.FindComponent<T>(path);
+    //         UnityEngine.Component component = RootObj.transform.FindComponent<T>(path);
     //     if (component == null)
     //     {
     //         Debug.LogError($"Component {path} not found!");

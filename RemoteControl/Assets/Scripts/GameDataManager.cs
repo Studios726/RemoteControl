@@ -87,9 +87,9 @@ public class GameDataManager : Singleton<GameDataManager>
         List<Color> colorList = new List<Color>();
 
         // SendDataReportAndDEM sendDataReportAndDem = JsonConvert.DeserializeObject<SendDataReportAndDEM>(jsonData);
-        Debug.Log("data " + sendDataReportAndDem.SendCoalFeapDEM.QUERY_SYSTEM);
-        CoalHeapDEM demData = sendDataReportAndDem.SendCoalFeapDEM;
-        for (int i = 0; i < sendDataReportAndDem.SendCoalFeapDEM.NZ; i++) //1003
+        Debug.Log("data " + sendDataReportAndDem.SendCoalHeapDEM.QUERY_SYSTEM);
+        CoalHeapDEM demData = sendDataReportAndDem.SendCoalHeapDEM;
+        for (int i = 0; i < sendDataReportAndDem.SendCoalHeapDEM.NZ; i++) //1003
         {
             for (int j = 0; j < demData.NX; j++) //336
             {
@@ -141,7 +141,15 @@ public class GameDataManager : Singleton<GameDataManager>
 
                 if (ve3.x + xLength >= reg.BEGIN && ve3.x + xLength < reg.END && side == reg.SIDE)
                 {
-                    pointColor = new Color(reg.ColorR / 255.0f, reg.ColorG / 255.0f, reg.ColorB / 255.0f, 1);
+                    // pointColor = new Color(reg.ColorR / 255.0f, reg.ColorG / 255.0f, reg.ColorB / 255.0f, 1);
+                    for (int i = 0; i < reg.layerArray.Length; i++)
+                    {
+                        if (ve3.y>=reg.layerArray[i].hBEGIN&&ve3.y<reg.layerArray[i].hEND)
+                        {
+                            pointColor = new Color(reg.layerArray[i].ColorR / 255.0f, reg.layerArray[i].ColorG / 255.0f, reg.layerArray[i].ColorB / 255.0f, 1);
+                            break;
+                        }
+                    }
                     break;
                 }
             }

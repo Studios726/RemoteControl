@@ -8,13 +8,13 @@ namespace ShangHaiPro
 {
     public class SendDataReportAndDEM
     {
-        public CoalHeapDEM SendCoalFeapDEM;
+        public CoalHeapDEM SendCoalHeapDEM;
         public Report SendReport;
         public int code;
 
         public SendDataReportAndDEM()
         {
-            SendCoalFeapDEM = new CoalHeapDEM();
+            SendCoalHeapDEM = new CoalHeapDEM();
 
             SendReport = new Report();
         }
