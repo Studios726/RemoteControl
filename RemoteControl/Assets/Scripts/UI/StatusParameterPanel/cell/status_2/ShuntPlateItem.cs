@@ -6,63 +6,63 @@ using UnityEngine.UI;
 public struct ShuntPlateData
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷ 
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public bool isMainCircuitBreaker;
     /// <summary>
-    /// µç»ú¹ıÔØ 
+    /// ç”µæœºè¿‡è½½ 
     /// </summary>
     public bool isMotorOverload;
     /// <summary>
-    /// Ì§ÆğÏŞÎ» 
+    /// Ì§è½ä¸‹é™ä½ï¼ˆå †ï¼‰
     /// </summary>
     public bool isLiftLimit;
     /// <summary>
-    ///  ÂäÏÂÏŞÎ» 
+    /// æŠ¬èµ·é™ä½ï¼ˆå–ï¼‰
     /// </summary>
     public bool isLowerLimit;
     /// <summary>
-    /// Ì§ÆğÔËĞĞ 
+    /// è½ä¸‹è¿è¡Œ
     /// </summary>
     public bool isLiftRunning;
     /// <summary>
-    /// ÂäÏÂÔËĞĞ
+    /// æŠ¬èµ·è¿è¡Œ
     /// </summary>
     public bool isLowerRunning;
 }
 public class ShuntPlateItem :StatusParmItemBase<ShuntPlateData>
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷ 
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MainCircuitBreaker;
     /// <summary>
-    /// µç»ú¹ıÔØ 
+    /// ç”µæœºè¿‡è½½ 
     /// </summary>
     public ToggleDIY MotorOverload;
     /// <summary>
-    /// Ì§ÆğÏŞÎ» 
+    /// è½ä¸‹é™ä½ï¼ˆå †ï¼‰
     /// </summary>
     public ToggleDIY LiftLimit;
     /// <summary>
-    ///  ÂäÏÂÏŞÎ» 
+    ///  æŠ¬èµ·é™ä½ï¼ˆå–ï¼‰
     /// </summary>
     public ToggleDIY LowerLimit;
     /// <summary>
-    /// Ì§ÆğÔËĞĞ 
+    /// è½ä¸‹è¿è¡Œ
     /// </summary>
     public ToggleDIY LiftRunning;
     /// <summary>
-    /// ÂäÏÂÔËĞĞ
+    /// æŠ¬èµ·è¿è¡Œ
     /// </summary>
     public ToggleDIY LowerRunning;
-    public override void UpdateData(ShuntPlateData data)
+    public override void UpdateData(ShuntPlateData data,bool isConnect=false)
     {
-        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker);
-        SetToggleState(MotorOverload, data.isMotorOverload);
-        SetToggleState(LiftLimit, data.isLiftLimit);
-        SetToggleState(LowerLimit, data.isLowerLimit);
-        SetToggleState(LiftRunning, data.isLiftRunning);
-        SetToggleState(LowerRunning, data.isLowerRunning);
+        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
+        SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
+        SetToggleState(LiftLimit, data.isLiftLimit,true,isConnect);
+        SetToggleState(LowerLimit, data.isLowerLimit,true,isConnect);
+        SetToggleState(LiftRunning, data.isLiftRunning,false,isConnect);
+        SetToggleState(LowerRunning, data.isLowerRunning,false,isConnect);
     }
 }

@@ -227,7 +227,7 @@ public class RotaryMechanismItem : StatusParmItemBase<RotaryMechanismData>
 
         SetToggleState(LeftTurnLimit, data.isLeftTurnLimit,true,isConnect);
         SetToggleState(LeftTurnLimitExceed, data.isLeftTurnLimitExceed,true,isConnect);
-        SetToggleState(LeftTurnRestrictedZoneLimit, data.isLeftTurnRestrictedZoneLimit);
+        SetToggleState(LeftTurnRestrictedZoneLimit, data.isLeftTurnRestrictedZoneLimit,true,isConnect);
         SetToggleState(LeftTurnCollisionPreventionLimit, data.isLeftTurnCollisionPreventionLimit,true,isConnect);
         SetToggleState(RightTurnLimit, data.isRightTurnLimit,true,isConnect);
         SetToggleState(RightTurnLimitExceed, data.isRightTurnLimitExceed,true,isConnect);

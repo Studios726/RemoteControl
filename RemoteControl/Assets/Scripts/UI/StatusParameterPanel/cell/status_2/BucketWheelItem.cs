@@ -8,66 +8,66 @@ using UnityEngine.UI;
 public struct BucketWheelData
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public bool isMainCircuitBreaker;
     /// <summary>
-    /// ¶·ÂÖÔËĞĞ
+    /// æ–—è½®è¿è¡Œ
     /// </summary>
     public bool isBucketWheelRunning;
     /// <summary>
-    /// Èó»¬ÓÍ±ÃÔËĞĞ
+    /// æ¶¦æ»‘æ²¹æ³µè¿è¡Œ
     /// </summary>
     public bool isLubricationPumpRunning;
     /// <summary>
-    /// µç»ú¹ıÔØ
+    /// ç”µæœºè¿‡è½½
     /// </summary>
     public bool isMotorOverload;
     /// <summary>
-    /// ¶·ÂÖ¹ıÁ¦¾Ø¿ª¹Ø
+    ///æ–—è½®è¿‡åŠ›çŸ©å¼€å…³
     /// </summary>
     public bool isBucketWheelOverTorqueSwitch;
     /// <summary>
-    /// Èó»¬ÓÍ±ÃÁ÷Á¿¿ª¹Ø
+    /// æ¶¦æ»‘æ²¹æ³µæµé‡å¼€å…³
     /// </summary>
     public bool isLubricatingOilPumpFlowSwitch;
 }
 /// <summary>
-/// ¶·ÂÖ
+/// æ–—è½®
 /// </summary>
 public class BucketWheelItem : StatusParmItemBase<BucketWheelData>
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MainCircuitBreaker;
     /// <summary>
-    /// ¶·ÂÖÔËĞĞ
+    /// æ–—è½®è¿è¡Œ
     /// </summary>
     public ToggleDIY BucketWheelRunning;
     /// <summary>
-    /// Èó»¬ÓÍ±ÃÔËĞĞ
+    /// æ¶¦æ»‘æ²¹æ³µè¿è¡Œ
     /// </summary>
     public ToggleDIY LubricationPumpRunning;
     /// <summary>
-    /// µç»ú¹ıÔØ
+    /// ç”µæœºè¿‡è½½
     /// </summary>
     public ToggleDIY MotorOverload;
     /// <summary>
-    /// ¶·ÂÖ¹ıÁ¦¾Ø¿ª¹Ø
+    /// æ–—è½®è¿‡åŠ›çŸ©å¼€å…³
     /// </summary>
     public ToggleDIY BucketWheelOverTorqueSwitch;
     /// <summary>
-    /// Èó»¬ÓÍ±ÃÁ÷Á¿¿ª¹Ø
+    /// æ¶¦æ»‘æ²¹æ³µæµé‡å¼€å…³
     /// </summary>
     public ToggleDIY LubricatingOilPumpFlowSwitch;
-    public override void UpdateData(BucketWheelData data)
+    public override void UpdateData(BucketWheelData data,bool isConnect=false)
     {
-        SetToggleState(MainCircuitBreaker,data.isMainCircuitBreaker);
-        SetToggleState(BucketWheelRunning, data.isBucketWheelRunning);
-        SetToggleState(LubricationPumpRunning, data.isLubricationPumpRunning);
-        SetToggleState(MotorOverload, data.isMotorOverload);
-        SetToggleState(BucketWheelOverTorqueSwitch, data.isBucketWheelOverTorqueSwitch);
-        SetToggleState(LubricatingOilPumpFlowSwitch, data.isLubricatingOilPumpFlowSwitch);
+        SetToggleState(MainCircuitBreaker,data.isMainCircuitBreaker,false,isConnect);
+        SetToggleState(BucketWheelRunning, data.isBucketWheelRunning,false,isConnect);
+        SetToggleState(LubricationPumpRunning, data.isLubricationPumpRunning,false,isConnect);
+        SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
+        SetToggleState(BucketWheelOverTorqueSwitch, data.isBucketWheelOverTorqueSwitch,false,isConnect);
+        SetToggleState(LubricatingOilPumpFlowSwitch, data.isLubricatingOilPumpFlowSwitch,false,isConnect);
     }
 }

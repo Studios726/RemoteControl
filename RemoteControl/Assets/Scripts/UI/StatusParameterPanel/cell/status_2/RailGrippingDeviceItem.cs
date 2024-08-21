@@ -5,100 +5,104 @@ using UnityEngine.UI;
 public struct RailGrippingDeviceData
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    ///ä¸»æ–­è·¯å™¨
     /// </summary>
     public bool isMainCircuitBreaker;
     /// <summary>
-    /// ×ó¼Ğ¹ìÆ÷µç»úÔËĞĞ
+    ///  å·¦å¤¹è½¨å™¨ç”µæœºè¿è¡Œ
     /// </summary>
     public bool isLeftRailClamperMotorRunning;
     /// <summary>
-    /// ×ó¼Ğ¹ìÆ÷µç´Å·§
+    /// å·¦å¤¹è½¨å™¨ç”µç£é˜€
     /// </summary>
     public bool isLeftRailClamperSolenoidValve;
     /// <summary>
-    /// ×ó²àÃªíÖÏŞÎ»
+    /// å·¦ä¾§é”šç¢‡é™ä½
     /// </summary>
     public bool isLeftAnchorLimit;
     /// <summary>
-    /// ×ó¼Ğ¹ìÆ÷·ÅËÉÏŞÎ»
+    ///å·¦å¤¹è½¨å™¨æ”¾æ¾é™ä½
     /// </summary>
     public bool isLeftRailClamperReleaseLimit;
     /// <summary>
-    /// µç»ú¹ıÔØ
+    /// ç”µæœºè¿‡è½½
     /// </summary>
     public bool isMotorOverload;
     /// <summary>
-    /// ÓÒ¼Ğ¹ìÆ÷µç»úÔËĞĞ
+    /// å³å¤¹è½¨å™¨ç”µæœºè¿è¡Œ
     /// </summary>
     public bool isRightRailClamperMotorRunning;
     /// <summary>
-    /// ÓÒ¼Ğ¹ìÆ÷µç´Å·§
+    /// å³å¤¹è½¨å™¨ç”µç£é˜€
     /// </summary>
     public bool isRightRailClamperSolenoidValve;
     /// <summary>
-    /// ÓÒ²àÃªíÖÏŞÎ»
+    /// å³ä¾§é”šç¢‡é™ä½
     /// </summary>
     public bool isRightAnchorLimit;
     /// <summary>
-    /// ÓÒ¼Ğ¹ìÆ÷·ÅËÉÏŞÎ»
+    /// å³å¤¹è½¨å™¨æ”¾æ¾é™ä½
     /// </summary>
     public bool isRightRailClamperReleaseLimit;
 }
+
+/// <summary>
+/// å¤¹è½¨å™¨
+/// </summary>
 public class RailGrippingDeviceItem : StatusParmItemBase<RailGrippingDeviceData>
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MainCircuitBreaker;
     /// <summary>
-    /// ×ó¼Ğ¹ìÆ÷µç»úÔËĞĞ
+    /// å·¦å¤¹è½¨å™¨ç”µæœºè¿è¡Œ
     /// </summary>
     public ToggleDIY LeftRailClamperMotorRunning;
     /// <summary>
-    /// ×ó¼Ğ¹ìÆ÷µç´Å·§
+    /// å·¦å¤¹è½¨å™¨ç”µç£é˜€
     /// </summary>
     public ToggleDIY LeftRailClamperSolenoidValve;
     /// <summary>
-    /// ×ó²àÃªíÖÏŞÎ»
+    /// å·¦ä¾§é”šç¢‡é™ä½
     /// </summary>
     public ToggleDIY LeftAnchorLimit;
     /// <summary>
-    /// ×ó¼Ğ¹ìÆ÷·ÅËÉÏŞÎ»
+    /// å·¦å¤¹è½¨å™¨æ”¾æ¾é™ä½
     /// </summary>
     public ToggleDIY LeftRailClamperReleaseLimit;
     /// <summary>
-    /// µç»ú¹ıÔØ
+    /// ç”µæœºè¿‡è½½
     /// </summary>
     public ToggleDIY MotorOverload;
     /// <summary>
-    /// ÓÒ¼Ğ¹ìÆ÷µç»úÔËĞĞ
+    /// å³å¤¹è½¨å™¨ç”µæœºè¿è¡Œ
     /// </summary>
     public ToggleDIY RightRailClamperMotorRunning;
     /// <summary>
-    /// ÓÒ¼Ğ¹ìÆ÷µç´Å·§
+    /// å³å¤¹è½¨å™¨ç”µç£é˜€
     /// </summary>
     public ToggleDIY RightRailClamperSolenoidValve;
     /// <summary>
-    /// ÓÒ²àÃªíÖÏŞÎ»
+    /// å³ä¾§é”šç¢‡é™ä½
     /// </summary>
     public ToggleDIY RightAnchorLimit;
     /// <summary>
-    /// ÓÒ¼Ğ¹ìÆ÷·ÅËÉÏŞÎ»
+    /// å³å¤¹è½¨å™¨æ”¾æ¾é™ä½
     /// </summary>
     public ToggleDIY RightRailClamperReleaseLimit;
-    public override void UpdateData(RailGrippingDeviceData data)
+    public override void UpdateData(RailGrippingDeviceData data,bool isConnect=false)
     {
-        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker);
-        SetToggleState(LeftRailClamperMotorRunning, data.isLeftRailClamperMotorRunning);
-        SetToggleState(LeftRailClamperSolenoidValve, data.isLeftRailClamperSolenoidValve);
-        SetToggleState(LeftAnchorLimit, data.isLeftAnchorLimit);
-        SetToggleState(LeftRailClamperReleaseLimit, data.isLeftRailClamperReleaseLimit);
-        SetToggleState(MotorOverload, data.isMotorOverload);
-        SetToggleState(RightRailClamperMotorRunning, data.isRightRailClamperMotorRunning);
-        SetToggleState(RightRailClamperSolenoidValve, data.isRightRailClamperSolenoidValve);
-        SetToggleState(RightAnchorLimit, data.isRightAnchorLimit);
-        SetToggleState(RightRailClamperReleaseLimit, data.isRightRailClamperReleaseLimit);
+        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
+        SetToggleState(LeftRailClamperMotorRunning, data.isLeftRailClamperMotorRunning,false,isConnect);
+        SetToggleState(LeftRailClamperSolenoidValve, data.isLeftRailClamperSolenoidValve,false,isConnect);
+        SetToggleState(LeftAnchorLimit, data.isLeftAnchorLimit,true,isConnect);
+        SetToggleState(LeftRailClamperReleaseLimit, data.isLeftRailClamperReleaseLimit,true,isConnect);
+        SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
+        SetToggleState(RightRailClamperMotorRunning, data.isRightRailClamperMotorRunning,false,isConnect);
+        SetToggleState(RightRailClamperSolenoidValve, data.isRightRailClamperSolenoidValve,false,isConnect);
+        SetToggleState(RightAnchorLimit, data.isRightAnchorLimit,true,isConnect);
+        SetToggleState(RightRailClamperReleaseLimit, data.isRightRailClamperReleaseLimit,true,isConnect);
     }
 
 }

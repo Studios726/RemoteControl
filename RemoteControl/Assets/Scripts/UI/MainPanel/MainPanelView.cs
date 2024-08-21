@@ -84,7 +84,7 @@ public class MainPanelView : UIView<MainPanelCtr>
             return;
         }
 
-        Debug.Log($">>>>>>>>>>>>>>>>>>>>>>> 任务更新 {taskVariables.McData.Count}");
+        Debug.Log($">>>>>>>>>>>>>>>>>>>>>>> 浠诲姟鏇存柊 {taskVariables.McData.Count}");
         if (taskVariables.McData.Count > 0)
         {
             for (int i = 0; i < taskVariables.McData.Count; i++)

@@ -6,67 +6,67 @@ using UnityEngine.UI;
 public struct TailCarBeltDeviceData
 {
     /// <summary>
-    /// Î²³µ´Ó¶¯¹öÍ²Öá³ĞÉÏÏŞ±¨¾¯
+    ///å°¾è½¦ä»åŠ¨æ»šç­’è½´æ‰¿ä¸Šé™æŠ¥è­¦
     /// </summary>
     public bool isBearingUpperLimitAlarm;
     /// <summary>
-    /// Î²³µ´Ó¶¯¹öÍ²Öá³ĞÏÂÏŞ±¨¾¯
+    /// å°¾è½¦ä»åŠ¨æ»šç­’è½´æ‰¿ä¸‹é™æŠ¥è­¦
     /// </summary>
     public bool isBearingLowerLimitAlarm;
     /// <summary>
-    /// Î²³µ½º´øÒ»¼¶ÅÜÆ«
+    /// å°¾è½¦èƒ¶å¸¦ä¸€çº§è·‘å
     /// </summary>
     public bool isLevelOneDeviation;
     /// <summary>
-    /// Î²³µ½º´ø¶ş¼¶ÅÜÆ«
+    /// å°¾è½¦èƒ¶å¸¦äºŒçº§è·‘å
     /// </summary>
     public bool isLevelTwoDeviation;
     /// <summary>
-    /// Î²³µ¼±Í£À­Ïß¿ª¹Ø
+    /// å°¾è½¦æ€¥åœæ‹‰çº¿å¼€å…³
     /// </summary>
     public bool isEmergencyStopCableSwitch;
     /// <summary>
-    /// Î²³µ½º´ø×İÏòËºÁÑ¿ª¹Ø
+    /// å°¾è½¦èƒ¶å¸¦çºµå‘æ’•è£‚å¼€å…³
     /// </summary>
     public bool isLongitudinalTearSwitch;
 }
 /// <summary>
-/// Î²³µ½º´ø
+/// å°¾è½¦èƒ¶å¸¦
 /// </summary>
 public class TailCarBeltDeviceItem : StatusParmItemBase<TailCarBeltDeviceData>
 {
     /// <summary>
-    /// Î²³µ´Ó¶¯¹öÍ²Öá³ĞÉÏÏŞ±¨¾¯
+    /// å°¾è½¦ä»åŠ¨æ»šç­’è½´æ‰¿ä¸Šé™æŠ¥è­¦
     /// </summary>
     public ToggleDIY BearingUpperLimitAlarm;
     /// <summary>
-    /// Î²³µ´Ó¶¯¹öÍ²Öá³ĞÏÂÏŞ±¨¾¯
+    /// å°¾è½¦ä»åŠ¨æ»šç­’è½´æ‰¿ä¸‹é™æŠ¥è­¦
     /// </summary>
     public ToggleDIY BearingLowerLimitAlarm;
     /// <summary>
-    /// Î²³µ½º´øÒ»¼¶ÅÜÆ«
+    /// å°¾è½¦èƒ¶å¸¦ä¸€çº§è·‘å
     /// </summary>
     public ToggleDIY LevelOneDeviation;
     /// <summary>
-    /// Î²³µ½º´ø¶ş¼¶ÅÜÆ«
+    /// å°¾è½¦èƒ¶å¸¦äºŒçº§è·‘å
     /// </summary>
     public ToggleDIY LevelTwoDeviation;
     /// <summary>
-    /// Î²³µ¼±Í£À­Ïß¿ª¹Ø
+    /// å°¾è½¦æ€¥åœæ‹‰çº¿å¼€å…³
     /// </summary>
     public ToggleDIY EmergencyStopCableSwitch;
     /// <summary>
-    /// Î²³µ½º´ø×İÏòËºÁÑ¿ª¹Ø
+    /// å°¾è½¦èƒ¶å¸¦çºµå‘æ’•è£‚å¼€å…³
     /// </summary>
     public ToggleDIY LongitudinalTearSwitch;
-    public override void UpdateData(TailCarBeltDeviceData data)
+    public override void UpdateData(TailCarBeltDeviceData data,bool isConnect=false)
     {
-        SetToggleState(BearingUpperLimitAlarm,data.isBearingUpperLimitAlarm);
-        SetToggleState(BearingLowerLimitAlarm, data.isBearingLowerLimitAlarm);
-        SetToggleState(LevelOneDeviation, data.isLevelOneDeviation);
-        SetToggleState(LevelTwoDeviation, data.isLevelTwoDeviation);
-        SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch);
-        SetToggleState(LongitudinalTearSwitch, data.isLongitudinalTearSwitch);
+        SetToggleState(BearingUpperLimitAlarm,data.isBearingUpperLimitAlarm,true,isConnect);
+        SetToggleState(BearingLowerLimitAlarm, data.isBearingLowerLimitAlarm,true,isConnect);
+        SetToggleState(LevelOneDeviation, data.isLevelOneDeviation,false,isConnect);
+        SetToggleState(LevelTwoDeviation, data.isLevelTwoDeviation,false,isConnect);
+        SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch,false,isConnect);
+        SetToggleState(LongitudinalTearSwitch, data.isLongitudinalTearSwitch,false,isConnect);
 
     }
 

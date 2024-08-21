@@ -6,39 +6,39 @@ using UnityEngine.UI;
 public struct VibratorMotorData
 {
     /// <summary>
-    /// 振打电机主断路器
+    /// 鎸墦鐢垫満涓绘柇璺櫒
     /// </summary>
     public bool isVibrationMotorMainCircuitBreaker;
     /// <summary>
-    /// 振打电机过载
+    /// 鎸墦鐢垫満杩囪浇
     /// </summary>
     public bool isVibrationMotorOverload;
     /// <summary>
-    /// 振打电机运行-
+    /// 鎸墦鐢垫満杩愯
     /// </summary>
     public bool isVibrationMotorRunning;
 }
 /// <summary>
-/// 振打电机
+/// 鎸墦鐢垫満
 /// </summary>
 public class VibratorMotorItem : StatusParmItemBase<VibratorMotorData>
 {
     /// <summary>
-    /// 振打电机主断路器
+    ///鎸墦鐢垫満涓绘柇璺櫒
     /// </summary>
     public ToggleDIY VibrationMotorMainCircuitBreaker;
     /// <summary>
-    /// 振打电机过载
+    /// 鎸墦鐢垫満杩囪浇
     /// </summary>
     public ToggleDIY VibrationMotorOverload;
     /// <summary>
-    /// 振打电机运行-
+    /// 鎸墦鐢垫満杩愯
     /// </summary>
     public ToggleDIY VibrationMotorRunning;
-    public override void UpdateData(VibratorMotorData data)
+    public override void UpdateData(VibratorMotorData data,bool isConnect=false)
     {
-        SetToggleState(VibrationMotorMainCircuitBreaker, data.isVibrationMotorMainCircuitBreaker);
-        SetToggleState(VibrationMotorOverload, data.isVibrationMotorOverload);
-        SetToggleState(VibrationMotorRunning, data.isVibrationMotorRunning);
+        SetToggleState(VibrationMotorMainCircuitBreaker, data.isVibrationMotorMainCircuitBreaker,false,isConnect);
+        SetToggleState(VibrationMotorOverload, data.isVibrationMotorOverload,true,isConnect);
+        SetToggleState(VibrationMotorRunning, data.isVibrationMotorRunning,false,isConnect);
     }
 }

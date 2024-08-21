@@ -6,102 +6,102 @@ using UnityEngine.UI;
 public struct CableWindingDeviceData
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷ 
+    ///ä¸»æ–­è·¯å™¨
     /// </summary>
     public bool isMainCircuitBreaker;
     /// <summary>
-    /// ¾íÍ²¹ı½ôÏŞÎ»1 
+    /// å·ç­’è¿‡ç´§é™ä½1
     /// </summary>
     public bool isReelOverTightLimit1;
     /// <summary>
-    /// ¾íÍ²¹ıËÉÏŞÎ»1 
+    /// å·ç­’è¿‡æ¾é™ä½1
     /// </summary>
     public bool isReelOverLooseLimit1;
     /// <summary>
-    /// ¾íÍ²¿ÕÅÌ¿ª¹Ø
+    /// å·ç­’ç©ºç›˜å¼€å…³
     /// </summary>
     public bool isReelEmptyDiskSwitch;
     /// <summary>
-    ///  ¾íÍ²ÖĞÕ¢¿ª¹Ø 
+    ///  å·ç­’ä¸­é—¸å¼€å…³
     /// </summary>
     public bool isReelMiddleBrakeSwitch;
     /// <summary>
-    /// ¾íÍ²µç»ú¹ıÔØ 
+    ///  å·ç­’ç”µæœºè¿‡è½½ 
     /// </summary>
     public bool isReelMotorOverload;
     /// <summary>
-    /// ¾íÍ²¹ı½ôÏŞÎ»2 
+    /// å·ç­’è¿‡ç´§é™ä½2
     /// </summary>
     public bool isReelOverTightLimit2;
     /// <summary>
-    /// ¾íÍ²¹ıËÉÏŞÎ»2 
+    /// å·ç­’è¿‡æ¾é™ä½2
     /// </summary>
     public bool isReelOverLooseLimit2;
     /// <summary>
-    /// ¾íÍ²ÂúÅÌ¿ª¹Ø 
+    /// å·ç­’æ»¡ç›˜å¼€å…³
     /// </summary>
     public bool isReelFullDiskSwitch;
     /// <summary>
-    /// ¶¯Á¦¾íÍ²ÔËĞĞ
+    /// åŠ¨åŠ›å·ç­’è¿è¡Œ
     /// </summary>
     public bool isPowerReelRunning;
 }
 /// <summary>
-/// µçÀÂ¾íÍ²
+/// ç”µç¼†å·ç­’
 /// </summary>
 public class CableWindingDeviceItem : StatusParmItemBase<CableWindingDeviceData>
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷ 
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MainCircuitBreaker;
     /// <summary>
-    /// ¾íÍ²¹ı½ôÏŞÎ»1 
+    /// å·ç­’è¿‡ç´§é™ä½1
     /// </summary>
     public ToggleDIY ReelOverTightLimit1;
     /// <summary>
-    /// ¾íÍ²¹ıËÉÏŞÎ»1 
+    ///  å·ç­’è¿‡æ¾é™ä½1
     /// </summary>
     public ToggleDIY ReelOverLooseLimit1;
     /// <summary>
-    /// ¾íÍ²¿ÕÅÌ¿ª¹Ø
+    /// å·ç­’ç©ºç›˜å¼€å…³
     /// </summary>
     public ToggleDIY ReelEmptyDiskSwitch;
     /// <summary>
-    ///  ¾íÍ²ÖĞÕ¢¿ª¹Ø 
+    ///  å·ç­’ä¸­é—¸å¼€å…³
     /// </summary>
     public ToggleDIY ReelMiddleBrakeSwitch;
     /// <summary>
-    /// ¾íÍ²µç»ú¹ıÔØ 
+    /// å·ç­’ç”µæœºè¿‡è½½ 
     /// </summary>
     public ToggleDIY ReelMotorOverload;
     /// <summary>
-    /// ¾íÍ²¹ı½ôÏŞÎ»2 
+    /// å·ç­’è¿‡ç´§é™ä½2
     /// </summary>
     public ToggleDIY ReelOverTightLimit2;
     /// <summary>
-    /// ¾íÍ²¹ıËÉÏŞÎ»2 
+    /// å·ç­’è¿‡æ¾é™ä½2
     /// </summary>
     public ToggleDIY ReelOverLooseLimit2;
     /// <summary>
-    /// ¾íÍ²ÂúÅÌ¿ª¹Ø 
+    /// å·ç­’æ»¡ç›˜å¼€å…³
     /// </summary>
     public ToggleDIY ReelFullDiskSwitch;
     /// <summary>
-    /// ¶¯Á¦¾íÍ²ÔËĞĞ
+    /// åŠ¨åŠ›å·ç­’è¿è¡Œ
     /// </summary>
     public ToggleDIY PowerReelRunning;
-    public override void UpdateData(CableWindingDeviceData data)
+    public override void UpdateData(CableWindingDeviceData data,bool isConnect=false)
     {
-        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker);
-        SetToggleState(ReelOverTightLimit1, data.isReelOverTightLimit1);
-        SetToggleState(ReelOverLooseLimit1, data.isReelOverLooseLimit1);
-        SetToggleState(ReelEmptyDiskSwitch, data.isReelEmptyDiskSwitch);
-        SetToggleState(ReelMiddleBrakeSwitch, data.isReelMiddleBrakeSwitch);
-        SetToggleState(ReelMotorOverload, data.isReelMotorOverload);
-        SetToggleState(ReelOverTightLimit2, data.isReelOverTightLimit2);
-        SetToggleState(ReelOverLooseLimit2, data.isReelOverLooseLimit2);
-        SetToggleState(ReelFullDiskSwitch, data.isReelFullDiskSwitch);
-        SetToggleState(PowerReelRunning, data.isPowerReelRunning);
+        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
+        SetToggleState(ReelOverTightLimit1, data.isReelOverTightLimit1,true,isConnect);
+        SetToggleState(ReelOverLooseLimit1, data.isReelOverLooseLimit1,true,isConnect);
+        SetToggleState(ReelEmptyDiskSwitch, data.isReelEmptyDiskSwitch,false,isConnect);
+        SetToggleState(ReelMiddleBrakeSwitch, data.isReelMiddleBrakeSwitch,false,isConnect);
+        SetToggleState(ReelMotorOverload, data.isReelMotorOverload,true,isConnect);
+        SetToggleState(ReelOverTightLimit2, data.isReelOverTightLimit2,true,isConnect);
+        SetToggleState(ReelOverLooseLimit2, data.isReelOverLooseLimit2,true,isConnect);
+        SetToggleState(ReelFullDiskSwitch, data.isReelFullDiskSwitch,false,isConnect);
+        SetToggleState(PowerReelRunning, data.isPowerReelRunning,false,isConnect);
     }
 }

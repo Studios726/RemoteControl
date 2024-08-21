@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
@@ -66,10 +67,19 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
     public GameObject state_2_2;
     public GameObject state_2_3;
 
+    private PileTakeMaterFirstSysStateParams _pileTakeMaterFirstSysStateParams_1_1;
+    private  PileTakeMaterSecondSysStateParams _pileTakeMaterSecondSysStateParams_1_2;
+    private  PileTakeMaterThirdSysStateParams _pileTakeMaterThirdSysStateParams_1_3;
+    
+    private PileTakeMaterFirstSysStateParams _pileTakeMaterFirstSysStateParams_2_1;
+    private  PileTakeMaterSecondSysStateParams _pileTakeMaterSecondSysStateParams_2_2;
+    private  PileTakeMaterThirdSysStateParams _pileTakeMaterThirdSysStateParams_2_3;
+    
     public GameObject curOffBtn;
     public GameObject curOnBtn;
     private GameObject lastPanel;
-
+    private SystemVariables _systemVariables;
+    public StatusParameterChildID CurStatusParameterChildID;
 
     public override void InitUIElements(UIArgs uiArgs = null)
     {
@@ -94,21 +104,32 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
         stateBtn_2_2_off.onClick.AddListener(() => ShowStatePane(StatusParameterChildID.State_2_2));
         stateBtn_2_3_off.onClick.AddListener(() => ShowStatePane(StatusParameterChildID.State_2_3));
 
-        state_1_1 = RootObj.transform.Find("status_1_1").gameObject;
-        state_1_2 = RootObj.transform.Find("status_1_2").gameObject;
-        state_1_3 = RootObj.transform.Find("status_1_3").gameObject;
-        state_2_1 = RootObj.transform.Find("status_2_1").gameObject;
-        state_2_2 = RootObj.transform.Find("status_2_2").gameObject;
-        state_2_3 = RootObj.transform.Find("status_2_3").gameObject;
+        _pileTakeMaterFirstSysStateParams_1_1 = RootObj.transform.FindComponent<PileTakeMaterFirstSysStateParams>("status_1_1");
+        _pileTakeMaterSecondSysStateParams_1_2 = RootObj.transform.FindComponent<PileTakeMaterSecondSysStateParams>("status_1_2");
+        _pileTakeMaterThirdSysStateParams_1_3 =RootObj.transform.FindComponent<PileTakeMaterThirdSysStateParams>("status_1_3");
+        _pileTakeMaterFirstSysStateParams_2_1 = RootObj.transform.FindComponent<PileTakeMaterFirstSysStateParams>("status_2_1");
+        _pileTakeMaterSecondSysStateParams_2_2 = RootObj.transform.FindComponent<PileTakeMaterSecondSysStateParams>("status_2_2");
+        _pileTakeMaterThirdSysStateParams_2_3 =RootObj.transform.FindComponent<PileTakeMaterThirdSysStateParams>("status_2_3");
+       
+        
+        state_1_1 = _pileTakeMaterFirstSysStateParams_1_1.gameObject;
+        state_1_2 = _pileTakeMaterSecondSysStateParams_1_2.gameObject;
+        state_1_3 = _pileTakeMaterThirdSysStateParams_1_3.gameObject;
+        state_2_1 = _pileTakeMaterFirstSysStateParams_2_1.gameObject;
+        state_2_2 = _pileTakeMaterSecondSysStateParams_2_2.gameObject;
+        state_2_3 = _pileTakeMaterThirdSysStateParams_2_3.gameObject;
 
         curOffBtn = stateBtn_1_1_off.gameObject;
         curOnBtn = stateBtn_1_1_on.gameObject;
         lastPanel = state_1_1;
+        stateBtn_1_1_off.onClick?.Invoke();
 
     }
 
-    public void ShowStatePane(StatusParameterChildID id) {
+    public void ShowStatePane(StatusParameterChildID id)
+    {
 
+        CurStatusParameterChildID = id;
         Debug.Log($"状态参数打开 {id}");
         if (id == StatusParameterChildID.State_1_1)
         {
@@ -155,5 +176,38 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
         curOnBtn = ongo;
         lastPanel = panel;
         lastPanel?.SetActive(true);
+    }
+
+    public void UpdateData(SystemVariables data)
+    {
+        _systemVariables = data;
+        if (CurStatusParameterChildID==StatusParameterChildID.State_1_1)
+        {
+            _pileTakeMaterFirstSysStateParams_1_1?.UpdateData();
+        }else if (CurStatusParameterChildID == StatusParameterChildID.State_1_2)
+        {
+            _pileTakeMaterSecondSysStateParams_1_2?.UpdateData();
+        }
+        else if (CurStatusParameterChildID == StatusParameterChildID.State_1_3)
+        {
+            _pileTakeMaterThirdSysStateParams_1_3?.UpdateData();
+        }
+        else if (CurStatusParameterChildID == StatusParameterChildID.State_2_1)
+        {
+            _pileTakeMaterFirstSysStateParams_2_1?.UpdateData();
+        }
+        else if (CurStatusParameterChildID == StatusParameterChildID.State_2_2)
+        {
+            _pileTakeMaterSecondSysStateParams_2_2?.UpdateData();
+        }
+        else if (CurStatusParameterChildID == StatusParameterChildID.State_2_3)
+        {
+            _pileTakeMaterThirdSysStateParams_2_3?.UpdateData();
+        }
+        else
+        {
+            
+        }
+        
     }
 }

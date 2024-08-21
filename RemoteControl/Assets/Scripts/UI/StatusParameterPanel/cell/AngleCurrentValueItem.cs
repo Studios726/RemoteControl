@@ -7,86 +7,86 @@ using Utility;
 public struct AngleCurrentValueData
 {
     /// <summary>
-    /// Ë¾»úÊÒ½Ç¶È
+    /// å¸æœºå®¤è§’åº¦
     /// </summary>
     public string cabAngleStr;
     /// <summary>
-    /// »Ø×ª½Ç¶È 
+    /// å›è½¬è§’åº¦ 
     /// </summary>
     public string slewingAngleStr;
     /// <summary>
-    /// ¸©Ñö½Ç¶È
+    /// ä¿¯ä»°è§’åº¦
     /// </summary>
     public string pitchAngleStr;
     /// <summary>
-    ///  ´ó³µÎ»ÖÃ  
+    ///  å¤§è½¦ä½ç½®  
     /// </summary>
     public string trolleyPositionStr;
     /// <summary>
-    /// Á½»ú¾àÀë 
+    /// ä¸¤æœºè·ç¦» 
     /// </summary>
     public string twoMachineDistanceStr;
     /// <summary>
-    /// ·ÖÁ÷µ²°å
+    /// åˆ†æµæŒ¡æ¿
     /// </summary>
     public string diversionBaffleStr;
     /// <summary>
-    ///  »Ø×ªµçÁ÷
+    ///  å›è½¬ç”µæµ
     /// </summary>
     public string slewingCurrentStr;
     /// <summary>
-    ///  Ğü½ºµçÁ÷
+    ///  æ‚¬èƒ¶ç”µæµ
     /// </summary>
     public string suspendedGelCurrentStr;
     /// <summary>
-    ///  ´ó³µµçÁ÷
+    ///  å¤§è½¦ç”µæµ
     /// </summary>
     public string trolleyCurrentStr;
     /// <summary>
-    ///  ¶·ÂÖµçÁ÷
+    ///  æ–—è½®ç”µæµ
     /// </summary>
     public string bucketWheelCurrentStr;
 }
 public class AngleCurrentValueItem : MonoBehaviour
 {
     /// <summary>
-    /// Ë¾»úÊÒ½Ç¶È
+    /// å¸æœºå®¤è§’åº¦
     /// </summary>
     public Text CabAngleText;
     /// <summary>
-    /// »Ø×ª½Ç¶È 
+    /// å›è½¬è§’åº¦ 
     /// </summary>
     public Text SlewingAngleText;
     /// <summary>
-    /// ¸©Ñö½Ç¶È
+    /// ä¿¯ä»°è§’åº¦
     /// </summary>
     public Text PitchAngleText;
     /// <summary>
-    ///  ´ó³µÎ»ÖÃ  
+    ///  å¤§è½¦ä½ç½®  
     /// </summary>
     public Text TrolleyPositionText;
     /// <summary>
-    /// Á½»ú¾àÀë 
+    /// ä¸¤æœºè·ç¦» 
     /// </summary>
     public Text TwoMachineDistanceText;
     /// <summary>
-    /// ·ÖÁ÷µ²°å
+    /// åˆ†æµæŒ¡æ¿
     /// </summary>
     public Text DiversionBaffleText;
     /// <summary>
-    ///  »Ø×ªµçÁ÷
+    ///  å›è½¬ç”µæµ
     /// </summary>
     public Text SlewingCurrentText;
     /// <summary>
-    ///  Ğü½ºµçÁ÷
+    ///  æ‚¬èƒ¶ç”µæµ
     /// </summary>
     public Text SuspendedGelCurrentText;
     /// <summary>
-    ///  ´ó³µµçÁ÷
+    ///  å¤§è½¦ç”µæµ
     /// </summary>
     public Text TrolleyCurrentText;
     /// <summary>
-    ///  ¶·ÂÖµçÁ÷
+    ///  æ–—è½®ç”µæµ
     /// </summary>
     public Text BucketWheelCurrentText;
     public void UpdateData(AngleCurrentValueData data)
@@ -106,7 +106,7 @@ public class AngleCurrentValueItem : MonoBehaviour
     {
         if (text == null)
         {
-            Debug.LogError(" Text is null Çë¼ì²é AngleCurrentValueItem");
+            Debug.LogError(" Text is null è¯·æ£€æŸ¥ AngleCurrentValueItem");
             return;
         }
         if (text.text == str) {

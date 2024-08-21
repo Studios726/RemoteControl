@@ -5,129 +5,129 @@ using UnityEngine.UI;
 public struct SunningWaterForDustPreventionData
 {
     /// <summary>
-    /// ¸ÉÎíÏµÍ³ÆøÑ¹µÍ
+    /// å¹²é›¾ç³»ç»Ÿæ°”å‹ä½
     /// </summary>
     public bool isDryFogSysAirPressureLow;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³Ë®Ñ¹µÍ
+    /// å¹²é›¾ç³»ç»Ÿæ°´å‹ä½
     /// </summary>
     public bool isDryFogSysWaterPressureLow;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³¹ıÂËÆ÷¶ÂÈû
+    /// å¹²é›¾ç³»ç»Ÿè¿‡æ»¤å™¨å µå¡
     /// </summary>
     public bool isDryFogSysFilterClogged;
     /// <summary>
-    /// Ë®ÏäÒºÎ»µÍ¿ª¹Ø
+    /// æ°´ç®±æ¶²ä½ä½å¼€å…³
     /// </summary>
     public bool isWaterTankLevelLowSwitch;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³ÅçÎí×´Ì¬
+    /// å¹²é›¾ç³»ç»Ÿå–·é›¾çŠ¶æ€
     /// </summary>
     public bool isDryFogSysSprayStatus;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³ÅçÎíÔËĞĞ
+    /// å¹²é›¾ç³»ç»Ÿå–·é›¾è¿è¡Œ
     /// </summary>
     public bool isDryFogSysSprayRunning;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³×Ô¶¯ÔËĞĞ
+    /// å¹²é›¾ç³»ç»Ÿè‡ªåŠ¨è¿è¡Œ
     /// </summary>
     public bool isDryFogSysAutoRunning;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³ÊÖ¶¯ÔËĞĞ
+    /// å¹²é›¾ç³»ç»Ÿæ‰‹åŠ¨è¿è¡Œ
     /// </summary>
     public bool isDryFogSysManualRunning;
     /// <summary>
-    /// ¸ÉÎíÒÖ³¾Ô¶³ÌÆô¶¯ÔËĞĞ
+    ///å¹²é›¾æŠ‘å°˜è¿œç¨‹å¯åŠ¨è¿è¡Œ
     /// </summary>
     public bool isDryFogDustSuppressionRemoteStartRunning;
     /// <summary>
-    /// ¸ÉÎíÒÖ³¾Ô¶³ÌÍ£Ö¹ÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜è¿œç¨‹åœæ­¢è¿è¡Œ
     /// </summary>
     public bool isDryFogDustSuppressionRemoteStopRunning;
     /// <summary>
-    /// ¸ÉÎíÒÖ³¾¶ÑÁÏÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜å †æ–™è¿è¡Œ
     /// </summary>
     public bool isDryFogDustSuppressionStockpileRunning;
     /// <summary>
-    /// ¸ÉÎíÈ¡ÁÏÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜å–æ–™è¿è¡Œ
     /// </summary>
     public bool isDryFogMaterialFetchingRunning;
     /// <summary>
-    /// ¸ÉÎíÒÖ³¾·ÖÁ÷ÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜åˆ†æµè¿è¡Œ
     /// </summary>
     public bool isDryFogDustSuppressionDiversionRunning;
 }
 /// <summary>
-/// È÷Ë®ÒÖ³¾
+/// æ´’æ°´æŠ‘å°˜
 /// </summary>
 public class SunningWaterForDustPreventionItem : StatusParmItemBase<SunningWaterForDustPreventionData>
 {
     /// <summary>
-    /// ¸ÉÎíÏµÍ³ÆøÑ¹µÍ
+    /// å¹²é›¾ç³»ç»Ÿæ°”å‹ä½
     /// </summary>
     public ToggleDIY DryFogSysAirPressureLow;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³Ë®Ñ¹µÍ
+    /// å¹²é›¾ç³»ç»Ÿæ°´å‹ä½
     /// </summary>
     public ToggleDIY DryFogSysWaterPressureLow;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³¹ıÂËÆ÷¶ÂÈû
+    /// å¹²é›¾ç³»ç»Ÿè¿‡æ»¤å™¨å µå¡
     /// </summary>
     public ToggleDIY DryFogSysFilterClogged;
     /// <summary>
-    /// Ë®ÏäÒºÎ»µÍ¿ª¹Ø
+    /// æ°´ç®±æ¶²ä½ä½å¼€å…³
     /// </summary>
     public ToggleDIY WaterTankLevelLowSwitch;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³ÅçÎí×´Ì¬
+    /// å¹²é›¾ç³»ç»Ÿå–·é›¾çŠ¶æ€
     /// </summary>
     public ToggleDIY DryFogSysSprayStatus;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³ÅçÎíÔËĞĞ
+    /// å¹²é›¾ç³»ç»Ÿå–·é›¾è¿è¡Œ
     /// </summary>
     public ToggleDIY DryFogSysSprayRunning;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³×Ô¶¯ÔËĞĞ
+    /// å¹²é›¾ç³»ç»Ÿè‡ªåŠ¨è¿è¡Œ
     /// </summary>
     public ToggleDIY DryFogSysAutoRunning;
     /// <summary>
-    /// ¸ÉÎíÏµÍ³ÊÖ¶¯ÔËĞĞ
+    /// å¹²é›¾ç³»ç»Ÿæ‰‹åŠ¨è¿è¡Œ
     /// </summary>
     public ToggleDIY DryFogSysManualRunning;
     /// <summary>
-    /// ¸ÉÎíÒÖ³¾Ô¶³ÌÆô¶¯ÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜è¿œç¨‹å¯åŠ¨è¿è¡Œ
     /// </summary>
     public ToggleDIY DryFogDustSuppressionRemoteStartRunning;
     /// <summary>
-    /// ¸ÉÎíÒÖ³¾Ô¶³ÌÍ£Ö¹ÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜è¿œç¨‹åœæ­¢è¿è¡Œ
     /// </summary>
     public ToggleDIY DryFogDustSuppressionRemoteStopRunning;
     /// <summary>
-    /// ¸ÉÎíÒÖ³¾¶ÑÁÏÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜å †æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY DryFogDustSuppressionStockpileRunning;
     /// <summary>
-    /// ¸ÉÎíÈ¡ÁÏÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜å–æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY DryFogMaterialFetchingRunning;
     /// <summary>
-    /// ¸ÉÎíÒÖ³¾·ÖÁ÷ÔËĞĞ
+    /// å¹²é›¾æŠ‘å°˜åˆ†æµè¿è¡Œ
     /// </summary>
     public ToggleDIY DryFogDustSuppressionDiversionRunning;
-    public override void UpdateData(SunningWaterForDustPreventionData data)
+    public override void UpdateData(SunningWaterForDustPreventionData data,bool isConnect=false)
     {
-        SetToggleState(DryFogSysAirPressureLow,data.isDryFogSysAirPressureLow);
-        SetToggleState(DryFogSysWaterPressureLow, data.isDryFogSysWaterPressureLow);
-        SetToggleState(DryFogSysFilterClogged, data.isDryFogSysFilterClogged);
-        SetToggleState(WaterTankLevelLowSwitch, data.isWaterTankLevelLowSwitch);
-        SetToggleState(DryFogSysSprayStatus, data.isDryFogSysSprayStatus);
-        SetToggleState(DryFogSysSprayRunning, data.isDryFogSysSprayRunning);
-        SetToggleState(DryFogSysAutoRunning, data.isDryFogSysAutoRunning);
-        SetToggleState(DryFogSysManualRunning, data.isDryFogSysManualRunning);
-        SetToggleState(DryFogDustSuppressionRemoteStartRunning, data.isDryFogDustSuppressionRemoteStartRunning);
-        SetToggleState(DryFogDustSuppressionRemoteStopRunning, data.isDryFogDustSuppressionRemoteStopRunning);
-        SetToggleState(DryFogDustSuppressionStockpileRunning, data.isDryFogDustSuppressionStockpileRunning);
-        SetToggleState(DryFogMaterialFetchingRunning, data.isDryFogMaterialFetchingRunning);
-        SetToggleState(DryFogDustSuppressionDiversionRunning, data.isDryFogDustSuppressionDiversionRunning);
+        SetToggleState(DryFogSysAirPressureLow,data.isDryFogSysAirPressureLow,true,isConnect);
+        SetToggleState(DryFogSysWaterPressureLow, data.isDryFogSysWaterPressureLow, true, isConnect);
+        SetToggleState(DryFogSysFilterClogged, data.isDryFogSysFilterClogged,true,isConnect);
+        SetToggleState(WaterTankLevelLowSwitch, data.isWaterTankLevelLowSwitch,false,isConnect);
+        SetToggleState(DryFogSysSprayStatus, data.isDryFogSysSprayStatus,false,isConnect);
+        SetToggleState(DryFogSysSprayRunning, data.isDryFogSysSprayRunning,false,isConnect);
+        SetToggleState(DryFogSysAutoRunning, data.isDryFogSysAutoRunning,false,isConnect);
+        SetToggleState(DryFogSysManualRunning, data.isDryFogSysManualRunning,false,isConnect);
+        SetToggleState(DryFogDustSuppressionRemoteStartRunning, data.isDryFogDustSuppressionRemoteStartRunning,false,isConnect);
+        SetToggleState(DryFogDustSuppressionRemoteStopRunning, data.isDryFogDustSuppressionRemoteStopRunning,false,isConnect);
+        SetToggleState(DryFogDustSuppressionStockpileRunning, data.isDryFogDustSuppressionStockpileRunning,false,isConnect);
+        SetToggleState(DryFogMaterialFetchingRunning, data.isDryFogMaterialFetchingRunning,false,isConnect);
+        SetToggleState(DryFogDustSuppressionDiversionRunning, data.isDryFogDustSuppressionDiversionRunning,false,isConnect);
     }
 }

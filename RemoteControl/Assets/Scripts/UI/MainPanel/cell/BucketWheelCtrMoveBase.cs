@@ -248,7 +248,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             case "堆取料控制停止":
                 UpdateCurCtrMode(ref curPileTakeMode, stopTakeMaterBtn);
 
-                //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
+                command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
                 break;
             case "堆取料控制取料":
                 UpdateCurCtrMode(ref curPileTakeMode, takeMaterBtn);

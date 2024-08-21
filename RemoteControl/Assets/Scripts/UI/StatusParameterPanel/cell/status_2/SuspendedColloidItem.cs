@@ -5,129 +5,129 @@ using UnityEngine.UI;
 public struct SuspendedColloidData
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public bool isMainCircuitBreaker;
     /// <summary>
-    /// µç»ú¹ıÔØ
+    /// ç”µæœºè¿‡è½½
     /// </summary>
     public bool isMotorOverload;
     /// <summary>
-    /// ÖÆ¶¯Æ÷´ò¿ª
+    /// åˆ¶åŠ¨å™¨æ‰“å¼€
     /// </summary>
     public bool isBrakeOpen;
     /// <summary>
-    /// ÖÆ¶¯Æ÷ËÉÕ¢ÏŞÎ»
+    /// åˆ¶åŠ¨å™¨æ¾é—¸é™ä½
     /// </summary>
     public bool isBrakeReleaseLimit;
     /// <summary>
-    /// ¶ÑÁÏÔËĞĞ
+    /// å †æ–™è¿è¡Œ
     /// </summary>
     public bool isStackingOperation;
     /// <summary>
-    /// È¡ÁÏÔËĞĞ
+    /// å–æ–™è¿è¡Œ
     /// </summary>
     public bool isFetchingOperation;
     /// <summary>
-    /// Ò»¼¶ÅÜÆ«¿ª¹Ø
+    /// ä¸€çº§è·‘åå¼€å…³
     /// </summary>
     public bool isFirstLevelDeviationSwitch;
     /// <summary>
-    /// ¶ş¼¶ÅÜÆ«¿ª¹Ø
+    /// äºŒçº§è·‘åå¼€å…³
     /// </summary>
     public bool isSecondLevelDeviationSwitch;
     /// <summary>
-    /// ´ò»¬¼ì²â¿ª¹Ø
+    /// æ‰“æ»‘æ£€æµ‹å¼€å…³
     /// </summary>
     public bool isSlippingDetectionSwitch;
     /// <summary>
-    /// ×İÏòËºÁÑ¿ª¹Ø
+    /// çºµå‘æ’•è£‚å¼€å…³
     /// </summary>
     public bool isLongitudinalTearSwitch;
     /// <summary>
-    /// ¼±Í£À­Ïß¿ª¹Ø
+    /// æ€¥åœæ‹‰çº¿å¼€å…³
     /// </summary>
     public bool isEmergencyStopCableSwitch;
     /// <summary>
-    /// ÁÏÁ÷¼ì²â¿ª¹Ø
+    /// æ–™æµæ£€æµ‹å¼€å…³
     /// </summary>
     public bool isMaterialFlowDetectionSwitch;
     /// <summary>
-    /// ÖĞ²¿ÁÏ¶·¶ÂÃº
+    /// ä¸­éƒ¨æ–™æ–—å µç…¤
     /// </summary>
     public bool isMiddleHopperCoalBlocking;
 }
 /// <summary>
-/// Ğü½º
+/// æ‚¬èƒ¶
 /// </summary>
 public class SuspendedColloidItem : StatusParmItemBase<SuspendedColloidData>
 {
     /// <summary>
-    /// Ö÷¶ÏÂ·Æ÷
+    /// ä¸»æ–­è·¯å™¨
     /// </summary>
     public ToggleDIY MainCircuitBreaker;
     /// <summary>
-    /// µç»ú¹ıÔØ
+    /// ç”µæœºè¿‡è½½
     /// </summary>
     public ToggleDIY MotorOverload;
     /// <summary>
-    /// ÖÆ¶¯Æ÷´ò¿ª
+    /// åˆ¶åŠ¨å™¨æ‰“å¼€
     /// </summary>
     public ToggleDIY BrakeOpen;
     /// <summary>
-    /// ÖÆ¶¯Æ÷ËÉÕ¢ÏŞÎ»
+    /// åˆ¶åŠ¨å™¨æ¾é—¸é™ä½
     /// </summary>
     public ToggleDIY BrakeReleaseLimit;
     /// <summary>
-    /// ¶ÑÁÏÔËĞĞ
+    /// å †æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY StackingOperation;
     /// <summary>
-    /// È¡ÁÏÔËĞĞ
+    /// å–æ–™è¿è¡Œ
     /// </summary>
     public ToggleDIY FetchingOperation;
     /// <summary>
-    /// Ò»¼¶ÅÜÆ«¿ª¹Ø
+    /// ä¸€çº§è·‘åå¼€å…³
     /// </summary>
     public ToggleDIY FirstLevelDeviationSwitch;
     /// <summary>
-    /// ¶ş¼¶ÅÜÆ«¿ª¹Ø
+    /// äºŒçº§è·‘åå¼€å…³
     /// </summary>
     public ToggleDIY SecondLevelDeviationSwitch;
     /// <summary>
-    /// ´ò»¬¼ì²â¿ª¹Ø
+    /// æ‰“æ»‘æ£€æµ‹å¼€å…³
     /// </summary>
     public ToggleDIY SlippingDetectionSwitch;
     /// <summary>
-    /// ×İÏòËºÁÑ¿ª¹Ø
+    /// çºµå‘æ’•è£‚å¼€å…³
     /// </summary>
     public ToggleDIY LongitudinalTearSwitch;
     /// <summary>
-    /// ¼±Í£À­Ïß¿ª¹Ø
+    /// æ€¥åœæ‹‰çº¿å¼€å…³
     /// </summary>
     public ToggleDIY EmergencyStopCableSwitch;
     /// <summary>
-    /// ÁÏÁ÷¼ì²â¿ª¹Ø
+    /// æ–™æµæ£€æµ‹å¼€å…³
     /// </summary>
     public ToggleDIY MaterialFlowDetectionSwitch;
     /// <summary>
-    /// ÖĞ²¿ÁÏ¶·¶ÂÃº
+    /// ä¸­éƒ¨æ–™æ–—å µç…¤
     /// </summary>
     public ToggleDIY MiddleHopperCoalBlocking;
-    public override void UpdateData(SuspendedColloidData data)
+    public override void UpdateData(SuspendedColloidData data,bool isConnect=false)
     {
-        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker);
-        SetToggleState(MotorOverload, data.isMotorOverload);
-        SetToggleState(BrakeOpen, data.isBrakeOpen);
-        SetToggleState(BrakeReleaseLimit, data.isBrakeReleaseLimit);
-        SetToggleState(StackingOperation, data.isStackingOperation);
-        SetToggleState(FetchingOperation, data.isFetchingOperation);
-        SetToggleState(FirstLevelDeviationSwitch, data.isFirstLevelDeviationSwitch);
-        SetToggleState(SecondLevelDeviationSwitch, data.isSecondLevelDeviationSwitch);
-        SetToggleState(SlippingDetectionSwitch, data.isSlippingDetectionSwitch);
-        SetToggleState(LongitudinalTearSwitch, data.isLongitudinalTearSwitch);
-        SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch);
-        SetToggleState(MaterialFlowDetectionSwitch, data.isMaterialFlowDetectionSwitch);
-        SetToggleState(MiddleHopperCoalBlocking, data.isMiddleHopperCoalBlocking);
+        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
+        SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
+        SetToggleState(BrakeOpen, data.isBrakeOpen,false,isConnect);
+        SetToggleState(BrakeReleaseLimit, data.isBrakeReleaseLimit,true,isConnect);
+        SetToggleState(StackingOperation, data.isStackingOperation,false,isConnect);
+        SetToggleState(FetchingOperation, data.isFetchingOperation,false,isConnect);
+        SetToggleState(FirstLevelDeviationSwitch, data.isFirstLevelDeviationSwitch,false,isConnect);
+        SetToggleState(SecondLevelDeviationSwitch, data.isSecondLevelDeviationSwitch,false,isConnect);
+        SetToggleState(SlippingDetectionSwitch, data.isSlippingDetectionSwitch,false,isConnect);
+        SetToggleState(LongitudinalTearSwitch, data.isLongitudinalTearSwitch,false,isConnect);
+        SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch,false,isConnect);
+        SetToggleState(MaterialFlowDetectionSwitch, data.isMaterialFlowDetectionSwitch,false,isConnect);
+        SetToggleState(MiddleHopperCoalBlocking, data.isMiddleHopperCoalBlocking,false,isConnect);
     }
 }
