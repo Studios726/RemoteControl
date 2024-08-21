@@ -41,7 +41,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             GetToggleState(data.LowVoltageControlPowerClosed, data.LowVoltageControlPowerClosed_2);
         switchOnData.isLowVoltagePowerClosedToggle =
             GetToggleState(data.LowVoltagePowerClosed, data.LowVoltagePowerClosed_2);
-        SwitchOnItem?.UpdateData(switchOnData);
+        SwitchOnItem?.UpdateData(switchOnData,data.PLCCommunicationState);
     }
     //急停信息
     public void UpdateScramStop(SystemVariables data)
@@ -53,7 +53,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             GetToggleState(data.ElectricalRoomEmergencyStopButton, data.ElectricalRoomEmergencyStopButton_2);
         scramStopData.isEmergencyStopRelay =
             GetToggleState(data.EmergencyStopRelay, data.EmergencyStopRelay_2);
-        ScramStopItem?.UpdateData(scramStopData);
+        ScramStopItem?.UpdateData(scramStopData,data.PLCCommunicationState);
     }
     //与中控室连锁
     public void UpdateCentralControlRoom(SystemVariables data)
@@ -61,7 +61,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         CentralControlData centralControlData = new CentralControlData();
         centralControlData.isUnlock = GetToggleState(!data.SystemInterlockSwitch, !data.SystemInterlockSwitch_2);
         centralControlData.isLock = GetToggleState(data.SystemInterlockSwitch, data.SystemInterlockSwitch_2);
-        CentralControlRoomItem?.UpdateData(centralControlData);
+        CentralControlRoomItem?.UpdateData(centralControlData,data.PLCCommunicationState);
     }
     //斗轮机与中控室信号
     public void UpdateBucketWheelCenterRoomSignal(SystemVariables data)
@@ -83,7 +83,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             data.BucketWheelDiversionRunning_2);
         bucketWheelCenterRoomSignalData.isBucketWheelMalfunction=GetToggleState(data.BucketWheelFault,
             data.BucketWheelFault_2);
-        BucketWheelCenterRoomSignalItem?.UpdateData(bucketWheelCenterRoomSignalData);
+        BucketWheelCenterRoomSignalItem?.UpdateData(bucketWheelCenterRoomSignalData,data.PLCCommunicationState);
     }
     //堆取料流程状态
     public void UpdatePileTakeFlowState(SystemVariables data)
@@ -103,7 +103,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             data.BucketWheelMotorRunning, data.BucketWheelMotorRunning_2);
         pileTakeFlowStateData.isFeedChannelTake = GetToggleState(
             data.BucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit_2);
-        PileTakeFlowStateItem?.UpdateData(pileTakeFlowStateData);
+        PileTakeFlowStateItem?.UpdateData(pileTakeFlowStateData,data.PLCCommunicationState);
     }
     //操作方式
     public void UpdateOperatingMode(SystemVariables data)
@@ -114,8 +114,9 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         operatingModeData.isAutoAction = GetToggleState(data.Automatic, data.Automatic_2);
         operatingModeData.isLocalAction = GetToggleState(!data.Remote, !data.Remote_2);
         operatingModeData.isLongRangeAction = GetToggleState(data.Remote, data.Remote_2);
-        OperatingModeItem?.UpdateData(operatingModeData);
+        OperatingModeItem?.UpdateData(operatingModeData,data.PLCCommunicationState);
     }
+    
     public void UpdateAngleCurrentValue(SystemVariables data)
     {
         AngleCurrentValueData angleCurrentValueData = new AngleCurrentValueData();
@@ -150,7 +151,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         jibLubbingMechanismData.isUpSolenoidValveToggle=GetToggleState(data.VariableAmplitudeUpperElectromagneticValveOpen, data.VariableAmplitudeUpperElectromagneticValveOpen_2);
         jibLubbingMechanismData.isDownSolenoidValveToggle=GetToggleState(data.VariableAmplitudeLowerElectromagneticValveOpen, data.VariableAmplitudeLowerElectromagneticValveOpen_2);
         jibLubbingMechanismData.isStepUpSolenoidValveToggle=GetToggleState(data.VariableAmplitudeBoostValveOpen, data.VariableAmplitudeBoostValveOpen_2);
-        JibLubbingMechanismItem?.UpdateData(jibLubbingMechanismData);
+        JibLubbingMechanismItem?.UpdateData(jibLubbingMechanismData,data.PLCCommunicationState);
     }
     //回转机构
     public void UpdateRotaryMechanism(SystemVariables data)
@@ -204,8 +205,9 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             GetToggleState(data.RotaryCentralizedLubricationOilBlockageFault, data.RotaryCentralizedLubricationOilBlockageFault_2);
         rotaryMechanismData.isRotaryCentralLubricationLowOilLevel =
             GetToggleState(data.RotaryCentralizedLubricationLowOilLevelFault, data.RotaryCentralizedLubricationLowOilLevelFault_2);
-        RotaryMechanismItem?.UpdateData(rotaryMechanismData);
+        RotaryMechanismItem?.UpdateData(rotaryMechanismData,data.PLCCommunicationState);
     }
+    //大车行走机构
     public void UpdateCarMoveOrganization(SystemVariables data)
     {
         CarMoveOrganizationData carMoveOrganizationData = new CarMoveOrganizationData();
@@ -225,7 +227,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         carMoveOrganizationData.isForwardLimitExceedToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarForwardExtremeLimit : data.LargeCarForwardExtremeLimit_2;
         carMoveOrganizationData.isReverseLimitToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarReverseLimit : data.LargeCarReverseLimit_2;
         carMoveOrganizationData.isReverseLimitExceedToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarReverseExtremeLimit : data.LargeCarReverseExtremeLimit_2;
-        CarMoveOrganizationItem?.UpdateData(carMoveOrganizationData);
+        CarMoveOrganizationItem?.UpdateData(carMoveOrganizationData,data.PLCCommunicationState);
     }
 
     public bool GetToggleState(bool machine1,bool machine2)

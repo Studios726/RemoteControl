@@ -6,11 +6,11 @@ using UnityEngine.UI;
 
 public class StatusParmItemBase<T> : MonoBehaviour
 {
-    public virtual void UpdateData(T data)
+    public virtual void UpdateData(T data,bool isConnect = false )
     {
     }
-    public virtual void SetToggleState(ToggleDIY toggle, bool ison,bool isFault=true, bool isconnect=true) {
-        if (isconnect) {
+    public virtual void SetToggleState(ToggleDIY toggle, bool ison,bool isFault=true, bool isConnect=true) {
+        if (isConnect) {
             if (ison)
             {
                 if (isFault)

@@ -6,57 +6,57 @@ using UnityEngine.UI;
 public struct OperatingModeData
 {
     /// <summary>
-    /// 单动
+    /// 鍗曞姩
     /// </summary>
     public bool isSingleAction;
     /// <summary>
-    /// 联动
+    /// 鑱斿姩
     /// </summary>
     public bool isLinkageAction;
     /// <summary>
-    /// 自动
+    /// 鑷姩
     /// </summary>
     public bool isAutoAction;
     /// <summary>
-    /// 本地
+    /// 鏈湴
     /// </summary>
     public bool isLocalAction;
     /// <summary>
-    /// 远程
+    /// 杩滅▼
     /// </summary>
     public bool isLongRangeAction;
 }
 /// <summary>
-/// 操作方式
+/// 鎿嶄綔鏂瑰紡
 /// </summary>
 public class OperatingModeItem : StatusParmItemBase<OperatingModeData>
 {
     /// <summary>
-    /// 单动
+    /// 锟斤拷锟斤拷
     /// </summary>
     public ToggleDIY SingleActionToggle;
     /// <summary>
-    /// 联动
+    /// 锟斤拷锟斤拷
     /// </summary>
     public ToggleDIY LinkageActionToggle;
     /// <summary>
-    /// 自动
+    /// 锟皆讹拷
     /// </summary>
     public ToggleDIY AutoActionToggle;
     /// <summary>
-    /// 本地
+    /// 锟斤拷锟斤拷
     /// </summary>
     public ToggleDIY LocalActionToggle;
     /// <summary>
-    /// 远程
+    /// 远锟斤拷
     /// </summary>
     public ToggleDIY LongRangeActionToggle;
-    public override void UpdateData(OperatingModeData operatingModeData)
+    public override void UpdateData(OperatingModeData operatingModeData,bool isConnect=false)
     {
-        SetToggleState(SingleActionToggle, operatingModeData.isSingleAction);
-        SetToggleState(LinkageActionToggle, operatingModeData.isLinkageAction);
-        SetToggleState(LocalActionToggle, operatingModeData.isLocalAction);
-        SetToggleState(AutoActionToggle, operatingModeData.isAutoAction);
-        SetToggleState(LongRangeActionToggle, operatingModeData.isLongRangeAction);
+        SetToggleState(SingleActionToggle, operatingModeData.isSingleAction,false,isConnect);
+        SetToggleState(LinkageActionToggle, operatingModeData.isLinkageAction,false,isConnect);
+        SetToggleState(LocalActionToggle, operatingModeData.isLocalAction,false,isConnect);
+        SetToggleState(AutoActionToggle, operatingModeData.isAutoAction,false,isConnect);
+        SetToggleState(LongRangeActionToggle, operatingModeData.isLongRangeAction,false,isConnect);
     }
 }

@@ -35,10 +35,10 @@ public class SwitchOnItem : StatusParmItemBase<SwitchOnData>
     /// 低压动力电源
     /// </summary>
     public ToggleDIY LowVoltagePowerClosedToggle;
-    public override void UpdateData(SwitchOnData switchOnData)
+    public override void UpdateData(SwitchOnData switchOnData,bool isConnect=false)
     {
-        SetToggleState(VacuumCircuitBreakerClosedToggle, switchOnData.isVacuumCircuitBreakerClosedToggle);
-        SetToggleState(LowVoltageControlPowerClosedToggle, switchOnData.isLowVoltageControlPowerClosedToggle);
-        SetToggleState(LowVoltagePowerClosedToggle, switchOnData.isLowVoltagePowerClosedToggle);
+        SetToggleState(VacuumCircuitBreakerClosedToggle, switchOnData.isVacuumCircuitBreakerClosedToggle,false,isConnect);
+        SetToggleState(LowVoltageControlPowerClosedToggle, switchOnData.isLowVoltageControlPowerClosedToggle,false,isConnect);
+        SetToggleState(LowVoltagePowerClosedToggle, switchOnData.isLowVoltagePowerClosedToggle,false,isConnect);
     }
 }

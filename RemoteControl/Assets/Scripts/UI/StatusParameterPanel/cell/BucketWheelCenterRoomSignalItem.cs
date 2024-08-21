@@ -76,16 +76,16 @@ public class BucketWheelCenterRoomSignalItem : StatusParmItemBase<BucketWheelCen
     /// </summary>
     public ToggleDIY BucketWheelMalfunctionToggle;
 
-    public override void UpdateData(BucketWheelCenterRoomSignalData data)
+    public override void UpdateData(BucketWheelCenterRoomSignalData data,bool isConnect=false)
     {
-        SetToggleState(AllowPileMaterSignalToggle, data.isAllowPileMaterSignal);
-        SetToggleState(BucketWheelPileMaterRunToggle, data.isAllowPileMaterSignal);
-        SetToggleState(AllowTakeMaterSignalToggle, data.isAllowTakeMaterSignal);
-        SetToggleState(BucketWheelTakeMaterRunToggle, data.isBucketWheelTakeMaterRun);
-        SetToggleState(AllowShuntSignalToggle, data.isAllowShuntSignal);
-        SetToggleState(BucketWheelShuntRunToggle, data.isBucketWheelShuntRun);
-        SetToggleState(LongDistanceCtrScramStopToggle, data.isLongDistanceCtrScramStop);
-        SetToggleState(BucketWheelMalfunctionToggle, data.isBucketWheelMalfunction);
+        SetToggleState(AllowPileMaterSignalToggle, data.isAllowPileMaterSignal,false,isConnect);
+        SetToggleState(BucketWheelPileMaterRunToggle, data.isAllowPileMaterSignal,false,isConnect);
+        SetToggleState(AllowTakeMaterSignalToggle, data.isAllowTakeMaterSignal,false,isConnect);
+        SetToggleState(BucketWheelTakeMaterRunToggle, data.isBucketWheelTakeMaterRun,false,isConnect);
+        SetToggleState(AllowShuntSignalToggle, data.isAllowShuntSignal,false,isConnect);
+        SetToggleState(BucketWheelShuntRunToggle, data.isBucketWheelShuntRun,false,isConnect);
+        SetToggleState(LongDistanceCtrScramStopToggle, data.isLongDistanceCtrScramStop,false,isConnect);
+        SetToggleState(BucketWheelMalfunctionToggle, data.isBucketWheelMalfunction,true,isConnect);
     }
 
 

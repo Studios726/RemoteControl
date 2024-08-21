@@ -210,35 +210,35 @@ public class RotaryMechanismItem : StatusParmItemBase<RotaryMechanismData>
     /// </summary>
     public ToggleDIY RotaryCentralLubricationLowOilLevel;
 
-    public override void UpdateData(RotaryMechanismData data)
+    public override void UpdateData(RotaryMechanismData data,bool isConnect=false)
     {
-        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker);
-        SetToggleState(FrequencyConverterRunning, data.isFrequencyConverterRunning);
-        SetToggleState(BrakeOperating, data.isBrakeOperating);
-        SetToggleState(FanOperating, data.isFanOperating);
-        SetToggleState(LeftTurnOperating, data.isLeftTurnOperating);
-        SetToggleState(RightTurnOperating, data.isRightTurnOperating);
+        SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
+        SetToggleState(FrequencyConverterRunning, data.isFrequencyConverterRunning,false,isConnect);
+        SetToggleState(BrakeOperating, data.isBrakeOperating,false,isConnect);
+        SetToggleState(FanOperating, data.isFanOperating,false,isConnect);
+        SetToggleState(LeftTurnOperating, data.isLeftTurnOperating,false,isConnect);
+        SetToggleState(RightTurnOperating, data.isRightTurnOperating,false,isConnect);
 
-        SetToggleState(FrequencyConverterFault, data.isFrequencyConverterFault);
-        SetToggleState(BrakeOverload, data.isBrakeOverload);
-        SetToggleState(FanOverload, data.isFanOverload);
-        SetToggleState(BrakingResistorOverheating, data.isBrakingResistorOverheating);
-        SetToggleState(RotaryFault, data.isRotaryFault);
+        SetToggleState(FrequencyConverterFault, data.isFrequencyConverterFault,true,isConnect);
+        SetToggleState(BrakeOverload, data.isBrakeOverload,true,isConnect);
+        SetToggleState(FanOverload, data.isFanOverload,true,isConnect);
+        SetToggleState(BrakingResistorOverheating, data.isBrakingResistorOverheating,true,isConnect);
+        SetToggleState(RotaryFault, data.isRotaryFault,true,isConnect);
 
-        SetToggleState(LeftTurnLimit, data.isLeftTurnLimit);
-        SetToggleState(LeftTurnLimitExceed, data.isLeftTurnLimitExceed);
+        SetToggleState(LeftTurnLimit, data.isLeftTurnLimit,true,isConnect);
+        SetToggleState(LeftTurnLimitExceed, data.isLeftTurnLimitExceed,true,isConnect);
         SetToggleState(LeftTurnRestrictedZoneLimit, data.isLeftTurnRestrictedZoneLimit);
-        SetToggleState(LeftTurnCollisionPreventionLimit, data.isLeftTurnCollisionPreventionLimit);
-        SetToggleState(RightTurnLimit, data.isRightTurnLimit);
-        SetToggleState(RightTurnLimitExceed, data.isRightTurnLimitExceed);
-        SetToggleState(RightTurnRestrictedZoneLimit, data.isRightTurnRestrictedZoneLimit);
-        SetToggleState(RightTurnCollisionPreventionLimit, data.isRightTurnCollisionPreventionLimit);
+        SetToggleState(LeftTurnCollisionPreventionLimit, data.isLeftTurnCollisionPreventionLimit,true,isConnect);
+        SetToggleState(RightTurnLimit, data.isRightTurnLimit,true,isConnect);
+        SetToggleState(RightTurnLimitExceed, data.isRightTurnLimitExceed,true,isConnect);
+        SetToggleState(RightTurnRestrictedZoneLimit, data.isRightTurnRestrictedZoneLimit,true,isConnect);
+        SetToggleState(RightTurnCollisionPreventionLimit, data.isRightTurnCollisionPreventionLimit,true,isConnect);
 
-        SetToggleState(RotaryOverTorque, data.isRotaryOverTorque);
-        SetToggleState(RotaryZeroPositionLimit, data.isRotaryZeroPositionLimit);
-        SetToggleState(BrakeReliefLimit, data.isBrakeReliefLimit);
-        SetToggleState(RotaryCentralLubricationBlockedOil, data.isRotaryCentralLubricationBlockedOil);
-        SetToggleState(RotaryCentralLubricationLowOilLevel, data.isRotaryCentralLubricationLowOilLevel);
+        SetToggleState(RotaryOverTorque, data.isRotaryOverTorque,true,isConnect);
+        SetToggleState(RotaryZeroPositionLimit, data.isRotaryZeroPositionLimit,true,isConnect);
+        SetToggleState(BrakeReliefLimit, data.isBrakeReliefLimit,true,isConnect);
+        SetToggleState(RotaryCentralLubricationBlockedOil, data.isRotaryCentralLubricationBlockedOil,true,isConnect);
+        SetToggleState(RotaryCentralLubricationLowOilLevel, data.isRotaryCentralLubricationLowOilLevel,true,isConnect);
     }
 
 

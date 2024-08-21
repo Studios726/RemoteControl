@@ -194,36 +194,35 @@ public class JibLubbingMechanismItem :StatusParmItemBase<JibLubbingMechanismData
     /// 升压电磁阀
     /// </summary>
     public ToggleDIY StepUpSolenoidValveToggle;
-    public override void UpdateData(JibLubbingMechanismData data)
+    public override void UpdateData(JibLubbingMechanismData data,bool isConnect=false)
     {
-        bool isConnetction = GameDataManager.Instance.RcConnectionState;
-        SetToggleState(MainBreakerToggle,data.isMainBreakerToggle,false,isConnetction);
-        SetToggleState(FaceUpwardRunToggle, data.isFaceUpwardRunToggle,false,isConnetction);
-        SetToggleState(FaceDownRunToggle, data.isFaceDownRunToggle,false,isConnetction);
-        SetToggleState(DriverRoomForwordBalanceValveToggle, data.isDriverRoomForwordBalanceValveToggle,false,isConnetction);
-        SetToggleState(DriverRoomBackBalanceValveToggle, data.isDriverRoomBackBalanceValveToggle,false,isConnetction);
-        SetToggleState(MainElectricalMachineryOverloadToggle, data.isMainElectricalMachineryOverloadToggle,true,isConnetction);
-        SetToggleState(FaceUpwardLimitToggle, data.isFaceUpwardLimitToggle,true,isConnetction);
-        SetToggleState(FaceDownLimitToggle, data.isFaceDownLimitToggle,true,isConnetction);
-        SetToggleState(BendDownLimitToggle, data.isBendDownLimitToggle,true,isConnetction);
-        SetToggleState(BendDownMaxToggle, data.isBendDownMaxToggle,true,isConnetction);
+        SetToggleState(MainBreakerToggle,data.isMainBreakerToggle,false,isConnect);
+        SetToggleState(FaceUpwardRunToggle, data.isFaceUpwardRunToggle,false,isConnect);
+        SetToggleState(FaceDownRunToggle, data.isFaceDownRunToggle,false,isConnect);
+        SetToggleState(DriverRoomForwordBalanceValveToggle, data.isDriverRoomForwordBalanceValveToggle,false,isConnect);
+        SetToggleState(DriverRoomBackBalanceValveToggle, data.isDriverRoomBackBalanceValveToggle,false,isConnect);
+        SetToggleState(MainElectricalMachineryOverloadToggle, data.isMainElectricalMachineryOverloadToggle,true,isConnect);
+        SetToggleState(FaceUpwardLimitToggle, data.isFaceUpwardLimitToggle,true,isConnect);
+        SetToggleState(FaceDownLimitToggle, data.isFaceDownLimitToggle,true,isConnect);
+        SetToggleState(BendDownLimitToggle, data.isBendDownLimitToggle,true,isConnect);
+        SetToggleState(BendDownMaxToggle, data.isBendDownMaxToggle,true,isConnect);
 
-        SetToggleState(BendDownRestrictedZoneToggle, data.isBendDownRestrictedZoneToggle,true,isConnetction);
-        SetToggleState(HeaterStartSignalToggle, data.isHeaterStartSignalToggle,false,isConnetction);
-        SetToggleState(DraughtFanStartSignalToggle, data.isDraughtFanStartSignalToggle,false,isConnetction);
-        SetToggleState(PumpStationHighTemperatureWarningToggle, data.isPumpStationHighTemperatureWarningToggle,true,isConnetction);
-        SetToggleState(OilLowSignalToggle, data.isOilLowSignalToggle,true,isConnetction);
+        SetToggleState(BendDownRestrictedZoneToggle, data.isBendDownRestrictedZoneToggle,true,isConnect);
+        SetToggleState(HeaterStartSignalToggle, data.isHeaterStartSignalToggle,false,isConnect);
+        SetToggleState(DraughtFanStartSignalToggle, data.isDraughtFanStartSignalToggle,false,isConnect);
+        SetToggleState(PumpStationHighTemperatureWarningToggle, data.isPumpStationHighTemperatureWarningToggle,true,isConnect);
+        SetToggleState(OilLowSignalToggle, data.isOilLowSignalToggle,true,isConnect);
 
-        SetToggleState(OilUltralowSignalToggle, data.isOilUltralowSignalToggle,true,isConnetction);
-        SetToggleState(PumpStationBlockUpOilSignalToggle, data.isPumpStationBlockUpOilSignalToggle,true,isConnetction);
-        SetToggleState(MainOilPumpRunToggle, data.isMainOilPumpRunToggle,false,isConnetction);
+        SetToggleState(OilUltralowSignalToggle, data.isOilUltralowSignalToggle,true,isConnect);
+        SetToggleState(PumpStationBlockUpOilSignalToggle, data.isPumpStationBlockUpOilSignalToggle,true,isConnect);
+        SetToggleState(MainOilPumpRunToggle, data.isMainOilPumpRunToggle,false,isConnect);
 
-        SetToggleState(DraughtFanRunToggle, data.isDraughtFanRunToggle,false,isConnetction);
-        SetToggleState(OilHeaterRunToggle, data.isOilHeaterRunToggle,false,isConnetction);
-        SetToggleState(UpSolenoidValveToggle, data.isUpSolenoidValveToggle,false,isConnetction);
+        SetToggleState(DraughtFanRunToggle, data.isDraughtFanRunToggle,false,isConnect);
+        SetToggleState(OilHeaterRunToggle, data.isOilHeaterRunToggle,false,isConnect);
+        SetToggleState(UpSolenoidValveToggle, data.isUpSolenoidValveToggle,false,isConnect);
 
-        SetToggleState(DownSolenoidValveToggle, data.isDownSolenoidValveToggle,false,isConnetction);
-        SetToggleState(StepUpSolenoidValveToggle, data.isStepUpSolenoidValveToggle,false,isConnetction);
+        SetToggleState(DownSolenoidValveToggle, data.isDownSolenoidValveToggle,false,isConnect);
+        SetToggleState(StepUpSolenoidValveToggle, data.isStepUpSolenoidValveToggle,false,isConnect);
     }
 
 

@@ -45,7 +45,7 @@ public class PileTakeFlowStateItem : StatusParmItemBase<PileTakeFlowStateData>
     /// </summary>
     public ToggleDIY SuspensoidPileMaterRunToggle;
     /// <summary>
-    /// 挡板堆料运行
+    /// 挡板堆料位置
     /// </summary>
     public ToggleDIY BafflePileMaterPosToggle;
     /// <summary>
@@ -70,15 +70,15 @@ public class PileTakeFlowStateItem : StatusParmItemBase<PileTakeFlowStateData>
     public ToggleDIY FeedChannelTakeToggle;
 
 
-    public override void UpdateData(PileTakeFlowStateData data)
+    public override void UpdateData(PileTakeFlowStateData data,bool isConnect=false)
     {
-        SetToggleState(SuspensoidPileMaterRunToggle, data.isSuspensoidPileMaterRunToggle);
-        SetToggleState(BafflePileMaterPosToggle, data.isBafflePileMaterPos);
-        SetToggleState(BaffleShuntPosToggle, data.isBaffleShuntPos);
-        SetToggleState(FeedChannelPileMaterToggle, data.isFeedChannelPileMater);
+        SetToggleState(SuspensoidPileMaterRunToggle, data.isSuspensoidPileMaterRunToggle,false,isConnect);
+        SetToggleState(BafflePileMaterPosToggle, data.isBafflePileMaterPos,false,isConnect);
+        SetToggleState(BaffleShuntPosToggle, data.isBaffleShuntPos,false,isConnect);
+        SetToggleState(FeedChannelPileMaterToggle, data.isFeedChannelPileMater,false,isConnect);
 
-        SetToggleState(SuspensoidTakeMaterRunToggle, data.isSuspensoidTakeMaterRun);
-        SetToggleState(BucketWheelRunToggle, data.isBucketWheelRun);
-        SetToggleState(FeedChannelTakeToggle, data.isFeedChannelTake);
+        SetToggleState(SuspensoidTakeMaterRunToggle, data.isSuspensoidTakeMaterRun,false,isConnect);
+        SetToggleState(BucketWheelRunToggle, data.isBucketWheelRun,false,isConnect);
+        SetToggleState(FeedChannelTakeToggle, data.isFeedChannelTake,false,isConnect);
     }
 }

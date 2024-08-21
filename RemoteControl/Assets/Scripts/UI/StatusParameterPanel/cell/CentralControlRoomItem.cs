@@ -9,10 +9,10 @@ public class CentralControlRoomItem : StatusParmItemBase<CentralControlData>
 {
     public ToggleDIY UnlockToggle;
     public ToggleDIY LockToggle;
-    public override void UpdateData(CentralControlData centralControlData)
+    public override void UpdateData(CentralControlData centralControlData,bool isConnect=false)
     {
-        SetToggleState(UnlockToggle, centralControlData.isUnlock);
-        SetToggleState(LockToggle, centralControlData.isLock);
+        SetToggleState(UnlockToggle, centralControlData.isUnlock,false,isConnect);
+        SetToggleState(LockToggle, centralControlData.isLock,false,isConnect);
     }
 }
 public struct CentralControlData

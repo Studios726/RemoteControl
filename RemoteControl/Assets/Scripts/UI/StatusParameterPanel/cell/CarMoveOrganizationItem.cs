@@ -143,26 +143,26 @@ public class CarMoveOrganizationItem : StatusParmItemBase<CarMoveOrganizationDat
     /// </summary>
     public ToggleDIY ReverseLimitExceedToggle;
 
-    public override void UpdateData(CarMoveOrganizationData data)
+    public override void UpdateData(CarMoveOrganizationData data,bool isConnect=false)
     {
-        SetToggleState(MainCircuitBreakerToggle,data.isMainCircuitBreakerToggle);
-        SetToggleState(MotorCircuitBreakerToggle, data.isMotorCircuitBreakerToggle);
-        SetToggleState(BrakeCircuitBreakersToggle, data.isBrakeCircuitBreakersToggle);
-        SetToggleState(FrequencyConverterOperationToggle, data.isFrequencyConverterOperationToggle);
-        SetToggleState(BrakeOperationToggle, data.isBrakeOperationToggle);
-        SetToggleState(ForwardOperationToggle, data.isForwardOperationToggle);
-        SetToggleState(ReverseOperationToggle, data.isReverseOperationToggle);
+        SetToggleState(MainCircuitBreakerToggle,data.isMainCircuitBreakerToggle,false,isConnect);
+        SetToggleState(MotorCircuitBreakerToggle, data.isMotorCircuitBreakerToggle,false,isConnect);
+        SetToggleState(BrakeCircuitBreakersToggle, data.isBrakeCircuitBreakersToggle,false,isConnect);
+        SetToggleState(FrequencyConverterOperationToggle, data.isFrequencyConverterOperationToggle,false,isConnect);
+        SetToggleState(BrakeOperationToggle, data.isBrakeOperationToggle,false,isConnect);
+        SetToggleState(ForwardOperationToggle, data.isForwardOperationToggle,false,isConnect);
+        SetToggleState(ReverseOperationToggle, data.isReverseOperationToggle,false,isConnect);
 
-        SetToggleState(CraneFaultToggle, data.isCraneFaultToggle);
-        SetToggleState(FrequencyConverterFaultToggle, data.isFrequencyConverterFaultToggle);
-        SetToggleState(BrakeFaultToggle, data.isBrakeFaultToggle);
-        SetToggleState(LowOilLevelInBigVehicleCentralLubricationToggle, data.isLowOilLevelInBigVehicleCentralLubricationToggle);
-        SetToggleState(BlockedOilInBigVehicleCentralLubricationToggle, data.isBlockedOilInBigVehicleCentralLubricationToggle);
+        SetToggleState(CraneFaultToggle, data.isCraneFaultToggle,true,isConnect);
+        SetToggleState(FrequencyConverterFaultToggle, data.isFrequencyConverterFaultToggle,true,isConnect);
+        SetToggleState(BrakeFaultToggle, data.isBrakeFaultToggle,true,isConnect);
+        SetToggleState(LowOilLevelInBigVehicleCentralLubricationToggle, data.isLowOilLevelInBigVehicleCentralLubricationToggle,true,isConnect);
+        SetToggleState(BlockedOilInBigVehicleCentralLubricationToggle, data.isBlockedOilInBigVehicleCentralLubricationToggle,true,isConnect);
 
-        SetToggleState(ForwardLimitToggle, data.isForwardLimitToggle);
-        SetToggleState(ForwardLimitExceedToggle, data.isForwardLimitExceedToggle);
-        SetToggleState(ReverseLimitToggle, data.isReverseLimitToggle);
-        SetToggleState(ReverseLimitExceedToggle, data.isReverseLimitExceedToggle);
+        SetToggleState(ForwardLimitToggle, data.isForwardLimitToggle,true,isConnect);
+        SetToggleState(ForwardLimitExceedToggle, data.isForwardLimitExceedToggle,true,isConnect);
+        SetToggleState(ReverseLimitToggle, data.isReverseLimitToggle,true,isConnect);
+        SetToggleState(ReverseLimitExceedToggle, data.isReverseLimitExceedToggle,true,isConnect);
 
     }
 
