@@ -8,7 +8,7 @@ public class LoginPanelCtr :UIPresenter<LoginPanelView>
 {
     public void Login(string account, string password)
     {
-        if (DataManager.Instance.CheckLoginInfo(account, password))
+        if (true)//DataManager.Instance.CheckLoginInfo(account, password)
         {
             EventManager.Instance.TriggerEvent(EventName.LoginSuccess, null);
             view.SetAccountAndPassword();

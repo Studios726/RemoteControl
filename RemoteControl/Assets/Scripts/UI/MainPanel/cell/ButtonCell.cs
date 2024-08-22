@@ -11,8 +11,8 @@ public class ButtonCell : MonoBehaviour
     private Button btn;
     private GameObject red;
     private Text text;
-    private GameObject select;
-
+    public GameObject select;
+    private UnityAction lastAction;
     private void Awake()
     {
         btn = GetComponent<Button>();
@@ -26,7 +26,13 @@ public class ButtonCell : MonoBehaviour
     }
     public void AddListener(UnityAction action)
     {
-        btn.onClick.AddListener(action);
+        if (lastAction!=null)
+        {
+            btn.onClick.RemoveListener(lastAction);
+        }
+        lastAction = action;
+        btn.onClick.AddListener(lastAction);
+       
     }
     public void Invoke()
     {

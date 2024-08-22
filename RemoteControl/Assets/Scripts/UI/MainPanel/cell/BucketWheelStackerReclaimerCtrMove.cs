@@ -24,8 +24,8 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
     public override void Start()
     {
         base.Start();
-        AddOnClickListener(pileMaterResetBtn,(() => SendMessage("堆料重置")));
-        AddOnClickListener(pileMaterTakeBtn,(() => SendMessage("堆料")));
+        // AddOnClickListener(pileMaterResetBtn,(() => SendMessageToServer("堆料重置")));
+        // AddOnClickListener(pileMaterTakeBtn,(() => SendMessageToServer("堆料")));
         
     }
     public override void UpdateData(SystemVariables data)

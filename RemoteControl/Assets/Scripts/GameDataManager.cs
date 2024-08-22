@@ -44,7 +44,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public void SetSystemVariables(SystemVariables systemVariables)
     {
         _systemVariables = systemVariables;
-        _rcConnectionState = _systemVariables.PLCCommunicationState;
+        _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
         UpdateMachinePosAndRot();
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
     }
@@ -183,6 +183,16 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.QUERY_SYSTEM = "MC";
         serverCommand.DATA_TYPE = 6;
         serverCommand.QUERY_TYPE = 1;
+        MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
+    }
+
+    public void SendServerCommandByName(string commandName)
+    {
+        ServerCommand serverCommand = new ServerCommand();
+        serverCommand.QUERY_SYSTEM = "MC";
+        serverCommand.DATA_TYPE = 6;
+        serverCommand.QUERY_TYPE = 2;
+        serverCommand.COMMAND_NAME = commandName;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
     /// <summary>

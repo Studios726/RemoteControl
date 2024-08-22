@@ -49,7 +49,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             GetToggleState(data.BucketWheelOverTorqueSwitch, data.BucketWheelOverTorqueSwitch_2);
         bucketWheelData.isLubricatingOilPumpFlowSwitch =
             GetToggleState(data.BucketWheelForcedLubricationFlowSwitch, data.BucketWheelForcedLubricationFlowSwitch_2);
-        BucketWheelItem?.UpdateData(bucketWheelData, data.PLCCommunicationState);
+        BucketWheelItem?.UpdateData(bucketWheelData, data.D1PLC1CommunicationState);
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.BucketWheelSlotLift_2);
         bucketWheelFeedChuteData.isLowerRunning = GetToggleState(data.BucketWheelSlotLower,
             data.BucketWheelSlotLower_2);
-        BucketWheelFeedChuteItem?.UpdateData(bucketWheelFeedChuteData, data.PLCCommunicationState);
+        BucketWheelFeedChuteItem?.UpdateData(bucketWheelFeedChuteData, data.D1PLC1CommunicationState);
     }
 
     /// <summary>
@@ -93,7 +93,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.DiversionBaffleDownRunning_2);
         shuntPlateData.isLowerRunning = GetToggleState(data.DiversionBaffleUpRunning,
             data.DiversionBaffleUpRunning_2);
-        ShuntPlateItem?.UpdateData(shuntPlateData, data.PLCCommunicationState);
+        ShuntPlateItem?.UpdateData(shuntPlateData, data.D1PLC1CommunicationState);
     }
 
     /// <summary>
@@ -109,7 +109,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.VibrationMotorOverload_2);
         vibratorMotorData.isVibrationMotorRunning = GetToggleState(data.VibrationMotorRunning,
             data.VibrationMotorRunning_2);
-        VibratorMotorItem?.UpdateData(vibratorMotorData, data.PLCCommunicationState);
+        VibratorMotorItem?.UpdateData(vibratorMotorData, data.D1PLC1CommunicationState);
     }
 
     /// <summary>
@@ -132,7 +132,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
         //”–“…Œ £ø£ø£ø Ã’
         tailCarBeltDeviceData.isLongitudinalTearSwitch = GetToggleState(data.TailCarBeltLongitudinalTearing,
             data.TailCarBeltLongitudinalTearing_2);
-        TailCarBeltDeviceItem?.UpdateData(tailCarBeltDeviceData, data.PLCCommunicationState);
+        TailCarBeltDeviceItem?.UpdateData(tailCarBeltDeviceData, data.D1PLC1CommunicationState);
     }
 
     /// <summary>
@@ -170,7 +170,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             GetToggleState(data.DryFogDustSuppressionReclaimingRunning, data.DryFogDustSuppressionReclaimingRunning_2);
         sunningWaterForDustPreventionData.isDryFogDustSuppressionDiversionRunning =
             GetToggleState(data.DryFogDustSuppressionDiversionRunning, data.DryFogDustSuppressionDiversionRunning_2);
-        SunningWaterForDustPreventionItem?.UpdateData(sunningWaterForDustPreventionData, data.PLCCommunicationState);
+        SunningWaterForDustPreventionItem?.UpdateData(sunningWaterForDustPreventionData, data.D1PLC1CommunicationState);
     }
 
     /// <summary>
@@ -206,7 +206,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.SuspensionBeltMaterialFlowDetectionSwitch, data.SuspensionBeltMaterialFlowDetectionSwitch_2);
         suspendedColloidData.isMiddleHopperCoalBlocking = GetToggleState(data.CentralMaterialDustDetectionSwitch,
             data.CentralMaterialDustDetectionSwitch_2);
-        SuspendedColloidItem?.UpdateData(suspendedColloidData, data.PLCCommunicationState);
+        SuspendedColloidItem?.UpdateData(suspendedColloidData, data.D1PLC1CommunicationState);
     }
 
     public void UpdateRailGrippingDeviceItem(SystemVariables data)
@@ -232,7 +232,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             GetToggleState(data.RightAnchorLiftLimit, data.RightAnchorLiftLimit_2);
         railGrippingDeviceData.isRightRailClamperReleaseLimit =
             GetToggleState(data.RightClampRelaxLimit, data.RightClampRelaxLimit_2);
-        RailGrippingDeviceItem?.UpdateData(railGrippingDeviceData, data.PLCCommunicationState);
+        RailGrippingDeviceItem?.UpdateData(railGrippingDeviceData, data.D1PLC1CommunicationState);
     }
 
     /// <summary>
@@ -262,7 +262,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             GetToggleState(data.RollerFullDiskSwitch, data.RollerFullDiskSwitch_2);
         cableWindingDeviceData.isPowerReelRunning =
             GetToggleState(data.PowerRollerRunning, data.PowerRollerRunning_2);
-        CableWindingDeviceItem?.UpdateData(cableWindingDeviceData, data.PLCCommunicationState);
+        CableWindingDeviceItem?.UpdateData(cableWindingDeviceData, data.D1PLC1CommunicationState);
     }
 
     public bool GetToggleState(bool machine1, bool machine2)

@@ -9,24 +9,23 @@ namespace ShenYangRemoteSystem.Subclass
     public class SystemVariables
     {
         public DateTime TimeStamp { get; set; }
-
-
-        public bool PLCCommunicationState { get; set; }//可编程逻辑控制器通信状态
-        public bool RCCommunicationState { get; set; }//远程驱动子系统通信状态
-        public bool MCCommunicationState { get; set; }//综合运控子系统通信状态
-        public bool PCCommunicationState { get; set; }//任务规划子系统通信状态
-        public bool LOCCommunicationState { get; set; }//运动定位子系统通信状态
-        public bool CACommunicationState { get; set; }//安全防护子系统通信状态
-        public bool SCANCommunicationState { get; set; }//三维扫描子系统通信状态
-        public bool FDCommunicationState { get; set; }//流量检测子系统通信状态
-        public bool SMCommunicationState { get; set; }//系统管理子系统通信状态
-        public bool VMCommunicationState { get; set; }//视频监测子系统通信状态
-
-
+        public bool D1PLC1CommunicationState { get; set; } //堆/取料机机上PLC通信状态
+        public bool D1PLC2CommunicationState { get; set; } //堆/取料机无人值守PLC通信状态
+        public bool D2PLC1CommunicationState { get; set; } //取料机机上PLC通信状态
+        public bool D2PLC2CommunicationState { get; set; } //取料机无人值守PLC通信状态
+        public bool RCCommunicationState { get; set; } //远程驱动子系统通信状态
+        public bool MCCommunicationState { get; set; } //综合运控子系统通信状态
+        public bool PCCommunicationState { get; set; } //任务规划子系统通信状态
+        public bool LOCCommunicationState { get; set; } //运动定位子系统通信状态
+        public bool CACommunicationState { get; set; } //安全防护子系统通信状态
+        public bool SCANCommunicationState { get; set; } //三维扫描子系统通信状态
+        public bool FDCommunicationState { get; set; } //流量检测子系统通信状态
+        public bool SMCommunicationState { get; set; } //系统管理子系统通信状态
+        public bool VMCommunicationState { get; set; } //视频监测子系统通信状态
 
 
         // D1PLC1
-        public ushort LargeCarElectricCurrent { get; set; }// ID 1
+        public ushort LargeCarElectricCurrent { get; set; } // ID 1
         public ushort RotaryElectricCurrent { get; set; }
         public ushort SuspensionBeltElectricCurrent { get; set; }
         public ushort BucketWheelElectricCurrent { get; set; }
@@ -143,7 +142,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool LinkAction { get; set; }
         public bool Automatic { get; set; }
         public bool LargeCarFault { get; set; }
-        public bool LargeCarForwardLimiting { get; set; }// 118
+        public bool LargeCarForwardLimiting { get; set; } // 118
         public bool LargeCarReverseLimiting { get; set; }
         public bool AnchorClamp { get; set; }
         public bool LargeCarForward { get; set; }
@@ -225,7 +224,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool VibrationMotorFault { get; set; }
         public bool ReelEmptySwitch { get; set; }
         public bool WindproofSystemCableNotOpen { get; set; }
-        public bool LargeCarLimitAction { get; set; }// 200
+        public bool LargeCarLimitAction { get; set; } // 200
 
         // 201
         public bool RotaryLimitAction { get; set; }
@@ -320,7 +319,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool TailCarBeltFirstLevelDeviation { get; set; }
         public bool TailCarBeltSecondLevelDeviation { get; set; }
         public bool TailCarBeltLongitudinalTear { get; set; }
-        public bool Spare3 { get; set; }//293
+        public bool Spare3 { get; set; } //293
         public bool VibrationMotorCircuitBreakerFault { get; set; }
         public bool VibrationMotorOverloading { get; set; }
         public bool DriverRoomEmergencyStopButton { get; set; }
@@ -375,7 +374,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DryFogDustSuppressionReclaimingRunning { get; set; }
         public bool DryFogDustSuppressionDiversionRunning { get; set; }
         public bool DryFogDustSuppressionRemoteStartRunning { get; set; }
-        public bool DryFogDustSuppressionRemoteStopRunning { get; set; }// 348
+        public bool DryFogDustSuppressionRemoteStopRunning { get; set; } // 348
         public bool TailCarDrivenRollerBearingUpperLimitAlarm { get; set; }
         public bool TailCarDrivenRollerBearingLowerLimitAlarm { get; set; }
         public bool UnmannedEmergencyStop { get; set; }
@@ -408,22 +407,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DriverRoomDescentButton { get; set; }
 
 
-
-
-
-
-
-
-
-
         // D1PLC2
-
-
-
-
-
-
-
 
 
         // D2PLC1
@@ -626,7 +610,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool VibrationMotorFault_2 { get; set; }
         public bool ReelEmptySwitch_2 { get; set; }
         public bool WindproofSystemCableNotOpen_2 { get; set; }
-        public bool LargeCarLimitAction_2 { get; set; }// 200
+        public bool LargeCarLimitAction_2 { get; set; } // 200
 
         // 201
         public bool RotaryLimitAction_2 { get; set; }
@@ -721,7 +705,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool TailCarBeltFirstLevelDeviation_2 { get; set; }
         public bool TailCarBeltSecondLevelDeviation_2 { get; set; }
         public bool TailCarBeltLongitudinalTear_2 { get; set; }
-        public bool Spare3_2 { get; set; }//293
+        public bool Spare3_2 { get; set; } //293
         public bool VibrationMotorCircuitBreakerFault_2 { get; set; }
         public bool VibrationMotorOverloading_2 { get; set; }
         public bool DriverRoomEmergencyStopButton_2 { get; set; }
@@ -776,7 +760,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DryFogDustSuppressionReclaimingRunning_2 { get; set; }
         public bool DryFogDustSuppressionDiversionRunning_2 { get; set; }
         public bool DryFogDustSuppressionRemoteStartRunning_2 { get; set; }
-        public bool DryFogDustSuppressionRemoteStopRunning_2 { get; set; }// 348
+        public bool DryFogDustSuppressionRemoteStopRunning_2 { get; set; } // 348
         public bool TailCarDrivenRollerBearingUpperLimitAlarm_2 { get; set; }
         public bool TailCarDrivenRollerBearingLowerLimitAlarm_2 { get; set; }
         public bool UnmannedEmergencyStop_2 { get; set; }
@@ -809,59 +793,6 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DriverRoomDescentButton_2 { get; set; }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // D2PLC2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

@@ -28,11 +28,11 @@ namespace Utility
             image.sprite = Resources.Load<Sprite>(url);
         }
         /// <summary>
-        ///  ÉèÖÃÎÄ±¾·ûºÅ
+        ///  è®¾ç½®æ–‡æœ¬ç¬¦å·
         /// </summary>
         /// <param name="text"></param>
         /// <param name="str"></param>
-        /// <param name="type">1 m 2 ¶È 3 A </param>
+        /// <param name="type">1 m 2 åº¦ 3 A </param>
         public static void SetTextSymbol(this Text text,string str , TextType textType)
         {
             if (textType == TextType.Meter)
@@ -40,7 +40,7 @@ namespace Utility
                 str = str + "m";
             }
             else if (textType == TextType.Angle) {
-                str = str + "¡ã";
+                str = str + "Â°";
             }
             else if (textType == TextType.Electricity)
             {

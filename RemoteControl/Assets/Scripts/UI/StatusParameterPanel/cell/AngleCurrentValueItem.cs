@@ -112,6 +112,11 @@ public class AngleCurrentValueItem : MonoBehaviour
         if (text.text == str) {
             return;
         }
+
+        if (str=="")
+        {
+            str = "0";
+        }
         text.SetTextSymbol(str, type);
     }
 }

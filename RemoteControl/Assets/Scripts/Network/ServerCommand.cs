@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Unity.VisualScripting;
+using UnityEngine;
 
 [DataContract]
 //远程驱动命令类
@@ -30,7 +31,184 @@ public class ServerCommand
     public float DATA_FLOAT { get; set; }
     //数据浮点型：度数，深度
 }
-
+public enum COMMAND_NAME
+{
+    /// <summary>
+    /// 回转左转
+    /// </summary>
+    ROTATE_LEFT,
+    /// <summary>
+    /// 回转右转
+    /// </summary>
+    ROTATE_RIGHT,
+    /// <summary>
+    /// 回转停止
+    /// </summary>
+    ROTATE_STOP,
+    /// <summary>
+    /// 俯仰上仰
+    /// </summary>
+    ELEVATE_UP,
+    /// <summary>
+    /// 俯仰下附
+    /// </summary>
+    ELEVATE_DOWN,
+    /// <summary>
+    /// 俯仰停止
+    /// </summary>
+    ELEVATE_STOP,
+    /// <summary>
+    /// 大车前进
+    /// </summary>
+    MOVE_FORWARD,
+    /// <summary>
+    /// 大车后退
+    /// </summary>
+    MOVE_BACKWARD,
+    /// <summary>
+    /// 大车停止
+    /// </summary>
+    MOVE_STOP,
+    /// <summary>
+    /// 夹轨器放松
+    /// </summary>
+    RAIL_RELAX,
+    /// <summary>
+    /// 夹轨器夹紧
+    /// </summary>
+    RAIL_CLAMP,
+    /// <summary>
+    /// 动力电源合闸
+    /// </summary>
+    SUPPLYPOWER_ON,
+    /// <summary>
+    /// 动力电源分闸
+    /// </summary>
+    SUPPLYPOWER_OFF,
+    /// <summary>
+    /// 控制电源合闸
+    /// </summary>
+    CONTROLPOWER_ON,
+    /// <summary>
+    /// 控制电源分闸
+    /// </summary>
+    CONTROLPOWER_OFF,
+    /// <summary>
+    /// 悬臂皮带取料
+    /// </summary>
+    BELT_TAKE,
+    /// <summary>
+    /// 悬臂皮带堆料
+    /// </summary>
+    BELT_STACK,
+    /// <summary>
+    /// 悬臂皮带停止
+    /// </summary>
+    BELT_STOP,
+    /// <summary>
+    /// 斗轮启动
+    /// </summary>
+    BUCKET_START,
+    /// <summary>
+    /// 斗轮停止
+    /// </summary>
+    BUCKET_STOP,
+    /// <summary>
+    /// 照明合闸
+    /// </summary>
+    LIGHTPOWER_ON,
+    /// <summary>
+    /// 照明分闸
+    /// </summary>
+    LIGHTPOWER_OFF,
+    /// <summary>
+    /// 主车油泵启动
+    /// </summary>
+    OILBUMP_ON,
+    /// <summary>
+    /// 主车油泵关闭
+    /// </summary>
+    OILBUMP_OFF,
+    /// <summary>
+    /// #取料开关
+    /// </summary>
+    BELTTAKE_BUTTON,
+    /// <summary>
+    /// 堆料开关
+    /// </summary>
+    BELTSTACK_BUTTON,
+    /// <summary>
+    /// 堆取料停止开关
+    /// </summary>
+    BELTSSTOP_BUTTON,
+    /// <summary>
+    /// 与系统连锁解锁
+    /// </summary>
+    SYSTEM_UNLOCK,
+    /// <summary>
+    /// 与系统连锁连锁
+    /// </summary>
+    SYSTEM_LOCK,
+    /// <summary>
+    /// 悬臂头部导料槽抬起（堆料）
+    /// </summary>
+    XBTB_UP_BUTTON,
+    /// <summary>
+    /// 悬臂头部导料槽落下（取料）
+    /// </summary>
+    XBTB_DOWN_BUTTON,
+    /// <summary>
+    /// 悬臂头部导料槽停止
+    /// </summary>
+    XBTB_STOP_BUTTON,
+    /// <summary>
+    /// 振打器启动
+    /// </summary>
+    VIBRATOR_START,
+    /// <summary>
+    /// 振打器停止
+    /// </summary>
+    VIBRATOR_STOP,
+    /// <summary>
+    /// 上位急停
+    /// </summary>
+    EMERGENCY_STOP,
+    /// <summary>
+    /// 上位机故障复位
+    /// </summary>
+    ERR_RESET,
+    /// <summary>
+    /// 上位机旁路
+    /// </summary>
+    BYPASS_BUTTON,
+    /// <summary>
+    /// 取料大车步长递增按钮
+    /// </summary>
+    STEP_SIZE_INC_1,
+    /// <summary>
+    /// 取料大车步长递减按钮
+    /// </summary>
+    STEP_SIZE_DES_1,
+    /// <summary>
+    /// 启车报警
+    /// </summary>
+    STARTUP_ALARM,
+    /// <summary>
+    /// 挡板取料变换启动
+    /// </summary>
+    SKRIT_TAKE_START,
+    /// <summary>
+    /// 挡板分流变换停止
+    /// </summary>
+    SKRIT_TAKE_STOP,
+    /// <summary>
+    /// 挡板堆料变换启动
+    /// </summary>
+    SKRIT_STACK_START
+    
+    
+        
+}
 public static class ServerCommandDataType
 {
     public const int FLOW = 1;
@@ -39,6 +217,7 @@ public static class ServerCommandDataType
     public const int SECURITY = 4;
     public const int TASK = 5;
     public const int REMOTE = 6;
+    
 }
 
 public class TaskCommand

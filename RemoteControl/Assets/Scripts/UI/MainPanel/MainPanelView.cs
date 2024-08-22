@@ -41,7 +41,8 @@ public class MainPanelView : UIView<MainPanelCtr>
 
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
         UpdateData(GameDataManager.Instance.SystemVariables);
-        TaskDataManager.Instance.GetNearestTaskDataDic();
+        //临时注释
+        // TaskDataManager.Instance.GetNearestTaskDataDic();
     }
 
     private void ActiveHideBtnCtr2()
