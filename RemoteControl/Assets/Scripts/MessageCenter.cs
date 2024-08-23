@@ -76,12 +76,13 @@ public class MessageCenter : Singleton<MessageCenter>
             {
                 string json = Decompress(message);
                 SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
-                Debug.Log($"数据解析成功 socketType {nameof(SocketType.TaoRC)}");
+                // Debug.Log($"数据解析成功 socketType {nameof(SocketType.TaoRC)}");
                 GameDataManager.Instance.SetSystemVariables(systemVariables);
             }
             catch (Exception)
             {
 
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
                 Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)}");
             }
            
@@ -90,7 +91,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 string json = Decompress(message);
-                Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
+                // Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
                 TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
                 TaskDataManager.Instance.SetTaskVariables(taskVariables);
             }
@@ -106,7 +107,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 string json = Decompress(message);
-                Debug.LogError($"收到数据 {socketType} {json}");
+                // Debug.LogError($"收到数据 {socketType} {json}");
                 SendDataReportAndDEM  sendDataReportAndDEM = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
                 GameDataManager.Instance.SetScaReportAndDem(sendDataReportAndDEM);
             }

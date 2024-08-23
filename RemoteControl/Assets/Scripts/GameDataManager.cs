@@ -66,17 +66,22 @@ public class GameDataManager : Singleton<GameDataManager>
 
             machineRoot = GameObject.Find("ModelRoot");
         }
+
+        if (machineRoot == null)
+        {
+            return;
+        }
         machineRoot.SetActive(active);
     }
     public void UpdateMachinePosAndRot()
     {
         if (machineMove_1)
         {
-            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance, SystemVariables.RotaryAngle, SystemVariables.VariableAmplitudeAngle);//
+            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance, SystemVariables.SLEW_Angle, SystemVariables.Luff_Angle);//
         }
         if (machineMove_2)
         {
-            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance_2, SystemVariables.RotaryAngle_2, SystemVariables.VariableAmplitudeAngle_2);//
+            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance_2, SystemVariables.SLEW_Angle_2, SystemVariables.Luff_Angle_2);//
         }
     }
     public GameObject SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem)

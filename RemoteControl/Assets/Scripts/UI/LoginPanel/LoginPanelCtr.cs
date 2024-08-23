@@ -6,14 +6,21 @@ using UnityEngine;
 
 public class LoginPanelCtr :UIPresenter<LoginPanelView>
 {
+    public override void ShowView(UIArgs uiArgs = null)
+    {
+        base.ShowView(uiArgs);
+        GameDataManager.Instance.SetMachineActive(false);
+    }
+
     public void Login(string account, string password)
     {
-        if (true)//DataManager.Instance.CheckLoginInfo(account, password)
+        if (DataManager.Instance.CheckLoginInfo(account, password))//DataManager.Instance.CheckLoginInfo(account, password)
         {
             EventManager.Instance.TriggerEvent(EventName.LoginSuccess, null);
             view.SetAccountAndPassword();
             UIManager.Instance.OpenUI(UIID.MainPanel);
             UIManager.Instance.OpenUI(UIID.TopPanel);
+            UIManager.Instance.CloseUI(UIID.LoginPanel);
         }
         else
         {

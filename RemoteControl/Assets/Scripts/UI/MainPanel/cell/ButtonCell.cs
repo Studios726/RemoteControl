@@ -22,6 +22,10 @@ public class ButtonCell : MonoBehaviour
     }
     public void SetSelectState(bool state)
     {
+        if (select.activeSelf==state)
+        {
+            return;
+        }
         select.SetActive(state);
     }
     public void AddListener(UnityAction action)

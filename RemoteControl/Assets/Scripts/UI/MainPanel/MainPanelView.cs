@@ -25,24 +25,24 @@ public class MainPanelView : UIView<MainPanelCtr>
         _bucketWheelCtrMove2 = RootObj.transform.FindComponent<BucketWheelCtrMoveBase>("machine_2/Bg_2");
         _bucketWheelTask2 = RootObj.transform.FindComponent<BucketWheelTaskBase>("machine_2/Bg_3");
         _bucketWheelHideBtnCtr2 = RootObj.transform.FindComponent<HideButtonCtrBase>("machine_2/hideCtrBtns");
-
+        
         _bucketWheelState1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerState>("machine_1/Bg_1");
         _bucketWheelCtrMove1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerCtrMove>("machine_1/Bg_2");
         _bucketWheelTask1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerTask>("machine_1/Bg_3");
         _bucketWheelHideBtnCtr1 =
             RootObj.transform.FindComponent<BucketWheelStackerReclaimerHideBtnCtr>("machine_1/hideCtrBtns");
-
+        
         updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
-
+        
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
-
+        
         updateModelBtn.onClick.AddListener(() => { GameDataManager.Instance.UpdateSCAData(30); });
-
-
+        
+        
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
         UpdateData(GameDataManager.Instance.SystemVariables);
         //临时注释
-        // TaskDataManager.Instance.GetNearestTaskDataDic();
+        TaskDataManager.Instance.GetNearestTaskDataDic();
     }
 
     private void ActiveHideBtnCtr2()

@@ -9,7 +9,8 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     public override void ShowView(UIArgs uiArgs = null)
     {
         base.ShowView(uiArgs);
-        GameDataManager.Instance.SetMachineActive(true);
+        Timer.Register(0.1f, () => GameDataManager.Instance.SetMachineActive(true));
+
     }
 
     public override void HideView()
@@ -22,7 +23,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     {
         Debug.Log("MainPanelCtr ");
         Addlistener();
-        GameDataManager.Instance.UpdatePcData();
+        // GameDataManager.Instance.UpdatePcData();
         view.UpdateData(null,null);
         view.UpdatePcData(null, null);
         UpdateTaskDes1(null, null);

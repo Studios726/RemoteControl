@@ -114,7 +114,7 @@ namespace RemoteControl
                 //    //GameDataManager.Instance.UpdatePcData();
                 //});
             }
-            else if (connectEventArgs.type == SocketType.TaskPC)
+            else if (connectEventArgs.type == SocketType.SCA)
             {
                 GameDataManager.Instance.UpdateSCAData(30);
             }

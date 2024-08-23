@@ -41,6 +41,8 @@ public static class ConstStr
     public const string DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC = "history_suspensoidElectricity";
     public const string DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC = "history_bucketWheelElectricity";
     public const string DATABASE_HISTORY_CANTILEVER_Flow_MC = "history_cantileverFlow";
+    public const string DATABASE_HISTORY_LOG1_MC = "history_logs";
+    public const string DATABASE_HISTORY_LOG2_MC = "history_logs_2";
     #endregion
 
     #region login
@@ -78,6 +80,11 @@ public static class ConstStr
     public const string DATA_HISTORY_CARTELECTRICITY_NAME = "Name";
     public const string DATA_HISTORY_CARTELECTRICITY_TIME = "Time";
     public const string DATA_HISTORY_CARTELECTRICITY_MACHINE = "Machine";
+    #endregion
+    #region history_logs
+    public const string DATA_HISTORY_LOGS_TIME = "time";
+    public const string DATA_HISTORY_LOGS_INFO = "info";
+    public const string DATA_HISTORY_LOGS_OPERATOR = "operator";
     #endregion
     #region
     public const string DATA_ACCOUNT_OPERATION_INDEX = "Index";

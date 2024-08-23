@@ -222,101 +222,130 @@ public class HideButtonCtrBase : PanelBase
             case  COMMAND_NAME.RAIL_RELAX:
                 disengageClampBtn.SetSelectState(true);
                 engageClampBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("夹轨器放松", GameDataManager.Instance.GetUserName(), machine);
                     break;
             case  COMMAND_NAME.RAIL_CLAMP: 
                 engageClampBtn.SetSelectState(true);
                 disengageClampBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("夹轨器夹紧", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.SUPPLYPOWER_ON:   
                 impetusSupplyCloseBrakeBtn.SetSelectState(true);
                 impetusSupplyOpenBrakeBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("动力电源合闸", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.SUPPLYPOWER_OFF:   
                 impetusSupplyOpenBrakeBtn.SetSelectState(true);
                 impetusSupplyCloseBrakeBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("动力电源分闸", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.CONTROLPOWER_ON:   
                 powerSupplyCloseBrakeBtn.SetSelectState(true);
                 powerSupplyOpenBrakeBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("控制电源合闸", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.CONTROLPOWER_OFF:   
                 powerSupplyOpenBrakeBtn.SetSelectState(true);
                 powerSupplyCloseBrakeBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("控制电源分闸", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BELT_TAKE:   
                 cantileverTakeMaterStartBtn.SetSelectState(true);
                 cantileverTakeMaterStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("悬臂皮带取料", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BELT_STACK:   
+                DataManager.Instance.InsertHistoryLogMc("悬臂皮带堆料", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BELT_STOP:  
                 cantileverTakeMaterStopBtn.SetSelectState(true);
                 cantileverTakeMaterStartBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("悬臂皮带停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BUCKET_START:  
                 bucketWheelStartBtn.SetSelectState(true);
                 bucketWheelStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("斗轮启动", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BUCKET_STOP: 
                 bucketWheelStopBtn.SetSelectState(true);
                 bucketWheelStartBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("斗轮停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.LIGHTPOWER_ON:   
                 lightCloseBrakeBtn.SetSelectState(true);
                 lightOpenBrakeBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("照明合闸", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.LIGHTPOWER_OFF:   
                 lightOpenBrakeBtn.SetSelectState(true);
                 lightCloseBrakeBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("照明分闸", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.OILBUMP_ON:   
                 oilPumpStartBtn.SetSelectState(true);
                 oilPumpStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("主车油泵启动", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.OILBUMP_OFF:   
                 oilPumpStopBtn.SetSelectState(true);
                 oilPumpStartBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("主车油泵关闭", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BELTTAKE_BUTTON:   
+                DataManager.Instance.InsertHistoryLogMc("取料开关", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BELTSTACK_BUTTON:   
+                DataManager.Instance.InsertHistoryLogMc("堆料开关", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BELTSSTOP_BUTTON:   
+                DataManager.Instance.InsertHistoryLogMc("堆取料停止开关", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.SYSTEM_UNLOCK:   
                 systemUnlockBtn.SetSelectState(true);
                 systemLockBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("与系统解锁", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.SYSTEM_LOCK:   
                 systemLockBtn.SetSelectState(true);
                 systemUnlockBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("与系统连锁", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.BYPASS_BUTTON:   
                 bypassBtn.SetSelectState(!bypassBtn.select.activeSelf);
+                DataManager.Instance.InsertHistoryLogMc("上位机旁路", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.XBTB_UP_BUTTON:   
+                DataManager.Instance.InsertHistoryLogMc("悬臂头部导料槽抬起（堆料）", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.XBTB_DOWN_BUTTON:   
                 takeMaterDownBtn.SetSelectState(true);
                 takeMaterStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("悬臂头部导料槽落下（取料）", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.XBTB_STOP_BUTTON:   
                 takeMaterStopBtn.SetSelectState(true);
                 takeMaterDownBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("悬臂头部导料槽停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.VIBRATOR_START:   
                 shakerStartBtn.SetSelectState(true);
                 shakerStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("振打器启动", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.VIBRATOR_STOP:   
                 shakerStopBtn.SetSelectState(true);
                 shakerStartBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("振打器停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.SKRIT_TAKE_START:   
+                DataManager.Instance.InsertHistoryLogMc("挡板取料变换启动", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.SKRIT_STACK_START:   
+                DataManager.Instance.InsertHistoryLogMc("挡板堆料变换启动", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.SKRIT_TAKE_STOP:   
+                DataManager.Instance.InsertHistoryLogMc("挡板分流变换停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             default:
                 break;

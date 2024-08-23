@@ -268,30 +268,39 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             //     break;
             case COMMAND_NAME.MOVE_FORWARD:
                 UpdateCurCtrMode(ref curCarMoveMode, carForwardBtn);
+                DataManager.Instance.InsertHistoryLogMc("大车前进", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.MOVE_STOP:
                 UpdateCurCtrMode(ref curCarMoveMode, carStopBtn);
+                DataManager.Instance.InsertHistoryLogMc("大车停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.MOVE_BACKWARD:
                 UpdateCurCtrMode(ref curCarMoveMode, carBackBtn);
+                DataManager.Instance.InsertHistoryLogMc("大车后退", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.ELEVATE_UP:
                 UpdateCurCtrMode(ref curCarPitchingMode, upBtn);
+                DataManager.Instance.InsertHistoryLogMc("俯仰上仰", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.ELEVATE_DOWN:
                 UpdateCurCtrMode(ref curCarPitchingMode, downBtn);
+                DataManager.Instance.InsertHistoryLogMc("俯仰下附", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.ELEVATE_STOP:
                 UpdateCurCtrMode(ref curCarPitchingMode, stopBtn);
+                DataManager.Instance.InsertHistoryLogMc("俯仰停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.ROTATE_LEFT:
                 UpdateCurCtrMode(ref curCarRotMode, leftBtn);
+                DataManager.Instance.InsertHistoryLogMc("回转左转", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.ROTATE_RIGHT:
                 UpdateCurCtrMode(ref curCarRotMode, rightBtn);
+                DataManager.Instance.InsertHistoryLogMc("回转右转", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.ROTATE_STOP:
                 UpdateCurCtrMode(ref curCarRotMode, rotStopBtn);
+                DataManager.Instance.InsertHistoryLogMc("回转停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             default:
                 break;

@@ -6,32 +6,38 @@ using System.Threading.Tasks;
 
 namespace ShenYangRemoteSystem.Subclass
 {
+    
     public class SystemVariables
     {
         public DateTime TimeStamp { get; set; }
-        public bool D1PLC1CommunicationState { get; set; } //堆/取料机机上PLC通信状态
-        public bool D1PLC2CommunicationState { get; set; } //堆/取料机无人值守PLC通信状态
-        public bool D2PLC1CommunicationState { get; set; } //取料机机上PLC通信状态
-        public bool D2PLC2CommunicationState { get; set; } //取料机无人值守PLC通信状态
-        public bool RCCommunicationState { get; set; } //远程驱动子系统通信状态
-        public bool MCCommunicationState { get; set; } //综合运控子系统通信状态
-        public bool PCCommunicationState { get; set; } //任务规划子系统通信状态
-        public bool LOCCommunicationState { get; set; } //运动定位子系统通信状态
-        public bool CACommunicationState { get; set; } //安全防护子系统通信状态
-        public bool SCANCommunicationState { get; set; } //三维扫描子系统通信状态
-        public bool FDCommunicationState { get; set; } //流量检测子系统通信状态
-        public bool SMCommunicationState { get; set; } //系统管理子系统通信状态
-        public bool VMCommunicationState { get; set; } //视频监测子系统通信状态
+
+        
+        public bool D1PLC1CommunicationState { get; set; }//堆/取料机机上PLC通信状态
+        public bool D1PLC2CommunicationState { get; set; }//堆/取料机无人值守PLC通信状态
+        public bool D2PLC1CommunicationState { get; set; }//取料机机上PLC通信状态
+        public bool D2PLC2CommunicationState { get; set; }//取料机无人值守PLC通信状态
+        public bool RCCommunicationState { get; set; }//远程驱动子系统通信状态
+        public bool MCCommunicationState { get; set; }//综合运控子系统通信状态
+        public bool PCCommunicationState { get; set; }//任务规划子系统通信状态
+        public bool LOCCommunicationState { get; set; }//运动定位子系统通信状态
+        public bool CACommunicationState { get; set; }//安全防护子系统通信状态
+        public bool SCANCommunicationState { get; set; }//三维扫描子系统通信状态
+        public bool FDCommunicationState { get; set; }//流量检测子系统通信状态
+        public bool SMCommunicationState { get; set; }//系统管理子系统通信状态
+        public bool VMCommunicationState { get; set; }//视频监测子系统通信状态
+
+
 
 
         // D1PLC1
-        public ushort LargeCarElectricCurrent { get; set; } // ID 1
-        public ushort RotaryElectricCurrent { get; set; }
-        public ushort SuspensionBeltElectricCurrent { get; set; }
-        public ushort BucketWheelElectricCurrent { get; set; }
-        public ushort LargeCarTravelDistance { get; set; } //大车行走距离
-        public ushort RotaryAngle { get; set; } //回转角度
-        public ushort VariableAmplitudeAngle { get; set; } //变幅角度
+        // ID1
+        public short LargeCarElectricCurrent { get; set; }// 1
+        public short RotaryElectricCurrent { get; set; }
+        public short SuspensionBeltElectricCurrent { get; set; }
+        public short BucketWheelElectricCurrent { get; set; }
+        public short LargeCarTravelDistance { get; set; } //大车行走距离
+        public short RotaryAngle { get; set; } //回转角度
+        public short VariableAmplitudeAngle { get; set; } //变幅角度
         public bool VacuumCircuitBreakerClosed { get; set; }
         public bool LowVoltageControlPowerClosed { get; set; }
         public bool LowVoltagePowerClosed { get; set; }
@@ -137,12 +143,12 @@ namespace ShenYangRemoteSystem.Subclass
         public bool RotarySpeedGivenSelection { get; set; }
         public bool RotaryFanRunning { get; set; }
         public bool VariableAmplitudeLowerElectromagneticValveOpen { get; set; }
-        public ushort RiseCount { get; set; }
+        public short RiseCount { get; set; }
         public bool SingleAction { get; set; }
         public bool LinkAction { get; set; }
         public bool Automatic { get; set; }
         public bool LargeCarFault { get; set; }
-        public bool LargeCarForwardLimiting { get; set; } // 118
+        public bool LargeCarForwardLimiting { get; set; }// 118
         public bool LargeCarReverseLimiting { get; set; }
         public bool AnchorClamp { get; set; }
         public bool LargeCarForward { get; set; }
@@ -177,7 +183,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool SuspensionBeltUnloadingButton { get; set; }
         public bool BucketWheelStartupButton { get; set; }
         public bool BucketWheelStopButton { get; set; }
-        public ushort RotaryCount { get; set; }
+        public short RotaryCount { get; set; }
         public bool LeftAnchorNotLifted { get; set; }
         public bool RightAnchorNotLifted { get; set; }
         public bool ClampNotRelaxed { get; set; }
@@ -224,7 +230,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool VibrationMotorFault { get; set; }
         public bool ReelEmptySwitch { get; set; }
         public bool WindproofSystemCableNotOpen { get; set; }
-        public bool LargeCarLimitAction { get; set; } // 200
+        public bool LargeCarLimitAction { get; set; }// 200
 
         // 201
         public bool RotaryLimitAction { get; set; }
@@ -319,7 +325,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool TailCarBeltFirstLevelDeviation { get; set; }
         public bool TailCarBeltSecondLevelDeviation { get; set; }
         public bool TailCarBeltLongitudinalTear { get; set; }
-        public bool Spare3 { get; set; } //293
+        public bool Spare3 { get; set; }//293
         public bool VibrationMotorCircuitBreakerFault { get; set; }
         public bool VibrationMotorOverloading { get; set; }
         public bool DriverRoomEmergencyStopButton { get; set; }
@@ -369,12 +375,12 @@ namespace ShenYangRemoteSystem.Subclass
         public bool BucketWheelSlotLift { get; set; }
         public bool BucketWheelSlotLower { get; set; }
         public bool RemoteEmergencyStop { get; set; }
-        public ushort DiversionPlateAngle { get; set; }
+        public short DiversionPlateAngle { get; set; }
         public bool DryFogDustSuppressionStackingRunning { get; set; }
         public bool DryFogDustSuppressionReclaimingRunning { get; set; }
         public bool DryFogDustSuppressionDiversionRunning { get; set; }
         public bool DryFogDustSuppressionRemoteStartRunning { get; set; }
-        public bool DryFogDustSuppressionRemoteStopRunning { get; set; } // 348
+        public bool DryFogDustSuppressionRemoteStopRunning { get; set; }// 348
         public bool TailCarDrivenRollerBearingUpperLimitAlarm { get; set; }
         public bool TailCarDrivenRollerBearingLowerLimitAlarm { get; set; }
         public bool UnmannedEmergencyStop { get; set; }
@@ -401,23 +407,744 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DriverRoomBalancePumpMotorNotRunning { get; set; }
         public bool DriverRoomBalancePumpMotorAuxiliaryContactFault { get; set; }
         public bool Remote { get; set; }
-        public ushort TwoMachineDistance { get; set; } //两机距离
-        public ushort DriverRoomAngle { get; set; } //司机室角度
+        public short TwoMachineDistance { get; set; } //两机距离
+        public short DriverRoomAngle { get; set; } //司机室角度
         public bool DriverRoomRiseButton { get; set; }
         public bool DriverRoomDescentButton { get; set; }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // D1PLC2
+        //ID1
+        public float XBZQ_FZ_VALUE { get; set; }
+        public float XBZZ_FZ_VALUE { get; set; }
+        public float XBZH_FZ_VALUE { get; set; }
+        public float XBYQ_FZ_VALUE { get; set; }
+        public float XBYZ_FZ_VALUE { get; set; }
+        public float XBYH_FZ_VALUE { get; set; }
+        public float QJY_VALUE { get; set; }
+        public float DCZQ_FZ_VALUE { get; set; }
+        public float DCYQ_FZ_VALUE { get; set; }
+        public float DCZH_FZ_VALUE { get; set; }
+        public float DCYH_FZ_VALUE { get; set; }
+        public float XBTB_LWJ_VALUE { get; set; }
+        public float ENCODE_DC_VALUE { get; set; }
+        public float Encode_slew_VALUE { get; set; }
+        public bool Take_BySection { get; set; }
+        public bool Take_Run_Rdy { get; set; }
+        public bool Take_Runing { get; set; }
+        public bool Take_Runing_Fault { get; set; }
+        public bool Take_Para_Set_ERR { get; set; }
+        public bool Take_Right_Arrive { get; set; }
+        public bool Take_Left_Arrive { get; set; }
+        public bool Take_SlewDirect { get; set; }
+        public bool Take_DCDirect { get; set; }
+        public bool Take_Right_CMD { get; set; }
+        public bool Take_Left_CMD { get; set; }
+        public bool Take_DCFWD_CMD { get; set; }
+        public bool Take_DCREV_CMD { get; set; }
+        public bool Take_Device_Enable { get; set; }
+        public bool Change_Direct { get; set; }
+        public bool Forbid_ChangeDirect { get; set; }
+        public bool Get_R_CurrentAngle { get; set; }
+        public bool Get_L_CurrentAngle { get; set; }
+        public bool Take_FWDStepSize_INC { get; set; }
+        public bool Take_FWDStepSize_DES { get; set; }
+        public bool Take_LeftBorder_INC { get; set; }
+        public bool Take_LeftBorder_DES { get; set; }
+        public bool Take_RightBorder_INC { get; set; }
+        public bool Take_RightBorder_DES { get; set; }
+        public bool ChangeDirectTimer_R { get; set; }
+        public bool Slew_Speed_Enable { get; set; }
+        public bool Take_Current_Lock { get; set; }
+        public bool Take_Current_H { get; set; }
+        public bool Take_Current_HH { get; set; }
+        public bool Take_Current_Norm { get; set; }
+        public bool Take_Current_Norm_PE { get; set; }
+        public bool Take_Forbid_CHDirect { get; set; }
+        public bool Take_Releas_CHDirect { get; set; }
+        public bool Take_ChT_MO { get; set; }
+        public bool Take_CHT_Enable { get; set; }
+        public bool Take_CHT_Start { get; set; }
+        public bool Take_CHT_Stop { get; set; }
+        public bool Take_ChT_Restrat { get; set; }
+        public bool Take_ChT_PerStart { get; set; }
+        public bool Take_CHT_Finsh { get; set; }
+        public bool Take_CHT_ERR { get; set; }
+        public bool Take_CHT_Onse { get; set; }
+        public bool Take_ChT_Left_CMD1 { get; set; }
+        public bool Take_ChT_Right_CMD1 { get; set; }
+        public bool Take_ChT_DcREV_CMD { get; set; }
+        public bool Take_ChT_LuffD_CMD1 { get; set; }
+        public bool Take_ChT_LuffD_CMD2 { get; set; }
+        public bool Take_CHT_Right_Reach { get; set; }
+        public bool Take_CHT_Left_Reach { get; set; }
+        public bool Take_CHT_Slew_Finish { get; set; }
+        public bool Take_CHT_Runing { get; set; }
+        public bool Take_Outside_INC { get; set; }
+        public bool Take_Inside_INC { get; set; }
+        public bool BeltBucket_OnZero { get; set; }
+        public bool Take_VVVF_Aear { get; set; }
+        public bool Take_TSOL_Enable { get; set; }
+        public bool Take_TSOL_Flag { get; set; }
+        public bool Take_TSOL_PE { get; set; }
+        public bool Take_TSOL_Reset_PE1 { get; set; }
+        public bool Take_TSOL_Reset_PE2 { get; set; }
+        public bool Take_LowSpeed { get; set; }
+        public bool Take_Record_Flag1 { get; set; }
+        public bool Take_Record_Flag2 { get; set; }
+        public bool Take_Record_Flag3 { get; set; }
+        public bool Take_Run { get; set; }
+        public bool Take_Record { get; set; }
+        public bool Take_DCREV_CMD_FE { get; set; }
+        public short Take_Step { get; set; }
+        public short Take_Pause_TM { get; set; }
+        public short Take_ChangeDirect_TM { get; set; }
+        public short Take_ChT_CW { get; set; }
+        public short Take_ChT_TM { get; set; }
+        public short Take_CHT_Finish_Delaytime { get; set; }
+        public float Take_DC_NextPos { get; set; }
+        public float Take_DC_StepSize { get; set; }
+        public float Take_Start_Point { get; set; }
+        public float Take_End_Point { get; set; }
+        public float Take_LeftBorder { get; set; }
+        public float Take_RightBorder { get; set; }
+        public float Take_OffSet1 { get; set; }
+        public float Take_OffSet2 { get; set; }
+        public float Take_TSOL_CU { get; set; }
+        public float Take_NormCurrent { get; set; }
+        public float Take_RightBorder_SP { get; set; }
+        public float Take_LeftBorder_SP { get; set; }
+        public float Take_MaxFlue_SP { get; set; }
+        public float Take_MaxCurrent_SP { get; set; }
+        public float Take_MinCurrent_SP { get; set; }
+        public float Take_DCPosStrat_SP { get; set; }
+        public float Take_DCPosEnd_SP { get; set; }
+        public float MAC_Right_Border { get; set; }
+        public float MAC_Left_Border { get; set; }
+        public float Take_ChT_HTLuff { get; set; }
+        public float Take_ChT_HTSlew_SP { get; set; }
+        public float Take_ChT_TargetLuff { get; set; }
+        public float DC_Pos { get; set; }
+        public float SLEW_Angle { get; set; }
+        public float Luff_Angle { get; set; }
+        public float Coal_L_High { get; set; }
+        public float Coal_R_High { get; set; }
+        public float Bucket_Current { get; set; }
+        public float BoomBelt_Current { get; set; }
+        public float Slew_Current { get; set; }
+        public float Travel_Current { get; set; }
+        public float Luff_Current { get; set; }
+        public float TailLuff_Current { get; set; }
+        public float Belt_Flue { get; set; }
+        public float Bucket_Pos { get; set; }
+        public float DC_FixSize { get; set; }
+        public float DC_FixSize_NEXT { get; set; }
+        public float Luff_FixSize { get; set; }
+        public float Luff_FixSize_NEXT { get; set; }
+        public bool Control_SEL_Local { get; set; }
+        public bool Control_SEL_CCR { get; set; }
+        public bool SEL_Take_Mode { get; set; }
+        public bool SEL_Stack_Mode { get; set; }
+        public bool SEL_Pass_Mode { get; set; }
+        public bool Test_Mode { get; set; }
+        public bool OperDesk_OnZero { get; set; }
+        public bool AutoBorder_Enable { get; set; }
+        public bool Working_Start { get; set; }
+        public bool Working_Pause { get; set; }
+        public bool Stop_Runing { get; set; }
+        public bool System_Emergence { get; set; }
+        public bool HMI_ErrReset { get; set; }
+        public bool DC_FWD_Limit { get; set; }
+        public bool DC_FWD_LLimit { get; set; }
+        public bool DC_FWD_SoftLimit { get; set; }
+        public bool DcFWD_LimitStatus { get; set; }
+        public bool DC_REV_Limit { get; set; }
+        public bool DC_REV_LLimit { get; set; }
+        public bool DC_REV_SoftLimit { get; set; }
+        public bool DcREV_LimitStatus { get; set; }
+        public bool Slew_R_Limit { get; set; }
+        public bool Slew_R_LLimit { get; set; }
+        public bool Slew_R_SoftLimit { get; set; }
+        public bool Slew_R_LimitStatus { get; set; }
+        public bool Slew_L_Limit { get; set; }
+        public bool Slew_L_LLimit { get; set; }
+        public bool Slew_L_SoftLimit { get; set; }
+        public bool Slew_L_LimitStatus { get; set; }
+        public bool Luff_Up_Limit { get; set; }
+        public bool Luff_Up_LLimit { get; set; }
+        public bool Luff_Up_SoftLimit { get; set; }
+        public bool LuffUp_LimitStatus { get; set; }
+        public bool Luff_Down_Limit { get; set; }
+        public bool Luff_Down_LLimit { get; set; }
+        public bool Luff_Down_SoftLimit { get; set; }
+        public bool LuffDown_LimitStatus { get; set; }
+        public bool OverBelt_R_Limit { get; set; }
+        public bool OverBelt_L_Limit { get; set; }
+        public bool OverBelt_D_Limit { get; set; }
+        public bool OverBelt_R_SoftLimit { get; set; }
+        public bool OverBelt_L_SoftLimit { get; set; }
+        public bool OverBelt_D_SoftLimit { get; set; }
+        public bool ErrReset { get; set; }
+        public bool XBTB_Baffle_OnTake { get; set; }
+        public bool XBTB_Baffle_OnStack { get; set; }
+        public bool ZXLD_Baffle_OnTake { get; set; }
+        public bool ZXLD_Baffle_OnStack { get; set; }
+        public bool ZXLD_Skrit_OnTake { get; set; }
+        public bool ZXLD_Skrit_OnStack { get; set; }
+        public bool BOOL_YL8 { get; set; }
+        public bool PSOn_Light { get; set; }
+        public bool PSOff_Light { get; set; }
+        public bool CPSOn_Light { get; set; }
+        public bool CPSOff_Light { get; set; }
+        public bool Ground_Belt_Waiting { get; set; }
+        public bool Ground_Belt_Runing { get; set; }
+        public bool CantBeltTake_Runing { get; set; }
+        public bool CantBeltStack_Runing { get; set; }
+        public bool Cable_PS_Runing { get; set; }
+        public bool Cable_CPS_Runing { get; set; }
+        public bool Luff_OilBump_Runing { get; set; }
+        public bool Bucket_Runing { get; set; }
+        public bool DC_FWD_Runing { get; set; }
+        public bool DC_REV_Runing { get; set; }
+        public bool SLEW_R_Runing { get; set; }
+        public bool SLEW_L_Runing { get; set; }
+        public bool Luff_Up_Runing { get; set; }
+        public bool Luff_Down_Runing { get; set; }
+        public bool Tail_LuffU_Runing { get; set; }
+        public bool Tail_LuffD_Runing { get; set; }
+        public bool Lighting { get; set; }
+        public bool CCR_Take_Enable { get; set; }
+        public bool CCR_Stack_Enable { get; set; }
+        public bool Runing_RightField { get; set; }
+        public bool Runing_LeftField { get; set; }
+        public bool DC_Encoder_ERR { get; set; }
+        public bool Slew_Encoder_ERR { get; set; }
+        public bool Para_Intail_SB { get; set; }
+        public bool Alarming { get; set; }
+        public bool DC_Enable { get; set; }
+        public bool Slew_Enable { get; set; }
+        public bool Luff_Enable { get; set; }
+        public bool DC_FWD_Enable { get; set; }
+        public bool DC_REV_Enable { get; set; }
+        public bool Slew_R_Enable { get; set; }
+        public bool Slew_L_Enable { get; set; }
+        public bool LuffU_Enable { get; set; }
+        public bool LuffD_Enable { get; set; }
+        public bool Bucket_Enable { get; set; }
+        public bool Belt_Take_Enable { get; set; }
+        public bool Belt_Stack_Enable { get; set; }
+        public bool Rail_Relax_SB { get; set; }
+        public bool Rail_Clamp_SB { get; set; }
+        public bool PS_MO_SB { get; set; }
+        public bool PS_MC_SB { get; set; }
+        public bool CPS_MO_SB { get; set; }
+        public bool CPS_MC_SB { get; set; }
+        public bool BeltTake_MO_SB { get; set; }
+        public bool BeltStack_MO_SB { get; set; }
+        public bool Belt_MC_SB { get; set; }
+        public bool BeltTake_MO { get; set; }
+        public bool BeltStack_MO { get; set; }
+        public bool Bucket_MO_SB { get; set; }
+        public bool Bucket_MC_SB { get; set; }
+        public bool Bucket_MO { get; set; }
+        public bool Light_MO_SB { get; set; }
+        public bool Light_MC_SB { get; set; }
+        public bool Luff_OilBump_MO_SB { get; set; }
+        public bool Luff_OilBump_MC_SB { get; set; }
+        public bool Travel_MC_SB { get; set; }
+        public bool Emergency_Stop { get; set; }
+        public bool Travel_FWD_AO { get; set; }
+        public bool Travel_REV_AO { get; set; }
+        public bool Slew_R_AO { get; set; }
+        public bool Slew_L_AO { get; set; }
+        public bool LuffU_AO { get; set; }
+        public bool LuffD_AO { get; set; }
+        public bool Bucket_AO { get; set; }
+        public bool Bucket_AC { get; set; }
+        public bool Belt_Take_AO { get; set; }
+        public bool Belt_Take_AC { get; set; }
+        public bool Belt_Stack_AO { get; set; }
+        public bool Belt_Stack_AC { get; set; }
+        public bool XBTB_Baffle_Take_MO { get; set; }
+        public bool XBTB_Baffle_Stack_MO { get; set; }
+        public bool XBTB_Baffle_Err { get; set; }
+        public bool ZXLD_Baffle_Take_MO { get; set; }
+        public bool ZXLD_Baffle_Stack_MO { get; set; }
+        public bool ZXLD_Baffle_Err { get; set; }
+        public bool ZXLD_Skrit_Take_MO { get; set; }
+        public bool ZXLD_Skrit_Stack_MO { get; set; }
+        public bool ZXLD_Skrit_Err { get; set; }
+        public bool DC_R_Anchor { get; set; }
+        public bool DC_L_Anchor { get; set; }
+        public bool DC_R_Rail_Clamp { get; set; }
+        public bool DC_L_Rail_Clamp { get; set; }
+        public bool DC_R_Rail_Relax { get; set; }
+        public bool DC_L_Rail_Relax { get; set; }
+        public bool YL_Bit8 { get; set; }
+        public bool YL_Bit5 { get; set; }
+        public bool YL_Bit9 { get; set; }
+        public bool YL_Bit7 { get; set; }
+        public bool YL_Bit12 { get; set; }
+        public bool YL_Bit10 { get; set; }
+        public bool YL_Bit15 { get; set; }
+        public bool DC_FWD_FixS_SB { get; set; }
+        public bool DC_FWD_FixS_Run { get; set; }
+        public bool DC_FWD_FixS_CMD { get; set; }
+        public bool DC_REV_FixS_SB { get; set; }
+        public bool DC_REV_FixS_Run { get; set; }
+        public bool DC_REV_FixS_CMD { get; set; }
+        public bool LuffU_FixS_SB { get; set; }
+        public bool LuffD_FixS_SB { get; set; }
+        public bool LuffU_FixS_Run { get; set; }
+        public bool LuffD_FixS_Run { get; set; }
+        public bool LuffU_FixS_CMD { get; set; }
+        public bool LuffD_FixS_CMD { get; set; }
+        public bool Skrit_Take_Start_SB { get; set; }
+        public bool Skrit_Take_Changing { get; set; }
+        public bool Skrit_Take_ChFinish { get; set; }
+        public bool Skrit_Take_Stop_SB { get; set; }
+        public bool Skrit_Stack_Start_SB { get; set; }
+        public bool Skrit_Stack_Changing { get; set; }
+        public bool Skrit_Stack_ChFinish { get; set; }
+        public bool Skrit_Stack_Stop_SB { get; set; }
+        public bool Slew_SAS_L_Alarm { get; set; }
+        public bool Slew_SAS_R_Alarm { get; set; }
+        public bool DC_SAS_F_Alarm { get; set; }
+        public bool DC_SAS_B_Alarm { get; set; }
+        public bool Slew_SAS_RR_Alarm { get; set; }
+        public bool Slew_SAS_LR_Alarm { get; set; }
+        public bool Slew_SAS_RU_Alarm { get; set; }
+        public bool Slew_SAS_LU_Alarm { get; set; }
+
+        //301
+        public bool DC_SAS_RF_Alrm { get; set; }
+        public bool DC_SAS_RB_Alrm { get; set; }
+        public bool DC_SAS_LF_Alrm { get; set; }
+        public bool DC_SAS_LB_Alrm { get; set; }
+        public bool FWD_Limit_Waring { get; set; }
+        public bool REV_Limit_Waring { get; set; }
+        public bool Slew_R_Limit_Waring { get; set; }
+        public bool Slew_L_Limit_Waring { get; set; }
+        public bool Luff_U_Limit_Waring { get; set; }
+        public bool Luff_D_Limit_Waring { get; set; }
+        public bool DC_SAS_Bypass { get; set; }
+        public bool Boom_SAS_Bypass { get; set; }
+        public bool DCPos_Bypass { get; set; }
+        public bool SlewAngle_Bypass { get; set; }
+        public bool LuffAngle_Bypass { get; set; }
+        public bool DC_Encoder_Bypass { get; set; }
+        public bool Slew_Encoder_Bypass { get; set; }
+        public bool OverBelt_R_Bypass { get; set; }
+        public bool OverBelt_L_Bypass { get; set; }
+        public bool OverBelt_D_Bypass { get; set; }
+        public bool DC_SAS_RF_Bypass { get; set; }
+        public bool DC_SAS_LF_Bypass { get; set; }
+        public bool DC_SAS_RB_Bypass { get; set; }
+        public bool DC_SAS_LB_Bypass { get; set; }
+        public bool Boom_SAS_RR_Bypass { get; set; }
+        public bool Boom_SAS_LR_Bypass { get; set; }
+        public bool Boom_SAS_RU_Bypass { get; set; }
+        public bool Boom_SAS_LU_Bypass { get; set; }
+        public short XBTB_Baffle_CW { get; set; }
+        public short XBTB_Baffle_TTSet { get; set; }
+        public short XBTB_Baffle_STSet { get; set; }
+        public short XBTB_Baffle_ACSet { get; set; }
+        public short Working_Status { get; set; }
+        public short Working_Start_TM { get; set; }
+        public short Stop_Runing_TM { get; set; }
+        public short PS_MO_SB_TM { get; set; }
+        public short PS_MC_SB_TM { get; set; }
+        public short CPS_MO_SB_TM { get; set; }
+        public short CPS_MC_SB_TM { get; set; }
+        public short Light_MO_SB_TM { get; set; }
+        public short Light_MC_SB_TM { get; set; }
+        public short LuffOilBump_MO_SB_TM { get; set; }
+        public short LuffOilBump_MC_SB_TM { get; set; }
+        public short Rail_Relax_SB_TM { get; set; }
+        public short Rail_Clamp_SB_TM { get; set; }
+        public int DC_Encoder_Value { get; set; }
+        public int Slew_Encoder_Value { get; set; }
+        public short StackSlew_CW { get; set; }
+        public short StackPiont_CW { get; set; }
+        public short SlewStack_TM1 { get; set; }
+        public short SlewStack_TM2 { get; set; }
+        public short Stack_Pause_TM { get; set; }
+        public short StackWS_CW { get; set; }
+        public short StackWS_Tier { get; set; }
+        public short StackWS_Tier_SP { get; set; }
+        public short StackWS_TM1 { get; set; }
+        public short StackWS_TM2 { get; set; }
+        public short SlewStack_TM3 { get; set; }
+        public float Stack_DcRevSize { get; set; }
+        public float Stack_NextDCPos { get; set; }
+        public float Stack_HighSet { get; set; }
+        public float Stack_Start_Slew { get; set; }
+        public float Stack_End_Slew { get; set; }
+        public float Stack_RightBorder { get; set; }
+        public float Stack_LeftBorder { get; set; }
+        public float StackPiont_NextLuff { get; set; }
+        public float StackPiont_LuffSize { get; set; }
+        public float StackPiont_LuffMax { get; set; }
+        public float Stack_Range { get; set; }
+        public float Stack_Range_Middule { get; set; }
+        public float Stack_OffSet { get; set; }
+        public float Stack_OffSet_Min { get; set; }
+        public float Stack_OffSet_Max { get; set; }
+        public float Stack_M_OffSet { get; set; }
+        public float StackPiont_FS_Next { get; set; }
+        public float Stack_Start_Pos { get; set; }
+        public float Stack_End_Pos { get; set; }
+        public float StackW_DC_End { get; set; }
+        public float StackWS_NextSlew { get; set; }
+        public float StackWS_NextLuff { get; set; }
+        public float StackWS_Slew_Start { get; set; }
+        public float StackWS_Slew_End { get; set; }
+        public float StackWS_Luff_End { get; set; }
+        public float StackWS_Start_S { get; set; }
+        public float StackWS_End_S { get; set; }
+        public float StackWS_Luff_S { get; set; }
+        public float StackWS_S_Offset { get; set; }
+        public float StackWS_S_AllOffset { get; set; }
+        public float StackWS_StartSOA_ABS { get; set; }
+        public float Stack_RightBorder_SP { get; set; }
+        public float Stack_LeftBorder_SP { get; set; }
+        public bool SlewStack_SEL { get; set; }
+        public bool PointStack_SEL { get; set; }
+        public bool Stack_Runing { get; set; }
+        public bool Stack_Runing_Rdy { get; set; }
+        public bool Stack_Runing_Fault { get; set; }
+        public bool StackSlew_Direction { get; set; }
+        public bool StackSlew_Left_CMD { get; set; }
+        public bool StackSlew_Right_CMD { get; set; }
+        public bool StackSlew_DcREV_CMD { get; set; }
+        public bool StackSlew_H_Arrive { get; set; }
+        public bool StackSlew_L_Arrive { get; set; }
+        public bool StackSlew_R_Arrive { get; set; }
+        public bool StackPiont_Left_CMD { get; set; }
+        public bool StackPiont_Right_CMD { get; set; }
+        public bool StackPiont_LuffU_CMD { get; set; }
+        public bool StackPiont_DcRev_CMD { get; set; }
+        public bool StackPiont_H_Arrive { get; set; }
+        public bool StackPiont_D_Arrive { get; set; }
+        public bool StackEndPos_Arrive { get; set; }
+        public bool StackPiont_FS_Mode { get; set; }
+        public bool StackPiont_FS_Arrive { get; set; }
+        public bool StackPiont_FS_DWF { get; set; }
+        public bool StackPiont_FS_DW { get; set; }
+        public bool Stack_ParaSet_ERR { get; set; }
+        public bool StackRightBorder_INC { get; set; }
+        public bool StackRightBorder_DES { get; set; }
+        public bool StackLeftBorder_INC { get; set; }
+        public bool StackLeftBorder_DES { get; set; }
+        public bool Stack_DcRevSize_INC { get; set; }
+        public bool Stack_DcRevSize_DES { get; set; }
+        public bool StackPiont_Direct { get; set; }
+        public bool StackPiont_FS_Run { get; set; }
+        public bool Stack_DC_Direct { get; set; }
+        public bool Stack_DcFWD_Arrive { get; set; }
+        public bool Stack_DcREV_Arrive { get; set; }
+        public bool StackWS_SEL { get; set; }
+        public bool StackWS_Luff_Arrive { get; set; }
+        public bool StackWS_SEL_PE { get; set; }
+        public bool Stack_Record_Flag1 { get; set; }
+        public bool Stack_Record_Flag2 { get; set; }
+        public bool Stack_Record_Flag3 { get; set; }
+        public bool Stack_Record_Flag4 { get; set; }
+        public bool Stack_Record_Flag5 { get; set; }
+        public bool Stack_Record_Flag6 { get; set; }
+        public bool Pos_Start { get; set; }
+        public bool Pos_Froce { get; set; }
+        public bool Pos_Rdy { get; set; }
+        public bool Pos_Start_Warning { get; set; }
+        public bool Pos_Runing { get; set; }
+        public bool Pos_Runing_Fault { get; set; }
+        public bool Pos_Runing_Finish { get; set; }
+        public bool Pos_TakeDevice_En { get; set; }
+        public bool Pos_StackDevice_En { get; set; }
+        public bool WorkArea_NotSelect { get; set; }
+        public bool Pos_DcREV_CMD1 { get; set; }
+        public bool Pos_LuffUp_CMD1 { get; set; }
+        public bool Pos_LuffUp_CMD2 { get; set; }
+        public bool Pos_LuffUp_CMD3 { get; set; }
+        public bool Pos_Slew_R_CMD1 { get; set; }
+        public bool Pos_Slew_L_CMD1 { get; set; }
+        public bool Pos_DcFWD_Dest_CMD { get; set; }
+        public bool Pos_DcREV_Dest_CMD { get; set; }
+        public bool Pos_DcFWD_Dest { get; set; }
+        public bool Pos_DcREV_Dest { get; set; }
+        public bool Pos_DC_Finish { get; set; }
+        public bool Pos_DC_HightSpeed { get; set; }
+        public bool Pos_LuffDown_CMD1 { get; set; }
+        public bool Pos_LuffUp_CMD { get; set; }
+        public bool Pos_L_Slew_CMD2 { get; set; }
+        public bool Pos_R_Slew_CMD2 { get; set; }
+        public bool Pos_LuffUpMax_CMD { get; set; }
+        public bool Pos_L_Slew_CMD3 { get; set; }
+        public bool Pos_R_Slew_CMD3 { get; set; }
+        public bool Pos_L_Slew_Dest { get; set; }
+        public bool Pos_R_Slew_Dest { get; set; }
+        public bool Pos_Slew_Finish { get; set; }
+        public bool Pos_StartTakeDecive { get; set; }
+        public bool Pos_StartStackDecive { get; set; }
+        public bool Pos_Take_LuffU_CMD { get; set; }
+        public bool Pos_Take_LuffD_CMD { get; set; }
+        public bool Pos_Take_LuffU_Dest { get; set; }
+        public bool Pos_Take_LuffD_Dest { get; set; }
+        public bool Pos_Take_Luff_Finish { get; set; }
+        public bool Pos_Stack_LuffD_CMD { get; set; }
+        public bool Pos_Stack_LuffD_Dest { get; set; }
+        public bool Pos_StackLuff_Finish { get; set; }
+        public bool Pos_Finish_Missing { get; set; }
+        public bool Pos_Finish_Confmiss { get; set; }
+        public bool Pos_Execute_Onse { get; set; }
+        public bool Pos_Take_Starting { get; set; }
+        public bool Pos_Take_Outtime { get; set; }
+        public bool Pos_TakeBelt_AO_CMD { get; set; }
+        public bool Pos_Bucket_AO_CMD { get; set; }
+        public bool Pos_TakeBelt_AO { get; set; }
+        public bool Pos_Bucket_AO { get; set; }
+        public bool Pos_Take_Stopting { get; set; }
+        public bool Pos_TakeBelt_AC_CMD { get; set; }
+        public bool Pos_Bucket_AC_CMD { get; set; }
+        public bool Pos_TakeBelt_AC { get; set; }
+        public bool Pos_Bucket_AC { get; set; }
+        public bool Pos_Stack_Starting { get; set; }
+        public bool Pos_Stack_Outtime { get; set; }
+        public bool Pos_StackBelt_AO_CMD { get; set; }
+        public bool Pos_StackBelt_AO { get; set; }
+        public bool Pos_StackBelt_AC_CMD { get; set; }
+        public bool Pos_PassStarting { get; set; }
+        public bool Pos_PassBelt_AO_CMD { get; set; }
+        public bool Pos_PassBelt_AO { get; set; }
+        public bool Pos_PassBelt_AC_CMD { get; set; }
+        public bool Pos_PassStopting { get; set; }
+        public bool Pos_StartPassDecive { get; set; }
+        public bool Pass_BeltTake_AC_CMD { get; set; }
+        public bool Pass_SmaBelt_AC_CMD { get; set; }
+        public bool Pass_Sque_Stoping { get; set; }
+        public bool Pass_Starting { get; set; }
+        public bool Pos_Take_Startfinish { get; set; }
+        public bool Pos_Stac_Startfinish { get; set; }
+        public bool Pos_Stop { get; set; }
+        public short Pos_STEP { get; set; }
+        public short BucketStart_RTM { get; set; }
+        public short StackStoping_RTM { get; set; }
+        public short PassStart_TimeOut { get; set; }
+        public short Pass_Stoping_RTM { get; set; }
+        public short Pos_StackDevice_RTM { get; set; }
+        public short Pos_Finish_FTM { get; set; }
+        public short SEL_WorkArea { get; set; }
+        public short SEL_WorkClass { get; set; }
+        public short SEL_WorkTier { get; set; }
+        public short Pos_Start_RTM { get; set; }
+        public short Pos_TakeDevice_RTM { get; set; }
+        public short Pos_SBCH_Finish { get; set; }
+        public short Pos_ForceSBCH_Finish { get; set; }
+        public float Pos_DCTarget { get; set; }
+        public float Pos_SlewTarget { get; set; }
+        public float Pos_LuffTarget { get; set; }
+        public float Pos_DCTarget_SP { get; set; }
+        public float Pos_SlewTarget_SP { get; set; }
+        public float Pos_LuffTarget_SP { get; set; }
+        public float Pos_DcBack { get; set; }
+        public float Pos_LuffSA_SP { get; set; }
+        public float Pos_SlewSA { get; set; }
+        public float Pos_SlewSA_R_SP { get; set; }
+        public float Pos_SlewSA_L_SP { get; set; }
+        public float Pos_DCTarget_Mid { get; set; }
+        public float Pos_Safe_LA_SP { get; set; }
+        public float Pos_HCSafe_LA { get; set; }
+        public float Pos_MaxStack_LA_SP { get; set; }
+        public float Pos_SlewTarget_Mid { get; set; }
+        public float MAC_Start_DcPos { get; set; }
+        public float MAC_Start_SlewAngle { get; set; }
+        public float MAC_Start_LuffAngle { get; set; }
+        public float MAC_End_DcPos { get; set; }
+        public float DCTarget_Record { get; set; }
+        public float SlewTarget_Record { get; set; }
+        public float LuffTarget_Record { get; set; }
+        public float Take_PU_ACC { get; set; }
+        public float Take_Current_ACC { get; set; }
+        public float Take_Last_ACC { get; set; }
+        public float Take_Total_ACC { get; set; }
+        public float Stack_PU_ACC { get; set; }
+        public float Stack_Current_ACC { get; set; }
+        public float Stack_Last_ACC { get; set; }
+        public float Encoder_PMW { get; set; }
+        public float DC_SAS_RF_DSV { get; set; }
+        public float DC_SAS_LF_DSV { get; set; }
+        public float DC_SAS_RB_DSV { get; set; }
+        public float DC_SAS_LB_DSV { get; set; }
+        public float Boom_SAS_R_Radar_DSV { get; set; }
+        public float Boom_SAS_L_Radar_DSV { get; set; }
+        public float Boom_SAS_R_Ult_DSV { get; set; }
+        public float Boom_SAS_L_Ult_DSV { get; set; }
+        public float OverBelt_R_SPASV { get; set; }
+        public float OverBelt_L_SPASV { get; set; }
+        public float OverBelt_D_SPASV { get; set; }
+        public float DC_FWD_SPSV { get; set; }
+        public float DC_REV_SPSV { get; set; }
+        public float Slew_R_SPSV { get; set; }
+        public float Slew_L_SPSV { get; set; }
+        public float Luff_U_SPSV { get; set; }
+        public float Luff_D_SPSV { get; set; }
+        public float Take_R_RB_01_SP { get; set; }
+        public float Take_R_LB_01_SP { get; set; }
+        public float Take_R_RB_02_SP { get; set; }
+        public float Take_R_LB_02_SP { get; set; }
+        public float Take_R_RB_03_SP { get; set; }
+        public float Take_R_LB_03_SP { get; set; }
+        public float Take_R_RB_04_SP { get; set; }
+        public float Take_R_LB_04_SP { get; set; }
+        public float Take_L_RB_01_SP { get; set; }
+        public float Take_L_LB_01_SP { get; set; }
+        public float Take_L_RB_02_SP { get; set; }
+        public float Take_L_LB_02_SP { get; set; }
+        public float Take_L_RB_03_SP { get; set; }
+        public float Take_L_LB_03_SP { get; set; }
+        public float Take_L_RB_04_SP { get; set; }
+        public float Take_L_LB_04_SP { get; set; }
+        public float Take_Luff_01_SP { get; set; }
+        public float Take_Luff_02_SP { get; set; }
+        public float Take_Luff_03_SP { get; set; }
+        public float Take_Luff_04_SP { get; set; }
+        public float Stack_R_RB_01_SP { get; set; }
+        public float Stack_R_LB_01_SP { get; set; }
+        public float Stack_R_RB_02_SP { get; set; }
+        public float Stack_R_LB_02_SP { get; set; }
+        public float Stack_R_RB_03_SP { get; set; }
+        public float Stack_R_LB_03_SP { get; set; }
+        public float Stack_R_RB_04_SP { get; set; }
+        public float Stack_R_LB_04_SP { get; set; }
+        public float Stack_L_RB_01_SP { get; set; }
+        public float Stack_L_LB_01_SP { get; set; }
+        public float Stack_L_RB_02_SP { get; set; }
+        public float Stack_L_LB_02_SP { get; set; }
+        public float Stack_L_RB_03_SP { get; set; }
+        public float Stack_L_LB_03_SP { get; set; }
+        public float Stack_L_RB_04_SP { get; set; }
+        public float Stack_L_LB_04_SP { get; set; }
+        public float Stack_Luff_01_SP { get; set; }
+        public float Stack_Luff_02_SP { get; set; }
+        public float Stack_Luff_03_SP { get; set; }
+        public float Stack_Luff_04_SP { get; set; }
+        public bool Encoder_SAM { get; set; }
+        public bool DC_Encoder_Enable { get; set; }
+        public bool Slew_Encoder_Enable { get; set; }
+        public bool DC_Encoder_Adjust { get; set; }
+        public bool Slew_Encoder_Adjust { get; set; }
+        public bool Encoder_BY2 { get; set; }
+        public bool FAULT_RESET { get; set; }
+
+        //8.20
+
+        public bool SR1_Travel_FWD_1MO_SB { get; set; }
+        public bool SR1_Travel_REV_1MO_SB { get; set; }
+        public bool SR1_Slew_R_1MO_SB { get; set; }
+        public bool SR1_Slew_L_1MO_SB { get; set; }
+        public bool SR1_Slew_MC_SB { get; set; }
+        public bool SR1_LuffU_MO_SB { get; set; }
+        public bool SR1_LuffD_MO_SB { get; set; }
+        public bool SR1_Luff_MC_SB { get; set; }
+        public bool SR1_BeltTake_Swicth { get; set; }
+        public bool SR1_BeltStack_Swicth { get; set; }
+        public bool SR1_BeltTS_Stop_Swicth { get; set; }
+        public bool SR1_Interlock_Swich { get; set; }
+        public bool SR1_XBTB_Skrit_UP_SB { get; set; }
+        public bool SR1_XBTB_Skrit_DOWN_SB { get; set; }
+        public bool SR1_XBTB_Skrit_Stop_SB { get; set; }
+        public bool SR1_SCADA_ByPass_SB { get; set; }
+        public bool SR1_Vibrator_Start_SB { get; set; }
+        public bool SR1_Vibrator_Stop_SB { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // D2PLC1
-        public ushort LargeCarElectricCurrent_2 { get; set; } // 1
-        public ushort RotaryElectricCurrent_2 { get; set; }
-        public ushort SuspensionBeltElectricCurrent_2 { get; set; }
-        public ushort BucketWheelElectricCurrent_2 { get; set; }
-        public ushort LargeCarTravelDistance_2 { get; set; } //大车行走距离
-        public ushort RotaryAngle_2 { get; set; } //回转角度
-        public ushort VariableAmplitudeAngle_2 { get; set; } //变幅角度
+
+        // 1
+        public short LargeCarElectricCurrent_2 { get; set; }
+        public short RotaryElectricCurrent_2 { get; set; }
+        public short SuspensionBeltElectricCurrent_2 { get; set; }
+        public short BucketWheelElectricCurrent_2 { get; set; }
+        public short LargeCarTravelDistance_2 { get; set; } //大车行走距离
+        public short RotaryAngle_2 { get; set; } //回转角度
+        public short VariableAmplitudeAngle_2 { get; set; } //变幅角度
         public bool VacuumCircuitBreakerClosed_2 { get; set; }
         public bool LowVoltageControlPowerClosed_2 { get; set; }
         public bool LowVoltagePowerClosed_2 { get; set; }
@@ -523,7 +1250,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool RotarySpeedGivenSelection_2 { get; set; }
         public bool RotaryFanRunning_2 { get; set; }
         public bool VariableAmplitudeLowerElectromagneticValveOpen_2 { get; set; }
-        public ushort RiseCount_2 { get; set; }
+        public short RiseCount_2 { get; set; }
         public bool SingleAction_2 { get; set; }
         public bool LinkAction_2 { get; set; }
         public bool Automatic_2 { get; set; }
@@ -563,7 +1290,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool SuspensionBeltUnloadingButton_2 { get; set; }
         public bool BucketWheelStartupButton_2 { get; set; }
         public bool BucketWheelStopButton_2 { get; set; }
-        public ushort RotaryCount_2 { get; set; }
+        public short RotaryCount_2 { get; set; }
         public bool LeftAnchorNotLifted_2 { get; set; }
         public bool RightAnchorNotLifted_2 { get; set; }
         public bool ClampNotRelaxed_2 { get; set; }
@@ -610,7 +1337,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool VibrationMotorFault_2 { get; set; }
         public bool ReelEmptySwitch_2 { get; set; }
         public bool WindproofSystemCableNotOpen_2 { get; set; }
-        public bool LargeCarLimitAction_2 { get; set; } // 200
+        public bool LargeCarLimitAction_2 { get; set; }// 200
 
         // 201
         public bool RotaryLimitAction_2 { get; set; }
@@ -705,7 +1432,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool TailCarBeltFirstLevelDeviation_2 { get; set; }
         public bool TailCarBeltSecondLevelDeviation_2 { get; set; }
         public bool TailCarBeltLongitudinalTear_2 { get; set; }
-        public bool Spare3_2 { get; set; } //293
+        public bool Spare3_2 { get; set; }//293
         public bool VibrationMotorCircuitBreakerFault_2 { get; set; }
         public bool VibrationMotorOverloading_2 { get; set; }
         public bool DriverRoomEmergencyStopButton_2 { get; set; }
@@ -755,12 +1482,12 @@ namespace ShenYangRemoteSystem.Subclass
         public bool BucketWheelSlotLift_2 { get; set; }
         public bool BucketWheelSlotLower_2 { get; set; }
         public bool RemoteEmergencyStop_2 { get; set; }
-        public ushort DiversionPlateAngle_2 { get; set; }
+        public short DiversionPlateAngle_2 { get; set; }
         public bool DryFogDustSuppressionStackingRunning_2 { get; set; }
         public bool DryFogDustSuppressionReclaimingRunning_2 { get; set; }
         public bool DryFogDustSuppressionDiversionRunning_2 { get; set; }
         public bool DryFogDustSuppressionRemoteStartRunning_2 { get; set; }
-        public bool DryFogDustSuppressionRemoteStopRunning_2 { get; set; } // 348
+        public bool DryFogDustSuppressionRemoteStopRunning_2 { get; set; }// 348
         public bool TailCarDrivenRollerBearingUpperLimitAlarm_2 { get; set; }
         public bool TailCarDrivenRollerBearingLowerLimitAlarm_2 { get; set; }
         public bool UnmannedEmergencyStop_2 { get; set; }
@@ -787,12 +1514,684 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DriverRoomBalancePumpMotorNotRunning_2 { get; set; }
         public bool DriverRoomBalancePumpMotorAuxiliaryContactFault_2 { get; set; }
         public bool Remote_2 { get; set; }
-        public ushort TwoMachineDistance_2 { get; set; } //两机距离
-        public ushort DriverRoomAngle_2 { get; set; } //司机室角度
+        public short TwoMachineDistance_2 { get; set; } //两机距离
+        public short DriverRoomAngle_2 { get; set; } //司机室角度
         public bool DriverRoomRiseButton_2 { get; set; }
         public bool DriverRoomDescentButton_2 { get; set; }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         // D2PLC2
+
+        //ID1
+        public float XBZQ_FZ_VALUE_2 { get; set; }
+        public float XBZZ_FZ_VALUE_2 { get; set; }
+        public float XBZH_FZ_VALUE_2 { get; set; }
+        public float XBYQ_FZ_VALUE_2 { get; set; }
+        public float XBYZ_FZ_VALUE_2 { get; set; }
+        public float XBYH_FZ_VALUE_2 { get; set; }
+        public float QJY_VALUE_2 { get; set; }
+        public float DCZQ_FZ_VALUE_2 { get; set; }
+        public float DCYQ_FZ_VALUE_2 { get; set; }
+        public float DCZH_FZ_VALUE_2 { get; set; }
+        public float DCYH_FZ_VALUE_2 { get; set; }
+        public float XBTB_LWJ_VALUE_2 { get; set; }
+        public float ENCODE_DC_VALUE_2 { get; set; }
+        public float Encode_slew_VALUE_2 { get; set; }
+        public bool Take_BySection_2 { get; set; }
+        public bool Take_Run_Rdy_2 { get; set; }
+        public bool Take_Runing_2 { get; set; }
+        public bool Take_Runing_Fault_2 { get; set; }
+        public bool Take_Para_Set_ERR_2 { get; set; }
+        public bool Take_Right_Arrive_2 { get; set; }
+        public bool Take_Left_Arrive_2 { get; set; }
+        public bool Take_SlewDirect_2 { get; set; }
+        public bool Take_DCDirect_2 { get; set; }
+        public bool Take_Right_CMD_2 { get; set; }
+        public bool Take_Left_CMD_2 { get; set; }
+        public bool Take_DCFWD_CMD_2 { get; set; }
+        public bool Take_DCREV_CMD_2 { get; set; }
+        public bool Take_Device_Enable_2 { get; set; }
+        public bool Change_Direct_2 { get; set; }
+        public bool Forbid_ChangeDirect_2 { get; set; }
+        public bool Get_R_CurrentAngle_2 { get; set; }
+        public bool Get_L_CurrentAngle_2 { get; set; }
+        public bool Take_FWDStepSize_INC_2 { get; set; }
+        public bool Take_FWDStepSize_DES_2 { get; set; }
+        public bool Take_LeftBorder_INC_2 { get; set; }
+        public bool Take_LeftBorder_DES_2 { get; set; }
+        public bool Take_RightBorder_INC_2 { get; set; }
+        public bool Take_RightBorder_DES_2 { get; set; }
+        public bool ChangeDirectTimer_R_2 { get; set; }
+        public bool Slew_Speed_Enable_2 { get; set; }
+        public bool Take_Current_Lock_2 { get; set; }
+        public bool Take_Current_H_2 { get; set; }
+        public bool Take_Current_HH_2 { get; set; }
+        public bool Take_Current_Norm_2 { get; set; }
+        public bool Take_Current_Norm_PE_2 { get; set; }
+        public bool Take_Forbid_CHDirect_2 { get; set; }
+        public bool Take_Releas_CHDirect_2 { get; set; }
+        public bool Take_ChT_MO_2 { get; set; }
+        public bool Take_CHT_Enable_2 { get; set; }
+        public bool Take_CHT_Start_2 { get; set; }
+        public bool Take_CHT_Stop_2 { get; set; }
+        public bool Take_ChT_Restrat_2 { get; set; }
+        public bool Take_ChT_PerStart_2 { get; set; }
+        public bool Take_CHT_Finsh_2 { get; set; }
+        public bool Take_CHT_ERR_2 { get; set; }
+        public bool Take_CHT_Onse_2 { get; set; }
+        public bool Take_ChT_Left_CMD1_2 { get; set; }
+        public bool Take_ChT_Right_CMD1_2 { get; set; }
+        public bool Take_ChT_DcREV_CMD_2 { get; set; }
+        public bool Take_ChT_LuffD_CMD1_2 { get; set; }
+        public bool Take_ChT_LuffD_CMD2_2 { get; set; }
+        public bool Take_CHT_Right_Reach_2 { get; set; }
+        public bool Take_CHT_Left_Reach_2 { get; set; }
+        public bool Take_CHT_Slew_Finish_2 { get; set; }
+        public bool Take_CHT_Runing_2 { get; set; }
+        public bool Take_Outside_INC_2 { get; set; }
+        public bool Take_Inside_INC_2 { get; set; }
+        public bool BeltBucket_OnZero_2 { get; set; }
+        public bool Take_VVVF_Aear_2 { get; set; }
+        public bool Take_TSOL_Enable_2 { get; set; }
+        public bool Take_TSOL_Flag_2 { get; set; }
+        public bool Take_TSOL_PE_2 { get; set; }
+        public bool Take_TSOL_Reset_PE1_2 { get; set; }
+        public bool Take_TSOL_Reset_PE2_2 { get; set; }
+        public bool Take_LowSpeed_2 { get; set; }
+        public bool Take_Record_Flag1_2 { get; set; }
+        public bool Take_Record_Flag2_2 { get; set; }
+        public bool Take_Record_Flag3_2 { get; set; }
+        public bool Take_Run_2 { get; set; }
+        public bool Take_Record_2 { get; set; }
+        public bool Take_DCREV_CMD_FE_2 { get; set; }
+        public short Take_Step_2 { get; set; }
+        public short Take_Pause_TM_2 { get; set; }
+        public short Take_ChangeDirect_TM_2 { get; set; }
+        public short Take_ChT_CW_2 { get; set; }
+        public short Take_ChT_TM_2 { get; set; }
+        public short Take_CHT_Finish_Delaytime_2 { get; set; }
+        public float Take_DC_NextPos_2 { get; set; }
+        public float Take_DC_StepSize_2 { get; set; }
+        public float Take_Start_Point_2 { get; set; }
+        public float Take_End_Point_2 { get; set; }
+        public float Take_LeftBorder_2 { get; set; }
+        public float Take_RightBorder_2 { get; set; }
+        public float Take_OffSet1_2 { get; set; }
+        public float Take_OffSet2_2 { get; set; }
+        public float Take_TSOL_CU_2 { get; set; }
+        public float Take_NormCurrent_2 { get; set; }
+        public float Take_RightBorder_SP_2 { get; set; }
+        public float Take_LeftBorder_SP_2 { get; set; }
+        public float Take_MaxFlue_SP_2 { get; set; }
+        public float Take_MaxCurrent_SP_2 { get; set; }
+        public float Take_MinCurrent_SP_2 { get; set; }
+        public float Take_DCPosStrat_SP_2 { get; set; }
+        public float Take_DCPosEnd_SP_2 { get; set; }
+        public float MAC_Right_Border_2 { get; set; }
+        public float MAC_Left_Border_2 { get; set; }
+        public float Take_ChT_HTLuff_2 { get; set; }
+        public float Take_ChT_HTSlew_SP_2 { get; set; }
+        public float Take_ChT_TargetLuff_2 { get; set; }
+        public float DC_Pos_2 { get; set; }
+        public float SLEW_Angle_2 { get; set; }
+        public float Luff_Angle_2 { get; set; }
+        public float Coal_L_High_2 { get; set; }
+        public float Coal_R_High_2 { get; set; }
+        public float Bucket_Current_2 { get; set; }
+        public float BoomBelt_Current_2 { get; set; }
+        public float Slew_Current_2 { get; set; }
+        public float Travel_Current_2 { get; set; }
+        public float Luff_Current_2 { get; set; }
+        public float TailLuff_Current_2 { get; set; }
+        public float Belt_Flue_2 { get; set; }
+        public float Bucket_Pos_2 { get; set; }
+        public float DC_FixSize_2 { get; set; }
+        public float DC_FixSize_NEXT_2 { get; set; }
+        public float Luff_FixSize_2 { get; set; }
+        public float Luff_FixSize_NEXT_2 { get; set; }
+        public bool Control_SEL_Local_2 { get; set; }
+        public bool Control_SEL_CCR_2 { get; set; }
+        public bool SEL_Take_Mode_2 { get; set; }
+        public bool SEL_Stack_Mode_2 { get; set; }
+        public bool SEL_Pass_Mode_2 { get; set; }
+        public bool Test_Mode_2 { get; set; }
+        public bool OperDesk_OnZero_2 { get; set; }
+        public bool AutoBorder_Enable_2 { get; set; }
+        public bool Working_Start_2 { get; set; }
+        public bool Working_Pause_2 { get; set; }
+        public bool Stop_Runing_2 { get; set; }
+        public bool System_Emergence_2 { get; set; }
+        public bool HMI_ErrReset_2 { get; set; }
+        public bool DC_FWD_Limit_2 { get; set; }
+        public bool DC_FWD_LLimit_2 { get; set; }
+        public bool DC_FWD_SoftLimit_2 { get; set; }
+        public bool DcFWD_LimitStatus_2 { get; set; }
+        public bool DC_REV_Limit_2 { get; set; }
+        public bool DC_REV_LLimit_2 { get; set; }
+        public bool DC_REV_SoftLimit_2 { get; set; }
+        public bool DcREV_LimitStatus_2 { get; set; }
+        public bool Slew_R_Limit_2 { get; set; }
+        public bool Slew_R_LLimit_2 { get; set; }
+        public bool Slew_R_SoftLimit_2 { get; set; }
+        public bool Slew_R_LimitStatus_2 { get; set; }
+        public bool Slew_L_Limit_2 { get; set; }
+        public bool Slew_L_LLimit_2 { get; set; }
+        public bool Slew_L_SoftLimit_2 { get; set; }
+        public bool Slew_L_LimitStatus_2 { get; set; }
+        public bool Luff_Up_Limit_2 { get; set; }
+        public bool Luff_Up_LLimit_2 { get; set; }
+        public bool Luff_Up_SoftLimit_2 { get; set; }
+        public bool LuffUp_LimitStatus_2 { get; set; }
+        public bool Luff_Down_Limit_2 { get; set; }
+        public bool Luff_Down_LLimit_2 { get; set; }
+        public bool Luff_Down_SoftLimit_2 { get; set; }
+        public bool LuffDown_LimitStatus_2 { get; set; }
+        public bool OverBelt_R_Limit_2 { get; set; }
+        public bool OverBelt_L_Limit_2 { get; set; }
+        public bool OverBelt_D_Limit_2 { get; set; }
+        public bool OverBelt_R_SoftLimit_2 { get; set; }
+        public bool OverBelt_L_SoftLimit_2 { get; set; }
+        public bool OverBelt_D_SoftLimit_2 { get; set; }
+        public bool ErrReset_2 { get; set; }
+        public bool XBTB_Baffle_OnTake_2 { get; set; }
+        public bool XBTB_Baffle_OnStack_2 { get; set; }
+        public bool ZXLD_Baffle_OnTake_2 { get; set; }
+        public bool ZXLD_Baffle_OnStack_2 { get; set; }
+        public bool ZXLD_Skrit_OnTake_2 { get; set; }
+        public bool ZXLD_Skrit_OnStack_2 { get; set; }
+        public bool BOOL_YL8_2 { get; set; }
+        public bool PSOn_Light_2 { get; set; }
+        public bool PSOff_Light_2 { get; set; }
+        public bool CPSOn_Light_2 { get; set; }
+        public bool CPSOff_Light_2 { get; set; }
+        public bool Ground_Belt_Waiting_2 { get; set; }
+        public bool Ground_Belt_Runing_2 { get; set; }
+        public bool CantBeltTake_Runing_2 { get; set; }
+        public bool CantBeltStack_Runing_2 { get; set; }
+        public bool Cable_PS_Runing_2 { get; set; }
+        public bool Cable_CPS_Runing_2 { get; set; }
+        public bool Luff_OilBump_Runing_2 { get; set; }
+        public bool Bucket_Runing_2 { get; set; }
+        public bool DC_FWD_Runing_2 { get; set; }
+        public bool DC_REV_Runing_2 { get; set; }
+        public bool SLEW_R_Runing_2 { get; set; }
+        public bool SLEW_L_Runing_2 { get; set; }
+        public bool Luff_Up_Runing_2 { get; set; }
+        public bool Luff_Down_Runing_2 { get; set; }
+        public bool Tail_LuffU_Runing_2 { get; set; }
+        public bool Tail_LuffD_Runing_2 { get; set; }
+        public bool Lighting_2 { get; set; }
+        public bool CCR_Take_Enable_2 { get; set; }
+        public bool CCR_Stack_Enable_2 { get; set; }
+        public bool Runing_RightField_2 { get; set; }
+        public bool Runing_LeftField_2 { get; set; }
+        public bool DC_Encoder_ERR_2 { get; set; }
+        public bool Slew_Encoder_ERR_2 { get; set; }
+        public bool Para_Intail_SB_2 { get; set; }
+        public bool Alarming_2 { get; set; }
+        public bool DC_Enable_2 { get; set; }
+        public bool Slew_Enable_2 { get; set; }
+        public bool Luff_Enable_2 { get; set; }
+        public bool DC_FWD_Enable_2 { get; set; }
+        public bool DC_REV_Enable_2 { get; set; }
+        public bool Slew_R_Enable_2 { get; set; }
+        public bool Slew_L_Enable_2 { get; set; }
+        public bool LuffU_Enable_2 { get; set; }
+        public bool LuffD_Enable_2 { get; set; }
+        public bool Bucket_Enable_2 { get; set; }
+        public bool Belt_Take_Enable_2 { get; set; }
+        public bool Belt_Stack_Enable_2 { get; set; }
+        public bool Rail_Relax_SB_2 { get; set; }
+        public bool Rail_Clamp_SB_2 { get; set; }
+        public bool PS_MO_SB_2 { get; set; }
+        public bool PS_MC_SB_2 { get; set; }
+        public bool CPS_MO_SB_2 { get; set; }
+        public bool CPS_MC_SB_2 { get; set; }
+        public bool BeltTake_MO_SB_2 { get; set; }
+        public bool BeltStack_MO_SB_2 { get; set; }
+        public bool Belt_MC_SB_2 { get; set; }
+        public bool BeltTake_MO_2 { get; set; }
+        public bool BeltStack_MO_2 { get; set; }
+        public bool Bucket_MO_SB_2 { get; set; }
+        public bool Bucket_MC_SB_2 { get; set; }
+        public bool Bucket_MO_2 { get; set; }
+        public bool Light_MO_SB_2 { get; set; }
+        public bool Light_MC_SB_2 { get; set; }
+        public bool Luff_OilBump_MO_SB_2 { get; set; }
+        public bool Luff_OilBump_MC_SB_2 { get; set; }
+        public bool Travel_MC_SB_2 { get; set; }
+        public bool Emergency_Stop_2 { get; set; }
+        public bool Travel_FWD_AO_2 { get; set; }
+        public bool Travel_REV_AO_2 { get; set; }
+        public bool Slew_R_AO_2 { get; set; }
+        public bool Slew_L_AO_2 { get; set; }
+        public bool LuffU_AO_2 { get; set; }
+        public bool LuffD_AO_2 { get; set; }
+        public bool Bucket_AO_2 { get; set; }
+        public bool Bucket_AC_2 { get; set; }
+        public bool Belt_Take_AO_2 { get; set; }
+        public bool Belt_Take_AC_2 { get; set; }
+        public bool Belt_Stack_AO_2 { get; set; }
+        public bool Belt_Stack_AC_2 { get; set; }
+        public bool XBTB_Baffle_Take_MO_2 { get; set; }
+        public bool XBTB_Baffle_Stack_MO_2 { get; set; }
+        public bool XBTB_Baffle_Err_2 { get; set; }
+        public bool ZXLD_Baffle_Take_MO_2 { get; set; }
+        public bool ZXLD_Baffle_Stack_MO_2 { get; set; }
+        public bool ZXLD_Baffle_Err_2 { get; set; }
+        public bool ZXLD_Skrit_Take_MO_2 { get; set; }
+        public bool ZXLD_Skrit_Stack_MO_2 { get; set; }
+        public bool ZXLD_Skrit_Err_2 { get; set; }
+        public bool DC_R_Anchor_2 { get; set; }
+        public bool DC_L_Anchor_2 { get; set; }
+        public bool DC_R_Rail_Clamp_2 { get; set; }
+        public bool DC_L_Rail_Clamp_2 { get; set; }
+        public bool DC_R_Rail_Relax_2 { get; set; }
+        public bool DC_L_Rail_Relax_2 { get; set; }
+        public bool YL_Bit8_2 { get; set; }
+        public bool YL_Bit5_2 { get; set; }
+        public bool YL_Bit9_2 { get; set; }
+        public bool YL_Bit7_2 { get; set; }
+        public bool YL_Bit12_2 { get; set; }
+        public bool YL_Bit10_2 { get; set; }
+        public bool YL_Bit15_2 { get; set; }
+        public bool DC_FWD_FixS_SB_2 { get; set; }
+        public bool DC_FWD_FixS_Run_2 { get; set; }
+        public bool DC_FWD_FixS_CMD_2 { get; set; }
+        public bool DC_REV_FixS_SB_2 { get; set; }
+        public bool DC_REV_FixS_Run_2 { get; set; }
+        public bool DC_REV_FixS_CMD_2 { get; set; }
+        public bool LuffU_FixS_SB_2 { get; set; }
+        public bool LuffD_FixS_SB_2 { get; set; }
+        public bool LuffU_FixS_Run_2 { get; set; }
+        public bool LuffD_FixS_Run_2 { get; set; }
+        public bool LuffU_FixS_CMD_2 { get; set; }
+        public bool LuffD_FixS_CMD_2 { get; set; }
+        public bool Skrit_Take_Start_SB_2 { get; set; }
+        public bool Skrit_Take_Changing_2 { get; set; }
+        public bool Skrit_Take_ChFinish_2 { get; set; }
+        public bool Skrit_Take_Stop_SB_2 { get; set; }
+        public bool Skrit_Stack_Start_SB_2 { get; set; }
+        public bool Skrit_Stack_Changing_2 { get; set; }
+        public bool Skrit_Stack_ChFinish_2 { get; set; }
+        public bool Skrit_Stack_Stop_SB_2 { get; set; }
+        public bool Slew_SAS_L_Alarm_2 { get; set; }
+        public bool Slew_SAS_R_Alarm_2 { get; set; }
+        public bool DC_SAS_F_Alarm_2 { get; set; }
+        public bool DC_SAS_B_Alarm_2 { get; set; }
+        public bool Slew_SAS_RR_Alarm_2 { get; set; }
+        public bool Slew_SAS_LR_Alarm_2 { get; set; }
+        public bool Slew_SAS_RU_Alarm_2 { get; set; }
+        public bool Slew_SAS_LU_Alarm_2 { get; set; }
+
+        //301
+        public bool DC_SAS_RF_Alrm_2 { get; set; }
+        public bool DC_SAS_RB_Alrm_2 { get; set; }
+        public bool DC_SAS_LF_Alrm_2 { get; set; }
+        public bool DC_SAS_LB_Alrm_2 { get; set; }
+        public bool FWD_Limit_Waring_2 { get; set; }
+        public bool REV_Limit_Waring_2 { get; set; }
+        public bool Slew_R_Limit_Waring_2 { get; set; }
+        public bool Slew_L_Limit_Waring_2 { get; set; }
+        public bool Luff_U_Limit_Waring_2 { get; set; }
+        public bool Luff_D_Limit_Waring_2 { get; set; }
+        public bool DC_SAS_Bypass_2 { get; set; }
+        public bool Boom_SAS_Bypass_2 { get; set; }
+        public bool DCPos_Bypass_2 { get; set; }
+        public bool SlewAngle_Bypass_2 { get; set; }
+        public bool LuffAngle_Bypass_2 { get; set; }
+        public bool DC_Encoder_Bypass_2 { get; set; }
+        public bool Slew_Encoder_Bypass_2 { get; set; }
+        public bool OverBelt_R_Bypass_2 { get; set; }
+        public bool OverBelt_L_Bypass_2 { get; set; }
+        public bool OverBelt_D_Bypass_2 { get; set; }
+        public bool DC_SAS_RF_Bypass_2 { get; set; }
+        public bool DC_SAS_LF_Bypass_2 { get; set; }
+        public bool DC_SAS_RB_Bypass_2 { get; set; }
+        public bool DC_SAS_LB_Bypass_2 { get; set; }
+        public bool Boom_SAS_RR_Bypass_2 { get; set; }
+        public bool Boom_SAS_LR_Bypass_2 { get; set; }
+        public bool Boom_SAS_RU_Bypass_2 { get; set; }
+        public bool Boom_SAS_LU_Bypass_2 { get; set; }
+        public short XBTB_Baffle_CW_2 { get; set; }
+        public short XBTB_Baffle_TTSet_2 { get; set; }
+        public short XBTB_Baffle_STSet_2 { get; set; }
+        public short XBTB_Baffle_ACSet_2 { get; set; }
+        public short Working_Status_2 { get; set; }
+        public short Working_Start_TM_2 { get; set; }
+        public short Stop_Runing_TM_2 { get; set; }
+        public short PS_MO_SB_TM_2 { get; set; }
+        public short PS_MC_SB_TM_2 { get; set; }
+        public short CPS_MO_SB_TM_2 { get; set; }
+        public short CPS_MC_SB_TM_2 { get; set; }
+        public short Light_MO_SB_TM_2 { get; set; }
+        public short Light_MC_SB_TM_2 { get; set; }
+        public short LuffOilBump_MO_SB_TM_2 { get; set; }
+        public short LuffOilBump_MC_SB_TM_2 { get; set; }
+        public short Rail_Relax_SB_TM_2 { get; set; }
+        public short Rail_Clamp_SB_TM_2 { get; set; }
+        public int DC_Encoder_Value_2 { get; set; }
+        public int Slew_Encoder_Value_2 { get; set; }
+        public short StackSlew_CW_2 { get; set; }
+        public short StackPiont_CW_2 { get; set; }
+        public short SlewStack_TM1_2 { get; set; }
+        public short SlewStack_TM2_2 { get; set; }
+        public short Stack_Pause_TM_2 { get; set; }
+        public short StackWS_CW_2 { get; set; }
+        public short StackWS_Tier_2 { get; set; }
+        public short StackWS_Tier_SP_2 { get; set; }
+        public short StackWS_TM1_2 { get; set; }
+        public short StackWS_TM2_2 { get; set; }
+        public short SlewStack_TM3_2 { get; set; }
+        public float Stack_DcRevSize_2 { get; set; }
+        public float Stack_NextDCPos_2 { get; set; }
+        public float Stack_HighSet_2 { get; set; }
+        public float Stack_Start_Slew_2 { get; set; }
+        public float Stack_End_Slew_2 { get; set; }
+        public float Stack_RightBorder_2 { get; set; }
+        public float Stack_LeftBorder_2 { get; set; }
+        public float StackPiont_NextLuff_2 { get; set; }
+        public float StackPiont_LuffSize_2 { get; set; }
+        public float StackPiont_LuffMax_2 { get; set; }
+        public float Stack_Range_2 { get; set; }
+        public float Stack_Range_Middule_2 { get; set; }
+        public float Stack_OffSet_2 { get; set; }
+        public float Stack_OffSet_Min_2 { get; set; }
+        public float Stack_OffSet_Max_2 { get; set; }
+        public float Stack_M_OffSet_2 { get; set; }
+        public float StackPiont_FS_Next_2 { get; set; }
+        public float Stack_Start_Pos_2 { get; set; }
+        public float Stack_End_Pos_2 { get; set; }
+        public float StackW_DC_End_2 { get; set; }
+        public float StackWS_NextSlew_2 { get; set; }
+        public float StackWS_NextLuff_2 { get; set; }
+        public float StackWS_Slew_Start_2 { get; set; }
+        public float StackWS_Slew_End_2 { get; set; }
+        public float StackWS_Luff_End_2 { get; set; }
+        public float StackWS_Start_S_2 { get; set; }
+        public float StackWS_End_S_2 { get; set; }
+        public float StackWS_Luff_S_2 { get; set; }
+        public float StackWS_S_Offset_2 { get; set; }
+        public float StackWS_S_AllOffset_2 { get; set; }
+        public float StackWS_StartSOA_ABS_2 { get; set; }
+        public float Stack_RightBorder_SP_2 { get; set; }
+        public float Stack_LeftBorder_SP_2 { get; set; }
+        public bool SlewStack_SEL_2 { get; set; }
+        public bool PointStack_SEL_2 { get; set; }
+        public bool Stack_Runing_2 { get; set; }
+        public bool Stack_Runing_Rdy_2 { get; set; }
+        public bool Stack_Runing_Fault_2 { get; set; }
+        public bool StackSlew_Direction_2 { get; set; }
+        public bool StackSlew_Left_CMD_2 { get; set; }
+        public bool StackSlew_Right_CMD_2 { get; set; }
+        public bool StackSlew_DcREV_CMD_2 { get; set; }
+        public bool StackSlew_H_Arrive_2 { get; set; }
+        public bool StackSlew_L_Arrive_2 { get; set; }
+        public bool StackSlew_R_Arrive_2 { get; set; }
+        public bool StackPiont_Left_CMD_2 { get; set; }
+        public bool StackPiont_Right_CMD_2 { get; set; }
+        public bool StackPiont_LuffU_CMD_2 { get; set; }
+        public bool StackPiont_DcRev_CMD_2 { get; set; }
+        public bool StackPiont_H_Arrive_2 { get; set; }
+        public bool StackPiont_D_Arrive_2 { get; set; }
+        public bool StackEndPos_Arrive_2 { get; set; }
+        public bool StackPiont_FS_Mode_2 { get; set; }
+        public bool StackPiont_FS_Arrive_2 { get; set; }
+        public bool StackPiont_FS_DWF_2 { get; set; }
+        public bool StackPiont_FS_DW_2 { get; set; }
+        public bool Stack_ParaSet_ERR_2 { get; set; }
+        public bool StackRightBorder_INC_2 { get; set; }
+        public bool StackRightBorder_DES_2 { get; set; }
+        public bool StackLeftBorder_INC_2 { get; set; }
+        public bool StackLeftBorder_DES_2 { get; set; }
+        public bool Stack_DcRevSize_INC_2 { get; set; }
+        public bool Stack_DcRevSize_DES_2 { get; set; }
+        public bool StackPiont_Direct_2 { get; set; }
+        public bool StackPiont_FS_Run_2 { get; set; }
+        public bool Stack_DC_Direct_2 { get; set; }
+        public bool Stack_DcFWD_Arrive_2 { get; set; }
+        public bool Stack_DcREV_Arrive_2 { get; set; }
+        public bool StackWS_SEL_2 { get; set; }
+        public bool StackWS_Luff_Arrive_2 { get; set; }
+        public bool StackWS_SEL_PE_2 { get; set; }
+        public bool Stack_Record_Flag1_2 { get; set; }
+        public bool Stack_Record_Flag2_2 { get; set; }
+        public bool Stack_Record_Flag3_2 { get; set; }
+        public bool Stack_Record_Flag4_2 { get; set; }
+        public bool Stack_Record_Flag5_2 { get; set; }
+        public bool Stack_Record_Flag6_2 { get; set; }
+        public bool Pos_Start_2 { get; set; }
+        public bool Pos_Froce_2 { get; set; }
+        public bool Pos_Rdy_2 { get; set; }
+        public bool Pos_Start_Warning_2 { get; set; }
+        public bool Pos_Runing_2 { get; set; }
+        public bool Pos_Runing_Fault_2 { get; set; }
+        public bool Pos_Runing_Finish_2 { get; set; }
+        public bool Pos_TakeDevice_En_2 { get; set; }
+        public bool Pos_StackDevice_En_2 { get; set; }
+        public bool WorkArea_NotSelect_2 { get; set; }
+        public bool Pos_DcREV_CMD1_2 { get; set; }
+        public bool Pos_LuffUp_CMD1_2 { get; set; }
+        public bool Pos_LuffUp_CMD2_2 { get; set; }
+        public bool Pos_LuffUp_CMD3_2 { get; set; }
+        public bool Pos_Slew_R_CMD1_2 { get; set; }
+        public bool Pos_Slew_L_CMD1_2 { get; set; }
+        public bool Pos_DcFWD_Dest_CMD_2 { get; set; }
+        public bool Pos_DcREV_Dest_CMD_2 { get; set; }
+        public bool Pos_DcFWD_Dest_2 { get; set; }
+        public bool Pos_DcREV_Dest_2 { get; set; }
+        public bool Pos_DC_Finish_2 { get; set; }
+        public bool Pos_DC_HightSpeed_2 { get; set; }
+        public bool Pos_LuffDown_CMD1_2 { get; set; }
+        public bool Pos_LuffUp_CMD_2 { get; set; }
+        public bool Pos_L_Slew_CMD2_2 { get; set; }
+        public bool Pos_R_Slew_CMD2_2 { get; set; }
+        public bool Pos_LuffUpMax_CMD_2 { get; set; }
+        public bool Pos_L_Slew_CMD3_2 { get; set; }
+        public bool Pos_R_Slew_CMD3_2 { get; set; }
+        public bool Pos_L_Slew_Dest_2 { get; set; }
+        public bool Pos_R_Slew_Dest_2 { get; set; }
+        public bool Pos_Slew_Finish_2 { get; set; }
+        public bool Pos_StartTakeDecive_2 { get; set; }
+        public bool Pos_StartStackDecive_2 { get; set; }
+        public bool Pos_Take_LuffU_CMD_2 { get; set; }
+        public bool Pos_Take_LuffD_CMD_2 { get; set; }
+        public bool Pos_Take_LuffU_Dest_2 { get; set; }
+        public bool Pos_Take_LuffD_Dest_2 { get; set; }
+        public bool Pos_Take_Luff_Finish_2 { get; set; }
+        public bool Pos_Stack_LuffD_CMD_2 { get; set; }
+        public bool Pos_Stack_LuffD_Dest_2 { get; set; }
+        public bool Pos_StackLuff_Finish_2 { get; set; }
+        public bool Pos_Finish_Missing_2 { get; set; }
+        public bool Pos_Finish_Confmiss_2 { get; set; }
+        public bool Pos_Execute_Onse_2 { get; set; }
+        public bool Pos_Take_Starting_2 { get; set; }
+        public bool Pos_Take_Outtime_2 { get; set; }
+        public bool Pos_TakeBelt_AO_CMD_2 { get; set; }
+        public bool Pos_Bucket_AO_CMD_2 { get; set; }
+        public bool Pos_TakeBelt_AO_2 { get; set; }
+        public bool Pos_Bucket_AO_2 { get; set; }
+        public bool Pos_Take_Stopting_2 { get; set; }
+        public bool Pos_TakeBelt_AC_CMD_2 { get; set; }
+        public bool Pos_Bucket_AC_CMD_2 { get; set; }
+        public bool Pos_TakeBelt_AC_2 { get; set; }
+        public bool Pos_Bucket_AC_2 { get; set; }
+        public bool Pos_Stack_Starting_2 { get; set; }
+        public bool Pos_Stack_Outtime_2 { get; set; }
+        public bool Pos_StackBelt_AO_CMD_2 { get; set; }
+        public bool Pos_StackBelt_AO_2 { get; set; }
+        public bool Pos_StackBelt_AC_CMD_2 { get; set; }
+        public bool Pos_PassStarting_2 { get; set; }
+        public bool Pos_PassBelt_AO_CMD_2 { get; set; }
+        public bool Pos_PassBelt_AO_2 { get; set; }
+        public bool Pos_PassBelt_AC_CMD_2 { get; set; }
+        public bool Pos_PassStopting_2 { get; set; }
+        public bool Pos_StartPassDecive_2 { get; set; }
+        public bool Pass_BeltTake_AC_CMD_2 { get; set; }
+        public bool Pass_SmaBelt_AC_CMD_2 { get; set; }
+        public bool Pass_Sque_Stoping_2 { get; set; }
+        public bool Pass_Starting_2 { get; set; }
+        public bool Pos_Take_Startfinish_2 { get; set; }
+        public bool Pos_Stac_Startfinish_2 { get; set; }
+        public bool Pos_Stop_2 { get; set; }
+        public short Pos_STEP_2 { get; set; }
+        public short BucketStart_RTM_2 { get; set; }
+        public short StackStoping_RTM_2 { get; set; }
+        public short PassStart_TimeOut_2 { get; set; }
+        public short Pass_Stoping_RTM_2 { get; set; }
+        public short Pos_StackDevice_RTM_2 { get; set; }
+        public short Pos_Finish_FTM_2 { get; set; }
+        public short SEL_WorkArea_2 { get; set; }
+        public short SEL_WorkClass_2 { get; set; }
+        public short SEL_WorkTier_2 { get; set; }
+        public short Pos_Start_RTM_2 { get; set; }
+        public short Pos_TakeDevice_RTM_2 { get; set; }
+        public short Pos_SBCH_Finish_2 { get; set; }
+        public short Pos_ForceSBCH_Finish_2 { get; set; }
+        public float Pos_DCTarget_2 { get; set; }
+        public float Pos_SlewTarget_2 { get; set; }
+        public float Pos_LuffTarget_2 { get; set; }
+        public float Pos_DCTarget_SP_2 { get; set; }
+        public float Pos_SlewTarget_SP_2 { get; set; }
+        public float Pos_LuffTarget_SP_2 { get; set; }
+        public float Pos_DcBack_2 { get; set; }
+        public float Pos_LuffSA_SP_2 { get; set; }
+        public float Pos_SlewSA_2 { get; set; }
+        public float Pos_SlewSA_R_SP_2 { get; set; }
+        public float Pos_SlewSA_L_SP_2 { get; set; }
+        public float Pos_DCTarget_Mid_2 { get; set; }
+        public float Pos_Safe_LA_SP_2 { get; set; }
+        public float Pos_HCSafe_LA_2 { get; set; }
+        public float Pos_MaxStack_LA_SP_2 { get; set; }
+        public float Pos_SlewTarget_Mid_2 { get; set; }
+        public float MAC_Start_DcPos_2 { get; set; }
+        public float MAC_Start_SlewAngle_2 { get; set; }
+        public float MAC_Start_LuffAngle_2 { get; set; }
+        public float MAC_End_DcPos_2 { get; set; }
+        public float DCTarget_Record_2 { get; set; }
+        public float SlewTarget_Record_2 { get; set; }
+        public float LuffTarget_Record_2 { get; set; }
+        public float Take_PU_ACC_2 { get; set; }
+        public float Take_Current_ACC_2 { get; set; }
+        public float Take_Last_ACC_2 { get; set; }
+        public float Take_Total_ACC_2 { get; set; }
+        public float Stack_PU_ACC_2 { get; set; }
+        public float Stack_Current_ACC_2 { get; set; }
+        public float Stack_Last_ACC_2 { get; set; }
+        public float Encoder_PMW_2 { get; set; }
+        public float DC_SAS_RF_DSV_2 { get; set; }
+        public float DC_SAS_LF_DSV_2 { get; set; }
+        public float DC_SAS_RB_DSV_2 { get; set; }
+        public float DC_SAS_LB_DSV_2 { get; set; }
+        public float Boom_SAS_R_Radar_DSV_2 { get; set; }
+        public float Boom_SAS_L_Radar_DSV_2 { get; set; }
+        public float Boom_SAS_R_Ult_DSV_2 { get; set; }
+        public float Boom_SAS_L_Ult_DSV_2 { get; set; }
+        public float OverBelt_R_SPASV_2 { get; set; }
+        public float OverBelt_L_SPASV_2 { get; set; }
+        public float OverBelt_D_SPASV_2 { get; set; }
+        public float DC_FWD_SPSV_2 { get; set; }
+        public float DC_REV_SPSV_2 { get; set; }
+        public float Slew_R_SPSV_2 { get; set; }
+        public float Slew_L_SPSV_2 { get; set; }
+        public float Luff_U_SPSV_2 { get; set; }
+        public float Luff_D_SPSV_2 { get; set; }
+        public float Take_R_RB_01_SP_2 { get; set; }
+        public float Take_R_LB_01_SP_2 { get; set; }
+        public float Take_R_RB_02_SP_2 { get; set; }
+        public float Take_R_LB_02_SP_2 { get; set; }
+        public float Take_R_RB_03_SP_2 { get; set; }
+        public float Take_R_LB_03_SP_2 { get; set; }
+        public float Take_R_RB_04_SP_2 { get; set; }
+        public float Take_R_LB_04_SP_2 { get; set; }
+        public float Take_L_RB_01_SP_2 { get; set; }
+        public float Take_L_LB_01_SP_2 { get; set; }
+        public float Take_L_RB_02_SP_2 { get; set; }
+        public float Take_L_LB_02_SP_2 { get; set; }
+        public float Take_L_RB_03_SP_2 { get; set; }
+        public float Take_L_LB_03_SP_2 { get; set; }
+        public float Take_L_RB_04_SP_2 { get; set; }
+        public float Take_L_LB_04_SP_2 { get; set; }
+        public float Take_Luff_01_SP_2 { get; set; }
+        public float Take_Luff_02_SP_2 { get; set; }
+        public float Take_Luff_03_SP_2 { get; set; }
+        public float Take_Luff_04_SP_2 { get; set; }
+        public float Stack_R_RB_01_SP_2 { get; set; }
+        public float Stack_R_LB_01_SP_2 { get; set; }
+        public float Stack_R_RB_02_SP_2 { get; set; }
+        public float Stack_R_LB_02_SP_2 { get; set; }
+        public float Stack_R_RB_03_SP_2 { get; set; }
+        public float Stack_R_LB_03_SP_2 { get; set; }
+        public float Stack_R_RB_04_SP_2 { get; set; }
+        public float Stack_R_LB_04_SP_2 { get; set; }
+        public float Stack_L_RB_01_SP_2 { get; set; }
+        public float Stack_L_LB_01_SP_2 { get; set; }
+        public float Stack_L_RB_02_SP_2 { get; set; }
+        public float Stack_L_LB_02_SP_2 { get; set; }
+        public float Stack_L_RB_03_SP_2 { get; set; }
+        public float Stack_L_LB_03_SP_2 { get; set; }
+        public float Stack_L_RB_04_SP_2 { get; set; }
+        public float Stack_L_LB_04_SP_2 { get; set; }
+        public float Stack_Luff_01_SP_2 { get; set; }
+        public float Stack_Luff_02_SP_2 { get; set; }
+        public float Stack_Luff_03_SP_2 { get; set; }
+        public float Stack_Luff_04_SP_2 { get; set; }
+        public bool Encoder_SAM_2 { get; set; }
+        public bool DC_Encoder_Enable_2 { get; set; }
+        public bool Slew_Encoder_Enable_2 { get; set; }
+        public bool DC_Encoder_Adjust_2 { get; set; }
+        public bool Slew_Encoder_Adjust_2 { get; set; }
+        public bool Encoder_BY2_2 { get; set; }
+        public bool FAULT_RESET_2 { get; set; }
+
+
     }
 }
