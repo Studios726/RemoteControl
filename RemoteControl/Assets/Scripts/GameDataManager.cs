@@ -18,6 +18,7 @@ public class GameDataManager : Singleton<GameDataManager>
     private MachineMove machineMove_2;//取斗轮机
     public AccountInfo curAccountInfo;
     public GameObject machineRoot;
+    private string _taoIP;
     public bool RcConnectionState
     {
         get => _rcConnectionState;
@@ -28,6 +29,10 @@ public class GameDataManager : Singleton<GameDataManager>
         get => _systemVariables;
     }
 
+    public string TaoIP
+    {
+        get => _taoIP;
+    }
     public string GetUserName()
     {
         if (curAccountInfo!=null)
@@ -36,6 +41,11 @@ public class GameDataManager : Singleton<GameDataManager>
         }
 
         return "";
+    }
+
+    public void SetIp(string ip)
+    {
+        _taoIP ="ws://"+ip;
     }
     public SendDataReportAndDEM SendDataReportAndDEM
     {
@@ -146,13 +156,20 @@ public class GameDataManager : Singleton<GameDataManager>
 
                 if (ve3.x + xLength >= reg.BEGIN && ve3.x + xLength < reg.END && side == reg.SIDE)
                 {
-                    // pointColor = new Color(reg.ColorR / 255.0f, reg.ColorG / 255.0f, reg.ColorB / 255.0f, 1);
-                    for (int i = 0; i < reg.layerArray.Length; i++)
+                    if (reg.IsUseLayer==0)
                     {
-                        if (ve3.y>=reg.layerArray[i].hBEGIN&&ve3.y<reg.layerArray[i].hEND)
+                        pointColor = new Color(reg.ColorR / 255.0f, reg.ColorG / 255.0f, reg.ColorB / 255.0f, 1);
+                        break;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < reg.layerArray.Count; i++)
                         {
-                            pointColor = new Color(reg.layerArray[i].ColorR / 255.0f, reg.layerArray[i].ColorG / 255.0f, reg.layerArray[i].ColorB / 255.0f, 1);
-                            break;
+                            if (ve3.y>=Mathf.Abs(reg.layerArray[i].hBEGIN)&&ve3.y<Mathf.Abs(reg.layerArray[i].hEND))
+                            {
+                                pointColor = new Color(reg.layerArray[i].ColorR / 255.0f, reg.layerArray[i].ColorG / 255.0f, reg.layerArray[i].ColorB / 255.0f, 1);
+                                break;
+                            }
                         }
                     }
                     break;

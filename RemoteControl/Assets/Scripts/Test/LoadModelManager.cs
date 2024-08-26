@@ -11,7 +11,7 @@ public class LoadModelManager : MonoBehaviour
 {
     public Material red;
     public Transform parent;
-    public GameObject go;
+    public GameObject model;
     void Start()
     {
         //string jsonData = Resources.Load("Json/info").ToString();
@@ -22,11 +22,18 @@ public class LoadModelManager : MonoBehaviour
 
     public void RefreshModel(object o, EventArgs eventArgs)
     {
-        if (transform.Find("coalModel"))
+        if (model)
         {
-            Destroy(transform.Find("coalModel").gameObject);
+            Debug.LogError("删除多余的模型");
+            Destroy(model);
         }
-        GameObject model = GameDataManager.Instance.SpawnCoalModel(parent, red, GameDataManager.Instance.SendDataReportAndDEM);
-        model.name = "coalModel";
+
+        Timer.Register(0.02f, () =>
+        {
+           model =
+                GameDataManager.Instance.SpawnCoalModel(parent, red, GameDataManager.Instance.SendDataReportAndDEM);
+            model.name = "coalModel";
+        });
+
     }
 }

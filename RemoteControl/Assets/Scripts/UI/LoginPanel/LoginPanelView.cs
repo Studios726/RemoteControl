@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Utility;
+using Button = UnityEngine.UI.Button;
 
 public class LoginPanelView : UIView<LoginPanelCtr>
 {
@@ -12,6 +13,9 @@ public class LoginPanelView : UIView<LoginPanelCtr>
     private TMP_InputField _passwordInput;
     private UnityEngine.UI.Button _loginBtn;
     private UnityEngine.UI.Toggle _toggle;
+    private Button _ipBtn;
+    private Button _changeIPBtn;
+    private InputField _ipInput;
     public GameObject _error;
     public Timer timer;
     public override void InitUIElements(UIArgs uiArgs)
@@ -21,8 +25,19 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         _loginBtn = RootObj.transform.Find("Bg/loginBtn").GetComponent<UnityEngine.UI.Button>();
         _toggle = RootObj.transform.Find("Bg/Toggle").GetComponent<UnityEngine.UI.Toggle>();
         _error = RootObj.transform.Find("error").gameObject;
+        _ipBtn=RootObj.transform.Find("ipBtn").GetComponent<Button>();
+        _ipInput=RootObj.transform.Find("ipInput").GetComponent<InputField>();
+        _changeIPBtn=RootObj.transform.Find("changeIPBtn").GetComponent<Button>();
         _loginBtn.onClick.AddListener(Login);
-        
+        _ipBtn.onClick.AddListener((() =>
+        {
+            _ipInput.gameObject.SetActive(!_ipInput.gameObject.activeSelf);
+            _changeIPBtn.gameObject.SetActive(!_changeIPBtn.gameObject.activeSelf);
+        }));
+        _changeIPBtn.onClick.AddListener((() =>
+        {
+            GameDataManager.Instance.SetIp(_ipInput.text);
+        }));
         _passwordInput.onSubmit.AddListener(OnSubmit);
         _accountInput.text = PlayerPrefs.GetString("Account");
         _passwordInput.text = PlayerPrefs.GetString("Password");
