@@ -61,10 +61,16 @@ public class MainPanelView : UIView<MainPanelCtr>
 
     public void UpdateData(SystemVariables data)
     {
+        if (data==null)
+        {
+            return;
+        }
         _bucketWheelState2.UpdateData(data);
         _bucketWheelState1.UpdateData(data);
         _bucketWheelCtrMove2.UpdateData(data);
         _bucketWheelCtrMove1.UpdateData(data);
+        _bucketWheelHideBtnCtr2.UpdateData(data);
+        _bucketWheelHideBtnCtr1.UpdateData(data);
     }
 
     public void UpdateData(object o, EventArgs eventArgs)

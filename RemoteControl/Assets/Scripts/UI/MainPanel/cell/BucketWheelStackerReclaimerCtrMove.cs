@@ -19,17 +19,38 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
     /// d堆料重置
     /// </summary>
     public Button pileMaterResetBtn;
-    public Button pileMaterTakeBtn;
+    public ButtonCell pileMaterTakeBtn;
 
     public override void Start()
     {
         base.Start();
         // AddOnClickListener(pileMaterResetBtn,(() => SendMessageToServer("堆料重置")));
-        // AddOnClickListener(pileMaterTakeBtn,(() => SendMessageToServer("堆料")));
+        AddOnClickListener(takeMaterBtn, (() =>
+        {
+            SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON);
+            takeMaterBtn.SetSelectState(true);
+            stopTakeMaterBtn.SetSelectState(false);
+            pileMaterTakeBtn.SetSelectState(false);
+        }));
+        AddOnClickListener(stopTakeMaterBtn, (() =>
+        {
+            SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON);
+            takeMaterBtn.SetSelectState(false);
+            stopTakeMaterBtn.SetSelectState(true);
+            pileMaterTakeBtn.SetSelectState(false);
+        }));
+        AddOnClickListener(pileMaterTakeBtn,(() =>
+        {
+            SendMessageToServer(COMMAND_NAME.BELTSTACK_BUTTON);
+            takeMaterBtn.SetSelectState(false);
+            stopTakeMaterBtn.SetSelectState(false);
+            pileMaterTakeBtn.SetSelectState(true);
+        }));
         
     }
     public override void UpdateData(SystemVariables data)
     {
         //Debug.Log("更新堆取料机碰撞信息");
+        base.UpdateData(data);
     }
 }

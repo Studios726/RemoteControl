@@ -8,21 +8,29 @@ using UnityEngine.UI;
 public class BucketWheelStateBase : MonoBehaviour
 {
     /// <summary>
+    /// 本地控制
+    /// </summary>
+    public ToggleDIY localControl;
+    /// <summary>
     /// 远程控制
     /// </summary>
-    public Toggle remoteControl;
+    public ToggleDIY remoteControl;
     /// <summary>
     /// 电源合闸
     /// </summary>
-    public Toggle powerSupplyClose;
+    public ToggleDIY powerSupplyClose;
+    /// <summary>
+    /// 动力电源
+    /// </summary>
+    public ToggleDIY lowVoltagePowerClosed;
     /// <summary>
     /// 与系统连锁
     /// </summary>
-    public Toggle systemChain;
+    public ToggleDIY systemChain;
     /// <summary>
     /// 通訊状态
     /// </summary>
-    public Toggle communicationStatus;
+    public ToggleDIY communicationStatus;
     /// <summary>
     /// 通訊状态 红色灯
     /// </summary>
@@ -34,76 +42,103 @@ public class BucketWheelStateBase : MonoBehaviour
     /// <summary>
     /// 检修
     /// </summary>
-    public Toggle recondition;
+    public ToggleDIY recondition;
     /// <summary>
     /// 斗轮机故障
     /// </summary>
-    public Toggle bucketWheelMalfunction;
+    public ToggleDIY bucketWheelMalfunction;
     /// <summary>
     /// 蜂鸣报警
     /// </summary>
-    public Toggle buzzerAlarm;
+    public ToggleDIY buzzerAlarm;
     /// <summary>
     /// 斗轮运行
     /// </summary>
-    public Toggle bucketWheelRun;
+    public ToggleDIY bucketWheelRun;
     /// <summary>
     /// 允许取料信号
     /// </summary>
-    public Toggle reclaimerSignal;
+    public ToggleDIY reclaimerSignal;
     /// <summary>
     /// 斗轮机取料运行
     /// </summary>
-    public Toggle reclaimerRun;
+    public ToggleDIY reclaimerRun;
     /// <summary>
     /// 俯仰上俯
     /// </summary>
-    public Toggle pitchingUp;
+    public ToggleDIY pitchingUp;
     /// <summary>
     /// 俯仰下俯
     /// </summary>
-    public  Toggle pitchingDown;
+    public  ToggleDIY pitchingDown;
     /// <summary>
     /// 左转运行
     /// </summary>
-    public Toggle leftTurnRun;
+    public ToggleDIY leftTurnRun;
     /// <summary>
     /// 右转运行
     /// </summary>
-    public  Toggle rightTurnRun;
+    public  ToggleDIY rightTurnRun;
     /// <summary>
     /// 后退运行
     /// </summary>
-    public Toggle backTurnRun;
+    public ToggleDIY backTurnRun;
     /// <summary>
     /// 前进运行
     /// </summary>
-    public Toggle fowardTurnRun;
+    public ToggleDIY fowardTurnRun;
     
+    /// <summary>
+    /// 左侧运行
+    /// </summary>
+    public ToggleDIY leftSideRun;
+    /// <summary>
+    /// 右侧运行
+    /// </summary>
+    public ToggleDIY rightSideRun;
     public float pastTime = 0;
     public virtual void UpdateData(SystemVariables data)
     {
         //Debug.Log("更新参数状态");
-        
+        SetToggleState(localControl,!data.Remote_2,false,data.D1PLC1CommunicationState);
+        SetToggleState(lowVoltagePowerClosed,data.LowVoltagePowerClosed_2,false,data.D1PLC1CommunicationState);
+        SetToggleState(remoteControl, data.Remote_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(powerSupplyClose, data.LowVoltageControlPowerClosed_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(systemChain, data.SystemInterlockSwitch_2, false, data.D1PLC1CommunicationState);
+        // SetToggleState(recondition, data.SystemInterlockSwitch, false, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelMalfunction, data.BucketWheelFault_2, true, data.D1PLC1CommunicationState);
+        // SetToggleState(buzzerAlarm, data.BucketWheelFault, true, data.D1PLC1CommunicationState);
+        // SetToggleState(buzzerAlarm, data.BucketWheelFault, true, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelRun, data.BucketWheelMotorRunning_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(reclaimerSignal, data.AllowBucketWheelMaterialUnloading_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(reclaimerRun, data.BucketWheelMaterialUnloadingRunning_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(pitchingUp, data.VariableAmplitudeUpperElectromagneticValveOpen_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(pitchingDown, data.VariableAmplitudeLowerElectromagneticValveOpen_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(leftTurnRun, data.RotaryLeftTurnCommand_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(rightTurnRun, data.RotaryRightTurnCommand_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(backTurnRun, data.LargeCarReverseCommand_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(fowardTurnRun, data.LargeCarForwardCommand_2, false, data.D1PLC1CommunicationState);
+        // SetToggleState(leftSideRun, data.LargeCarForwardCommand_2, false, data.D1PLC1CommunicationState);
+        // SetToggleState(rightSideRun, data.LargeCarForwardCommand_2, false, data.D1PLC1CommunicationState);
     }
 
     public void Update()
     {
         if (GameDataManager.Instance.RcConnectionState == false)//
         {
-            if (communicationStatus.isOn==true)
+            if (communicationStatus.curState!=2)
             {
-                ConnectionStatus(false);
+                ConnectionStatus(2);
             }
         }
         else
         {
-            if (communicationStatus.isOn==false)
+            if (communicationStatus.curState!=1)
             {
-                ConnectionStatus(true);
+                ConnectionStatus(1);
             }
         }
-        if (communicationStatus==null||communicationStatus.isOn)
+        if (GameDataManager.Instance.RcConnectionState==true)
         {
             return;
         }
@@ -120,25 +155,42 @@ public class BucketWheelStateBase : MonoBehaviour
         }
     }
 
-    public void ConnectionStatus(bool isSucc)
+    public void ConnectionStatus(int isSucc)
     {
-        communicationStatus.isOn=isSucc;
-        red.SetActive(!isSucc);
-        yellow.SetActive(!isSucc);
+        communicationStatus.SetState(isSucc);
+        red.SetActive(isSucc==1);
+        yellow.SetActive(isSucc==2);
     }
-    public virtual void SetToggleState(Toggle toggle, bool ison)
+    public virtual void SetToggleState(ToggleDIY toggle, bool ison,bool isFault=true, bool isConnect=true)
     {
-        if (toggle.isOn == ison)
-        {
-            return;
-        }
-        else if (toggle)
-        {
-            toggle.isOn = ison;
+        if (isConnect) {
+            if (ison)
+            {
+                if (isFault)
+                {
+                    toggle?.SetState(2);
+                }
+                else
+                {
+                    toggle?.SetState(1);
+                }
+                
+            }
+            else
+            {
+                if (isFault)
+                {
+                    toggle?.SetState(1);
+                }
+                else
+                {
+                    toggle?.SetState(2);
+                }
+            }
         }
         else
         {
-            Debug.LogError("Toggle is null");
+            toggle?.SetState(0);
         }
 
     }

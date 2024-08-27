@@ -2,6 +2,7 @@ using System;
 using RemoteControl.Event;
 using System.Collections;
 using System.Collections.Generic;
+using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 
 public class LoginPanelCtr :UIPresenter<LoginPanelView>
@@ -10,6 +11,7 @@ public class LoginPanelCtr :UIPresenter<LoginPanelView>
     {
         base.ShowView(uiArgs);
         GameDataManager.Instance.SetMachineActive(false);
+       
     }
 
     public void Login(string account, string password)

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace ShenYangRemoteSystem.Subclass
 {
     
+    
     public class SystemVariables
     {
         public DateTime TimeStamp { get; set; }

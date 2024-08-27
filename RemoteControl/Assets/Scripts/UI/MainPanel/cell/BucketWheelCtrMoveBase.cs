@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
+using Utility;
 
 public class BucketWheelCtrMoveBase : MonoBehaviour
 {
@@ -202,8 +203,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         // AddOnClickListener(aloneBtn, (() => SendMessageToServer("控制方式单动")));
         // AddOnClickListener(togetherBtn, (() => SendMessageToServer("控制方式联动")));
         // AddOnClickListener(automaticBtn, (() => SendMessageToServer("控制方式自动")));
-        // AddOnClickListener(takeMaterBtn, (() => SendMessageToServer("堆取料控制取料")));
-        // AddOnClickListener(stopTakeMaterBtn, (() =>SendMessageToServer("堆取料控制停止")));
+        AddOnClickListener(takeMaterBtn, (() => SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON)));
+        AddOnClickListener(stopTakeMaterBtn, (() =>SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON)));
         // AddOnClickListener(carFastBtn, (() => SendMessageToServer("大车快速")));
         // AddOnClickListener(carSlowBtn, (() => SendMessageToServer("大车慢速")));
         AddOnClickListener(carBackBtn, (() => SendMessageToServer(COMMAND_NAME.MOVE_BACKWARD)));
@@ -219,6 +220,98 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     public virtual void UpdateData(SystemVariables data)
     {
         //Debug.Log("更新move  大车碰撞信息 ");
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            SetText(carElectricity,data.LargeCarElectricCurrent.ToString(),TextType.Electricity);
+            SetText(rotationElectricity,data.RotaryElectricCurrent.ToString(),TextType.Electricity);
+            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent.ToString(),TextType.Electricity);
+            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent.ToString(),TextType.Electricity);
+            SetText(carPos,data.DC_Pos.ToString(),TextType.Meter);
+            SetText(rotationAngle,data.SLEW_Angle.ToString(),TextType.Angle);
+            SetText(upAngle,data.Luff_Angle.ToString(),TextType.Angle);
+            
+            upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
+            downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen);
+
+            if (data.LargeCarForwardCommand==false&&data.LargeCarReverseCommand==false)
+            {
+                carStopBtn.SetSystemState(true);
+            }
+            else
+            {
+                carStopBtn.SetSystemState(false);
+            }
+            
+            if (data.VariableAmplitudeUpperElectromagneticValveOpen==false&&data.VariableAmplitudeLowerElectromagneticValveOpen==false)
+            {
+                stopBtn.SetSystemState(true);
+            }
+            else
+            {
+                stopBtn.SetSystemState(false);
+            }
+
+            if (data.RotaryLeftTurnCommand==false&&data.RotaryRightTurnCommand==false)
+            {
+                rotStopBtn.SetSystemState(true);
+            }
+            else
+            {
+                rotStopBtn.SetSystemState(false);
+            }
+            leftBtn.SetSystemState(data.RotaryLeftTurnCommand);
+            rightBtn.SetSystemState(data.RotaryRightTurnCommand);
+            carBackBtn.SetSystemState(data.LargeCarReverseCommand);
+            carForwardBtn.SetSystemState(data.LargeCarForwardCommand);
+            
+        }
+        else
+        {
+            SetText(carElectricity,data.LargeCarElectricCurrent_2.ToString(),TextType.Electricity);
+            SetText(rotationElectricity,data.RotaryElectricCurrent_2.ToString(),TextType.Electricity);
+            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent_2.ToString(),TextType.Electricity);
+            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent_2.ToString(),TextType.Electricity);
+            SetText(carPos,data.DC_Pos_2.ToString(),TextType.Meter);
+            SetText(rotationAngle,data.SLEW_Angle_2.ToString(),TextType.Angle);
+            SetText(upAngle,data.Luff_Angle_2.ToString(),TextType.Angle);
+            
+            
+            
+            upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
+            downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
+            leftBtn.SetSystemState(data.RotaryLeftTurnCommand_2);
+            rightBtn.SetSystemState(data.RotaryRightTurnCommand_2);
+            carBackBtn.SetSystemState(data.LargeCarReverseCommand_2);
+            carForwardBtn.SetSystemState(data.LargeCarForwardCommand_2);
+            
+            if (data.LargeCarForwardCommand_2==false&&data.LargeCarReverseCommand_2==false)
+            {
+                carStopBtn.SetSystemState(true);
+            }
+            else
+            {
+                carStopBtn.SetSystemState(false);
+            }
+            
+            if (data.VariableAmplitudeUpperElectromagneticValveOpen_2==false&&data.VariableAmplitudeLowerElectromagneticValveOpen_2==false)
+            {
+                stopBtn.SetSystemState(true);
+            }
+            else
+            {
+                stopBtn.SetSystemState(false);
+            }
+
+            if (data.RotaryLeftTurnCommand_2==false&&data.RotaryRightTurnCommand_2==false)
+            {
+                rotStopBtn.SetSystemState(true);
+            }
+            else
+            {
+                rotStopBtn.SetSystemState(false);
+            }
+        }
+      
     }
     public  void AddOnClickListener(Button btn, UnityAction action)
     {
@@ -245,15 +338,18 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         Debug.Log($"sendMessage {machine} {commandName}");
         switch (command)
         {
-            // case "堆取料控制停止":
-            //     UpdateCurCtrMode(ref curPileTakeMode, stopTakeMaterBtn);
-            //
-            //     command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
-            //     break;
-            // case "堆取料控制取料":
-            //     UpdateCurCtrMode(ref curPileTakeMode, takeMaterBtn);
-            //     //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
-            //     break;
+            case COMMAND_NAME.BELTSSTOP_BUTTON:
+                UpdateCurCtrMode(ref curPileTakeMode, stopTakeMaterBtn);
+                DataManager.Instance.InsertHistoryLogMc("堆取料停止开关", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.BELTTAKE_BUTTON:
+                UpdateCurCtrMode(ref curPileTakeMode, takeMaterBtn);
+                DataManager.Instance.InsertHistoryLogMc("取料开关", GameDataManager.Instance.GetUserName(), machine);
+                //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
+                break;
+            case COMMAND_NAME.BELTSTACK_BUTTON:
+                DataManager.Instance.InsertHistoryLogMc("堆料开关", GameDataManager.Instance.GetUserName(), machine);
+                break;
             // case "控制方式联动":
             //     UpdateCurCtrMode(ref curCtrMode, togetherBtn);
             //     //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
@@ -306,5 +402,23 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 break;
         }
         GameDataManager.Instance.SendServerCommandByName(commandName);
+    }
+
+    public virtual void SetText(Text text, string value,TextType type)
+    {
+        if (text == null)
+        {
+            Debug.LogError(" Text is null 请检查 AngleCurrentValueItem");
+            return;
+        }
+        if (text.text == value) {
+            return;
+        }
+
+        if (value=="")
+        {
+            value = "0";
+        }
+        text.SetTextSymbol(value, type);
     }
 }

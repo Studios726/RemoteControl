@@ -9,7 +9,7 @@ using Utility;
 public class ButtonCell : MonoBehaviour
 {
     private Button btn;
-    private GameObject red;
+    public GameObject red;
     private Text text;
     public GameObject select;
     private UnityAction lastAction;
@@ -22,11 +22,38 @@ public class ButtonCell : MonoBehaviour
     }
     public void SetSelectState(bool state)
     {
+        if (select==null)
+        {
+            select = transform.Find("select").gameObject;
+        }
+        if (select==null)
+        {
+            Debug.Log($"  red is null {gameObject.name}");
+            return;
+        }
         if (select.activeSelf==state)
         {
             return;
         }
         select.SetActive(state);
+    }
+    public void SetSystemState(bool state)
+    {
+        if (red==null)
+        {
+            red = transform.Find("Image").gameObject;
+        }
+
+        if (red==null)
+        {
+            Debug.Log($" red is null  {gameObject.name}");
+            return;
+        }
+        if (red.activeSelf==state)
+        {
+            return;
+        }
+        red.SetActive(state);
     }
     public void AddListener(UnityAction action)
     {

@@ -97,9 +97,9 @@ public class BucketWheelTaskBase : PanelBase
     }
     public virtual void Init()
     {
-        AddOnClickListener(scramStopBtn, (() => { SendPlcCommand("急停"); }));
-        AddOnClickListener(resetBtn, (() => { SendPlcCommand("复位"); }));
-        AddOnClickListener(warningBtn, (() => { SendPlcCommand("警告"); }));
+        AddOnClickListener(scramStopBtn, (() => { SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP); }));
+        AddOnClickListener(resetBtn, (() => { SendPlcCommand(COMMAND_NAME.ERR_RESET); }));
+        AddOnClickListener(warningBtn, (() => { SendPlcCommand(COMMAND_NAME.STARTUP_ALARM); }));
         AddOnClickListener(takeMaterStartBtn, (() => { SendTaskCommand(OperationType.START); }));
         AddOnClickListener(takeMaterStopBtn, (() => { SendTaskCommand(OperationType.PAUSE); }));
         AddOnClickListener(takeMaterReversingBtn, (() => { SendTaskCommand(OperationType.REVERSING); }));
@@ -128,9 +128,22 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(takeMaterNum, 0, 99999); 
         InputFieldValueRange(layerHigh, 0, 45);
     }
-    public virtual void SendPlcCommand(string plcCommand)
+    public virtual void SendPlcCommand(COMMAND_NAME mCommandName)
     {
-
+        string commandName=machine == Machine.BucketWheelStackerReclaimer ? mCommandName.ToString()+"_1" : mCommandName.ToString()+"_2";
+        // int dataInt = 0;
+        if (mCommandName==COMMAND_NAME.EMERGENCY_STOP)
+        {
+            
+        }else if (COMMAND_NAME.ERR_RESET == mCommandName)
+        {
+            
+        }else if (COMMAND_NAME.STARTUP_ALARM == mCommandName)
+        {
+            
+        }
+        // Debug.Log($" commandName {commandName}");
+        GameDataManager.Instance.SendServerCommandByName(commandName);
     }
     public virtual void SendTaskCommand(OperationType operationType)
     {
@@ -143,6 +156,7 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
         taskCommand.TaskCreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        taskCommand.OperatorSystem = "MC";
         if (operationType == OperationType.START)
         {
             taskCommand.Command_Type = 0;
@@ -159,7 +173,6 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.IsQuantified = quantityOpenToggle.isOn;
             taskCommand.Quantity = int.Parse(takeMaterNum.text);
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
-            taskCommand.OperatorSystem = "MC";
             taskCommand.LayerHigh = layerHigh.text == "" ? 0 : int.Parse(layerHigh.text);
             AllData allData = new AllData();
             taskCommand.AllData = allData;

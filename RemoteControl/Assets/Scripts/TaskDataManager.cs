@@ -28,6 +28,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         command.QuerySystem = "MC";
         command.Machine = machine;
         command.Command_Type = 2;
+        command.OperatorSystem = "MC";
         command.OperationCommand = operationType;
         SendTaskCommand(command);
     }
@@ -39,6 +40,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
         taskCommand.Command_Type = 1;
+        taskCommand.OperatorSystem = "MC";
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
         Debug.Log("获取当前任务状态");
     }

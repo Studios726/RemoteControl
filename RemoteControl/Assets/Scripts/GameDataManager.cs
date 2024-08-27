@@ -208,13 +208,14 @@ public class GameDataManager : Singleton<GameDataManager>
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 
-    public void SendServerCommandByName(string commandName)
+    public void SendServerCommandByName(string commandName,int dataInt=0)
     {
         ServerCommand serverCommand = new ServerCommand();
         serverCommand.QUERY_SYSTEM = "MC";
         serverCommand.DATA_TYPE = 6;
         serverCommand.QUERY_TYPE = 2;
         serverCommand.COMMAND_NAME = commandName;
+        serverCommand.DATA_INT = dataInt;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
     /// <summary>

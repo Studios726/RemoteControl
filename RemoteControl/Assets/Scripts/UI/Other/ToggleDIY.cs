@@ -11,6 +11,7 @@ public class ToggleDIY : MonoBehaviour
     public Color color1;
     public Color color2;
     public Color color3;
+    public  int curState;
     private void Start()
     {
         state1.color = color1;
@@ -19,6 +20,7 @@ public class ToggleDIY : MonoBehaviour
     }
     public void SetState(int state)
     {
+        curState = state;
         state1.gameObject.SetActive(state == 0);
         state2.gameObject.SetActive(state == 1);
         state3.gameObject.SetActive(state == 2);

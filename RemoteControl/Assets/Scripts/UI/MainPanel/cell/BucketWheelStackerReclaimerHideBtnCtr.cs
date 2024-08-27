@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ShenYangRemoteSystem.Subclass;
 public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
 {
     /// <summary>
@@ -97,5 +97,23 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
             damBoardPileMaterDownBtn.SetSelectState(false);
             damBoardPileMaterUpBtn.SetSelectState(false);
         });
+    }
+
+    public override void UpdateData(SystemVariables data)
+    {
+        base.UpdateData(data);
+        pileMaterBtn.SetSystemState(data.SuspensionBeltMaterialLoadingRunningContact);
+        pileMaterUpBtn.SetSystemState(data.BucketWheelSlotLiftLimit);
+        damBoardPileMaterDownBtn.SetSystemState(data.BaffleDownLimit);
+        damBoardPileMaterUpBtn.SetSystemState(data.BaffleUpLimit);
+        if (data.BaffleDownLimit==false&&data.BaffleUpLimit==false)
+        {
+            damBoardPileMaterStopBtn.SetSystemState(true);
+        }
+        else
+        {
+            damBoardPileMaterStopBtn.SetSystemState(false);
+        }
+        
     }
 }

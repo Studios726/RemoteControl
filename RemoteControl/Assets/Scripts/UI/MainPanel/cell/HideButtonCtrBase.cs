@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using ShenYangRemoteSystem.Subclass;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -175,8 +176,8 @@ public class HideButtonCtrBase : PanelBase
 
     public void Init()
     {
-        AddOnClickListener(highOpenBrake,(() =>SendMessageToServer("高压分闸") ));
-        AddOnClickListener(highCloseBrake,(() =>SendMessageToServer("高压合闸") ));
+        // AddOnClickListener(highOpenBrake,(() =>SendMessageToServer("高压分闸") ));
+        // AddOnClickListener(highCloseBrake,(() =>SendMessageToServer("高压合闸") ));
         AddOnClickListener(shakerStartBtn,(() =>SendMessageToServer(COMMAND_NAME.VIBRATOR_START) ));
         AddOnClickListener(shakerStopBtn,(() =>SendMessageToServer(COMMAND_NAME.VIBRATOR_STOP) ));
         AddOnClickListener(powerSupplyCloseBrakeBtn,(() =>SendMessageToServer(COMMAND_NAME.CONTROLPOWER_ON) ));
@@ -209,6 +210,87 @@ public class HideButtonCtrBase : PanelBase
         AddOnClickListener(takeMaterStopBtn,(() =>SendMessageToServer(COMMAND_NAME.XBTB_STOP_BUTTON) ));
     }
 
+    public virtual void UpdateData(SystemVariables data)
+    {
+        if (machine== Machine.BucketWheelStackerReclaimer)
+        {
+            shakerStopBtn.SetSystemState(data.VibrationMotorRunning==false);
+            shakerStartBtn.SetSystemState(data.VibrationMotorRunning);
+            powerSupplyCloseBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed);
+            powerSupplyOpenBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed==false);
+            if (data.LeftClampRelaxLimit==true && data.RightClampRelaxLimit==true)
+            {
+                disengageClampBtn.SetSystemState(true);
+            }
+            else
+            {
+                engageClampBtn.SetSystemState(true);
+            }
+            impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed==false);
+            impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed);
+            // lightCloseBrakeBtn.SetSystemState(data.);
+            systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich==false);
+            systemLockBtn.SetSystemState(data.SR1_Interlock_Swich);
+            oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning==false);
+            oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning);
+            bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB);
+            bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning);
+            bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning==false);
+            cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact);
+            if (data.SuspensionBeltMaterialUnloadingRunningContact==false &&data.SuspensionBeltMaterialLoadingRunningContact==false)
+            {
+                cantileverTakeMaterStopBtn.SetSystemState(true);
+            }
+            else
+            {
+                cantileverTakeMaterStopBtn.SetSystemState(false);
+            }
+            takeMaterDownBtn.SetSystemState(data.BucketWheelSlotLowerLimit);
+            if (data.BucketWheelSlotLowerLimit==false&&data.BucketWheelSlotLiftLimit==false)
+            {
+                takeMaterStopBtn.SetSystemState(true);
+            }
+        }
+        else
+        {
+            shakerStopBtn.SetSystemState(data.VibrationMotorRunning_2==false);
+            shakerStartBtn.SetSystemState(data.VibrationMotorRunning_2);
+            powerSupplyCloseBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed_2);
+            powerSupplyOpenBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed_2==false);
+            if (data.LeftClampRelaxLimit_2==true && data.RightClampRelaxLimit_2==true)
+            {
+                disengageClampBtn.SetSystemState(true);
+            }
+            else
+            {
+                engageClampBtn.SetSystemState(true);
+            }
+            impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2==false);
+            impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2);
+            // lightCloseBrakeBtn.SetSystemState(data.);
+            // systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich==false);
+            // systemLockBtn.SetSystemState(data.SR1_Interlock_Swich);
+            oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false);
+            oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2);
+            // bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB);
+            bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning_2);
+            bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning_2==false);
+            cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact_2);
+            if (data.SuspensionBeltMaterialUnloadingRunningContact_2==false &&data.SuspensionBeltMaterialLoadingRunningContact_2==false)
+            {
+                cantileverTakeMaterStopBtn.SetSystemState(true);
+            }
+            else
+            {
+                cantileverTakeMaterStopBtn.SetSystemState(false);
+            }
+            takeMaterDownBtn.SetSystemState(data.BucketWheelSlotLowerLimit_2);
+            if (data.BucketWheelSlotLowerLimit_2==false&&data.BucketWheelSlotLiftLimit_2==false)
+            {
+                takeMaterStopBtn.SetSystemState(true);
+            }
+        }
+    }
     public void SendMessageToServer(string message)
     {
         Debug.Log($"message { machine }   {message}");
@@ -216,6 +298,7 @@ public class HideButtonCtrBase : PanelBase
     public void SendMessageToServer(COMMAND_NAME command)
     {
         string commandName=machine == Machine.BucketWheelStackerReclaimer ? command.ToString()+"_1" : command.ToString()+"_2";
+        int dataInt = 0;
         Debug.Log($"message { machine }   {commandName}");
         switch (command)
         {
@@ -313,6 +396,7 @@ public class HideButtonCtrBase : PanelBase
                 break;
             case  COMMAND_NAME.BYPASS_BUTTON:   
                 bypassBtn.SetSelectState(!bypassBtn.select.activeSelf);
+                dataInt = bypassBtn.red.activeSelf ? 0 : 1;
                 DataManager.Instance.InsertHistoryLogMc("上位机旁路", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case  COMMAND_NAME.XBTB_UP_BUTTON:   
@@ -350,6 +434,6 @@ public class HideButtonCtrBase : PanelBase
             default:
                 break;
         }
-        GameDataManager.Instance.SendServerCommandByName(commandName);
+        GameDataManager.Instance.SendServerCommandByName(commandName,dataInt);
     }
 }

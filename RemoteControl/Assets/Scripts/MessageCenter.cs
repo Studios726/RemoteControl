@@ -76,7 +76,6 @@ public class MessageCenter : Singleton<MessageCenter>
             {
                 string json = Decompress(message);
                 SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
-                // Debug.Log($"数据解析成功 socketType {nameof(SocketType.TaoRC)}");
                 GameDataManager.Instance.SetSystemVariables(systemVariables);
             }
             catch (Exception)
