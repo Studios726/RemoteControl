@@ -67,21 +67,11 @@ namespace RemoteControl
 
             isConnect = true;
             connectionRC = new GameObject().AddComponent<ClientConnection>();
-            if ( string.IsNullOrEmpty(GameDataManager.Instance.TaoIP)==false)
-            {
-                connectionRC.Init(GameDataManager.Instance.TaoIP, SocketType.TaoRC);
-                Debug.LogError($"taoIP: {GameDataManager.Instance.TaoIP}");
-            }
-            else
-            {
-                connectionRC.Init(Address.taoUrl, SocketType.TaoRC);
-                Debug.LogError($"taoIP: {Address.taoUrl}");
-            }
-          
+            connectionRC.Init("ws://"+GameDataManager.Instance.IpConfig.TaoIP, SocketType.TaoRC);
             connectionPC = new GameObject().AddComponent<ClientConnection>();
-            connectionPC.Init(Address.taskUrl, SocketType.TaskPC);
+            connectionPC.Init("ws://"+GameDataManager.Instance.IpConfig.TaskIP, SocketType.TaskPC);
             connectionSCA = new GameObject().AddComponent<ClientConnection>();
-            connectionSCA.Init(Address.yuanUrl, SocketType.SCA);
+            connectionSCA.Init("ws://"+GameDataManager.Instance.IpConfig.YuanIP, SocketType.SCA);
 
             MessageCenter.Instance.RegisterListener(MessageType.RC, connectionRC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.PC, connectionPC.WebSend);

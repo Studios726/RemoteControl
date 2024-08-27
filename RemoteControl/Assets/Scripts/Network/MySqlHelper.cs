@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 
 public class MySqlHelper
 {
-    public static string IP = Address.serviceIP;
+    public static string IP = GameDataManager.Instance.IpConfig.DataIP;
     public static string Database = "huarun";//"huarun";
     public static string Username = "root";
     public static string Password = "123456";

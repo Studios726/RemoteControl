@@ -64,6 +64,7 @@ public class LoginPanelView : UIView<LoginPanelCtr>
             timer=null;
             _error.SetActive(false);
         });
+        _error.transform.FindComponent<Text>("Text").text = error;
         _error.SetActive(true);
     }
     public void SetAccountAndPassword()

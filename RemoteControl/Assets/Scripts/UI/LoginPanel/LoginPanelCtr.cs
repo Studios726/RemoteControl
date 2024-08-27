@@ -2,6 +2,7 @@ using System;
 using RemoteControl.Event;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ public class LoginPanelCtr :UIPresenter<LoginPanelView>
     {
         base.ShowView(uiArgs);
         GameDataManager.Instance.SetMachineActive(false);
-       
+        ReadConfig();
     }
 
     public void Login(string account, string password)
@@ -26,7 +27,7 @@ public class LoginPanelCtr :UIPresenter<LoginPanelView>
         }
         else
         {
-            view.ShowError("");
+            view.ShowError("账号或密码输入错误，请重新输入");
         }
     }
 
@@ -39,6 +40,34 @@ public class LoginPanelCtr :UIPresenter<LoginPanelView>
         EventManager.Instance.AddListener(EventName.KeyCodeTab,KeyCodeTab);
     }
 
+    public void ReadConfig()
+    {
+        if (GameDataManager.Instance.IpConfig!=null)
+        {
+               return;
+        }
+        string exeRootPath = Application.dataPath;
+        string parentPath = Directory.GetParent(exeRootPath).FullName;
+        string filePath =parentPath+ "\\IpConfig.txt";
+        if (File.Exists(filePath))
+        {
+            string content = File.ReadAllText(filePath);
+            IpConfig ipConfig = JsonMgr.DeSerialize<IpConfig>(content);
+            GameDataManager.Instance.SetIpConfig(ipConfig);
+          
+        }
+        else
+        {
+            IpConfig config = new IpConfig();
+            config.TaoIP = Address.serviceTaoIP;
+            config.YuanIP= Address.serviceYuanIP;
+            config.TaskIP= Address.serviceTaskIP;
+            config.DataIP= Address.serviceIP;
+            GameDataManager.Instance.SetIpConfig(config);
+           
+        }
+        Debug.LogError(GameDataManager.Instance.IpConfig.DataIP);
+    }
     public override void Dispose()
     {
         EventManager.Instance.RemoveListener(EventName.KeyCodeTab, KeyCodeTab);

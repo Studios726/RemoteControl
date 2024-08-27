@@ -19,6 +19,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public AccountInfo curAccountInfo;
     public GameObject machineRoot;
     private string _taoIP;
+    private IpConfig _ipConfig;
     public bool RcConnectionState
     {
         get => _rcConnectionState;
@@ -32,6 +33,16 @@ public class GameDataManager : Singleton<GameDataManager>
     public string TaoIP
     {
         get => _taoIP;
+    }
+
+    public IpConfig IpConfig
+    {
+        get => _ipConfig;
+    }
+
+    public void SetIpConfig(IpConfig ipConfig)
+    {
+        _ipConfig = ipConfig;
     }
     public string GetUserName()
     {
