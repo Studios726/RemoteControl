@@ -98,11 +98,11 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         if (machineMove_1)
         {
-            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance, SystemVariables.SLEW_Angle, SystemVariables.Luff_Angle);//
+            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos, SystemVariables.SLEW_Angle, SystemVariables.Luff_Angle);//
         }
         if (machineMove_2)
         {
-            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.LargeCarTravelDistance_2, SystemVariables.SLEW_Angle_2, SystemVariables.Luff_Angle_2);//
+            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2, SystemVariables.SLEW_Angle_2, SystemVariables.Luff_Angle_2);//
         }
     }
     public GameObject SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem)
