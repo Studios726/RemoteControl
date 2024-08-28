@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class AppLauncher : MonoBehaviour
 {
-    private GameMain _gameMain;
+    public GameMain _gameMain;
     private bool isQuit;
     private void Awake()
     {
@@ -15,6 +15,7 @@ public class AppLauncher : MonoBehaviour
         Application.targetFrameRate = 60;
         UIInit();
         _gameMain=this.gameObject.AddComponent<GameMain>();
+        GameDataManager.Instance.GameMain = _gameMain;
         GameStart();
         OnApplicationQuit();
     }

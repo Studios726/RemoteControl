@@ -229,7 +229,8 @@ public class TaskCommand
     //任务ID
     public string TaskID {  get; set; }
     //任务创建时间
-    public string TaskCreateTime { get; set; }
+    public DateTime TaskCreateTime { get; set; }
+    public string nowState { get; set; }
     // public 
     //发布任务者
     public string OperatorName { get; set; }
@@ -266,7 +267,7 @@ public class TaskCommand
     // 定量多少，如果IsQuantified为true，则此字段有效
     public int Quantity { get; set; }
     //堆料高度
-    public int TakeMateHigh {  get; set; }
+    public float TakeMateHigh {  get; set; }
     //层高
     public float LayerHigh {  get; set; }
     public AllData  AllData { get; set; }

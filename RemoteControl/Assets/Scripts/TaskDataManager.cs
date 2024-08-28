@@ -16,7 +16,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
     private Dictionary<string, TaskData> nearestTaskDataDic = new Dictionary<string, TaskData>();
     private Dictionary<string, TaskData> curTaskDic = new Dictionary<string,TaskData>();
     public Queue<string> BucketWheelQueue = new Queue<string>();
-    public Queue<string> BucketWheelStackerReclaimer = new Queue<string>();
+    public Queue<string> BucketWheelStackerReclaimerQueue = new Queue<string>();
     public void SendTaskCommand(TaskCommand taskCommand)
     {
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
@@ -89,7 +89,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                             GameDataManager.Instance.UpdateSCAData(1);
                             if (taskVariables.McData[i].Machine==Machine.BucketWheelStackerReclaimer)
                             {
-                                AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimer,0,Machine.BucketWheelStackerReclaimer);
+                                AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimerQueue,0,Machine.BucketWheelStackerReclaimer);
                             }
                             else
                             {
@@ -106,7 +106,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         GameDataManager.Instance.UpdateSCAData(1);
                         if (taskVariables.McData[i].Machine==Machine.BucketWheelStackerReclaimer)
                         {
-                            AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimer,taskVariables.McData[i].AllData.Code,Machine.BucketWheelStackerReclaimer);
+                            AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimerQueue,taskVariables.McData[i].AllData.Code,Machine.BucketWheelStackerReclaimer);
                         }
                         else
                         {
@@ -125,7 +125,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     
                     if (taskCommand.Machine==Machine.BucketWheelStackerReclaimer)
                     {
-                        AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimer,-1,Machine.BucketWheelStackerReclaimer);//hard code 
+                        AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimerQueue,-1,Machine.BucketWheelStackerReclaimer);//hard code 
                     }
                     else
                     {
@@ -182,24 +182,17 @@ public class TaskDataManager : Singleton<TaskDataManager>
             {
                 DateTime parsedDateTime;
                 long timestamp=0;
-                if (DateTime.TryParse(taskCommand.TaskCreateTime, out parsedDateTime))
-                {
-                    timestamp =taskCommand.TimedAt*60 - (long)(DateTime.Now - parsedDateTime).TotalSeconds ;
-                    Debug.LogError("字符串转换为 timestamp: " + timestamp);
-                }
-
+                timestamp =taskCommand.TimedAt*60 - (long)(DateTime.Now - taskCommand.TaskCreateTime).TotalSeconds ;
                 if (timestamp>0)
                 {
                     taskData.AddTimer(() =>
                     {
                         SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END);
-                        Debug.LogError("结束任务");
-                    }, timestamp*60);
+                    }, timestamp);
                 }
                 else
                 {
                     SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END);
-                    Debug.LogError("结束任务22");
                 }
                
             }
@@ -234,16 +227,47 @@ public class TaskDataManager : Singleton<TaskDataManager>
         }
 
         string des = "";
+        string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         if (code==-1)
         {
-            des = $"开始任务 {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}";
+            des = $"开始任务 {time}";
         }else if (code == 0)
         {
-            des = $"任务完成 {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}";
+            des = $"任务完成 {time}";
+        }else if (code == 1)
+        {
+            des = $"与RC通讯中断 {time}";
+        }else if (code == 2)
+        {
+            des = $"臂调0的范围内，有超过臂极限位置高度的煤堆 {time}";
+        }else if (code == 3)
+        {
+            des = $"工作范围不满足实际情况 {time}";
+        }else if (code == 4)
+        {
+            des = $"软保护中出现问题 {time}";
+        }else if (code == 5)
+        {
+            des = $"两台机器会产生碰撞 {time}";
+        }else if (code == 6)
+        {
+            des = $"软保护和两台机器会产生碰撞 {time}";
+        }else if (code == 7)
+        {
+            des = $"当前没有满足实际工作的情况 {time}";
+        }else if (code == 14)
+        {
+            des = $"处于调臂阶段，换向不能用 {time}";
+        }else if (code == 15)
+        {
+            des = $"取料作业中，处于暂停状态 {time}";
+        }else if (code == 16)
+        {
+            des = $"正常运行 {time}";
         }
         else
         {
-            des = $"任务异常中断 {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}";
+            des = $"任务异常中断 code {code} {time}";
         }
         queue.Enqueue(des);
         if (machine==Machine.BucketWheelStackerReclaimer)

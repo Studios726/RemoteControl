@@ -19,6 +19,7 @@ public class ClientConnection:MonoBehaviour
     private bool lockReconnect = false;
     private Coroutine _pingCor, _clientPing, _serverPing;
     public bool isConnect;
+    private Coroutine coroutine_setReConnect;   
     public void Init(string _address,SocketType type)
     {
         socketType = type;
@@ -122,7 +123,14 @@ public class ClientConnection:MonoBehaviour
         if (this.lockReconnect)
             return;
         this.lockReconnect = true;
-        StartCoroutine(SetReConnect());
+        isConnect = false;
+        if (coroutine_setReConnect != null)
+        {
+            StopCoroutine(coroutine_setReConnect);
+            coroutine_setReConnect = null;
+        }
+        coroutine_setReConnect =  StartCoroutine(SetReConnect());
+       
     }
  
     private IEnumerator SetReConnect()
@@ -130,7 +138,7 @@ public class ClientConnection:MonoBehaviour
         Debug.Log($"正在重连websocket{socketType}");
         yield return new WaitForSeconds(5);
         CreateWebSocket();
-        lockReconnect = false;
+        this.lockReconnect = false;
     }
  
     //心跳检测

@@ -36,13 +36,21 @@ public class MainPanelView : UIView<MainPanelCtr>
         
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
         
-        updateModelBtn.onClick.AddListener(() => { GameDataManager.Instance.UpdateSCAData(30); });
+        updateModelBtn.onClick.AddListener(() =>
+        {
+            if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
+            GameDataManager.Instance.UpdateSCAData(30);
+        });
         
         
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
         UpdateData(GameDataManager.Instance.SystemVariables);
         //临时注释
-        // TaskDataManager.Instance.GetNearestTaskDataDic();
+        TaskDataManager.Instance.GetNearestTaskDataDic();
     }
 
     private void ActiveHideBtnCtr2()

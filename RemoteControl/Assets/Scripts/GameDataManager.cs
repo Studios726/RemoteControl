@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using RemoteControl;
 using RemoteControl.Event;
 using ShangHaiPro;
 using ShenYangRemoteSystem.Subclass;
@@ -18,6 +19,7 @@ public class GameDataManager : Singleton<GameDataManager>
     private MachineMove machineMove_2;//取斗轮机
     public AccountInfo curAccountInfo;
     public GameObject machineRoot;
+    public GameMain GameMain;
     private string _taoIP;
     private IpConfig _ipConfig;
     public bool RcConnectionState
@@ -75,6 +77,28 @@ public class GameDataManager : Singleton<GameDataManager>
 
         _sendDataReportAndDem = sendDataReportAndDEM;
         EventManager.Instance.TriggerEvent(EventName.RefreshModel, null);
+    }
+
+    public void RecordLocalSCAData(string jsonData)
+    {
+        PlayerPrefs.SetString("LocalSCAData", jsonData);   
+    }
+
+    public void GetLocalSCAData()
+    {
+        string json=PlayerPrefs.GetString("LocalSCAData", "");
+        if (json!="")
+        {
+            try
+            {
+                SetScaReportAndDem(JsonMgr.DeSerialize<SendDataReportAndDEM>(json));
+            }
+            catch (Exception e)
+            {
+               Debug.LogError("本地读取SCA数据失败");
+            }
+           
+        }
     }
     public void SetMachine(MachineMove machine1, MachineMove machine2)
     {
@@ -207,6 +231,8 @@ public class GameDataManager : Singleton<GameDataManager>
         meshCollider.sharedMesh = mesh;
         return go;
     }
+    
+    
     /// <summary>
     /// 获取PLC没帧数据
     /// </summary>

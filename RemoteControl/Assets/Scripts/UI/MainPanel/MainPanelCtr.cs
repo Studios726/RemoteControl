@@ -32,9 +32,9 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskDes1(object o, EventArgs eventArgs)
     {
-        if (TaskDataManager.Instance.BucketWheelStackerReclaimer.Count>0)
+        if (TaskDataManager.Instance.BucketWheelStackerReclaimerQueue.Count>0)
         {
-            view._bucketWheelTask1.UpdateDes(TaskDataManager.Instance.BucketWheelStackerReclaimer);
+            view._bucketWheelTask1.UpdateDes(TaskDataManager.Instance.BucketWheelStackerReclaimerQueue);
         }
         
     }

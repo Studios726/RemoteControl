@@ -297,6 +297,11 @@ public class HideButtonCtrBase : PanelBase
     }
     public void SendMessageToServer(COMMAND_NAME command)
     {
+        if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            return;
+        }
         string commandName=machine == Machine.BucketWheelStackerReclaimer ? command.ToString()+"_1" : command.ToString()+"_2";
         int dataInt = 0;
         Debug.Log($"message { machine }   {commandName}");

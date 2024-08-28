@@ -13,9 +13,9 @@ namespace RemoteControl
     public class GameMain : MonoBehaviour
     {
         // Start is called before the first frame update
-        private ClientConnection connectionRC;
-        private ClientConnection connectionPC;
-        private ClientConnection connectionSCA;
+        public ClientConnection connectionRC;
+        public ClientConnection connectionPC;
+        public ClientConnection connectionSCA;
         private MachineMove machineMove_1;
         private MachineMove machineMove_2;
         private Timer timerRc;
@@ -26,8 +26,8 @@ namespace RemoteControl
         {
             AddListener();
             InitMode();
-            //CreatConnect();
             UIManager.Instance.OpenUI(UIID.LoginPanel);
+            GameDataManager.Instance.GetLocalSCAData();
         }
 
         public void OnExitGame()

@@ -16,6 +16,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public ButtonCell pileMaterStartBtn;
     public ButtonCell pileMaterStopBtn;
     public ButtonCell pileMaterEndBtn;
+    public ButtonCell curPileTaskButtonCell;
     public override void Start()
     {
         base.Start();
@@ -52,15 +53,30 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             }
             startLeftPileMaterText.text=taskCommand.LeftRightRange.startValue.ToString();
             endLeftPileMaterText.text=taskCommand.LeftRightRange.endValue.ToString();
-            pileMaterStartBtn.SetSelectState(taskCommand.AllData.OperationCommandList[0]==1);
-            pileMaterStopBtn.SetSelectState(taskCommand.AllData.OperationCommandList[1] == 1);
-            pileMaterEndBtn.SetSelectState(taskCommand.AllData.OperationCommandList[2] == 1);
+            pileMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0]==1);
+            pileMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1);
+            pileMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1);
         }
     
       
     }
     public void SendPileMaterCommand(OperationType operationType)
     {
+        if (GameDataManager.Instance.GameMain.connectionPC.isConnect==false)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP));
+            return;
+        }
+        if (operationType==OperationType.START)
+        {
+            UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStartBtn);
+        }else if (operationType==OperationType.PAUSE)
+        {
+            UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStopBtn);
+        }else if (operationType == OperationType.END)
+        {
+            UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterEndBtn);
+        }
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
        
@@ -68,7 +84,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         taskCommand.TaskType = TaskType.PILEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
-        taskCommand.TaskCreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        // taskCommand.TaskCreateTime = DateTime.Now;
         if (operationType==OperationType.START)
         {
             taskCommand.Command_Type = 0;

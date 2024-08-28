@@ -30,6 +30,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         base.Start();
         AddOnClickListener(pileMaterBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.BELT_STACK);
             pileMaterBtn.SetSelectState(true);
             cantileverTakeMaterStartBtn.SetSelectState(false);
@@ -38,6 +43,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         
         AddOnClickListener(cantileverTakeMaterStartBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.BELT_TAKE);
             pileMaterBtn.SetSelectState(false);
             cantileverTakeMaterStartBtn.SetSelectState(true);
@@ -46,6 +56,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         
         AddOnClickListener(cantileverTakeMaterStopBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.BELT_STOP);
             pileMaterBtn.SetSelectState(false);
             cantileverTakeMaterStartBtn.SetSelectState(false);
@@ -54,6 +69,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         
         AddOnClickListener(pileMaterUpBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.XBTB_UP_BUTTON);
             pileMaterUpBtn.SetSelectState(true);
             takeMaterDownBtn.SetSelectState(false);
@@ -62,6 +82,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         
         AddOnClickListener(takeMaterDownBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.XBTB_DOWN_BUTTON);
             pileMaterUpBtn.SetSelectState(false);
             takeMaterDownBtn.SetSelectState(true);
@@ -70,6 +95,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         
         AddOnClickListener(takeMaterStopBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.XBTB_STOP_BUTTON);
             pileMaterUpBtn.SetSelectState(false);
             takeMaterDownBtn.SetSelectState(false);
@@ -78,6 +108,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         
         AddOnClickListener(damBoardPileMaterDownBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.SKRIT_STACK_START);
             damBoardPileMaterDownBtn.SetSelectState(true);
             damBoardPileMaterUpBtn.SetSelectState(false);
@@ -85,6 +120,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         });
         AddOnClickListener(damBoardPileMaterUpBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.SKRIT_TAKE_START);
             damBoardPileMaterUpBtn.SetSelectState(true);
             damBoardPileMaterDownBtn.SetSelectState(false);
@@ -92,6 +132,11 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         });
         AddOnClickListener(damBoardPileMaterStopBtn, () =>
         {
+            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             SendMessageToServer(COMMAND_NAME.SKRIT_TAKE_STOP);
             damBoardPileMaterStopBtn.SetSelectState(true);
             damBoardPileMaterDownBtn.SetSelectState(false);

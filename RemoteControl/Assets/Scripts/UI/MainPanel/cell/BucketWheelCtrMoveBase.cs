@@ -334,6 +334,11 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
     public virtual void SendMessageToServer(COMMAND_NAME command)
     {
+        if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            return;
+        }
         string commandName=machine == Machine.BucketWheelStackerReclaimer ? command.ToString()+"_1" : command.ToString()+"_2";
         Debug.Log($"sendMessage {machine} {commandName}");
         switch (command)

@@ -333,6 +333,15 @@ public static class ConstStr
 
 
     #endregion
+    
+    #region
+
+    public const string RC_SERVER_CONNECTION_FAIL_TIP = "服务器连接失败，请检查网络连接！ ";
+    public const string TASK_SERVER_CONNECTION_FAIL_TIP = "服务器连接失败，请检查网络连接！ ";
+    public const string SCA_SERVER_CONNECTION_FAIL_TIP = "服务器连接失败，请检查网络连接！ ";
+
+
+    #endregion
 }
 
 public enum Machine

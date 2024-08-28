@@ -8,11 +8,26 @@ public enum TaskType
 
 public enum OperationType
 {
-    START = 0,//启动
-    PAUSE = 1,//暂定、和恢复
-    REVERSING = 2,//换向
-    END = 3,//结束
-    RECOVER = 4//恢复
+    /// <summary>
+    /// 启动
+    /// </summary>
+    START = 0,
+    /// <summary>
+    /// 暂定、和恢复
+    /// </summary>
+    PAUSE = 1,
+    /// <summary>
+    /// 换向
+    /// </summary>
+    REVERSING = 2,
+    /// <summary>
+    /// 结束
+    /// </summary>
+    END = 3,
+    /// <summary>
+    /// 恢复
+    /// </summary>
+    RECOVER = 4
 }
 
 public class TaskData

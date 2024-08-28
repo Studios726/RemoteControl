@@ -31,6 +31,7 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell takeMaterStopBtn;
     public ButtonCell takeMaterReversingBtn;
     public ButtonCell takeMaterEndBtn;
+    public ButtonCell curTaskButtonCell;
     public Machine machine;
     private Timer reversingTimer;
 
@@ -65,6 +66,7 @@ public class BucketWheelTaskBase : PanelBase
         leftTakeMaterText.text = taskCommand.LeftRightRange.startValue.ToString();
         rightTakeMaterText.text = taskCommand.LeftRightRange.endValue.ToString();
         takeMaterStep.text = taskCommand.StepLength.ToString();
+        layerHigh.text = taskCommand.LayerHigh.ToString();
         timeOpenToggle.isOn = taskCommand.IsTimed;
         if (timeOpenToggle.isOn) {
             quantityOpenToggle.isOn = false;
@@ -77,22 +79,22 @@ public class BucketWheelTaskBase : PanelBase
             timeOpenToggle.isOn = false;
             takeMaterNum.text= taskCommand.Quantity.ToString();
         }
-        takeMaterStartBtn.SetSelectState(taskCommand.AllData.OperationCommandList[0] == 1);
-        takeMaterStopBtn.SetSelectState(taskCommand.AllData.OperationCommandList[1] == 1);
+        takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1);
+        takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1);
         if (taskCommand.AllData.OperationCommandList[2] == 1)
         {
             if (reversingTimer!=null)
             {
                 reversingTimer?.Cancel();
             }
-            reversingTimer=Timer.Register(2,() => { takeMaterReversingBtn.SetSelectState(false); });
-            takeMaterReversingBtn.SetSelectState(true);
+            reversingTimer=Timer.Register(2,() => { takeMaterReversingBtn.SetSystemState(false); });
+            takeMaterReversingBtn.SetSystemState(true);
         }
         else
         {
-            takeMaterReversingBtn.SetSelectState(taskCommand.AllData.OperationCommandList[2] == 1);
+            takeMaterReversingBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1);
         }
-        takeMaterEndBtn.SetSelectState(taskCommand.AllData.OperationCommandList[3] == 1);
+        takeMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1);
 
     }
     public virtual void Init()
@@ -130,6 +132,11 @@ public class BucketWheelTaskBase : PanelBase
     }
     public virtual void SendPlcCommand(COMMAND_NAME mCommandName)
     {
+        // if (GameDataManager.Instance.GameMain.connectionPC.isConnect==false)
+        // {
+        //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("PLC系统不在线，稍后重试"));
+        //     return;
+        // }
         string commandName=machine == Machine.BucketWheelStackerReclaimer ? mCommandName.ToString()+"_1" : mCommandName.ToString()+"_2";
         // int dataInt = 0;
         if (mCommandName==COMMAND_NAME.EMERGENCY_STOP)
@@ -147,6 +154,25 @@ public class BucketWheelTaskBase : PanelBase
     }
     public virtual void SendTaskCommand(OperationType operationType)
     {
+        if (GameDataManager.Instance.GameMain.connectionPC.isConnect==false)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP));
+            return;
+        }
+
+        if (operationType==OperationType.START)
+        {
+            UpdateCurCtrMode(ref curTaskButtonCell,takeMaterStartBtn);
+        }else if (operationType==OperationType.PAUSE)
+        {
+            UpdateCurCtrMode(ref curTaskButtonCell,takeMaterStopBtn);
+        }else if (operationType==OperationType.REVERSING)
+        {
+            UpdateCurCtrMode(ref curTaskButtonCell,takeMaterReversingBtn);
+        }else if (operationType == OperationType.END)
+        {
+            UpdateCurCtrMode(ref curTaskButtonCell,takeMaterEndBtn);
+        }
         Debug.Log($"message {machine} {operationType}");
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
@@ -155,7 +181,7 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.TaskType = TaskType.TAKEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
-        taskCommand.TaskCreateTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        taskCommand.TaskCreateTime = DateTime.Now;//.ToString("yyyy-MM-dd HH:mm:ss")
         taskCommand.OperatorSystem = "MC";
         if (operationType == OperationType.START)
         {
@@ -185,6 +211,16 @@ public class BucketWheelTaskBase : PanelBase
         TaskDataManager.Instance.SendTaskCommand(taskCommand);
     }
 
+    public virtual void UpdateCurCtrMode(ref ButtonCell ctr, ButtonCell btn)
+    {
+        if (ctr != null)
+        {
+            ctr.SetSelectState(false);
+        }
+        ctr = btn;
+        ctr.SetSelectState(true);
+    }
+    
     public virtual void InputFieldValueRange(InputField inputField, int min, int max)
     {
         inputField.text = "0";
