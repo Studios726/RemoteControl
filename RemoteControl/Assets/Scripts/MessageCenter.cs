@@ -90,7 +90,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 string json = Decompress(message);
-                Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
+                // Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
                 TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
                 TaskDataManager.Instance.SetTaskVariables(taskVariables);
             }

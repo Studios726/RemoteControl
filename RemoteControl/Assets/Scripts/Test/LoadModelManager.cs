@@ -20,20 +20,17 @@ public class LoadModelManager : MonoBehaviour
         EventManager.Instance.AddListener(EventName.RefreshModel, RefreshModel);
     }
 
-    public void RefreshModel(object o, EventArgs eventArgs)
+    public async  void RefreshModel(object o, EventArgs eventArgs)
     {
-        if (model)
+        if (model==null)
         {
-            Debug.LogError("删除多余的模型");
-            Destroy(model);
+            model = new GameObject("coalModel");
+            model.transform.SetParent(parent);
+             model.AddComponent<MeshFilter>();
+             model.AddComponent<MeshRenderer>();
+             model.AddComponent<MeshCollider>();
         }
-
-        Timer.Register(0.02f, () =>
-        {
-           model =
-                GameDataManager.Instance.SpawnCoalModel(parent, red, GameDataManager.Instance.SendDataReportAndDEM);
-            model.name = "coalModel";
-        });
-
+        await GameDataManager.Instance.SpawnCoalModel(parent, red, GameDataManager.Instance.SendDataReportAndDEM,model);
+        model.name = "coalModel";
     }
 }

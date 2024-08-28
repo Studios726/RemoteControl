@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Newtonsoft.Json;
 using RemoteControl.Event;
 using ShenYangRemoteSystem.Subclass;
@@ -24,8 +25,10 @@ namespace RemoteControl
 
         public void EnterGame()
         {
+            ReadConfig();
             AddListener();
             InitMode();
+            CreatConnect(null, null);
             UIManager.Instance.OpenUI(UIID.LoginPanel);
             GameDataManager.Instance.GetLocalSCAData();
         }
@@ -77,7 +80,34 @@ namespace RemoteControl
             MessageCenter.Instance.RegisterListener(MessageType.PC, connectionPC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.SCA, connectionSCA.WebSend);
         }
-
+        public void ReadConfig()
+        {
+            if (GameDataManager.Instance.IpConfig!=null)
+            {
+                return;
+            }
+            string exeRootPath = Application.dataPath;
+            string parentPath = Directory.GetParent(exeRootPath).FullName;
+            string filePath =parentPath+ "\\IpConfig.txt";
+            if (File.Exists(filePath))
+            {
+                string content = File.ReadAllText(filePath);
+                IpConfig ipConfig = JsonMgr.DeSerialize<IpConfig>(content);
+                GameDataManager.Instance.SetIpConfig(ipConfig);
+          
+            }
+            else
+            {
+                IpConfig config = new IpConfig();
+                config.TaoIP = Address.serviceTaoIP;
+                config.YuanIP= Address.serviceYuanIP;
+                config.TaskIP= Address.serviceTaskIP;
+                config.DataIP= Address.serviceIP;
+                GameDataManager.Instance.SetIpConfig(config);
+           
+            }
+            Debug.LogError(GameDataManager.Instance.IpConfig.DataIP);
+        }
         public void AddListener()
         {
             EventManager.Instance.AddListener(EventName.ConnectionSuccess, ConnectionSuccess);

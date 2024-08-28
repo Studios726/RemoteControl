@@ -104,7 +104,7 @@ public class BucketWheelStateBase : MonoBehaviour
         SetToggleState(lowVoltagePowerClosed,data.LowVoltagePowerClosed_2,false,data.D1PLC1CommunicationState);
         SetToggleState(remoteControl, data.Remote_2, false, data.D1PLC1CommunicationState);
         SetToggleState(powerSupplyClose, data.LowVoltageControlPowerClosed_2, false, data.D1PLC1CommunicationState);
-        SetToggleState(systemChain, data.SystemInterlockSwitch_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(systemChain, data.SystemInterlockSwitch_2, false, data.D1PLC1CommunicationState);      
         // SetToggleState(recondition, data.SystemInterlockSwitch, false, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelMalfunction, data.BucketWheelFault_2, true, data.D1PLC1CommunicationState);
         // SetToggleState(buzzerAlarm, data.BucketWheelFault, true, data.D1PLC1CommunicationState);
