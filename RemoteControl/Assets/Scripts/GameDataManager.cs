@@ -16,18 +16,20 @@ public class GameDataManager : Singleton<GameDataManager>
     private bool _rcConnectionState;
     private SystemVariables _systemVariables;
     private SendDataReportAndDEM _sendDataReportAndDem;
-    private MachineMove machineMove_1;//堆取斗轮机
-    private MachineMove machineMove_2;//取斗轮机
+    private MachineMove machineMove_1; //堆取斗轮机
+    private MachineMove machineMove_2; //取斗轮机
     public AccountInfo curAccountInfo;
     public GameObject machineRoot;
     public GameMain GameMain;
     private string _taoIP;
     private IpConfig _ipConfig;
+
     public bool RcConnectionState
     {
         get => _rcConnectionState;
         set => _rcConnectionState = value;
     }
+
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
@@ -47,9 +49,10 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         _ipConfig = ipConfig;
     }
+
     public string GetUserName()
     {
-        if (curAccountInfo!=null)
+        if (curAccountInfo != null)
         {
             return curAccountInfo.name;
         }
@@ -59,12 +62,14 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void SetIp(string ip)
     {
-        _taoIP ="ws://"+ip;
+        _taoIP = "ws://" + ip;
     }
+
     public SendDataReportAndDEM SendDataReportAndDEM
     {
         get => _sendDataReportAndDem;
     }
+
     public void SetSystemVariables(SystemVariables systemVariables)
     {
         _systemVariables = systemVariables;
@@ -75,21 +80,20 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void SetScaReportAndDem(SendDataReportAndDEM sendDataReportAndDEM)
     {
-
         _sendDataReportAndDem = sendDataReportAndDEM;
         EventManager.Instance.TriggerEvent(EventName.RefreshModel, null);
     }
 
     public void RecordLocalSCAData(string jsonData)
     {
-        PlayerPrefs.SetString("LocalSCAData", jsonData);   
+        PlayerPrefs.SetString("LocalSCAData", jsonData);
     }
 
     public void GetLocalSCAData()
     {
-        string json=PlayerPrefs.GetString("LocalSCAData", "");
+        string json = PlayerPrefs.GetString("LocalSCAData", "");
         // Debug.LogError($" 获取本地数据sca {json}");
-        if (json!="")
+        if (json != "")
         {
             try
             {
@@ -97,20 +101,21 @@ public class GameDataManager : Singleton<GameDataManager>
             }
             catch (Exception e)
             {
-               Debug.LogError("本地读取SCA数据失败");
+                Debug.LogError("本地读取SCA数据失败");
             }
-           
         }
     }
+
     public void SetMachine(MachineMove machine1, MachineMove machine2)
     {
         machineMove_1 = machine1;
         machineMove_2 = machine2;
     }
+
     public void SetMachineActive(bool active)
     {
-        if (machineRoot == null) {
-
+        if (machineRoot == null)
+        {
             machineRoot = GameObject.Find("ModelRoot");
         }
 
@@ -118,243 +123,154 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             return;
         }
+
         machineRoot.SetActive(active);
     }
+
     public void UpdateMachinePosAndRot()
     {
         if (machineMove_1)
         {
-            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos, SystemVariables.SLEW_Angle, -SystemVariables.Luff_Angle);//
+            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos, SystemVariables.SLEW_Angle,
+                -SystemVariables.Luff_Angle); //
         }
+
         if (machineMove_2)
         {
-            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2, SystemVariables.SLEW_Angle_2, -SystemVariables.Luff_Angle_2);//
+            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2, SystemVariables.SLEW_Angle_2,
+                -SystemVariables.Luff_Angle_2); //
         }
     }
-    // public GameObject SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem)
-    // {
-    //     List<Vector3> vertices = new List<Vector3>();
-    //     List<int> triangles = new List<int>();
-    //     //初始顶点颜色列表
-    //     List<Color> colorList = new List<Color>();
-    //
-    //     // SendDataReportAndDEM sendDataReportAndDem = JsonConvert.DeserializeObject<SendDataReportAndDEM>(jsonData);
-    //     Debug.Log("data " + sendDataReportAndDem.SendCoalHeapDEM.QUERY_SYSTEM);
-    //     CoalHeapDEM demData = sendDataReportAndDem.SendCoalHeapDEM;
-    //     for (int i = 0; i < sendDataReportAndDem.SendCoalHeapDEM.NZ; i++) //1003
-    //     {
-    //         for (int j = 0; j < demData.NX; j++) //336
-    //         {
-    //             float X = demData.Z0 + demData.DZ * i - (demData.NZ - 1) * demData.DZ / 2;
-    //             float Z = -(demData.X0 + demData.DX * j) + (demData.NX - 1) * demData.DX / 2;
-    //             float Y = -demData.DEM[i, j];
-    //             vertices.Add(new Vector3(X, Y, Z)); //循环获得顶点列表224784
-    //         }
-    //     }
-    //
-    //     for (int m = 0; m < demData.NZ - 1; m++)
-    //     {
-    //         for (int n = 0; n < demData.NX - 1; n++)
-    //         {
-    //             int[] face = new int[6]; //循环获得面列表
-    //
-    //             face[0] = m * demData.NX + n; //0
-    //             face[1] = (m + 1) * demData.NX + n; //336
-    //             face[2] = m * demData.NX + (n + 1); //1
-    //
-    //             face[3] = m * demData.NX + (n + 1); //1
-    //             face[4] = (m + 1) * demData.NX + n; //336
-    //             face[5] = (m + 1) * demData.NX + (n + 1); //337
-    //
-    //             for (int q = 0; q < 6; q++)
-    //             {
-    //                 triangles.Add(face[q]); //存入顶点索引数据 
-    //             }
-    //         }
-    //     }
-    //
-    //     //取分区数据
-    //     REGION[] regionList = demData.REGION_LIST;
-    //     float xLength = demData.LENGTH / 2;
-    //     foreach (Vector3 ve3 in vertices)
-    //     {
-    //         Color pointColor = Color.gray;
-    //         foreach (REGION reg in regionList)
-    //         {
-    //             int side;
-    //             if (ve3.z > 0)
-    //             {
-    //                 side = 1;
-    //             }
-    //             else
-    //             {
-    //                 side = 0;
-    //             }
-    //
-    //             if (ve3.x + xLength >= reg.BEGIN && ve3.x + xLength < reg.END && side == reg.SIDE)
-    //             {
-    //                 if (reg.IsUseLayer==0)
-    //                 {
-    //                     pointColor = new Color(reg.ColorR / 255.0f, reg.ColorG / 255.0f, reg.ColorB / 255.0f, 1);
-    //                     break;
-    //                 }
-    //                 else
-    //                 {
-    //                     for (int i = 0; i < reg.layerArray.Count; i++)
-    //                     {
-    //                         if (ve3.y>=Mathf.Abs(reg.layerArray[i].hBEGIN)&&ve3.y<Mathf.Abs(reg.layerArray[i].hEND))
-    //                         {
-    //                             pointColor = new Color(reg.layerArray[i].ColorR / 255.0f, reg.layerArray[i].ColorG / 255.0f, reg.layerArray[i].ColorB / 255.0f, 1);
-    //                             break;
-    //                         }
-    //                     }
-    //                 }
-    //                 break;
-    //             }
-    //         }
-    //
-    //         colorList.Add(pointColor);
-    //     }
-    //
-    //     Mesh mesh = new Mesh();
-    //     mesh.indexFormat = IndexFormat.UInt32;
-    //     mesh.vertices = vertices.ToArray();
-    //     mesh.triangles = triangles.ToArray();
-    //     mesh.colors = colorList.ToArray();
-    //     GameObject go = new GameObject("Model");
-    //     go.transform.SetParent(parent);
-    //     go.transform.localRotation = Quaternion.identity;
-    //     MeshFilter meshFilter = go.AddComponent<MeshFilter>();
-    //     MeshRenderer meshRenderer = go.AddComponent<MeshRenderer>();
-    //     MeshCollider meshCollider = go.AddComponent<MeshCollider>();
-    //     meshFilter.mesh = mesh;
-    //     meshRenderer.sharedMaterial = material;
-    //     meshFilter.mesh.RecalculateNormals(); //更新法线
-    //     meshCollider.sharedMesh = mesh;
-    //     return go;
-    // }
-    public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,GameObject model=null)
+
+    public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,
+        GameObject model = null)
     {
-     
-        List<Vector3> vertices = new List<Vector3>();
-        List<int> triangles = new List<int>();
-        //初始顶点颜色列表
-        List<Color> colorList = new List<Color>();
+        if (sendDataReportAndDem == null || sendDataReportAndDem.SendCoalHeapDEM == null)
+        {
+            Debug.LogError("模型数据是空");
+            return;
+        }
+
+        if (model == null)
+        {
+            Debug.LogError("模型对象为空");
+            return;
+        }
+
         CoalHeapDEM demData = sendDataReportAndDem.SendCoalHeapDEM;
-        // GameObject go = new GameObject("Model");
-        // Debug.Log($"开始获取顶点 {DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")}");
-        await Task.Run(() => 
+
+        // 预先分配数组空间，避免频繁扩容
+        Vector3[] vertices = new Vector3[demData.NZ * demData.NX];
+        int[] triangles = new int[(demData.NZ - 1) * (demData.NX - 1) * 6];
+        Color[] colorList = new Color[demData.NZ * demData.NX];
+        try
         {
-            // UnityEngine.Profiling.Profiler.BeginSample("225 SetDataContext");
-        
-            // 第一步处理，例如解析数据格式
-            for (int i = 0; i < sendDataReportAndDem.SendCoalHeapDEM.NZ; i++) //1003
+            await Task.Run(() =>
             {
-                for (int j = 0; j < demData.NX; j++) //336
+                int vertexIndex = 0;
+                // 第一步处理，解析数据格式
+                for (int i = 0; i < demData.NZ; i++)
                 {
-                    float X = demData.Z0 + demData.DZ * i - (demData.NZ - 1) * demData.DZ / 2;
-                    float Z = -(demData.X0 + demData.DX * j) + (demData.NX - 1) * demData.DX / 2;
-                    float Y = -demData.DEM[i, j];
-                    vertices.Add(new Vector3(X, Y, Z)); //循环获得顶点列表224784
-                }
-            }
-            // UnityEngine.Profiling.Profiler.EndSample();
-        });
-        // Debug.Log($"开始获取面数 {DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")}");
-        await Task.Run(() => 
-        {
-            // UnityEngine.Profiling.Profiler.BeginSample("226 SetDataContext");
-            // 第二步处理，例如生成顶点数据
-            for (int m = 0; m < demData.NZ - 1; m++)
-            {
-                for (int n = 0; n < demData.NX - 1; n++)
-                {
-                    int[] face = new int[6]; //循环获得面列表
-
-                    face[0] = m * demData.NX + n; //0
-                    face[1] = (m + 1) * demData.NX + n; //336
-                    face[2] = m * demData.NX + (n + 1); //1
-
-                    face[3] = m * demData.NX + (n + 1); //1
-                    face[4] = (m + 1) * demData.NX + n; //336
-                    face[5] = (m + 1) * demData.NX + (n + 1); //337
-
-                    for (int q = 0; q < 6; q++)
+                    for (int j = 0; j < demData.NX; j++)
                     {
-                        triangles.Add(face[q]); //存入顶点索引数据 
+                        float X = demData.Z0 + demData.DZ * i - (demData.NZ - 1) * demData.DZ / 2;
+                        float Z = -(demData.X0 + demData.DX * j) + (demData.NX - 1) * demData.DX / 2;
+                        float Y = -demData.DEM[i, j];
+                        vertices[vertexIndex++] = new Vector3(X, Y, Z);
                     }
                 }
-            }
-            // UnityEngine.Profiling.Profiler.EndSample();
-        });
-        await Task.Run(() => 
-        {
-            // UnityEngine.Profiling.Profiler.BeginSample("227 SetDataContext");
-            // 第三步处理，例如构建 Mesh
-            REGION[] regionList = demData.REGION_LIST;
-            float xLength = demData.LENGTH / 2;
-            foreach (Vector3 ve3 in vertices)
-            {
-                Color pointColor = Color.gray;
-                foreach (REGION reg in regionList)
-                {
-                    int side;
-                    if (ve3.z > 0)
-                    {
-                        side = 1;
-                    }
-                    else
-                    {
-                        side = 0;
-                    }
 
-                    if (ve3.x + xLength >= reg.BEGIN && ve3.x + xLength < reg.END && side == reg.SIDE)
+                int triangleIndex = 0;
+                // 第二步处理，例如生成顶点数据
+                for (int m = 0; m < demData.NZ - 1; m++)
+                {
+                    for (int n = 0; n < demData.NX - 1; n++)
                     {
-                       
-                        if (reg.IsUseLayer==0)
+                        int[] face = new int[6];
+
+                        face[0] = m * demData.NX + n;
+                        face[1] = (m + 1) * demData.NX + n;
+                        face[2] = m * demData.NX + (n + 1);
+
+                        face[3] = m * demData.NX + (n + 1);
+                        face[4] = (m + 1) * demData.NX + n;
+                        face[5] = (m + 1) * demData.NX + (n + 1);
+
+                        for (int q = 0; q < 6; q++)
                         {
-                            // Debug.LogError($"IsUseLayer {reg.IsUseLayer}");
-                            pointColor = new Color(reg.ColorR / 255.0f, reg.ColorG / 255.0f, reg.ColorB / 255.0f, 1);
-                            break;
+                            triangles[triangleIndex++] = face[q];
+                        }
+                    }
+                }
+
+                int colorIndex = 0;
+                REGION[] regionList = demData.REGION_LIST;
+                float xLength = demData.LENGTH / 2;
+                foreach (Vector3 ve3 in vertices)
+                {
+                    Color pointColor = Color.gray;
+                    bool foundColor = false;
+                    for (int regIndex = 0; regIndex < regionList.Length && !foundColor; regIndex++)
+                    {
+                        REGION reg = regionList[regIndex];
+                        int side;
+                        if (ve3.z > 0)
+                        {
+                            side = 1;
                         }
                         else
                         {
-                            for (int i = 0; i < reg.layerArray.Count; i++)
+                            side = 0;
+                        }
+
+                        if (ve3.x + xLength >= reg.BEGIN && ve3.x + xLength < reg.END && side == reg.SIDE)
+                        {
+                            if (reg.IsUseLayer == 0)
                             {
-                                if (ve3.y>=Mathf.Abs(reg.layerArray[i].hBEGIN)&&ve3.y<Mathf.Abs(reg.layerArray[i].hEND))
+                                pointColor = new Color(reg.ColorR / 255.0f, reg.ColorG / 255.0f, reg.ColorB / 255.0f,
+                                    1);
+                                foundColor = true;
+                            }
+                            else
+                            {
+                                for (int i = 0; i < reg.layerArray.Count && !foundColor; i++)
                                 {
-                                    pointColor = new Color(reg.layerArray[i].ColorR / 255.0f, reg.layerArray[i].ColorG / 255.0f, reg.layerArray[i].ColorB / 255.0f, 1);
-                                    break;
+                                    if (ve3.y >= Mathf.Abs(reg.layerArray[i].hBEGIN) &&
+                                        ve3.y < Mathf.Abs(reg.layerArray[i].hEND))
+                                    {
+                                        pointColor = new Color(reg.layerArray[i].ColorR / 255.0f,
+                                            reg.layerArray[i].ColorG / 255.0f, reg.layerArray[i].ColorB / 255.0f, 1);
+                                        foundColor = true;
+                                    }
                                 }
                             }
                         }
-                        break;
                     }
-                }
 
-                colorList.Add(pointColor);
-            }
-            // UnityEngine.Profiling.Profiler.EndSample();
-        });
-        // UnityEngine.Profiling.Profiler.BeginSample("228 SetDataContext");
+                    colorList[colorIndex++] = pointColor;
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"异步任务执行失败: {ex.Message}");
+        }
+
         Mesh mesh = new Mesh();
         mesh.indexFormat = IndexFormat.UInt32;
-        mesh.vertices = vertices.ToArray();
-        mesh.triangles = triangles.ToArray();
-        mesh.colors = colorList.ToArray();
-        // go.transform.SetParent(parent);
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.colors = colorList;
         model.transform.localRotation = Quaternion.identity;
-        MeshFilter meshFilter = model.GetComponent<MeshFilter>();// go.AddComponent<MeshFilter>();
+        MeshFilter meshFilter = model.GetComponent<MeshFilter>();
         MeshRenderer meshRenderer = model.GetComponent<MeshRenderer>();
         MeshCollider meshCollider = model.GetComponent<MeshCollider>();
         meshFilter.mesh = mesh;
         meshRenderer.sharedMaterial = material;
-        meshFilter.mesh.RecalculateNormals(); //更新法线
+        meshFilter.mesh.RecalculateNormals();
         meshCollider.sharedMesh = mesh;
-        // UnityEngine.Profiling.Profiler.EndSample();
-        // Debug.Log("模型处理全部完成");
     }
-    
+
     /// <summary>
     /// 获取PLC没帧数据
     /// </summary>
@@ -367,7 +283,7 @@ public class GameDataManager : Singleton<GameDataManager>
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 
-    public void SendServerCommandByName(string commandName,int dataInt=0)
+    public void SendServerCommandByName(string commandName, int dataInt = 0)
     {
         ServerCommand serverCommand = new ServerCommand();
         serverCommand.QUERY_SYSTEM = "MC";
@@ -377,6 +293,7 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.DATA_INT = dataInt;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
+
     /// <summary>
     /// 获取任务当前状态
     /// </summary>
@@ -398,6 +315,4 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.QUERY_TYPE = query_type;
         MessageCenter.Instance.SendMessage(MessageType.SCA, serverCommand);
     }
-   
 }
-

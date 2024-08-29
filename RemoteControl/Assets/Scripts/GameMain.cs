@@ -30,7 +30,7 @@ namespace RemoteControl
             InitMode();
             CreatConnect(null, null);
             UIManager.Instance.OpenUI(UIID.LoginPanel);
-            GameDataManager.Instance.GetLocalSCAData();
+            // GameDataManager.Instance.GetLocalSCAData();
         }
 
         public void OnExitGame()

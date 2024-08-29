@@ -329,4 +329,46 @@ public class TaskDataManager : Singleton<TaskDataManager>
         }
       
     }
+
+    public int IsCanSendTaskCommond(Machine machine,TaskType taskType,OperationType operationType)
+    {
+        if (_taskVariables != null)
+        {
+            if ( _taskVariables.McData.Count > 0)
+            {
+                for (int i = 0; i < _taskVariables.McData.Count; i++)
+                {
+                    if (_taskVariables.McData[i].Machine==machine)
+                    {
+                        if (machine==Machine.BucketWheelStackerReclaimer)
+                        {
+                            if (_taskVariables.McData[i].TaskType==taskType||_taskVariables.McData[i].AllData.OperationCommandList[3]==1)
+                            {
+                                return -1;
+                            }
+                            else
+                            {
+                                return 0;
+                            }
+                        }
+                        else
+                        {
+                            return -1;
+                        }
+                    }
+                }
+                return -1;
+            }
+            else
+            {
+                return -1;
+            }
+            
+        }
+        else
+        {
+            return -1;
+        }
+    
+    }
 }

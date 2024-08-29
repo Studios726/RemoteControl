@@ -67,6 +67,13 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP));
             return;
         }
+        
+        if (TaskDataManager.Instance.IsCanSendTaskCommond(machine,TaskType.PILEMATER,operationType)!=-1)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("当前操作无效的"));
+            return;
+        }
+        
         if (operationType==OperationType.START)
         {
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStartBtn);

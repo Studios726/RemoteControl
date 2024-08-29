@@ -160,6 +160,12 @@ public class BucketWheelTaskBase : PanelBase
             return;
         }
 
+        if (TaskDataManager.Instance.IsCanSendTaskCommond(machine,TaskType.TAKEMATER,operationType)!=-1)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("当前操作无效的"));
+            return;
+        }
+        
         if (operationType==OperationType.START)
         {
             UpdateCurCtrMode(ref curTaskButtonCell,takeMaterStartBtn);

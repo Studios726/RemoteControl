@@ -52,11 +52,6 @@ public class MainPanelView : UIView<MainPanelCtr>
         UpdateData(GameDataManager.Instance.SystemVariables);
         //临时注释
         TaskDataManager.Instance.GetNearestTaskDataDic();
-        Timer.Register(0.2f, () =>
-        {
-            GameDataManager.Instance.GetLocalSCAData();
-        });
-    
     }
 
     private void ActiveHideBtnCtr2()
