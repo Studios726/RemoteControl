@@ -45,7 +45,7 @@ public static class ConstStr
     public const string DATABASE_HISTORY_LOG2_MC = "history_logs_2";
     public const string DATABASE_HISTORY_WARNING1_MC = "history_warning";
     public const string DATABASE_HISTORY_WARNING2_MC = "history_warning_2";
-    public const string DATABASE_TASK_CONFIG = "Task_Config";
+    public const string DATABASE_TASK_CONFIG = "task_config";
     #endregion
 
     #region login

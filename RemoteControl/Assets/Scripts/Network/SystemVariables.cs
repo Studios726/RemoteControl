@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 
 namespace ShenYangRemoteSystem.Subclass
 {
-    
-    
     public class SystemVariables
     {
         public DateTime TimeStamp { get; set; }
@@ -1520,7 +1518,12 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DriverRoomRiseButton_2 { get; set; }
         public bool DriverRoomDescentButton_2 { get; set; }
 
+        //新增
+        public bool DualMachineCollisionWarning_2 { get; set; }
 
+        public bool Spare4_2 { get; set; }
+        public bool Spare5_2 { get; set; }
+        public bool MachineOverclocking_2 { get; set; }
 
 
 
@@ -1570,8 +1573,6 @@ namespace ShenYangRemoteSystem.Subclass
 
 
         // D2PLC2
-
-        //ID1
         public float XBZQ_FZ_VALUE_2 { get; set; }
         public float XBZZ_FZ_VALUE_2 { get; set; }
         public float XBZH_FZ_VALUE_2 { get; set; }
@@ -1579,13 +1580,19 @@ namespace ShenYangRemoteSystem.Subclass
         public float XBYZ_FZ_VALUE_2 { get; set; }
         public float XBYH_FZ_VALUE_2 { get; set; }
         public float QJY_VALUE_2 { get; set; }
+        public float AI0_SPARE_2 { get; set; }
         public float DCZQ_FZ_VALUE_2 { get; set; }
         public float DCYQ_FZ_VALUE_2 { get; set; }
         public float DCZH_FZ_VALUE_2 { get; set; }
         public float DCYH_FZ_VALUE_2 { get; set; }
         public float XBTB_LWJ_VALUE_2 { get; set; }
+        public float AI1_SPARE1_2 { get; set; }
+        public float AI1_SPARE2_2 { get; set; }
+        public float AI1_SPARE3_2 { get; set; }
         public float ENCODE_DC_VALUE_2 { get; set; }
         public float Encode_slew_VALUE_2 { get; set; }
+        public bool Always_On_2 { get; set; }
+        public bool Always_off_2 { get; set; }
         public bool Take_BySection_2 { get; set; }
         public bool Take_Run_Rdy_2 { get; set; }
         public bool Take_Runing_2 { get; set; }
@@ -1612,6 +1619,9 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Take_RightBorder_DES_2 { get; set; }
         public bool ChangeDirectTimer_R_2 { get; set; }
         public bool Slew_Speed_Enable_2 { get; set; }
+        public bool Take_DCFWD_CMD_FE_2 { get; set; }
+        public bool Take_Right_Arrive_PE_2 { get; set; }
+        public bool Take_Left_Arrive_PE_2 { get; set; }
         public bool Take_Current_Lock_2 { get; set; }
         public bool Take_Current_H_2 { get; set; }
         public bool Take_Current_HH_2 { get; set; }
@@ -1633,29 +1643,69 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Take_ChT_DcREV_CMD_2 { get; set; }
         public bool Take_ChT_LuffD_CMD1_2 { get; set; }
         public bool Take_ChT_LuffD_CMD2_2 { get; set; }
+        public bool Take_CHT_Insert_PE1_2 { get; set; }
+        public bool Take_CHT_Insert_PE2_2 { get; set; }
         public bool Take_CHT_Right_Reach_2 { get; set; }
         public bool Take_CHT_Left_Reach_2 { get; set; }
         public bool Take_CHT_Slew_Finish_2 { get; set; }
         public bool Take_CHT_Runing_2 { get; set; }
         public bool Take_Outside_INC_2 { get; set; }
+        public bool Take_Outside_INC_PE1_2 { get; set; }
+        public bool Take_Outside_INC_PE2_2 { get; set; }
+        public bool Take_Outside_C_PE1_2 { get; set; }
+        public bool Take_Outside_C_PE2_2 { get; set; }
         public bool Take_Inside_INC_2 { get; set; }
+        public bool Take_Inside_INC_PE1_2 { get; set; }
+        public bool Take_Inside_INC_PE2_2 { get; set; }
+        public bool Take_Inside_C_PE1_2 { get; set; }
+        public bool Take_Inside_C_PE2_2 { get; set; }
         public bool BeltBucket_OnZero_2 { get; set; }
         public bool Take_VVVF_Aear_2 { get; set; }
+        public bool Take_ModeCh_P2_2 { get; set; }
+        public bool Take_Runing_ERR_PE1_2 { get; set; }
+        public bool Take_Runing_ERR_PE2_2 { get; set; }
+        public bool Take_Runing_ERR_PE3_2 { get; set; }
+        public bool Take_Runing_ERR_PE4_2 { get; set; }
+        public bool Take_Runing_ERR_PE5_2 { get; set; }
+        public bool Take_Runing_ERR_PE6_2 { get; set; }
+        public bool Take_Runing_ERR_PE7_2 { get; set; }
+        public bool Take_Runing_ERR_PE8_2 { get; set; }
+        public bool Take_Runing_ERR_PE9_2 { get; set; }
+        public bool Take_AM_Border_PE1_2 { get; set; }
+        public bool Take_AM_Border_PE2_2 { get; set; }
         public bool Take_TSOL_Enable_2 { get; set; }
         public bool Take_TSOL_Flag_2 { get; set; }
         public bool Take_TSOL_PE_2 { get; set; }
+        public bool Take_TSOL_Start_HR_2 { get; set; }
+        public bool Take_TSOL_Start_HL_2 { get; set; }
+        public bool Take_TSOL_Start_HMR_2 { get; set; }
+        public bool Take_TSOL_Start_HML_2 { get; set; }
+        public bool Take_TSOL_Start_MR_2 { get; set; }
+        public bool Take_TSOL_Start_ML_2 { get; set; }
+        public bool Take_TSOL_Start_MLR_2 { get; set; }
+        public bool Take_TSOL_Start_MLL_2 { get; set; }
+        public bool Take_TSOL_Start_LR_2 { get; set; }
+        public bool Take_TSOL_Start_LL_2 { get; set; }
         public bool Take_TSOL_Reset_PE1_2 { get; set; }
         public bool Take_TSOL_Reset_PE2_2 { get; set; }
         public bool Take_LowSpeed_2 { get; set; }
+        public bool Take_Record_PE1_2 { get; set; }
+        public bool Take_Record_PE2_2 { get; set; }
+        public bool Take_Record_PE3_2 { get; set; }
         public bool Take_Record_Flag1_2 { get; set; }
         public bool Take_Record_Flag2_2 { get; set; }
         public bool Take_Record_Flag3_2 { get; set; }
+        public bool Take_Record_PE4_2 { get; set; }
+        public bool Take_Record_PE5_2 { get; set; }
         public bool Take_Run_2 { get; set; }
         public bool Take_Record_2 { get; set; }
         public bool Take_DCREV_CMD_FE_2 { get; set; }
+        public short Take_MinCurrent_TM_2 { get; set; }
         public short Take_Step_2 { get; set; }
         public short Take_Pause_TM_2 { get; set; }
         public short Take_ChangeDirect_TM_2 { get; set; }
+        public short Take_MaxCurrent_TM_2 { get; set; }
+        public short TakeTier_Pluse_2 { get; set; }
         public short Take_ChT_CW_2 { get; set; }
         public short Take_ChT_TM_2 { get; set; }
         public short Take_CHT_Finish_Delaytime_2 { get; set; }
@@ -1678,6 +1728,8 @@ namespace ShenYangRemoteSystem.Subclass
         public float Take_DCPosEnd_SP_2 { get; set; }
         public float MAC_Right_Border_2 { get; set; }
         public float MAC_Left_Border_2 { get; set; }
+        public float Take_Inside_Slow_2 { get; set; }
+        public float Take_Outside_Slow_2 { get; set; }
         public float Take_ChT_HTLuff_2 { get; set; }
         public float Take_ChT_HTSlew_SP_2 { get; set; }
         public float Take_ChT_TargetLuff_2 { get; set; }
@@ -1688,6 +1740,8 @@ namespace ShenYangRemoteSystem.Subclass
         public float Coal_R_High_2 { get; set; }
         public float Bucket_Current_2 { get; set; }
         public float BoomBelt_Current_2 { get; set; }
+        public float TailBelt_Current_2 { get; set; }
+        public float SmallBelt_Current_2 { get; set; }
         public float Slew_Current_2 { get; set; }
         public float Travel_Current_2 { get; set; }
         public float Luff_Current_2 { get; set; }
@@ -1706,6 +1760,10 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Test_Mode_2 { get; set; }
         public bool OperDesk_OnZero_2 { get; set; }
         public bool AutoBorder_Enable_2 { get; set; }
+        public bool Sys_AlwayOn_2 { get; set; }
+        public bool Second_Pluse_1_2 { get; set; }
+        public bool Second_Pluse_2_2 { get; set; }
+        public bool Second_Pluse_3_2 { get; set; }
         public bool Working_Start_2 { get; set; }
         public bool Working_Pause_2 { get; set; }
         public bool Stop_Runing_2 { get; set; }
@@ -1742,13 +1800,22 @@ namespace ShenYangRemoteSystem.Subclass
         public bool OverBelt_L_SoftLimit_2 { get; set; }
         public bool OverBelt_D_SoftLimit_2 { get; set; }
         public bool ErrReset_2 { get; set; }
-        public bool XBTB_Baffle_OnTake_2 { get; set; }
-        public bool XBTB_Baffle_OnStack_2 { get; set; }
+        public bool TAIL_ON_TakePos_2 { get; set; }
+        public bool TAIL_ON_StackPos_2 { get; set; }
+        public bool XBTB_Skrit_OnTake_2 { get; set; }
+        public bool XBTB_Skrit_OnStack_2 { get; set; }
         public bool ZXLD_Baffle_OnTake_2 { get; set; }
         public bool ZXLD_Baffle_OnStack_2 { get; set; }
+        public bool WC_Baffle_OnShunt_2 { get; set; }
+        public bool WC_Baffle_OnStack_2 { get; set; }
+        public bool WC_Skrit_OnTake_2 { get; set; }
+        public bool WC_Skrit_OnStack_2 { get; set; }
+        public bool WC_HG_Arrive_2 { get; set; }
+        public bool WC_TK_Arrive_2 { get; set; }
         public bool ZXLD_Skrit_OnTake_2 { get; set; }
         public bool ZXLD_Skrit_OnStack_2 { get; set; }
         public bool BOOL_YL8_2 { get; set; }
+        public bool BOOL_YL9_2 { get; set; }
         public bool PSOn_Light_2 { get; set; }
         public bool PSOff_Light_2 { get; set; }
         public bool CPSOn_Light_2 { get; set; }
@@ -1757,8 +1824,11 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Ground_Belt_Runing_2 { get; set; }
         public bool CantBeltTake_Runing_2 { get; set; }
         public bool CantBeltStack_Runing_2 { get; set; }
+        public bool TaiBelt_Runing_2 { get; set; }
+        public bool SmaBelt_Runing_2 { get; set; }
         public bool Cable_PS_Runing_2 { get; set; }
         public bool Cable_CPS_Runing_2 { get; set; }
+        public bool Luff_OilBump_MO_AO1_2 { get; set; }
         public bool Luff_OilBump_Runing_2 { get; set; }
         public bool Bucket_Runing_2 { get; set; }
         public bool DC_FWD_Runing_2 { get; set; }
@@ -1767,20 +1837,25 @@ namespace ShenYangRemoteSystem.Subclass
         public bool SLEW_L_Runing_2 { get; set; }
         public bool Luff_Up_Runing_2 { get; set; }
         public bool Luff_Down_Runing_2 { get; set; }
-        public bool Tail_LuffU_Runing_2 { get; set; }
-        public bool Tail_LuffD_Runing_2 { get; set; }
+        public bool TailLuff_Up_Runing_2 { get; set; }
+        public bool TailLuff_Down_Runing_2 { get; set; }
         public bool Lighting_2 { get; set; }
         public bool CCR_Take_Enable_2 { get; set; }
         public bool CCR_Stack_Enable_2 { get; set; }
+        public bool CCR_Shunt_Enable_2 { get; set; }
+        public bool CCR_Pass31_Enable_2 { get; set; }
         public bool Runing_RightField_2 { get; set; }
         public bool Runing_LeftField_2 { get; set; }
+        public bool TaskWithTail_Clash_2 { get; set; }
         public bool DC_Encoder_ERR_2 { get; set; }
         public bool Slew_Encoder_ERR_2 { get; set; }
+        public bool WiressNetWork_Fault_2 { get; set; }
         public bool Para_Intail_SB_2 { get; set; }
         public bool Alarming_2 { get; set; }
         public bool DC_Enable_2 { get; set; }
         public bool Slew_Enable_2 { get; set; }
         public bool Luff_Enable_2 { get; set; }
+        public bool BOOL_YL18_2 { get; set; }
         public bool DC_FWD_Enable_2 { get; set; }
         public bool DC_REV_Enable_2 { get; set; }
         public bool Slew_R_Enable_2 { get; set; }
@@ -1788,8 +1863,13 @@ namespace ShenYangRemoteSystem.Subclass
         public bool LuffU_Enable_2 { get; set; }
         public bool LuffD_Enable_2 { get; set; }
         public bool Bucket_Enable_2 { get; set; }
+        public bool TaiBelt_Enable_2 { get; set; }
+        public bool SmaBelt_Enable_2 { get; set; }
         public bool Belt_Take_Enable_2 { get; set; }
         public bool Belt_Stack_Enable_2 { get; set; }
+        public bool Tail_Change_Enable_2 { get; set; }
+        public bool Enable2_2 { get; set; }
+        public bool Enable3_2 { get; set; }
         public bool Rail_Relax_SB_2 { get; set; }
         public bool Rail_Clamp_SB_2 { get; set; }
         public bool PS_MO_SB_2 { get; set; }
@@ -1801,6 +1881,12 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Belt_MC_SB_2 { get; set; }
         public bool BeltTake_MO_2 { get; set; }
         public bool BeltStack_MO_2 { get; set; }
+        public bool TaiBelt_MO_SB_2 { get; set; }
+        public bool TaiBelt_MC_SB_2 { get; set; }
+        public bool TaiBelt_MO_2 { get; set; }
+        public bool SmaBelt_MO_SB_2 { get; set; }
+        public bool SmaBelt_MC_SB_2 { get; set; }
+        public bool SmaBelt_MO_2 { get; set; }
         public bool Bucket_MO_SB_2 { get; set; }
         public bool Bucket_MC_SB_2 { get; set; }
         public bool Bucket_MO_2 { get; set; }
@@ -1808,7 +1894,28 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Light_MC_SB_2 { get; set; }
         public bool Luff_OilBump_MO_SB_2 { get; set; }
         public bool Luff_OilBump_MC_SB_2 { get; set; }
+        public bool Luff_OilBump_MO_AO2_2 { get; set; }
+        public bool Tail_OilBump_MC_SB_2 { get; set; }
+        public bool SR1_Travel_FWD_1MO_SB_2 { get; set; }
+        public bool SR1_Travel_REV_1MO_SB_2 { get; set; }
         public bool Travel_MC_SB_2 { get; set; }
+        public bool SR1_Slew_R_1MO_SB_2 { get; set; }
+        public bool Slew_R_2MO_SB_2 { get; set; }
+        public bool Slew_R_3MO_SB_2 { get; set; }
+        public bool SR1_Slew_L_1MO_SB_2 { get; set; }
+        public bool Slew_L_2MO_SB_2 { get; set; }
+        public bool Slew_L_3MO_SB_2 { get; set; }
+        public bool SR1_Slew_MC_SB_2 { get; set; }
+        public bool SR1_LuffU_MO_SB_2 { get; set; }
+        public bool SR1_LuffD_MO_SB_2 { get; set; }
+        public bool SR1_Luff_MC_SB_2 { get; set; }
+        public bool LuffU_MO_PE1_2 { get; set; }
+        public bool LuffU_MO_CMD_2 { get; set; }
+        public bool LuffD_MO_PE1_2 { get; set; }
+        public bool LuffD_MO_CMD_2 { get; set; }
+        public bool TailLuffU_MO_SB_2 { get; set; }
+        public bool TailLuffD_MO_SB_2 { get; set; }
+        public bool TailLuff_MC_SB_2 { get; set; }
         public bool Emergency_Stop_2 { get; set; }
         public bool Travel_FWD_AO_2 { get; set; }
         public bool Travel_REV_AO_2 { get; set; }
@@ -1816,21 +1923,14 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Slew_L_AO_2 { get; set; }
         public bool LuffU_AO_2 { get; set; }
         public bool LuffD_AO_2 { get; set; }
+        public bool TailLuff_Up_AO_2 { get; set; }
+        public bool Tail_Luff_Down_AO_2 { get; set; }
         public bool Bucket_AO_2 { get; set; }
         public bool Bucket_AC_2 { get; set; }
         public bool Belt_Take_AO_2 { get; set; }
         public bool Belt_Take_AC_2 { get; set; }
         public bool Belt_Stack_AO_2 { get; set; }
         public bool Belt_Stack_AC_2 { get; set; }
-        public bool XBTB_Baffle_Take_MO_2 { get; set; }
-        public bool XBTB_Baffle_Stack_MO_2 { get; set; }
-        public bool XBTB_Baffle_Err_2 { get; set; }
-        public bool ZXLD_Baffle_Take_MO_2 { get; set; }
-        public bool ZXLD_Baffle_Stack_MO_2 { get; set; }
-        public bool ZXLD_Baffle_Err_2 { get; set; }
-        public bool ZXLD_Skrit_Take_MO_2 { get; set; }
-        public bool ZXLD_Skrit_Stack_MO_2 { get; set; }
-        public bool ZXLD_Skrit_Err_2 { get; set; }
         public bool DC_R_Anchor_2 { get; set; }
         public bool DC_L_Anchor_2 { get; set; }
         public bool DC_R_Rail_Clamp_2 { get; set; }
@@ -1840,10 +1940,12 @@ namespace ShenYangRemoteSystem.Subclass
         public bool YL_Bit8_2 { get; set; }
         public bool YL_Bit5_2 { get; set; }
         public bool YL_Bit9_2 { get; set; }
-        public bool YL_Bit7_2 { get; set; }
-        public bool YL_Bit12_2 { get; set; }
-        public bool YL_Bit10_2 { get; set; }
-        public bool YL_Bit15_2 { get; set; }
+        public bool CPS_MO_CMD_2 { get; set; }
+        public bool Light_MO_CMD_2 { get; set; }
+        public bool Travel_Start_Alarm_SB_2 { get; set; }
+        public bool Travel_Start_Alarm_M_2 { get; set; }
+        public bool Rail_Relax_CMD_2 { get; set; }
+        public bool Rail_Clamp_CMD_2 { get; set; }
         public bool DC_FWD_FixS_SB_2 { get; set; }
         public bool DC_FWD_FixS_Run_2 { get; set; }
         public bool DC_FWD_FixS_CMD_2 { get; set; }
@@ -1856,14 +1958,6 @@ namespace ShenYangRemoteSystem.Subclass
         public bool LuffD_FixS_Run_2 { get; set; }
         public bool LuffU_FixS_CMD_2 { get; set; }
         public bool LuffD_FixS_CMD_2 { get; set; }
-        public bool Skrit_Take_Start_SB_2 { get; set; }
-        public bool Skrit_Take_Changing_2 { get; set; }
-        public bool Skrit_Take_ChFinish_2 { get; set; }
-        public bool Skrit_Take_Stop_SB_2 { get; set; }
-        public bool Skrit_Stack_Start_SB_2 { get; set; }
-        public bool Skrit_Stack_Changing_2 { get; set; }
-        public bool Skrit_Stack_ChFinish_2 { get; set; }
-        public bool Skrit_Stack_Stop_SB_2 { get; set; }
         public bool Slew_SAS_L_Alarm_2 { get; set; }
         public bool Slew_SAS_R_Alarm_2 { get; set; }
         public bool DC_SAS_F_Alarm_2 { get; set; }
@@ -1872,8 +1966,6 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Slew_SAS_LR_Alarm_2 { get; set; }
         public bool Slew_SAS_RU_Alarm_2 { get; set; }
         public bool Slew_SAS_LU_Alarm_2 { get; set; }
-
-        //301
         public bool DC_SAS_RF_Alrm_2 { get; set; }
         public bool DC_SAS_RB_Alrm_2 { get; set; }
         public bool DC_SAS_LF_Alrm_2 { get; set; }
@@ -1902,6 +1994,257 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Boom_SAS_LR_Bypass_2 { get; set; }
         public bool Boom_SAS_RU_Bypass_2 { get; set; }
         public bool Boom_SAS_LU_Bypass_2 { get; set; }
+        public short DC_RF_SAS_LBT_2 { get; set; }
+        public short DC_RB_SAS_LBT_2 { get; set; }
+        public short DC_LF_SAS_LBT_2 { get; set; }
+        public short DC_LB_SAS_LBT_2 { get; set; }
+        public short Slew_SAS_R_Radar_LBT_2 { get; set; }
+        public short Slew_SAS_L_Radar_LBT_2 { get; set; }
+        public short Slew_SAS_R_Ult_LBT_2 { get; set; }
+        public short Slew_SAS_L_Ult_LBT_2 { get; set; }
+        public bool Luff_OilBump_MO_AO_2 { get; set; }
+        public bool Luff_OilBump_MC_AO_2 { get; set; }
+        public bool Luff_OilBump_MO_2 { get; set; }
+        public bool Luff_OilBump_MC_2 { get; set; }
+        public short Rail_Relax_SB_TM_2 { get; set; }
+        public short Rail_Clamp_SB_TM_2 { get; set; }
+        public int DC_Encoder_Value_2 { get; set; }
+        public int Slew_Encoder_Value_2 { get; set; }
+        public bool Pos_Start_2 { get; set; }
+        public bool Pos_Froce_2 { get; set; }
+        public bool Pos_Rdy_2 { get; set; }
+        public bool Pos_Start_Warning_2 { get; set; }
+        public bool Pos_Runing_2 { get; set; }
+        public bool Pos_Runing_Fault_2 { get; set; }
+        public bool Pos_Runing_Finish_2 { get; set; }
+        public bool Pos_TakeDevice_En_2 { get; set; }
+        public bool WorkArea_NotSelect_2 { get; set; }
+        public bool Pos_Slew_R_CMD1_2 { get; set; }
+        public bool Pos_Slew_L_CMD1_2 { get; set; }
+        public bool Pos_DcFWD_Dest_CMD_2 { get; set; }
+        public bool Pos_DcREV_Dest_CMD_2 { get; set; }
+        public bool Pos_DcFWD_Dest_2 { get; set; }
+        public bool Pos_DcREV_Dest_2 { get; set; }
+        public bool Pos_DC_Finish_2 { get; set; }
+        public bool Pos_DC_HightSpeed_2 { get; set; }
+        public bool Pos_LuffDown_CMD1_2 { get; set; }
+        public bool Pos_LuffUp_CMD_2 { get; set; }
+        public bool Pos_L_Slew_CMD2_2 { get; set; }
+        public bool Pos_R_Slew_CMD2_2 { get; set; }
+        public bool Pos_LuffUpMax_CMD_2 { get; set; }
+        public bool Pos_L_Slew_CMD3_2 { get; set; }
+        public bool Pos_R_Slew_CMD3_2 { get; set; }
+        public bool Pos_L_Slew_Dest_2 { get; set; }
+        public bool Pos_R_Slew_Dest_2 { get; set; }
+        public bool Pos_Slew_Finish_2 { get; set; }
+        public bool Pos_StartTakeDecive_2 { get; set; }
+        public bool Pos_StartStackDecive_2 { get; set; }
+        public bool Pos_Take_LuffU_CMD_2 { get; set; }
+        public bool Pos_Take_LuffD_CMD_2 { get; set; }
+        public bool Pos_Take_LuffU_Dest_2 { get; set; }
+        public bool Pos_Take_LuffD_Dest_2 { get; set; }
+        public bool Pos_Take_Luff_Finish_2 { get; set; }
+        public bool Pos_Finish_Missing_2 { get; set; }
+        public bool Pos_Finish_Confmiss_2 { get; set; }
+        public bool Pos_Execute_Onse_2 { get; set; }
+        public short SEL_WorkArea_2 { get; set; }
+        public short SEL_WorkClass_2 { get; set; }
+        public short SEL_WorkTier_2 { get; set; }
+        public short Pos_Start_RTM_2 { get; set; }
+        public short Pos_TakeDevice_RTM_2 { get; set; }
+        public short Pos_SBCH_Finish_2 { get; set; }
+        public short Pos_ForceSBCH_Finish_2 { get; set; }
+        public short Pos_CW9_2 { get; set; }
+        public float Pos_DCTarget_2 { get; set; }
+        public float Pos_SlewTarget_2 { get; set; }
+        public float Pos_LuffTarget_2 { get; set; }
+        public float Pos_DCTarget_SP_2 { get; set; }
+        public float Pos_SlewTarget_SP_2 { get; set; }
+        public float Pos_LuffTarget_SP_2 { get; set; }
+        public float Pos_DcBack_2 { get; set; }
+        public float Pos_LuffSA_SP_2 { get; set; }
+        public float Pos_SlewSA_2 { get; set; }
+        public float Pos_SlewSA_R_SP_2 { get; set; }
+        public float Pos_SlewSA_L_SP_2 { get; set; }
+        public float Pos_DCTarget_Mid_2 { get; set; }
+        public float Pos_Safe_LA_SP_2 { get; set; }
+        public float Pos_HCSafe_LA_2 { get; set; }
+        public float Pos_MaxStack_LA_SP_2 { get; set; }
+        public float Pos_SlewTarget_Mid_2 { get; set; }
+        public float MAC_Start_DcPos_2 { get; set; }
+        public float MAC_Start_SlewAngle_2 { get; set; }
+        public float MAC_Start_LuffAngle_2 { get; set; }
+        public float MAC_End_DcPos_2 { get; set; }
+        public float DCTarget_Record_2 { get; set; }
+        public float SlewTarget_Record_2 { get; set; }
+        public float LuffTarget_Record_2 { get; set; }
+        public float Take_PU_ACC_2 { get; set; }
+        public float Take_Current_ACC_2 { get; set; }
+        public float Take_Last_ACC_2 { get; set; }
+        public float Take_Total_ACC_2 { get; set; }
+        public float Stack_PU_ACC_2 { get; set; }
+        public float Stack_Current_ACC_2 { get; set; }
+        public float Stack_Last_ACC_2 { get; set; }
+        public float Stack_Total_ACC_2 { get; set; }
+        public int Slew_Encoder_SV_2 { get; set; }
+        public float Slew_Encoder_PU_2 { get; set; }
+        public float Slew_Encoder_ZP_2 { get; set; }
+        public float Slew_Encoder_PV_2 { get; set; }
+        public float Slew_Encoder_Number_2 { get; set; }
+        public float Encoder_PMW_2 { get; set; }
+        public float DC_SAS_RF_DSV_2 { get; set; }
+        public float DC_SAS_LF_DSV_2 { get; set; }
+        public float DC_SAS_RB_DSV_2 { get; set; }
+        public float DC_SAS_LB_DSV_2 { get; set; }
+        public float Boom_SAS_R_Radar_DSV_2 { get; set; }
+        public float Boom_SAS_L_Radar_DSV_2 { get; set; }
+        public float Boom_SAS_R_Ult_DSV_2 { get; set; }
+        public float Boom_SAS_L_Ult_DSV_2 { get; set; }
+        public float OverBelt_R_SPASV_2 { get; set; }
+        public float OverBelt_L_SPASV_2 { get; set; }
+        public float OverBelt_D_SPASV_2 { get; set; }
+        public float DC_FWD_SPSV_2 { get; set; }
+        public float DC_REV_SPSV_2 { get; set; }
+        public float Slew_R_SPSV_2 { get; set; }
+        public float Slew_L_SPSV_2 { get; set; }
+        public float Luff_U_SPSV_2 { get; set; }
+        public float Luff_D_SPSV_2 { get; set; }
+        public float Take_R_RB_01_SP_2 { get; set; }
+        public float Take_R_LB_01_SP_2 { get; set; }
+        public float Take_R_RB_02_SP_2 { get; set; }
+        public float Take_R_LB_02_SP_2 { get; set; }
+        public float Take_R_RB_03_SP_2 { get; set; }
+        public float Take_R_LB_03_SP_2 { get; set; }
+        public float Take_R_RB_04_SP_2 { get; set; }
+        public float Take_R_LB_04_SP_2 { get; set; }
+        public float Take_L_RB_01_SP_2 { get; set; }
+        public float Take_L_LB_01_SP_2 { get; set; }
+        public float Take_L_RB_02_SP_2 { get; set; }
+        public float Take_L_LB_02_SP_2 { get; set; }
+        public float Take_L_RB_03_SP_2 { get; set; }
+        public float Take_L_LB_03_SP_2 { get; set; }
+        public float Take_L_RB_04_SP_2 { get; set; }
+        public float Take_L_LB_04_SP_2 { get; set; }
+        public float Take_Luff_01_SP_2 { get; set; }
+        public float Take_Luff_02_SP_2 { get; set; }
+        public float Take_Luff_03_SP_2 { get; set; }
+        public float Take_Luff_04_SP_2 { get; set; }
+        public bool Encoder_SAM_2 { get; set; }
+        public bool DC_Encoder_Enable_2 { get; set; }
+        public bool Slew_Encoder_Enable_2 { get; set; }
+        public bool DC_Encoder_Adjust_2 { get; set; }
+        public bool Slew_Encoder_Adjust_2 { get; set; }
+        public bool FAULT_RESET_2 { get; set; }
+        public bool WC_Baffle_DOWN_2 { get; set; }
+        public bool WC_Baffle_UP_2 { get; set; }
+        public bool PROTECT_FAULT_2 { get; set; }
+        public short MODE_2 { get; set; }
+        public bool Single_Action_2 { get; set; }
+        public bool Link_Action_2 { get; set; }
+        public bool AUTO_MODE_2 { get; set; }
+        public bool Travel_Speed_SEL_2 { get; set; }
+        public bool Travel_FWD_MO_2 { get; set; }
+        public bool Travel_REV_MO_2 { get; set; }
+        public bool Slew_R_MO_2 { get; set; }
+        public bool Slew_L_MO_2 { get; set; }
+        public bool Bucket_LINK_READY_2 { get; set; }
+        public bool Travel_Run_Ready_2 { get; set; }
+        public bool LINK_STACK_READY_2 { get; set; }
+        public bool LINK_Take_READY_2 { get; set; }
+        public bool XBTB_Skrit_Take_Changing_2 { get; set; }
+        public bool XBTB_Skrit_Take_ChFinish_2 { get; set; }
+        public bool XBTB_Skrit_Stack_Changing_2 { get; set; }
+        public bool XBTB_Skrit_Stack_ChFinish_2 { get; set; }
+        public bool XBTB_Skrit_FAULT_2 { get; set; }
+        public bool WC_Baffle_FAULT_2 { get; set; }
+        public bool CCR_Assist_InPlace_2 { get; set; }
+        public bool Rail_Relax_AO_2 { get; set; }
+        public bool Rail_Clamp_AO_2 { get; set; }
+        public bool Rail_Relax_AO1_2 { get; set; }
+        public bool Rail_Relax_AO2_2 { get; set; }
+        public bool SR1_BeltTake_Swicth_2 { get; set; }
+        public bool SR1_BeltStack_Swicth_2 { get; set; }
+        public bool SR1_BeltTS_Stop_Swicth_2 { get; set; }
+        public bool SR1_Interlock_Swich_2 { get; set; }
+        public bool SR1_XBTB_Skrit_UP_SB_2 { get; set; }
+        public bool SR1_XBTB_Skrit_DOWN_SB_2 { get; set; }
+        public bool SR1_XBTB_Skrit_Stop_SB_2 { get; set; }
+        public bool SR1_SCADA_ByPass_SB_2 { get; set; }
+        public bool SR1_Vibrator_Start_SB_2 { get; set; }
+        public bool SR1_Vibrator_Stop_SB_2 { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public bool Tail_LuffU_Runing_2 { get; set; }
+        public bool Tail_LuffD_Runing_2 { get; set; }
+        public bool XBTB_Baffle_Take_MO_2 { get; set; }
+        public bool XBTB_Baffle_Stack_MO_2 { get; set; }
+        public bool XBTB_Baffle_Err_2 { get; set; }
+        public bool ZXLD_Baffle_Take_MO_2 { get; set; }
+        public bool ZXLD_Baffle_Stack_MO_2 { get; set; }
+        public bool ZXLD_Baffle_Err_2 { get; set; }
+        public bool ZXLD_Skrit_Take_MO_2 { get; set; }
+        public bool ZXLD_Skrit_Stack_MO_2 { get; set; }
+        public bool ZXLD_Skrit_Err_2 { get; set; }
+        public bool YL_Bit7_2 { get; set; }
+        public bool YL_Bit12_2 { get; set; }
+        public bool YL_Bit10_2 { get; set; }
+        public bool YL_Bit15_2 { get; set; }
+        public bool Skrit_Take_Start_SB_2 { get; set; }
+        public bool Skrit_Take_Changing_2 { get; set; }
+        public bool Skrit_Take_ChFinish_2 { get; set; }
+        public bool Skrit_Take_Stop_SB_2 { get; set; }
+        public bool Skrit_Stack_Start_SB_2 { get; set; }
+        public bool Skrit_Stack_Changing_2 { get; set; }
+        public bool Skrit_Stack_ChFinish_2 { get; set; }
+        public bool Skrit_Stack_Stop_SB_2 { get; set; }
+
+        //301
         public short XBTB_Baffle_CW_2 { get; set; }
         public short XBTB_Baffle_TTSet_2 { get; set; }
         public short XBTB_Baffle_STSet_2 { get; set; }
@@ -1917,10 +2260,6 @@ namespace ShenYangRemoteSystem.Subclass
         public short Light_MC_SB_TM_2 { get; set; }
         public short LuffOilBump_MO_SB_TM_2 { get; set; }
         public short LuffOilBump_MC_SB_TM_2 { get; set; }
-        public short Rail_Relax_SB_TM_2 { get; set; }
-        public short Rail_Clamp_SB_TM_2 { get; set; }
-        public int DC_Encoder_Value_2 { get; set; }
-        public int Slew_Encoder_Value_2 { get; set; }
         public short StackSlew_CW_2 { get; set; }
         public short StackPiont_CW_2 { get; set; }
         public short SlewStack_TM1_2 { get; set; }
@@ -2009,51 +2348,11 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Stack_Record_Flag4_2 { get; set; }
         public bool Stack_Record_Flag5_2 { get; set; }
         public bool Stack_Record_Flag6_2 { get; set; }
-        public bool Pos_Start_2 { get; set; }
-        public bool Pos_Froce_2 { get; set; }
-        public bool Pos_Rdy_2 { get; set; }
-        public bool Pos_Start_Warning_2 { get; set; }
-        public bool Pos_Runing_2 { get; set; }
-        public bool Pos_Runing_Fault_2 { get; set; }
-        public bool Pos_Runing_Finish_2 { get; set; }
-        public bool Pos_TakeDevice_En_2 { get; set; }
         public bool Pos_StackDevice_En_2 { get; set; }
-        public bool WorkArea_NotSelect_2 { get; set; }
         public bool Pos_DcREV_CMD1_2 { get; set; }
         public bool Pos_LuffUp_CMD1_2 { get; set; }
         public bool Pos_LuffUp_CMD2_2 { get; set; }
         public bool Pos_LuffUp_CMD3_2 { get; set; }
-        public bool Pos_Slew_R_CMD1_2 { get; set; }
-        public bool Pos_Slew_L_CMD1_2 { get; set; }
-        public bool Pos_DcFWD_Dest_CMD_2 { get; set; }
-        public bool Pos_DcREV_Dest_CMD_2 { get; set; }
-        public bool Pos_DcFWD_Dest_2 { get; set; }
-        public bool Pos_DcREV_Dest_2 { get; set; }
-        public bool Pos_DC_Finish_2 { get; set; }
-        public bool Pos_DC_HightSpeed_2 { get; set; }
-        public bool Pos_LuffDown_CMD1_2 { get; set; }
-        public bool Pos_LuffUp_CMD_2 { get; set; }
-        public bool Pos_L_Slew_CMD2_2 { get; set; }
-        public bool Pos_R_Slew_CMD2_2 { get; set; }
-        public bool Pos_LuffUpMax_CMD_2 { get; set; }
-        public bool Pos_L_Slew_CMD3_2 { get; set; }
-        public bool Pos_R_Slew_CMD3_2 { get; set; }
-        public bool Pos_L_Slew_Dest_2 { get; set; }
-        public bool Pos_R_Slew_Dest_2 { get; set; }
-        public bool Pos_Slew_Finish_2 { get; set; }
-        public bool Pos_StartTakeDecive_2 { get; set; }
-        public bool Pos_StartStackDecive_2 { get; set; }
-        public bool Pos_Take_LuffU_CMD_2 { get; set; }
-        public bool Pos_Take_LuffD_CMD_2 { get; set; }
-        public bool Pos_Take_LuffU_Dest_2 { get; set; }
-        public bool Pos_Take_LuffD_Dest_2 { get; set; }
-        public bool Pos_Take_Luff_Finish_2 { get; set; }
-        public bool Pos_Stack_LuffD_CMD_2 { get; set; }
-        public bool Pos_Stack_LuffD_Dest_2 { get; set; }
-        public bool Pos_StackLuff_Finish_2 { get; set; }
-        public bool Pos_Finish_Missing_2 { get; set; }
-        public bool Pos_Finish_Confmiss_2 { get; set; }
-        public bool Pos_Execute_Onse_2 { get; set; }
         public bool Pos_Take_Starting_2 { get; set; }
         public bool Pos_Take_Outtime_2 { get; set; }
         public bool Pos_TakeBelt_AO_CMD_2 { get; set; }
@@ -2090,81 +2389,6 @@ namespace ShenYangRemoteSystem.Subclass
         public short Pass_Stoping_RTM_2 { get; set; }
         public short Pos_StackDevice_RTM_2 { get; set; }
         public short Pos_Finish_FTM_2 { get; set; }
-        public short SEL_WorkArea_2 { get; set; }
-        public short SEL_WorkClass_2 { get; set; }
-        public short SEL_WorkTier_2 { get; set; }
-        public short Pos_Start_RTM_2 { get; set; }
-        public short Pos_TakeDevice_RTM_2 { get; set; }
-        public short Pos_SBCH_Finish_2 { get; set; }
-        public short Pos_ForceSBCH_Finish_2 { get; set; }
-        public float Pos_DCTarget_2 { get; set; }
-        public float Pos_SlewTarget_2 { get; set; }
-        public float Pos_LuffTarget_2 { get; set; }
-        public float Pos_DCTarget_SP_2 { get; set; }
-        public float Pos_SlewTarget_SP_2 { get; set; }
-        public float Pos_LuffTarget_SP_2 { get; set; }
-        public float Pos_DcBack_2 { get; set; }
-        public float Pos_LuffSA_SP_2 { get; set; }
-        public float Pos_SlewSA_2 { get; set; }
-        public float Pos_SlewSA_R_SP_2 { get; set; }
-        public float Pos_SlewSA_L_SP_2 { get; set; }
-        public float Pos_DCTarget_Mid_2 { get; set; }
-        public float Pos_Safe_LA_SP_2 { get; set; }
-        public float Pos_HCSafe_LA_2 { get; set; }
-        public float Pos_MaxStack_LA_SP_2 { get; set; }
-        public float Pos_SlewTarget_Mid_2 { get; set; }
-        public float MAC_Start_DcPos_2 { get; set; }
-        public float MAC_Start_SlewAngle_2 { get; set; }
-        public float MAC_Start_LuffAngle_2 { get; set; }
-        public float MAC_End_DcPos_2 { get; set; }
-        public float DCTarget_Record_2 { get; set; }
-        public float SlewTarget_Record_2 { get; set; }
-        public float LuffTarget_Record_2 { get; set; }
-        public float Take_PU_ACC_2 { get; set; }
-        public float Take_Current_ACC_2 { get; set; }
-        public float Take_Last_ACC_2 { get; set; }
-        public float Take_Total_ACC_2 { get; set; }
-        public float Stack_PU_ACC_2 { get; set; }
-        public float Stack_Current_ACC_2 { get; set; }
-        public float Stack_Last_ACC_2 { get; set; }
-        public float Encoder_PMW_2 { get; set; }
-        public float DC_SAS_RF_DSV_2 { get; set; }
-        public float DC_SAS_LF_DSV_2 { get; set; }
-        public float DC_SAS_RB_DSV_2 { get; set; }
-        public float DC_SAS_LB_DSV_2 { get; set; }
-        public float Boom_SAS_R_Radar_DSV_2 { get; set; }
-        public float Boom_SAS_L_Radar_DSV_2 { get; set; }
-        public float Boom_SAS_R_Ult_DSV_2 { get; set; }
-        public float Boom_SAS_L_Ult_DSV_2 { get; set; }
-        public float OverBelt_R_SPASV_2 { get; set; }
-        public float OverBelt_L_SPASV_2 { get; set; }
-        public float OverBelt_D_SPASV_2 { get; set; }
-        public float DC_FWD_SPSV_2 { get; set; }
-        public float DC_REV_SPSV_2 { get; set; }
-        public float Slew_R_SPSV_2 { get; set; }
-        public float Slew_L_SPSV_2 { get; set; }
-        public float Luff_U_SPSV_2 { get; set; }
-        public float Luff_D_SPSV_2 { get; set; }
-        public float Take_R_RB_01_SP_2 { get; set; }
-        public float Take_R_LB_01_SP_2 { get; set; }
-        public float Take_R_RB_02_SP_2 { get; set; }
-        public float Take_R_LB_02_SP_2 { get; set; }
-        public float Take_R_RB_03_SP_2 { get; set; }
-        public float Take_R_LB_03_SP_2 { get; set; }
-        public float Take_R_RB_04_SP_2 { get; set; }
-        public float Take_R_LB_04_SP_2 { get; set; }
-        public float Take_L_RB_01_SP_2 { get; set; }
-        public float Take_L_LB_01_SP_2 { get; set; }
-        public float Take_L_RB_02_SP_2 { get; set; }
-        public float Take_L_LB_02_SP_2 { get; set; }
-        public float Take_L_RB_03_SP_2 { get; set; }
-        public float Take_L_LB_03_SP_2 { get; set; }
-        public float Take_L_RB_04_SP_2 { get; set; }
-        public float Take_L_LB_04_SP_2 { get; set; }
-        public float Take_Luff_01_SP_2 { get; set; }
-        public float Take_Luff_02_SP_2 { get; set; }
-        public float Take_Luff_03_SP_2 { get; set; }
-        public float Take_Luff_04_SP_2 { get; set; }
         public float Stack_R_RB_01_SP_2 { get; set; }
         public float Stack_R_LB_01_SP_2 { get; set; }
         public float Stack_R_RB_02_SP_2 { get; set; }
@@ -2185,13 +2409,7 @@ namespace ShenYangRemoteSystem.Subclass
         public float Stack_Luff_02_SP_2 { get; set; }
         public float Stack_Luff_03_SP_2 { get; set; }
         public float Stack_Luff_04_SP_2 { get; set; }
-        public bool Encoder_SAM_2 { get; set; }
-        public bool DC_Encoder_Enable_2 { get; set; }
-        public bool Slew_Encoder_Enable_2 { get; set; }
-        public bool DC_Encoder_Adjust_2 { get; set; }
-        public bool Slew_Encoder_Adjust_2 { get; set; }
         public bool Encoder_BY2_2 { get; set; }
-        public bool FAULT_RESET_2 { get; set; }
 
 
     }

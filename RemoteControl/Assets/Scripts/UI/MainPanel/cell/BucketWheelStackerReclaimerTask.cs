@@ -55,7 +55,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             endLeftPileMaterText.text=taskCommand.LeftRightRange.endValue.ToString();
             pileMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0]==1);
             pileMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1);
-            pileMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1);
+            pileMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1);
         }
     
       

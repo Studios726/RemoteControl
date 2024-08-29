@@ -233,12 +233,10 @@ public class BucketWheelTaskBase : PanelBase
         takeMaterStopBtn.SetSystemState(false);
         takeMaterReversingBtn.SetSystemState(false);
         takeMaterEndBtn.SetSystemState(false);
-        curTaskButtonCell.SetSystemState(false);
         takeMaterStartBtn.SetSelectState(false);
         takeMaterStopBtn.SetSelectState(false);
         takeMaterReversingBtn.SetSelectState(false);
         takeMaterEndBtn.SetSelectState(false);
-        curTaskButtonCell.SetSelectState(false);
     }
     public virtual void InputFieldValueRange(InputField inputField, int min, int max)
     {
