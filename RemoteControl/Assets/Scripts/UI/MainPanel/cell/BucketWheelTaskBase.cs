@@ -87,7 +87,12 @@ public class BucketWheelTaskBase : PanelBase
             {
                 reversingTimer?.Cancel();
             }
-            reversingTimer=Timer.Register(2,() => { takeMaterReversingBtn.SetSystemState(false); });
+            reversingTimer=Timer.Register(2, () =>
+            {
+                takeMaterReversingBtn.SetSystemState(false);
+                curTaskButtonCell?.SetSelectState(false);
+                
+            });
             takeMaterReversingBtn.SetSystemState(true);
         }
         else
@@ -132,11 +137,11 @@ public class BucketWheelTaskBase : PanelBase
     }
     public virtual void SendPlcCommand(COMMAND_NAME mCommandName)
     {
-        // if (GameDataManager.Instance.GameMain.connectionPC.isConnect==false)
-        // {
-        //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("PLC系统不在线，稍后重试"));
-        //     return;
-        // }
+        if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            return;
+        }
         string commandName=machine == Machine.BucketWheelStackerReclaimer ? mCommandName.ToString()+"_1" : mCommandName.ToString()+"_2";
         // int dataInt = 0;
         if (mCommandName==COMMAND_NAME.EMERGENCY_STOP)
@@ -237,6 +242,7 @@ public class BucketWheelTaskBase : PanelBase
         takeMaterStopBtn.SetSelectState(false);
         takeMaterReversingBtn.SetSelectState(false);
         takeMaterEndBtn.SetSelectState(false);
+        curTaskButtonCell?.SetSelectState(false);
     }
     public virtual void InputFieldValueRange(InputField inputField, int min, int max)
     {
