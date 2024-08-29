@@ -26,11 +26,11 @@ public class HistoryPanelCtr :UIPresenter<HistoryPanelView>
       Debug.Log("useOperator: "+useOperator);
       if (view.curPanelType==PanelType.AlarmPanel)
       {
-          Tables = "history_warning";
+          Tables =type==MechanicalType.StackerReclaimer? ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;
       }
       else
       {
-          Tables = "history_logs";
+          Tables =type==MechanicalType.StackerReclaimer? ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
       }
       string sql = $"SELECT * FROM {Tables} WHERE ";
       

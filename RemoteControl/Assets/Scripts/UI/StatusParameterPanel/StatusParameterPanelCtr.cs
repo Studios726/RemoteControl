@@ -12,7 +12,6 @@ public class StatusParameterPanelCtr : UIPresenter<StatusParameterPanelView>
    }
    public override void Dispose()
    {
-      Debug.Log("MainPanelCtr ");
       EventManager.Instance.RemoveListener(EventName.UpdateRcData, UpdateData);
    }
    
@@ -22,7 +21,6 @@ public class StatusParameterPanelCtr : UIPresenter<StatusParameterPanelView>
    }
    public void UpdateData(object o, EventArgs eventArgs)
    {
-        Debug.LogError("状态参数面板更新数据");
         view.UpdateData(GameDataManager.Instance.SystemVariables);
    }
 }

@@ -124,11 +124,11 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         if (machineMove_1)
         {
-            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos, SystemVariables.SLEW_Angle, SystemVariables.Luff_Angle);//
+            machineMove_1.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos, SystemVariables.SLEW_Angle, -SystemVariables.Luff_Angle);//
         }
         if (machineMove_2)
         {
-            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2, SystemVariables.SLEW_Angle_2, SystemVariables.Luff_Angle_2);//
+            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2, SystemVariables.SLEW_Angle_2, -SystemVariables.Luff_Angle_2);//
         }
     }
     // public GameObject SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem)
@@ -235,6 +235,7 @@ public class GameDataManager : Singleton<GameDataManager>
     // }
     public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,GameObject model=null)
     {
+     
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
         //初始顶点颜色列表
@@ -244,6 +245,8 @@ public class GameDataManager : Singleton<GameDataManager>
         // Debug.Log($"开始获取顶点 {DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")}");
         await Task.Run(() => 
         {
+            // UnityEngine.Profiling.Profiler.BeginSample("225 SetDataContext");
+        
             // 第一步处理，例如解析数据格式
             for (int i = 0; i < sendDataReportAndDem.SendCoalHeapDEM.NZ; i++) //1003
             {
@@ -255,10 +258,12 @@ public class GameDataManager : Singleton<GameDataManager>
                     vertices.Add(new Vector3(X, Y, Z)); //循环获得顶点列表224784
                 }
             }
+            // UnityEngine.Profiling.Profiler.EndSample();
         });
         // Debug.Log($"开始获取面数 {DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")}");
         await Task.Run(() => 
         {
+            // UnityEngine.Profiling.Profiler.BeginSample("226 SetDataContext");
             // 第二步处理，例如生成顶点数据
             for (int m = 0; m < demData.NZ - 1; m++)
             {
@@ -280,10 +285,11 @@ public class GameDataManager : Singleton<GameDataManager>
                     }
                 }
             }
-
+            // UnityEngine.Profiling.Profiler.EndSample();
         });
         await Task.Run(() => 
         {
+            // UnityEngine.Profiling.Profiler.BeginSample("227 SetDataContext");
             // 第三步处理，例如构建 Mesh
             REGION[] regionList = demData.REGION_LIST;
             float xLength = demData.LENGTH / 2;
@@ -304,8 +310,10 @@ public class GameDataManager : Singleton<GameDataManager>
 
                     if (ve3.x + xLength >= reg.BEGIN && ve3.x + xLength < reg.END && side == reg.SIDE)
                     {
+                       
                         if (reg.IsUseLayer==0)
                         {
+                            // Debug.LogError($"IsUseLayer {reg.IsUseLayer}");
                             pointColor = new Color(reg.ColorR / 255.0f, reg.ColorG / 255.0f, reg.ColorB / 255.0f, 1);
                             break;
                         }
@@ -326,8 +334,9 @@ public class GameDataManager : Singleton<GameDataManager>
 
                 colorList.Add(pointColor);
             }
-
+            // UnityEngine.Profiling.Profiler.EndSample();
         });
+        // UnityEngine.Profiling.Profiler.BeginSample("228 SetDataContext");
         Mesh mesh = new Mesh();
         mesh.indexFormat = IndexFormat.UInt32;
         mesh.vertices = vertices.ToArray();
@@ -342,6 +351,7 @@ public class GameDataManager : Singleton<GameDataManager>
         meshRenderer.sharedMaterial = material;
         meshFilter.mesh.RecalculateNormals(); //更新法线
         meshCollider.sharedMesh = mesh;
+        // UnityEngine.Profiling.Profiler.EndSample();
         // Debug.Log("模型处理全部完成");
     }
     

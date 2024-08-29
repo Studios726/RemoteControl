@@ -230,6 +230,7 @@ public class TaskCommand
     public string TaskID {  get; set; }
     //任务创建时间
     public DateTime TaskCreateTime { get; set; }
+    //web 专属
     public string nowState { get; set; }
     // public 
     //发布任务者

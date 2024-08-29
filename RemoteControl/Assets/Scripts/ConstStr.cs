@@ -43,6 +43,9 @@ public static class ConstStr
     public const string DATABASE_HISTORY_CANTILEVER_Flow_MC = "history_cantileverFlow";
     public const string DATABASE_HISTORY_LOG1_MC = "history_logs";
     public const string DATABASE_HISTORY_LOG2_MC = "history_logs_2";
+    public const string DATABASE_HISTORY_WARNING1_MC = "history_warning";
+    public const string DATABASE_HISTORY_WARNING2_MC = "history_warning_2";
+    public const string DATABASE_TASK_CONFIG = "Task_Config";
     #endregion
 
     #region login
@@ -85,6 +88,14 @@ public static class ConstStr
     public const string DATA_HISTORY_LOGS_TIME = "time";
     public const string DATA_HISTORY_LOGS_INFO = "info";
     public const string DATA_HISTORY_LOGS_OPERATOR = "operator";
+    #endregion
+    #region task_config
+    public const string DATA_TASK_CONFIG_ID = "ID";
+    public const string DATA_TASK_CONFIG_HEAPDOS = "HeapDis";
+    public const string DATA_TASK_CONFIG_MOVEMODEL = "MoveModel";
+    public const string DATA_TASK_CONFIG_FETCHPILEDEPTH = "FetchPileDepth";
+    public const string DATA_TASK_CONFIG_FETCHVERTICALRANGEADD = "FetchVerticalRangeAdd";
+    public const string DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB = "FetchHorizontalRangeSub";
     #endregion
     #region
     public const string DATA_ACCOUNT_OPERATION_INDEX = "Index";

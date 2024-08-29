@@ -73,16 +73,16 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
 
     private void InitRecord()
     {
-        string warning = "history_warning";
-        string log = "history_logs";
-        string warningSql = "Select * from " + warning + " ORDER BY id DESC LIMIT 10;";
-        string warningSql2 = "Select * from " + warning + " ORDER BY id DESC LIMIT 5;";
-        string  logSql = "Select * from " + log + " ORDER BY id DESC LIMIT 10;";
-        string  logSql2 = "Select * from " + log + " ORDER BY id DESC LIMIT 5;";
-        _ctr.RequestData(warningSql, MechanicalType.Reclaimer, PanelType.AlarmPanel);
-        _ctr.RequestData(warningSql2, MechanicalType.StackerReclaimer, PanelType.AlarmPanel);
-        _ctr.RequestData(logSql, MechanicalType.Reclaimer, PanelType.LogPanel);
-        _ctr.RequestData(logSql2, MechanicalType.StackerReclaimer, PanelType.LogPanel);
+        // string warning = "history_warning";
+        // string log = "history_logs";
+        string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC} ORDER BY id DESC LIMIT 20;";
+        string warningSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC} ORDER BY id DESC LIMIT 20;";
+        string  logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG1_MC}  ORDER BY id DESC LIMIT 20;";
+        string  logSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_LOG2_MC}  ORDER BY id DESC LIMIT 20;";
+        _ctr.RequestData(warningSql, MechanicalType.StackerReclaimer, PanelType.AlarmPanel);
+        _ctr.RequestData(warningSql2, MechanicalType.Reclaimer, PanelType.AlarmPanel);
+        _ctr.RequestData(logSql, MechanicalType.StackerReclaimer, PanelType.LogPanel);
+        _ctr.RequestData(logSql2, MechanicalType.Reclaimer, PanelType.LogPanel);
     }
     private void ShowAlarmPanel()
     {

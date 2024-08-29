@@ -224,10 +224,11 @@ public class BucketWheelTaskBase : PanelBase
     public virtual void InputFieldValueRange(InputField inputField, int min, int max)
     {
         inputField.text = "0";
-        inputField.onValueChanged.AddListener(((string value) =>
+        // inputField
+        inputField.onEndEdit.AddListener(((string value) =>
         {
-            int num = 0;
-            if (int.TryParse(value, out num))
+            float num = 0;
+            if (float.TryParse(value, out num))
             {
                 num = num < min ? min : num;
                 num = num > max ? max : num;

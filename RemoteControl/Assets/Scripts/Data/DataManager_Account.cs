@@ -199,12 +199,25 @@ public partial class DataManager
 
     public bool InsertHistoryLogMc(string des,string userName,Machine machine)
     {
-        return true;
-        // string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
-        //
-        // string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_LOGS_TIME}`,`{ConstStr.DATA_HISTORY_LOGS_INFO}`,`{ConstStr.DATA_HISTORY_LOGS_OPERATOR}`) " +
-        //                $"VALUES ('{DateTime.Now}','{des}','{userName}')";
-        // return MySqlHelper.ExecuteSql(query) > 0; ;
+        string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
+        
+        string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_LOGS_TIME}`,`{ConstStr.DATA_HISTORY_LOGS_INFO}`,`{ConstStr.DATA_HISTORY_LOGS_OPERATOR}`) " +
+                       $"VALUES ('{DateTime.Now}','{des}','{userName}')";
+        return MySqlHelper.ExecuteSql(query) > 0;
+    }
+    
+    public MySqlDataReader GetTaskConfigMc()
+    {
+        string tabName = ConstStr.DATABASE_TASK_CONFIG;
+        string query = $"SELECT * FROM {tabName} WHERE {ConstStr.DATA_TASK_CONFIG_ID}=1";
+        MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
+        return mySqlDataReader;
+    }
+    public bool UpdateTaskConfig(string name,string value)
+    {
+        string query = $"UPDATE {ConstStr.DATABASE_TASK_CONFIG} SET {name} = {value} WHERE {ConstStr.DATA_TASK_CONFIG_ID} = 1";
+        bool success=MySqlHelper.ExecuteSql(query) > 0; 
+        return success; 
     }
     
 }
