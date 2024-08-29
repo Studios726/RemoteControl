@@ -89,6 +89,11 @@ public static class ConstStr
     public const string DATA_HISTORY_LOGS_INFO = "info";
     public const string DATA_HISTORY_LOGS_OPERATOR = "operator";
     #endregion
+    #region history_warning
+    public const string DATA_HISTORY_WARNING_TIME = "time";
+    public const string DATA_HISTORY_WARNING_INFO = "info";
+    public const string DATA_HISTORY_WARNING_OPERATOR = "operator";
+    #endregion
     #region task_config
     public const string DATA_TASK_CONFIG_ID = "ID";
     public const string DATA_TASK_CONFIG_HEAPDOS = "HeapDis";

@@ -120,6 +120,11 @@ public class MainPanelView : UIView<MainPanelCtr>
                 }
             }
         }
+        else
+        {
+            _bucketWheelTask2?.ResetState();
+            _bucketWheelTask1?.ResetState();
+        }
     }
 
     public void AddOnClickListener(Button btn, UnityAction action)

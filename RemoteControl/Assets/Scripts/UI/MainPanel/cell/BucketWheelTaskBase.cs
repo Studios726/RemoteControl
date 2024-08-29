@@ -220,7 +220,20 @@ public class BucketWheelTaskBase : PanelBase
         ctr = btn;
         ctr.SetSelectState(true);
     }
-    
+
+    public virtual void ResetState()
+    {
+        takeMaterStartBtn.SetSystemState(false);
+        takeMaterStopBtn.SetSystemState(false);
+        takeMaterReversingBtn.SetSystemState(false);
+        takeMaterEndBtn.SetSystemState(false);
+        curTaskButtonCell.SetSystemState(false);
+        takeMaterStartBtn.SetSelectState(false);
+        takeMaterStopBtn.SetSelectState(false);
+        takeMaterReversingBtn.SetSelectState(false);
+        takeMaterEndBtn.SetSelectState(false);
+        curTaskButtonCell.SetSelectState(false);
+    }
     public virtual void InputFieldValueRange(InputField inputField, int min, int max)
     {
         inputField.text = "0";

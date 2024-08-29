@@ -33,9 +33,9 @@ public struct JibLubbingMechanismData
     /// </summary>
     public bool isFaceUpwardLimitToggle;
     /// <summary>
-    /// 下仰限位
+    /// 上仰极限
     /// </summary>
-    public bool isFaceDownLimitToggle;
+    public bool isVariableAmplitudeUpperExtremeLimitToggle;
     /// <summary>
     /// 下附限位
     /// </summary>
@@ -131,9 +131,9 @@ public class JibLubbingMechanismItem :StatusParmItemBase<JibLubbingMechanismData
     /// </summary>
     public ToggleDIY FaceUpwardLimitToggle;
     /// <summary>
-    /// 下仰限位
+    /// 上仰极限
     /// </summary>
-    public ToggleDIY FaceDownLimitToggle;
+    public ToggleDIY VariableAmplitudeUpperExtremeLimitToggle;
     /// <summary>
     /// 下附限位
     /// </summary>
@@ -203,7 +203,7 @@ public class JibLubbingMechanismItem :StatusParmItemBase<JibLubbingMechanismData
         SetToggleState(DriverRoomBackBalanceValveToggle, data.isDriverRoomBackBalanceValveToggle,false,isConnect);
         SetToggleState(MainElectricalMachineryOverloadToggle, data.isMainElectricalMachineryOverloadToggle,true,isConnect);
         SetToggleState(FaceUpwardLimitToggle, data.isFaceUpwardLimitToggle,true,isConnect);
-        SetToggleState(FaceDownLimitToggle, data.isFaceDownLimitToggle,true,isConnect);
+        SetToggleState(VariableAmplitudeUpperExtremeLimitToggle, data.isVariableAmplitudeUpperExtremeLimitToggle,true,isConnect);
         SetToggleState(BendDownLimitToggle, data.isBendDownLimitToggle,true,isConnect);
         SetToggleState(BendDownMaxToggle, data.isBendDownMaxToggle,true,isConnect);
 

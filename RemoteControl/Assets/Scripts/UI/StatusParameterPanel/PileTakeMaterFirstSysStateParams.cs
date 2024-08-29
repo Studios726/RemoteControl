@@ -133,8 +133,8 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         jibLubbingMechanismData.isDriverRoomBackBalanceValveToggle=GetToggleState(data.DriverRoomDescentValve, data.DriverRoomDescentValve_2);
         jibLubbingMechanismData.isMainElectricalMachineryOverloadToggle=GetToggleState(data.VariableAmplitudeMotorOverload, data.VariableAmplitudeMotorOverload_2);
         jibLubbingMechanismData.isFaceUpwardLimitToggle=GetToggleState(data.VariableAmplitudeUpperLimit, data.VariableAmplitudeUpperLimit_2);
-        //有疑问 等待确认
-        jibLubbingMechanismData.isFaceDownLimitToggle=GetToggleState(data.VariableAmplitudeLowerLimit, data.VariableAmplitudeLowerLimit_2);
+       
+        jibLubbingMechanismData.isVariableAmplitudeUpperExtremeLimitToggle=GetToggleState(data.VariableAmplitudeUpperExtremeLimit, data.VariableAmplitudeUpperExtremeLimit_2);
         jibLubbingMechanismData.isBendDownLimitToggle=GetToggleState(data.VariableAmplitudeLowerLimit, data.VariableAmplitudeLowerLimit_2);
         
         jibLubbingMechanismData.isBendDownMaxToggle=GetToggleState(data.VariableAmplitudeLowerExtremeLimit, data.VariableAmplitudeLowerExtremeLimit_2);

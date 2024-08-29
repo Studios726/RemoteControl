@@ -113,4 +113,16 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         }
         TaskDataManager.Instance.SendTaskCommand(taskCommand);
     }
+
+    public override void ResetState()
+    {
+        base.ResetState();
+        pileMaterStartBtn.SetSystemState(false);
+        pileMaterStopBtn.SetSystemState(false);
+        pileMaterEndBtn.SetSystemState(false);
+        
+        pileMaterStartBtn.SetSelectState(false);
+        pileMaterStopBtn.SetSelectState(false);
+        pileMaterEndBtn.SetSelectState(false);
+    }
 }

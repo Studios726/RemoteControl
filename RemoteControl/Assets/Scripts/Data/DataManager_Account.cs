@@ -199,9 +199,18 @@ public partial class DataManager
 
     public bool InsertHistoryLogMc(string des,string userName,Machine machine)
     {
-        string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
+        string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;
         
         string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_LOGS_TIME}`,`{ConstStr.DATA_HISTORY_LOGS_INFO}`,`{ConstStr.DATA_HISTORY_LOGS_OPERATOR}`) " +
+                       $"VALUES ('{DateTime.Now}','{des}','{userName}')";
+        return MySqlHelper.ExecuteSql(query) > 0;
+    }
+    
+    public bool InsertHistoryWarningMc(string des,string userName,Machine machine)
+    {
+        string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
+        
+        string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_WARNING_TIME}`,`{ConstStr.DATA_HISTORY_WARNING_INFO}`,`{ConstStr.DATA_HISTORY_WARNING_OPERATOR}`) " +
                        $"VALUES ('{DateTime.Now}','{des}','{userName}')";
         return MySqlHelper.ExecuteSql(query) > 0;
     }

@@ -13,31 +13,18 @@ public class LoginPanelView : UIView<LoginPanelCtr>
     private TMP_InputField _passwordInput;
     private UnityEngine.UI.Button _loginBtn;
     private UnityEngine.UI.Toggle _toggle;
-    private Button _ipBtn;
-    private Button _changeIPBtn;
-    private InputField _ipInput;
     public GameObject _error;
     public Timer timer;
+    public Text _IP;
     public override void InitUIElements(UIArgs uiArgs)
     {
         _accountInput = RootObj.transform.Find("Bg/accountInput").GetComponent<TMP_InputField>();
         _passwordInput = RootObj.transform.Find("Bg/passwordInput").GetComponent<TMP_InputField>();
         _loginBtn = RootObj.transform.Find("Bg/loginBtn").GetComponent<UnityEngine.UI.Button>();
         _toggle = RootObj.transform.Find("Bg/Toggle").GetComponent<UnityEngine.UI.Toggle>();
+        _IP = RootObj.transform.FindComponent<Text>("IP");
         _error = RootObj.transform.Find("error").gameObject;
-        _ipBtn=RootObj.transform.Find("ipBtn").GetComponent<Button>();
-        _ipInput=RootObj.transform.Find("ipInput").GetComponent<InputField>();
-        _changeIPBtn=RootObj.transform.Find("changeIPBtn").GetComponent<Button>();
         _loginBtn.onClick.AddListener(Login);
-        _ipBtn.onClick.AddListener((() =>
-        {
-            _ipInput.gameObject.SetActive(!_ipInput.gameObject.activeSelf);
-            _changeIPBtn.gameObject.SetActive(!_changeIPBtn.gameObject.activeSelf);
-        }));
-        _changeIPBtn.onClick.AddListener((() =>
-        {
-            GameDataManager.Instance.SetIp(_ipInput.text);
-        }));
         _passwordInput.onSubmit.AddListener(OnSubmit);
         _accountInput.text = PlayerPrefs.GetString("Account");
         _passwordInput.text = PlayerPrefs.GetString("Password");
@@ -46,7 +33,9 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         _accountInput.onFocusSelectAll = false;
         _passwordInput.onFocusSelectAll = false;
         _accountInput.ActivateInputField();
-       
+        _IP.text ="数据库IP:"+ GameDataManager.Instance.IpConfig.DataIP + "\n 三维扫描IP:" + GameDataManager.Instance.IpConfig.YuanIP + "\n 任务IP " +
+                   GameDataManager.Instance.IpConfig.TaskIP +"\n RC IP "+
+                   GameDataManager.Instance.IpConfig.TaoIP;
 
     }
 
