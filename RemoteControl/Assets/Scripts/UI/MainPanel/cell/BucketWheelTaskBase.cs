@@ -197,20 +197,20 @@ public class BucketWheelTaskBase : PanelBase
         if (operationType == OperationType.START)
         {
             taskCommand.Command_Type = 0;
-            float startValue = startTakeMaterText.text == "" ? 0 : int.Parse(startTakeMaterText.text);
-            float endValue = stopTakeMaterText.text == "" ? 0 : int.Parse(stopTakeMaterText.text);
+            float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
+            float endValue = stopTakeMaterText.text == "" ? 0 : float.Parse(stopTakeMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
             taskCommand.SideSelection = leftToggle.isOn ? "LIFT" : "RIGHT";
-            float startLeftRightRangeValue = leftTakeMaterText.text == "" ? 0 : int.Parse(leftTakeMaterText.text);
-            float endLeftRightRangeValue = rightTakeMaterText.text == "" ? 0 : int.Parse(rightTakeMaterText.text);
+            float startLeftRightRangeValue = leftTakeMaterText.text == "" ? 0 : float.Parse(leftTakeMaterText.text);
+            float endLeftRightRangeValue = rightTakeMaterText.text == "" ? 0 : float.Parse(rightTakeMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
-            taskCommand.StepLength = takeMaterStep.text == "" ? 0 : int.Parse(takeMaterStep.text); ;
+            taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text); ;
             taskCommand.IsTimed = timeOpenToggle.isOn;
             taskCommand.TimedAt = int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
             taskCommand.IsQuantified = quantityOpenToggle.isOn;
             taskCommand.Quantity = int.Parse(takeMaterNum.text);
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
-            taskCommand.LayerHigh = layerHigh.text == "" ? 0 : int.Parse(layerHigh.text);
+            taskCommand.LayerHigh = layerHigh.text == "" ? 0 : float.Parse(layerHigh.text);
             AllData allData = new AllData();
             taskCommand.AllData = allData;
         }
@@ -247,7 +247,6 @@ public class BucketWheelTaskBase : PanelBase
     public virtual void InputFieldValueRange(InputField inputField, int min, int max)
     {
         inputField.text = "0";
-        // inputField
         inputField.onEndEdit.AddListener(((string value) =>
         {
             float num = 0;

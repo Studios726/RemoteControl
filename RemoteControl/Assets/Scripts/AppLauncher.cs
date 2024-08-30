@@ -9,6 +9,8 @@ public class AppLauncher : MonoBehaviour
 {
     public GameMain _gameMain;
     private bool isQuit;
+    private int previousWidth;
+    private int previousHeight;
     private void Awake()
     {
 
@@ -18,6 +20,8 @@ public class AppLauncher : MonoBehaviour
         GameDataManager.Instance.GameMain = _gameMain;
         GameStart();
         OnApplicationQuit();
+        previousWidth=Screen.width;
+        previousHeight=Screen.height;
     }
 
     public void Update()
@@ -32,6 +36,13 @@ public class AppLauncher : MonoBehaviour
         }else if (Input.GetKeyDown(KeyCode.Tab))
         {
             EventManager.Instance.TriggerEvent(EventName.KeyCodeTab, null);
+        }
+        if (Screen.width!= previousWidth || Screen.height!= previousHeight)
+        {
+            Debug.Log("屏幕分辨率发生变化: " + Screen.width + " x " + Screen.height);
+            previousWidth = Screen.width;
+            previousHeight = Screen.height;
+            EventManager.Instance.TriggerEvent(EventName.RefreshScreen, null);
         }
        
     }
@@ -68,5 +79,13 @@ public class AppLauncher : MonoBehaviour
     private void GameStart()
     {
         _gameMain.EnterGame();
+    }
+
+    public void Scree()
+    {
+        // Screen.fullScreenChanged += OnFullScreenChanged;
+        // Screen.widthChanged += OnResolutionChanged;
+        // Screen.heightChanged += OnResolutionChanged;
+        // Screen.orientation
     }
 }

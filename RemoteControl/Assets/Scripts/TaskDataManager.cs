@@ -71,11 +71,12 @@ public class TaskDataManager : Singleton<TaskDataManager>
         }
         DataManager.Instance.UpdateTaskConfig(name, value);
     }
-    public void SendChangeTaskStateCommand(Machine machine,OperationType operationType)
+    public void SendChangeTaskStateCommand(Machine machine,OperationType operationType,TaskType taskType)
     {
         TaskCommand command = new TaskCommand();
         command.QuerySystem = "MC";
         command.Machine = machine;
+        command.TaskType = taskType;
         command.Command_Type = 2;
         command.OperatorSystem = "MC";
         command.OperationCommand = operationType;
@@ -91,7 +92,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         taskCommand.Command_Type = 1;
         taskCommand.OperatorSystem = "MC";
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
-        Debug.Log("获取当前任务状态");
+        // Debug.Log("获取当前任务状态");
     }
     
     public void SetTaskVariables(TaskVariables taskVariables)
@@ -229,26 +230,25 @@ public class TaskDataManager : Singleton<TaskDataManager>
             taskData.Machine = taskCommand.Machine;
             if (taskCommand.IsTimed==true&&taskCommand.TaskType==TaskType.TAKEMATER)
             {
-                DateTime parsedDateTime;
                 long timestamp=0;
                 timestamp =taskCommand.TimedAt*60 - (long)(DateTime.Now - taskCommand.TaskCreateTime).TotalSeconds ;
+                Debug.LogError($"timestamp == {timestamp}");
                 if (timestamp>0)
                 {
                     taskData.AddTimer(() =>
                     {
-                        SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END);
+                        SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END,taskCommand.TaskType);
                     }, timestamp);
                 }
                 else
                 {
-                    SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END);
+                    SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END,taskCommand.TaskType);
                 }
                
             }
             curTaskDic.Add(taskCommand.TaskID,taskData);
            
         }
-        Debug.LogError($"当前任务列表 { curTaskDic.Count}");
     }
     public Dictionary<string, TaskData> GetNearestTaskDataDic()
     {

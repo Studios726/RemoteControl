@@ -198,12 +198,12 @@ public class HideButtonCtrBase : PanelBase
         AddOnClickListener(bypassBtn,(() =>SendMessageToServer( COMMAND_NAME.BYPASS_BUTTON) ));
         AddOnClickListener(cabDownBtn,(() =>SendMessageToServer("司机室下降") ));
         AddOnClickListener(cabUpBtn,(() =>SendMessageToServer("司机室上升") ));
-        AddOnClickListener(draughtFanStartBtn,(() =>SendMessageToServer("变幅风机启动") ));
-        AddOnClickListener(draughtFanStopBtn,(() =>SendMessageToServer("变幅风机停止") ));
+        AddOnClickListener(draughtFanStartBtn,(() =>SendMessageToServer(COMMAND_NAME.LUFF_FAN_START) ));
+        AddOnClickListener(draughtFanStopBtn,(() =>SendMessageToServer(COMMAND_NAME.LUFF_FAN_STOP) ));
         AddOnClickListener(bucketWheelStartBtn,(() =>SendMessageToServer(COMMAND_NAME.BUCKET_START) ));
         AddOnClickListener(bucketWheelStopBtn,(() =>SendMessageToServer(COMMAND_NAME.BUCKET_STOP) ));
-        AddOnClickListener(heaterStartBtn,(() =>SendMessageToServer("加热器启动") ));
-        AddOnClickListener(heaterStopBtn,(() =>SendMessageToServer("加热器停止") ));
+        AddOnClickListener(heaterStartBtn,(() =>SendMessageToServer(COMMAND_NAME.LUFF_HART_START) ));
+        AddOnClickListener(heaterStopBtn,(() =>SendMessageToServer(COMMAND_NAME.LUFF_HART_STOP) ));
         AddOnClickListener(cantileverTakeMaterStartBtn,(() =>SendMessageToServer(COMMAND_NAME.BELT_TAKE) ));
         AddOnClickListener(cantileverTakeMaterStopBtn,(() =>SendMessageToServer(COMMAND_NAME.BELT_STOP) ));
         AddOnClickListener(takeMaterDownBtn,(() =>SendMessageToServer(COMMAND_NAME.XBTB_DOWN_BUTTON) ));
@@ -237,6 +237,10 @@ public class HideButtonCtrBase : PanelBase
             bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning);
             bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning==false);
             cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact);
+            draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning);
+            draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false);
+            heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning);
+            heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning==false);
             if (data.SuspensionBeltMaterialUnloadingRunningContact==false &&data.SuspensionBeltMaterialLoadingRunningContact==false)
             {
                 cantileverTakeMaterStopBtn.SetSystemState(true);
@@ -276,6 +280,12 @@ public class HideButtonCtrBase : PanelBase
             bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning_2);
             bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning_2==false);
             cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact_2);
+            
+            draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning);
+            draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false);
+            heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning);
+            heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning==false);
+            
             if (data.SuspensionBeltMaterialUnloadingRunningContact_2==false &&data.SuspensionBeltMaterialLoadingRunningContact_2==false)
             {
                 cantileverTakeMaterStopBtn.SetSystemState(true);
@@ -435,6 +445,26 @@ public class HideButtonCtrBase : PanelBase
                 break;
             case  COMMAND_NAME.SKRIT_TAKE_STOP:   
                 DataManager.Instance.InsertHistoryLogMc("挡板分流变换停止", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case  COMMAND_NAME.LUFF_HART_START:   
+                heaterStartBtn.SetSelectState(true);
+                heaterStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("变幅油加热器启动", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case  COMMAND_NAME.LUFF_HART_STOP:   
+                heaterStartBtn.SetSelectState(false);
+                heaterStopBtn.SetSelectState(true);
+                DataManager.Instance.InsertHistoryLogMc("变幅油加热器停止", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case  COMMAND_NAME.LUFF_FAN_START:   
+                draughtFanStartBtn.SetSelectState(true);
+                draughtFanStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("变幅风机启动", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case  COMMAND_NAME.LUFF_FAN_STOP:   
+                draughtFanStartBtn.SetSelectState(false);
+                draughtFanStopBtn.SetSelectState(true);
+                DataManager.Instance.InsertHistoryLogMc("变幅风机停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
             default:
                 break;

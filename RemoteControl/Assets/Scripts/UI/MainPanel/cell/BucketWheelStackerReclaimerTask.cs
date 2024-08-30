@@ -95,14 +95,14 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         if (operationType==OperationType.START)
         {
             taskCommand.Command_Type = 0;
-            float startValue = startPileMaterText.text == "" ? 0 : int.Parse(startPileMaterText.text);
-            float endValue = endPileMaterText.text == "" ? 0 : int.Parse(endPileMaterText.text);
+            float startValue = startPileMaterText.text == "" ? 0 : float.Parse(startPileMaterText.text);
+            float endValue = endPileMaterText.text == "" ? 0 : float.Parse(endPileMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
             taskCommand.SideSelection = leftPileMaterToggle.isOn ? "LIFT" : "RIGHT";
-            float startLeftRightRangeValue = startLeftPileMaterText.text == "" ? 0 : int.Parse(startLeftPileMaterText.text);
-            float endLeftRightRangeValue = endLeftPileMaterText.text == "" ? 0 : int.Parse(endLeftPileMaterText.text);
+            float startLeftRightRangeValue = startLeftPileMaterText.text == "" ? 0 : float.Parse(startLeftPileMaterText.text);
+            float endLeftRightRangeValue = endLeftPileMaterText.text == "" ? 0 : float.Parse(endLeftPileMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
-            taskCommand.StepLength = takeMaterStep.text == "" ? 0 : int.Parse(takeMaterStep.text); ;
+            taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text);
             taskCommand.IsTimed = timeOpenToggle.isOn;
             taskCommand.TimedAt = int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
             taskCommand.IsQuantified = quantityOpenToggle.isOn;
@@ -110,7 +110,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
             taskCommand.OperatorSystem = "MC";
             taskCommand.LayerHigh = 0;
-            taskCommand.TakeMateHigh= int.Parse(pileMaterHeightText.text);
+            taskCommand.TakeMateHigh= float.Parse(pileMaterHeightText.text);
             AllData allData = new AllData();
             taskCommand.AllData = allData;
         }

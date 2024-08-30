@@ -137,6 +137,7 @@ public class ClientConnection:MonoBehaviour
     {
         Debug.Log($"正在重连websocket{socketType}");
         yield return new WaitForSeconds(5);
+        EventManager.Instance.TriggerEvent(EventName.ReConnect, this,new ConnectEventArgs(socketType));
         CreateWebSocket();
         this.lockReconnect = false;
     }

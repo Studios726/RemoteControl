@@ -25,13 +25,16 @@ public class UIManager : Singleton<UIManager>
    public void Init(UILayer[] uiLayers)
    {
       _canvasPrefab = Resources.Load<GameObject>("UI/Canvas");
+      Camera uiCamera = GameObject.Find("UICamera").GetComponent<Camera>();
       _uiRoot = new GameObject("UIRoot");
       GameObject.DontDestroyOnLoad(_uiRoot);
       for (int i = 0; i <uiLayers.Length; ++i)
       {
-         GameObject canvas = GameObject.Instantiate(_canvasPrefab, _uiRoot.transform);
-         canvas.GetComponent<Canvas>().sortingOrder = uiLayers[i].layerNum;
-         _canvasList.Add(canvas);
+         GameObject canvasGo = GameObject.Instantiate(_canvasPrefab, _uiRoot.transform);
+         Canvas canvas = canvasGo.GetComponent<Canvas>();
+         canvas.sortingOrder = uiLayers[i].layerNum;
+         canvas.worldCamera=uiCamera;
+         _canvasList.Add(canvasGo);
          canvas.name = uiLayers[i].layerName;
       }
    }

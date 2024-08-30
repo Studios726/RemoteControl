@@ -204,7 +204,24 @@ public enum COMMAND_NAME
     /// <summary>
     /// 挡板堆料变换启动
     /// </summary>
-    SKRIT_STACK_START
+    SKRIT_STACK_START,
+    /// <summary>
+    /// 变幅油加热器启动
+    /// </summary>
+    LUFF_HART_START,
+    /// <summary>
+    /// 变幅油加热器停止
+    /// </summary>
+    LUFF_HART_STOP,
+    /// <summary>
+    /// 变幅风机启动
+    /// </summary>
+    LUFF_FAN_START,
+    /// <summary>
+    /// 变幅风机停止
+    /// </summary>
+    LUFF_FAN_STOP,
+    
     
     
         
