@@ -100,11 +100,11 @@ public class SearchPanel : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scrollviewYPos = scrollviewY.transform.position;
-        scrollviewMPos = scrollviewM.transform.position;
-        scrollviewDPos = scrollviewD.transform.position;
-        scrollviewHPos = scrollviewH.transform.position;
-        scrollviewMinutePos= scrollviewMinute.transform.position;
+        scrollviewYPos = scrollviewY.transform.localPosition;
+        scrollviewMPos = scrollviewM.transform.localPosition;
+        scrollviewDPos = scrollviewD.transform.localPosition;
+        scrollviewHPos = scrollviewH.transform.localPosition;
+        scrollviewMinutePos= scrollviewMinute.transform.localPosition;
         startYBtn.onClick.AddListener((() =>
         {
             ResetDateUI();
@@ -381,16 +381,18 @@ public class SearchPanel : MonoBehaviour
     }
     void ShowScrollView(GameObject scrollView,Vector3 pos)
     {
+         SetActive(scrollView, true);
         if (timeType==TimeType.StartTime)
         {
-            scrollView.transform.position = pos;
+            scrollView.transform.localPosition = pos;
         }
         else
         {
-            scrollView.transform.position = pos + offset;
+            scrollView.transform.localPosition = pos + offset;
+         
         }
       
-        SetActive(scrollView, true);
+        // SetActive(scrollView, true);
     }
 
     public void SetActive(GameObject go, bool isActive)
