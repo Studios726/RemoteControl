@@ -205,7 +205,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         // AddOnClickListener(automaticBtn, (() => SendMessageToServer("控制方式自动")));
         AddOnClickListener(takeMaterBtn, (() => SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON)));
         AddOnClickListener(stopTakeMaterBtn, (() =>SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON)));
-        AddOnClickListener(carFastBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEK_SPEED_FAST)));
+        AddOnClickListener(carFastBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_FAST)));
         AddOnClickListener(carSlowBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_SLOW)));
         AddOnClickListener(carBackBtn, (() => SendMessageToServer(COMMAND_NAME.MOVE_BACKWARD)));
         AddOnClickListener(carStopBtn, (() => SendMessageToServer(COMMAND_NAME.MOVE_STOP)));
@@ -222,13 +222,13 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         //Debug.Log("更新move  大车碰撞信息 ");
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
-            SetText(carElectricity,data.LargeCarElectricCurrent.ToString("F1"),TextType.Electricity);
-            SetText(rotationElectricity,data.RotaryElectricCurrent.ToString("F1"),TextType.Electricity);
-            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent.ToString("F1"),TextType.Electricity);
-            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent.ToString("F1"),TextType.Electricity);
-            SetText(carPos,data.DC_Pos.ToString("F1"),TextType.Meter);
-            SetText(rotationAngle,data.SLEW_Angle.ToString("F1"),TextType.Angle);
-            SetText(upAngle,data.Luff_Angle.ToString("F1"),TextType.Angle);
+            SetText(carElectricity,data.LargeCarElectricCurrent.ToString("F2"),TextType.Electricity);
+            SetText(rotationElectricity,data.RotaryElectricCurrent.ToString("F2"),TextType.Electricity);
+            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent.ToString("F2"),TextType.Electricity);
+            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent.ToString("F2"),TextType.Electricity);
+            SetText(carPos,data.DC_Pos.ToString("F2"),TextType.Meter);
+            SetText(rotationAngle,data.SLEW_Angle.ToString("F2"),TextType.Angle);
+            SetText(upAngle,data.Luff_Angle.ToString("F2"),TextType.Angle);
             
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen);
@@ -269,13 +269,13 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         }
         else
         {
-            SetText(carElectricity,data.LargeCarElectricCurrent_2.ToString("F1"),TextType.Electricity);
-            SetText(rotationElectricity,data.RotaryElectricCurrent_2.ToString("F1"),TextType.Electricity);
-            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent_2.ToString("F1"),TextType.Electricity);
-            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent_2.ToString("F1"),TextType.Electricity);
-            SetText(carPos,data.DC_Pos_2.ToString("F"),TextType.Meter);
-            SetText(rotationAngle,data.SLEW_Angle_2.ToString("F"),TextType.Angle);
-            SetText(upAngle,data.Luff_Angle_2.ToString("F"),TextType.Angle);
+            SetText(carElectricity,data.LargeCarElectricCurrent_2.ToString("F2"),TextType.Electricity);
+            SetText(rotationElectricity,data.RotaryElectricCurrent_2.ToString("F2"),TextType.Electricity);
+            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent_2.ToString("F2"),TextType.Electricity);
+            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent_2.ToString("F2"),TextType.Electricity);
+            SetText(carPos,data.DC_Pos_2.ToString("F2"),TextType.Meter);
+            SetText(rotationAngle,data.SLEW_Angle_2.ToString("F2"),TextType.Angle);
+            SetText(upAngle,data.Luff_Angle_2.ToString("F2"),TextType.Angle);
             
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
@@ -373,7 +373,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 carFastBtn.SetSelectState(false);
                 DataManager.Instance.InsertHistoryLogMc("大车行走慢速", GameDataManager.Instance.GetUserName(), machine);
                 break;
-            case COMMAND_NAME.TRAVEK_SPEED_FAST:
+            case COMMAND_NAME.TRAVEL_SPEED_FAST:
                 carSlowBtn.SetSelectState(false);
                 carFastBtn.SetSelectState(true);
                 DataManager.Instance.InsertHistoryLogMc("大车行走快速", GameDataManager.Instance.GetUserName(), machine);

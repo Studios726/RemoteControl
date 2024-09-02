@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MachineMove : MonoBehaviour
@@ -9,6 +10,8 @@ public class MachineMove : MonoBehaviour
    //public Vector3 initialPoint;
    public Transform rotationGo_z;
     public Transform rotationGo_y;
+
+    public TMP_Text errorText;
     //public float curPercentage;
 
     //public void UpdatePosAndRotaion(float percentage,float rotAngleY,float rotAngleZ)
@@ -28,6 +31,19 @@ public class MachineMove : MonoBehaviour
         transform.localPosition= new Vector3(meter, transform.localPosition.y, transform.localPosition.z);
     }
 
+    public void UpdateErrorText(string error)
+    {
+        if (error==errorText.text)
+        {
+            return;
+        }
+
+        if (errorText.gameObject.activeSelf==false)
+        {
+            errorText.gameObject.SetActive(true);
+        }
+        errorText.text = error;
+    }
    //private void Update()
    //{
    //   if (Input.GetKeyDown(KeyCode.U))

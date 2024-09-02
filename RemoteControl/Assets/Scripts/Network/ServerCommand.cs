@@ -228,7 +228,7 @@ public enum COMMAND_NAME
     /// <summary>
     /// 大车行走快速
     /// </summary>
-    TRAVEK_SPEED_FAST
+    TRAVEL_SPEED_FAST
     
     
     

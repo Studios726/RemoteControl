@@ -121,15 +121,15 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
     {
         AngleCurrentValueData angleCurrentValueData = new AngleCurrentValueData();
         angleCurrentValueData.cabAngleStr = GetText("0","0");
-        angleCurrentValueData.slewingAngleStr = GetText(data.SLEW_Angle.ToString("F1"),data.SLEW_Angle_2.ToString("F1"));
-        angleCurrentValueData.pitchAngleStr = GetText(data.Luff_Angle.ToString("F1"),data.Luff_Angle_2.ToString("F1"));
-        angleCurrentValueData.trolleyPositionStr = GetText(data.DC_Pos.ToString("F1"), data.DC_Pos_2.ToString("F1"));
+        angleCurrentValueData.slewingAngleStr = GetText(data.SLEW_Angle.ToString("F2"),data.SLEW_Angle_2.ToString("F2"));
+        angleCurrentValueData.pitchAngleStr = GetText(data.Luff_Angle.ToString("F2"),data.Luff_Angle_2.ToString("F2"));
+        angleCurrentValueData.trolleyPositionStr = GetText(data.DC_Pos.ToString("F2"), data.DC_Pos_2.ToString("F2"));
         angleCurrentValueData.twoMachineDistanceStr = GetText("0","0");
         angleCurrentValueData.diversionBaffleStr = GetText("0","0");
-        angleCurrentValueData.slewingCurrentStr = GetText(data.DC_Pos.ToString("F1"), data.DC_Pos_2.ToString("F1"));
-        angleCurrentValueData.suspendedGelCurrentStr = GetText(data.SuspensionBeltElectricCurrent.ToString("F1"),data.SuspensionBeltElectricCurrent_2.ToString("F1"));
-        angleCurrentValueData.trolleyCurrentStr = GetText(data.LargeCarElectricCurrent.ToString("F1"), data.LargeCarElectricCurrent_2.ToString("F1"));
-        angleCurrentValueData.bucketWheelCurrentStr = GetText(data.BucketWheelElectricCurrent.ToString("F1"), data.BucketWheelElectricCurrent_2.ToString("F1"));
+        angleCurrentValueData.slewingCurrentStr = GetText(data.DC_Pos.ToString("F2"), data.DC_Pos_2.ToString("F2"));
+        angleCurrentValueData.suspendedGelCurrentStr = GetText(data.SuspensionBeltElectricCurrent.ToString("F2"),data.SuspensionBeltElectricCurrent_2.ToString("F2"));
+        angleCurrentValueData.trolleyCurrentStr = GetText(data.LargeCarElectricCurrent.ToString("F2"), data.LargeCarElectricCurrent_2.ToString("F2"));
+        angleCurrentValueData.bucketWheelCurrentStr = GetText(data.BucketWheelElectricCurrent.ToString("F2"), data.BucketWheelElectricCurrent_2.ToString("F2"));
         AngleCurrentValueItem?.UpdateData(angleCurrentValueData);
     }
     //变幅机构

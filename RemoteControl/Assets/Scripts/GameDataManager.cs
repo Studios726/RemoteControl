@@ -8,6 +8,7 @@ using RemoteControl;
 using RemoteControl.Event;
 using ShangHaiPro;
 using ShenYangRemoteSystem.Subclass;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -78,6 +79,7 @@ public class GameDataManager : Singleton<GameDataManager>
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
         UpdateDirectionBucketWheel();
         UpdateDirectionBucketWheelStackerReclaimer();
+        UpdateMachineWarning();
     }
 
     public void SetScaReportAndDem(SendDataReportAndDEM sendDataReportAndDEM)
@@ -144,6 +146,59 @@ public class GameDataManager : Singleton<GameDataManager>
         }
     }
 
+    public void UpdateMachineWarning()
+    {
+        if (machineMove_1)
+        {
+            string error = "";
+            error = _systemVariables.LargeCarForwardLimit ? error + "大车前进限位\n" : error;
+            error = _systemVariables.LargeCarReverseLimit ? error + "大车后退限位\n" : error;
+            error = _systemVariables.LargeCarForwardExtremeLimit ? error + "大车前进极限\n" : error;
+            error = _systemVariables.LargeCarReverseExtremeLimit ? error + "大车后退极限\n" : error;
+
+            error = _systemVariables.RotaryLeftTurnLimit ? error + "回转左转限位\n" : error;
+            error = _systemVariables.RotaryRightTurnLimit ? error + "回转右转限位\n" : error;
+            error = _systemVariables.RotaryLeftTurnExtremeLimit ? error + "回转左转极限\n" : error;
+            error = _systemVariables.RotaryRightTurnExtremeLimit ? error + "回转右转极限\n" : error;
+
+            error = _systemVariables.VariableAmplitudeUpperLimit ? error + "变幅上仰限位\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerLimit ? error + "变幅下附限位\n" : error;
+            error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "变幅上仰极限\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下附极限\n" : error;
+
+            if (error!="")
+            {
+                machineMove_1.UpdateErrorText(error);
+            }
+          
+        }
+
+        if (machineMove_2)
+        {
+            string error = "";
+            error = _systemVariables.LargeCarForwardLimit_2 ? error + "大车前进限位\n" : error;
+            error = _systemVariables.LargeCarReverseLimit_2 ? error + "大车后退限位\n" : error;
+            error = _systemVariables.LargeCarForwardExtremeLimit_2 ? error + "大车前进极限\n" : error;
+            error = _systemVariables.LargeCarReverseExtremeLimit_2 ? error + "大车后退极限\n" : error;
+
+            error = _systemVariables.RotaryLeftTurnLimit_2 ? error + "回转左转限位\n" : error;
+            error = _systemVariables.RotaryRightTurnLimit_2 ? error + "回转右转限位\n" : error;
+            error = _systemVariables.RotaryLeftTurnExtremeLimit_2 ? error + "回转左转极限\n" : error;
+            error = _systemVariables.RotaryRightTurnExtremeLimit_2 ? error + "回转右转极限\n" : error;
+
+            error = _systemVariables.VariableAmplitudeUpperLimit_2 ? error + "变幅上仰限位\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerLimit_2 ? error + "变幅下附限位\n" : error;
+            error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "变幅上仰极限\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下附极限\n" : error;
+
+            if (error!="")
+            {
+                machineMove_2.UpdateErrorText(error);
+            }
+            
+        }
+    }
+
     public void UpdateDirectionBucketWheel()
     {
         ModelDirection[] direction_2 = new ModelDirection[2];
@@ -152,7 +207,8 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             //大车前进
             direction_2[index++] = ModelDirection.Forward;
-        }else if (_systemVariables.LargeCarReverseCommand_2)
+        }
+        else if (_systemVariables.LargeCarReverseCommand_2)
         {
             //大车后退
             direction_2[index++] = ModelDirection.Backward;
@@ -161,12 +217,13 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             direction_2[index++] = ModelDirection.FbStop;
         }
-        
+
         if (_systemVariables.RotaryLeftTurnCommand_2)
         {
             //大车左转
             direction_2[index++] = ModelDirection.Left;
-        }else if (_systemVariables.RotaryRightTurnCommand_2)
+        }
+        else if (_systemVariables.RotaryRightTurnCommand_2)
         {
             //大车右转
             direction_2[index++] = ModelDirection.Right;
@@ -175,8 +232,11 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             direction_2[index++] = ModelDirection.LrStop;
         }
-        EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection,null,new UpdateModelDirectionEventArgs(direction_2,Machine.BucketWheel));
+
+        EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection, null,
+            new UpdateModelDirectionEventArgs(direction_2, Machine.BucketWheel));
     }
+
     public void UpdateDirectionBucketWheelStackerReclaimer()
     {
         ModelDirection[] direction = new ModelDirection[2];
@@ -185,7 +245,8 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             //大车前进
             direction[index++] = ModelDirection.Forward;
-        }else if (_systemVariables.LargeCarReverseCommand)
+        }
+        else if (_systemVariables.LargeCarReverseCommand)
         {
             //大车后退
             direction[index++] = ModelDirection.Backward;
@@ -194,12 +255,13 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             direction[index++] = ModelDirection.FbStop;
         }
-        
+
         if (_systemVariables.RotaryLeftTurnCommand)
         {
             //大车左转
             direction[index++] = ModelDirection.Left;
-        }else if (_systemVariables.RotaryRightTurnCommand)
+        }
+        else if (_systemVariables.RotaryRightTurnCommand)
         {
             //大车右转
             direction[index++] = ModelDirection.Right;
@@ -208,8 +270,11 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             direction[index++] = ModelDirection.LrStop;
         }
-        EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection,null,new UpdateModelDirectionEventArgs(direction,Machine.BucketWheelStackerReclaimer));
+
+        EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection, null,
+            new UpdateModelDirectionEventArgs(direction, Machine.BucketWheelStackerReclaimer));
     }
+
     public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,
         GameObject model = null)
     {

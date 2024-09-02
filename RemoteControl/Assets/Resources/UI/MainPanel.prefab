@@ -1877,8 +1877,8 @@ MonoBehaviour:
   stopTakeMaterBtn: {fileID: 7119131938566029048}
   carElectricity: {fileID: 2268031397601747786}
   carPos: {fileID: 8450960856820579151}
-  carFastBtn: {fileID: 4243426729934679546}
-  carSlowBtn: {fileID: 979910881980741103}
+  carFastBtn: {fileID: 979910881980741103}
+  carSlowBtn: {fileID: 4243426729934679546}
   carStopBtn: {fileID: 8066744405173631568}
   carBackBtn: {fileID: 5131083634053392576}
   carForwardBtn: {fileID: 7011305257081002170}
@@ -27114,7 +27114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.078431375, g: 0.18039216, b: 0.27450982, a: 1}
+  m_Color: {r: 0.078431375, g: 0.18039216, b: 0.27450982, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -30434,7 +30434,7 @@ GameObject:
   - component: {fileID: 5287351680854734181}
   - component: {fileID: 4243426729934679546}
   m_Layer: 5
-  m_Name: fastBtn
+  m_Name: slowBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32781,7 +32781,7 @@ GameObject:
   - component: {fileID: 9069004573234709767}
   - component: {fileID: 979910881980741103}
   m_Layer: 5
-  m_Name: slowBtn
+  m_Name: fastBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46521,7 +46521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.078431375, g: 0.18039216, b: 0.27450982, a: 1}
+  m_Color: {r: 0.078431375, g: 0.18039216, b: 0.27450982, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
