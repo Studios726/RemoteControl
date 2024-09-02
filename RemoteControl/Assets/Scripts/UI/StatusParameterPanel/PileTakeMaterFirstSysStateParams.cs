@@ -120,6 +120,16 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
     public void UpdateAngleCurrentValue(SystemVariables data)
     {
         AngleCurrentValueData angleCurrentValueData = new AngleCurrentValueData();
+        angleCurrentValueData.cabAngleStr = GetText("0","0");
+        angleCurrentValueData.slewingAngleStr = GetText(data.SLEW_Angle.ToString("F1"),data.SLEW_Angle_2.ToString("F1"));
+        angleCurrentValueData.pitchAngleStr = GetText(data.Luff_Angle.ToString("F1"),data.Luff_Angle_2.ToString("F1"));
+        angleCurrentValueData.trolleyPositionStr = GetText(data.DC_Pos.ToString("F1"), data.DC_Pos_2.ToString("F1"));
+        angleCurrentValueData.twoMachineDistanceStr = GetText("0","0");
+        angleCurrentValueData.diversionBaffleStr = GetText("0","0");
+        angleCurrentValueData.slewingCurrentStr = GetText(data.DC_Pos.ToString("F1"), data.DC_Pos_2.ToString("F1"));
+        angleCurrentValueData.suspendedGelCurrentStr = GetText(data.SuspensionBeltElectricCurrent.ToString("F1"),data.SuspensionBeltElectricCurrent_2.ToString("F1"));
+        angleCurrentValueData.trolleyCurrentStr = GetText(data.LargeCarElectricCurrent.ToString("F1"), data.LargeCarElectricCurrent_2.ToString("F1"));
+        angleCurrentValueData.bucketWheelCurrentStr = GetText(data.BucketWheelElectricCurrent.ToString("F1"), data.BucketWheelElectricCurrent_2.ToString("F1"));
         AngleCurrentValueItem?.UpdateData(angleCurrentValueData);
     }
     //变幅机构
@@ -230,6 +240,20 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         CarMoveOrganizationItem?.UpdateData(carMoveOrganizationData,data.D1PLC1CommunicationState);
     }
 
+    public string GetText(string machine1Str, string machine2Str)
+    {
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            return machine1Str;
+        }else if (machine==Machine.BucketWheel)
+        {
+            return machine2Str;
+        }
+        else
+        {
+            return "";
+        }
+    }
     public bool GetToggleState(bool machine1,bool machine2)
     {
         if (machine==Machine.BucketWheelStackerReclaimer)

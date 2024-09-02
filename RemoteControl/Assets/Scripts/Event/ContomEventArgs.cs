@@ -19,3 +19,14 @@ public class MessageEventArgs:EventArgs
         this.socketTpe = type;
     }
 }
+
+public class UpdateModelDirectionEventArgs:EventArgs
+{
+    public ModelDirection[] Direction;
+    public Machine Machine;
+    public UpdateModelDirectionEventArgs(ModelDirection[] direction,Machine machine)
+    {
+        Direction = direction;
+        Machine = machine;
+    }
+}

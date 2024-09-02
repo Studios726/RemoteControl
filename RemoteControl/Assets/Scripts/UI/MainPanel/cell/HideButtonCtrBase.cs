@@ -228,7 +228,8 @@ public class HideButtonCtrBase : PanelBase
             }
             impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed==false);
             impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed);
-            // lightCloseBrakeBtn.SetSystemState(data.);
+            lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed);
+            lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed==false);
             systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich==false);
             systemLockBtn.SetSystemState(data.SR1_Interlock_Swich);
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning==false);
@@ -241,6 +242,7 @@ public class HideButtonCtrBase : PanelBase
             draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false);
             heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning);
             heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning==false);
+            
             if (data.SuspensionBeltMaterialUnloadingRunningContact==false &&data.SuspensionBeltMaterialLoadingRunningContact==false)
             {
                 cantileverTakeMaterStopBtn.SetSystemState(true);
@@ -264,14 +266,17 @@ public class HideButtonCtrBase : PanelBase
             if (data.LeftClampRelaxLimit_2==true && data.RightClampRelaxLimit_2==true)
             {
                 disengageClampBtn.SetSystemState(true);
+                engageClampBtn.SetSystemState(false);
             }
             else
             {
                 engageClampBtn.SetSystemState(true);
+                disengageClampBtn.SetSystemState(false);
             }
             impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2==false);
             impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2);
-            // lightCloseBrakeBtn.SetSystemState(data.);
+            lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed_2);
+            lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed_2==false);
             // systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich==false);
             // systemLockBtn.SetSystemState(data.SR1_Interlock_Swich);
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false);

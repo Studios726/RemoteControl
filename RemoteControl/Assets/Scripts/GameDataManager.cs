@@ -76,6 +76,8 @@ public class GameDataManager : Singleton<GameDataManager>
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
         UpdateMachinePosAndRot();
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
+        UpdateDirectionBucketWheel();
+        UpdateDirectionBucketWheelStackerReclaimer();
     }
 
     public void SetScaReportAndDem(SendDataReportAndDEM sendDataReportAndDEM)
@@ -142,6 +144,72 @@ public class GameDataManager : Singleton<GameDataManager>
         }
     }
 
+    public void UpdateDirectionBucketWheel()
+    {
+        ModelDirection[] direction_2 = new ModelDirection[2];
+        int index = 0;
+        if (_systemVariables.LargeCarForwardCommand_2)
+        {
+            //大车前进
+            direction_2[index++] = ModelDirection.Forward;
+        }else if (_systemVariables.LargeCarReverseCommand_2)
+        {
+            //大车后退
+            direction_2[index++] = ModelDirection.Backward;
+        }
+        else
+        {
+            direction_2[index++] = ModelDirection.FbStop;
+        }
+        
+        if (_systemVariables.RotaryLeftTurnCommand_2)
+        {
+            //大车左转
+            direction_2[index++] = ModelDirection.Left;
+        }else if (_systemVariables.RotaryRightTurnCommand_2)
+        {
+            //大车右转
+            direction_2[index++] = ModelDirection.Right;
+        }
+        else
+        {
+            direction_2[index++] = ModelDirection.LrStop;
+        }
+        EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection,null,new UpdateModelDirectionEventArgs(direction_2,Machine.BucketWheel));
+    }
+    public void UpdateDirectionBucketWheelStackerReclaimer()
+    {
+        ModelDirection[] direction = new ModelDirection[2];
+        int index = 0;
+        if (_systemVariables.LargeCarForwardCommand)
+        {
+            //大车前进
+            direction[index++] = ModelDirection.Forward;
+        }else if (_systemVariables.LargeCarReverseCommand)
+        {
+            //大车后退
+            direction[index++] = ModelDirection.Backward;
+        }
+        else
+        {
+            direction[index++] = ModelDirection.FbStop;
+        }
+        
+        if (_systemVariables.RotaryLeftTurnCommand)
+        {
+            //大车左转
+            direction[index++] = ModelDirection.Left;
+        }else if (_systemVariables.RotaryRightTurnCommand)
+        {
+            //大车右转
+            direction[index++] = ModelDirection.Right;
+        }
+        else
+        {
+            direction[index++] = ModelDirection.LrStop;
+        }
+        EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection,null,new UpdateModelDirectionEventArgs(direction,Machine.BucketWheelStackerReclaimer));
+    }
     public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,
         GameObject model = null)
     {

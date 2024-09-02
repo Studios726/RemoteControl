@@ -221,6 +221,14 @@ public enum COMMAND_NAME
     /// 变幅风机停止
     /// </summary>
     LUFF_FAN_STOP,
+    /// <summary>
+    /// 大车行走慢速
+    /// </summary>
+    TRAVEL_SPEED_SLOW,
+    /// <summary>
+    /// 大车行走快速
+    /// </summary>
+    TRAVEK_SPEED_FAST
     
     
     

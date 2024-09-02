@@ -414,7 +414,8 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
-
+        //9.1
+        public bool LightPowerClosed { get; set; }
 
 
 
@@ -1098,6 +1099,26 @@ namespace ShenYangRemoteSystem.Subclass
         public bool SR1_Vibrator_Stop_SB { get; set; }
 
 
+        //8.30
+        public bool SR1_LUFF_HART_START_SB { get; set; }
+        public bool SR1_LUFF_HART_STOP_SB { get; set; }
+        public bool SR1_LUFF_FAN_START_SB { get; set; }
+        public bool SR1_LUFF_FAN_STOP_SB { get; set; }
+
+
+        //9.1
+        public bool SR1_Travel_Speed_SB { get; set; }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1528,7 +1549,8 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
-
+        //9.1
+        public bool LightPowerClosed_2 { get; set; }
 
 
 
@@ -2410,6 +2432,27 @@ namespace ShenYangRemoteSystem.Subclass
         public float Stack_Luff_03_SP_2 { get; set; }
         public float Stack_Luff_04_SP_2 { get; set; }
         public bool Encoder_BY2_2 { get; set; }
+
+
+
+
+        //8.30
+        public bool SR1_LUFF_HART_START_SB_2 { get; set; }
+        public bool SR1_LUFF_HART_STOP_SB_2 { get; set; }
+        public bool SR1_LUFF_FAN_START_SB_2 { get; set; }
+        public bool SR1_LUFF_FAN_STOP_SB_2 { get; set; }
+
+
+
+
+
+        //9.1
+        public bool SR1_Travel_Speed_SB_2 { get; set; }
+
+
+
+
+
 
 
     }
