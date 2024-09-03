@@ -6,63 +6,48 @@ using UnityEngine;
 
 public class MachineMove : MonoBehaviour
 {
-   //public float distance;
-   //public Vector3 initialPoint;
-   public Transform rotationGo_z;
+    public Transform rotationGo_z;
     public Transform rotationGo_y;
-
+    public Transform currentCanvasTransform;
     public TMP_Text errorText;
-    //public float curPercentage;
+    public Transform mainCameraTransform;
 
-    //public void UpdatePosAndRotaion(float percentage,float rotAngleY,float rotAngleZ)
-    //{
-    //   percentage = percentage > 1 ? 1 :percentage;
-    //   curPercentage = percentage;
-    //   Vector3 curPos = initialPoint;
-    //   curPos.x=curPos.x + distance * percentage;
-    //   transform.localPosition = curPos;
-    //   rotationGo.localRotation=Quaternion.Euler(new Vector3(0,rotAngleY,rotAngleZ));
-    // }
-    public void UpdatePosAndRotaionByMeter(float meter, float rotAngleY, float rotAngleZ) {
+    private void Start()
+    {
+        mainCameraTransform = Camera.main?.transform;
+    }
+
+    public void UpdatePosAndRotaionByMeter(float meter, float rotAngleY, float rotAngleZ)
+    {
         rotationGo_z.localRotation = Quaternion.Euler(new Vector3(0, 0, rotAngleY));
         rotationGo_y.localRotation = Quaternion.Euler(new Vector3(0, rotAngleZ, 0));
 
 
-        transform.localPosition= new Vector3(meter, transform.localPosition.y, transform.localPosition.z);
+        transform.localPosition = new Vector3(meter, transform.localPosition.y, transform.localPosition.z);
     }
 
     public void UpdateErrorText(string error)
     {
-        if (error==errorText.text)
+        if (error == errorText.text)
         {
             return;
         }
 
-        if (errorText.gameObject.activeSelf==false)
+        if (errorText.gameObject.activeSelf == false)
         {
             errorText.gameObject.SetActive(true);
         }
+
         errorText.text = error;
     }
-   //private void Update()
-   //{
-   //   if (Input.GetKeyDown(KeyCode.U))
-   //   {
-   //      UpdatePosAndRotaion(0.3f, 20, 0);
-   //   }else if (Input.GetKeyDown(KeyCode.I))
-   //   {
-   //      UpdatePosAndRotaion(0.5f, 40, 0);
-   //   }
-   //   else if (Input.GetKeyDown(KeyCode.O))
-   //   {
-   //      UpdatePosAndRotaion(0.7f, 10, 10);
-   //   }
-   //   else if (Input.GetKeyDown(KeyCode.P))
-   //   {
-   //      UpdatePosAndRotaion(1, 0, 0);
-   //   }
 
-   //     curPercentage = curPercentage + Time.deltaTime*0.01f;
-   //     UpdatePosAndRotaion(curPercentage, 0, 0);
-   // }
+    private void Update()
+    {
+        if (errorText.text != "" && mainCameraTransform != null)
+        {
+            currentCanvasTransform.LookAt(
+                currentCanvasTransform.position + mainCameraTransform.rotation * Vector3.forward,
+                mainCameraTransform.rotation * Vector3.up);
+        }
+    }
 }

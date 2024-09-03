@@ -41680,7 +41680,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationGo_z: {fileID: 8676848940633653747}
   rotationGo_y: {fileID: 4619709880654436007}
+  currentCanvasTransform: {fileID: 7650171982693322476}
   errorText: {fileID: 3217696330442256287}
+  mainCameraTransform: {fileID: 0}
 --- !u!1 &3723894181797337067
 GameObject:
   m_ObjectHideFlags: 0
@@ -99303,9 +99305,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8654435239851183504}
     m_Modifications:
+    - target: {fileID: 5280659421407139326, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5520357633860589377, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7261045956385160990, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7794481949590192708, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_Name
@@ -99313,15 +99323,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7821523375767101239, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.086
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 7821523375767101239, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.007
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7821523375767101239, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.282
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 7821523375767101239, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_LocalRotation.w
@@ -99372,3 +99382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &7650171982693322476 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1136588145438536845, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
+  m_PrefabInstance: {fileID: 7345131331788765793}
+  m_PrefabAsset: {fileID: 0}
