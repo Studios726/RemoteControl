@@ -275,6 +275,16 @@ public class GameDataManager : Singleton<GameDataManager>
             new UpdateModelDirectionEventArgs(direction, Machine.BucketWheelStackerReclaimer));
     }
 
+    public async Task DeSerializeScaJson(string json)
+    {
+        SendDataReportAndDEM cursendDataReportAndDem=new SendDataReportAndDEM();
+        await Task.Run((() =>
+        {
+            cursendDataReportAndDem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
+        }));
+        RecordLocalSCAData(json);
+        SetScaReportAndDem(cursendDataReportAndDem);
+    }
     public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,
         GameObject model = null)
     {

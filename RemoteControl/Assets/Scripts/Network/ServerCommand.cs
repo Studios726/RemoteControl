@@ -232,6 +232,7 @@ public enum COMMAND_NAME
     
     
     
+    
         
 }
 public static class ServerCommandDataType

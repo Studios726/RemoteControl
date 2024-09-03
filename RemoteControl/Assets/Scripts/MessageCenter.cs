@@ -7,6 +7,8 @@ using UnityEngine.Networking.PlayerConnection;
 using System.IO;
 using System.Text;
 using System.IO.Compression;
+using System.Threading;
+using Newtonsoft.Json;
 using ShangHaiPro;
 
 public enum MessageType
@@ -105,10 +107,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 string json = Decompress(message);
-                // Debug.LogError($"收到数据 {socketType} {json}");
-                SendDataReportAndDEM  sendDataReportAndDEM = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
-                GameDataManager.Instance.RecordLocalSCAData(json);
-                GameDataManager.Instance.SetScaReportAndDem(sendDataReportAndDEM);
+                GameDataManager.Instance.DeSerializeScaJson(json);
             }
             catch (Exception)
             {
