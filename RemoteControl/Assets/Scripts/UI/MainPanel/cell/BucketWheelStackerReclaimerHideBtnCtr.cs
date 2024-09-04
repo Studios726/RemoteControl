@@ -30,117 +30,143 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         base.Start();
         AddOnClickListener(pileMaterBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.BELT_STACK,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.BELT_STACK);
-            pileMaterBtn.SetSelectState(true);
-            cantileverTakeMaterStartBtn.SetSelectState(false);
-            cantileverTakeMaterStopBtn.SetSelectState(false);
+                pileMaterBtn.SetSelectState(true);
+                cantileverTakeMaterStartBtn.SetSelectState(false);
+                cantileverTakeMaterStopBtn.SetSelectState(false);
+            }));
         });
         
         AddOnClickListener(cantileverTakeMaterStartBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.BELT_TAKE,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.BELT_TAKE);
-            pileMaterBtn.SetSelectState(false);
-            cantileverTakeMaterStartBtn.SetSelectState(true);
-            cantileverTakeMaterStopBtn.SetSelectState(false);
+                pileMaterBtn.SetSelectState(false);
+                cantileverTakeMaterStartBtn.SetSelectState(true);
+                cantileverTakeMaterStopBtn.SetSelectState(false);
+            }));
+          
         });
         
         AddOnClickListener(cantileverTakeMaterStopBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.BELT_STOP,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.BELT_STOP);
-            pileMaterBtn.SetSelectState(false);
-            cantileverTakeMaterStartBtn.SetSelectState(false);
-            cantileverTakeMaterStopBtn.SetSelectState(true);
+                pileMaterBtn.SetSelectState(false);
+                cantileverTakeMaterStartBtn.SetSelectState(false);
+                cantileverTakeMaterStopBtn.SetSelectState(true);
+            }));
+      
         });
         
         AddOnClickListener(pileMaterUpBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.XBTB_UP_BUTTON,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.XBTB_UP_BUTTON);
-            pileMaterUpBtn.SetSelectState(true);
-            takeMaterDownBtn.SetSelectState(false);
-            takeMaterStopBtn.SetSelectState(false);
+                pileMaterUpBtn.SetSelectState(true);
+                takeMaterDownBtn.SetSelectState(false);
+                takeMaterStopBtn.SetSelectState(false);
+            }));
+         
         });
         
         AddOnClickListener(takeMaterDownBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.XBTB_DOWN_BUTTON,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.XBTB_DOWN_BUTTON);
-            pileMaterUpBtn.SetSelectState(false);
-            takeMaterDownBtn.SetSelectState(true);
-            takeMaterStopBtn.SetSelectState(false);
+                pileMaterUpBtn.SetSelectState(false);
+                takeMaterDownBtn.SetSelectState(true);
+                takeMaterStopBtn.SetSelectState(false);
+            }));
+     
         });
         
         AddOnClickListener(takeMaterStopBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.XBTB_STOP_BUTTON,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.XBTB_STOP_BUTTON);
-            pileMaterUpBtn.SetSelectState(false);
-            takeMaterDownBtn.SetSelectState(false);
-            takeMaterStopBtn.SetSelectState(true);
+                pileMaterUpBtn.SetSelectState(false);
+                takeMaterDownBtn.SetSelectState(false);
+                takeMaterStopBtn.SetSelectState(true);
+            }));
+       
         });
         
         AddOnClickListener(damBoardPileMaterDownBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.SKRIT_STACK_START,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.SKRIT_STACK_START);
-            damBoardPileMaterDownBtn.SetSelectState(true);
-            damBoardPileMaterUpBtn.SetSelectState(false);
-            damBoardPileMaterStopBtn.SetSelectState(false);
+                damBoardPileMaterDownBtn.SetSelectState(true);
+                damBoardPileMaterUpBtn.SetSelectState(false);
+                damBoardPileMaterStopBtn.SetSelectState(false);
+            }));
+        
         });
         AddOnClickListener(damBoardPileMaterUpBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.SKRIT_TAKE_START,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.SKRIT_TAKE_START);
-            damBoardPileMaterUpBtn.SetSelectState(true);
-            damBoardPileMaterDownBtn.SetSelectState(false);
-            damBoardPileMaterStopBtn.SetSelectState(false);
+                damBoardPileMaterUpBtn.SetSelectState(true);
+                damBoardPileMaterDownBtn.SetSelectState(false);
+                damBoardPileMaterStopBtn.SetSelectState(false);
+            }));
+          
         });
         AddOnClickListener(damBoardPileMaterStopBtn, () =>
         {
-            if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
+            // {
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            //     return;
+            // }
+            SendMessageToServer(COMMAND_NAME.SKRIT_TAKE_STOP,(() =>
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
-                return;
-            }
-            SendMessageToServer(COMMAND_NAME.SKRIT_TAKE_STOP);
-            damBoardPileMaterStopBtn.SetSelectState(true);
-            damBoardPileMaterDownBtn.SetSelectState(false);
-            damBoardPileMaterUpBtn.SetSelectState(false);
+                damBoardPileMaterStopBtn.SetSelectState(true);
+                damBoardPileMaterDownBtn.SetSelectState(false);
+                damBoardPileMaterUpBtn.SetSelectState(false);
+            }));
+         
         });
     }
 

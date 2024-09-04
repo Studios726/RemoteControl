@@ -177,6 +177,8 @@ namespace RemoteControl
             Debug.Log("----------------------Success " + connectEventArgs.type);
             DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
                 Machine.BucketWheelStackerReclaimer);
+            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
+                Machine.BucketWheel);
         }
 
         public void ConnectionFail(object o, EventArgs eventArgs)
@@ -192,7 +194,7 @@ namespace RemoteControl
                 }
 
                 GameDataManager.Instance.RcConnectionState = false;
-                des = "RC 断开";
+                des = "RC 连接失败";
             }
             else if (connectEventArgs.type == SocketType.TaskPC)
             {
@@ -201,15 +203,17 @@ namespace RemoteControl
                     timerPc.Cancel();
                     timerPc = null;
                 }
-                des = "PC 断开";
+                des = "PC 连接失败";
             }else if (connectEventArgs.type == SocketType.SCA)
             {
-                des = "SCA 断开";
+                des = "SCA 连接失败";
             }
 
             Debug.Log("----------------------Fail " + connectEventArgs.type);
             DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
                 Machine.BucketWheelStackerReclaimer);
+            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
+                Machine.BucketWheel);
         }
 
         public void ReConnect(object o, EventArgs eventArgs)
@@ -230,6 +234,8 @@ namespace RemoteControl
 
             DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
                 Machine.BucketWheelStackerReclaimer);
+            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
+                Machine.BucketWheel);
         }
         public void MessageReveive(object o, EventArgs eventArgs)
         {

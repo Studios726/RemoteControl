@@ -310,13 +310,128 @@ public class HideButtonCtrBase : PanelBase
     {
         Debug.Log($"message { machine }   {message}");
     }
-    public void SendMessageToServer(COMMAND_NAME command)
+    public void SendMessageToServer(COMMAND_NAME command,Action action=null)
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
             return;
         }
+
+        string des = "";
+        switch (command)
+        {
+            case  COMMAND_NAME.RAIL_RELAX:
+                des = "是否确认夹轨器放松?";
+                    break;
+            case  COMMAND_NAME.RAIL_CLAMP: 
+                des = "是否确认夹轨器夹紧?";
+                break;
+            case  COMMAND_NAME.SUPPLYPOWER_ON:
+                des = "是否确认动力电源合闸?";
+                break;
+            case  COMMAND_NAME.SUPPLYPOWER_OFF:   
+                des = "是否确认动力电源分闸?";
+                break;
+            case  COMMAND_NAME.CONTROLPOWER_ON:   
+                des = "是否确认控制电源合闸?";
+                break;
+            case  COMMAND_NAME.CONTROLPOWER_OFF:   
+                des = "是否确认控制电源分闸?";
+                break;
+            case  COMMAND_NAME.BELT_TAKE:   
+                des = "是否确认悬臂皮带取料?";
+                break;
+            case  COMMAND_NAME.BELT_STACK: 
+                des = "是否确认悬臂皮带堆料?";
+                break;
+            case  COMMAND_NAME.BELT_STOP:  
+                des = "是否确认悬臂皮带停止?";
+                break;
+            case  COMMAND_NAME.BUCKET_START:  
+                des = "是否确认斗轮启动?";
+                break;
+            case  COMMAND_NAME.BUCKET_STOP: 
+                des = "是否确认斗轮停止?";
+                break;
+            case  COMMAND_NAME.LIGHTPOWER_ON:   
+                des = "是否确认照明合闸?";
+                break;
+            case  COMMAND_NAME.LIGHTPOWER_OFF:   
+                des = "是否确认照明分闸?";
+                break;
+            case  COMMAND_NAME.OILBUMP_ON:   
+                des = "是否确认主车油泵启动?";
+                break;
+            case  COMMAND_NAME.OILBUMP_OFF:   
+                des = "是否确认主车油泵关闭?";
+                break;
+            case  COMMAND_NAME.BELTTAKE_BUTTON:   
+                des = "是否确认取料开关?";
+                break;
+            case  COMMAND_NAME.BELTSTACK_BUTTON:  
+                des = "是否确认堆料开关?";
+                break;
+            case  COMMAND_NAME.BELTSSTOP_BUTTON:   
+                des = "是否确认堆取料停止开关?";
+                break;
+            case  COMMAND_NAME.SYSTEM_UNLOCK:   
+                des = "是否确认与系统解锁?";
+                break;
+            case  COMMAND_NAME.SYSTEM_LOCK:   
+                des = "是否确认与系统解锁?";
+                break;
+            case  COMMAND_NAME.BYPASS_BUTTON:   
+                des = "是否确认上位机旁路?";
+                break;
+            case  COMMAND_NAME.XBTB_UP_BUTTON:   
+                des = "是否确认悬臂头部导料槽抬起（堆料）?";
+                break;
+            case  COMMAND_NAME.XBTB_DOWN_BUTTON:   
+                des = "是否确认悬臂头部导料槽落下（取料）?";
+                break;
+            case  COMMAND_NAME.XBTB_STOP_BUTTON:   
+                des = "是否确认悬臂头部导料槽停止?";
+                break;
+            case  COMMAND_NAME.VIBRATOR_START:   
+                des = "是否确认振打器启动?";
+                break;
+            case  COMMAND_NAME.VIBRATOR_STOP:   
+                des = "是否确认振打器启动?";
+                break;
+            case  COMMAND_NAME.SKRIT_TAKE_START:   
+                des = "是否确认挡板取料变换启动?";
+                break;
+            case  COMMAND_NAME.SKRIT_STACK_START:   
+                des = "是否确认挡板堆料变换启动?";
+                break;
+            case  COMMAND_NAME.SKRIT_TAKE_STOP:   
+                des = "是否确认挡板分流变换停止?";
+                break;
+            case  COMMAND_NAME.LUFF_HART_START:   
+                des = "是否确认变幅油加热器启动?";
+                break;
+            case  COMMAND_NAME.LUFF_HART_STOP:   
+                des = "是否确认变幅油加热器停止?";
+                break;
+            case  COMMAND_NAME.LUFF_FAN_START:   
+                des = "是否确认变幅风机启动?";
+                break;
+            case  COMMAND_NAME.LUFF_FAN_STOP:   
+                des = "是否确认变幅风机停止?";
+                break;
+            default:
+                break;
+        }
+        UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(des,null,(() =>
+        {
+            action?.Invoke();
+            ConfirmSendMessageToServer(command);
+        })));
+    }
+
+    public void ConfirmSendMessageToServer(COMMAND_NAME command)
+    {
         string commandName=machine == Machine.BucketWheelStackerReclaimer ? command.ToString()+"_1" : command.ToString()+"_2";
         int dataInt = 0;
         Debug.Log($"message { machine }   {commandName}");

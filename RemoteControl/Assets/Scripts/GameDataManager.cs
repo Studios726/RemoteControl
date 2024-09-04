@@ -141,7 +141,7 @@ public class GameDataManager : Singleton<GameDataManager>
 
         if (machineMove_2)
         {
-            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2, SystemVariables.SLEW_Angle_2,
+            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2+64.34f, SystemVariables.SLEW_Angle_2,
                 -SystemVariables.Luff_Angle_2); //
         }
     }

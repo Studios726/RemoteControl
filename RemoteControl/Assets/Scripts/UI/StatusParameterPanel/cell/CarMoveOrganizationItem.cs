@@ -70,6 +70,7 @@ public struct CarMoveOrganizationData
     /// 后退极限
     /// </summary>
     public bool isReverseLimitExceedToggle;
+    public bool isTwoMachineCollisionAlarmToggle;
 }
 /// <summary>
 /// 大车行走机构
@@ -125,7 +126,10 @@ public class CarMoveOrganizationItem : StatusParmItemBase<CarMoveOrganizationDat
     /// 大车集中润滑堵油
     /// </summary>
     public ToggleDIY BlockedOilInBigVehicleCentralLubricationToggle;
-
+    /// <summary>
+    /// 两机防撞报警
+    /// </summary>
+    public  ToggleDIY TwoMachineCollisionAlarmToggle;
     /// <summary>
     /// 前进限位
     /// </summary>
@@ -158,7 +162,7 @@ public class CarMoveOrganizationItem : StatusParmItemBase<CarMoveOrganizationDat
         SetToggleState(BrakeFaultToggle, data.isBrakeFaultToggle,true,isConnect);
         SetToggleState(LowOilLevelInBigVehicleCentralLubricationToggle, data.isLowOilLevelInBigVehicleCentralLubricationToggle,true,isConnect);
         SetToggleState(BlockedOilInBigVehicleCentralLubricationToggle, data.isBlockedOilInBigVehicleCentralLubricationToggle,true,isConnect);
-
+        SetToggleState(TwoMachineCollisionAlarmToggle, data.isTwoMachineCollisionAlarmToggle, true, isConnect);
         SetToggleState(ForwardLimitToggle, data.isForwardLimitToggle,true,isConnect);
         SetToggleState(ForwardLimitExceedToggle, data.isForwardLimitExceedToggle,true,isConnect);
         SetToggleState(ReverseLimitToggle, data.isReverseLimitToggle,true,isConnect);

@@ -154,7 +154,7 @@ public class BucketWheelTaskBase : PanelBase
         {
             
         }
-        // Debug.Log($" commandName {commandName}");
+        Debug.Log($" commandName {commandName}");
         GameDataManager.Instance.SendServerCommandByName(commandName);
     }
     public virtual void SendTaskCommand(OperationType operationType)
@@ -173,15 +173,19 @@ public class BucketWheelTaskBase : PanelBase
         
         if (operationType==OperationType.START)
         {
+            DataManager.Instance.InsertHistoryLogMc("启动任务", GameDataManager.Instance.GetUserName(), machine);
             UpdateCurCtrMode(ref curTaskButtonCell,takeMaterStartBtn);
         }else if (operationType==OperationType.PAUSE)
         {
+            DataManager.Instance.InsertHistoryLogMc("暂停任务", GameDataManager.Instance.GetUserName(), machine);
             UpdateCurCtrMode(ref curTaskButtonCell,takeMaterStopBtn);
         }else if (operationType==OperationType.REVERSING)
         {
+            DataManager.Instance.InsertHistoryLogMc("任务换向", GameDataManager.Instance.GetUserName(), machine);
             UpdateCurCtrMode(ref curTaskButtonCell,takeMaterReversingBtn);
         }else if (operationType == OperationType.END)
         {
+            DataManager.Instance.InsertHistoryLogMc("任务结束", GameDataManager.Instance.GetUserName(), machine);
             UpdateCurCtrMode(ref curTaskButtonCell,takeMaterEndBtn);
         }
         Debug.Log($"message {machine} {operationType}");

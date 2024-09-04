@@ -237,6 +237,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         carMoveOrganizationData.isForwardLimitExceedToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarForwardExtremeLimit : data.LargeCarForwardExtremeLimit_2;
         carMoveOrganizationData.isReverseLimitToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarReverseLimit : data.LargeCarReverseLimit_2;
         carMoveOrganizationData.isReverseLimitExceedToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarReverseExtremeLimit : data.LargeCarReverseExtremeLimit_2;
+        carMoveOrganizationData.isTwoMachineCollisionAlarmToggle= machine == Machine.BucketWheelStackerReclaimer ? data.TwoMachineCollisionAlarm : data.TwoMachineCollisionAlarm_2;
         CarMoveOrganizationItem?.UpdateData(carMoveOrganizationData,data.D1PLC1CommunicationState);
     }
 

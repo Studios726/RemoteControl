@@ -232,6 +232,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             GetToggleState(data.RightAnchorLiftLimit, data.RightAnchorLiftLimit_2);
         railGrippingDeviceData.isRightRailClamperReleaseLimit =
             GetToggleState(data.RightClampRelaxLimit, data.RightClampRelaxLimit_2);
+        railGrippingDeviceData.isClampFault = GetToggleState(data.ClampFault, data.ClampFault_2);
         RailGrippingDeviceItem?.UpdateData(railGrippingDeviceData, data.D1PLC1CommunicationState);
     }
 

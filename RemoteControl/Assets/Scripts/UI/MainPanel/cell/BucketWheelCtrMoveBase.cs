@@ -200,9 +200,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     public virtual void Init()
     {
         // AddOnClickListener(takeResetBtn, (() =>SendMessageToServer("归零")));
-        // AddOnClickListener(aloneBtn, (() => SendMessageToServer("控制方式单动")));
-        // AddOnClickListener(togetherBtn, (() => SendMessageToServer("控制方式联动")));
-        // AddOnClickListener(automaticBtn, (() => SendMessageToServer("控制方式自动")));
+        AddOnClickListener(aloneBtn, (() => SendMessageToServer(COMMAND_NAME.MODE_A)));
+        AddOnClickListener(togetherBtn, (() => SendMessageToServer(COMMAND_NAME.MODE_B)));
+        AddOnClickListener(automaticBtn, (() => SendMessageToServer(COMMAND_NAME.MODE_C)));
         AddOnClickListener(takeMaterBtn, (() => SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON)));
         AddOnClickListener(stopTakeMaterBtn, (() =>SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON)));
         AddOnClickListener(carFastBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_FAST)));
@@ -229,7 +229,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(carPos,data.DC_Pos.ToString("F2"),TextType.Meter);
             SetText(rotationAngle,data.SLEW_Angle.ToString("F2"),TextType.Angle);
             SetText(upAngle,data.Luff_Angle.ToString("F2"),TextType.Angle);
-            
+            aloneBtn.SetSystemState(data.Single_Action);
+            togetherBtn.SetSystemState(data.Link_Action);
+            automaticBtn.SetSystemState(data.AUTO_MODE);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen);
 
@@ -276,7 +278,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(carPos,data.DC_Pos_2.ToString("F2"),TextType.Meter);
             SetText(rotationAngle,data.SLEW_Angle_2.ToString("F2"),TextType.Angle);
             SetText(upAngle,data.Luff_Angle_2.ToString("F2"),TextType.Angle);
-            
+            aloneBtn.SetSystemState(data.Single_Action_2);
+            togetherBtn.SetSystemState(data.Link_Action_2);
+            automaticBtn.SetSystemState(data.AUTO_MODE_2);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
             leftBtn.SetSystemState(data.RotaryLeftTurnCommand_2);
@@ -356,18 +360,18 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             case COMMAND_NAME.BELTSTACK_BUTTON:
                 DataManager.Instance.InsertHistoryLogMc("堆料开关", GameDataManager.Instance.GetUserName(), machine);
                 break;
-            // case "控制方式联动":
-            //     UpdateCurCtrMode(ref curCtrMode, togetherBtn);
-            //     //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
-            //     break;
-            // case "控制方式单动":
-            //     UpdateCurCtrMode(ref curCtrMode, aloneBtn);
-            //     //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
-            //     break;
-            // case COMMAND_NAME.MOVE_FORWARD:
-            //     UpdateCurCtrMode(ref curCtrMode, automaticBtn);
-            //     //command_name = machine == Machine.BucketWheelStackerReclaimer ? "MOVE_FORWARD_1" : "MOVE_FORWARD_2";
-            //     break;
+            case COMMAND_NAME.MODE_B:
+                UpdateCurCtrMode(ref curCtrMode, togetherBtn);
+                DataManager.Instance.InsertHistoryLogMc("联动", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.MODE_A:
+                UpdateCurCtrMode(ref curCtrMode, aloneBtn);
+                DataManager.Instance.InsertHistoryLogMc("单动", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.MODE_C:
+                UpdateCurCtrMode(ref curCtrMode, automaticBtn);
+                DataManager.Instance.InsertHistoryLogMc("自动", GameDataManager.Instance.GetUserName(), machine);
+                break;
             case COMMAND_NAME.TRAVEL_SPEED_SLOW:
                 carSlowBtn.SetSelectState(true);
                 carFastBtn.SetSelectState(false);

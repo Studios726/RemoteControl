@@ -14,7 +14,7 @@ public class AppLauncher : MonoBehaviour
     private void Awake()
     {
 
-        // Application.targetFrameRate = 60;
+        Application.targetFrameRate = 60;
         UIInit();
         _gameMain=this.gameObject.AddComponent<GameMain>();
         GameDataManager.Instance.GameMain = _gameMain;

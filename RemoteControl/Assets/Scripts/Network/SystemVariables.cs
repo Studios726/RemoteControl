@@ -1111,6 +1111,40 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
+        //9.2
+        public bool Single_Action { get; set; }
+        public bool Link_Action { get; set; }
+        public bool AUTO_MODE { get; set; }
+        public short MODE { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

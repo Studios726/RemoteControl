@@ -228,7 +228,19 @@ public enum COMMAND_NAME
     /// <summary>
     /// 大车行走快速
     /// </summary>
-    TRAVEL_SPEED_FAST
+    TRAVEL_SPEED_FAST,
+    /// <summary>
+    /// 单动
+    /// </summary>
+    MODE_A,
+    /// <summary>
+    /// 联动
+    /// </summary>
+    MODE_B,
+    /// <summary>
+    /// 自动
+    /// </summary>
+    MODE_C,
     
     
     

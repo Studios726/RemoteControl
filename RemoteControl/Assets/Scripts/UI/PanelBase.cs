@@ -13,5 +13,6 @@ public class PanelBase : MonoBehaviour
     public virtual void AddOnClickListener(Button btn, UnityAction action)
     {
         btn.onClick.AddListener(action);
+        // btn.OnPointerDown();
     }
 }

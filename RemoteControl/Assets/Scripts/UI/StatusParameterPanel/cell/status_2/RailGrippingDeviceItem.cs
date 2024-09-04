@@ -25,6 +25,10 @@ public struct RailGrippingDeviceData
     /// </summary>
     public bool isLeftRailClamperReleaseLimit;
     /// <summary>
+    /// 夹轨器故障
+    /// </summary>
+    public bool isClampFault;
+    /// <summary>
     /// 电机过载
     /// </summary>
     public bool isMotorOverload;
@@ -72,6 +76,10 @@ public class RailGrippingDeviceItem : StatusParmItemBase<RailGrippingDeviceData>
     /// </summary>
     public ToggleDIY LeftRailClamperReleaseLimit;
     /// <summary>
+    /// 夹轨器故障
+    /// </summary>
+    public ToggleDIY ClampFault;
+    /// <summary>
     /// 电机过载
     /// </summary>
     public ToggleDIY MotorOverload;
@@ -98,6 +106,7 @@ public class RailGrippingDeviceItem : StatusParmItemBase<RailGrippingDeviceData>
         SetToggleState(LeftRailClamperSolenoidValve, data.isLeftRailClamperSolenoidValve,false,isConnect);
         SetToggleState(LeftAnchorLimit, data.isLeftAnchorLimit,true,isConnect);
         SetToggleState(LeftRailClamperReleaseLimit, data.isLeftRailClamperReleaseLimit,true,isConnect);
+        SetToggleState(ClampFault, data.isClampFault,true,isConnect);
         SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
         SetToggleState(RightRailClamperMotorRunning, data.isRightRailClamperMotorRunning,false,isConnect);
         SetToggleState(RightRailClamperSolenoidValve, data.isRightRailClamperSolenoidValve,false,isConnect);
