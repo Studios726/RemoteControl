@@ -105,13 +105,13 @@ public class RailGrippingDeviceItem : StatusParmItemBase<RailGrippingDeviceData>
         SetToggleState(LeftRailClamperMotorRunning, data.isLeftRailClamperMotorRunning,false,isConnect);
         SetToggleState(LeftRailClamperSolenoidValve, data.isLeftRailClamperSolenoidValve,false,isConnect);
         SetToggleState(LeftAnchorLimit, data.isLeftAnchorLimit,true,isConnect);
-        SetToggleState(LeftRailClamperReleaseLimit, data.isLeftRailClamperReleaseLimit,true,isConnect);
+        SetToggleState(LeftRailClamperReleaseLimit, data.isLeftRailClamperReleaseLimit,false,isConnect);
         SetToggleState(ClampFault, data.isClampFault,true,isConnect);
         SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
         SetToggleState(RightRailClamperMotorRunning, data.isRightRailClamperMotorRunning,false,isConnect);
         SetToggleState(RightRailClamperSolenoidValve, data.isRightRailClamperSolenoidValve,false,isConnect);
         SetToggleState(RightAnchorLimit, data.isRightAnchorLimit,true,isConnect);
-        SetToggleState(RightRailClamperReleaseLimit, data.isRightRailClamperReleaseLimit,true,isConnect);
+        SetToggleState(RightRailClamperReleaseLimit, data.isRightRailClamperReleaseLimit,false,isConnect);
     }
 
 }

@@ -75,6 +75,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// </summary>
     public Text carTailElectricity;
     /// <summary>
+    /// 两机距离
+    /// </summary>
+    public Text distanceOfTwoCars;
+    /// <summary>
     /// 悬臂皮带电流
     /// </summary>
     public Text cantileverBeltElectricity;
@@ -229,6 +233,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(carPos,data.DC_Pos.ToString("F2"),TextType.Meter);
             SetText(rotationAngle,data.SLEW_Angle.ToString("F2"),TextType.Angle);
             SetText(upAngle,data.Luff_Angle.ToString("F2"),TextType.Angle);
+            SetText(cantileverHeight,data.XBTB_LWJ_VALUE.ToString("F2"),TextType.Meter);
             aloneBtn.SetSystemState(data.Single_Action);
             togetherBtn.SetSystemState(data.Link_Action);
             automaticBtn.SetSystemState(data.AUTO_MODE);
@@ -267,7 +272,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand);
             carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB==false);
             carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB);
-            
+            string x =(53.4+data.DC_Pos +  (40 * Mathf.Cos(data.SLEW_Angle*Mathf.Deg2Rad))).ToString("F2");
+            string y = (40 * Mathf.Sin(data.SLEW_Angle*Mathf.Deg2Rad) -1.8F).ToString("F2");
+            bucketWheelPos.text = $"({x},{y})";
         }
         else
         {
@@ -278,6 +285,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(carPos,data.DC_Pos_2.ToString("F2"),TextType.Meter);
             SetText(rotationAngle,data.SLEW_Angle_2.ToString("F2"),TextType.Angle);
             SetText(upAngle,data.Luff_Angle_2.ToString("F2"),TextType.Angle);
+            SetText(cantileverHeight,data.XBTB_LWJ_VALUE_2.ToString("F2"),TextType.Meter);
             aloneBtn.SetSystemState(data.Single_Action_2);
             togetherBtn.SetSystemState(data.Link_Action_2);
             automaticBtn.SetSystemState(data.AUTO_MODE_2);
@@ -315,7 +323,12 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             {
                 rotStopBtn.SetSystemState(false);
             }
+            string x =(53.4+data.DC_Pos_2 +  (40 * Mathf.Cos(data.SLEW_Angle_2*Mathf.Deg2Rad))).ToString("F2");
+            string y = (40 * Mathf.Sin(data.SLEW_Angle_2*Mathf.Deg2Rad) +1.7).ToString("F2");
+                   
+            bucketWheelPos.text = $"({x},{y})";
         }
+        SetText(distanceOfTwoCars,(Mathf.Abs(data.DC_Pos-data.DC_Pos_2) +64.34).ToString("F2"),TextType.Meter);
       
     }
     public  void AddOnClickListener(Button btn, UnityAction action)

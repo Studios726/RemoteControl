@@ -170,7 +170,7 @@ namespace RemoteControl
             }
             else if (connectEventArgs.type == SocketType.SCA)
             {
-                GameDataManager.Instance.UpdateSCAData(30);
+                GameDataManager.Instance.UpdateSCAData(4);
                 des="SCA 连接成功";
             }
 

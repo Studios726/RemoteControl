@@ -74,6 +74,7 @@ public class MessageCenter : Singleton<MessageCenter>
             return;
         if(socketType== SocketType.TaoRC)
         {
+       
             try
             {
                 string json = Decompress(message);
@@ -82,7 +83,7 @@ public class MessageCenter : Singleton<MessageCenter>
             }
             catch (Exception)
             {
-
+            
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
                 Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)}");
             }

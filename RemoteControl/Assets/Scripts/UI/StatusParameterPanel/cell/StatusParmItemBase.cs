@@ -6,11 +6,14 @@ using UnityEngine.UI;
 
 public class StatusParmItemBase<T> : MonoBehaviour
 {
-    public virtual void UpdateData(T data,bool isConnect = false )
+    public virtual void UpdateData(T data, bool isConnect = false)
     {
     }
-    public virtual void SetToggleState(ToggleDIY toggle, bool ison,bool isFault=true, bool isConnect=true) {
-        if (isConnect) {
+
+    public virtual void SetToggleState(ToggleDIY toggle, bool ison, bool isFault = true, bool isConnect = true)
+    {
+        if (isConnect && ison)
+        {
             if (ison)
             {
                 if (isFault)
@@ -21,7 +24,6 @@ public class StatusParmItemBase<T> : MonoBehaviour
                 {
                     toggle?.SetState(1);
                 }
-                
             }
             else
             {
@@ -39,8 +41,8 @@ public class StatusParmItemBase<T> : MonoBehaviour
         {
             toggle?.SetState(0);
         }
-       
     }
+
     public virtual void SetToggleState(Toggle toggle, bool ison)
     {
         if (toggle.isOn == ison)
@@ -55,6 +57,5 @@ public class StatusParmItemBase<T> : MonoBehaviour
         {
             Debug.LogError("Toggle is null");
         }
-
     }
 }

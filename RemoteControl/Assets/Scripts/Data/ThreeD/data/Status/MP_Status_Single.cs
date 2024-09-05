@@ -2,13 +2,12 @@ namespace ShangHaiPro
 {
     public class MP_Status_Single
     {
-        public string MP_InSpace;//煤场E F
-        public int MP_ID;//1~8
+        public string MP_InSpace;
+        public int MP_ID;
         public MP_Status MP_Lidar_Status;
-        public int MP_Lider_Once_PointNums;//雷达单次扫描点数
+        public int MP_Lider_Once_PointNums;
         public MP_Status MP_Platform_Status;
-        public double MP_Platform_Rotation_Angle;//云台回转角度
-
+        public double MP_Platform_Rotation_Angle;
         public bool MP_Status_Isnormal;
     }
 }

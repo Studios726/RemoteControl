@@ -11,22 +11,19 @@ namespace ShangHaiPro
         //发送 3 5时 的截图数据
         public byte[] SCREENSHOT_IMG { get; set; }
 
-        //发送 3 7 的报表文件名
+        //发送 3 7时候 的报表名字
         public string REPORT_FILE_NAME { get; set; }
 
-        //发送 3 7 的报表数据类
+        //发送 3 7时候 的报表数据类
         public Send_Report_Data REPORT_DATA { get; set; }
 
-        //发送 3 8 的监控截图数据类
+        //发送 3 8时候 的相机图像
         public byte[] MONITOR_IMG { get; set; }
 
-        //接收扫描类型 在发送3的时候 获取
+        //发送 3 10时候 的相机图像
         public string IsAutoType { get; set; }
 
-        //主动传输时候的标识位
+        //发送 主动传输时候的标识位
         public string ICON { get; set; }
-        
-        
-
     }
 }

@@ -201,7 +201,7 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void UpdateDirectionBucketWheel()
     {
-        ModelDirection[] direction_2 = new ModelDirection[2];
+        ModelDirection[] direction_2 = new ModelDirection[3];
         int index = 0;
         if (_systemVariables.LargeCarForwardCommand_2)
         {
@@ -233,13 +233,28 @@ public class GameDataManager : Singleton<GameDataManager>
             direction_2[index++] = ModelDirection.LrStop;
         }
 
+        if (_systemVariables.VariableAmplitudeUpperElectromagneticValveOpen_2)
+        {
+            //大车上仰
+            direction_2[index++] = ModelDirection.Up;
+        }
+        else if (_systemVariables.VariableAmplitudeLowerElectromagneticValveOpen_2)
+        {
+            //大车下俯
+            direction_2[index++] = ModelDirection.Down;
+        }
+        else
+        {
+            direction_2[index++] = ModelDirection.UdStop;
+        }
+        
         EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection, null,
             new UpdateModelDirectionEventArgs(direction_2, Machine.BucketWheel));
     }
 
     public void UpdateDirectionBucketWheelStackerReclaimer()
     {
-        ModelDirection[] direction = new ModelDirection[2];
+        ModelDirection[] direction = new ModelDirection[3];
         int index = 0;
         if (_systemVariables.LargeCarForwardCommand)
         {
@@ -271,6 +286,21 @@ public class GameDataManager : Singleton<GameDataManager>
             direction[index++] = ModelDirection.LrStop;
         }
 
+        if (_systemVariables.VariableAmplitudeUpperElectromagneticValveOpen)
+        {
+            //大车上仰
+            direction[index++] = ModelDirection.Up;
+        }
+        else if (_systemVariables.VariableAmplitudeLowerElectromagneticValveOpen)
+        {
+            //大车下俯
+            direction[index++] = ModelDirection.Down;
+        }
+        else
+        {
+            direction[index++] = ModelDirection.UdStop;
+        }
+        
         EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection, null,
             new UpdateModelDirectionEventArgs(direction, Machine.BucketWheelStackerReclaimer));
     }
@@ -280,9 +310,9 @@ public class GameDataManager : Singleton<GameDataManager>
         SendDataReportAndDEM cursendDataReportAndDem=new SendDataReportAndDEM();
         await Task.Run((() =>
         {
-            cursendDataReportAndDem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
+            SystemCommand command = JsonMgr.DeSerialize<SystemCommand>(json);
+            cursendDataReportAndDem = command.SendAllData.DEM_DATA;
         }));
-        RecordLocalSCAData(json);
         SetScaReportAndDem(cursendDataReportAndDem);
     }
     public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,
@@ -398,7 +428,6 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             Debug.LogError($"异步任务执行失败: {ex.Message}");
         }
-
         Mesh mesh = new Mesh();
         mesh.indexFormat = IndexFormat.UInt32;
         mesh.vertices = vertices;
@@ -411,7 +440,7 @@ public class GameDataManager : Singleton<GameDataManager>
         meshFilter.mesh = mesh;
         meshRenderer.sharedMaterial = material;
         meshFilter.mesh.RecalculateNormals();
-        meshCollider.sharedMesh = mesh;
+        // meshCollider.sharedMesh = mesh;
     }
 
     /// <summary>
@@ -452,7 +481,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public void UpdateSCAData(int query_type)
     {
         Debug.LogError("堆料模型更新");
-        ServerCommand serverCommand = new ServerCommand();
+        SystemCommand serverCommand = new SystemCommand();
         serverCommand.QUERY_SYSTEM = "MC";
         serverCommand.DATA_TYPE = 3;
         serverCommand.QUERY_TYPE = query_type;

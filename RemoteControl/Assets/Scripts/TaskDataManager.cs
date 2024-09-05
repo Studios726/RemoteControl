@@ -103,7 +103,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             string tips = "";
             if (taskVariables.Error==1)
             {
-                tips = "当前任务已经结束或者不存在";
+                tips = "任务不存在";
             }else if(taskVariables.Error==2)
             {
                 tips = "当前机器正在执行任务";
