@@ -109,7 +109,7 @@ public class BucketWheelTaskBase : PanelBase
     {
         AddOnClickListener(scramStopBtn, (() => { SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP); }));
         AddOnClickListener(resetBtn, (() => { SendPlcCommand(COMMAND_NAME.ERR_RESET); }));
-        AddOnClickListener(warningBtn, (() => { SendPlcCommand(COMMAND_NAME.STARTUP_ALARM); }));
+        // AddOnClickListener(warningBtn, (() => { SendPlcCommand(COMMAND_NAME.STARTUP_ALARM); }));
         AddOnClickListener(takeMaterStartBtn, (() => { SendTaskCommand(OperationType.START); }));
         AddOnClickListener(takeMaterStopBtn, (() => { SendTaskCommand(OperationType.PAUSE); }));
         AddOnClickListener(takeMaterReversingBtn, (() => { SendTaskCommand(OperationType.REVERSING); }));
