@@ -272,7 +272,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand);
             carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB==false);
             carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB);
-            string x =(53.4+data.DC_Pos +  (40 * Mathf.Cos(data.SLEW_Angle*Mathf.Deg2Rad))).ToString("F2");
+            float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle) * Mathf.Deg2Rad);
+            string x =(53.4+data.DC_Pos +  (x1 * Mathf.Cos(data.SLEW_Angle*Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle*Mathf.Deg2Rad) -1.8F).ToString("F2");
             bucketWheelPos.text = $"({x},{y})";
         }
@@ -323,7 +324,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             {
                 rotStopBtn.SetSystemState(false);
             }
-            string x =(53.4+data.DC_Pos_2 +  (40 * Mathf.Cos(data.SLEW_Angle_2*Mathf.Deg2Rad))).ToString("F2");
+            float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle_2) * Mathf.Deg2Rad);
+            string x =(117.74+data.DC_Pos_2 +  (x1 * Mathf.Cos(data.SLEW_Angle_2*Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle_2*Mathf.Deg2Rad) +1.7).ToString("F2");
                    
             bucketWheelPos.text = $"({x},{y})";

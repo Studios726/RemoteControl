@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Utility;
 
 public class BucketWheelTaskBase : PanelBase
 {
@@ -135,7 +138,18 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(takeMaterNum, 0, 99999); 
         InputFieldValueRange(layerHigh, 0, 45);
     }
-    public virtual void SendPlcCommand(COMMAND_NAME mCommandName)
+
+    public virtual void WarningDown()
+    {
+        Debug.LogError("按下");//1
+        SendPlcCommand(COMMAND_NAME.STARTUP_ALARM,1);
+    }
+    public virtual void WarningUp()
+    {
+        Debug.LogError("抬起");//0
+        SendPlcCommand(COMMAND_NAME.STARTUP_ALARM,0);
+    }
+    public virtual void SendPlcCommand(COMMAND_NAME mCommandName,int dataInt=0)
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
         {
@@ -154,8 +168,8 @@ public class BucketWheelTaskBase : PanelBase
         {
             
         }
-        Debug.Log($" commandName {commandName}");
-        GameDataManager.Instance.SendServerCommandByName(commandName);
+        Debug.Log($" commandName {commandName} {dataInt}");
+        GameDataManager.Instance.SendServerCommandByName(commandName,dataInt);
     }
     public virtual void SendTaskCommand(OperationType operationType)
     {

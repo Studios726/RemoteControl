@@ -33,4 +33,12 @@ public class LoadModelManager : MonoBehaviour
         await GameDataManager.Instance.SpawnCoalModel(parent, red, GameDataManager.Instance.SendDataReportAndDEM,model);
         model.name = "coalModel";
     }
+
+    private void OnDestroy()
+    {
+        if (model!=null)
+        {
+            Destroy(model);
+        }
+    }
 }
