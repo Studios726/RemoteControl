@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
@@ -91,7 +88,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         taskCommand.TaskType = TaskType.PILEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
-        // taskCommand.TaskCreateTime = DateTime.Now;
+        taskCommand.TaskCreateTime = DateTime.Now;
         if (operationType==OperationType.START)
         {
             taskCommand.Command_Type = 0;

@@ -39,7 +39,6 @@ public class MainPanelView : UIView<MainPanelCtr>
         
         updateModelBtn.onClick.AddListener(() =>
         {
-            // EventManager.Instance.TriggerEvent(EventName.RefreshModel, null);
             if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
@@ -81,6 +80,8 @@ public class MainPanelView : UIView<MainPanelCtr>
         _bucketWheelCtrMove1.UpdateData(data);
         _bucketWheelHideBtnCtr2.UpdateData(data);
         _bucketWheelHideBtnCtr1.UpdateData(data);
+        _bucketWheelTask2.UpdatePlc(data);
+        _bucketWheelTask1.UpdatePlc(data);
     }
 
     public void UpdateData(object o, EventArgs eventArgs)

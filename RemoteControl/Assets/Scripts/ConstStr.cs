@@ -83,6 +83,7 @@ public static class ConstStr
     public const string DATA_HISTORY_CARTELECTRICITY_NAME = "Name";
     public const string DATA_HISTORY_CARTELECTRICITY_TIME = "Time";
     public const string DATA_HISTORY_CARTELECTRICITY_MACHINE = "Machine";
+    public const string DATA_HISTORY_CARTELECTRICITY_VALUE = "Value";
     #endregion
     #region history_logs
     public const string DATA_HISTORY_LOGS_TIME = "time";

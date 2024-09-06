@@ -262,6 +262,8 @@ public class SettingPanelView :UIView<SettingPanelCtr>
     {
         Transform record = _accountRecordPool.GetFreeObject().transform;
         record.SetParent(_infoListScroll.content);
+        record.localScale=Vector3.one;
+        record.localPosition=Vector3.zero;
         TMP_Text recordIndexTxt = record.FindComponent<TMP_Text>("Fields/IndexField/IndexTxt");
         recordIndexTxt.text = info.index.ToString();
         TMP_Text recordAccountTxt = record.FindComponent<TMP_Text>("Fields/AccountField/AccountTxt");
@@ -349,6 +351,8 @@ public class SettingPanelView :UIView<SettingPanelCtr>
 		{
 			Transform record = _accountOperationRecordPool.GetFreeObject().transform;
 			record.SetParent(_accountOperationListScroll.content);
+			record.localScale=Vector3.one;
+			record.localPosition=Vector3.zero;
 			record.FindComponent<TMP_Text>("Fields/IndexField/IndexTxt").text = info.index.ToString();
 			record.FindComponent<TMP_Text>("Fields/TimeField/TimeTxt").text = info.time;
 			record.FindComponent<TMP_Text>("Fields/OperatorField/OperatorTxt").text = info.operatorName;

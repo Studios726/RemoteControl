@@ -239,7 +239,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             automaticBtn.SetSystemState(data.AUTO_MODE);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen);
-
+            
             if (data.LargeCarForwardCommand==false&&data.LargeCarReverseCommand==false)
             {
                 carStopBtn.SetSystemState(true);

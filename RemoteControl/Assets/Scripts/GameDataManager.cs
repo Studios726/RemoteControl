@@ -1,14 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
 using RemoteControl;
 using RemoteControl.Event;
 using ShangHaiPro;
 using ShenYangRemoteSystem.Subclass;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -24,6 +20,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public GameMain GameMain;
     private string _taoIP;
     private IpConfig _ipConfig;
+    private int count;
 
     public bool RcConnectionState
     {
@@ -80,6 +77,12 @@ public class GameDataManager : Singleton<GameDataManager>
         UpdateDirectionBucketWheel();
         UpdateDirectionBucketWheelStackerReclaimer();
         UpdateMachineWarning();
+        ++count;
+        if (++count>5)
+        {
+            count = 0;
+            RecordChart();
+        }
     }
 
     public void SetScaReportAndDem(SendDataReportAndDEM sendDataReportAndDEM)
@@ -486,5 +489,56 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.DATA_TYPE = 3;
         serverCommand.QUERY_TYPE = query_type;
         MessageCenter.Instance.SendMessage(MessageType.SCA, serverCommand);
+    }
+
+    public void RecordChart()
+    {
+        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,_systemVariables.BucketWheelElectricCurrent, "斗轮电流",
+            Machine.BucketWheelStackerReclaimer);
+        
+        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, _systemVariables.LargeCarElectricCurrent, "大车电流",
+            Machine.BucketWheelStackerReclaimer);
+        
+        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, _systemVariables.RotaryElectricCurrent, "回转电流",
+            Machine.BucketWheelStackerReclaimer);
+        
+        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, _systemVariables.SuspensionBeltElectricCurrent, "悬胶电流",
+            Machine.BucketWheelStackerReclaimer);
+        
+        // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
+        //     Machine.BucketWheelStackerReclaimer);
+        
+        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,_systemVariables.BucketWheelElectricCurrent_2, "斗轮电流",
+            Machine.BucketWheel);
+        
+        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, _systemVariables.LargeCarElectricCurrent_2, "大车电流",
+            Machine.BucketWheel);
+        
+        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, _systemVariables.RotaryElectricCurrent_2, "回转电流",
+            Machine.BucketWheel);
+        
+        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, _systemVariables.SuspensionBeltElectricCurrent_2, "悬胶电流",
+            Machine.BucketWheel);
+        
+        // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
+        //     Machine.BucketWheelStackerReclaimer);
+        
+    }
+    
+    public void DeleteThreeMonthData() //删除电流表 日志表 和告警表三个月前的数据 -ljz
+    {
+        bool A=DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_LOG1_MC);
+        bool B=DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_LOG2_MC);
+        Debug.LogError($"删除成功{A} {B}");
+        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_WARNING1_MC);
+        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_WARNING2_MC);
+        
+        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC);
+        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC);
+        
+        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC);
+        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC);
+        
+        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC);
     }
 }

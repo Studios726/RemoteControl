@@ -1,18 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.Mime;
-using Unity.VisualScripting;
+using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Utility;
 
 public class BucketWheelTaskBase : PanelBase
 {
-    public Button scramStopBtn;
+    public ButtonCell scramStopBtn;
 
-    public Button resetBtn;
+    public ButtonCell resetBtn;
     public Button warningBtn;
     public Text[] warningTexts;
     public InputField startTakeMaterText;
@@ -41,6 +37,7 @@ public class BucketWheelTaskBase : PanelBase
     public virtual void Start()
     {
         Init();
+        // scramStopBtn
     }
 
     public virtual void UpdateDes(Queue<string> queue)
@@ -52,6 +49,22 @@ public class BucketWheelTaskBase : PanelBase
             index = index + 1;
         }
     }
+
+    public void UpdatePlc(SystemVariables data)
+    {
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            scramStopBtn.SetSystemState(data.System_Emergence);
+            resetBtn.SetSystemState(data.HMI_ErrReset);
+        }
+        else
+        {
+            scramStopBtn.SetSystemState(data.System_Emergence_2);
+            resetBtn.SetSystemState(data.HMI_ErrReset_2);
+        }
+    
+    }
+
     public virtual void UpdateData(TaskCommand taskCommand)
     {
         startTakeMaterText.text = taskCommand.MaterialRange.startValue.ToString();
@@ -142,11 +155,13 @@ public class BucketWheelTaskBase : PanelBase
     public virtual void WarningDown()
     {
         Debug.LogError("按下");//1
+        warningBtn.transform.Find("Image").gameObject.SetActive(true);
         SendPlcCommand(COMMAND_NAME.STARTUP_ALARM,1);
     }
     public virtual void WarningUp()
     {
         Debug.LogError("抬起");//0
+        warningBtn.transform.Find("Image").gameObject.SetActive(false);
         SendPlcCommand(COMMAND_NAME.STARTUP_ALARM,0);
     }
     public virtual void SendPlcCommand(COMMAND_NAME mCommandName,int dataInt=0)
@@ -160,10 +175,12 @@ public class BucketWheelTaskBase : PanelBase
         // int dataInt = 0;
         if (mCommandName==COMMAND_NAME.EMERGENCY_STOP)
         {
-            
+            scramStopBtn.SetSelectState(!scramStopBtn.select.activeSelf);
+            dataInt = scramStopBtn.red.activeSelf ? 0 : 1;
         }else if (COMMAND_NAME.ERR_RESET == mCommandName)
         {
-            
+            resetBtn.SetSelectState(!resetBtn.select.activeSelf);
+            dataInt=resetBtn.red.activeSelf ? 0 : 1;//HMI_ErrReset
         }else if (COMMAND_NAME.STARTUP_ALARM == mCommandName)
         {
             

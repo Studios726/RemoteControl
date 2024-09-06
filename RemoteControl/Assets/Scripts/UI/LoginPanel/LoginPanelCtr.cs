@@ -1,10 +1,5 @@
 using System;
 using RemoteControl.Event;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using ShenYangRemoteSystem.Subclass;
-using UnityEngine;
 
 public class LoginPanelCtr :UIPresenter<LoginPanelView>
 {

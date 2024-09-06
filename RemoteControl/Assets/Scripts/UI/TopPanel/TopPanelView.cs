@@ -10,6 +10,9 @@ public class TopPanelView : UIView<TopPanelCtr>
     private Button _controlBtn;
     private Button _superviseBtn;
     private Button _alarmBtn;
+    private TMP_Text _controlText;
+    private TMP_Text _superviseText;
+    private TMP_Text _alarmText;
     private Button _userBtn;
     private TMP_Text _userTxt;
     private Transform _userPnl;
@@ -18,12 +21,18 @@ public class TopPanelView : UIView<TopPanelCtr>
     private GameObject StatePanel;
     private TMP_Text _title;
     public GameObject WorkScreenPanel;
+    private Color selectColor = new Color(0, 0.98f, 1,1);
+    private Color normalColor = Color.white;
+    public TMP_Text _lastText;
 
     public override void InitUIElements(UIArgs uiArgs)
     {
         _controlBtn = RootObj.transform.FindComponent<Button>("BG/Control");
+        _controlText=RootObj.transform.FindComponent<TMP_Text>("BG/Control/Text");
         _superviseBtn = RootObj.transform.FindComponent<Button>("BG/Supervise");
+        _superviseText = RootObj.transform.FindComponent<TMP_Text>("BG/Supervise/Text");
         _alarmBtn = RootObj.transform.FindComponent<Button>("BG/Alarm");
+        _alarmText = RootObj.transform.FindComponent<TMP_Text>("BG/Alarm/Text");
         _userBtn = RootObj.transform.FindComponent<Button>("BG/User");
         _userTxt = RootObj.transform.FindComponent<TMP_Text>("BG/User/Text (TMP)");
         _userPnl = RootObj.transform.Find("BG/UserPnl");
@@ -34,7 +43,7 @@ public class TopPanelView : UIView<TopPanelCtr>
         // StatePanel = GameObject.Find("StatePanel");
         // StatePanel.SetActive(false);
         // WorkScreenPanel = GameObject.Find("WorkScreenPanel");
-
+        _lastText = _controlText;
         _userTxt.text =GameDataManager.Instance.GetUserName();
 
         _controlBtn.onClick.AddListener(() => //打开远程操作界面
@@ -43,6 +52,7 @@ public class TopPanelView : UIView<TopPanelCtr>
             UIManager.Instance.OpenUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
+            SetSelectState(_controlText);
         });
         _superviseBtn.onClick.AddListener(() =>
         {
@@ -55,6 +65,7 @@ public class TopPanelView : UIView<TopPanelCtr>
             UIManager.Instance.CloseUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
+            SetSelectState(_superviseText);
         });
         _alarmBtn.onClick.AddListener(() => //打开报警处理界面
         {
@@ -62,6 +73,7 @@ public class TopPanelView : UIView<TopPanelCtr>
             UIManager.Instance.CloseUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
+            SetSelectState(_alarmText);
 
         });
         _userBtn.onClick.AddListener(() => { _userPnl.gameObject.SetActive(!_userPnl.gameObject.activeSelf); });
@@ -84,6 +96,16 @@ public class TopPanelView : UIView<TopPanelCtr>
         _userPnl.gameObject.SetActive(false);
     }
 
+    public void SetSelectState(TMP_Text tmpText )
+    {
+        if (_lastText!=null)
+        {
+            _lastText.color = normalColor;
+        }
+
+        _lastText = tmpText;
+        _lastText.color = selectColor;
+    }
     public void UpdateCurrentAccount(AccountInfo account)
     {
         _userTxt.text = account.name;

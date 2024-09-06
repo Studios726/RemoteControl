@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 using Utility;
-using Button = UnityEngine.UI.Button;
 
 public class LoginPanelView : UIView<LoginPanelCtr>
 {
@@ -36,7 +33,7 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         _IP.text ="数据库IP:"+ GameDataManager.Instance.IpConfig.DataIP + "\n 三维扫描IP:" + GameDataManager.Instance.IpConfig.YuanIP + "\n 任务IP " +
                    GameDataManager.Instance.IpConfig.TaskIP +"\n RC IP "+
                    GameDataManager.Instance.IpConfig.TaoIP;
-
+        GameDataManager.Instance.DeleteThreeMonthData();
     }
 
     public void OnSubmit(string str)

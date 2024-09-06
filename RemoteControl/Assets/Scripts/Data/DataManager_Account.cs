@@ -136,6 +136,7 @@ public partial class DataManager
     }
     public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userName,string state)
     {
+        Debug.LogError($" taskCommand.TaskCreateTime {taskCommand.TaskCreateTime.ToString()}");
         string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`) " +
            $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{userName}','{state}','{taskCommand.TaskID}','{taskCommand.TakeMateHigh}','{taskCommand.LayerHigh}')";
         return MySqlHelper.ExecuteSql(query) > 0; ;
@@ -184,6 +185,7 @@ public partial class DataManager
     }
     public MySqlDataReader GetHistoryChartData(string chartName, string machine, int limit = 100, bool isUseTime = false, string startTime = "", string endTime = "")
     {
+        Debug.Log($"{chartName}");
         string query = "";
         if (isUseTime == false)
         {
@@ -197,6 +199,13 @@ public partial class DataManager
         return mySqlDataReader;
     }
 
+    public bool InsertHistoryChartData(string tabName,float value,string des,Machine machine)
+    {
+        int id =machine==Machine.BucketWheelStackerReclaimer?0:1;
+        string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_CARTELECTRICITY_NAME}`,`{ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}`,`{ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME}`,`{ConstStr.DATA_HISTORY_CARTELECTRICITY_VALUE}`) " +
+                       $"VALUES ('{des}','{id}','{DateTime.Now}','{value}')";
+        return MySqlHelper.ExecuteSql(query) > 0;
+    }
     public bool InsertHistoryLogMc(string des,string userName,Machine machine)
     {
         string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
@@ -227,6 +236,12 @@ public partial class DataManager
         string query = $"UPDATE {ConstStr.DATABASE_TASK_CONFIG} SET {name} = {value} WHERE {ConstStr.DATA_TASK_CONFIG_ID} = 1";
         bool success=MySqlHelper.ExecuteSql(query) > 0; 
         return success; 
+    }
+
+    public bool DeleTabData(string tabName)
+    {
+        string query = $"DELETE FROM {tabName} WHERE time < DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH)";
+        return MySqlHelper.ExecuteSql(query) > 0;
     }
     
 }

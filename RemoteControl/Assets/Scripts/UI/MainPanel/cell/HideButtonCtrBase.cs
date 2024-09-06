@@ -277,11 +277,11 @@ public class HideButtonCtrBase : PanelBase
             impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2);
             lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed_2);
             lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed_2==false);
-            // systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich==false);
-            // systemLockBtn.SetSystemState(data.SR1_Interlock_Swich);
+            systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich_2==false);
+            systemLockBtn.SetSystemState(data.SR1_Interlock_Swich_2);
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false);
             oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2);
-            // bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB);
+            bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB_2);
             bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning_2);
             bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning_2==false);
             cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact_2);
