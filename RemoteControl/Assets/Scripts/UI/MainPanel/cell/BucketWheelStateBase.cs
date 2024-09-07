@@ -97,6 +97,7 @@ public class BucketWheelStateBase : MonoBehaviour
     /// </summary>
     public ToggleDIY rightSideRun;
     public float pastTime = 0;
+    public Machine machine;
     public virtual void UpdateData(SystemVariables data)
     {
         //Debug.Log("更新参数状态");
@@ -124,7 +125,7 @@ public class BucketWheelStateBase : MonoBehaviour
 
     public void Update()
     {
-        if (GameDataManager.Instance.RcConnectionState == false)//
+        if (GameDataManager.Instance.GetPlcConnection(machine) == false)//
         {
             if (communicationStatus.curState!=2)
             {
@@ -138,7 +139,7 @@ public class BucketWheelStateBase : MonoBehaviour
                 ConnectionStatus(1);
             }
         }
-        if (GameDataManager.Instance.RcConnectionState==true)
+        if (GameDataManager.Instance.GetPlcConnection(machine)==true)
         {
             return;
         }
@@ -158,7 +159,7 @@ public class BucketWheelStateBase : MonoBehaviour
     public void ConnectionStatus(int isSucc)
     {
         communicationStatus.SetState(isSucc);
-        red.SetActive(isSucc==1);
+        red.SetActive(isSucc==2);
         yellow.SetActive(isSucc==2);
     }
     public virtual void SetToggleState(ToggleDIY toggle, bool ison,bool isFault=true, bool isConnect=true)

@@ -192,8 +192,6 @@ namespace RemoteControl
                     timerRc.Cancel();
                     timerRc = null;
                 }
-
-                GameDataManager.Instance.RcConnectionState = false;
                 des = "RC 连接失败";
             }
             else if (connectEventArgs.type == SocketType.TaskPC)

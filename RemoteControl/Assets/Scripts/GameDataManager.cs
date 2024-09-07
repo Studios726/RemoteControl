@@ -21,13 +21,7 @@ public class GameDataManager : Singleton<GameDataManager>
     private string _taoIP;
     private IpConfig _ipConfig;
     private int count;
-
-    public bool RcConnectionState
-    {
-        get => _rcConnectionState;
-        set => _rcConnectionState = value;
-    }
-
+    
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
@@ -85,6 +79,32 @@ public class GameDataManager : Singleton<GameDataManager>
         }
     }
 
+    public bool GetPlcConnection(Machine machine)
+    {
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            if (_systemVariables.D1PLC1CommunicationState==false || _systemVariables.D1PLC2CommunicationState==false || GameMain.connectionRC.isConnect==false)
+            {
+                return true;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else
+        {
+            if (_systemVariables.D2PLC1CommunicationState==false || _systemVariables.D2PLC2CommunicationState==false|| GameMain.connectionRC.isConnect==false)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+  
+    }
     public void SetScaReportAndDem(SendDataReportAndDEM sendDataReportAndDEM)
     {
         _sendDataReportAndDem = sendDataReportAndDEM;
