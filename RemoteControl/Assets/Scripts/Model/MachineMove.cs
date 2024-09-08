@@ -11,10 +11,19 @@ public class MachineMove : MonoBehaviour
     public Transform currentCanvasTransform;
     public TMP_Text errorText;
     public Transform mainCameraTransform;
-
+    public Animation rotClip;
+    public float speed;
     private void Start()
     {
         mainCameraTransform = Camera.main?.transform;
+        if (rotClip!=null)
+        {
+            foreach (AnimationState state in rotClip)
+            {
+                state.speed = speed;
+            }
+        }
+       
     }
 
     public void UpdatePosAndRotaionByMeter(float meter, float rotAngleY, float rotAngleZ)
@@ -41,6 +50,26 @@ public class MachineMove : MonoBehaviour
         errorText.text = error;
     }
 
+    public void PlayRotationClip(bool isPlay)
+    {
+        if (rotClip == null)
+        {
+            Debug.Log(" rotClip is null");
+            return;
+        }
+        if (isPlay && rotClip.isPlaying==false)
+        {
+            rotClip.Play("wheelRotClip");
+        }else if (isPlay==false && rotClip.isPlaying==true)
+        {
+            rotClip.Stop("wheelRotClip");
+        }
+        else
+        {
+            //不处理
+        }
+       
+    }
     private void Update()
     {
         if (errorText.text != "" && mainCameraTransform != null)

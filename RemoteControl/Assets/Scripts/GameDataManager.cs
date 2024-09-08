@@ -66,11 +66,9 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         _systemVariables = systemVariables;
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
-        UpdateMachinePosAndRot();
+      
+        UpdateMachine();
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
-        UpdateDirectionBucketWheel();
-        UpdateDirectionBucketWheelStackerReclaimer();
-        UpdateMachineWarning();
         ++count;
         if (++count>5)
         {
@@ -154,6 +152,14 @@ public class GameDataManager : Singleton<GameDataManager>
         machineRoot.SetActive(active);
     }
 
+    public void UpdateMachine()
+    {
+        UpdateMachinePosAndRot();
+        UpdateDirectionBucketWheel();
+        UpdateDirectionBucketWheelStackerReclaimer();
+        UpdateMachineWarning();
+        UpdateWheelAnimation();
+    }
     public void UpdateMachinePosAndRot()
     {
         if (machineMove_1)
@@ -326,6 +332,12 @@ public class GameDataManager : Singleton<GameDataManager>
         
         EventManager.Instance.TriggerEvent(EventName.UpdateModelDirection, null,
             new UpdateModelDirectionEventArgs(direction, Machine.BucketWheelStackerReclaimer));
+    }
+
+    public void UpdateWheelAnimation()
+    {
+        machineMove_1.PlayRotationClip(_systemVariables.BucketWheelMotorRunning);
+        machineMove_2.PlayRotationClip(_systemVariables.BucketWheelMotorRunning_2);
     }
 
     public async Task DeSerializeScaJson(string json)

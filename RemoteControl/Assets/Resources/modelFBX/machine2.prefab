@@ -24383,6 +24383,8 @@ MonoBehaviour:
   currentCanvasTransform: {fileID: 9203708259532079851}
   errorText: {fileID: 4122887985655931800}
   mainCameraTransform: {fileID: 0}
+  rotClip: {fileID: 3894881614681637371}
+  speed: 1
 --- !u!1 &3563696525055633657
 GameObject:
   m_ObjectHideFlags: 0
@@ -58746,6 +58748,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4006652085467943875}
+  - component: {fileID: 3894881614681637371}
   m_Layer: 0
   m_Name: wheelRot
   m_TagString: Untagged
@@ -58777,7 +58780,23 @@ Transform:
   - {fileID: 6381117519466895357}
   - {fileID: 986942714529393061}
   m_Father: {fileID: 8811870755815149597}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 114, z: 0}
+--- !u!111 &3894881614681637371
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8788421499634493956}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 45a60b5aa35bcc648b89dcdc6f5d2f1a, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 45a60b5aa35bcc648b89dcdc6f5d2f1a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &8788814238780928169
 GameObject:
   m_ObjectHideFlags: 0
