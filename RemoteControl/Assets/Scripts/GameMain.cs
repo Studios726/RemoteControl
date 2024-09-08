@@ -163,9 +163,9 @@ namespace RemoteControl
                 }
 
                 TaskDataManager.Instance.UpdatePcData();
-                // timerPc = Timer.Register(0.1f, true, true, () => {
-                //     TaskDataManager.Instance.UpdatePcData();
-                // });
+                timerPc = Timer.Register(3600f, true, true, () => {
+                    TaskDataManager.Instance.UpdatePcData();
+                });
                 des="PC 连接成功";
             }
             else if (connectEventArgs.type == SocketType.SCA)

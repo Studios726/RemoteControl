@@ -488,19 +488,7 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.DATA_INT = dataInt;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
-
-    /// <summary>
-    /// 获取任务当前状态
-    /// </summary>
-    public void UpdatePcData()
-    {
-        TaskCommand taskCommand = new TaskCommand();
-        taskCommand.QuerySystem = "MC";
-        taskCommand.Command_Type = 1;
-        MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
-        Debug.Log("获取当前任务状态");
-    }
-
+  
     public void UpdateSCAData(int query_type)
     {
         Debug.LogError("堆料模型更新");
