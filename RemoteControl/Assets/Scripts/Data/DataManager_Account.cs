@@ -238,9 +238,9 @@ public partial class DataManager
         return success; 
     }
 
-    public bool DeleTabData(string tabName)
+    public bool DeleTabData(string tabName,int month=6)
     {
-        string query = $"DELETE FROM {tabName} WHERE time < DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH)";
+        string query = $"DELETE FROM {tabName} WHERE time < DATE_SUB(CURRENT_DATE, INTERVAL {month} MONTH)";
         return MySqlHelper.ExecuteSql(query) > 0;
     }
     

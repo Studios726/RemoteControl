@@ -545,20 +545,40 @@ public class GameDataManager : Singleton<GameDataManager>
         
     }
     
-    public void DeleteThreeMonthData() //删除电流表 日志表 和告警表三个月前的数据 -ljz
+    public void DeleteThreeMonthData() //
     {
-        bool A=DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_LOG1_MC);
-        bool B=DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_LOG2_MC);
-        Debug.LogError($"删除成功{A} {B}");
-        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_WARNING1_MC);
-        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_WARNING2_MC);
+        string time = PlayerPrefs.GetString("Time", "");
+        if (time=="")
+        {
+            PlayerPrefs.SetString("Time", DateTime.Now.ToString());
+        }
+        DateTime anotherTime =time==""? DateTime.Now:DateTime.Parse(time);
+        DateTime currentTime = DateTime.Now;
+
+        TimeSpan timeDifference = currentTime - anotherTime;
+
+        double monthsDifference = timeDifference.TotalDays / 30.44;  // 平均每个月的天数约为 30.44 天
+
+        if (Math.Abs(monthsDifference) >= 6)
+        {
+            PlayerPrefs.SetString("Time", DateTime.Now.ToString());
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_LOG1_MC);
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_LOG2_MC);
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_WARNING1_MC);
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_WARNING2_MC);
         
-        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC);
-        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC);
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC);
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC);
         
-        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC);
-        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC);
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC);
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC);
         
-        DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC);
+            DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC);
+        }
+        else
+        {
+            // Debug.Log("相差不足三个月");
+        }
+       
     }
 }
