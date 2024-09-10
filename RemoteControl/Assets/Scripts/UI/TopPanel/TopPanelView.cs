@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RemoteControl.Event;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,14 +11,16 @@ public class TopPanelView : UIView<TopPanelCtr>
     private Button _controlBtn;
     private Button _superviseBtn;
     private Button _alarmBtn;
-    private TMP_Text _controlText;
-    private TMP_Text _superviseText;
-    private TMP_Text _alarmText;
+    public TMP_Text _controlText;
+    public TMP_Text _superviseText;
+    public TMP_Text _alarmText;
     private Button _userBtn;
     private TMP_Text _userTxt;
     private Transform _userPnl;
     private Button _settingBtn;
     private Button _logoutBtn;
+    private Button _logoutBtn2;
+    private Button _closeUserBtn;
     private GameObject StatePanel;
     private TMP_Text _title;
     public GameObject WorkScreenPanel;
@@ -34,33 +37,29 @@ public class TopPanelView : UIView<TopPanelCtr>
         _alarmBtn = RootObj.transform.FindComponent<Button>("BG/Alarm");
         _alarmText = RootObj.transform.FindComponent<TMP_Text>("BG/Alarm/Text");
         _userBtn = RootObj.transform.FindComponent<Button>("BG/User");
+        _closeUserBtn = RootObj.transform.FindComponent<Button>("BG/close");
         _userTxt = RootObj.transform.FindComponent<TMP_Text>("BG/User/Text (TMP)");
         _userPnl = RootObj.transform.Find("BG/UserPnl");
         _settingBtn = _userPnl.FindComponent<Button>("SettingBtn");
         _logoutBtn = _userPnl.FindComponent<Button>("LogoutBtn");
+        _logoutBtn2 = _userPnl.FindComponent<Button>("LogoutBtn_2");
         _title = RootObj.transform.FindComponent<TMP_Text>("BG/Title/Text (TMP)");
         _title.text = ConstStr.PROJECT_NAME;
-        // StatePanel = GameObject.Find("StatePanel");
-        // StatePanel.SetActive(false);
-        // WorkScreenPanel = GameObject.Find("WorkScreenPanel");
+      
         _lastText = _controlText;
         _userTxt.text =GameDataManager.Instance.GetUserName();
 
         _controlBtn.onClick.AddListener(() => //打开远程操作界面
         {
-            Debugger.Log("打开远程操作界面");
             UIManager.Instance.OpenUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
+            UIManager.Instance.CloseUI(UIID.SettingPanel);
             SetSelectState(_controlText);
         });
         _superviseBtn.onClick.AddListener(() =>
         {
-            // //presenter.CurrentActive = UIID.RuntimeMonitor;
-            // //SceneManager.LoadScene("Monitor");
-            // StatePanel.SetActive(true);
-            // UISystem.Instance.HideCanvasParent();
-            // Debugger.Log("打开远程操作界面");
+          
             UIManager.Instance.OpenUI(UIID.StatusParaeterPanel);
             UIManager.Instance.CloseUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.MainPanel);
@@ -76,24 +75,41 @@ public class TopPanelView : UIView<TopPanelCtr>
             SetSelectState(_alarmText);
 
         });
-        _userBtn.onClick.AddListener(() => { _userPnl.gameObject.SetActive(!_userPnl.gameObject.activeSelf); });
+        _userBtn.onClick.AddListener(() =>
+        {
+            _userPnl.gameObject.SetActive(!_userPnl.gameObject.activeSelf);
+            _closeUserBtn.gameObject.SetActive(!_closeUserBtn.gameObject.activeSelf);
+        });
+        _closeUserBtn.onClick.AddListener((() =>
+        {
+            _closeUserBtn.gameObject.SetActive(false);
+            _userPnl.gameObject.SetActive(false);
+        }));
         _settingBtn.onClick.AddListener(() =>
         {
             _userPnl.gameObject.SetActive(false);
+            _closeUserBtn.gameObject.SetActive(false);
             UIManager.Instance.OpenUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
-            Debugger.LogError("打开setting页面");
+            SetSelectState(_userTxt);
           
         });
         _logoutBtn.onClick.AddListener(() =>
         {
             _userPnl.gameObject.SetActive(false);
+            _closeUserBtn.gameObject.SetActive(false);
             _ctr.Logout();
         });
-
+        _logoutBtn2.onClick.AddListener(() =>
+        {
+            EventManager.Instance.TriggerEvent(EventName.ExitGame,null,null);
+            // _userPnl.gameObject.SetActive(false);
+            
+        });
         _userPnl.gameObject.SetActive(false);
+        _closeUserBtn.gameObject.SetActive(false);
     }
 
     public void SetSelectState(TMP_Text tmpText )

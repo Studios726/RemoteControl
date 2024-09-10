@@ -22,6 +22,10 @@ public class AppLauncher : MonoBehaviour
         OnApplicationQuit();
         previousWidth=Screen.width;
         previousHeight=Screen.height;
+        EventManager.Instance.AddListener(EventName.ExitGame, (o, args) =>
+        {
+            ExitGamePop();
+        });
     }
 
     public void Update()
@@ -63,6 +67,15 @@ public class AppLauncher : MonoBehaviour
         }
       
         return isQuit;
+    }
+
+    public void ExitGamePop()
+    {
+        UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控", (() => isQuit = false),()=>
+        {
+            isQuit = true;
+            _gameMain.OnExitGame();
+        }));
     }
     public void UIInit()
     {

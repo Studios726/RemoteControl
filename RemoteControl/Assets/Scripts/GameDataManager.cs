@@ -79,6 +79,10 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public bool GetPlcConnection(Machine machine)
     {
+        if (_systemVariables == null)
+        {
+            return false;
+        }
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
             if (_systemVariables.D1PLC1CommunicationState==false || _systemVariables.D1PLC2CommunicationState==false || GameMain.connectionRC.isConnect==false)

@@ -19,6 +19,7 @@ namespace RemoteControl.Event
         public const string KeyCodeTab="KeyCodeTab";
         public const string RefreshScreen = "RefreshScreen";
         public const string UpdateModelDirection = "UpdateModelDirection";
+        public  const string ExitGame = "ExitGame";
 
     }
 }

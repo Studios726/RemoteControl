@@ -92,9 +92,7 @@ namespace RemoteControl
                 config.TaskIP= Address.serviceTaskIP;
                 config.DataIP= Address.serviceIP;
                 GameDataManager.Instance.SetIpConfig(config);
-           
             }
-            Debug.LogError(GameDataManager.Instance.IpConfig.DataIP);
         }
         public void AddListener()
         {

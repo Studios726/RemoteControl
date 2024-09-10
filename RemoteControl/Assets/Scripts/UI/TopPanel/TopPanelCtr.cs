@@ -13,4 +13,10 @@ public class TopPanelCtr : UIPresenter<TopPanelView>
         UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
         UIManager.Instance.OpenUI(UIID.LoginPanel);
     }
+
+    public override void ShowView(UIArgs uiArgs = null)
+    {
+        base.ShowView(uiArgs);
+        view.SetSelectState(view._controlText);
+    }
 }

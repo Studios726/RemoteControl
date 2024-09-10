@@ -30,9 +30,10 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         _accountInput.onFocusSelectAll = false;
         _passwordInput.onFocusSelectAll = false;
         _accountInput.ActivateInputField();
-        _IP.text ="数据库IP:"+ GameDataManager.Instance.IpConfig.DataIP + "\n 三维扫描IP:" + GameDataManager.Instance.IpConfig.YuanIP + "\n 任务IP " +
-                   GameDataManager.Instance.IpConfig.TaskIP +"\n RC IP "+
-                   GameDataManager.Instance.IpConfig.TaoIP;
+        // _IP.text ="数据库IP:"+ GameDataManager.Instance.IpConfig.DataIP + "\n 三维扫描IP:" + GameDataManager.Instance.IpConfig.YuanIP + "\n 任务IP " +
+        //            GameDataManager.Instance.IpConfig.TaskIP +"\n RC IP "+
+        //            GameDataManager.Instance.IpConfig.TaoIP;
+        _IP.text = "";
         GameDataManager.Instance.DeleteThreeMonthData();
     }
 
