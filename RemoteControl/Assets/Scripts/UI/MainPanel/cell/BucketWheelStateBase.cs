@@ -143,8 +143,8 @@ public class BucketWheelStateBase : MonoBehaviour
         SetToggleState(rightTurnRun, data.RotaryRightTurnCommand_2, false, data.D1PLC1CommunicationState);
         SetToggleState(backTurnRun, data.LargeCarReverseCommand_2, false, data.D1PLC1CommunicationState);
         SetToggleState(fowardTurnRun, data.LargeCarForwardCommand_2, false, data.D1PLC1CommunicationState);
-        // SetToggleState(leftSideRun, data.LargeCarForwardCommand_2, false, data.D1PLC1CommunicationState);
-        // SetToggleState(rightSideRun, data.LargeCarForwardCommand_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(leftSideRun, data.SLEW_Angle_2<0, false, data.D1PLC1CommunicationState);
+        SetToggleState(rightSideRun, data.SLEW_Angle_2>0, false, data.D1PLC1CommunicationState);
     }
 
     public void Update()

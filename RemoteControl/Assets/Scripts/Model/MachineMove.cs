@@ -12,6 +12,7 @@ public class MachineMove : MonoBehaviour
     public TMP_Text errorText;
     public Transform mainCameraTransform;
     public Animation rotClip;
+    public Machine machine;
     public float speed;
     private void Start()
     {
@@ -28,8 +29,16 @@ public class MachineMove : MonoBehaviour
 
     public void UpdatePosAndRotaionByMeter(float meter, float rotAngleY, float rotAngleZ)
     {
-        rotationGo_z.localRotation = Quaternion.Euler(new Vector3(0, 0, rotAngleY));
-        rotationGo_y.localRotation = Quaternion.Euler(new Vector3(0, rotAngleZ, 0));
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            rotationGo_z.localRotation = Quaternion.Euler(new Vector3(0, 0, rotAngleY));
+            rotationGo_y.localRotation = Quaternion.Euler(new Vector3(0, rotAngleZ, 0));
+        }
+        else
+        {
+            rotationGo_z.localRotation = Quaternion.Euler(new Vector3(0, rotAngleZ, rotAngleY));
+        }
+       
 
 
         transform.localPosition = new Vector3(meter, transform.localPosition.y, transform.localPosition.z);

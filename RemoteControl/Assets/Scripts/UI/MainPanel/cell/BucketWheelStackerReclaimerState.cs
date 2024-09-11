@@ -45,5 +45,8 @@ public class BucketWheelStackerReclaimerState : BucketWheelStateBase
         SetToggleState(rightTurnRun, data.RotaryRightTurnCommand, false, data.D1PLC1CommunicationState);
         SetToggleState(backTurnRun, data.LargeCarReverseCommand, false, data.D1PLC1CommunicationState);
         SetToggleState(fowardTurnRun, data.LargeCarForwardCommand, false, data.D1PLC1CommunicationState);
+        
+        SetToggleState(leftSideRun, data.SLEW_Angle<0, false, data.D1PLC1CommunicationState);
+        SetToggleState(rightSideRun, data.SLEW_Angle>0, false, data.D1PLC1CommunicationState);
    }
 }
