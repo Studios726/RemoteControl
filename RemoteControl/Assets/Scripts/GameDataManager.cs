@@ -64,6 +64,7 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void SetSystemVariables(SystemVariables systemVariables)
     {
+        RecordWarning(systemVariables);
         _systemVariables = systemVariables;
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
       
@@ -199,10 +200,7 @@ public class GameDataManager : Singleton<GameDataManager>
             error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "变幅上仰极限\n" : error;
             error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下附极限\n" : error;
 
-            if (error!="")
-            {
-                machineMove_1.UpdateErrorText(error);
-            }
+            machineMove_1.UpdateErrorText(error);
           
         }
 
@@ -224,10 +222,7 @@ public class GameDataManager : Singleton<GameDataManager>
             error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "变幅上仰极限\n" : error;
             error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下附极限\n" : error;
 
-            if (error!="")
-            {
-                machineMove_2.UpdateErrorText(error);
-            }
+            machineMove_2.UpdateErrorText(error);
             
         }
     }
@@ -584,5 +579,15 @@ public class GameDataManager : Singleton<GameDataManager>
             // Debug.Log("相差不足三个月");
         }
        
+    }
+
+    public void RecordWarning(SystemVariables newSystemVariables)
+    {
+       
+       if (_systemVariables!=null)
+       {
+           // 存儲警告信息
+           //l
+       }
     }
 }
