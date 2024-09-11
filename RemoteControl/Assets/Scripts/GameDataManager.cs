@@ -197,8 +197,8 @@ public class GameDataManager : Singleton<GameDataManager>
 
             error = _systemVariables.VariableAmplitudeUpperLimit ? error + "变幅上仰限位\n" : error;
             error = _systemVariables.VariableAmplitudeLowerLimit ? error + "变幅下附限位\n" : error;
-            error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "变幅上仰极限\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下附极限\n" : error;
+            error = _systemVariables.VariableAmplitudeUpperExtremeLimit ? error + "变幅上仰极限\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerExtremeLimit ? error + "变幅下附极限\n" : error;
 
             machineMove_1.UpdateErrorText(error);
           
