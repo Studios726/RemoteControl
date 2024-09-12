@@ -275,7 +275,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle) * Mathf.Deg2Rad);
             string x =(53.4+data.DC_Pos +  (x1 * Mathf.Cos(data.SLEW_Angle*Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle*Mathf.Deg2Rad) -1.8F).ToString("F2");
-            bucketWheelPos.text = $"({x},{y})";
+            bucketWheelPos.text = $"({x} , {y})";
         }
         else
         {
@@ -328,7 +328,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             string x =(117.74+data.DC_Pos_2 +  (x1 * Mathf.Cos(data.SLEW_Angle_2*Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle_2*Mathf.Deg2Rad) +1.7).ToString("F2");
                    
-            bucketWheelPos.text = $"({x},{y})";
+            bucketWheelPos.text = $"({x} , {y})";
         }
         SetText(distanceOfTwoCars,(Mathf.Abs(data.DC_Pos-data.DC_Pos_2) +64.34).ToString("F2"),TextType.Meter);
       
