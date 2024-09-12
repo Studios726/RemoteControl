@@ -235,8 +235,8 @@ public class RotaryMechanismItem : StatusParmItemBase<RotaryMechanismData>
         SetToggleState(RightTurnCollisionPreventionLimit, data.isRightTurnCollisionPreventionLimit,true,isConnect);
 
         SetToggleState(RotaryOverTorque, data.isRotaryOverTorque,true,isConnect);
-        SetToggleState(RotaryZeroPositionLimit, data.isRotaryZeroPositionLimit,true,isConnect);
-        SetToggleState(BrakeReliefLimit, data.isBrakeReliefLimit,true,isConnect);
+        SetToggleState(RotaryZeroPositionLimit, data.isRotaryZeroPositionLimit,false,isConnect);
+        SetToggleState(BrakeReliefLimit, data.isBrakeReliefLimit,false,isConnect);
         SetToggleState(RotaryCentralLubricationBlockedOil, data.isRotaryCentralLubricationBlockedOil,true,isConnect);
         SetToggleState(RotaryCentralLubricationLowOilLevel, data.isRotaryCentralLubricationLowOilLevel,true,isConnect);
     }

@@ -84,7 +84,7 @@ public class BucketWheelCenterRoomSignalItem : StatusParmItemBase<BucketWheelCen
         SetToggleState(BucketWheelTakeMaterRunToggle, data.isBucketWheelTakeMaterRun,false,isConnect);
         SetToggleState(AllowShuntSignalToggle, data.isAllowShuntSignal,false,isConnect);
         SetToggleState(BucketWheelShuntRunToggle, data.isBucketWheelShuntRun,false,isConnect);
-        SetToggleState(LongDistanceCtrScramStopToggle, data.isLongDistanceCtrScramStop,false,isConnect);
+        SetToggleState(LongDistanceCtrScramStopToggle, data.isLongDistanceCtrScramStop,true,isConnect);
         SetToggleState(BucketWheelMalfunctionToggle, data.isBucketWheelMalfunction,true,isConnect);
     }
 

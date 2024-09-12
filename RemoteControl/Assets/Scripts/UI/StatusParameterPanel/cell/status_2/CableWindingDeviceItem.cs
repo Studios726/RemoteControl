@@ -96,12 +96,12 @@ public class CableWindingDeviceItem : StatusParmItemBase<CableWindingDeviceData>
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
         SetToggleState(ReelOverTightLimit1, data.isReelOverTightLimit1,true,isConnect);
         SetToggleState(ReelOverLooseLimit1, data.isReelOverLooseLimit1,true,isConnect);
-        SetToggleState(ReelEmptyDiskSwitch, data.isReelEmptyDiskSwitch,false,isConnect);
+        SetToggleState(ReelEmptyDiskSwitch, data.isReelEmptyDiskSwitch,true,isConnect);
         SetToggleState(ReelMiddleBrakeSwitch, data.isReelMiddleBrakeSwitch,false,isConnect);
         SetToggleState(ReelMotorOverload, data.isReelMotorOverload,true,isConnect);
         SetToggleState(ReelOverTightLimit2, data.isReelOverTightLimit2,true,isConnect);
         SetToggleState(ReelOverLooseLimit2, data.isReelOverLooseLimit2,true,isConnect);
-        SetToggleState(ReelFullDiskSwitch, data.isReelFullDiskSwitch,false,isConnect);
+        SetToggleState(ReelFullDiskSwitch, data.isReelFullDiskSwitch,true,isConnect);
         SetToggleState(PowerReelRunning, data.isPowerReelRunning,false,isConnect);
     }
 }

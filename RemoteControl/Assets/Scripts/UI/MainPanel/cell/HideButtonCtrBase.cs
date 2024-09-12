@@ -221,17 +221,19 @@ public class HideButtonCtrBase : PanelBase
             if (data.LeftClampRelaxLimit==true && data.RightClampRelaxLimit==true)
             {
                 disengageClampBtn.SetSystemState(true);
+                engageClampBtn.SetSystemState(false);
             }
             else
             {
                 engageClampBtn.SetSystemState(true);
+                disengageClampBtn.SetSystemState(false);
             }
             impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed==false);
             impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed);
             lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed);
             lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed==false);
-            systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich==false);
-            systemLockBtn.SetSystemState(data.SR1_Interlock_Swich);
+            systemUnlockBtn.SetSystemState(data.SystemInterlockSwitch==false);
+            systemLockBtn.SetSystemState(data.SystemInterlockSwitch);
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning==false);
             oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning);
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB);
@@ -277,8 +279,8 @@ public class HideButtonCtrBase : PanelBase
             impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2);
             lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed_2);
             lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed_2==false);
-            systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich_2==false);
-            systemLockBtn.SetSystemState(data.SR1_Interlock_Swich_2);
+            systemUnlockBtn.SetSystemState(data.SystemInterlockSwitch_2==false);
+            systemLockBtn.SetSystemState(data.SystemInterlockSwitch_2);
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false);
             oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2);
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB_2);

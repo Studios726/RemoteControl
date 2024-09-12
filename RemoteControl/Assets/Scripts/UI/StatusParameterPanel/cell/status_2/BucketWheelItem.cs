@@ -67,7 +67,7 @@ public class BucketWheelItem : StatusParmItemBase<BucketWheelData>
         SetToggleState(BucketWheelRunning, data.isBucketWheelRunning,false,isConnect);
         SetToggleState(LubricationPumpRunning, data.isLubricationPumpRunning,false,isConnect);
         SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
-        SetToggleState(BucketWheelOverTorqueSwitch, data.isBucketWheelOverTorqueSwitch,false,isConnect);
+        SetToggleState(BucketWheelOverTorqueSwitch, data.isBucketWheelOverTorqueSwitch,true,isConnect);
         SetToggleState(LubricatingOilPumpFlowSwitch, data.isLubricatingOilPumpFlowSwitch,false,isConnect);
     }
 }

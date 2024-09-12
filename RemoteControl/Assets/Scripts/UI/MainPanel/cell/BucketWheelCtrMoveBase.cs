@@ -226,10 +226,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         //Debug.Log("更新move  大车碰撞信息 ");
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
-            SetText(carElectricity,data.LargeCarElectricCurrent.ToString("F2"),TextType.Electricity);
-            SetText(rotationElectricity,data.RotaryElectricCurrent.ToString("F2"),TextType.Electricity);
-            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent.ToString("F2"),TextType.Electricity);
-            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent.ToString("F2"),TextType.Electricity);
+            SetText(carElectricity,data.LargeCarElectricCurrent.ToString(),TextType.Electricity);
+            SetText(rotationElectricity,data.RotaryElectricCurrent.ToString(),TextType.Electricity);
+            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent.ToString(),TextType.Electricity);
+            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent.ToString(),TextType.Electricity);
             SetText(carPos,data.DC_Pos.ToString("F2"),TextType.Meter);
             SetText(rotationAngle,data.SLEW_Angle.ToString("F2"),TextType.Angle);
             SetText(upAngle,data.Luff_Angle.ToString("F2"),TextType.Angle);
@@ -279,10 +279,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         }
         else
         {
-            SetText(carElectricity,data.LargeCarElectricCurrent_2.ToString("F2"),TextType.Electricity);
-            SetText(rotationElectricity,data.RotaryElectricCurrent_2.ToString("F2"),TextType.Electricity);
-            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent_2.ToString("F2"),TextType.Electricity);
-            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent_2.ToString("F2"),TextType.Electricity);
+            SetText(carElectricity,data.LargeCarElectricCurrent_2.ToString(),TextType.Electricity);
+            SetText(rotationElectricity,data.RotaryElectricCurrent_2.ToString(),TextType.Electricity);
+            SetText(bucketWheelElectricity,data.BucketWheelElectricCurrent_2.ToString(),TextType.Electricity);
+            SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent_2.ToString(),TextType.Electricity);
             SetText(carPos,data.DC_Pos_2.ToString("F2"),TextType.Meter);
             SetText(rotationAngle,data.SLEW_Angle_2.ToString("F2"),TextType.Angle);
             SetText(upAngle,data.Luff_Angle_2.ToString("F2"),TextType.Angle);

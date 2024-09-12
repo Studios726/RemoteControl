@@ -63,10 +63,10 @@ public class TailCarBeltDeviceItem : StatusParmItemBase<TailCarBeltDeviceData>
     {
         SetToggleState(BearingUpperLimitAlarm,data.isBearingUpperLimitAlarm,true,isConnect);
         SetToggleState(BearingLowerLimitAlarm, data.isBearingLowerLimitAlarm,true,isConnect);
-        SetToggleState(LevelOneDeviation, data.isLevelOneDeviation,false,isConnect);
-        SetToggleState(LevelTwoDeviation, data.isLevelTwoDeviation,false,isConnect);
-        SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch,false,isConnect);
-        SetToggleState(LongitudinalTearSwitch, data.isLongitudinalTearSwitch,false,isConnect);
+        SetToggleState(LevelOneDeviation, data.isLevelOneDeviation,true,isConnect);
+        SetToggleState(LevelTwoDeviation, data.isLevelTwoDeviation,true,isConnect);
+        SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch,true,isConnect);
+        SetToggleState(LongitudinalTearSwitch, data.isLongitudinalTearSwitch,true,isConnect);
 
     }
 

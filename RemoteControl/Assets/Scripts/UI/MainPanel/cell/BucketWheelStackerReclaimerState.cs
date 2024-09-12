@@ -31,7 +31,7 @@ public class BucketWheelStackerReclaimerState : BucketWheelStateBase
         SetToggleState(lowVoltagePowerClosed,data.LowVoltagePowerClosed,false,data.D1PLC1CommunicationState);
         SetToggleState(remoteControl, data.Remote, false, data.D1PLC1CommunicationState);
         SetToggleState(powerSupplyClose, data.LowVoltageControlPowerClosed, false, data.D1PLC1CommunicationState);
-        SetToggleState(systemChain, data.SR1_Interlock_Swich, false, data.D1PLC1CommunicationState);
+        SetToggleState(systemChain, data.SystemInterlockSwitch, false, data.D1PLC1CommunicationState);
         // SetToggleState(recondition, data.SystemInterlockSwitch, false, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelMalfunction, data.BucketWheelFault, true, data.D1PLC1CommunicationState);
         // SetToggleState(buzzerAlarm, data.BucketWheelFault, true, data.D1PLC1CommunicationState);

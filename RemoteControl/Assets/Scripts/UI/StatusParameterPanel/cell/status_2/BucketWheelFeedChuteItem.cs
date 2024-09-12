@@ -63,8 +63,8 @@ public class BucketWheelFeedChuteItem : StatusParmItemBase<BucketWheelFeedChuteD
     {
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
         SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
-        SetToggleState(LiftLimit, data.isLiftLimit,true,isConnect);
-        SetToggleState(LowerLimit, data.isLowerLimit,true,isConnect);
+        SetToggleState(LiftLimit, data.isLiftLimit,false,isConnect);
+        SetToggleState(LowerLimit, data.isLowerLimit,false,isConnect);
         SetToggleState(LiftRunning, data.isLiftRunning,false,isConnect);
         SetToggleState(LowerRunning, data.isLowerRunning,false,isConnect);
     }

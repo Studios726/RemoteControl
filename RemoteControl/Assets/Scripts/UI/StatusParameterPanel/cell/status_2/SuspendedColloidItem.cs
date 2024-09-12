@@ -119,15 +119,15 @@ public class SuspendedColloidItem : StatusParmItemBase<SuspendedColloidData>
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
         SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
         SetToggleState(BrakeOpen, data.isBrakeOpen,false,isConnect);
-        SetToggleState(BrakeReleaseLimit, data.isBrakeReleaseLimit,true,isConnect);
+        SetToggleState(BrakeReleaseLimit, data.isBrakeReleaseLimit,false,isConnect);
         SetToggleState(StackingOperation, data.isStackingOperation,false,isConnect);
         SetToggleState(FetchingOperation, data.isFetchingOperation,false,isConnect);
-        SetToggleState(FirstLevelDeviationSwitch, data.isFirstLevelDeviationSwitch,false,isConnect);
-        SetToggleState(SecondLevelDeviationSwitch, data.isSecondLevelDeviationSwitch,false,isConnect);
-        SetToggleState(SlippingDetectionSwitch, data.isSlippingDetectionSwitch,false,isConnect);
-        SetToggleState(LongitudinalTearSwitch, data.isLongitudinalTearSwitch,false,isConnect);
-        SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch,false,isConnect);
-        SetToggleState(MaterialFlowDetectionSwitch, data.isMaterialFlowDetectionSwitch,false,isConnect);
-        SetToggleState(MiddleHopperCoalBlocking, data.isMiddleHopperCoalBlocking,false,isConnect);
+        SetToggleState(FirstLevelDeviationSwitch, data.isFirstLevelDeviationSwitch,true,isConnect);
+        SetToggleState(SecondLevelDeviationSwitch, data.isSecondLevelDeviationSwitch,true,isConnect);
+        SetToggleState(SlippingDetectionSwitch, data.isSlippingDetectionSwitch,true,isConnect);
+        SetToggleState(LongitudinalTearSwitch, data.isLongitudinalTearSwitch,true,isConnect);
+        SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch,true,isConnect);
+        SetToggleState(MaterialFlowDetectionSwitch, data.isMaterialFlowDetectionSwitch,true,isConnect);
+        SetToggleState(MiddleHopperCoalBlocking, data.isMiddleHopperCoalBlocking,true,isConnect);
     }
 }

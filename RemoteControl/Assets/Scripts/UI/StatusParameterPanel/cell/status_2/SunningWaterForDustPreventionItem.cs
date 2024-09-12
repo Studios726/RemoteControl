@@ -119,7 +119,7 @@ public class SunningWaterForDustPreventionItem : StatusParmItemBase<SunningWater
         SetToggleState(DryFogSysAirPressureLow,data.isDryFogSysAirPressureLow,true,isConnect);
         SetToggleState(DryFogSysWaterPressureLow, data.isDryFogSysWaterPressureLow, true, isConnect);
         SetToggleState(DryFogSysFilterClogged, data.isDryFogSysFilterClogged,true,isConnect);
-        SetToggleState(WaterTankLevelLowSwitch, data.isWaterTankLevelLowSwitch,false,isConnect);
+        SetToggleState(WaterTankLevelLowSwitch, data.isWaterTankLevelLowSwitch,true,isConnect);
         SetToggleState(DryFogSysSprayStatus, data.isDryFogSysSprayStatus,false,isConnect);
         SetToggleState(DryFogSysSprayRunning, data.isDryFogSysSprayRunning,false,isConnect);
         SetToggleState(DryFogSysAutoRunning, data.isDryFogSysAutoRunning,false,isConnect);

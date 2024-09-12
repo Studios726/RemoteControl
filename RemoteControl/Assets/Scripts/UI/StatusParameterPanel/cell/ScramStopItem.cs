@@ -38,8 +38,8 @@ public class ScramStopItem : StatusParmItemBase<ScramStopData>
     public override void UpdateData(ScramStopData scramStopData,bool isConnect=false)
     {
       
-        SetToggleState(ElectricalRoomEmergencyToggle, scramStopData.isElectricalRoomEmergency,false,isConnect);
-        SetToggleState(DriverRoomEmergencyToggle, scramStopData.isDriverRoomEmergency,false,isConnect);
+        SetToggleState(ElectricalRoomEmergencyToggle, scramStopData.isElectricalRoomEmergency,true,isConnect);
+        SetToggleState(DriverRoomEmergencyToggle, scramStopData.isDriverRoomEmergency,true,isConnect);
         SetToggleState(EmergencyStopRelayToggle, scramStopData.isEmergencyStopRelay,true,isConnect);
     }
 

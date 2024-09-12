@@ -201,7 +201,7 @@ public partial class DataManager
 
     public bool InsertHistoryChartData(string tabName,float value,string des,Machine machine)
     {
-        int id =machine==Machine.BucketWheelStackerReclaimer?0:1;
+        int id =machine==(int)Machine.BucketWheelStackerReclaimer?0:1;
         string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_CARTELECTRICITY_NAME}`,`{ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}`,`{ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME}`,`{ConstStr.DATA_HISTORY_CARTELECTRICITY_VALUE}`) " +
                        $"VALUES ('{des}','{id}','{DateTime.Now}','{value}')";
         return MySqlHelper.ExecuteSql(query) > 0;
