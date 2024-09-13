@@ -237,6 +237,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             aloneBtn.SetSystemState(data.Single_Action);
             togetherBtn.SetSystemState(data.Link_Action);
             automaticBtn.SetSystemState(data.AUTO_MODE);
+            
+            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth);
+            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen);
             
@@ -290,6 +293,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             aloneBtn.SetSystemState(data.Single_Action_2);
             togetherBtn.SetSystemState(data.Link_Action_2);
             automaticBtn.SetSystemState(data.AUTO_MODE_2);
+            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2);
+            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
             leftBtn.SetSystemState(data.RotaryLeftTurnCommand_2);

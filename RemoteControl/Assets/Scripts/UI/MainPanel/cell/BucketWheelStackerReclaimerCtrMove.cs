@@ -67,5 +67,6 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
     {
         //Debug.Log("更新堆取料机碰撞信息");
         base.UpdateData(data);
+        pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth);
     }
 }
