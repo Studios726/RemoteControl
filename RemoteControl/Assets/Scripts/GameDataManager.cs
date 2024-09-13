@@ -196,9 +196,9 @@ public class GameDataManager : Singleton<GameDataManager>
             error = _systemVariables.RotaryRightTurnExtremeLimit ? error + "回转右转极限\n" : error;
 
             error = _systemVariables.VariableAmplitudeUpperLimit ? error + "变幅上仰限位\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerLimit ? error + "变幅下附限位\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerLimit ? error + "变幅下俯限位\n" : error;
             error = _systemVariables.VariableAmplitudeUpperExtremeLimit ? error + "变幅上仰极限\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerExtremeLimit ? error + "变幅下附极限\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerExtremeLimit ? error + "变幅下俯极限\n" : error;
 
             machineMove_1.UpdateErrorText(error);
           
@@ -218,9 +218,9 @@ public class GameDataManager : Singleton<GameDataManager>
             error = _systemVariables.RotaryRightTurnExtremeLimit_2 ? error + "回转右转极限\n" : error;
 
             error = _systemVariables.VariableAmplitudeUpperLimit_2 ? error + "变幅上仰限位\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerLimit_2 ? error + "变幅下附限位\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerLimit_2 ? error + "变幅下俯限位\n" : error;
             error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "变幅上仰极限\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下附极限\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下俯极限\n" : error;
 
             machineMove_2.UpdateErrorText(error);
             
@@ -514,6 +514,7 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         if (curAccountInfo != null && curAccountInfo.isAdmin)
         {
+            Debug.LogError("RecordChart");
             DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,_systemVariables.BucketWheelElectricCurrent, "斗轮电流",
                 Machine.BucketWheelStackerReclaimer);
         

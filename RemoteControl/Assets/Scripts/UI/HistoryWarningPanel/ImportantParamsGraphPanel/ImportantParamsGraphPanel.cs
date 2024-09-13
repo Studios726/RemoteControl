@@ -311,7 +311,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public void GetSqlData(LineChart lineChart,string chartName, Machine machine,bool isUseTime =false,string startTime="",string endTime="")
     {
         lineChart.series[0].data.Clear();
-        _dataReader = DataManager.Instance.GetHistoryChartData(chartName, ((int)machine).ToString(), 10, isUseTime, startTime, endTime);
+        _dataReader = DataManager.Instance.GetHistoryChartData(chartName, ((int)machine).ToString(), 3000, isUseTime, startTime, endTime);
 
         List<ElectricityData> electricityDataList = new List<ElectricityData>();
         int counter = 0;
@@ -323,7 +323,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             data.Value = int.Parse(_dataReader[3].ToString());
             electricityDataList.Add(data);
             ++counter;
-            if (counter == 100)
+            if (counter == 3000)
             {
                 counter = 0;
                 break;
