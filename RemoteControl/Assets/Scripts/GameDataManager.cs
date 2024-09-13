@@ -512,40 +512,48 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void RecordChart()
     {
-        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,_systemVariables.BucketWheelElectricCurrent, "斗轮电流",
-            Machine.BucketWheelStackerReclaimer);
+        if (curAccountInfo != null && curAccountInfo.isAdmin)
+        {
+            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,_systemVariables.BucketWheelElectricCurrent, "斗轮电流",
+                Machine.BucketWheelStackerReclaimer);
         
-        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, _systemVariables.LargeCarElectricCurrent, "大车电流",
-            Machine.BucketWheelStackerReclaimer);
+            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, _systemVariables.LargeCarElectricCurrent, "大车电流",
+                Machine.BucketWheelStackerReclaimer);
         
-        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, _systemVariables.RotaryElectricCurrent, "回转电流",
-            Machine.BucketWheelStackerReclaimer);
+            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, _systemVariables.RotaryElectricCurrent, "回转电流",
+                Machine.BucketWheelStackerReclaimer);
         
-        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, _systemVariables.SuspensionBeltElectricCurrent, "悬胶电流",
-            Machine.BucketWheelStackerReclaimer);
+            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, _systemVariables.SuspensionBeltElectricCurrent, "悬胶电流",
+                Machine.BucketWheelStackerReclaimer);
         
-        // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
-        //     Machine.BucketWheelStackerReclaimer);
+            // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
+            //     Machine.BucketWheelStackerReclaimer);
         
-        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,_systemVariables.BucketWheelElectricCurrent_2, "斗轮电流",
-            Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,_systemVariables.BucketWheelElectricCurrent_2, "斗轮电流",
+                Machine.BucketWheel);
         
-        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, _systemVariables.LargeCarElectricCurrent_2, "大车电流",
-            Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, _systemVariables.LargeCarElectricCurrent_2, "大车电流",
+                Machine.BucketWheel);
         
-        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, _systemVariables.RotaryElectricCurrent_2, "回转电流",
-            Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, _systemVariables.RotaryElectricCurrent_2, "回转电流",
+                Machine.BucketWheel);
         
-        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, _systemVariables.SuspensionBeltElectricCurrent_2, "悬胶电流",
-            Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, _systemVariables.SuspensionBeltElectricCurrent_2, "悬胶电流",
+                Machine.BucketWheel);
         
-        // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
-        //     Machine.BucketWheelStackerReclaimer);
+            // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
+            //     Machine.BucketWheelStackerReclaimer);
+        }
+        
         
     }
     
     public void DeleteThreeMonthData() //
     {
+        if (curAccountInfo == null || curAccountInfo.isAdmin==false)
+        {
+            return;
+        }
         string time = PlayerPrefs.GetString("Time", "");
         if (time=="")
         {

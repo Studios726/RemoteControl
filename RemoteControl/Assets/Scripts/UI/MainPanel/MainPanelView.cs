@@ -52,6 +52,7 @@ public class MainPanelView : UIView<MainPanelCtr>
         UpdateData(GameDataManager.Instance.SystemVariables);
         //临时注释
         TaskDataManager.Instance.GetNearestTaskDataDic();
+        GameDataManager.Instance.DeleteThreeMonthData();
     }
 
     private void ActiveHideBtnCtr2()

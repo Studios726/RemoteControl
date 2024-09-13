@@ -34,7 +34,7 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         //            GameDataManager.Instance.IpConfig.TaskIP +"\n RC IP "+
         //            GameDataManager.Instance.IpConfig.TaoIP;
         _IP.text = "";
-        GameDataManager.Instance.DeleteThreeMonthData();
+       
     }
 
     public void OnSubmit(string str)
