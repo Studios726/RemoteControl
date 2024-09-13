@@ -192,12 +192,12 @@ public class HideButtonCtrBase : PanelBase
         AddOnClickListener(systemUnlockBtn,(() =>SendMessageToServer(COMMAND_NAME.SYSTEM_UNLOCK) ));
         AddOnClickListener(oilPumpStartBtn,(() =>SendMessageToServer(COMMAND_NAME.OILBUMP_ON) ));
         AddOnClickListener(oilPumpStopBtn,(() =>SendMessageToServer(COMMAND_NAME.OILBUMP_OFF) ));
-        AddOnClickListener(wiperStartBtn,(() =>SendMessageToServer("雨刷器启动") ));
-        AddOnClickListener(wiperStopBtn,(() =>SendMessageToServer("雨刷器停止") ));
-        AddOnClickListener(wiperSprayWaterBtn,(() =>SendMessageToServer("雨刷器喷水") ));
+        // AddOnClickListener(wiperStartBtn,(() =>SendMessageToServer("雨刷器启动") ));
+        // AddOnClickListener(wiperStopBtn,(() =>SendMessageToServer("雨刷器停止") ));
+        // AddOnClickListener(wiperSprayWaterBtn,(() =>SendMessageToServer("雨刷器喷水") ));
         AddOnClickListener(bypassBtn,(() =>SendMessageToServer( COMMAND_NAME.BYPASS_BUTTON) ));
-        AddOnClickListener(cabDownBtn,(() =>SendMessageToServer("司机室下降") ));
-        AddOnClickListener(cabUpBtn,(() =>SendMessageToServer("司机室上升") ));
+        // AddOnClickListener(cabDownBtn,(() =>SendMessageToServer("司机室下降") ));
+        // AddOnClickListener(cabUpBtn,(() =>SendMessageToServer("司机室上升") ));
         AddOnClickListener(draughtFanStartBtn,(() =>SendMessageToServer(COMMAND_NAME.LUFF_FAN_START) ));
         AddOnClickListener(draughtFanStopBtn,(() =>SendMessageToServer(COMMAND_NAME.LUFF_FAN_STOP) ));
         AddOnClickListener(bucketWheelStartBtn,(() =>SendMessageToServer(COMMAND_NAME.BUCKET_START) ));
