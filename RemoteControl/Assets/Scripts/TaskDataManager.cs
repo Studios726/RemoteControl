@@ -126,7 +126,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
             for (int i = 0; i < taskVariables.McData.Count; i++)
             {
-                Debug.LogError($" code {taskVariables.McData[i].AllData.Code}  {taskVariables.McData[i].Machine}");
+                // Debug.LogError($" code {taskVariables.McData[i].AllData.Code}  {taskVariables.McData[i].Machine} {taskVariables.McData[i].AllData.ProcessingProgress} ");
                 AddOrUpdateTaskData(taskVariables.McData[i]);
                 if (nearestTaskDataDic.ContainsKey(taskVariables.McData[i].TaskID))
                 {
@@ -155,6 +155,17 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         DataManager.Instance.UpdateHistoryTaskMc(taskData.TaskID,
                             taskData.TaskState);
                         GameDataManager.Instance.UpdateSCAData(1);
+                        if (taskVariables.McData[i].Machine==Machine.BucketWheelStackerReclaimer)
+                        {
+                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,Machine.BucketWheelStackerReclaimer);
+                        }
+                        else
+                        {
+                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,Machine.BucketWheel);
+                        }
+                    }
+                    else
+                    {
                         if (taskVariables.McData[i].Machine==Machine.BucketWheelStackerReclaimer)
                         {
                             AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,Machine.BucketWheelStackerReclaimer);
@@ -341,9 +352,18 @@ public class TaskDataManager : Singleton<TaskDataManager>
             des = "取料中，暂停不可用";
             rank = 1;
         }
+        else if (code == 304)
+        {
+            des = "取料解除暂停";
+            rank = 1;
+        }
         else if (code == 401)
         {
             des = "取料中，换向不可用";
+            rank = 1;
+        }else if (code == 402)
+        {
+            des = "取料换向成功";
             rank = 1;
         }
         else if (code == 1000)

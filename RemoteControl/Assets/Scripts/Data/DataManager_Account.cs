@@ -136,7 +136,6 @@ public partial class DataManager
     }
     public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userName,string state)
     {
-        Debug.LogError($" taskCommand.TaskCreateTime {taskCommand.TaskCreateTime.ToString()}");
         string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`) " +
            $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{userName}','{state}','{taskCommand.TaskID}','{taskCommand.TakeMateHigh}','{taskCommand.LayerHigh}')";
         return MySqlHelper.ExecuteSql(query) > 0; ;
@@ -145,7 +144,7 @@ public partial class DataManager
     {
         string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE} = {state} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
         bool success=MySqlHelper.ExecuteSql(query) > 0; 
-        Debug.LogError($"更新任务状态 { taskID } { state} {success}");
+        // Debug.LogError($"更新任务状态 { taskID } { state} {success}");
         return success; 
     }
     public MySqlDataReader GetHistoryTaskMc(int limit)
@@ -198,7 +197,52 @@ public partial class DataManager
         MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
         return mySqlDataReader;
     }
+    public MySqlDataReader GetHistoryChartData(string chartName, string machine, bool isUseTime = false, string startTime = "", string endTime = "")
+    {
+        string query = "";
+        if (isUseTime == false)
+        {
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine}  ORDER BY id DESC;";
+        }
+        else
+        {
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY id DESC";
+        }
+        // Debug.Log($"命令 {query}");
+        MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
+        return mySqlDataReader;
+    }
 
+    public DataSet GetHistoryChartDataSet(string chartName, string machine, int limit = 100, bool isUseTime = false, string startTime = "", string endTime = "")
+    {
+        string query = "";
+        if (isUseTime == false)
+        {
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine}  ORDER BY id DESC LIMIT {limit};";
+        }
+        else
+        {
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY id DESC LIMIT {limit}";
+        }
+        // Debug.Log($"命令 {query}");
+        DataSet dataSet = MySqlHelper.GetDataSet(query);
+        return  dataSet;
+    }
+    
+    public DataSet GetHistoryChartDataSet(string chartName, string machine, bool isUseTime = false, string startTime = "", string endTime = "")
+    {
+        string query = "";
+        if (isUseTime == false)
+        {
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine}  ORDER BY id DESC;";
+        }
+        else
+        {
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY id DESC";
+        }
+        DataSet dataSet = MySqlHelper.GetDataSet(query);
+        return  dataSet;
+    }
     public bool InsertHistoryChartData(string tabName,float value,string des,Machine machine)
     {
         int id =machine==(int)Machine.BucketWheelStackerReclaimer?0:1;

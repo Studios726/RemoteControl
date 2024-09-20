@@ -336,7 +336,7 @@ public class SearchPanel : MonoBehaviour
             for (int i = 0; i < 24; i++)
             {
                 GameObject obj = Instantiate(searchItme, contentH);
-                obj.transform.Find("Text").GetComponent<Text>().text = (i + 1).ToString();
+                obj.transform.Find("Text").GetComponent<Text>().text =i.ToString();
                 obj.GetComponent<Button>().onClick.AddListener((() =>
                 {
                     SetActive(scrollviewH, false);
@@ -391,8 +391,6 @@ public class SearchPanel : MonoBehaviour
             scrollView.transform.localPosition = pos + offset;
          
         }
-      
-        // SetActive(scrollView, true);
     }
 
     public void SetActive(GameObject go, bool isActive)
@@ -416,6 +414,12 @@ public class SearchPanel : MonoBehaviour
         
         SetActive(startMBtn.gameObject,true);
         SetActive(startMBtn2.gameObject,false);
+        
+        SetActive(startHBtn.gameObject, true);
+        SetActive(startHBtn2.gameObject, false);
+
+        SetActive(startMinuteBtn.gameObject, true);
+        SetActive(startMinuteBtn2.gameObject, false);
         
         SetActive(endYBtn.gameObject,true);
         SetActive(endYBtn2.gameObject,false);
@@ -469,55 +473,8 @@ public class SearchPanel : MonoBehaviour
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("日期无效，请重新检查日期，稍后查询"));
             return;
         }
-        Debug.LogError($"搜索日期 {startTime} \n {endTime}");
+        Debug.Log($"搜索日期 {startTime} \n {endTime}");
         searchAction?.Invoke(startTime, endTime, mechanicalType,"");
-        //_historyPanelCtr?.SearchRecord(startTime, endTime, mechanicalType);
-        //
-        // string sql = $"SELECT * FROM {Tables} WHERE ";
-        //
-        // if (!useDate && !useOperator)
-        // {
-        //     sql = "Select * from " + Tables + " ORDER BY id DESC LIMIT 50;";
-        // }
-        // else if (useDate && useOperator)
-        // {
-        //     sql += $"`operator` = '{OperatorPerson}' AND `time` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `id` DESC;";
-        // }
-        // else if (useDate)
-        // {
-        //     sql += $"`time` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `id` DESC;";
-        // }
-        // else
-        // {
-        //     sql += $"`operator` = '{OperatorPerson}' ORDER BY `id` DESC;";
-        // }
-        //
-        // if (_dataReader != null)
-        // {
-        //     StopCoroutine(_readingCoroutine);
-        //     _dataReader.Close();
-        // }
-        // Debug.LogError($"sql={sql}");
-        // _dataReader = MySqlHelper.ExecuteReader(sql);
-        // Reader();
+       
     }
-    // private void Reader()
-    // {
-    //     int counter = 0;
-    //     while(_dataReader.Read())
-    //     {
-    //         string _id = _dataReader[0].ToString();
-    //         string _time = _dataReader[1].ToString();
-    //         string _info = _dataReader[2].ToString();
-    //         string _operatorname = _dataReader[3].ToString();
-    //         Debug.Log($"{_id}---{_time}---{_info}---{_operatorname}");
-    //         ++counter;
-    //         if (counter == 1000)
-    //         {
-    //             counter = 0;
-    //             break;
-    //         }
-    //     }
-    //     _dataReader.Close();
-    // }
 }

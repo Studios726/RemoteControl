@@ -642,6 +642,28 @@ public class GameDataManager : Singleton<GameDataManager>
         }
     }
 
+    public void RefreshWarningDesQueue()
+    {
+        if (BucketWheelStackerReclaimerQueue.Count>0)
+        {
+            WarningData warningData= BucketWheelStackerReclaimerQueue.Peek();
+            if ((DateTime.Now - warningData.Time).TotalSeconds>=8)
+            {
+                BucketWheelStackerReclaimerQueue.Dequeue();
+                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
+            }
+        }
+        
+        if (BucketWheelQueue.Count>0)
+        {
+            WarningData warningData= BucketWheelQueue.Peek();
+            if ((DateTime.Now - warningData.Time).TotalSeconds>=8)
+            {
+                BucketWheelQueue.Dequeue();
+                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
+            }
+        }
+    }
     public void AddOrUpdateWarningDesQueue(string des, Machine machine,int rank=0)
     {
         WarningData warningData = new WarningData(des,rank);

@@ -31,20 +31,20 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskDes1(object o, EventArgs eventArgs)
     {
-        if (GameDataManager.Instance.BucketWheelStackerReclaimerQueue.Count>0)
-        {
-            view._bucketWheelTask1.UpdateDes(GameDataManager.Instance.BucketWheelStackerReclaimerQueue);
-        }
-        
+        // if (GameDataManager.Instance.BucketWheelStackerReclaimerQueue.Count>0)
+        // {
+        //     
+        // }
+        view._bucketWheelTask1.UpdateDes(GameDataManager.Instance.BucketWheelStackerReclaimerQueue);
     }
     
     public void UpdateTaskDes2(object o, EventArgs eventArgs)
     {
-        if (GameDataManager.Instance.BucketWheelQueue.Count>0)
-        {
-            view._bucketWheelTask2.UpdateDes(GameDataManager.Instance.BucketWheelQueue);
-        }
-      
+        // if (GameDataManager.Instance.BucketWheelQueue.Count>0)
+        // {
+        //     view._bucketWheelTask2.UpdateDes(GameDataManager.Instance.BucketWheelQueue);
+        // }
+        view._bucketWheelTask2.UpdateDes(GameDataManager.Instance.BucketWheelQueue);
     }
     public override void Dispose()
     {

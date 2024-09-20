@@ -41,11 +41,17 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateDes(Queue<WarningData> queue)
     {
-        int index = 0;
-        foreach (var data in queue)
+        warningTexts[0].text ="";
+        warningTexts[1].text ="";
+        warningTexts[2].text ="";
+        if (queue.Count>0)
         {
-            warningTexts[index].text = data.Des;
-            index = index + 1;
+            int index = 0;
+            foreach (var data in queue)
+            {
+                warningTexts[index].text = data.Des;
+                index = index + 1;
+            }
         }
     }
 

@@ -22,6 +22,7 @@ namespace RemoteControl
         private Timer timerRc;
         private Timer timerPc;
         private Timer chartTimer;
+        private Timer warningTimer;
         private bool isConnect = false;
 
         public void EnterGame()
@@ -34,6 +35,10 @@ namespace RemoteControl
             chartTimer=Timer.Register(5,true,true,(() =>
             {
                 GameDataManager.Instance.RecordChart();
+            }));
+            warningTimer=Timer.Register(1,true,true,(() =>
+            {
+                GameDataManager.Instance.RefreshWarningDesQueue();
             }));
             // GameDataManager.Instance.GetLocalSCAData();
         }
