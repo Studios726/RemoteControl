@@ -126,6 +126,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
             for (int i = 0; i < taskVariables.McData.Count; i++)
             {
+                Debug.LogError($" code {taskVariables.McData[i].AllData.Code}  {taskVariables.McData[i].Machine}");
                 AddOrUpdateTaskData(taskVariables.McData[i]);
                 if (nearestTaskDataDic.ContainsKey(taskVariables.McData[i].TaskID))
                 {
@@ -139,11 +140,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                             GameDataManager.Instance.UpdateSCAData(1);
                             if (taskVariables.McData[i].Machine==Machine.BucketWheelStackerReclaimer)
                             {
-                                AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimerQueue,0,Machine.BucketWheelStackerReclaimer);
+                                AddOrUpdateTaskDesQueue(0,Machine.BucketWheelStackerReclaimer);
                             }
                             else
                             {
-                                AddOrUpdateTaskDesQueue(BucketWheelQueue,0,Machine.BucketWheel);
+                                AddOrUpdateTaskDesQueue(0,Machine.BucketWheel);
                             }
                          
                         }
@@ -156,11 +157,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         GameDataManager.Instance.UpdateSCAData(1);
                         if (taskVariables.McData[i].Machine==Machine.BucketWheelStackerReclaimer)
                         {
-                            AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimerQueue,taskVariables.McData[i].AllData.Code,Machine.BucketWheelStackerReclaimer);
+                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,Machine.BucketWheelStackerReclaimer);
                         }
                         else
                         {
-                            AddOrUpdateTaskDesQueue(BucketWheelQueue,taskVariables.McData[i].AllData.Code,Machine.BucketWheel);
+                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,Machine.BucketWheel);
                         }
                     }
                 }
@@ -175,11 +176,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     
                     if (taskCommand.Machine==Machine.BucketWheelStackerReclaimer)
                     {
-                        AddOrUpdateTaskDesQueue(BucketWheelStackerReclaimerQueue,-1,Machine.BucketWheelStackerReclaimer);//hard code 
+                        AddOrUpdateTaskDesQueue(-1,Machine.BucketWheelStackerReclaimer);//hard code 
                     }
                     else
                     {
-                        AddOrUpdateTaskDesQueue(BucketWheelQueue,-1,Machine.BucketWheel);
+                        AddOrUpdateTaskDesQueue(-1,Machine.BucketWheel);
                     }
                 }
             }
@@ -268,64 +269,111 @@ public class TaskDataManager : Singleton<TaskDataManager>
         return nearestTaskDataDic;
     }
 
-    public void AddOrUpdateTaskDesQueue(Queue<string> queue,int code,Machine machine)
+    public void AddOrUpdateTaskDesQueue(int code,Machine machine)
     {
-        if (queue.Count>=3)
-        {
-            queue.Dequeue();
-        }
-
+        Debug.Log($">>>>>>>code {code}");
         string des = "";
-        string time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        int rank = 3;
         if (code==-1)
         {
-            des = $"开始任务 {time}";
+            des ="任务进行中";
         }else if (code == 0)
         {
-            des = $"任务完成 {time}";
+            des = "作业完成";
         }else if (code == 1)
         {
-            des = $"与RC通讯中断 {time}";
+            des = "堆料完成，区间不可堆料";
+            rank = 1;
         }else if (code == 2)
         {
-            des = $"臂调0的范围内，有超过臂极限位置高度的煤堆 {time}";
+            des = "取料完成，区间无料可取";
+            rank = 1;
         }else if (code == 3)
         {
-            des = $"工作范围不满足实际情况 {time}";
-        }else if (code == 4)
+            des = "作业已被结束";
+        }else if (code == 101)
         {
-            des = $"软保护中出现问题 {time}";
-        }else if (code == 5)
+            des = "调臂区间煤堆高度超限";
+            rank = 1;
+        }else if (code == 102)
         {
-            des = $"两台机器会产生碰撞 {time}";
-        }else if (code == 6)
+            des = "设备限位/故障触发";
+            rank = 1;
+        }else if (code == 103)
         {
-            des = $"软保护和两台机器会产生碰撞 {time}";
-        }else if (code == 7)
+            des = "设备碰撞预警";
+            rank = 1;
+        }else if (code == 104)
         {
-            des = $"当前没有满足实际工作的情况 {time}";
-        }else if (code == 14)
+            des = "设备预超限位";
+            rank = 1;
+        }else if (code == 105)
         {
-            des = $"处于调臂阶段，换向不能用 {time}";
-        }else if (code == 15)
+            des = "异常完成，回转超极限";
+            rank = 1;
+        }else if (code == 106)
         {
-            des = $"取料作业中，处于暂停状态 {time}";
-        }else if (code == 16)
+            des = "异常完成，俯仰超极限";
+            rank = 1;
+        }else if (code == 150)
         {
-            des = $"正常运行 {time}";
+            des = "堆料作业暂停中";
+        }
+        else if (code == 151)
+        {
+            des = "取料作业暂停中";
+        } else if (code == 201)
+        {
+            des = "取料中，已换向";
+        }
+        else if (code == 301)
+        {
+            des = "堆料暂停自动解除";
+            rank = 1;
+        }
+        else if (code == 302)
+        {
+            des = "堆料中，暂停不可用";
+            rank = 1;
+        }
+        else if (code == 303)
+        {
+            des = "取料中，暂停不可用";
+            rank = 1;
+        }
+        else if (code == 401)
+        {
+            des = "取料中，换向不可用";
+            rank = 1;
+        }
+        else if (code == 1000)
+        {
+            des = "与远程驱动通信中断";
+            rank = 1;
+        }
+        else if (code == 1001)
+        {
+            des = "堆料范围不恰当";
+            rank = 1;
+        }
+        else if (code == 1002)
+        {
+            des = "取料范围不恰当";
+            rank = 1;
         }
         else
         {
-            des = $"任务异常中断 code {code} {time}";
+            des = $"错误码 {code}";
+            rank = 0;
         }
-        queue.Enqueue(des);
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1,null);
+            GameDataManager.Instance.AddOrUpdateWarningDesQueue(des,Machine.BucketWheelStackerReclaimer,rank);
+            
         }
         else
         {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2,null);
+            GameDataManager.Instance.AddOrUpdateWarningDesQueue(des,Machine.BucketWheelStackerReclaimer,rank);
         }
       
     }

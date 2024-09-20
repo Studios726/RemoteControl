@@ -21,6 +21,7 @@ namespace RemoteControl
         private MachineMove machineMove_2;
         private Timer timerRc;
         private Timer timerPc;
+        private Timer chartTimer;
         private bool isConnect = false;
 
         public void EnterGame()
@@ -30,6 +31,10 @@ namespace RemoteControl
             InitMode();
             CreatConnect(null, null);
             UIManager.Instance.OpenUI(UIID.LoginPanel);
+            chartTimer=Timer.Register(5,true,true,(() =>
+            {
+                GameDataManager.Instance.RecordChart();
+            }));
             // GameDataManager.Instance.GetLocalSCAData();
         }
 
@@ -128,6 +133,12 @@ namespace RemoteControl
             {
                 connectionSCA.OnClose();
                 connectionSCA = null;
+            }
+
+            if (chartTimer!=null)
+            {
+                chartTimer.Cancel();
+                chartTimer = null;
             }
             EventManager.Instance.RemoveListener(EventName.ConnectionSuccess, ConnectionSuccess);
             EventManager.Instance.RemoveListener(EventName.ConnectionFail, ConnectionFail);

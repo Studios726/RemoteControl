@@ -156,7 +156,7 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
 
     public void RefreshList(List<HistoryData> historyDatas,MechanicalType mechanicalType,PanelType panelType)
     {
-        Debug.Log($"RefreshList  mechanicalType{mechanicalType} ,panelType {panelType}");
+        // Debug.Log($"RefreshList  mechanicalType{mechanicalType} ,panelType {panelType}");
         if (mechanicalType==MechanicalType.Reclaimer)
         {
             if (panelType==PanelType.AlarmPanel)

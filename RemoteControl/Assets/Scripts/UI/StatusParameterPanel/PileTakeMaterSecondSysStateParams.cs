@@ -195,9 +195,8 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.SuspensionBeltFirstLevelDeviationSwitch_2);
         suspendedColloidData.isSecondLevelDeviationSwitch = GetToggleState(
             data.SuspensionBeltSecondLevelDeviationSwitch, data.SuspensionBeltSecondLevelDeviationSwitch_2);
-        //“…Œ £ø£ø£ø
-        suspendedColloidData.isSlippingDetectionSwitch = GetToggleState(data.SuspensionBeltSpeedDetectionSwitch,
-            data.SuspensionBeltSpeedDetectionSwitch_2);
+        suspendedColloidData.isSlippingDetectionSwitch = GetToggleState(data.SuspendedBeltSlip,
+            data.SuspendedBeltSlip_2);
         suspendedColloidData.isLongitudinalTearSwitch = GetToggleState(data.SuspensionBeltLongitudinalTearSwitch,
             data.SuspensionBeltLongitudinalTearSwitch_2);
         suspendedColloidData.isEmergencyStopCableSwitch = GetToggleState(data.SuspensionBeltEmergencyStopSwitch,

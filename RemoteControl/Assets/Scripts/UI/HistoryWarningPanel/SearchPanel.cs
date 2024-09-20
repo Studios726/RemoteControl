@@ -361,7 +361,7 @@ public class SearchPanel : MonoBehaviour
             for (int i = 0; i < 60; i++)
             {
                 GameObject obj = Instantiate(searchItme, contentMinute);
-                obj.transform.Find("Text").GetComponent<Text>().text = (i + 1).ToString();
+                obj.transform.Find("Text").GetComponent<Text>().text =i.ToString();
                 obj.GetComponent<Button>().onClick.AddListener((() =>
                 {
                     SetActive(scrollviewMinute, false);
@@ -435,7 +435,6 @@ public class SearchPanel : MonoBehaviour
 
     public void SearchHistroyRecord()
     {
-        Debug.Log("SearchHistroyRecord");
         string OperatorPerson = "管理员";
         string startTime = null, endTime = null;
         
@@ -446,14 +445,16 @@ public class SearchPanel : MonoBehaviour
             int startyear = Convert.ToInt32(startYText.text);
             int startmouth = Convert.ToInt32(startMText.text);
             int startday = Convert.ToInt32(startDText.text);
+            int startHour = startHText.text == "" ? 0:Convert.ToInt32(startHText.text);
+            int startMinute = startMinuteText.text == "" ? 0:Convert.ToInt32(startMinuteText.text);
             int endyear = Convert.ToInt32(endYText.text);
             int endmouth = Convert.ToInt32(endMText.text);
             int endday = Convert.ToInt32(endDText.text);
             int endHour = endHText.text == "" ? 0:Convert.ToInt32(endHText.text);
             int endMinute = endMinuteText.text==""?0:Convert.ToInt32(endMinuteText.text);
-            startTime = startyear + "-" + startmouth + "-" + startday + $" {endHour}:{endMinute}:00";
+            startTime = startyear + "-" + startmouth + "-" + startday + $" {startHour}:{startMinute}:00";
             endTime = endyear + "-" + endmouth + "-" + endday + $" {endHour}:{endMinute}:59";
-            long startTimeStamp = new DateTime(startyear, startmouth, startday,endHour, endMinute,0).ToFileTime();
+            long startTimeStamp = new DateTime(startyear, startmouth, startday,startHour, startMinute,0).ToFileTime();
             long endTimeStamp = new DateTime(endyear, endmouth, endday, endHour, endMinute,59).ToFileTime();
             if (startTimeStamp>endTimeStamp)
             {

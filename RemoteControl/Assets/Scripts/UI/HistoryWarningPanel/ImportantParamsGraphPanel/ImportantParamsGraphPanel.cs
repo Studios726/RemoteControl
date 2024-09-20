@@ -329,7 +329,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
                 break;
             }
         }
-    
+        Debug.LogError($" {counter} {electricityDataList.Count}");
         for (int i = 0; i < electricityDataList.Count; i++)
         {
             lineChart.AddData(0, electricityDataList[i].Time, electricityDataList[i].Value);

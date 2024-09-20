@@ -13,12 +13,27 @@ public class ButtonCell : MonoBehaviour
     private Text text;
     public GameObject select;
     private UnityAction lastAction;
+    private Timer _timer;
     private void Awake()
     {
         btn = GetComponent<Button>();
         red = transform.Find("Image").gameObject;
         text = transform.FindComponent<Text>("Text");
         select = transform.Find("select").gameObject;
+    }
+
+    public void SetSelectState(bool state,float duration)
+    {
+        if (_timer!=null)
+        {
+            _timer.Cancel();
+            _timer = null;
+        }
+        _timer=Timer.Register(duration,(() =>
+        {
+            SetSelectState(false);
+        }));
+        SetSelectState(state);
     }
     public void SetSelectState(bool state)
     {

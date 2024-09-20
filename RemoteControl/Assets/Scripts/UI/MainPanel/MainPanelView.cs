@@ -50,7 +50,6 @@ public class MainPanelView : UIView<MainPanelCtr>
         
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
         UpdateData(GameDataManager.Instance.SystemVariables);
-        //临时注释
         TaskDataManager.Instance.GetNearestTaskDataDic();
         GameDataManager.Instance.DeleteThreeMonthData();
     }

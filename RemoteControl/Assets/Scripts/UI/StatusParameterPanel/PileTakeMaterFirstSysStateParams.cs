@@ -230,7 +230,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         carMoveOrganizationData.isReverseOperationToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarReverseCommand : data.LargeCarReverseCommand_2;
         carMoveOrganizationData.isCraneFaultToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarFault : data.LargeCarFault_2;
         carMoveOrganizationData.isFrequencyConverterFaultToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarFrequencyConverterFault : data.LargeCarFrequencyConverterFault_2;
-        carMoveOrganizationData.isBrakeFaultToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarFrequencyConverterFault : data.LargeCarFrequencyConverterFault_2;
+        carMoveOrganizationData.isBrakeFaultToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarBrakeResistorOverheatSwitch : data.LargeCarBrakeResistorOverheatSwitch_2;
         carMoveOrganizationData.isLowOilLevelInBigVehicleCentralLubricationToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarCentralizedLubricationLowOilLevel : data.LargeCarCentralizedLubricationLowOilLevel_2;
         carMoveOrganizationData.isBlockedOilInBigVehicleCentralLubricationToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarCentralizedLubricationOilBlockage : data.LargeCarCentralizedLubricationOilBlockage_2;
         carMoveOrganizationData.isForwardLimitToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarForwardLimit : data.LargeCarForwardLimit_2;

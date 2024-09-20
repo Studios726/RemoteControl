@@ -37,15 +37,14 @@ public class BucketWheelTaskBase : PanelBase
     public virtual void Start()
     {
         Init();
-        // scramStopBtn
     }
 
-    public virtual void UpdateDes(Queue<string> queue)
+    public virtual void UpdateDes(Queue<WarningData> queue)
     {
         int index = 0;
-        foreach (var des in queue)
+        foreach (var data in queue)
         {
-            warningTexts[index].text = des;
+            warningTexts[index].text = data.Des;
             index = index + 1;
         }
     }
@@ -179,7 +178,7 @@ public class BucketWheelTaskBase : PanelBase
             dataInt = scramStopBtn.red.activeSelf ? 0 : 1;
         }else if (COMMAND_NAME.ERR_RESET == mCommandName)
         {
-            resetBtn.SetSelectState(!resetBtn.select.activeSelf);
+            resetBtn.SetSelectState(true,2);
             dataInt=resetBtn.red.activeSelf ? 0 : 1;//HMI_ErrReset
         }else if (COMMAND_NAME.STARTUP_ALARM == mCommandName)
         {

@@ -23,7 +23,6 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     {
         Debug.Log("MainPanelCtr ");
         Addlistener();
-        // GameDataManager.Instance.UpdatePcData();
         view.UpdateData(null,null);
         view.UpdatePcData(null, null);
         UpdateTaskDes1(null, null);
@@ -32,24 +31,23 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskDes1(object o, EventArgs eventArgs)
     {
-        if (TaskDataManager.Instance.BucketWheelStackerReclaimerQueue.Count>0)
+        if (GameDataManager.Instance.BucketWheelStackerReclaimerQueue.Count>0)
         {
-            view._bucketWheelTask1.UpdateDes(TaskDataManager.Instance.BucketWheelStackerReclaimerQueue);
+            view._bucketWheelTask1.UpdateDes(GameDataManager.Instance.BucketWheelStackerReclaimerQueue);
         }
         
     }
     
     public void UpdateTaskDes2(object o, EventArgs eventArgs)
     {
-        if (TaskDataManager.Instance.BucketWheelQueue.Count>0)
+        if (GameDataManager.Instance.BucketWheelQueue.Count>0)
         {
-            view._bucketWheelTask2.UpdateDes(TaskDataManager.Instance.BucketWheelQueue);
+            view._bucketWheelTask2.UpdateDes(GameDataManager.Instance.BucketWheelQueue);
         }
       
     }
     public override void Dispose()
     {
-        Debug.Log("MainPanelCtr ");
         EventManager.Instance.RemoveListener(EventName.UpdateRcData, view.UpdateData);
         EventManager.Instance.RemoveListener(EventName.UpdatePcData, view.UpdatePcData);
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes1,UpdateTaskDes1);

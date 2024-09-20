@@ -185,7 +185,6 @@ public partial class DataManager
     }
     public MySqlDataReader GetHistoryChartData(string chartName, string machine, int limit = 100, bool isUseTime = false, string startTime = "", string endTime = "")
     {
-        Debug.Log($"{chartName}");
         string query = "";
         if (isUseTime == false)
         {
@@ -195,6 +194,7 @@ public partial class DataManager
         {
             query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY id DESC LIMIT {limit}";
         }
+        // Debug.Log($"命令 {query}");
         MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
         return mySqlDataReader;
     }
@@ -217,11 +217,19 @@ public partial class DataManager
     
     public bool InsertHistoryWarningMc(string des,string userName,Machine machine)
     {
-        string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;
+        if (GameDataManager.Instance.IsAdmin())
+        {
+            string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;
         
-        string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_WARNING_TIME}`,`{ConstStr.DATA_HISTORY_WARNING_INFO}`,`{ConstStr.DATA_HISTORY_WARNING_OPERATOR}`) " +
-                       $"VALUES ('{DateTime.Now}','{des}','{userName}')";
-        return MySqlHelper.ExecuteSql(query) > 0;
+            string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_WARNING_TIME}`,`{ConstStr.DATA_HISTORY_WARNING_INFO}`,`{ConstStr.DATA_HISTORY_WARNING_OPERATOR}`) " +
+                           $"VALUES ('{DateTime.Now}','{des}','{userName}')";
+            return MySqlHelper.ExecuteSql(query) > 0;
+        }
+        else
+        {
+            return false;
+        }
+      
     }
     
     public MySqlDataReader GetTaskConfigMc()

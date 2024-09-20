@@ -42,7 +42,7 @@ public struct CarMoveOrganizationData
     /// </summary>
     public bool isFrequencyConverterFaultToggle;
     /// <summary>
-    /// 制动器故障
+    /// 制动电阻超温
     /// </summary>
     public bool isBrakeFaultToggle;
     /// <summary>
