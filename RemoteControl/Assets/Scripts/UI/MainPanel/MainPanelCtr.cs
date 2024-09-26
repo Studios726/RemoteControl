@@ -31,11 +31,19 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskDes1(object o, EventArgs eventArgs)
     {
-        // if (GameDataManager.Instance.BucketWheelStackerReclaimerQueue.Count>0)
-        // {
-        //     
-        // }
-        view._bucketWheelTask1.UpdateDes(GameDataManager.Instance.BucketWheelStackerReclaimerQueue);
+        List<WarningCellData> datas = new List<WarningCellData>();
+        if (GameDataManager.Instance.WarningCellDataDict.Count>0)
+        {
+            foreach (var keyCellData in GameDataManager.Instance.WarningCellDataDict)
+            {
+                if (keyCellData.Value.Machine==Machine.BucketWheelStackerReclaimer)
+                {
+                    datas.Add(keyCellData.Value);
+                }
+            }
+        }
+        view._bucketWheelTask1.UpdateDes(datas);
+      
     }
     
     public void UpdateTaskDes2(object o, EventArgs eventArgs)
@@ -44,7 +52,18 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         // {
         //     view._bucketWheelTask2.UpdateDes(GameDataManager.Instance.BucketWheelQueue);
         // }
-        view._bucketWheelTask2.UpdateDes(GameDataManager.Instance.BucketWheelQueue);
+        List<WarningCellData> datas = new List<WarningCellData>();
+        if (GameDataManager.Instance.WarningCellDataDict.Count>0)
+        {
+            foreach (var keyCellData in GameDataManager.Instance.WarningCellDataDict)
+            {
+                if (keyCellData.Value.Machine==Machine.BucketWheel)
+                {
+                    datas.Add(keyCellData.Value);
+                }
+            }
+        }
+        view._bucketWheelTask2.UpdateDes(datas);
     }
     public override void Dispose()
     {

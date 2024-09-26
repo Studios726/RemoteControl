@@ -116,7 +116,14 @@ public class BucketWheelStateBase : MonoBehaviour
     /// 右侧运行
     /// </summary>
     public ToggleDIY rightSideRun;
-
+    /// <summary>
+    /// 悬胶取料运行
+    /// </summary>
+    public ToggleDIY suspensoidTakeMaterRun;
+    /// <summary>
+    /// 导料槽取料位
+    /// </summary>
+    public ToggleDIY bucketWheelSlotLowerLimit;
     public float pastTime = 0;
     public Machine machine;
 
@@ -145,6 +152,9 @@ public class BucketWheelStateBase : MonoBehaviour
         SetToggleState(fowardTurnRun, data.LargeCarForwardCommand_2, false, data.D1PLC1CommunicationState);
         SetToggleState(leftSideRun, data.SLEW_Angle_2<0, false, data.D1PLC1CommunicationState);
         SetToggleState(rightSideRun, data.SLEW_Angle_2>0, false, data.D1PLC1CommunicationState);
+        
+        SetToggleState(suspensoidTakeMaterRun, data.SuspensionBeltMaterialUnloadingRunningContact_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit_2, false, data.D1PLC1CommunicationState);
     }
 
     public void Update()

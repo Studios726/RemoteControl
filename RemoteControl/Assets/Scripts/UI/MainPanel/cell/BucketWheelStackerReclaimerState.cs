@@ -3,7 +3,7 @@ using ShenYangRemoteSystem.Subclass;
 public class BucketWheelStackerReclaimerState : BucketWheelStateBase
 {
    /// <summary>
-   /// 堆料信号
+   /// 允许堆料信号
    /// </summary>
    public ToggleDIY storeSpaceSignal;
    /// <summary>
@@ -18,7 +18,22 @@ public class BucketWheelStackerReclaimerState : BucketWheelStateBase
    /// 分流运行
    /// </summary>
    public ToggleDIY shuntRun;
-
+   /// <summary>
+   /// 悬胶堆料运行
+   /// </summary>
+   public ToggleDIY suspensoidPileMaterRun;
+   /// <summary>
+   /// 导料槽堆料位
+   /// </summary>
+   public ToggleDIY bucketWheelSlotLiftLimit;
+   /// <summary>
+   /// 挡板堆料位置
+   /// </summary>
+   public ToggleDIY baffleDownLimit;
+   /// <summary>
+   /// 挡板分流位置
+   /// </summary>
+   public ToggleDIY diversionPlateLimit;
    public override void UpdateData(SystemVariables data)
    {
         
@@ -48,5 +63,13 @@ public class BucketWheelStackerReclaimerState : BucketWheelStateBase
         
         SetToggleState(leftSideRun, data.SLEW_Angle<0, false, data.D1PLC1CommunicationState);
         SetToggleState(rightSideRun, data.SLEW_Angle>0, false, data.D1PLC1CommunicationState);
+        
+        SetToggleState(suspensoidPileMaterRun, data.SuspensionBeltMaterialLoadingRunningContact, false, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelSlotLiftLimit, data.BucketWheelSlotLiftLimit, false, data.D1PLC1CommunicationState);
+        SetToggleState(baffleDownLimit, data.BaffleDownLimit, false, data.D1PLC1CommunicationState);
+        SetToggleState(diversionPlateLimit, data.DiversionPlateLimit, false, data.D1PLC1CommunicationState);
+        SetToggleState(suspensoidTakeMaterRun, data.SuspensionBeltMaterialUnloadingRunningContact, false, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit, false, data.D1PLC1CommunicationState);
+
    }
 }

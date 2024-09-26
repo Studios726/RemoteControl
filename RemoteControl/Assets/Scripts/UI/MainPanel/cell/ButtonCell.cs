@@ -72,6 +72,11 @@ public class ButtonCell : MonoBehaviour
     }
     public void AddListener(UnityAction action)
     {
+        if (btn==null)
+        {
+            Debug.Log("按钮没有初始化");
+            return;
+        }
         if (lastAction!=null)
         {
             btn.onClick.RemoveListener(lastAction);

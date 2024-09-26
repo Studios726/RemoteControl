@@ -151,7 +151,15 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// <summary>
     /// 回转角度
     /// </summary>
+    public Text leftAngle;
+    /// <summary>
+    /// 回转角度
+    /// </summary>
     public Text rotationAngle;
+    /// <summary>
+    /// 右转角度
+    /// </summary>
+    public Text rightAngle;
     /// <summary>
     /// 俯仰电流
     /// </summary>
@@ -160,6 +168,14 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 俯仰角度
     /// </summary>
     public Text upAngle;
+    /// <summary>
+    /// 俯仰角度
+    /// </summary>
+    public Text downAngle;
+    /// <summary>
+    /// 俯仰角度
+    /// </summary>
+    public Text pitchingAngle;
     /// <summary>
     /// 上仰
     /// </summary>
@@ -204,23 +220,90 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     public virtual void Init()
     {
         // AddOnClickListener(takeResetBtn, (() =>SendMessageToServer("归零")));
-        AddOnClickListener(aloneBtn, (() => SendMessageToServer(COMMAND_NAME.MODE_A)));
-        AddOnClickListener(togetherBtn, (() => SendMessageToServer(COMMAND_NAME.MODE_B)));
-        AddOnClickListener(automaticBtn, (() => SendMessageToServer(COMMAND_NAME.MODE_C)));
-        AddOnClickListener(takeMaterBtn, (() => SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON)));
-        AddOnClickListener(stopTakeMaterBtn, (() =>SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON)));
+        AddOnClickListener(aloneBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将控制方式切换为单动模式",null,(() =>
+            {
+                SendMessageToServer(COMMAND_NAME.MODE_A);
+            })));
+         
+        }));
+        AddOnClickListener(togetherBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将控制方式切换为联动模式",null,(() =>
+            {
+                SendMessageToServer(COMMAND_NAME.MODE_B);
+            })));
+     
+        }));
+        AddOnClickListener(automaticBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将控制方式切换为自动模式",null,(() =>
+            {
+                   SendMessageToServer(COMMAND_NAME.MODE_C);
+            })));
+         
+        }));
+        AddOnClickListener(takeMaterBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将堆/取料控制切换为取料状态",null,(() =>
+            {
+                SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON);
+            })));
+          
+        }));
+        AddOnClickListener(stopTakeMaterBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将堆/取料控制切换为停止状态",null,(() =>
+            {
+                SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON);
+            })));
+        
+        }));
         AddOnClickListener(carFastBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_FAST)));
         AddOnClickListener(carSlowBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_SLOW)));
-        AddOnClickListener(carBackBtn, (() => SendMessageToServer(COMMAND_NAME.MOVE_BACKWARD)));
+        AddOnClickListener(carBackBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(GameDataManager.Instance.IsRailClampRelaxed(machine),null,(() =>
+            {
+                SendMessageToServer(COMMAND_NAME.MOVE_BACKWARD);
+            })));
+           
+        }));
         AddOnClickListener(carStopBtn, (() => SendMessageToServer(COMMAND_NAME.MOVE_STOP)));
-        AddOnClickListener(carForwardBtn, (() => SendMessageToServer(COMMAND_NAME.MOVE_FORWARD)));
-        AddOnClickListener(upBtn,(() => SendMessageToServer(COMMAND_NAME.ELEVATE_UP)));
-        AddOnClickListener(downBtn,(() => SendMessageToServer(COMMAND_NAME.ELEVATE_DOWN)));
+        AddOnClickListener(carForwardBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(GameDataManager.Instance.IsRailClampRelaxed(machine),null,(() =>
+            {
+                SendMessageToServer(COMMAND_NAME.MOVE_FORWARD);
+            })));
+           
+        }));
+        AddOnClickListener(upBtn,(() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(GameDataManager.Instance.IsOilPumpStarted(machine),null,(() =>
+            {
+                SendMessageToServer(COMMAND_NAME.ELEVATE_UP);
+            })));
+        }));
+        AddOnClickListener(downBtn,(() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(GameDataManager.Instance.IsOilPumpStarted(machine),null,(() =>
+            {
+                SendMessageToServer(COMMAND_NAME.ELEVATE_DOWN);
+            })));
+          
+        }));
         AddOnClickListener(leftBtn,(() => SendMessageToServer(COMMAND_NAME.ROTATE_LEFT)));
         AddOnClickListener(rightBtn,(() => SendMessageToServer(COMMAND_NAME.ROTATE_RIGHT)));
-        AddOnClickListener(rotStopBtn, (() => SendMessageToServer(COMMAND_NAME.ROTATE_STOP)));
+        AddOnClickListener(rotStopBtn, (() =>
+        {
+            SendMessageToServer(COMMAND_NAME.ROTATE_STOP);
+            SendMessageToServer(COMMAND_NAME.ELEVATE_STOP);
+        }));
         AddOnClickListener(stopBtn,(() => SendMessageToServer( COMMAND_NAME.ELEVATE_STOP)));
     }
+
     public virtual void UpdateData(SystemVariables data)
     {
         //Debug.Log("更新move  大车碰撞信息 ");
@@ -232,7 +315,11 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent.ToString(),TextType.Electricity);
             SetText(carPos,data.DC_Pos.ToString("F2"),TextType.Meter);
             SetText(rotationAngle,data.SLEW_Angle.ToString("F2"),TextType.Angle);
+            SetText(leftAngle,data.SLEW_Angle.ToString("F2"),TextType.Angle);
+            SetText(rightAngle,data.SLEW_Angle.ToString("F2"),TextType.Angle);
             SetText(upAngle,data.Luff_Angle.ToString("F2"),TextType.Angle);
+            SetText(downAngle,data.Luff_Angle.ToString("F2"),TextType.Angle);
+            SetText(pitchingAngle,data.Luff_Angle.ToString("F2"),TextType.Angle);
             SetText(cantileverHeight,data.XBTB_LWJ_VALUE.ToString("F2"),TextType.Meter);
             aloneBtn.SetSystemState(data.Single_Action);
             togetherBtn.SetSystemState(data.Link_Action);
@@ -241,6 +328,14 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth);
             stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
+            if (upAngle.gameObject.activeSelf!= data.VariableAmplitudeUpperElectromagneticValveOpen)
+            {
+                upAngle.gameObject.SetActive(data.VariableAmplitudeUpperElectromagneticValveOpen);
+            }
+            if (downAngle.gameObject.activeSelf!= data.VariableAmplitudeLowerElectromagneticValveOpen)
+            {
+                downAngle.gameObject.SetActive(data.VariableAmplitudeLowerElectromagneticValveOpen);
+            }
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen);
             
             if (data.LargeCarForwardCommand==false&&data.LargeCarReverseCommand==false)
@@ -270,6 +365,14 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 rotStopBtn.SetSystemState(false);
             }
             leftBtn.SetSystemState(data.RotaryLeftTurnCommand);
+            if (leftAngle.gameObject.activeSelf!= data.RotaryLeftTurnCommand)
+            {
+                leftAngle.gameObject.SetActive(data.RotaryLeftTurnCommand);
+            }
+            if (rightAngle.gameObject.activeSelf!= data.RotaryRightTurnCommand)
+            {
+                rightAngle.gameObject.SetActive(data.RotaryRightTurnCommand);
+            }
             rightBtn.SetSystemState(data.RotaryRightTurnCommand);
             carBackBtn.SetSystemState(data.LargeCarReverseCommand);
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand);
@@ -288,7 +391,11 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(cantileverBeltElectricity,data.SuspensionBeltElectricCurrent_2.ToString(),TextType.Electricity);
             SetText(carPos,data.DC_Pos_2.ToString("F2"),TextType.Meter);
             SetText(rotationAngle,data.SLEW_Angle_2.ToString("F2"),TextType.Angle);
+            SetText(leftAngle,data.SLEW_Angle_2.ToString("F2"),TextType.Angle);
+            SetText(rightAngle,data.SLEW_Angle_2.ToString("F2"),TextType.Angle);
             SetText(upAngle,data.Luff_Angle_2.ToString("F2"),TextType.Angle);
+            SetText(downAngle,data.Luff_Angle_2.ToString("F2"),TextType.Angle);
+            SetText(pitchingAngle,data.Luff_Angle_2.ToString("F2"),TextType.Angle);
             SetText(cantileverHeight,data.XBTB_LWJ_VALUE_2.ToString("F2"),TextType.Meter);
             aloneBtn.SetSystemState(data.Single_Action_2);
             togetherBtn.SetSystemState(data.Link_Action_2);
@@ -296,8 +403,25 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2);
             stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
+            if (upAngle.gameObject.activeSelf!= data.VariableAmplitudeUpperElectromagneticValveOpen_2)
+            {
+                upAngle.gameObject.SetActive(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
+            }
+            if (downAngle.gameObject.activeSelf!= data.VariableAmplitudeLowerElectromagneticValveOpen_2)
+            {
+                downAngle.gameObject.SetActive(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
+            }
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
             leftBtn.SetSystemState(data.RotaryLeftTurnCommand_2);
+         
+            if (leftAngle.gameObject.activeSelf!= data.RotaryLeftTurnCommand)
+            {
+                leftAngle.gameObject.SetActive(data.RotaryLeftTurnCommand);
+            }
+            if (rightAngle.gameObject.activeSelf!= data.RotaryRightTurnCommand)
+            {
+                rightAngle.gameObject.SetActive(data.RotaryRightTurnCommand);
+            }
             rightBtn.SetSystemState(data.RotaryRightTurnCommand_2);
             carBackBtn.SetSystemState(data.LargeCarReverseCommand_2);
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand_2);
@@ -338,13 +462,38 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         SetText(distanceOfTwoCars,(Mathf.Abs(data.DC_Pos-data.DC_Pos_2) +64.34).ToString("F2"),TextType.Meter);
       
     }
+    //堆取料弹窗提示
+    public virtual void PileTakeMaterPop(Machine _machine,TaskType taskType)
+    {
+        if (_machine==Machine.BucketWheelStackerReclaimer&&togetherBtn.red.activeSelf)
+        {
+            if (taskType==TaskType.PILEMATER)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s",null,null,20));
+            }
+            else
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s\n 斗轮运行倒计时 {1}s",null,null,20));
+                //斗轮运行倒计时
+            }
+        }
+        
+    }
     public  void AddOnClickListener(Button btn, UnityAction action)
     {
         btn.onClick.AddListener(action);
     }
     public void AddOnClickListener(ButtonCell btn, UnityAction action)
     {
-        btn.AddListener(action);
+        if (btn==null)
+        {
+            Debug.Log("btn is null");
+        }
+        else
+        {
+            btn.AddListener(action);
+        }
+      
     }
 
     public virtual void UpdateCurCtrMode(ref ButtonCell ctr, ButtonCell btn)

@@ -20,6 +20,8 @@ namespace RemoteControl.Event
         public const string RefreshScreen = "RefreshScreen";
         public const string UpdateModelDirection = "UpdateModelDirection";
         public  const string ExitGame = "ExitGame";
+        public const string PlayBeltAnim = "PlayBeltAnim";
+        public const string StopPlayBeltAnim = "StopPlayBeltAnim";
 
     }
 }

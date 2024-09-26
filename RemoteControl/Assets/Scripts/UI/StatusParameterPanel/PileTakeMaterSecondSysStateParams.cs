@@ -203,8 +203,8 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.SuspensionBeltEmergencyStopSwitch_2);
         suspendedColloidData.isMaterialFlowDetectionSwitch = GetToggleState(
             data.SuspensionBeltMaterialFlowDetectionSwitch, data.SuspensionBeltMaterialFlowDetectionSwitch_2);
-        suspendedColloidData.isMiddleHopperCoalBlocking = GetToggleState(data.CentralMaterialDustDetectionSwitch,
-            data.CentralMaterialDustDetectionSwitch_2);
+        suspendedColloidData.isMiddleHopperCoalBlocking = GetToggleState(!data.CentralMaterialDustDetectionSwitch,
+            !data.CentralMaterialDustDetectionSwitch_2);
         SuspendedColloidItem?.UpdateData(suspendedColloidData, data.D1PLC1CommunicationState);
     }
 

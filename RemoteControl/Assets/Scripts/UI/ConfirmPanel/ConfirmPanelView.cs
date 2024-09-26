@@ -10,66 +10,114 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
     private Text _des;
     private Button _confirmBtn;
     private Button _cancelBtn; // 修改按钮命名以保持一致性
-    
+    private Timer _timer;
+    private float _duration;
+    private float _duration2;
+    private string _content;
+
     public override void InitUIElements(UIArgs uiArgs = null)
     {
         _des = RootObj.transform.FindComponent<Text>("bg/des");
         _confirmBtn = RootObj.transform.FindComponent<Button>("bg/confirmBtn");
         _cancelBtn = RootObj.transform.FindComponent<Button>("bg/cancelBtn");
         // 保证UI元素初始化后再调用UpdateUI，避免NullReferenceException
-        if (_des != null && _confirmBtn != null && _cancelBtn != null) 
-        {
-            UpdateUI(uiArgs);
-        }
+        UpdateUI(uiArgs);
     }
-
-    // private T GetUIComponent<T>(string path) where T : UnityEngine.Component
-    // {
-    //         UnityEngine.Component component = RootObj.transform.FindComponent<T>(path);
-    //     if (component == null)
-    //     {
-    //         Debug.LogError($"Component {path} not found!");
-    //         return null;
-    //     }
-    //     return component.GetComponent<T>();
-    // }
 
     public void UpdateUI(UIArgs uiArgs)
     {
-        if (uiArgs == null || _confirmBtn == null || _cancelBtn == null) 
+        if (uiArgs == null)
         {
             return;
         }
-        
+
         // 类型安全检查
         if (uiArgs is ConfirmPanelArgs args)
         {
-            _confirmBtn.onClick.RemoveAllListeners();
-            _cancelBtn.onClick.RemoveAllListeners();
-            
+            _content = args.Describe;
             _des.text = args.Describe;
-            
-            _confirmBtn.onClick.AddListener(() =>
+            if (_confirmBtn != null)
             {
-                args.ConfirmAction?.Invoke();
-                if (UIManager.Instance != null) 
+                _confirmBtn.onClick.RemoveAllListeners();
+                _confirmBtn.onClick.AddListener(() =>
                 {
-                    UIManager.Instance.CloseUI(UIID.ConfirmPanel);
-                }
-            });
-            
-            _cancelBtn.onClick.AddListener(() =>
+                    if (UIManager.Instance != null)
+                    {
+                        UIManager.Instance.CloseUI(UIID.ConfirmPanel);
+                    }
+
+                    if (_timer != null)
+                    {
+                        _timer.Cancel();
+                        _timer = null;
+                    }
+
+                    args.ConfirmAction?.Invoke();
+                });
+            }
+
+            if (_cancelBtn != null)
             {
-                args.CancleAction?.Invoke();
-                if (_ctr != null) 
+                _cancelBtn.onClick.RemoveAllListeners();
+                _cancelBtn.onClick.AddListener(() =>
                 {
-                    _ctr.HideView();
-                }
-                if (UIManager.Instance != null) 
+                    if (UIManager.Instance != null)
+                    {
+                        UIManager.Instance.CloseUI(UIID.ConfirmPanel);
+                    }
+
+                    if (_timer != null)
+                    {
+                        _timer.Cancel();
+                        _timer = null;
+                    }
+
+                    args.CancleAction?.Invoke();
+                    if (_ctr != null)
+                    {
+                        _ctr.HideView();
+                    }
+                });
+            }
+
+            if (args.Duration != 0 || args.Duration2 != 0)
+            {
+                if (_timer != null)
                 {
-                    UIManager.Instance.CloseUI(UIID.ConfirmPanel);
+                    _duration = 0;
+                    _duration2 = 0;
+                    _timer.Cancel();
+                    _timer = null;
                 }
-            });
+                _duration = args.Duration;
+                _duration2 = args.Duration2;
+                _des.text = string.Format(_content, _duration, _duration2);
+                
+                // _timer=Timer.Register(args.Duration,(() =>
+                // {
+                //     if (UIManager.Instance != null) 
+                //     {
+                //         UIManager.Instance.CloseUI(UIID.ConfirmPanel);
+                //     }
+                // }));
+                _timer = Timer.Register(1, () =>
+                {
+                    _duration = _duration - 1;
+                    _duration2 = _duration2 - 1;
+                    _duration = _duration >= 0 ? _duration : 0;
+                    _duration2 = _duration2 >= 0 ? _duration2 : 0;
+                    _des.text = string.Format(_content, _duration, _duration2);
+                    if (_duration <= 0 && _duration2 <= 0)
+                    {
+                        _timer?.Cancel();
+                        _timer = null;
+                        if (UIManager.Instance != null)
+                        {
+                            UIManager.Instance.CloseUI(UIID.ConfirmPanel);
+                        }
+                    }
+                }, null, true);
+            }
         }
     }
 }

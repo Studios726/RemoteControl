@@ -115,7 +115,7 @@ public class CarMoveOrganizationItem : StatusParmItemBase<CarMoveOrganizationDat
     /// </summary>
     public ToggleDIY FrequencyConverterFaultToggle;
     /// <summary>
-    /// 制动器故障
+    /// 制动电阻超温（名字）
     /// </summary>
     public ToggleDIY BrakeFaultToggle;
     /// <summary>

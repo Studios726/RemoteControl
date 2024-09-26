@@ -110,7 +110,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             }
             else
             {
-                tips = "任务异常稍后重试";
+                tips = $"任务异常稍后重试{taskVariables.Error}";
             }
          
             UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(tips, null, null));

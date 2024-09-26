@@ -20,6 +20,17 @@ public class MessageEventArgs:EventArgs
     }
 }
 
+public class BeltRunArgs : EventArgs
+{
+    public bool isPlayPileBeltAnim;
+    public bool isPlayTakeBeltAnim;
+
+    public BeltRunArgs(bool isPlayPileBeltAnim, bool isPlayTakeBeltAnim)
+    {
+        this.isPlayPileBeltAnim = isPlayPileBeltAnim;
+        this.isPlayTakeBeltAnim = isPlayTakeBeltAnim;
+    }
+}
 public class UpdateModelDirectionEventArgs:EventArgs
 {
     public ModelDirection[] Direction;
