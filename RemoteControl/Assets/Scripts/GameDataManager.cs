@@ -749,16 +749,14 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         if (WarningCellDataDict.ContainsKey(key))
         {
-            WarningCellDataDict[key].Key=key;
-            WarningCellDataDict[key].Des=des;
-            WarningCellDataDict[key].Machine=machine;
-            WarningCellDataDict[key].IsSelect=isSelect;
-            WarningCellDataDict[key].ConfirmTime = time;
+            WarningCellDataDict.Remove(key);
+            // WarningCellDataDict[key].Key=key;
+            // WarningCellDataDict[key].Des=des;
+            // WarningCellDataDict[key].Machine=machine;
+            // WarningCellDataDict[key].IsSelect=isSelect;
+            // WarningCellDataDict[key].ConfirmTime = time;
         }
-        else
-        {
-            WarningCellDataDict.Add(key,new WarningCellData(key,des,DateTime.Now.ToString("HH:mm:ss"),machine,false,false,""));
-        }
+        WarningCellDataDict.Add(key,new WarningCellData(key,des,DateTime.Now.ToString("HH:mm:ss"),machine,false,false,""));
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
