@@ -39,14 +39,12 @@ public class MainPanelView : UIView<MainPanelCtr>
         
         updateModelBtn.onClick.AddListener(() =>
         {
-            Debug.Log($">>>>>>>> {nameof(GameDataManager.Instance.SystemVariables.DriverRoomEmergencyStopButton)}");
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s\n 斗轮运行倒计时 {1}s",null,null,20));
-            // if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
-            // {
-            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
-            //     return;
-            // }
-            // GameDataManager.Instance.UpdateSCAData(30);
+            if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
+            GameDataManager.Instance.UpdateSCAData(30);
         });
         
         

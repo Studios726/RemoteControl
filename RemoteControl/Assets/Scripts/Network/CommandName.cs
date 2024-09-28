@@ -4,13 +4,13 @@ using UnityEngine;
 
 public enum CommandName
 {
-    ROTATE_LEFT,//回转左转
-    ROTATE_RIGHT,//回转右转
-    ROTATE_STOP, //回转停止
-    ELEVATE_UP,//俯仰上仰
-    ELEVATE_DOWN, //俯仰下俯
-    ELEVATE_STOP,//俯仰停止
-    MOVE_FORWARD,//大车前进
-    MOVE_BACKWARD,//大车后退
-    MOVE_STOP//大车停止
+    ROTATE_LEFT,//鍥炶浆宸﹁浆
+    ROTATE_RIGHT,//鍥炶浆鍙宠浆
+    ROTATE_STOP, //鍥炶浆鍋滄
+    ELEVATE_UP,//淇话涓婁话
+    ELEVATE_DOWN, //淇话涓嬩刊
+    ELEVATE_STOP,//淇话鍋滄
+    MOVE_FORWARD,//澶ц溅鍓嶈繘
+    MOVE_BACKWARD,//澶ц溅鍚庨��
+    MOVE_STOP//澶ц溅鍋滄
 }

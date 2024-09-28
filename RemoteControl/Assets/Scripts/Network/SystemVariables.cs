@@ -418,6 +418,46 @@ namespace ShenYangRemoteSystem.Subclass
         public bool LightPowerClosed { get; set; }
 
 
+        //9.26
+        public bool CantileverHeadFault { get; set; }
+        public bool ProtectionFault { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2482,6 +2522,21 @@ namespace ShenYangRemoteSystem.Subclass
 
         //9.1
         public bool SR1_Travel_Speed_SB_2 { get; set; }
+
+
+
+
+
+
+
+
+        //9.26
+        public bool CantileverHeadFault_2 { get; set; }
+        public bool ProtectionFault_2 { get; set; }
+
+
+
+
 
 
 

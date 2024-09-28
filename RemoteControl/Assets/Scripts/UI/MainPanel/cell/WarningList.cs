@@ -21,7 +21,8 @@ public class WarningList :UICyclicScrollList<WarningCell, WarningCellData>
     public void RefreshList(List<WarningCellData> historyDatas)
     {
         datas.Clear();
-        for (int i = 0; i < historyDatas.Count; i++)
+        int count = historyDatas.Count - 1;
+        for (int i = count; i >= 0; i--)
         {
             datas.Add(historyDatas[i]);
         }

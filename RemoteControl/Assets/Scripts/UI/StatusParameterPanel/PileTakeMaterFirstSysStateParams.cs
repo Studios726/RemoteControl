@@ -41,7 +41,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             GetToggleState(data.LowVoltageControlPowerClosed, data.LowVoltageControlPowerClosed_2);
         switchOnData.isLowVoltagePowerClosedToggle =
             GetToggleState(data.LowVoltagePowerClosed, data.LowVoltagePowerClosed_2);
-        SwitchOnItem?.UpdateData(switchOnData,data.D1PLC1CommunicationState);
+        SwitchOnItem?.UpdateData(switchOnData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //急停信息
     public void UpdateScramStop(SystemVariables data)
@@ -53,7 +53,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             GetToggleState(data.ElectricalRoomEmergencyStopButton, data.ElectricalRoomEmergencyStopButton_2);
         scramStopData.isEmergencyStopRelay =
             GetToggleState(!data.EmergencyStopRelay, !data.EmergencyStopRelay_2);
-        ScramStopItem?.UpdateData(scramStopData,data.D1PLC1CommunicationState);
+        ScramStopItem?.UpdateData(scramStopData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //与中控室连锁
     public void UpdateCentralControlRoom(SystemVariables data)
@@ -61,7 +61,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         CentralControlData centralControlData = new CentralControlData();
         centralControlData.isUnlock = GetToggleState(!data.SystemInterlockSwitch, !data.SystemInterlockSwitch_2);
         centralControlData.isLock = GetToggleState(data.SystemInterlockSwitch, data.SystemInterlockSwitch_2);
-        CentralControlRoomItem?.UpdateData(centralControlData,data.D1PLC1CommunicationState);
+        CentralControlRoomItem?.UpdateData(centralControlData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //斗轮机与中控室信号
     public void UpdateBucketWheelCenterRoomSignal(SystemVariables data)
@@ -83,7 +83,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             data.BucketWheelDiversionRunning_2);
         bucketWheelCenterRoomSignalData.isBucketWheelMalfunction=GetToggleState(data.BucketWheelFault,
             data.BucketWheelFault_2);
-        BucketWheelCenterRoomSignalItem?.UpdateData(bucketWheelCenterRoomSignalData,data.D1PLC1CommunicationState);
+        BucketWheelCenterRoomSignalItem?.UpdateData(bucketWheelCenterRoomSignalData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //堆取料流程状态
     public void UpdatePileTakeFlowState(SystemVariables data)
@@ -103,7 +103,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             data.BucketWheelMotorRunning, data.BucketWheelMotorRunning_2);
         pileTakeFlowStateData.isFeedChannelTake = GetToggleState(
             data.BucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit_2);
-        PileTakeFlowStateItem?.UpdateData(pileTakeFlowStateData,data.D1PLC1CommunicationState);
+        PileTakeFlowStateItem?.UpdateData(pileTakeFlowStateData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //操作方式
     public void UpdateOperatingMode(SystemVariables data)
@@ -114,7 +114,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         operatingModeData.isAutoAction = GetToggleState(data.Automatic, data.Automatic_2);
         operatingModeData.isLocalAction = GetToggleState(!data.Remote, !data.Remote_2);
         operatingModeData.isLongRangeAction = GetToggleState(data.Remote, data.Remote_2);
-        OperatingModeItem?.UpdateData(operatingModeData,data.D1PLC1CommunicationState);
+        OperatingModeItem?.UpdateData(operatingModeData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     
     public void UpdateAngleCurrentValue(SystemVariables data)
@@ -161,7 +161,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         jibLubbingMechanismData.isUpSolenoidValveToggle=GetToggleState(data.VariableAmplitudeUpperElectromagneticValveOpen, data.VariableAmplitudeUpperElectromagneticValveOpen_2);
         jibLubbingMechanismData.isDownSolenoidValveToggle=GetToggleState(data.VariableAmplitudeLowerElectromagneticValveOpen, data.VariableAmplitudeLowerElectromagneticValveOpen_2);
         jibLubbingMechanismData.isStepUpSolenoidValveToggle=GetToggleState(data.VariableAmplitudeBoostValveOpen, data.VariableAmplitudeBoostValveOpen_2);
-        JibLubbingMechanismItem?.UpdateData(jibLubbingMechanismData,data.D1PLC1CommunicationState);
+        JibLubbingMechanismItem?.UpdateData(jibLubbingMechanismData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //回转机构
     public void UpdateRotaryMechanism(SystemVariables data)
@@ -215,7 +215,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             GetToggleState(data.RotaryCentralizedLubricationOilBlockageFault, data.RotaryCentralizedLubricationOilBlockageFault_2);
         rotaryMechanismData.isRotaryCentralLubricationLowOilLevel =
             GetToggleState(data.RotaryCentralizedLubricationLowOilLevelFault, data.RotaryCentralizedLubricationLowOilLevelFault_2);
-        RotaryMechanismItem?.UpdateData(rotaryMechanismData,data.D1PLC1CommunicationState);
+        RotaryMechanismItem?.UpdateData(rotaryMechanismData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //大车行走机构
     public void UpdateCarMoveOrganization(SystemVariables data)
@@ -238,7 +238,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         carMoveOrganizationData.isReverseLimitToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarReverseLimit : data.LargeCarReverseLimit_2;
         carMoveOrganizationData.isReverseLimitExceedToggle = machine == Machine.BucketWheelStackerReclaimer ? data.LargeCarReverseExtremeLimit : data.LargeCarReverseExtremeLimit_2;
         carMoveOrganizationData.isTwoMachineCollisionAlarmToggle= machine == Machine.BucketWheelStackerReclaimer ? data.TwoMachineCollisionAlarm : data.TwoMachineCollisionAlarm_2;
-        CarMoveOrganizationItem?.UpdateData(carMoveOrganizationData,data.D1PLC1CommunicationState);
+        CarMoveOrganizationItem?.UpdateData(carMoveOrganizationData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
 
     public string GetText(string machine1Str, string machine2Str)

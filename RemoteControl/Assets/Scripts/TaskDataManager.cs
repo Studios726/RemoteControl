@@ -386,15 +386,17 @@ public class TaskDataManager : Singleton<TaskDataManager>
             des = $"错误码 {code}";
             rank = 0;
         }
-        if (machine==Machine.BucketWheelStackerReclaimer)
-        {
-            GameDataManager.Instance.AddOrUpdateWarningDesQueue(des,Machine.BucketWheelStackerReclaimer,rank);
-            
-        }
-        else
-        {
-            GameDataManager.Instance.AddOrUpdateWarningDesQueue(des,Machine.BucketWheelStackerReclaimer,rank);
-        }
+        GameDataManager.Instance.AddOrUpdateWarningDesDict(code.ToString(), des,
+            machine, false, "");
+        // if (machine==Machine.BucketWheelStackerReclaimer)
+        // {
+        //     GameDataManager.Instance.AddOrUpdateWarningDesQueue(des,Machine.BucketWheelStackerReclaimer,rank);
+        //     
+        // }
+        // else
+        // {
+        //     GameDataManager.Instance.AddOrUpdateWarningDesQueue(des,Machine.BucketWheelStackerReclaimer,rank);
+        // }
       
     }
 

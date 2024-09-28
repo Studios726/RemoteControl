@@ -240,6 +240,47 @@ public enum COMMAND_NAME
     /// 自动
     /// </summary>
     MODE_C,
+    /// <summary>
+    /// 大车右前防碰撞设定
+    /// </summary>
+    CAR_RIGHT_FRONT_SET,
+    /// <summary>
+    /// 大车左前防碰撞设定
+    /// </summary>
+    CAR_LEFT_FRONT_SET,
+    /// <summary>
+    /// 大车右后防碰撞设定
+    /// </summary>
+    CAR_RIGHT_BACK_SET,
+    /// <summary>
+    /// 大车左后防碰撞设定
+    /// </summary>
+    CAR_LEFT_BACK_SET,
+    /// <summary>
+    /// 大车前进极限设定
+    /// </summary>
+    FORWARD_LIMIT_SET,
+    /// <summary>
+    /// 大车后退极限设定
+    /// </summary>
+    BACKWARD_LIMIT_SET,
+    /// <summary>
+    /// 右转极限设定
+    /// </summary>
+    RIGHT_LIMIT_SET,
+    /// <summary>
+    /// 左转极限设定
+    /// </summary>
+    LEFT_LIMIT_SET,
+    /// <summary>
+    /// 上仰极限设定
+    /// </summary>
+    UP_LIMIT_SET,
+    /// <summary>
+    /// 下附极限设定
+    /// </summary>
+    DOWN_LIMIT_SET,
+    
     
     
     

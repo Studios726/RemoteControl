@@ -584,7 +584,7 @@ public class GameDataManager : Singleton<GameDataManager>
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 
-    public void SendServerCommandByName(string commandName, int dataInt = 0)
+    public void SendServerCommandByName(string commandName, int dataInt = 0,float dataFloat=0)
     {
         ServerCommand serverCommand = new ServerCommand();
         serverCommand.QUERY_SYSTEM = "MC";
@@ -592,6 +592,7 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.QUERY_TYPE = 2;
         serverCommand.COMMAND_NAME = commandName;
         serverCommand.DATA_INT = dataInt;
+        serverCommand.DATA_FLOAT = dataFloat;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 
