@@ -32,14 +32,11 @@ namespace RemoteControl
             InitMode();
             CreatConnect(null, null);
             UIManager.Instance.OpenUI(UIID.LoginPanel);
-            chartTimer=Timer.Register(5,true,true,(() =>
-            {
-                GameDataManager.Instance.RecordChart();
-            }));
-            warningTimer=Timer.Register(1,true,true,(() =>
-            {
-                GameDataManager.Instance.RefreshWarningDesQueue();
-            }));
+            chartTimer = Timer.Register(5, true, true, (() => { GameDataManager.Instance.RecordChart(); }));
+            // warningTimer=Timer.Register(1,true,true,(() =>
+            // {
+            //     GameDataManager.Instance.RefreshWarningDesQueue();
+            // }));
             // GameDataManager.Instance.GetLocalSCAData();
         }
 
@@ -52,6 +49,7 @@ namespace RemoteControl
             Application.Quit();
 #endif
         }
+
         public void InitMode()
         {
             machineMove_1 = GameObject.Find("ModelRoot/Model/machine1").GetComponent<MachineMove>();
@@ -68,45 +66,46 @@ namespace RemoteControl
 
             isConnect = true;
             connectionRC = new GameObject().AddComponent<ClientConnection>();
-            connectionRC.Init("ws://"+GameDataManager.Instance.IpConfig.TaoIP, SocketType.TaoRC);
+            connectionRC.Init("ws://" + GameDataManager.Instance.IpConfig.TaoIP, SocketType.TaoRC);
             connectionPC = new GameObject().AddComponent<ClientConnection>();
-            connectionPC.Init("ws://"+GameDataManager.Instance.IpConfig.TaskIP, SocketType.TaskPC);
+            connectionPC.Init("ws://" + GameDataManager.Instance.IpConfig.TaskIP, SocketType.TaskPC);
             connectionSCA = new GameObject().AddComponent<ClientConnection>();
-            connectionSCA.Init("ws://"+GameDataManager.Instance.IpConfig.YuanIP, SocketType.SCA);
+            connectionSCA.Init("ws://" + GameDataManager.Instance.IpConfig.YuanIP, SocketType.SCA);
 
             MessageCenter.Instance.RegisterListener(MessageType.RC, connectionRC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.PC, connectionPC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.SCA, connectionSCA.WebSend);
         }
+
         public void ReadConfig()
         {
-            if (GameDataManager.Instance.IpConfig!=null)
+            if (GameDataManager.Instance.IpConfig != null)
             {
                 return;
             }
+
             string exeRootPath = Application.dataPath;
             string parentPath = Directory.GetParent(exeRootPath).FullName;
-            string filePath =parentPath+ "\\IpConfig.txt";
+            string filePath = parentPath + "\\IpConfig.txt";
             if (File.Exists(filePath))
             {
                 string content = File.ReadAllText(filePath);
                 IpConfig ipConfig = JsonMgr.DeSerialize<IpConfig>(content);
                 GameDataManager.Instance.SetIpConfig(ipConfig);
-          
             }
             else
             {
                 IpConfig config = new IpConfig();
                 config.TaoIP = Address.serviceTaoIP;
-                config.YuanIP= Address.serviceYuanIP;
-                config.TaskIP= Address.serviceTaskIP;
-                config.DataIP= Address.serviceIP;
+                config.YuanIP = Address.serviceYuanIP;
+                config.TaskIP = Address.serviceTaskIP;
+                config.DataIP = Address.serviceIP;
                 GameDataManager.Instance.SetIpConfig(config);
             }
         }
+
         public void AddListener()
         {
-            
             EventManager.Instance.AddListener(EventName.ConnectionSuccess, ConnectionSuccess);
             EventManager.Instance.AddListener(EventName.ConnectionFail, ConnectionFail);
             EventManager.Instance.AddListener(EventName.ConnectionClose, ConnectionFail);
@@ -124,27 +123,30 @@ namespace RemoteControl
 
         public void Dispose()
         {
-            if (connectionRC!=null&&connectionRC.isConnect)
+            if (connectionRC != null && connectionRC.isConnect)
             {
                 connectionRC.OnClose();
                 connectionRC = null;
             }
-            if (connectionPC!=null&&connectionPC.isConnect)
+
+            if (connectionPC != null && connectionPC.isConnect)
             {
                 connectionPC.OnClose();
                 connectionPC = null;
             }
-            if (connectionSCA!=null&&connectionSCA.isConnect)
+
+            if (connectionSCA != null && connectionSCA.isConnect)
             {
                 connectionSCA.OnClose();
                 connectionSCA = null;
             }
 
-            if (chartTimer!=null)
+            if (chartTimer != null)
             {
                 chartTimer.Cancel();
                 chartTimer = null;
             }
+
             EventManager.Instance.RemoveListener(EventName.ConnectionSuccess, ConnectionSuccess);
             EventManager.Instance.RemoveListener(EventName.ConnectionFail, ConnectionFail);
             EventManager.Instance.RemoveListener(EventName.ConnectionClose, ConnectionFail);
@@ -153,6 +155,7 @@ namespace RemoteControl
             EventManager.Instance.RemoveListener(EventName.Message, MessageReveive);
             EventManager.Instance.RemoveListener(EventName.LoginSuccess, CreatConnect);
         }
+
         public void ConnectionSuccess(object o, EventArgs eventArgs)
         {
             ConnectEventArgs connectEventArgs = (ConnectEventArgs)eventArgs;
@@ -177,15 +180,13 @@ namespace RemoteControl
                 }
 
                 TaskDataManager.Instance.UpdatePcData();
-                timerPc = Timer.Register(3600f, true, true, () => {
-                    TaskDataManager.Instance.UpdatePcData();
-                });
-                des="PC 连接成功";
+                timerPc = Timer.Register(3600f, true, true, () => { TaskDataManager.Instance.UpdatePcData(); });
+                des = "PC 连接成功";
             }
             else if (connectEventArgs.type == SocketType.SCA)
             {
                 GameDataManager.Instance.UpdateSCAData(4);
-                des="SCA 连接成功";
+                des = "SCA 连接成功";
             }
 
             Debug.Log("----------------------Success " + connectEventArgs.type);
@@ -199,6 +200,7 @@ namespace RemoteControl
         {
             ConnectEventArgs connectEventArgs = (ConnectEventArgs)eventArgs;
             string des = "";
+            bool isInsert = false;
             if (connectEventArgs.type == SocketType.TaoRC)
             {
                 if (timerRc != null)
@@ -206,7 +208,9 @@ namespace RemoteControl
                     timerRc.Cancel();
                     timerRc = null;
                 }
+
                 des = "RC 连接失败";
+                isInsert = connectionRC.ReconnectCount == 0;
             }
             else if (connectEventArgs.type == SocketType.TaskPC)
             {
@@ -215,40 +219,57 @@ namespace RemoteControl
                     timerPc.Cancel();
                     timerPc = null;
                 }
+
                 des = "PC 连接失败";
-            }else if (connectEventArgs.type == SocketType.SCA)
+                isInsert = connectionPC.ReconnectCount == 0;
+            }
+            else if (connectEventArgs.type == SocketType.SCA)
             {
                 des = "SCA 连接失败";
+                isInsert = connectionSCA.ReconnectCount == 0;
             }
 
             Debug.Log("----------------------Fail " + connectEventArgs.type);
-            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                Machine.BucketWheelStackerReclaimer);
-            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                Machine.BucketWheel);
+            if (isInsert == true)
+            {
+                DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
+                    Machine.BucketWheel);
+            }
         }
 
         public void ReConnect(object o, EventArgs eventArgs)
         {
             ConnectEventArgs connectEventArgs = (ConnectEventArgs)eventArgs;
             string des = "";
+            bool isInsert = false;
             if (connectEventArgs.type == SocketType.TaoRC)
             {
                 des = "RC 重连";
+                isInsert = connectionRC.ReconnectCount == 0;
             }
             else if (connectEventArgs.type == SocketType.TaskPC)
             {
                 des = "PC 重连";
-            }else if (connectEventArgs.type == SocketType.SCA)
+                isInsert = connectionPC.ReconnectCount == 0;
+            }
+            else if (connectEventArgs.type == SocketType.SCA)
             {
                 des = "SCA 重连";
+                isInsert = connectionSCA.ReconnectCount == 0;
             }
 
-            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                Machine.BucketWheelStackerReclaimer);
-            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                Machine.BucketWheel);
+            if (isInsert)
+            {
+                DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
+                    Machine.BucketWheel);
+            }
+            
         }
+
         public void MessageReveive(object o, EventArgs eventArgs)
         {
             MessageEventArgs messageEventArgs = (MessageEventArgs)eventArgs;

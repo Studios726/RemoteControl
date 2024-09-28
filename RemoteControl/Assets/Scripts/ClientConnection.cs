@@ -15,6 +15,7 @@ public class ClientConnection:MonoBehaviour
 {
     public string address;
     public SocketType socketType;
+    public int ReconnectCount;
     WebSocket webSocket;
     private bool lockReconnect = false;
     private Coroutine _pingCor, _clientPing, _serverPing;
@@ -71,6 +72,7 @@ public class ClientConnection:MonoBehaviour
     void OnOpen(WebSocket ws)
     {
         isConnect = true;
+        ReconnectCount=0;
         EventManager.Instance.TriggerEvent(EventName.ConnectionSuccess,this,new ConnectEventArgs(socketType));
         // Debug.Log("websocket连接成功");
         // if (_pingCor != null)
@@ -137,6 +139,7 @@ public class ClientConnection:MonoBehaviour
     {
         Debug.Log($"正在重连websocket{socketType}");
         yield return new WaitForSeconds(5);
+        ReconnectCount++;
         EventManager.Instance.TriggerEvent(EventName.ReConnect, this,new ConnectEventArgs(socketType));
         CreateWebSocket();
         this.lockReconnect = false;
