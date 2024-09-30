@@ -39,28 +39,13 @@ public class MainPanelView : UIView<MainPanelCtr>
         
         updateModelBtn.onClick.AddListener(() =>
         {
-            GameDataManager.Instance.AddOrUpdateWarningDesDict("2", "变幅-2",
-                Machine.BucketWheelStackerReclaimer, false, "");
-            GameDataManager.Instance.AddOrUpdateWarningDesDict("4", "变幅-4",
-                Machine.BucketWheelStackerReclaimer, false, "");
-            // if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
-            // {
-            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
-            //     return;
-            // }
-            // GameDataManager.Instance.UpdateSCAData(30);
+            if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
+            GameDataManager.Instance.UpdateSCAData(30);
         });
-        
-        GameDataManager.Instance.AddOrUpdateWarningDesDict("1", "变幅-1",
-            Machine.BucketWheelStackerReclaimer, false, "");
-        GameDataManager.Instance.AddOrUpdateWarningDesDict("2", "变幅-2",
-            Machine.BucketWheelStackerReclaimer, false, "");
-        GameDataManager.Instance.AddOrUpdateWarningDesDict("3", "变幅-3",
-            Machine.BucketWheelStackerReclaimer, false, "");
-        GameDataManager.Instance.AddOrUpdateWarningDesDict("4", "变幅-4",
-            Machine.BucketWheelStackerReclaimer, false, "");
-        GameDataManager.Instance.AddOrUpdateWarningDesDict("5", "变幅-5",
-            Machine.BucketWheelStackerReclaimer, false, "");
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
         UpdateData(GameDataManager.Instance.SystemVariables);
         TaskDataManager.Instance.GetNearestTaskDataDic();

@@ -846,7 +846,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.ElectricalRoomEmergencyStopButton));
             }
 
-            if (newSystemVariables.EmergencyStopRelay && _systemVariables.EmergencyStopRelay == false)
+            if (newSystemVariables.EmergencyStopRelay==false && _systemVariables.EmergencyStopRelay == true)
             {
                 //急停继电器
                 DataManager.Instance.InsertHistoryWarningMc("急停继电器", GetUserName(),
@@ -855,7 +855,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.EmergencyStopRelay), "急停继电器",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.EmergencyStopRelay == false && _systemVariables.EmergencyStopRelay == true)
+            else if (newSystemVariables.EmergencyStopRelay == true && _systemVariables.EmergencyStopRelay == false)
             {
                 //急停继电器解除
                 DataManager.Instance.InsertHistoryWarningMc("急停继电器解除", GetUserName(),
@@ -933,8 +933,8 @@ public class GameDataManager : Singleton<GameDataManager>
                  RemoveWarningDesDict(nameof(newSystemVariables.LargeCarFrequencyConverterFault));
             }
 
-            if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch &&
-                _systemVariables.LargeCarBrakeResistorOverheatSwitch == false)
+            if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch==false &&
+                _systemVariables.LargeCarBrakeResistorOverheatSwitch == true)
             {
                 //大车-制动电阻超温
                 DataManager.Instance.InsertHistoryWarningMc("大车-制动电阻超温", GetUserName(),
@@ -943,8 +943,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarBrakeResistorOverheatSwitch), "大车-制动电阻超温",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch == false &&
-                     _systemVariables.LargeCarBrakeResistorOverheatSwitch == true)
+            else if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch == true &&
+                     _systemVariables.LargeCarBrakeResistorOverheatSwitch == false)
             {
                 //大车-制动电阻超温解除
                 DataManager.Instance.InsertHistoryWarningMc("大车-制动电阻超温解除", GetUserName(),
@@ -1725,8 +1725,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch));
             }
 
-            if (newSystemVariables.CentralMaterialDustDetectionSwitch &&
-                _systemVariables.CentralMaterialDustDetectionSwitch == false)
+            if (newSystemVariables.CentralMaterialDustDetectionSwitch==false &&
+                _systemVariables.CentralMaterialDustDetectionSwitch == true)
             {
                 //悬胶/挡板-中部料斗堵煤
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤", GetUserName(),
@@ -1735,8 +1735,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralMaterialDustDetectionSwitch), "悬胶/挡板-中部料斗堵煤",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.CentralMaterialDustDetectionSwitch == false &&
-                     _systemVariables.CentralMaterialDustDetectionSwitch == true)
+            else if (newSystemVariables.CentralMaterialDustDetectionSwitch == true &&
+                     _systemVariables.CentralMaterialDustDetectionSwitch == false)
             {
                 //悬胶/挡板-中部料斗堵煤解除
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤解除", GetUserName(),
@@ -2149,7 +2149,7 @@ public class GameDataManager : Singleton<GameDataManager>
                   RemoveWarningDesDict(nameof(newSystemVariables.ElectricalRoomEmergencyStopButton_2));
             }
 
-            if (newSystemVariables.EmergencyStopRelay_2 && _systemVariables.EmergencyStopRelay_2 == false)
+            if (newSystemVariables.EmergencyStopRelay_2==false && _systemVariables.EmergencyStopRelay_2 == true)
             {
                 //急停继电器
                 DataManager.Instance.InsertHistoryWarningMc("急停继电器", GetUserName(),
@@ -2158,7 +2158,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.EmergencyStopRelay_2), "急停继电器",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.EmergencyStopRelay_2 == false && _systemVariables.EmergencyStopRelay_2 == true)
+            else if (newSystemVariables.EmergencyStopRelay_2 == true && _systemVariables.EmergencyStopRelay_2 == false)
             {
                 //急停继电器解除
                 DataManager.Instance.InsertHistoryWarningMc("急停继电器解除", GetUserName(),
@@ -2237,8 +2237,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.LargeCarFrequencyConverterFault_2));
             }
 
-            if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2 &&
-                _systemVariables.LargeCarBrakeResistorOverheatSwitch_2 == false)
+            if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2==false &&
+                _systemVariables.LargeCarBrakeResistorOverheatSwitch_2 == true)
             {
                 //大车-制动电阻超温
                 DataManager.Instance.InsertHistoryWarningMc("大车-制动电阻超温", GetUserName(),
@@ -2247,8 +2247,8 @@ public class GameDataManager : Singleton<GameDataManager>
                  AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2), "大车-制动电阻超温",
                                                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2 == false &&
-                     _systemVariables.LargeCarBrakeResistorOverheatSwitch_2 == true)
+            else if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2 == true &&
+                     _systemVariables.LargeCarBrakeResistorOverheatSwitch_2 == false)
             {
                 //大车-制动电阻超温解除
                 DataManager.Instance.InsertHistoryWarningMc("大车-制动电阻超温解除", GetUserName(),
@@ -3039,8 +3039,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch_2));
             }
 
-            if (newSystemVariables.CentralMaterialDustDetectionSwitch_2 &&
-                _systemVariables.CentralMaterialDustDetectionSwitch_2 == false)
+            if (newSystemVariables.CentralMaterialDustDetectionSwitch_2==false &&
+                _systemVariables.CentralMaterialDustDetectionSwitch_2 == true)
             {
                 //悬胶/挡板-中部料斗堵煤
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤", GetUserName(),
@@ -3049,8 +3049,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralMaterialDustDetectionSwitch_2), "悬胶/挡板-中部料斗堵煤",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.CentralMaterialDustDetectionSwitch_2 == false &&
-                     _systemVariables.CentralMaterialDustDetectionSwitch_2 == true)
+            else if (newSystemVariables.CentralMaterialDustDetectionSwitch_2 == true &&
+                     _systemVariables.CentralMaterialDustDetectionSwitch_2 == false)
             {
                 //悬胶/挡板-中部料斗堵煤解除
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤解除", GetUserName(),

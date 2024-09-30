@@ -113,7 +113,7 @@ public class ClientConnection:MonoBehaviour
         }
 #endif
         EventManager.Instance.TriggerEvent(EventName.ConnectionError, this, new ConnectEventArgs(socketType));
-        Debug.LogFormat("OnError: error occured: {0}\n", (ex != null ? ex : "Unknown Error " + errorMsg + socketType));
+        Debug.LogFormat("OnError: error occured: {0}\n{1}", (ex != null ? ex : "Unknown Error " + errorMsg), socketType);
         webSocket = null;
         ReConnect();
         
