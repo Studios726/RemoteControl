@@ -745,6 +745,15 @@ public class GameDataManager : Singleton<GameDataManager>
         }
        
     }
+
+    public void ChangeWarningDesDict(string key,bool isSelect,string confirmTime)
+    {
+        if (WarningCellDataDict.ContainsKey(key))
+        {
+            WarningCellDataDict[key].IsSelect=isSelect;
+            WarningCellDataDict[key].ConfirmTime = confirmTime;
+        }
+    }
     public void AddOrUpdateWarningDesDict(string key, string des, Machine machine,bool isSelect,string time)
     {
         if (WarningCellDataDict.ContainsKey(key))
@@ -756,7 +765,7 @@ public class GameDataManager : Singleton<GameDataManager>
             // WarningCellDataDict[key].IsSelect=isSelect;
             // WarningCellDataDict[key].ConfirmTime = time;
         }
-        WarningCellDataDict.Add(key,new WarningCellData(key,des,DateTime.Now.ToString("HH:mm:ss"),machine,false,false,""));
+        WarningCellDataDict.Add(key,new WarningCellData(key,des,DateTime.Now,machine,false,false,""));
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);

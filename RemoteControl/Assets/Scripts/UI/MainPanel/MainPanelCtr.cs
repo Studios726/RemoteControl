@@ -21,7 +21,6 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public override void SetPanelData(UIArgs uiArgs)
     {
-        Debug.Log("MainPanelCtr ");
         Addlistener();
         view.UpdateData(null,null);
         view.UpdatePcData(null, null);
@@ -42,6 +41,22 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
                 }
             }
         }
+        
+        int n = datas.Count;
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (datas[j].Timestamp < datas[j + 1].Timestamp)
+                {
+                    WarningCellData temp = datas[j];
+                    datas[j] = datas[j + 1];
+                    datas[j + 1] = temp;
+                }
+            }
+        }
+        
         view._bucketWheelTask1.UpdateDes(datas);
       
     }
@@ -60,6 +75,21 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
                 if (keyCellData.Value.Machine==Machine.BucketWheel)
                 {
                     datas.Add(keyCellData.Value);
+                }
+            }
+        }
+        
+        int n = datas.Count;
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                if (datas[j].Timestamp < datas[j + 1].Timestamp)
+                {
+                    WarningCellData temp = datas[j];
+                    datas[j] = datas[j + 1];
+                    datas[j + 1] = temp;
                 }
             }
         }

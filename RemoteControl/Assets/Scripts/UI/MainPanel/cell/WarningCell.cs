@@ -12,9 +12,11 @@ public class WarningCellData
     public string TriggerTime;
     public bool IsSelect;
     public string ConfirmTime;
+    public DateTime TriggerDateTime;
+    public double Timestamp;
     public Machine Machine;
 
-    public WarningCellData(string key,string des, string triggerTime, Machine machine, bool isConfirm = false, bool isSelect = false,
+    public WarningCellData(string key,string des,DateTime dateTime, Machine machine, bool isConfirm = false, bool isSelect = false,
         string confirmTime = "")
     {
         this.Key = key;
@@ -22,8 +24,10 @@ public class WarningCellData
         this.IsConfirm = isConfirm;
         this.ConfirmTime = confirmTime;
         this.Machine = machine;
-        this.TriggerTime = triggerTime;
+        this.TriggerTime = dateTime.ToString("HH:mm:ss");
         this.IsSelect = isSelect;
+        this.TriggerDateTime = dateTime;
+        this.Timestamp =(dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local)).TotalSeconds;
     }
 }
 
@@ -45,8 +49,7 @@ public class WarningCell : MonoBehaviour
         });
         isConfirmToggle.onValueChanged.AddListener((arg0 =>
         {
-            Debug.Log(arg0);
-            GameDataManager.Instance.AddOrUpdateWarningDesDict(data.Key, data.Des, data.Machine, arg0,data.ConfirmTime);
+            GameDataManager.Instance.ChangeWarningDesDict(data.Key,arg0,data.ConfirmTime);
         }));
     }
 
@@ -55,6 +58,7 @@ public class WarningCell : MonoBehaviour
         data = warningCellData;
         des.text = warningCellData.Des;
         triggerTime.text = warningCellData.TriggerTime;
+        des.color = warningCellData.IsConfirm ? Color.white : Color.red;
         time.text = warningCellData.IsConfirm == true ? warningCellData.ConfirmTime : "";
         isConfirmToggle.isOn = warningCellData.IsSelect;
     }

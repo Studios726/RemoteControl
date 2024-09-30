@@ -21,11 +21,15 @@ public class WarningList :UICyclicScrollList<WarningCell, WarningCellData>
     public void RefreshList(List<WarningCellData> historyDatas)
     {
         datas.Clear();
-        int count = historyDatas.Count - 1;
-        for (int i = count; i >= 0; i--)
+        // int count = historyDatas.Count - 1;
+        for (int i = 0; i < historyDatas.Count; i++)
         {
             datas.Add(historyDatas[i]);
         }
+        // for (int i = count; i >= 0; i--)
+        // {
+        //     datas.Add(historyDatas[i]);
+        // }
         Initlize(datas);
     }
     protected override void ResetCellData(WarningCell cell, WarningCellData data, int dataIndex)
