@@ -356,13 +356,15 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 stopBtn.SetSystemState(false);
             }
 
-            if (data.RotaryLeftTurnCommand==false&&data.RotaryRightTurnCommand==false)
+            if (data.RotaryLeftTurnCommand==false&&data.RotaryRightTurnCommand==false&&data.VariableAmplitudeUpperElectromagneticValveOpen==false&&data.VariableAmplitudeLowerElectromagneticValveOpen==false)
             {
                 rotStopBtn.SetSystemState(true);
+                stopBtn.SetSystemState(true);
             }
             else
             {
                 rotStopBtn.SetSystemState(false);
+                stopBtn.SetSystemState(false);
             }
             leftBtn.SetSystemState(data.RotaryLeftTurnCommand);
             if (leftAngle.gameObject.activeSelf!= data.RotaryLeftTurnCommand)
