@@ -77,7 +77,7 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void ScramStopFicker(bool isFicker)
     {
-        if (true)
+        if (isFicker)
         {
             if (scramStopTimer == null)
             {
@@ -92,6 +92,7 @@ public class BucketWheelTaskBase : PanelBase
             if (scramStopTimer != null)
             {
                 scramStopTimer.Cancel();
+                scramStopTimer = null;
             }
 
             scramStopYellowBtn.SetActive(false);

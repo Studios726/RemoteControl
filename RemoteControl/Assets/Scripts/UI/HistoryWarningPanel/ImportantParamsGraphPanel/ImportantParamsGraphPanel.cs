@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Utility;
 using XCharts.Runtime;
+using Random = UnityEngine.Random;
 
 public class ElectricityData
 {
@@ -294,10 +295,32 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         addNum = addNum == 0 ? 1 : addNum;
        
         DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
-        for (int i = 0; i < dataRowCollection.Count; i+=addNum)
+        for (int i = dataRowCollection.Count -1; i >= 0; i-=addNum)
         {
             lineChart.AddData(0, DateTime.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME].ToString()), float.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_VALUE].ToString()));
         }
+        // int m = 1;
+        // int s = 1;
+        // for (int i = 0; i < 1000; i++)
+        // {
+        //     s = s + 1;
+        //     if (i%60==0)
+        //     {
+        //         m = m + 1;
+        //         s = 0;
+        //     }
+        //     lineChart.AddData(0, new DateTime(2024,1,15,15,m,s), Random.Range(25, 30));
+        // }
+        // lineChart.AddData(0, new DateTime(2024,8,15,19,51,59), 9);
+        // lineChart.AddData(0, new DateTime(2024,8,13,14,53,45), 15);
+        // lineChart.AddData(0, new DateTime(2024,8,7,17,49,45), 6);
+        // lineChart.AddData(0, new DateTime(2024,8,7,15,49,45), 2);
+        // lineChart.AddData(0, new DateTime(2024,8,6,15,49,43), 6);
+     
+       
+        
+        
+        
     }
 
     public void UpdateCurChartByTime(string startTime, string endTime, MechanicalType mechanicalType,string other)
