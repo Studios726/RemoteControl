@@ -245,7 +245,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
         cableWindingDeviceData.isMainCircuitBreaker =
             GetToggleState(data.CableReelMainCircuitBreaker, data.CableReelMainCircuitBreaker_2);
         cableWindingDeviceData.isReelOverTightLimit1 =
-            GetToggleState(data.ReelOverTensionLimit1, data.ReelOverTensionLimit1_2);
+            GetToggleState(!data.ReelOverTensionLimit1, !data.ReelOverTensionLimit1_2);
         cableWindingDeviceData.isReelOverLooseLimit1 =
             GetToggleState(data.ReelOverLooseLimit1, data.ReelOverLooseLimit1_2);
         cableWindingDeviceData.isReelEmptyDiskSwitch =

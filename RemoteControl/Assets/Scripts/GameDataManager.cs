@@ -1782,7 +1782,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload));
             }
 
-            if (newSystemVariables.ReelOverTensionLimit1 && _systemVariables.ReelOverTensionLimit1 == false)
+            if (newSystemVariables.ReelOverTensionLimit1==false && _systemVariables.ReelOverTensionLimit1 == true)
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1", GetUserName(),
@@ -1791,8 +1791,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1), "电缆卷筒-卷筒过紧限位1",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.ReelOverTensionLimit1 == false &&
-                     _systemVariables.ReelOverTensionLimit1 == true)
+            else if (newSystemVariables.ReelOverTensionLimit1 == true &&
+                     _systemVariables.ReelOverTensionLimit1 == false)
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1解除", GetUserName(),
@@ -2108,6 +2108,8 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.TailCarBeltLongitudinalTearing));
             }
+            
+            
             //333333333333333333
 
             //取料机
@@ -3095,7 +3097,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload_2));
             }
 
-            if (newSystemVariables.ReelOverTensionLimit1_2 && _systemVariables.ReelOverTensionLimit1_2 == false)
+            if (newSystemVariables.ReelOverTensionLimit1_2==false && _systemVariables.ReelOverTensionLimit1_2 == true)
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1", GetUserName(),
@@ -3104,8 +3106,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1_2), "电缆卷筒-卷筒过紧限位1",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.ReelOverTensionLimit1_2 == false &&
-                     _systemVariables.ReelOverTensionLimit1_2 == true)
+            else if (newSystemVariables.ReelOverTensionLimit1_2 == true &&
+                     _systemVariables.ReelOverTensionLimit1_2 == false)
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1解除", GetUserName(),
