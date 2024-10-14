@@ -16,13 +16,14 @@ public struct WarningData
     public string Des;
     public DateTime Time;
 
-    public WarningData(string des,int rank=3)
+    public WarningData(string des, int rank = 3)
     {
         string time = DateTime.Now.ToString("HH:mm:ss");
-        if (rank==0)
+        if (rank == 0)
         {
             Des = $"<color=#FF0000>{des} {time}</color>";
-        }else if (rank==1)
+        }
+        else if (rank == 1)
         {
             Des = $"<color=#FFFF00>{des} {time}</color>";
         }
@@ -30,7 +31,7 @@ public struct WarningData
         {
             Des = des + " " + time;
         }
-       
+
         Time = DateTime.Now;
     }
 }
@@ -55,6 +56,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public List<WarningCellData> BucketWheelWarningCellDataList = new List<WarningCellData>();
     public List<WarningCellData> BucketWheelStackerReclaimerWarningCellDataList = new List<WarningCellData>();
     public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
+
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
@@ -62,7 +64,7 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public bool IsAdmin()
     {
-        if (curAccountInfo!=null&&curAccountInfo.isAdmin)
+        if (curAccountInfo != null && curAccountInfo.isAdmin)
         {
             return true;
         }
@@ -71,6 +73,7 @@ public class GameDataManager : Singleton<GameDataManager>
             return false;
         }
     }
+
     public string TaoIP
     {
         get => _taoIP;
@@ -113,7 +116,7 @@ public class GameDataManager : Singleton<GameDataManager>
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
 
         UpdateMachine();
-    
+
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
     }
 
@@ -182,49 +185,55 @@ public class GameDataManager : Singleton<GameDataManager>
     //油泵是否启动判断
     public string IsOilPumpStarted(Machine machine)
     {
-       
-        if (_systemVariables==null)
+        if (_systemVariables == null)
         {
-            return  "油泵未启动，是否继续执行？";
+            return "油泵未启动，是否继续执行？";
         }
         else
         {
             string des;
-            bool isRelaxed = machine==Machine.BucketWheelStackerReclaimer?_systemVariables.VariableAmplitudeOilPumpMotorRunning:_systemVariables.VariableAmplitudeOilPumpMotorRunning_2;
+            bool isRelaxed = machine == Machine.BucketWheelStackerReclaimer
+                ? _systemVariables.VariableAmplitudeOilPumpMotorRunning
+                : _systemVariables.VariableAmplitudeOilPumpMotorRunning_2;
             if (isRelaxed)
             {
-                des="油泵已启动，是否继续执行？";
+                des = "油泵已启动，是否继续执行？";
             }
             else
             {
-                des="油泵未启动，是否继续执行？";
+                des = "油泵未启动，是否继续执行？";
             }
+
             return des;
         }
-      
     }
+
     // 夹轨器是否放松判断
     public string IsRailClampRelaxed(Machine machine)
     {
-        if (_systemVariables==null)
+        if (_systemVariables == null)
         {
-            return  "夹轨器未放松，是否继续执行";
+            return "夹轨器未放松，是否继续执行";
         }
         else
         {
             string des;
-            bool isRelaxed = machine==Machine.BucketWheelStackerReclaimer?(_systemVariables.LeftClampRelaxLimit&&_systemVariables.RightClampRelaxLimit):(_systemVariables.LeftClampRelaxLimit_2&&_systemVariables.RightClampRelaxLimit_2);
+            bool isRelaxed = machine == Machine.BucketWheelStackerReclaimer
+                ? (_systemVariables.LeftClampRelaxLimit && _systemVariables.RightClampRelaxLimit)
+                : (_systemVariables.LeftClampRelaxLimit_2 && _systemVariables.RightClampRelaxLimit_2);
             if (isRelaxed)
             {
-                des="夹轨器已放松，是否继续执行";
+                des = "夹轨器已放松，是否继续执行";
             }
             else
             {
-                des="夹轨器未放松，是否继续执行";
+                des = "夹轨器未放松，是否继续执行";
             }
+
             return des;
         }
     }
+
     public void SetMachine(MachineMove machine1, MachineMove machine2)
     {
         machineMove_1 = machine1;
@@ -430,8 +439,13 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void UpdateBeltAnimation()
     {
-        EventManager.Instance.TriggerEvent(EventName.PlayBeltAnim, null,new BeltRunArgs(_systemVariables.AllowBucketWheelMaterialUnloading||_systemVariables.AllowBucketWheelMaterialLoading,_systemVariables.AllowBucketWheelMaterialUnloading_2||_systemVariables.AllowBucketWheelMaterialLoading_2));
+        EventManager.Instance.TriggerEvent(EventName.PlayBeltAnim, null,
+            new BeltRunArgs(
+                _systemVariables.AllowBucketWheelMaterialUnloading || _systemVariables.AllowBucketWheelMaterialLoading,
+                _systemVariables.AllowBucketWheelMaterialUnloading_2 ||
+                _systemVariables.AllowBucketWheelMaterialLoading_2));
     }
+
     public async Task DeSerializeScaJson(string json)
     {
         SendDataReportAndDEM cursendDataReportAndDem = new SendDataReportAndDEM();
@@ -584,7 +598,7 @@ public class GameDataManager : Singleton<GameDataManager>
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 
-    public void SendServerCommandByName(string commandName, int dataInt = 0,float dataFloat=0)
+    public void SendServerCommandByName(string commandName, int dataInt = 0, float dataFloat = 0)
     {
         ServerCommand serverCommand = new ServerCommand();
         serverCommand.QUERY_SYSTEM = "MC";
@@ -608,7 +622,6 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void RecordChart()
     {
-     
         if (_systemVariables == null)
         {
             return;
@@ -700,20 +713,20 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void RefreshWarningDesQueue()
     {
-        if (BucketWheelStackerReclaimerQueue.Count>0)
+        if (BucketWheelStackerReclaimerQueue.Count > 0)
         {
-            WarningData warningData= BucketWheelStackerReclaimerQueue.Peek();
-            if ((DateTime.Now - warningData.Time).TotalSeconds>=8)
+            WarningData warningData = BucketWheelStackerReclaimerQueue.Peek();
+            if ((DateTime.Now - warningData.Time).TotalSeconds >= 8)
             {
                 BucketWheelStackerReclaimerQueue.Dequeue();
                 EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
             }
         }
-        
-        if (BucketWheelQueue.Count>0)
+
+        if (BucketWheelQueue.Count > 0)
         {
-            WarningData warningData= BucketWheelQueue.Peek();
-            if ((DateTime.Now - warningData.Time).TotalSeconds>=8)
+            WarningData warningData = BucketWheelQueue.Peek();
+            if ((DateTime.Now - warningData.Time).TotalSeconds >= 8)
             {
                 BucketWheelQueue.Dequeue();
                 EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
@@ -723,18 +736,20 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void UpdateWarningConfirmTime(Machine machine)
     {
-        if (WarningCellDataDict.Count>0)
+        if (WarningCellDataDict.Count > 0)
         {
             foreach (var keyCellData in WarningCellDataDict)
             {
-                if (machine==keyCellData.Value.Machine&&keyCellData.Value.IsSelect&&keyCellData.Value.IsConfirm==false)
+                if (machine == keyCellData.Value.Machine && keyCellData.Value.IsSelect &&
+                    keyCellData.Value.IsConfirm == false)
                 {
                     //更新确认时间
-                    keyCellData.Value.ConfirmTime=DateTime.Now.ToString("HH:mm:ss");
+                    keyCellData.Value.ConfirmTime = DateTime.Now.ToString("HH:mm:ss");
                     keyCellData.Value.IsConfirm = true;
                 }
-            } 
-            if (machine==Machine.BucketWheelStackerReclaimer)
+            }
+
+            if (machine == Machine.BucketWheelStackerReclaimer)
             {
                 EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
             }
@@ -743,18 +758,18 @@ public class GameDataManager : Singleton<GameDataManager>
                 EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
             }
         }
-       
     }
 
-    public void ChangeWarningDesDict(string key,bool isSelect,string confirmTime)
+    public void ChangeWarningDesDict(string key, bool isSelect, string confirmTime)
     {
         if (WarningCellDataDict.ContainsKey(key))
         {
-            WarningCellDataDict[key].IsSelect=isSelect;
+            WarningCellDataDict[key].IsSelect = isSelect;
             WarningCellDataDict[key].ConfirmTime = confirmTime;
         }
     }
-    public void AddOrUpdateWarningDesDict(string key, string des, Machine machine,bool isSelect,string time)
+
+    public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, string time)
     {
         if (WarningCellDataDict.ContainsKey(key))
         {
@@ -765,8 +780,9 @@ public class GameDataManager : Singleton<GameDataManager>
             // WarningCellDataDict[key].IsSelect=isSelect;
             // WarningCellDataDict[key].ConfirmTime = time;
         }
-        WarningCellDataDict.Add(key,new WarningCellData(key,des,DateTime.Now,machine,false,false,""));
-        if (machine==Machine.BucketWheelStackerReclaimer)
+
+        WarningCellDataDict.Add(key, new WarningCellData(key, des, DateTime.Now, machine, false, false, ""));
+        if (machine == Machine.BucketWheelStackerReclaimer)
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
         }
@@ -783,7 +799,8 @@ public class GameDataManager : Singleton<GameDataManager>
             WarningCellDataDict.Remove(key);
         }
     }
-    public void AddOrUpdateWarningDesQueue(string des, Machine machine,int rank=0)
+
+    public void AddOrUpdateWarningDesQueue(string des, Machine machine, int rank = 0)
     {
         // des = des + DateTime.Now.ToString("HH:mm:ss");
         // if (machine==Machine.BucketWheelStackerReclaimer)
@@ -796,15 +813,15 @@ public class GameDataManager : Singleton<GameDataManager>
         //     BucketWheelWarningCellDataList.Add(new WarningCellData(des,machine,false,""));
         //     EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
         // }
-      
     }
 
     public void RecordWarning(SystemVariables newSystemVariables)
     {
-        if (_systemVariables==null)
+        if (_systemVariables == null)
         {
             _systemVariables = new SystemVariables();
         }
+
         if (_systemVariables != null)
         {
             // 存儲警告信息
@@ -846,7 +863,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.ElectricalRoomEmergencyStopButton));
             }
 
-            if (newSystemVariables.EmergencyStopRelay==false && _systemVariables.EmergencyStopRelay == true)
+            if (newSystemVariables.EmergencyStopRelay == false && _systemVariables.EmergencyStopRelay == true)
             {
                 //急停继电器
                 DataManager.Instance.InsertHistoryWarningMc("急停继电器", GetUserName(),
@@ -930,10 +947,10 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-变频器故障解除
                 DataManager.Instance.InsertHistoryWarningMc("大车-变频器故障解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                 RemoveWarningDesDict(nameof(newSystemVariables.LargeCarFrequencyConverterFault));
+                RemoveWarningDesDict(nameof(newSystemVariables.LargeCarFrequencyConverterFault));
             }
 
-            if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch==false &&
+            if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch == false &&
                 _systemVariables.LargeCarBrakeResistorOverheatSwitch == true)
             {
                 //大车-制动电阻超温
@@ -959,7 +976,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("大车-大车集中润滑低油位", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel), "大车-大车集中润滑低油位",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel),
+                    "大车-大车集中润滑低油位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel == false &&
@@ -978,7 +996,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("大车-大车集中润滑堵油", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage), "大车-大车集中润滑堵油",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage),
+                    "大车-大车集中润滑堵油",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage == false &&
@@ -1085,8 +1104,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("变幅-主电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("变幅-主电机过载", Machine.BucketWheelStackerReclaimer);
-                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeMotorOverload), "变幅-主电机过载",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeMotorOverload), "变幅-主电机过载",
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.VariableAmplitudeMotorOverload == false &&
                      _systemVariables.VariableAmplitudeMotorOverload == true)
@@ -1178,7 +1197,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("变幅-下俯禁区", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("变幅-下俯禁区", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeLowerForbiddenZoneLimit), "变幅-下俯禁区",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeLowerForbiddenZoneLimit),
+                    "变幅-下俯禁区",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.VariableAmplitudeLowerForbiddenZoneLimit == false &&
@@ -1197,7 +1217,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("变幅-泵站高温报警", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("变幅-泵站高温报警", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudePumpStationOverheatAlarm), "变幅-泵站高温报警",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudePumpStationOverheatAlarm),
+                    "变幅-泵站高温报警",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.VariableAmplitudePumpStationOverheatAlarm == false &&
@@ -1216,8 +1237,9 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("变幅-油液位低信号", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("变幅-油液位低信号", Machine.BucketWheelStackerReclaimer);
-                  AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeOilLevelVeryLowSignal), "变幅-油液位低信号",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeOilLevelVeryLowSignal),
+                    "变幅-油液位低信号",
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.VariableAmplitudeOilLevelVeryLowSignal == false &&
                      _systemVariables.VariableAmplitudeOilLevelVeryLowSignal == true)
@@ -1291,10 +1313,9 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("回转-制动器过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("回转-制动器过载", Machine.BucketWheelStackerReclaimer);
-                
+
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryBrakeOverload), "回转-制动器过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
-                
             }
             else if (newSystemVariables.RotaryBrakeOverload == false && _systemVariables.RotaryBrakeOverload == true)
             {
@@ -1508,7 +1529,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("回转-回转集中润滑堵油", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault), "回转-回转集中润滑堵油",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault),
+                    "回转-回转集中润滑堵油",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault == false &&
@@ -1527,7 +1549,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("回转-回转集中润滑低油位", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault), "回转-回转集中润滑低油位",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault),
+                    "回转-回转集中润滑低油位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault == false &&
@@ -1563,8 +1586,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("斗轮/槽-斗轮过力矩开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("斗轮/槽-斗轮过力矩开关", Machine.BucketWheelStackerReclaimer);
-                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelOverTorqueSwitch), "斗轮/槽-斗轮过力矩开关",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelOverTorqueSwitch), "斗轮/槽-斗轮过力矩开关",
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.BucketWheelOverTorqueSwitch == false &&
                      _systemVariables.BucketWheelOverTorqueSwitch == true)
@@ -1572,7 +1595,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 //斗轮/槽-斗轮过力矩开关解除
                 DataManager.Instance.InsertHistoryWarningMc("斗轮/槽-斗轮过力矩开关解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                   RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelOverTorqueSwitch));
+                RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelOverTorqueSwitch));
             }
 
             if (newSystemVariables.BucketWheelSlotMotorOverload &&
@@ -1619,7 +1642,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-一级跑偏开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("悬胶/挡板-一级跑偏开关", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltFirstLevelDeviationSwitch), "悬胶/挡板-一级跑偏开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltFirstLevelDeviationSwitch),
+                    "悬胶/挡板-一级跑偏开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.SuspensionBeltFirstLevelDeviationSwitch == false &&
@@ -1638,8 +1662,9 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-二级跑偏开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("悬胶/挡板-二级跑偏开关", Machine.BucketWheelStackerReclaimer);
-                
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltSecondLevelDeviationSwitch), "悬胶/挡板-二级跑偏开关",
+
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltSecondLevelDeviationSwitch),
+                    "悬胶/挡板-二级跑偏开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.SuspensionBeltSecondLevelDeviationSwitch == false &&
@@ -1658,7 +1683,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("悬胶/挡板-打滑检测开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltSlip), "悬胶/挡板-打滑检测开关",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.SuspendedBeltSlip == false && _systemVariables.SuspendedBeltSlip == true)
             {
@@ -1675,8 +1700,9 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-纵向撕裂开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("悬胶/挡板-纵向撕裂开关", Machine.BucketWheelStackerReclaimer);
-                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltLongitudinalTearSwitch), "悬胶/挡板-纵向撕裂开关",
-                                                    Machine.BucketWheelStackerReclaimer, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltLongitudinalTearSwitch),
+                    "悬胶/挡板-纵向撕裂开关",
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.SuspensionBeltLongitudinalTearSwitch == false &&
                      _systemVariables.SuspensionBeltLongitudinalTearSwitch == true)
@@ -1713,7 +1739,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-料流检测开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("悬胶/挡板-料流检测开关", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch), "悬胶/挡板-料流检测开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch),
+                    "悬胶/挡板-料流检测开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch == false &&
@@ -1725,7 +1752,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch));
             }
 
-            if (newSystemVariables.CentralMaterialDustDetectionSwitch==false &&
+            if (newSystemVariables.CentralMaterialDustDetectionSwitch == false &&
                 _systemVariables.CentralMaterialDustDetectionSwitch == true)
             {
                 //悬胶/挡板-中部料斗堵煤
@@ -1751,8 +1778,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("分流挡板-电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("分流挡板-电机过载", Machine.BucketWheelStackerReclaimer);
-                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.DiversionBaffleMotorOverload), "分流挡板-电机过载",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DiversionBaffleMotorOverload), "分流挡板-电机过载",
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.DiversionBaffleMotorOverload == false &&
                      _systemVariables.DiversionBaffleMotorOverload == true)
@@ -1782,7 +1809,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload));
             }
 
-            if (newSystemVariables.ReelOverTensionLimit1==false && _systemVariables.ReelOverTensionLimit1 == true)
+            if (newSystemVariables.ReelOverTensionLimit1 == false && _systemVariables.ReelOverTensionLimit1 == true)
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1", GetUserName(),
@@ -1797,7 +1824,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                 RemoveWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1));
+                RemoveWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1));
             }
 
             if (newSystemVariables.ReelOverLooseLimit1 && _systemVariables.ReelOverLooseLimit1 == false)
@@ -1807,7 +1834,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过松限位1", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1), "电缆卷筒-卷筒过松限位1",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.ReelOverLooseLimit1 == false && _systemVariables.ReelOverLooseLimit1 == true)
             {
@@ -1914,7 +1941,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("洒水抑尘-干雾系统过滤器堵塞", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.DryFogSystemFilterClogged), "洒水抑尘-干雾系统过滤器堵塞",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.DryFogSystemFilterClogged == false &&
                      _systemVariables.DryFogSystemFilterClogged == true)
@@ -1985,8 +2012,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("夹轨器故障", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("夹轨器故障", Machine.BucketWheelStackerReclaimer);
-                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ClampFault), "夹轨器故障",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ClampFault), "夹轨器故障",
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.ClampFault == false && _systemVariables.ClampFault == true)
             {
@@ -2003,7 +2030,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车从动滚筒轴承上限报警", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("尾车胶带-尾车从动滚筒轴承上限报警", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm), "尾车胶带-尾车从动滚筒轴承上限报警",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm),
+                    "尾车胶带-尾车从动滚筒轴承上限报警",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm == false &&
@@ -2022,8 +2050,9 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车从动滚筒轴承下限报警", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("尾车胶带-尾车从动滚筒轴承下限报警", Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingLowerLimitAlarm), "尾车胶带-尾车从动滚筒轴承下限报警",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingLowerLimitAlarm),
+                    "尾车胶带-尾车从动滚筒轴承下限报警",
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.TailCarDrivenRollerBearingLowerLimitAlarm == false &&
                      _systemVariables.TailCarDrivenRollerBearingLowerLimitAlarm == true)
@@ -2061,7 +2090,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 // AddOrUpdateWarningDesQueue("尾车胶带-尾车二级跑偏开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarSecondLevelDeviationSwitch), "尾车胶带-尾车二级跑偏开关",
-                                    Machine.BucketWheelStackerReclaimer, false, "");
+                    Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.TailCarSecondLevelDeviationSwitch == false &&
                      _systemVariables.TailCarSecondLevelDeviationSwitch == true)
@@ -2108,8 +2137,614 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.TailCarBeltLongitudinalTearing));
             }
-            
-            
+
+            if (newSystemVariables.OverBelt_R_Limit && _systemVariables.OverBelt_R_Limit == false)
+            {
+                // 回转右转过皮带保护限位
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_R_Limit), "回转右转过皮带保护限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.OverBelt_R_Limit == false && _systemVariables.OverBelt_R_Limit == true)
+            {
+                // 回转右转过皮带保护限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_R_Limit));
+            }
+
+            if (newSystemVariables.OverBelt_L_Limit && _systemVariables.OverBelt_L_Limit == false)
+            {
+                // 回转左转过皮带保护限位
+                DataManager.Instance.InsertHistoryWarningMc("回转左转过皮带保护限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_L_Limit), "回转左转过皮带保护限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.OverBelt_L_Limit == false && _systemVariables.OverBelt_L_Limit == true)
+            {
+                // 回转左转过皮带保护限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转左转过皮带保护限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_L_Limit));
+            }
+
+            if (newSystemVariables.OverBelt_D_Limit && _systemVariables.OverBelt_D_Limit == false)
+            {
+                // 回转过皮带俯仰下限位保护
+                DataManager.Instance.InsertHistoryWarningMc("回转过皮带俯仰下限位保护", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_D_Limit), "回转过皮带俯仰下限位保护",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.OverBelt_D_Limit == false && _systemVariables.OverBelt_D_Limit == true)
+            {
+                // 回转过皮带俯仰下限位保护解除
+                DataManager.Instance.InsertHistoryWarningMc("回转过皮带俯仰下限位保护解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_D_Limit));
+            }
+
+            if (newSystemVariables.OverBelt_R_SoftLimit && _systemVariables.OverBelt_R_SoftLimit == false)
+            {
+                // 回转右转过皮带保护软限位
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_R_SoftLimit), "回转右转过皮带保护软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.OverBelt_R_SoftLimit == false && _systemVariables.OverBelt_R_SoftLimit == true)
+            {
+                // 回转右转过皮带保护软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_R_SoftLimit));
+            }
+
+            if (newSystemVariables.OverBelt_L_SoftLimit && _systemVariables.OverBelt_L_SoftLimit == false)
+            {
+                // 回转左转过皮带保护软限位
+                DataManager.Instance.InsertHistoryWarningMc("回转左转过皮带保护软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_L_SoftLimit), "回转左转过皮带保护软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.OverBelt_L_SoftLimit == false && _systemVariables.OverBelt_L_SoftLimit == true)
+            {
+                // 回转左转过皮带保护软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转左转过皮带保护软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_L_SoftLimit));
+            }
+
+            if (newSystemVariables.OverBelt_D_SoftLimit && _systemVariables.OverBelt_D_SoftLimit == false)
+            {
+                // 回转过皮带俯仰下限软限位
+                DataManager.Instance.InsertHistoryWarningMc("回转过皮带俯仰下限软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_D_SoftLimit), "回转过皮带俯仰下限软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.OverBelt_D_SoftLimit == false && _systemVariables.OverBelt_D_SoftLimit == true)
+            {
+                // 回转过皮带俯仰下限软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转过皮带俯仰下限软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_D_SoftLimit));
+            }
+
+            if (newSystemVariables.DC_FWD_SoftLimit && _systemVariables.DC_FWD_SoftLimit == false)
+            {
+                // 大车前进停止软限位
+                DataManager.Instance.InsertHistoryWarningMc("大车前进停止软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_FWD_SoftLimit), "大车前进停止软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_FWD_SoftLimit == false && _systemVariables.DC_FWD_SoftLimit == true)
+            {
+                // 大车前进停止软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("大车前进停止软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_FWD_SoftLimit));
+            }
+
+            if (newSystemVariables.DcFWD_LimitStatus && _systemVariables.DcFWD_LimitStatus == false)
+            {
+                // 大车前进限位集合
+                DataManager.Instance.InsertHistoryWarningMc("大车前进限位集合", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DcFWD_LimitStatus), "大车前进限位集合",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DcFWD_LimitStatus == false && _systemVariables.DcFWD_LimitStatus == true)
+            {
+                // 大车前进限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("大车前进限位集合解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DcFWD_LimitStatus));
+            }
+
+            if (newSystemVariables.DC_REV_SoftLimit && _systemVariables.DC_REV_SoftLimit == false)
+            {
+                // 大车后退停止软限位
+                DataManager.Instance.InsertHistoryWarningMc("大车后退停止软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_REV_SoftLimit), "大车后退停止软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_REV_SoftLimit == false && _systemVariables.DC_REV_SoftLimit == true)
+            {
+                // 大车后退停止软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("大车后退停止软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_REV_SoftLimit));
+            }
+
+            if (newSystemVariables.DcREV_LimitStatus && _systemVariables.DcREV_LimitStatus == false)
+            {
+                // 大车后退限位集合
+                DataManager.Instance.InsertHistoryWarningMc("大车后退限位集合", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DcREV_LimitStatus), "大车后退限位集合",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DcREV_LimitStatus == false && _systemVariables.DcREV_LimitStatus == true)
+            {
+                // 大车后退限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("大车后退限位集合解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DcREV_LimitStatus));
+            }
+
+            if (newSystemVariables.Slew_R_SoftLimit && _systemVariables.Slew_R_SoftLimit == false)
+            {
+                // 悬臂右转软限位
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右转软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_R_SoftLimit), "悬臂右转软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_R_SoftLimit == false && _systemVariables.Slew_R_SoftLimit == true)
+            {
+                // 悬臂右转软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右转软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_R_SoftLimit));
+            }
+
+            if (newSystemVariables.Slew_R_LimitStatus && _systemVariables.Slew_R_LimitStatus == false)
+            {
+                // 悬臂右转限位集合
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右转限位集合", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_R_LimitStatus), "悬臂右转限位集合",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_R_LimitStatus == false && _systemVariables.Slew_R_LimitStatus == true)
+            {
+                // 悬臂右转限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右转限位集合解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_R_LimitStatus));
+            }
+
+            if (newSystemVariables.Slew_L_SoftLimit && _systemVariables.Slew_L_SoftLimit == false)
+            {
+                // 悬臂左转软限位
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左转软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_L_SoftLimit), "悬臂左转软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_L_SoftLimit == false && _systemVariables.Slew_L_SoftLimit == true)
+            {
+                // 悬臂左转软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左转软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_L_SoftLimit));
+            }
+
+            if (newSystemVariables.Slew_L_LimitStatus && _systemVariables.Slew_L_LimitStatus == false)
+            {
+                // 悬臂左转限位集合
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左转限位集合", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_L_LimitStatus), "悬臂左转限位集合",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_L_LimitStatus == false && _systemVariables.Slew_L_LimitStatus == true)
+            {
+                // 悬臂左转限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左转限位集合解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_L_LimitStatus));
+            }
+
+            if (newSystemVariables.Luff_Up_SoftLimit && _systemVariables.Luff_Up_SoftLimit == false)
+            {
+                // 俯仰上极限软限位
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上极限软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Luff_Up_SoftLimit), "俯仰上极限软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Luff_Up_SoftLimit == false && _systemVariables.Luff_Up_SoftLimit == true)
+            {
+                // 俯仰上极限软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上极限软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Luff_Up_SoftLimit));
+            }
+
+            if (newSystemVariables.LuffUp_LimitStatus && _systemVariables.LuffUp_LimitStatus == false)
+            {
+                // 俯仰上极限限位集合
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上极限限位集合", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LuffUp_LimitStatus), "俯仰上极限限位集合",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.LuffUp_LimitStatus == false && _systemVariables.LuffUp_LimitStatus == true)
+            {
+                // 俯仰上极限限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上极限限位集合解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.LuffUp_LimitStatus));
+            }
+
+            if (newSystemVariables.Luff_Down_SoftLimit && _systemVariables.Luff_Down_SoftLimit == false)
+            {
+                // 俯仰下极限软限位
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下极限软限位", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Luff_Down_SoftLimit), "俯仰下极限软限位",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Luff_Down_SoftLimit == false && _systemVariables.Luff_Down_SoftLimit == true)
+            {
+                // 俯仰下极限软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下极限软限位解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Luff_Down_SoftLimit));
+            }
+
+            if (newSystemVariables.LuffDown_LimitStatus && _systemVariables.LuffDown_LimitStatus == false)
+            {
+                // 俯仰下极限限位集合
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下极限限位集合", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LuffDown_LimitStatus), "俯仰下极限限位集合",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.LuffDown_LimitStatus == false && _systemVariables.LuffDown_LimitStatus == true)
+            {
+                // 俯仰下极限限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下极限限位集合解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.LuffDown_LimitStatus));
+            }
+
+            if (newSystemVariables.Slew_SAS_L_Alarm && _systemVariables.Slew_SAS_L_Alarm == false)
+            {
+                // 悬臂左侧防撞保护动作
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左侧防撞保护动作", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_L_Alarm), "悬臂左侧防撞保护动作",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_L_Alarm == false && _systemVariables.Slew_SAS_L_Alarm == true)
+            {
+                // 悬臂左侧防撞保护动作解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左侧防撞保护动作解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_L_Alarm));
+            }
+
+            if (newSystemVariables.Slew_SAS_R_Alarm && _systemVariables.Slew_SAS_R_Alarm == false)
+            {
+                // 悬臂右侧防撞保护动作
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右侧防撞保护动作", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_R_Alarm), "悬臂右侧防撞保护动作",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_R_Alarm == false && _systemVariables.Slew_SAS_R_Alarm == true)
+            {
+                // 悬臂右侧防撞保护动作解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右侧防撞保护动作解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_R_Alarm));
+            }
+
+            if (newSystemVariables.DC_SAS_F_Alarm && _systemVariables.DC_SAS_F_Alarm == false)
+            {
+                // 大车前进防撞保护动作
+                DataManager.Instance.InsertHistoryWarningMc("大车前进防撞保护动作", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_F_Alarm), "大车前进防撞保护动作",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_F_Alarm == false && _systemVariables.DC_SAS_F_Alarm == true)
+            {
+                // 大车前进防撞保护动作解除
+                DataManager.Instance.InsertHistoryWarningMc("大车前进防撞保护动作解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_F_Alarm));
+            }
+
+            if (newSystemVariables.DC_SAS_B_Alarm && _systemVariables.DC_SAS_B_Alarm == false)
+            {
+                // 大车后退防撞保护动作
+                DataManager.Instance.InsertHistoryWarningMc("大车后退防撞保护动作", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_B_Alarm), "大车后退防撞保护动作",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_B_Alarm == false && _systemVariables.DC_SAS_B_Alarm == true)
+            {
+                // 大车后退防撞保护动作解除
+                DataManager.Instance.InsertHistoryWarningMc("大车后退防撞保护动作解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_B_Alarm));
+            }
+
+            if (newSystemVariables.Slew_SAS_RR_Alarm && _systemVariables.Slew_SAS_RR_Alarm == false)
+            {
+                // 悬臂右雷达前方有煤垛碰撞警告
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右雷达前方有煤垛碰撞警告", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_RR_Alarm), "悬臂右雷达前方有煤垛碰撞警告",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_RR_Alarm == false && _systemVariables.Slew_SAS_RR_Alarm == true)
+            {
+                // 悬臂右雷达前方有煤垛碰撞警告解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右雷达前方有煤垛碰撞警告解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_RR_Alarm));
+            }
+
+            if (newSystemVariables.Slew_SAS_LR_Alarm && _systemVariables.Slew_SAS_LR_Alarm == false)
+            {
+                // 悬臂左雷达前方有煤垛碰撞警告
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左雷达前方有煤垛碰撞警告", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_LR_Alarm), "悬臂左雷达前方有煤垛碰撞警告",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_LR_Alarm == false && _systemVariables.Slew_SAS_LR_Alarm == true)
+            {
+                // 悬臂左雷达前方有煤垛碰撞警告解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左雷达前方有煤垛碰撞警告解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_LR_Alarm));
+            }
+
+            if (newSystemVariables.Slew_SAS_RU_Alarm && _systemVariables.Slew_SAS_RU_Alarm == false)
+            {
+                // 悬臂右超声波前方有煤垛碰撞警告
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右超声波前方有煤垛碰撞警告", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_RU_Alarm), "悬臂右超声波前方有煤垛碰撞警告",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_RU_Alarm == false && _systemVariables.Slew_SAS_RU_Alarm == true)
+            {
+                // 悬臂右超声波前方有煤垛碰撞警告解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右超声波前方有煤垛碰撞警告解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_RU_Alarm));
+            }
+
+            if (newSystemVariables.Slew_SAS_LU_Alarm && _systemVariables.Slew_SAS_LU_Alarm == false)
+            {
+                // 悬臂左超声波前方有煤垛碰撞警告
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左超声波前方有煤垛碰撞警告", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_LU_Alarm), "悬臂左超声波前方有煤垛碰撞警告",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_LU_Alarm == false && _systemVariables.Slew_SAS_LU_Alarm == true)
+            {
+                // 悬臂左超声波前方有煤垛碰撞警告解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左超声波前方有煤垛碰撞警告解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_LU_Alarm));
+            }
+
+            if (newSystemVariables.DC_SAS_RF_Alrm && _systemVariables.DC_SAS_RF_Alrm == false)
+            {
+                // 大车右前方有障碍
+                DataManager.Instance.InsertHistoryWarningMc("大车右前方有障碍", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_RF_Alrm), "大车右前方有障碍",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_RF_Alrm == false && _systemVariables.DC_SAS_RF_Alrm == true)
+            {
+                // 大车右前方有障碍解除
+                DataManager.Instance.InsertHistoryWarningMc("大车右前方有障碍解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_RF_Alrm));
+            }
+
+            if (newSystemVariables.DC_SAS_RB_Alrm && _systemVariables.DC_SAS_RB_Alrm == false)
+            {
+                // 大车右后方有障碍
+                DataManager.Instance.InsertHistoryWarningMc("大车右后方有障碍", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_RB_Alrm), "大车右后方有障碍",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_RB_Alrm == false && _systemVariables.DC_SAS_RB_Alrm == true)
+            {
+                // 大车右后方有障碍解除
+                DataManager.Instance.InsertHistoryWarningMc("大车右后方有障碍解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_RB_Alrm));
+            }
+
+            if (newSystemVariables.DC_SAS_LF_Alrm && _systemVariables.DC_SAS_LF_Alrm == false)
+            {
+                // 大车左前方有障碍
+                DataManager.Instance.InsertHistoryWarningMc("大车左前方有障碍", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_LF_Alrm), "大车左前方有障碍",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_LF_Alrm == false && _systemVariables.DC_SAS_LF_Alrm == true)
+            {
+                // 大车左前方有障碍解除
+                DataManager.Instance.InsertHistoryWarningMc("大车左前方有障碍解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_LF_Alrm));
+            }
+
+            if (newSystemVariables.DC_SAS_LB_Alrm && _systemVariables.DC_SAS_LB_Alrm == false)
+            {
+                // 大车左后方有障碍
+                DataManager.Instance.InsertHistoryWarningMc("大车左后方有障碍", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_LB_Alrm), "大车左后方有障碍",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_LB_Alrm == false && _systemVariables.DC_SAS_LB_Alrm == true)
+            {
+                // 大车左后方有障碍解除
+                DataManager.Instance.InsertHistoryWarningMc("大车左后方有障碍解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_LB_Alrm));
+            }
+
+            if (newSystemVariables.FWD_Limit_Waring && _systemVariables.FWD_Limit_Waring == false)
+            {
+                // 大车前进限位两米预警
+                DataManager.Instance.InsertHistoryWarningMc("大车前进限位两米预警", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.FWD_Limit_Waring), "大车前进限位两米预警",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.FWD_Limit_Waring == false && _systemVariables.FWD_Limit_Waring == true)
+            {
+                // 大车前进限位两米预警解除
+                DataManager.Instance.InsertHistoryWarningMc("大车前进限位两米预警解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.FWD_Limit_Waring));
+            }
+
+            if (newSystemVariables.REV_Limit_Waring && _systemVariables.REV_Limit_Waring == false)
+            {
+                // 大车后退限位两米预警
+                DataManager.Instance.InsertHistoryWarningMc("大车后退限位两米预警", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.REV_Limit_Waring), "大车后退限位两米预警",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.REV_Limit_Waring == false && _systemVariables.REV_Limit_Waring == true)
+            {
+                // 大车后退限位两米预警解除
+                DataManager.Instance.InsertHistoryWarningMc("大车后退限位两米预警解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.REV_Limit_Waring));
+            }
+
+            if (newSystemVariables.Slew_R_Limit_Waring && _systemVariables.Slew_R_Limit_Waring == false)
+            {
+                // 回转右转限位两度预警
+                DataManager.Instance.InsertHistoryWarningMc("回转右转限位两度预警", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_R_Limit_Waring), "回转右转限位两度预警",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_R_Limit_Waring == false && _systemVariables.Slew_R_Limit_Waring == true)
+            {
+                // 回转右转限位两度预警解除
+                DataManager.Instance.InsertHistoryWarningMc("回转右转限位两度预警解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_R_Limit_Waring));
+            }
+
+            if (newSystemVariables.Slew_L_Limit_Waring && _systemVariables.Slew_L_Limit_Waring == false)
+            {
+                // 回转左转限位两度预警
+                DataManager.Instance.InsertHistoryWarningMc("回转左转限位两度预警", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_L_Limit_Waring), "回转左转限位两度预警",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_L_Limit_Waring == false && _systemVariables.Slew_L_Limit_Waring == true)
+            {
+                // 回转左转限位两度预警解除
+                DataManager.Instance.InsertHistoryWarningMc("回转左转限位两度预警解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_L_Limit_Waring));
+            }
+
+            if (newSystemVariables.Luff_U_Limit_Waring && _systemVariables.Luff_U_Limit_Waring == false)
+            {
+                // 俯仰上仰限位两度预警
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上仰限位两度预警", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Luff_U_Limit_Waring), "俯仰上仰限位两度预警",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Luff_U_Limit_Waring == false && _systemVariables.Luff_U_Limit_Waring == true)
+            {
+                // 俯仰上仰限位两度预警解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上仰限位两度预警解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Luff_U_Limit_Waring));
+            }
+
+            if (newSystemVariables.Luff_D_Limit_Waring && _systemVariables.Luff_D_Limit_Waring == false)
+            {
+                // 俯仰下俯限位两度预警
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下俯限位两度预警", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Luff_D_Limit_Waring), "俯仰下俯限位两度预警",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Luff_D_Limit_Waring == false && _systemVariables.Luff_D_Limit_Waring == true)
+            {
+                // 俯仰下俯限位两度预警解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下俯限位两度预警解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Luff_D_Limit_Waring));
+            }
+
+            if (newSystemVariables.DC_Encoder_ERR == true && _systemVariables.DC_Encoder_ERR == false)
+            {
+                // 行走编码器异常
+                DataManager.Instance.InsertHistoryWarningMc("行走编码器异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_Encoder_ERR), "行走编码器异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DC_Encoder_ERR == false && _systemVariables.DC_Encoder_ERR == true)
+            {
+                // 行走编码器异常解除
+                DataManager.Instance.InsertHistoryWarningMc("行走编码器异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_Encoder_ERR));
+            }
+
+            if (newSystemVariables.Slew_Encoder_ERR == true && _systemVariables.Slew_Encoder_ERR == false)
+            {
+                // 回转编码器异常
+                DataManager.Instance.InsertHistoryWarningMc("回转编码器异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_Encoder_ERR), "回转编码器异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_Encoder_ERR == false && _systemVariables.Slew_Encoder_ERR == true)
+            {
+                // 回转编码器异常解除
+                DataManager.Instance.InsertHistoryWarningMc("回转编码器异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_Encoder_ERR));
+            }
             //333333333333333333
 
             //取料机
@@ -2148,10 +2783,10 @@ public class GameDataManager : Singleton<GameDataManager>
                 //电气室急停解除
                 DataManager.Instance.InsertHistoryWarningMc("电气室急停解除", GetUserName(),
                     Machine.BucketWheel);
-                  RemoveWarningDesDict(nameof(newSystemVariables.ElectricalRoomEmergencyStopButton_2));
+                RemoveWarningDesDict(nameof(newSystemVariables.ElectricalRoomEmergencyStopButton_2));
             }
 
-            if (newSystemVariables.EmergencyStopRelay_2==false && _systemVariables.EmergencyStopRelay_2 == true)
+            if (newSystemVariables.EmergencyStopRelay_2 == false && _systemVariables.EmergencyStopRelay_2 == true)
             {
                 //急停继电器
                 DataManager.Instance.InsertHistoryWarningMc("急停继电器", GetUserName(),
@@ -2227,8 +2862,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("大车-变频器故障", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("大车-变频器故障", Machine.BucketWheel);
-                  AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarFrequencyConverterFault_2), "大车-变频器故障",
-                                    Machine.BucketWheel, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarFrequencyConverterFault_2), "大车-变频器故障",
+                    Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.LargeCarFrequencyConverterFault_2 == false &&
                      _systemVariables.LargeCarFrequencyConverterFault_2 == true)
@@ -2239,15 +2874,15 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.LargeCarFrequencyConverterFault_2));
             }
 
-            if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2==false &&
+            if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2 == false &&
                 _systemVariables.LargeCarBrakeResistorOverheatSwitch_2 == true)
             {
                 //大车-制动电阻超温
                 DataManager.Instance.InsertHistoryWarningMc("大车-制动电阻超温", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("大车-制动电阻超温", Machine.BucketWheel);
-                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2), "大车-制动电阻超温",
-                                                    Machine.BucketWheel, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2), "大车-制动电阻超温",
+                    Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2 == true &&
                      _systemVariables.LargeCarBrakeResistorOverheatSwitch_2 == false)
@@ -2265,7 +2900,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("大车-大车集中润滑低油位", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2), "大车-大车集中润滑低油位",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2),
+                    "大车-大车集中润滑低油位",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2 == false &&
@@ -2284,7 +2920,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("大车-大车集中润滑堵油", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2), "大车-大车集中润滑堵油",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2),
+                    "大车-大车集中润滑堵油",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2 == false &&
@@ -2293,7 +2930,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-大车集中润滑堵油解除
                 DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油解除", GetUserName(),
                     Machine.BucketWheel);
-                     RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2));
+                RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2));
             }
 
             if (newSystemVariables.LargeCarForwardLimit_2 && _systemVariables.LargeCarForwardLimit_2 == false)
@@ -2490,7 +3127,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("变幅-下俯禁区", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("变幅-下俯禁区", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeLowerForbiddenZoneLimit_2), "变幅-下俯禁区",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeLowerForbiddenZoneLimit_2),
+                    "变幅-下俯禁区",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.VariableAmplitudeLowerForbiddenZoneLimit_2 == false &&
@@ -2509,7 +3147,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("变幅-泵站高温报警", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("变幅-泵站高温报警", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudePumpStationOverheatAlarm_2), "变幅-泵站高温报警",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudePumpStationOverheatAlarm_2),
+                    "变幅-泵站高温报警",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.VariableAmplitudePumpStationOverheatAlarm_2 == false &&
@@ -2528,7 +3167,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("变幅-油液位低信号", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("变幅-油液位低信号", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeOilLevelVeryLowSignal_2), "变幅-油液位低信号",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeOilLevelVeryLowSignal_2),
+                    "变幅-油液位低信号",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.VariableAmplitudeOilLevelVeryLowSignal_2 == false &&
@@ -2594,7 +3234,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-变频器故障解除
                 DataManager.Instance.InsertHistoryWarningMc("回转-变频器故障解除", GetUserName(),
                     Machine.BucketWheel);
-                 RemoveWarningDesDict(nameof(newSystemVariables.RotaryFrequencyConverterFault_2));
+                RemoveWarningDesDict(nameof(newSystemVariables.RotaryFrequencyConverterFault_2));
             }
 
             if (newSystemVariables.RotaryBrakeOverload_2 && _systemVariables.RotaryBrakeOverload_2 == false)
@@ -2813,7 +3453,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-回转过力矩解除
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转过力矩解除", GetUserName(),
                     Machine.BucketWheel);
-                 RemoveWarningDesDict(nameof(newSystemVariables.RotaryOverTorque_2));
+                RemoveWarningDesDict(nameof(newSystemVariables.RotaryOverTorque_2));
             }
 
             if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2 &&
@@ -2823,7 +3463,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("回转-回转集中润滑堵油", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2), "回转-回转集中润滑堵油",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2),
+                    "回转-回转集中润滑堵油",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2 == false &&
@@ -2842,7 +3483,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("回转-回转集中润滑低油位", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2), "回转-回转集中润滑低油位",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2),
+                    "回转-回转集中润滑低油位",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 == false &&
@@ -2936,7 +3578,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-一级跑偏开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("悬胶/挡板-一级跑偏开关", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltFirstLevelDeviationSwitch_2), "悬胶/挡板-一级跑偏开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltFirstLevelDeviationSwitch_2),
+                    "悬胶/挡板-一级跑偏开关",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.SuspensionBeltFirstLevelDeviationSwitch_2 == false &&
@@ -2955,8 +3598,9 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-二级跑偏开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("悬胶/挡板-二级跑偏开关", Machine.BucketWheel);
-                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltSecondLevelDeviationSwitch_2), "悬胶/挡板-二级跑偏开关",
-                                    Machine.BucketWheel, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltSecondLevelDeviationSwitch_2),
+                    "悬胶/挡板-二级跑偏开关",
+                    Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.SuspensionBeltSecondLevelDeviationSwitch_2 == false &&
                      _systemVariables.SuspensionBeltSecondLevelDeviationSwitch_2 == true)
@@ -2991,7 +3635,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-纵向撕裂开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("悬胶/挡板-纵向撕裂开关", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltLongitudinalTearSwitch_2), "悬胶/挡板-纵向撕裂开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltLongitudinalTearSwitch_2),
+                    "悬胶/挡板-纵向撕裂开关",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.SuspensionBeltLongitudinalTearSwitch_2 == false &&
@@ -3010,7 +3655,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-急停拉线开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("悬胶/挡板-急停拉线开关", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltEmergencyStopSwitch_2), "悬胶/挡板-急停拉线开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltEmergencyStopSwitch_2),
+                    "悬胶/挡板-急停拉线开关",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.SuspensionBeltEmergencyStopSwitch_2 == false &&
@@ -3029,7 +3675,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-料流检测开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("悬胶/挡板-料流检测开关", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch_2), "悬胶/挡板-料流检测开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch_2),
+                    "悬胶/挡板-料流检测开关",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch_2 == false &&
@@ -3041,14 +3688,15 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch_2));
             }
 
-            if (newSystemVariables.CentralMaterialDustDetectionSwitch_2==false &&
+            if (newSystemVariables.CentralMaterialDustDetectionSwitch_2 == false &&
                 _systemVariables.CentralMaterialDustDetectionSwitch_2 == true)
             {
                 //悬胶/挡板-中部料斗堵煤
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("悬胶/挡板-中部料斗堵煤", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralMaterialDustDetectionSwitch_2), "悬胶/挡板-中部料斗堵煤",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralMaterialDustDetectionSwitch_2),
+                    "悬胶/挡板-中部料斗堵煤",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.CentralMaterialDustDetectionSwitch_2 == true &&
@@ -3097,7 +3745,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload_2));
             }
 
-            if (newSystemVariables.ReelOverTensionLimit1_2==false && _systemVariables.ReelOverTensionLimit1_2 == true)
+            if (newSystemVariables.ReelOverTensionLimit1_2 == false && _systemVariables.ReelOverTensionLimit1_2 == true)
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1", GetUserName(),
@@ -3248,8 +3896,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("洒水抑尘-水箱液位低开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("洒水抑尘-水箱液位低开关", Machine.BucketWheel);
-                  AddOrUpdateWarningDesDict(nameof(newSystemVariables.WaterTankLowLevelSwitch_2), "洒水抑尘-水箱液位低开关",
-                                    Machine.BucketWheel, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.WaterTankLowLevelSwitch_2), "洒水抑尘-水箱液位低开关",
+                    Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.WaterTankLowLevelSwitch_2 == false &&
                      _systemVariables.WaterTankLowLevelSwitch_2 == true)
@@ -3266,8 +3914,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("振打电机-振打电机过载", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("振打电机-振打电机过载", Machine.BucketWheel);
-                     AddOrUpdateWarningDesDict(nameof(newSystemVariables.VibrationMotorOverload_2), "振打电机-振打电机过载",
-                                                    Machine.BucketWheel, false, "");
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.VibrationMotorOverload_2), "振打电机-振打电机过载",
+                    Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.VibrationMotorOverload_2 == false &&
                      _systemVariables.VibrationMotorOverload_2 == true)
@@ -3321,7 +3969,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车从动滚筒轴承上限报警", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("尾车胶带-尾车从动滚筒轴承上限报警", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm_2), "尾车胶带-尾车从动滚筒轴承上限报警",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm_2),
+                    "尾车胶带-尾车从动滚筒轴承上限报警",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm_2 == false &&
@@ -3340,7 +3989,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车从动滚筒轴承下限报警", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("尾车胶带-尾车从动滚筒轴承下限报警", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm_2), "尾车胶带-尾车从动滚筒轴承下限报警",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm_2),
+                    "尾车胶带-尾车从动滚筒轴承下限报警",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.TailCarDrivenRollerBearingLowerLimitAlarm_2 == false &&
@@ -3359,7 +4009,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车一级跑偏开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("尾车胶带-尾车一级跑偏开关", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarFirstLevelDeviationSwitch_2), "尾车胶带-尾车一级跑偏开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarFirstLevelDeviationSwitch_2),
+                    "尾车胶带-尾车一级跑偏开关",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.TailCarFirstLevelDeviationSwitch_2 == false &&
@@ -3378,7 +4029,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车二级跑偏开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesQueue("尾车胶带-尾车二级跑偏开关", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarSecondLevelDeviationSwitch_2), "尾车胶带-尾车二级跑偏开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarSecondLevelDeviationSwitch_2),
+                    "尾车胶带-尾车二级跑偏开关",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.TailCarSecondLevelDeviationSwitch_2 == false &&
@@ -3428,6 +4080,704 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.TailCarBeltLongitudinalTearing_2));
             }
             //333333333333333333
+
+            if (newSystemVariables.OverBelt_R_Limit_2 &&
+                _systemVariables.OverBelt_R_Limit_2 == false)
+            {
+                //回转右转过皮带保护限位
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_R_Limit_2), "回转右转过皮带保护限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.OverBelt_R_Limit_2 == false &&
+                     _systemVariables.OverBelt_R_Limit_2 == true)
+            {
+                //回转右转过皮带保护限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_R_Limit_2));
+            }
+
+            if (newSystemVariables.OverBelt_R_Limit_2 &&
+                _systemVariables.OverBelt_R_Limit_2 == false)
+            {
+                //回转右转过皮带保护限位
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_R_Limit_2), "回转右转过皮带保护限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.OverBelt_R_Limit_2 == false &&
+                     _systemVariables.OverBelt_R_Limit_2 == true)
+            {
+                //回转右转过皮带保护限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_R_Limit_2));
+            }
+
+            if (newSystemVariables.OverBelt_L_Limit_2 &&
+                _systemVariables.OverBelt_L_Limit_2 == false)
+            {
+                //回转左转过皮带保护限位
+                DataManager.Instance.InsertHistoryWarningMc("回转左转过皮带保护限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_L_Limit_2), "回转左转过皮带保护限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.OverBelt_L_Limit_2 == false &&
+                     _systemVariables.OverBelt_L_Limit_2 == true)
+            {
+                //回转左转过皮带保护限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转左转过皮带保护限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_L_Limit_2));
+            }
+
+            if (newSystemVariables.OverBelt_D_Limit_2 &&
+                _systemVariables.OverBelt_D_Limit_2 == false)
+            {
+                //回转过皮带俯仰下限位保护
+                DataManager.Instance.InsertHistoryWarningMc("回转过皮带俯仰下限位保护", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_D_Limit_2), "回转过皮带俯仰下限位保护",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.OverBelt_D_Limit_2 == false &&
+                     _systemVariables.OverBelt_D_Limit_2 == true)
+            {
+                //回转过皮带俯仰下限位保护解除
+                DataManager.Instance.InsertHistoryWarningMc("回转过皮带俯仰下限位保护解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_D_Limit_2));
+            }
+
+            if (newSystemVariables.OverBelt_R_SoftLimit_2 &&
+                _systemVariables.OverBelt_R_SoftLimit_2 == false)
+            {
+                //回转右转过皮带保护软限位
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_R_SoftLimit_2), "回转右转过皮带保护软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.OverBelt_R_SoftLimit_2 == false &&
+                     _systemVariables.OverBelt_R_SoftLimit_2 == true)
+            {
+                //回转右转过皮带保护软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转右转过皮带保护软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_R_SoftLimit_2));
+            }
+
+            if (newSystemVariables.OverBelt_L_SoftLimit_2 &&
+                _systemVariables.OverBelt_L_SoftLimit_2 == false)
+            {
+                //回转左转过皮带保护软限位
+                DataManager.Instance.InsertHistoryWarningMc("回转左转过皮带保护软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_L_SoftLimit_2), "回转左转过皮带保护软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.OverBelt_L_SoftLimit_2 == false &&
+                     _systemVariables.OverBelt_L_SoftLimit_2 == true)
+            {
+                //回转左转过皮带保护软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转左转过皮带保护软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_L_SoftLimit_2));
+            }
+
+            if (newSystemVariables.OverBelt_D_SoftLimit_2 &&
+                _systemVariables.OverBelt_D_SoftLimit_2 == false)
+            {
+                //回转过皮带俯仰下限软限位
+                DataManager.Instance.InsertHistoryWarningMc("回转过皮带俯仰下限软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.OverBelt_D_SoftLimit_2), "回转过皮带俯仰下限软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.OverBelt_D_SoftLimit_2 == false &&
+                     _systemVariables.OverBelt_D_SoftLimit_2 == true)
+            {
+                //回转过皮带俯仰下限软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("回转过皮带俯仰下限软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.OverBelt_D_SoftLimit_2));
+            }
+
+            if (newSystemVariables.DC_FWD_SoftLimit_2 &&
+                _systemVariables.DC_FWD_SoftLimit_2 == false)
+            {
+                //大车前进停止软限位
+                DataManager.Instance.InsertHistoryWarningMc("大车前进停止软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_FWD_SoftLimit_2), "大车前进停止软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_FWD_SoftLimit_2 == false &&
+                     _systemVariables.DC_FWD_SoftLimit_2 == true)
+            {
+                //大车前进停止软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("大车前进停止软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_FWD_SoftLimit_2));
+            }
+
+            if (newSystemVariables.DcFWD_LimitStatus_2 &&
+                _systemVariables.DcFWD_LimitStatus_2 == false)
+            {
+                //大车前进限位集合
+                DataManager.Instance.InsertHistoryWarningMc("大车前进限位集合", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DcFWD_LimitStatus_2), "大车前进限位集合",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DcFWD_LimitStatus_2 == false &&
+                     _systemVariables.DcFWD_LimitStatus_2 == true)
+            {
+                //大车前进限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("大车前进限位集合解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DcFWD_LimitStatus_2));
+            }
+
+            if (newSystemVariables.DC_REV_SoftLimit_2 &&
+                _systemVariables.DC_REV_SoftLimit_2 == false)
+            {
+                //大车后退停止软限位
+                DataManager.Instance.InsertHistoryWarningMc("大车后退停止软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_REV_SoftLimit_2), "大车后退停止软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_REV_SoftLimit_2 == false &&
+                     _systemVariables.DC_REV_SoftLimit_2 == true)
+            {
+                //大车后退停止软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("大车后退停止软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_REV_SoftLimit_2));
+            }
+
+            if (newSystemVariables.DcREV_LimitStatus_2 &&
+                _systemVariables.DcREV_LimitStatus_2 == false)
+            {
+                //大车后退限位集合
+                DataManager.Instance.InsertHistoryWarningMc("大车后退限位集合", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DcREV_LimitStatus_2), "大车后退限位集合",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DcREV_LimitStatus_2 == false &&
+                     _systemVariables.DcREV_LimitStatus_2 == true)
+            {
+                //大车后退限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("大车后退限位集合解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DcREV_LimitStatus_2));
+            }
+
+            if (newSystemVariables.Slew_R_SoftLimit_2 &&
+                _systemVariables.Slew_R_SoftLimit_2 == false)
+            {
+                //悬臂右转软限位
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右转软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_R_SoftLimit_2), "悬臂右转软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_R_SoftLimit_2 == false &&
+                     _systemVariables.Slew_R_SoftLimit_2 == true)
+            {
+                //悬臂右转软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右转软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_R_SoftLimit_2));
+            }
+
+            if (newSystemVariables.Slew_R_LimitStatus_2 &&
+                _systemVariables.Slew_R_LimitStatus_2 == false)
+            {
+                //悬臂右转限位集合
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右转限位集合", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_R_LimitStatus_2), "悬臂右转限位集合",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_R_LimitStatus_2 == false &&
+                     _systemVariables.Slew_R_LimitStatus_2 == true)
+            {
+                //悬臂右转限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右转限位集合解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_R_LimitStatus_2));
+            }
+
+            if (newSystemVariables.Slew_L_SoftLimit_2 &&
+                _systemVariables.Slew_L_SoftLimit_2 == false)
+            {
+                //悬臂左转软限位
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左转软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_L_SoftLimit_2), "悬臂左转软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_L_SoftLimit_2 == false &&
+                     _systemVariables.Slew_L_SoftLimit_2 == true)
+            {
+                //悬臂左转软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左转软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_L_SoftLimit_2));
+            }
+
+            if (newSystemVariables.Slew_L_LimitStatus_2 &&
+                _systemVariables.Slew_L_LimitStatus_2 == false)
+            {
+                //悬臂左转限位集合
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左转限位集合", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_L_LimitStatus_2), "悬臂左转限位集合",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_L_LimitStatus_2 == false &&
+                     _systemVariables.Slew_L_LimitStatus_2 == true)
+            {
+                //悬臂左转限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左转限位集合解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_L_LimitStatus_2));
+            }
+
+            if (newSystemVariables.Luff_Up_SoftLimit_2 &&
+                _systemVariables.Luff_Up_SoftLimit_2 == false)
+            {
+                //俯仰上极限软限位
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上极限软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Luff_Up_SoftLimit_2), "俯仰上极限软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Luff_Up_SoftLimit_2 == false &&
+                     _systemVariables.Luff_Up_SoftLimit_2 == true)
+            {
+                //俯仰上极限软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上极限软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Luff_Up_SoftLimit_2));
+            }
+
+            if (newSystemVariables.LuffUp_LimitStatus_2 &&
+                _systemVariables.LuffUp_LimitStatus_2 == false)
+            {
+                //俯仰上极限限位集合
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上极限限位集合", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LuffUp_LimitStatus_2), "俯仰上极限限位集合",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.LuffUp_LimitStatus_2 == false &&
+                     _systemVariables.LuffUp_LimitStatus_2 == true)
+            {
+                //俯仰上极限限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上极限限位集合解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.LuffUp_LimitStatus_2));
+            }
+
+            if (newSystemVariables.Luff_Down_SoftLimit_2 &&
+                _systemVariables.Luff_Down_SoftLimit_2 == false)
+            {
+                //俯仰下极限软限位
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下极限软限位", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Luff_Down_SoftLimit_2), "俯仰下极限软限位",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Luff_Down_SoftLimit_2 == false &&
+                     _systemVariables.Luff_Down_SoftLimit_2 == true)
+            {
+                //俯仰下极限软限位解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下极限软限位解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Luff_Down_SoftLimit_2));
+            }
+
+            if (newSystemVariables.LuffDown_LimitStatus_2 &&
+                _systemVariables.LuffDown_LimitStatus_2 == false)
+            {
+                //俯仰下极限限位集合
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下极限限位集合", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.LuffDown_LimitStatus_2), "俯仰下极限限位集合",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.LuffDown_LimitStatus_2 == false &&
+                     _systemVariables.LuffDown_LimitStatus_2 == true)
+            {
+                //俯仰下极限限位集合解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下极限限位集合解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.LuffDown_LimitStatus_2));
+            }
+
+            if (newSystemVariables.Slew_SAS_L_Alarm_2 &&
+                _systemVariables.Slew_SAS_L_Alarm_2 == false)
+            {
+                //悬臂左侧防撞保护动作
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左侧防撞保护动作", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_L_Alarm_2), "悬臂左侧防撞保护动作",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_L_Alarm_2 == false &&
+                     _systemVariables.Slew_SAS_L_Alarm_2 == true)
+            {
+                //悬臂左侧防撞保护动作解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左侧防撞保护动作解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_L_Alarm_2));
+            }
+
+            if (newSystemVariables.Slew_SAS_R_Alarm_2 &&
+                _systemVariables.Slew_SAS_R_Alarm_2 == false)
+            {
+                //悬臂右侧防撞保护动作
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右侧防撞保护动作", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_R_Alarm_2), "悬臂右侧防撞保护动作",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_R_Alarm_2 == false &&
+                     _systemVariables.Slew_SAS_R_Alarm_2 == true)
+            {
+                //悬臂右侧防撞保护动作解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右侧防撞保护动作解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_R_Alarm_2));
+            }
+
+            if (newSystemVariables.DC_SAS_F_Alarm_2 &&
+                _systemVariables.DC_SAS_F_Alarm_2 == false)
+            {
+                //大车前进防撞保护动作
+                DataManager.Instance.InsertHistoryWarningMc("大车前进防撞保护动作", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_F_Alarm_2), "大车前进防撞保护动作",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_F_Alarm_2 == false &&
+                     _systemVariables.DC_SAS_F_Alarm_2 == true)
+            {
+                //大车前进防撞保护动作解除
+                DataManager.Instance.InsertHistoryWarningMc("大车前进防撞保护动作解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_F_Alarm_2));
+            }
+
+            if (newSystemVariables.DC_SAS_B_Alarm_2 &&
+                _systemVariables.DC_SAS_B_Alarm_2 == false)
+            {
+                //大车后退防撞保护动作
+                DataManager.Instance.InsertHistoryWarningMc("大车后退防撞保护动作", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_B_Alarm_2), "大车后退防撞保护动作",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_B_Alarm_2 == false &&
+                     _systemVariables.DC_SAS_B_Alarm_2 == true)
+            {
+                //大车后退防撞保护动作解除
+                DataManager.Instance.InsertHistoryWarningMc("大车后退防撞保护动作解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_B_Alarm_2));
+            }
+
+            if (newSystemVariables.Slew_SAS_RR_Alarm_2 &&
+                _systemVariables.Slew_SAS_RR_Alarm_2 == false)
+            {
+                //悬臂右雷达前方有煤垛碰撞警告
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右雷达前方有煤垛碰撞警告", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_RR_Alarm_2), "悬臂右雷达前方有煤垛碰撞警告",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_RR_Alarm_2 == false &&
+                     _systemVariables.Slew_SAS_RR_Alarm_2 == true)
+            {
+                //悬臂右雷达前方有煤垛碰撞警告解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右雷达前方有煤垛碰撞警告解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_RR_Alarm_2));
+            }
+
+            if (newSystemVariables.Slew_SAS_LR_Alarm_2 &&
+                _systemVariables.Slew_SAS_LR_Alarm_2 == false)
+            {
+                //悬臂左雷达前方有煤垛碰撞警告
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左雷达前方有煤垛碰撞警告", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_LR_Alarm_2), "悬臂左雷达前方有煤垛碰撞警告",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_LR_Alarm_2 == false &&
+                     _systemVariables.Slew_SAS_LR_Alarm_2 == true)
+            {
+                //悬臂左雷达前方有煤垛碰撞警告解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左雷达前方有煤垛碰撞警告解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_LR_Alarm_2));
+            }
+
+            if (newSystemVariables.Slew_SAS_RU_Alarm_2 &&
+                _systemVariables.Slew_SAS_RU_Alarm_2 == false)
+            {
+                //悬臂右超声波前方有煤垛碰撞警告
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右超声波前方有煤垛碰撞警告", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_RU_Alarm_2), "悬臂右超声波前方有煤垛碰撞警告",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_RU_Alarm_2 == false &&
+                     _systemVariables.Slew_SAS_RU_Alarm_2 == true)
+            {
+                //悬臂右超声波前方有煤垛碰撞警告解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右超声波前方有煤垛碰撞警告解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_RU_Alarm_2));
+            }
+
+            if (newSystemVariables.Slew_SAS_LU_Alarm_2 &&
+                _systemVariables.Slew_SAS_LU_Alarm_2 == false)
+            {
+                //悬臂左超声波前方有煤垛碰撞警告
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左超声波前方有煤垛碰撞警告", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_SAS_LU_Alarm_2), "悬臂左超声波前方有煤垛碰撞警告",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_SAS_LU_Alarm_2 == false &&
+                     _systemVariables.Slew_SAS_LU_Alarm_2 == true)
+            {
+                //悬臂左超声波前方有煤垛碰撞警告解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左超声波前方有煤垛碰撞警告解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_SAS_LU_Alarm_2));
+            }
+
+            if (newSystemVariables.DC_SAS_RF_Alrm_2 &&
+                _systemVariables.DC_SAS_RF_Alrm_2 == false)
+            {
+                //大车右前方有障碍
+                DataManager.Instance.InsertHistoryWarningMc("大车右前方有障碍", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_RF_Alrm_2), "大车右前方有障碍",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_RF_Alrm_2 == false &&
+                     _systemVariables.DC_SAS_RF_Alrm_2 == true)
+            {
+                //大车右前方有障碍解除
+                DataManager.Instance.InsertHistoryWarningMc("大车右前方有障碍解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_RF_Alrm_2));
+            }
+
+            if (newSystemVariables.DC_SAS_RB_Alrm_2 &&
+                _systemVariables.DC_SAS_RB_Alrm_2 == false)
+            {
+                //大车右后方有障碍
+                DataManager.Instance.InsertHistoryWarningMc("大车右后方有障碍", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_RB_Alrm_2), "大车右后方有障碍",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_RB_Alrm_2 == false &&
+                     _systemVariables.DC_SAS_RB_Alrm_2 == true)
+            {
+                //大车右后方有障碍解除
+                DataManager.Instance.InsertHistoryWarningMc("大车右后方有障碍解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_RB_Alrm_2));
+            }
+
+            if (newSystemVariables.DC_SAS_LF_Alrm_2 &&
+                _systemVariables.DC_SAS_LF_Alrm_2 == false)
+            {
+                //大车左前方有障碍
+                DataManager.Instance.InsertHistoryWarningMc("大车左前方有障碍", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_LF_Alrm_2), "大车左前方有障碍",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_LF_Alrm_2 == false &&
+                     _systemVariables.DC_SAS_LF_Alrm_2 == true)
+            {
+                //大车左前方有障碍解除
+                DataManager.Instance.InsertHistoryWarningMc("大车左前方有障碍解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_LF_Alrm_2));
+            }
+
+            if (newSystemVariables.DC_SAS_LB_Alrm_2 &&
+                _systemVariables.DC_SAS_LB_Alrm_2 == false)
+            {
+                //大车左后方有障碍
+                DataManager.Instance.InsertHistoryWarningMc("大车左后方有障碍", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_SAS_LB_Alrm_2), "大车左后方有障碍",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_SAS_LB_Alrm_2 == false &&
+                     _systemVariables.DC_SAS_LB_Alrm_2 == true)
+            {
+                //大车左后方有障碍解除
+                DataManager.Instance.InsertHistoryWarningMc("大车左后方有障碍解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_SAS_LB_Alrm_2));
+            }
+
+            if (newSystemVariables.FWD_Limit_Waring_2 &&
+                _systemVariables.FWD_Limit_Waring_2 == false)
+            {
+                //大车前进限位两米预警
+                DataManager.Instance.InsertHistoryWarningMc("大车前进限位两米预警", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.FWD_Limit_Waring_2), "大车前进限位两米预警",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.FWD_Limit_Waring_2 == false &&
+                     _systemVariables.FWD_Limit_Waring_2 == true)
+            {
+                //大车前进限位两米预警解除
+                DataManager.Instance.InsertHistoryWarningMc("大车前进限位两米预警解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.FWD_Limit_Waring_2));
+            }
+
+            if (newSystemVariables.REV_Limit_Waring_2 &&
+                _systemVariables.REV_Limit_Waring_2 == false)
+            {
+                //大车后退限位两米预警
+                DataManager.Instance.InsertHistoryWarningMc("大车后退限位两米预警", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.REV_Limit_Waring_2), "大车后退限位两米预警",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.REV_Limit_Waring_2 == false &&
+                     _systemVariables.REV_Limit_Waring_2 == true)
+            {
+                //大车后退限位两米预警解除
+                DataManager.Instance.InsertHistoryWarningMc("大车后退限位两米预警解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.REV_Limit_Waring_2));
+            }
+
+            if (newSystemVariables.Slew_R_Limit_Waring_2 &&
+                _systemVariables.Slew_R_Limit_Waring_2 == false)
+            {
+                //回转右转限位两度预警
+                DataManager.Instance.InsertHistoryWarningMc("回转右转限位两度预警", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_R_Limit_Waring_2), "回转右转限位两度预警",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_R_Limit_Waring_2 == false &&
+                     _systemVariables.Slew_R_Limit_Waring_2 == true)
+            {
+                //回转右转限位两度预警解除
+                DataManager.Instance.InsertHistoryWarningMc("回转右转限位两度预警解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_R_Limit_Waring_2));
+            }
+
+            if (newSystemVariables.Slew_L_Limit_Waring_2 &&
+                _systemVariables.Slew_L_Limit_Waring_2 == false)
+            {
+                //回转左转限位两度预警
+                DataManager.Instance.InsertHistoryWarningMc("回转左转限位两度预警", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_L_Limit_Waring_2), "回转左转限位两度预警",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_L_Limit_Waring_2 == false &&
+                     _systemVariables.Slew_L_Limit_Waring_2 == true)
+            {
+                //回转左转限位两度预警解除
+                DataManager.Instance.InsertHistoryWarningMc("回转左转限位两度预警解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_L_Limit_Waring_2));
+            }
+
+            if (newSystemVariables.Luff_U_Limit_Waring_2 &&
+                _systemVariables.Luff_U_Limit_Waring_2 == false)
+            {
+                //俯仰上仰限位两度预警
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上仰限位两度预警", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Luff_U_Limit_Waring_2), "俯仰上仰限位两度预警",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Luff_U_Limit_Waring_2 == false &&
+                     _systemVariables.Luff_U_Limit_Waring_2 == true)
+            {
+                //俯仰上仰限位两度预警解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰上仰限位两度预警解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Luff_U_Limit_Waring_2));
+            }
+
+            if (newSystemVariables.Luff_D_Limit_Waring_2 &&
+                _systemVariables.Luff_D_Limit_Waring_2 == false)
+            {
+                //俯仰下俯限位两度预警
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下俯限位两度预警", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Luff_D_Limit_Waring_2), "俯仰下俯限位两度预警",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Luff_D_Limit_Waring_2 == false &&
+                     _systemVariables.Luff_D_Limit_Waring_2 == true)
+            {
+                //俯仰下俯限位两度预警解除
+                DataManager.Instance.InsertHistoryWarningMc("俯仰下俯限位两度预警解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Luff_D_Limit_Waring_2));
+            }
+            
+            if (newSystemVariables.DC_Encoder_ERR_2 == true && _systemVariables.DC_Encoder_ERR_2 == false)
+            {
+                // 行走编码器异常
+                DataManager.Instance.InsertHistoryWarningMc("行走编码器异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DC_Encoder_ERR_2), "行走编码器异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DC_Encoder_ERR_2 == false && _systemVariables.DC_Encoder_ERR_2 == true)
+            {
+                // 行走编码器异常解除
+                DataManager.Instance.InsertHistoryWarningMc("行走编码器异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DC_Encoder_ERR_2));
+            }
+
+            if (newSystemVariables.Slew_Encoder_ERR_2 == true && _systemVariables.Slew_Encoder_ERR_2 == false)
+            {
+                // 回转编码器异常
+                DataManager.Instance.InsertHistoryWarningMc("回转编码器异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_Encoder_ERR_2), "回转编码器异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_Encoder_ERR_2 == false && _systemVariables.Slew_Encoder_ERR_2 == true)
+            {
+                // 回转编码器异常解除
+                DataManager.Instance.InsertHistoryWarningMc("回转编码器异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_Encoder_ERR_2));
+            }
         }
     }
 }
