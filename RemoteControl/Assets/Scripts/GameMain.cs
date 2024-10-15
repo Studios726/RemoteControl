@@ -168,7 +168,7 @@ namespace RemoteControl
                     timerRc = null;
                 }
 
-                des = "RC 连接成功";
+                des = "远程驱动连接成功";
                 timerRc = Timer.Register(1, true, true, () => { GameDataManager.Instance.UpdatePlcData(); });
             }
             else if (connectEventArgs.type == SocketType.TaskPC)
@@ -181,12 +181,12 @@ namespace RemoteControl
 
                 TaskDataManager.Instance.UpdatePcData();
                 timerPc = Timer.Register(3600f, true, true, () => { TaskDataManager.Instance.UpdatePcData(); });
-                des = "PC 连接成功";
+                des = "任务规划连接成功";
             }
             else if (connectEventArgs.type == SocketType.SCA)
             {
                 GameDataManager.Instance.UpdateSCAData(4);
-                des = "SCA 连接成功";
+                des = "三维扫描连接成功";
             }
 
             Debug.Log("----------------------Success " + connectEventArgs.type);
@@ -209,7 +209,7 @@ namespace RemoteControl
                     timerRc = null;
                 }
 
-                des = "RC 连接失败";
+                des = "远程驱动连接失败";
                 isInsert = connectionRC.ReconnectCount == 0;
             }
             else if (connectEventArgs.type == SocketType.TaskPC)
@@ -220,12 +220,12 @@ namespace RemoteControl
                     timerPc = null;
                 }
 
-                des = "PC 连接失败";
+                des = "任务规划连接失败";
                 isInsert = connectionPC.ReconnectCount == 0;
             }
             else if (connectEventArgs.type == SocketType.SCA)
             {
-                des = "SCA 连接失败";
+                des = "三维扫描连接失败";  
                 isInsert = connectionSCA.ReconnectCount == 0;
             }
 

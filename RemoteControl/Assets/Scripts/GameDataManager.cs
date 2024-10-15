@@ -10,7 +10,9 @@ using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 using UnityEngine.Rendering;
 using System.Collections.Generic;
-
+using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 public struct WarningData
 {
     public string Des;
@@ -35,7 +37,16 @@ public struct WarningData
         Time = DateTime.Now;
     }
 }
-
+[DataContract]
+public class McWarningRecord
+{
+    [DataMember]
+    public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
+    public McWarningRecord(Dictionary<string, WarningCellData> warningCellDatas )
+    {
+        WarningCellDataDict = warningCellDatas;
+    }
+}
 public class GameDataManager : Singleton<GameDataManager>
 {
     private bool _rcConnectionState;
@@ -53,8 +64,8 @@ public class GameDataManager : Singleton<GameDataManager>
     // private int count;
     public Queue<WarningData> BucketWheelQueue = new Queue<WarningData>();
     public Queue<WarningData> BucketWheelStackerReclaimerQueue = new Queue<WarningData>();
-    public List<WarningCellData> BucketWheelWarningCellDataList = new List<WarningCellData>();
-    public List<WarningCellData> BucketWheelStackerReclaimerWarningCellDataList = new List<WarningCellData>();
+    // public List<WarningCellData> BucketWheelWarningCellDataList = new List<WarningCellData>();
+    // public List<WarningCellData> BucketWheelStackerReclaimerWarningCellDataList = new List<WarningCellData>();
     public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
 
     public SystemVariables SystemVariables
@@ -598,6 +609,18 @@ public class GameDataManager : Singleton<GameDataManager>
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 
+    public void UpdatePlcWarningRecordData(string mcData) 
+    {
+        McWarningRecord mcWarningRecord = new McWarningRecord(WarningCellDataDict);
+        ServerCommand serverCommand = new ServerCommand();
+        serverCommand.QUERY_SYSTEM = "MC";
+        serverCommand.DATA_TYPE = 6;
+        serverCommand.QUERY_TYPE = 3;
+        serverCommand.DATA_STRING = mcData;
+        Debug.LogError($">>>>>>>>>>>>>>>>>>>{ mcData }");
+        MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
+    }
+    
     public void SendServerCommandByName(string commandName, int dataInt = 0, float dataFloat = 0)
     {
         ServerCommand serverCommand = new ServerCommand();

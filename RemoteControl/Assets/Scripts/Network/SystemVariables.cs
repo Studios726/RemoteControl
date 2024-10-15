@@ -9,8 +9,8 @@ namespace ShenYangRemoteSystem.Subclass
     public class SystemVariables
     {
         public DateTime TimeStamp { get; set; }
-
-        
+        public string MCString { get; set; }
+        //数据字符串：用于存放向mc系统转发的内容
         public bool D1PLC1CommunicationState { get; set; }//堆/取料机机上PLC通信状态
         public bool D1PLC2CommunicationState { get; set; }//堆/取料机无人值守PLC通信状态
         public bool D2PLC1CommunicationState { get; set; }//取料机机上PLC通信状态
