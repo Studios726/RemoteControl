@@ -74,7 +74,6 @@ public class MessageCenter : Singleton<MessageCenter>
             return;
         if(socketType== SocketType.TaoRC)
         {
-       
             try
             {
                 string json = Decompress(message);
@@ -84,8 +83,8 @@ public class MessageCenter : Singleton<MessageCenter>
             catch (Exception)
             {
             
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
-                Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)}");
+                // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
+                Debug.Log($"数据解析失败 socketType {nameof(SocketType.TaoRC)}");
             }
            
         }else if(socketType== SocketType.TaskPC)
@@ -99,7 +98,7 @@ public class MessageCenter : Singleton<MessageCenter>
             }
             catch (Exception)
             {
-                Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)}");
+                Debug.Log($"数据解析失败 socketType {nameof(SocketType.TaskPC)}");
             }
            
            
@@ -113,7 +112,7 @@ public class MessageCenter : Singleton<MessageCenter>
             catch (Exception)
             {
 
-                Debug.LogError($"数据解析失败 socketType {socketType}");
+                Debug.Log($"数据解析失败 socketType {socketType}");
             }
         }
         EventManager.Instance.TriggerEvent(EventName.Message, this, new MessageEventArgs(message, socketType));

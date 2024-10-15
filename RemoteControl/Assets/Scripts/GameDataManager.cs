@@ -41,10 +41,13 @@ public struct WarningData
 public class McWarningRecord
 {
     [DataMember]
+    public DateTime updateTime;
+    [DataMember]
     public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
-    public McWarningRecord(Dictionary<string, WarningCellData> warningCellDatas )
+    public McWarningRecord(Dictionary<string, WarningCellData> warningCellDatas,DateTime dateTime )
     {
         WarningCellDataDict = warningCellDatas;
+        updateTime = dateTime;
     }
 }
 public class GameDataManager : Singleton<GameDataManager>
@@ -67,7 +70,7 @@ public class GameDataManager : Singleton<GameDataManager>
     // public List<WarningCellData> BucketWheelWarningCellDataList = new List<WarningCellData>();
     // public List<WarningCellData> BucketWheelStackerReclaimerWarningCellDataList = new List<WarningCellData>();
     public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
-
+    public McWarningRecord LastMcWarningRecord;
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
@@ -122,6 +125,30 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void SetSystemVariables(SystemVariables systemVariables)
     {
+        if (systemVariables.MCString!=null)
+        {
+            try
+            {
+                McWarningRecord mcWarningRecord = JsonMgr.DeSerialize<McWarningRecord>(systemVariables.MCString);
+                if (LastMcWarningRecord==null)
+                {
+                    LastMcWarningRecord = mcWarningRecord;
+                    UpdateWarningByLastMcWarningRecord();
+                }
+                else
+                {
+                    if ((mcWarningRecord.updateTime-LastMcWarningRecord.updateTime).TotalSeconds>0)
+                    {
+                        LastMcWarningRecord = mcWarningRecord;
+                        UpdateWarningByLastMcWarningRecord();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+               Debug.Log("解析失败");
+            }
+        }
         RecordWarning(systemVariables);
         _systemVariables = systemVariables;
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
@@ -609,15 +636,14 @@ public class GameDataManager : Singleton<GameDataManager>
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 
-    public void UpdatePlcWarningRecordData(string mcData) 
+    public void UpdatePlcWarningRecordData() 
     {
-        McWarningRecord mcWarningRecord = new McWarningRecord(WarningCellDataDict);
+        McWarningRecord mcWarningRecord = new McWarningRecord(WarningCellDataDict,DateTime.Now);
         ServerCommand serverCommand = new ServerCommand();
         serverCommand.QUERY_SYSTEM = "MC";
         serverCommand.DATA_TYPE = 6;
         serverCommand.QUERY_TYPE = 3;
-        serverCommand.DATA_STRING = mcData;
-        Debug.LogError($">>>>>>>>>>>>>>>>>>>{ mcData }");
+        serverCommand.DATA_STRING = JsonMgr.Serialize(mcWarningRecord);
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
     
@@ -792,19 +818,14 @@ public class GameDataManager : Singleton<GameDataManager>
         }
     }
 
-    public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, string time)
+    public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, string time,bool isConfirm=false,string confirmTime = "")
     {
         if (WarningCellDataDict.ContainsKey(key))
         {
             WarningCellDataDict.Remove(key);
-            // WarningCellDataDict[key].Key=key;
-            // WarningCellDataDict[key].Des=des;
-            // WarningCellDataDict[key].Machine=machine;
-            // WarningCellDataDict[key].IsSelect=isSelect;
-            // WarningCellDataDict[key].ConfirmTime = time;
         }
-
-        WarningCellDataDict.Add(key, new WarningCellData(key, des, DateTime.Now, machine, false, false, ""));
+        
+        WarningCellDataDict.Add(key, new WarningCellData(key, des, DateTime.Now, machine, isConfirm, isSelect, confirmTime));
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
@@ -814,12 +835,30 @@ public class GameDataManager : Singleton<GameDataManager>
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
         }
     }
-
+    public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, DateTime TriggerTime,bool isConfirm=false,string confirmTime = "")
+    {
+        if (WarningCellDataDict.ContainsKey(key))
+        {
+            WarningCellDataDict.Remove(key);
+             
+            WarningCellDataDict.Add(key, new WarningCellData(key, des, TriggerTime, machine, isConfirm, isSelect, confirmTime));
+            if (machine == Machine.BucketWheelStackerReclaimer)
+            {
+                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
+            }
+            else
+            {
+                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
+            }
+        }
+       
+    }
     public void RemoveWarningDesDict(string key)
     {
         if (WarningCellDataDict.ContainsKey(key))
         {
             WarningCellDataDict.Remove(key);
+            UpdatePlcWarningRecordData();
         }
     }
 
@@ -840,9 +879,11 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void RecordWarning(SystemVariables newSystemVariables)
     {
+        bool isUpdate = false;
         if (_systemVariables == null)
         {
             _systemVariables = new SystemVariables();
+            isUpdate = true;
         }
 
         if (_systemVariables != null)
@@ -4800,6 +4841,22 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("回转编码器异常解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.Slew_Encoder_ERR_2));
+            }
+        }
+
+        if (isUpdate==true&&LastMcWarningRecord!=null)
+        {
+            //同步历史警告信息操作
+            UpdateWarningByLastMcWarningRecord();
+        }
+    }
+    public void UpdateWarningByLastMcWarningRecord(){
+        if (LastMcWarningRecord!=null&&LastMcWarningRecord.WarningCellDataDict.Count>0)
+        {
+            foreach (var data in LastMcWarningRecord.WarningCellDataDict)
+            {
+                AddOrUpdateWarningDesDict(data.Value.Key, data.Value.Des, data.Value.Machine, false,
+                    data.Value.TriggerDateTime, data.Value.IsConfirm, data.Value.ConfirmTime);
             }
         }
     }

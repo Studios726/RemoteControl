@@ -185,8 +185,8 @@ public class BucketWheelTaskBase : PanelBase
         AddOnClickListener(takeMaterEndBtn, (() => { SendTaskCommand(OperationType.END); }));
         confirmWarningBtn.onClick.AddListener((() =>
         {
-             Debug.LogError("按下");
              GameDataManager.Instance.UpdateWarningConfirmTime(machine);
+             GameDataManager.Instance.UpdatePlcWarningRecordData();
         }));
         quantityOpenToggle.onValueChanged.AddListener(((bool isOn) =>
         {

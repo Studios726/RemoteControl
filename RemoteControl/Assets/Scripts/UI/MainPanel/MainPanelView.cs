@@ -44,7 +44,7 @@ public class MainPanelView : UIView<MainPanelCtr>
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
                 return;
             }
-            GameDataManager.Instance.UpdateSCAData(30);
+            GameDataManager.Instance.UpdateSCAData(30);  
         });
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
         UpdateData(GameDataManager.Instance.SystemVariables);
