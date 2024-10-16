@@ -169,7 +169,7 @@ namespace RemoteControl
                 }
 
                 des = "远程驱动连接成功";
-                timerRc = Timer.Register(1, true, true, () => { GameDataManager.Instance.UpdatePlcData(); });
+                timerRc = Timer.Register(0.2f, true, true, () => { GameDataManager.Instance.UpdatePlcData(); });
             }
             else if (connectEventArgs.type == SocketType.TaskPC)
             {

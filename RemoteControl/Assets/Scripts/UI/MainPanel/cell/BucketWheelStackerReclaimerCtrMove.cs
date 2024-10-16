@@ -75,9 +75,13 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
         }));
         
     }
+    
     public override void UpdateData(SystemVariables data)
     {
-        //Debug.Log("更新堆取料机碰撞信息");
+        if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltStack_Swicth==true)
+        {
+            PileTakeMaterPop(TaskType.PILEMATER);
+        }
         base.UpdateData(data);
         pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth);
     }

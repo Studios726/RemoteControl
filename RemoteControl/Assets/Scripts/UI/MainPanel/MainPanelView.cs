@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using RemoteControl.Event;
+using ShangHaiPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -39,6 +40,9 @@ public class MainPanelView : UIView<MainPanelCtr>
         
         updateModelBtn.onClick.AddListener(() =>
         {
+            // string json = Resources.Load("Json/info").ToString();
+            // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
+            // GameDataManager.Instance.SetScaReportAndDem(dem);
             if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
