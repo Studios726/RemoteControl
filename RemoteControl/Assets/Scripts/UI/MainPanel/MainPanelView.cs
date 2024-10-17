@@ -80,8 +80,15 @@ public class MainPanelView : UIView<MainPanelCtr>
         _bucketWheelState1.UpdateData(data);
         _bucketWheelCtrMove2.UpdateData(data);
         _bucketWheelCtrMove1.UpdateData(data);
-        _bucketWheelHideBtnCtr2.UpdateData(data);
-        _bucketWheelHideBtnCtr1.UpdateData(data);
+        if (_bucketWheelHideBtnCtr1.gameObject.activeSelf==true)
+        {
+            _bucketWheelHideBtnCtr1.UpdateData(data);
+        }
+
+        if (_bucketWheelHideBtnCtr2.gameObject.activeSelf==true)
+        {
+              _bucketWheelHideBtnCtr2.UpdateData(data);
+        }
         _bucketWheelTask2.UpdatePlc(data);
         _bucketWheelTask1.UpdatePlc(data);
     }

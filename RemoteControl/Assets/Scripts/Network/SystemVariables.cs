@@ -1156,6 +1156,11 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Link_Action { get; set; }
         public bool AUTO_MODE { get; set; }
         public short MODE { get; set; }
+        
+        public bool SuspensionGlueRunCommand{ get; set; }
+        public short BeltRealyDis{ get; set; }
+        public bool SuspensionGlueRunCommand_2{ get; set; }
+        public short BeltRealyDis_2{ get; set; }
 
 
 

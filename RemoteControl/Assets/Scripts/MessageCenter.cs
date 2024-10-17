@@ -77,6 +77,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 string json = Decompress(message);
+                // json= Resources.Load("Json/RC").ToString();
                 SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
                 GameDataManager.Instance.SetSystemVariables(systemVariables);
             }

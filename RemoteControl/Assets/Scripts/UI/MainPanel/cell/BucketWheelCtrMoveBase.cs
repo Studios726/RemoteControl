@@ -374,9 +374,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             aloneBtn.SetSystemState(data.Single_Action);
             togetherBtn.SetSystemState(data.Link_Action);
             automaticBtn.SetSystemState(data.AUTO_MODE);
-            if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltTake_Swicth==true)
+            if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltTake_Swicth==true &&data.SuspensionGlueRunCommand)
             {
-                PileTakeMaterPop(TaskType.TAKEMATER);
+                PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis);
             }
             takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth);
             stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth);
@@ -463,6 +463,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             aloneBtn.SetSystemState(data.Single_Action_2);
             togetherBtn.SetSystemState(data.Link_Action_2);
             automaticBtn.SetSystemState(data.AUTO_MODE_2);
+            if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth_2==false&&data.SR1_BeltTake_Swicth_2==true&&data.SuspensionGlueRunCommand_2)
+            {
+                PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis_2);
+            }
             takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2);
             stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
@@ -533,18 +537,18 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     }
 
     //堆取料弹窗提示
-    public virtual void PileTakeMaterPop(TaskType taskType)
+    public virtual void PileTakeMaterPop(TaskType taskType,int time)
     {
-        if (togetherBtn.red.activeSelf==false)
+        if (togetherBtn.red.activeSelf==true)
         {
             if (taskType == TaskType.PILEMATER)
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s", null, null, 20));
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s", null, null, time));
             }
             else
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s\n 斗轮运行倒计时 {1}s", null, null, 20,25));
+                    new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s", null, null, time));
                 //斗轮运行倒计时
             }
         }

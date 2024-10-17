@@ -170,6 +170,20 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
 
     public override void UpdateData(SystemVariables data)
     {
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            if (data.SuspensionBeltMaterialLoadingRunningContact==true&&data.Single_Action&&data.SuspensionGlueRunCommand&&cantileverTakeMaterStopBtn.red.activeSelf)
+            {
+                PileTakeMaterPop(TaskType.PILEMATER,data.BeltRealyDis);
+            }
+        }
+        else
+        {
+            if (data.SuspensionBeltMaterialLoadingRunningContact_2==true&&data.Single_Action_2&&data.SuspensionGlueRunCommand_2&&cantileverTakeMaterStopBtn.red.activeSelf)
+            {
+                PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis_2);
+            }
+        }
         base.UpdateData(data);
         pileMaterBtn.SetSystemState(data.SuspensionBeltMaterialLoadingRunningContact);
         pileMaterUpBtn.SetSystemState(data.BucketWheelSlotLiftLimit);

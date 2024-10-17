@@ -239,7 +239,12 @@ public class HideButtonCtrBase : PanelBase
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB);
             bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning);
             bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning==false);
+            if (data.SuspensionBeltMaterialUnloadingRunningContact==true&&data.Single_Action&&data.SuspensionGlueRunCommand&&cantileverTakeMaterStopBtn.red.activeSelf)
+            {
+                PileTakeMaterPop(TaskType.PILEMATER,data.BeltRealyDis);
+            }
             cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact);
+            
             draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning);
             draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false);
             heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning);
@@ -286,6 +291,10 @@ public class HideButtonCtrBase : PanelBase
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB_2);
             bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning_2);
             bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning_2==false);
+            if (data.SuspensionBeltMaterialUnloadingRunningContact_2==true&&data.Single_Action_2&&data.SuspensionGlueRunCommand_2&&cantileverTakeMaterStopBtn.red.activeSelf)
+            {
+                PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis_2);
+            }
             cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact_2);
             
             draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning);
@@ -592,5 +601,20 @@ public class HideButtonCtrBase : PanelBase
                 break;
         }
         GameDataManager.Instance.SendServerCommandByName(commandName,dataInt);
+    }
+    //堆取料弹窗提示
+    public virtual void PileTakeMaterPop(TaskType taskType,int time)
+    {
+        if (taskType == TaskType.PILEMATER)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s", null, null, time));
+        }
+        else
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s", null, null, time));
+            //斗轮运行倒计时
+        }
+        
     }
 }
