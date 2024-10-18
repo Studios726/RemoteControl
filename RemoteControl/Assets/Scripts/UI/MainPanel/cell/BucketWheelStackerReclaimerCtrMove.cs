@@ -78,20 +78,20 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
     
     public override void UpdateData(SystemVariables data)
     {
-        if (machine == Machine.BucketWheelStackerReclaimer)
-        {
-            if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltStack_Swicth==true&&data.SuspensionGlueRunCommand)
-            {
-                PileTakeMaterPop(TaskType.PILEMATER,data.BeltRealyDis);
-            }
-        }
-        else
-        {
-            if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth_2==false&&data.SR1_BeltStack_Swicth_2==true&&data.SuspensionGlueRunCommand_2)
-            {
-                PileTakeMaterPop(TaskType.PILEMATER,data.BeltRealyDis_2);
-            }
-        }
+        // if (machine == Machine.BucketWheelStackerReclaimer)
+        // {
+        //     if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltStack_Swicth==true&&data.SuspensionGlueRunCommand)
+        //     {
+        //         PileTakeMaterPop(TaskType.PILEMATER,data.BeltRealyDis);
+        //     }
+        // }
+        // else
+        // {
+        //     if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth_2==false&&data.SR1_BeltStack_Swicth_2==true&&data.SuspensionGlueRunCommand_2)
+        //     {
+        //         PileTakeMaterPop(TaskType.PILEMATER,data.BeltRealyDis_2);
+        //     }
+        // }
        
         base.UpdateData(data);
         pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth);

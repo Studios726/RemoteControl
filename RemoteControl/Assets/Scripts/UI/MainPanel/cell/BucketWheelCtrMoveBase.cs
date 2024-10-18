@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.PlayerLoop;
@@ -256,6 +257,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
     private ButtonCell curCarRotMode;
     public Machine machine;
+    public bool IsCanPop;
 
     public virtual void Start()
     {
@@ -264,6 +266,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
     public virtual void Init()
     {
+        IsCanPop = true;
         // AddOnClickListener(takeResetBtn, (() =>SendMessageToServer("归零")));
         AddOnClickListener(aloneBtn,
             (() =>
@@ -374,10 +377,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             aloneBtn.SetSystemState(data.Single_Action);
             togetherBtn.SetSystemState(data.Link_Action);
             automaticBtn.SetSystemState(data.AUTO_MODE);
-            if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltTake_Swicth==true &&data.SuspensionGlueRunCommand)
-            {
-                PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis);
-            }
+            // if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltTake_Swicth==true &&data.SuspensionGlueRunCommand)
+            // {
+            //     PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis);
+            // }
             takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth);
             stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
@@ -463,10 +466,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             aloneBtn.SetSystemState(data.Single_Action_2);
             togetherBtn.SetSystemState(data.Link_Action_2);
             automaticBtn.SetSystemState(data.AUTO_MODE_2);
-            if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth_2==false&&data.SR1_BeltTake_Swicth_2==true&&data.SuspensionGlueRunCommand_2)
-            {
-                PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis_2);
-            }
+            // if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth_2==false&&data.SR1_BeltTake_Swicth_2==true&&data.SuspensionGlueRunCommand_2)
+            // {
+            //     PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis_2);
+            // }
             takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2);
             stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
@@ -532,26 +535,35 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
             bucketWheelPos.text = $"({x} , {y})";
         }
-
+        // if (data.SuspensionGlueRunCommand&&IsCanPop)
+        // {
+        //     IsCanPop = false;
+        //     PileTakeMaterPop(TaskType.None,data.BeltRealyDis);
+        // }
+        //
+        // if (data.SR1_BeltTS_Stop_Swicth==true)
+        // {
+        //     IsCanPop=true;
+        // }
         SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos - data.DC_Pos_2) + 64.34).ToString("F2"), TextType.Meter);
     }
 
     //堆取料弹窗提示
     public virtual void PileTakeMaterPop(TaskType taskType,int time)
     {
-        if (togetherBtn.red.activeSelf==true)
-        {
-            if (taskType == TaskType.PILEMATER)
-            {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s", null, null, time));
-            }
-            else
-            {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s", null, null, time));
-                //斗轮运行倒计时
-            }
-        }
+        // if (togetherBtn.red.activeSelf==true)
+        // {
+        //     if (taskType == TaskType.PILEMATER)
+        //     {
+        //         UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s", null, null, time));
+        //     }
+        //     else
+        //     {
+        //         UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+        //             new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s", null, null, time));
+        //         //斗轮运行倒计时
+        //     }
+        // }
         
     }
 

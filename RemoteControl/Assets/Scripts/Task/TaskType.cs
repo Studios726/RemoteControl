@@ -3,7 +3,8 @@ using System;
 public enum TaskType
 {
     PILEMATER,
-    TAKEMATER
+    TAKEMATER,
+    None
 }
 
 public enum OperationType

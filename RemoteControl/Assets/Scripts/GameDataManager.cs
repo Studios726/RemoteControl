@@ -71,6 +71,7 @@ public class GameDataManager : Singleton<GameDataManager>
     // public List<WarningCellData> BucketWheelStackerReclaimerWarningCellDataList = new List<WarningCellData>();
     public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
     public McWarningRecord LastMcWarningRecord;
+    public bool IsCanPop;
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
@@ -125,6 +126,10 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void SetSystemVariables(SystemVariables systemVariables)
     {
+        if (_systemVariables==null)
+        {
+            IsCanPop = true;
+        }
         if (systemVariables.MCString!=null)
         {
             try
@@ -152,12 +157,37 @@ public class GameDataManager : Singleton<GameDataManager>
         RecordWarning(systemVariables);
         _systemVariables = systemVariables;
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
-
+        if (_systemVariables.SuspensionGlueRunCommand&&IsCanPop&&_systemVariables.BeltRealyDis>0&&curAccountInfo != null)
+        {
+            IsCanPop = false;
+            Timer.Register(_systemVariables.BeltRealyDis, false, false, (() =>
+            {
+                IsCanPop = true;
+            }));
+            PileTakeMaterPop(TaskType.None,_systemVariables.BeltRealyDis);
+        }
         UpdateMachine();
 
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
     }
-
+    //悬胶皮带运行提示
+     public  void PileTakeMaterPop(TaskType taskType,int time)
+        {
+            if (taskType == TaskType.PILEMATER)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s", null, null, time));
+            }
+            else if (taskType ==TaskType.TAKEMATER)
+            {
+                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                                    new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s", null, null, time));
+            }
+            else
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                    new ConfirmPanelArgs("悬胶运行倒计时 {0}s", null, null, time));
+            }
+        }
     public bool GetPlcConnection(Machine machine)
     {
         if (_systemVariables == null)
