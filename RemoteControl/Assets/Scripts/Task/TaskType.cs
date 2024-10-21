@@ -7,7 +7,7 @@ public enum TaskType
     None
 }
 
-public enum AutoModel
+public enum AutoMode
 {
     AUTOMAX,//全自动
     SemiAuto//半自动

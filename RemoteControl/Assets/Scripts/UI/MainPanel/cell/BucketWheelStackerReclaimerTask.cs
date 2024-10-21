@@ -118,7 +118,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         taskCommand.TaskCreateTime = DateTime.Now;
         if (operationType==OperationType.START)
         {
-            taskCommand.AutoModel = AutoMaxToggle.red.activeSelf ? AutoModel.AUTOMAX : AutoModel.SemiAuto;
+            taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
             taskCommand.Command_Type = 0;
             float startValue = startPileMaterText.text == "" ? 0 : float.Parse(startPileMaterText.text);
             float endValue = endPileMaterText.text == "" ? 0 : float.Parse(endPileMaterText.text);

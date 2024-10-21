@@ -27,6 +27,7 @@ public class BucketWheelTaskBase : PanelBase
     public InputField timeMinuteText;
     public Toggle timeOpenToggle;
     public Toggle timeCloseToggle;
+    public ButtonCell useTimeBtn;
     public InputField takeMaterNum;
     public Toggle quantityOpenToggle;
     public Toggle quantityCloseToggle;
@@ -126,6 +127,7 @@ public class BucketWheelTaskBase : PanelBase
         takeMaterStep.text = taskCommand.StepLength.ToString();
         layerHigh.text = taskCommand.LayerHigh.ToString();
         timeOpenToggle.isOn = taskCommand.IsTimed;
+        useTimeBtn.SetSystemState(taskCommand.IsTimed,true);
         if (timeOpenToggle.isOn)
         {
             quantityOpenToggle.isOn = false;
@@ -230,7 +232,10 @@ public class BucketWheelTaskBase : PanelBase
             AutoMaxToggle.SetSystemState(false,true);
             SemiAutoToggle.SetSystemState(true,true);
         } ));
-        
+        AddOnClickListener(useTimeBtn,(() =>
+        {
+            useTimeBtn.SetSystemState(!useTimeBtn.red.activeSelf,true);
+        }));
         InputFieldValueRange(startTakeMaterText, 0, 350);
         InputFieldValueRange(stopTakeMaterText, 0, 350);
         InputFieldValueRange(leftTakeMaterText, 0, 45);
@@ -340,7 +345,7 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.OperatorSystem = "MC";
         if (operationType == OperationType.START)
         {
-            taskCommand.AutoModel = AutoMaxToggle.red.activeSelf ? AutoModel.AUTOMAX : AutoModel.SemiAuto;
+            taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
             taskCommand.Command_Type = 0;
             float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
             float endValue = stopTakeMaterText.text == "" ? 0 : float.Parse(stopTakeMaterText.text);
@@ -351,7 +356,7 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
             taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text);
             ;
-            taskCommand.IsTimed = timeOpenToggle.isOn;
+            taskCommand.IsTimed =useTimeBtn.red.activeSelf;
             taskCommand.TimedAt = int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
             taskCommand.IsQuantified = quantityOpenToggle.isOn;
             taskCommand.Quantity = int.Parse(takeMaterNum.text);
