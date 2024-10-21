@@ -5,8 +5,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
 {
     public InputField startPileMaterText;
     public InputField endPileMaterText;
-    public Toggle leftPileMaterToggle;
-    public Toggle rightPileMaterToggle;
+    public ButtonCell leftPileMaterToggle;
+    public ButtonCell rightPileMaterToggle;
+    public ButtonCell PileAutoMaxToggle;
+    public ButtonCell PileSemiAutoToggle;
     public InputField startLeftPileMaterText;
     public InputField endLeftPileMaterText;
     public InputField pileMaterHeightText;
@@ -25,6 +27,26 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         AddOnClickListener(pileMaterStartBtn,(() => { SendPileMaterCommand(OperationType.START);}));
         AddOnClickListener(pileMaterStopBtn,(() => {SendPileMaterCommand(OperationType.PAUSE);}));
         AddOnClickListener(pileMaterEndBtn,(() => {SendPileMaterCommand(OperationType.END);}));
+        AddOnClickListener(leftPileMaterToggle,(() =>
+        {
+            leftPileMaterToggle.SetSystemState(true,true);
+            rightPileMaterToggle.SetSystemState(false,true);
+        } ));
+        AddOnClickListener(rightPileMaterToggle,(() =>
+        {
+            rightPileMaterToggle.SetSystemState(true,true);
+            leftPileMaterToggle.SetSystemState(false,true);
+        } ));
+        AddOnClickListener(PileAutoMaxToggle,(() =>
+        {
+            PileAutoMaxToggle.SetSystemState(true,true);
+            PileSemiAutoToggle.SetSystemState(false,true);
+        } ));
+        AddOnClickListener(PileSemiAutoToggle,(() =>
+        {
+            PileAutoMaxToggle.SetSystemState(false,true);
+            PileSemiAutoToggle.SetSystemState(true,true);
+        } ));
     }
 
     public override void UpdateData(TaskCommand taskCommand)
@@ -40,19 +62,24 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             
             if (taskCommand.SideSelection=="LIFT")
             {
-                leftPileMaterToggle.isOn = true;
-                rightPileMaterToggle.isOn = false;
+                leftPileMaterToggle.SetSystemState(true,true);
+                rightPileMaterToggle.SetSystemState(false,true);
+                // leftPileMaterToggle.isOn = true;
+                // rightPileMaterToggle.isOn = false;
             }
             else
             {
-                leftPileMaterToggle.isOn = false;
-                rightPileMaterToggle.isOn = true;
+                
+                leftPileMaterToggle.SetSystemState(false,true);
+                rightPileMaterToggle.SetSystemState(true,true);
+                // leftPileMaterToggle.isOn = false;
+                // rightPileMaterToggle.isOn = true;
             }
             startLeftPileMaterText.text=taskCommand.LeftRightRange.startValue.ToString();
             endLeftPileMaterText.text=taskCommand.LeftRightRange.endValue.ToString();
-            pileMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0]==1);
-            pileMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1);
-            pileMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1);
+            pileMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0]==1,true);
+            pileMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
+            pileMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1,true);
         }
     
       
@@ -91,11 +118,12 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         taskCommand.TaskCreateTime = DateTime.Now;
         if (operationType==OperationType.START)
         {
+            taskCommand.AutoModel = AutoMaxToggle.red.activeSelf ? AutoModel.AUTOMAX : AutoModel.SemiAuto;
             taskCommand.Command_Type = 0;
             float startValue = startPileMaterText.text == "" ? 0 : float.Parse(startPileMaterText.text);
             float endValue = endPileMaterText.text == "" ? 0 : float.Parse(endPileMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
-            taskCommand.SideSelection = leftPileMaterToggle.isOn ? "LIFT" : "RIGHT";
+            taskCommand.SideSelection = leftPileMaterToggle.red.activeSelf ? "LIFT" : "RIGHT";
             float startLeftRightRangeValue = startLeftPileMaterText.text == "" ? 0 : float.Parse(startLeftPileMaterText.text);
             float endLeftRightRangeValue = endLeftPileMaterText.text == "" ? 0 : float.Parse(endLeftPileMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
@@ -121,9 +149,9 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public override void ResetState()
     {
         base.ResetState();
-        pileMaterStartBtn.SetSystemState(false);
-        pileMaterStopBtn.SetSystemState(false);
-        pileMaterEndBtn.SetSystemState(false);
+        pileMaterStartBtn.SetSystemState(false,true);
+        pileMaterStopBtn.SetSystemState(false,true);
+        pileMaterEndBtn.SetSystemState(false,true);
         
         pileMaterStartBtn.SetSelectState(false);
         pileMaterStopBtn.SetSelectState(false);

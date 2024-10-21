@@ -2,11 +2,17 @@ using System;
 
 public enum TaskType
 {
-    PILEMATER,
-    TAKEMATER,
+    PILEMATER,//堆料
+    TAKEMATER,//取料
     None
 }
 
+public enum AutoModel
+{
+    AUTOMAX,//全自动
+    SemiAuto//半自动
+    
+}
 public enum OperationType
 {
     /// <summary>

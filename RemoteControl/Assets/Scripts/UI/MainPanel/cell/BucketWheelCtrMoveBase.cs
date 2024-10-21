@@ -245,7 +245,23 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 俯仰停止
     /// </summary>
     public ButtonCell stopBtn;
-
+    /// <summary>
+    /// 上仰角度object
+    /// </summary>
+    public GameObject UpAngleGameObject;
+    /// <summary>
+    /// 下仰角度object
+    /// </summary>
+    public GameObject DownAngelGameObject;
+    /// <summary>
+    /// 左转角度object
+    /// </summary>
+    public GameObject LeftAngleGameObject;
+    /// <summary>
+    /// 右转角度object
+    /// </summary>
+    public GameObject RightAangleGameObject;
+    
     private ButtonCell curCtrMode;
     private ButtonCell curPileTakeMode;
     private ButtonCell curCarMoveMode;
@@ -257,7 +273,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
     private ButtonCell curCarRotMode;
     public Machine machine;
-    public bool IsCanPop;
+    public Color normalColor = new Color(1, 1, 1, 0.6f);
+    public Color runColor = new Color(0.4392157f, 1, 0, 1);
 
     public virtual void Start()
     {
@@ -266,7 +283,6 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
     public virtual void Init()
     {
-        IsCanPop = true;
         // AddOnClickListener(takeResetBtn, (() =>SendMessageToServer("归零")));
         AddOnClickListener(aloneBtn,
             (() =>
@@ -384,18 +400,19 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth);
             stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
-            if (upAngle.gameObject.activeSelf != data.VariableAmplitudeUpperElectromagneticValveOpen)
+            upBtn.SetTextColor(data.VariableAmplitudeUpperElectromagneticValveOpen ? runColor : normalColor);
+            if (UpAngleGameObject.activeSelf != data.VariableAmplitudeUpperElectromagneticValveOpen)
             {
-                upAngle.gameObject.SetActive(data.VariableAmplitudeUpperElectromagneticValveOpen);
+                UpAngleGameObject.SetActive(data.VariableAmplitudeUpperElectromagneticValveOpen);
             }
 
-            if (downAngle.gameObject.activeSelf != data.VariableAmplitudeLowerElectromagneticValveOpen)
+            if (DownAngelGameObject.activeSelf != data.VariableAmplitudeLowerElectromagneticValveOpen)
             {
-                downAngle.gameObject.SetActive(data.VariableAmplitudeLowerElectromagneticValveOpen);
+                DownAngelGameObject.SetActive(data.VariableAmplitudeLowerElectromagneticValveOpen);
             }
 
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen);
-
+            downBtn.SetTextColor(data.VariableAmplitudeLowerElectromagneticValveOpen ? runColor : normalColor);
             if (data.LargeCarForwardCommand == false && data.LargeCarReverseCommand == false)
             {
                 carStopBtn.SetSystemState(true);
@@ -429,21 +446,25 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             }
 
             leftBtn.SetSystemState(data.RotaryLeftTurnCommand);
-            if (leftAngle.gameObject.activeSelf != data.RotaryLeftTurnCommand)
+            leftBtn.SetTextColor(data.RotaryLeftTurnCommand ? runColor : normalColor);
+            if (LeftAngleGameObject.activeSelf != data.RotaryLeftTurnCommand)
             {
-                leftAngle.gameObject.SetActive(data.RotaryLeftTurnCommand);
+                LeftAngleGameObject.SetActive(data.RotaryLeftTurnCommand);
             }
 
-            if (rightAngle.gameObject.activeSelf != data.RotaryRightTurnCommand)
+            if (RightAangleGameObject.activeSelf != data.RotaryRightTurnCommand)
             {
-                rightAngle.gameObject.SetActive(data.RotaryRightTurnCommand);
+                RightAangleGameObject.SetActive(data.RotaryRightTurnCommand);
             }
 
             rightBtn.SetSystemState(data.RotaryRightTurnCommand);
+            rightBtn.SetTextColor(data.RotaryRightTurnCommand ? runColor : normalColor);
             carBackBtn.SetSystemState(data.LargeCarReverseCommand);
+            carBackBtn.SetTextColor(data.LargeCarReverseCommand ? runColor : normalColor);
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand);
-            carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB == false);
-            carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB);
+            carForwardBtn.SetTextColor(data.LargeCarForwardCommand ? runColor : normalColor);
+            carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB == false,true);
+            carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB,true);
             float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle) * Mathf.Deg2Rad);
             string x = (53.4 + data.DC_Pos + (x1 * Mathf.Cos(data.SLEW_Angle * Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle * Mathf.Deg2Rad) - 1.8F).ToString("F2");
@@ -466,41 +487,43 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             aloneBtn.SetSystemState(data.Single_Action_2);
             togetherBtn.SetSystemState(data.Link_Action_2);
             automaticBtn.SetSystemState(data.AUTO_MODE_2);
-            // if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth_2==false&&data.SR1_BeltTake_Swicth_2==true&&data.SuspensionGlueRunCommand_2)
-            // {
-            //     PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis_2);
-            // }
             takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2);
             stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
-            if (upAngle.gameObject.activeSelf != data.VariableAmplitudeUpperElectromagneticValveOpen_2)
+            if (UpAngleGameObject.activeSelf != data.VariableAmplitudeUpperElectromagneticValveOpen_2)
             {
-                upAngle.gameObject.SetActive(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
+                UpAngleGameObject.SetActive(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
             }
 
-            if (downAngle.gameObject.activeSelf != data.VariableAmplitudeLowerElectromagneticValveOpen_2)
+            upBtn.SetTextColor(data.VariableAmplitudeUpperElectromagneticValveOpen_2 ? runColor : normalColor);
+            if (DownAngelGameObject.activeSelf != data.VariableAmplitudeLowerElectromagneticValveOpen_2)
             {
-                downAngle.gameObject.SetActive(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
+                DownAngelGameObject.SetActive(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
             }
 
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
+            downBtn.SetTextColor(data.VariableAmplitudeLowerElectromagneticValveOpen_2 ? runColor : normalColor);
             leftBtn.SetSystemState(data.RotaryLeftTurnCommand_2);
+            leftBtn.SetTextColor(data.RotaryLeftTurnCommand_2 ? runColor : normalColor);
 
-            if (leftAngle.gameObject.activeSelf != data.RotaryLeftTurnCommand_2)
+            if (LeftAngleGameObject.activeSelf != data.RotaryLeftTurnCommand_2)
             {
-                leftAngle.gameObject.SetActive(data.RotaryLeftTurnCommand_2);
+                LeftAngleGameObject.SetActive(data.RotaryLeftTurnCommand_2);
             }
 
-            if (rightAngle.gameObject.activeSelf != data.RotaryRightTurnCommand_2)
+            if (RightAangleGameObject.activeSelf != data.RotaryRightTurnCommand_2)
             {
-                rightAngle.gameObject.SetActive(data.RotaryRightTurnCommand_2);
+                RightAangleGameObject.SetActive(data.RotaryRightTurnCommand_2);
             }
 
             rightBtn.SetSystemState(data.RotaryRightTurnCommand_2);
+            rightBtn.SetTextColor(data.RotaryRightTurnCommand_2 ? runColor : normalColor);
             carBackBtn.SetSystemState(data.LargeCarReverseCommand_2);
+            carBackBtn.SetTextColor(data.LargeCarReverseCommand_2 ? runColor : normalColor);
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand_2);
-            carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB_2 == false);
-            carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB_2);
+            carForwardBtn.SetTextColor(data.LargeCarForwardCommand_2 ? runColor : normalColor);
+            carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB_2 == false,true);
+            carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB_2,true);
             if (data.LargeCarForwardCommand_2 == false && data.LargeCarReverseCommand_2 == false)
             {
                 carStopBtn.SetSystemState(true);
@@ -535,16 +558,6 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
             bucketWheelPos.text = $"({x} , {y})";
         }
-        // if (data.SuspensionGlueRunCommand&&IsCanPop)
-        // {
-        //     IsCanPop = false;
-        //     PileTakeMaterPop(TaskType.None,data.BeltRealyDis);
-        // }
-        //
-        // if (data.SR1_BeltTS_Stop_Swicth==true)
-        // {
-        //     IsCanPop=true;
-        // }
         SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos - data.DC_Pos_2) + 64.34).ToString("F2"), TextType.Meter);
     }
 

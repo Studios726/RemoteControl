@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 public class BucketWheelTaskBase : PanelBase
 {
@@ -14,8 +15,10 @@ public class BucketWheelTaskBase : PanelBase
     public Text[] warningTexts;
     public InputField startTakeMaterText;
     public InputField stopTakeMaterText;
-    public Toggle leftToggle;
-    public Toggle rightToggle;
+    public ButtonCell leftToggle;
+    public ButtonCell rightToggle;
+    public ButtonCell AutoMaxToggle;
+    public ButtonCell SemiAutoToggle;
     public InputField leftTakeMaterText;
     public InputField rightTakeMaterText;
     public InputField takeMaterStep;
@@ -65,13 +68,13 @@ public class BucketWheelTaskBase : PanelBase
         {
             scramStopBtn.SetSystemState(data.System_Emergence);
             ScramStopFicker(data.System_Emergence);
-            resetBtn.SetSystemState(data.HMI_ErrReset);
+            resetBtn.SetSystemState(data.HMI_ErrReset,true);
         }
         else
         {
             scramStopBtn.SetSystemState(data.System_Emergence_2);
             ScramStopFicker(data.System_Emergence_2);
-            resetBtn.SetSystemState(data.HMI_ErrReset_2);
+            resetBtn.SetSystemState(data.HMI_ErrReset_2,true);
         }
     }
 
@@ -105,13 +108,17 @@ public class BucketWheelTaskBase : PanelBase
         stopTakeMaterText.text = taskCommand.MaterialRange.endValue.ToString();
         if (taskCommand.SideSelection == "LIFT")
         {
-            leftToggle.isOn = true;
-            rightToggle.isOn = false;
+            leftToggle.SetSystemState(true,true);
+            rightToggle.SetSystemState(false,true);
+            // leftToggle.isOn = true;
+            // rightToggle.isOn = false;
         }
         else
         {
-            leftToggle.isOn = false;
-            rightToggle.isOn = true;
+            leftToggle.SetSystemState(false,true);
+            rightToggle.SetSystemState(true,true);
+            // leftToggle.isOn = false;
+            // rightToggle.isOn = true;
         }
 
         leftTakeMaterText.text = taskCommand.LeftRightRange.startValue.ToString();
@@ -132,8 +139,8 @@ public class BucketWheelTaskBase : PanelBase
             takeMaterNum.text = taskCommand.Quantity.ToString();
         }
 
-        takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1);
-        takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1);
+        takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1,true);
+        takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
         if (taskCommand.AllData.OperationCommandList[2] == 1)
         {
             if (reversingTimer != null)
@@ -143,17 +150,17 @@ public class BucketWheelTaskBase : PanelBase
 
             reversingTimer = Timer.Register(2, () =>
             {
-                takeMaterReversingBtn.SetSystemState(false);
+                takeMaterReversingBtn.SetSystemState(false,true);
                 curTaskButtonCell?.SetSelectState(false);
             });
-            takeMaterReversingBtn.SetSystemState(true);
+            takeMaterReversingBtn.SetSystemState(true,true);
         }
         else
         {
-            takeMaterReversingBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1);
+            takeMaterReversingBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1,true);
         }
 
-        takeMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1);
+        takeMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1,true);
     }
 
     public virtual void Init()
@@ -202,6 +209,28 @@ public class BucketWheelTaskBase : PanelBase
                 quantityCloseToggle.isOn = true;
             }
         })));
+        AddOnClickListener(leftToggle,(() =>
+        {
+            leftToggle.SetSystemState(true,true);
+            rightToggle.SetSystemState(false,true);
+        } ));
+        AddOnClickListener(rightToggle,(() =>
+        {
+            rightToggle.SetSystemState(true,true);
+            leftToggle.SetSystemState(false,true);
+        } ));
+        
+        AddOnClickListener(AutoMaxToggle,(() =>
+        {
+            AutoMaxToggle.SetSystemState(true,true);
+            SemiAutoToggle.SetSystemState(false,true);
+        } ));
+        AddOnClickListener(SemiAutoToggle,(() =>
+        {
+            AutoMaxToggle.SetSystemState(false,true);
+            SemiAutoToggle.SetSystemState(true,true);
+        } ));
+        
         InputFieldValueRange(startTakeMaterText, 0, 350);
         InputFieldValueRange(stopTakeMaterText, 0, 350);
         InputFieldValueRange(leftTakeMaterText, 0, 45);
@@ -216,14 +245,20 @@ public class BucketWheelTaskBase : PanelBase
     public virtual void WarningDown()
     {
         Debug.LogError("按下"); //1
+        warningBtn.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         warningBtn.transform.Find("Image").gameObject.SetActive(true);
+        warningBtn.transform.FindComponent<Text>("Text").color = new Color(1, 0, 0.1803922f, 1);
+    // private Color textColor1 = new Color(0.1411765f, 1, 1, 1);
+    // private Color textColor2 = new Color(1, 0, 0.1803922f, 1);
         SendPlcCommand(COMMAND_NAME.STARTUP_ALARM, 1);
     }
 
     public virtual void WarningUp()
     {
         Debug.LogError("抬起"); //0
+        warningBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         warningBtn.transform.Find("Image").gameObject.SetActive(false);
+        warningBtn.transform.FindComponent<Text>("Text").color =new Color(0.1411765f, 1, 1, 1);
         SendPlcCommand(COMMAND_NAME.STARTUP_ALARM, 0);
     }
 
@@ -305,11 +340,12 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.OperatorSystem = "MC";
         if (operationType == OperationType.START)
         {
+            taskCommand.AutoModel = AutoMaxToggle.red.activeSelf ? AutoModel.AUTOMAX : AutoModel.SemiAuto;
             taskCommand.Command_Type = 0;
             float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
             float endValue = stopTakeMaterText.text == "" ? 0 : float.Parse(stopTakeMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
-            taskCommand.SideSelection = leftToggle.isOn ? "LIFT" : "RIGHT";
+            taskCommand.SideSelection = leftToggle.red.activeSelf ? "LIFT" : "RIGHT";
             float startLeftRightRangeValue = leftTakeMaterText.text == "" ? 0 : float.Parse(leftTakeMaterText.text);
             float endLeftRightRangeValue = rightTakeMaterText.text == "" ? 0 : float.Parse(rightTakeMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
@@ -346,10 +382,10 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void ResetState()
     {
-        takeMaterStartBtn.SetSystemState(false);
-        takeMaterStopBtn.SetSystemState(false);
-        takeMaterReversingBtn.SetSystemState(false);
-        takeMaterEndBtn.SetSystemState(false);
+        takeMaterStartBtn.SetSystemState(false,true);
+        takeMaterStopBtn.SetSystemState(false,true);
+        takeMaterReversingBtn.SetSystemState(false,true);
+        takeMaterEndBtn.SetSystemState(false,true);
         takeMaterStartBtn.SetSelectState(false);
         takeMaterStopBtn.SetSelectState(false);
         takeMaterReversingBtn.SetSelectState(false);

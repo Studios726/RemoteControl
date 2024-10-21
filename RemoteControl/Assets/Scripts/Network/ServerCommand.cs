@@ -319,6 +319,8 @@ public class TaskCommand
     public Machine Machine { get; set; }
     //0 堆料 1 取料
     public TaskType TaskType { get; set; }
+    //自动模式
+    public AutoModel AutoModel{ get; set;}
     //启动0 暂停1 换向2 结束3
     public OperationType OperationCommand { get; set; }
     // 取料范围，可以是一个区间
@@ -349,6 +351,7 @@ public class TaskCommand
     public float TakeMateHigh {  get; set; }
     //层高
     public float LayerHigh {  get; set; }
+   
     public AllData  AllData { get; set; }
     public CommonTaskParameters CommonTaskParameters{ get; set; }
 }
