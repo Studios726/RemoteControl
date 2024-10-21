@@ -65,11 +65,11 @@ public class BucketWheelStackerReclaimerState : BucketWheelStateBase
         SetToggleState(rightSideRun, data.SLEW_Angle>0, false, data.D1PLC1CommunicationState);
         
         SetToggleState(suspensoidPileMaterRun, data.SuspensionBeltMaterialLoadingRunningContact, false, data.D1PLC1CommunicationState);
-        SetToggleState(bucketWheelSlotLiftLimit, data.BucketWheelSlotLiftLimit, false, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelSlotLiftLimit, !data.BucketWheelSlotLiftLimit, false, data.D1PLC1CommunicationState);
         SetToggleState(baffleDownLimit, data.BaffleDownLimit, false, data.D1PLC1CommunicationState);
         SetToggleState(diversionPlateLimit, data.DiversionPlateLimit, false, data.D1PLC1CommunicationState);
         SetToggleState(suspensoidTakeMaterRun, data.SuspensionBeltMaterialUnloadingRunningContact, false, data.D1PLC1CommunicationState);
-        SetToggleState(bucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit, false, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelSlotLowerLimit, !data.BucketWheelSlotLowerLimit, false, data.D1PLC1CommunicationState);
 
    }
 }

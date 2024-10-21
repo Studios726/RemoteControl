@@ -154,7 +154,7 @@ public class BucketWheelStateBase : MonoBehaviour
         SetToggleState(rightSideRun, data.SLEW_Angle_2>0, false, data.D1PLC1CommunicationState);
         
         SetToggleState(suspensoidTakeMaterRun, data.SuspensionBeltMaterialUnloadingRunningContact_2, false, data.D1PLC1CommunicationState);
-        SetToggleState(bucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelSlotLowerLimit, !data.BucketWheelSlotLowerLimit_2, false, data.D1PLC1CommunicationState);
     }
 
     public void Update()

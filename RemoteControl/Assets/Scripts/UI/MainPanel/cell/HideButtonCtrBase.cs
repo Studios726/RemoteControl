@@ -258,8 +258,8 @@ public class HideButtonCtrBase : PanelBase
             {
                 cantileverTakeMaterStopBtn.SetSystemState(false);
             }
-            takeMaterDownBtn.SetSystemState(data.BucketWheelSlotLowerLimit);
-            if (data.BucketWheelSlotLowerLimit==false&&data.BucketWheelSlotLiftLimit==false)
+            takeMaterDownBtn.SetSystemState(!data.BucketWheelSlotLowerLimit);
+            if (data.BucketWheelSlotLowerLimit&&data.BucketWheelSlotLiftLimit)
             {
                 takeMaterStopBtn.SetSystemState(true);
             }
@@ -310,8 +310,8 @@ public class HideButtonCtrBase : PanelBase
             {
                 cantileverTakeMaterStopBtn.SetSystemState(false);
             }
-            takeMaterDownBtn.SetSystemState(data.BucketWheelSlotLowerLimit_2);
-            if (data.BucketWheelSlotLowerLimit_2==false&&data.BucketWheelSlotLiftLimit_2==false)
+            takeMaterDownBtn.SetSystemState(!data.BucketWheelSlotLowerLimit_2);
+            if (data.BucketWheelSlotLowerLimit_2)
             {
                 takeMaterStopBtn.SetSystemState(true);
             }

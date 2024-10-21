@@ -63,10 +63,10 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.BucketWheelSlotMainCircuitBreaker_2);
         bucketWheelFeedChuteData.isMotorOverload = GetToggleState(data.BucketWheelMotorOverload,
             data.BucketWheelMotorOverload_2);
-        bucketWheelFeedChuteData.isLiftLimit = GetToggleState(data.BucketWheelSlotLiftLimit,
-            data.BucketWheelSlotLiftLimit_2);
-        bucketWheelFeedChuteData.isLowerLimit = GetToggleState(data.BucketWheelSlotLowerLimit,
-            data.BucketWheelSlotLowerLimit_2);
+        bucketWheelFeedChuteData.isLiftLimit = GetToggleState(!data.BucketWheelSlotLiftLimit,
+            !data.BucketWheelSlotLiftLimit_2);
+        bucketWheelFeedChuteData.isLowerLimit = GetToggleState(!data.BucketWheelSlotLowerLimit,
+            !data.BucketWheelSlotLowerLimit_2);
         bucketWheelFeedChuteData.isLiftRunning = GetToggleState(data.BucketWheelSlotLift,
             data.BucketWheelSlotLift_2);
         bucketWheelFeedChuteData.isLowerRunning = GetToggleState(data.BucketWheelSlotLower,

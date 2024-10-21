@@ -486,14 +486,14 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             downBtn.SetSystemState(data.VariableAmplitudeLowerElectromagneticValveOpen_2);
             leftBtn.SetSystemState(data.RotaryLeftTurnCommand_2);
 
-            if (leftAngle.gameObject.activeSelf != data.RotaryLeftTurnCommand)
+            if (leftAngle.gameObject.activeSelf != data.RotaryLeftTurnCommand_2)
             {
-                leftAngle.gameObject.SetActive(data.RotaryLeftTurnCommand);
+                leftAngle.gameObject.SetActive(data.RotaryLeftTurnCommand_2);
             }
 
-            if (rightAngle.gameObject.activeSelf != data.RotaryRightTurnCommand)
+            if (rightAngle.gameObject.activeSelf != data.RotaryRightTurnCommand_2)
             {
-                rightAngle.gameObject.SetActive(data.RotaryRightTurnCommand);
+                rightAngle.gameObject.SetActive(data.RotaryRightTurnCommand_2);
             }
 
             rightBtn.SetSystemState(data.RotaryRightTurnCommand_2);

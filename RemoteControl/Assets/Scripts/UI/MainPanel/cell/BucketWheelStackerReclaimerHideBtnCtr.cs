@@ -186,7 +186,7 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
         }
         base.UpdateData(data);
         pileMaterBtn.SetSystemState(data.SuspensionBeltMaterialLoadingRunningContact);
-        pileMaterUpBtn.SetSystemState(data.BucketWheelSlotLiftLimit);
+        pileMaterUpBtn.SetSystemState(!data.BucketWheelSlotLiftLimit);
         damBoardPileMaterDownBtn.SetSystemState(data.BaffleDownLimit);
         damBoardPileMaterUpBtn.SetSystemState(data.BaffleUpLimit);
         if (data.BaffleDownLimit==false&&data.BaffleUpLimit==false)

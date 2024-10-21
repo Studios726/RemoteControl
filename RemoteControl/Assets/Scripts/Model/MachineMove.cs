@@ -10,13 +10,13 @@ public class MachineMove : MonoBehaviour
     public Transform rotationGo_y;
     public Transform currentCanvasTransform;
     public TMP_Text errorText;
-    public Transform mainCameraTransform;
+    public Transform modelCameraTransform;
     public Animation rotClip;
     public Machine machine;
     public float speed;
     private void Start()
     {
-        mainCameraTransform = Camera.main?.transform;
+        // mainCameraTransform = Camera.main?.transform;
         if (rotClip!=null)
         {
             foreach (AnimationState state in rotClip)
@@ -81,11 +81,11 @@ public class MachineMove : MonoBehaviour
     }
     private void Update()
     {
-        if (errorText.text != "" && mainCameraTransform != null)
+        if (errorText.text != "" && modelCameraTransform != null)
         {
             currentCanvasTransform.LookAt(
-                currentCanvasTransform.position + mainCameraTransform.rotation * Vector3.forward,
-                mainCameraTransform.rotation * Vector3.up);
+                currentCanvasTransform.position + modelCameraTransform.rotation * Vector3.forward,
+                modelCameraTransform.rotation * Vector3.up);
         }
     }
 }
