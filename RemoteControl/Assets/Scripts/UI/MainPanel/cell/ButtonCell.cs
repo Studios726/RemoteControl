@@ -96,6 +96,10 @@ public class ButtonCell : MonoBehaviour
             return;
         }
         red.SetActive(state);
+        if (state&&select!=null&&select.activeSelf==true)
+        {
+            select.SetActive(false);
+        }
     }
     public void SetSystemState(bool state,Color bgColor,Color textColor)
     {
