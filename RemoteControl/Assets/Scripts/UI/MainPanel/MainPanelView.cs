@@ -40,15 +40,15 @@ public class MainPanelView : UIView<MainPanelCtr>
         
         updateModelBtn.onClick.AddListener(() =>
         {
-            string json = Resources.Load("Json/info").ToString();
-            SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
-            GameDataManager.Instance.SetScaReportAndDem(dem);
-            // if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
-            // {
-            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
-            //     return;
-            // }
-            // GameDataManager.Instance.UpdateSCAData(30);  
+            // string json = Resources.Load("Json/info").ToString();
+            // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
+            // GameDataManager.Instance.SetScaReportAndDem(dem);
+            if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
+            GameDataManager.Instance.UpdateSCAData(30);  
         });
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
         UpdateData(GameDataManager.Instance.SystemVariables);
