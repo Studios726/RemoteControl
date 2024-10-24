@@ -136,8 +136,8 @@ public class BucketWheelStateBase : MonoBehaviour
         SetToggleState(powerSupplyClose, data.LowVoltageControlPowerClosed_2, false, data.D1PLC1CommunicationState);
         SetToggleState(systemChain, data.SystemInterlockSwitch_2, false, data.D1PLC1CommunicationState);
         // SetToggleState(recondition, data.SystemInterlockSwitch, false, data.D1PLC1CommunicationState);
-        SetToggleState(bucketWheelMalfunction, data.BucketWheelFault_2, true, data.D1PLC1CommunicationState);
-        SetToggleState(buzzerAlarm, data.StartAlarmStatus_2, true, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelMalfunction, data.BucketWheelFault_2, true, data.D1PLC1CommunicationState,true);
+        SetToggleState(buzzerAlarm, data.StartAlarmStatus_2, true, data.D1PLC1CommunicationState,true);
         // SetToggleState(buzzerAlarm, data.BucketWheelFault, true, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelRun, data.BucketWheelMotorRunning_2, false, data.D1PLC1CommunicationState);
         SetToggleState(reclaimerSignal, data.AllowBucketWheelMaterialUnloading_2, false, data.D1PLC1CommunicationState);
@@ -199,7 +199,7 @@ public class BucketWheelStateBase : MonoBehaviour
         yellow.SetActive(isSucc == 2);
     }
 
-    public virtual void SetToggleState(ToggleDIY toggle, bool ison, bool isFault = true, bool isConnect = true)
+    public virtual void SetToggleState(ToggleDIY toggle, bool ison, bool isFault = true, bool isConnect = true,bool isUseFlicker = false)
     {
         if (isConnect && ison)
         {
@@ -207,7 +207,15 @@ public class BucketWheelStateBase : MonoBehaviour
             {
                 if (isFault)
                 {
-                    toggle?.SetState(2);
+                    if (isUseFlicker)
+                    {
+                        toggle?.SetState(1,true);
+                    }
+                    else
+                    {
+                        toggle?.SetState(2);
+                    }
+                  
                 }
                 else
                 {
@@ -228,7 +236,15 @@ public class BucketWheelStateBase : MonoBehaviour
         }
         else
         {
-            toggle?.SetState(0);
+            if (isUseFlicker)
+            {
+                toggle?.SetState(0,false);
+            }
+            else
+            {
+                toggle?.SetState(0);
+            }
+          
         }
     }
 }
