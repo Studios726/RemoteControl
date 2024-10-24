@@ -63,10 +63,10 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.BucketWheelSlotMainCircuitBreaker_2);
         bucketWheelFeedChuteData.isMotorOverload = GetToggleState(data.BucketWheelMotorOverload,
             data.BucketWheelMotorOverload_2);
-        bucketWheelFeedChuteData.isLiftLimit = GetToggleState(!data.BucketWheelSlotLiftLimit,
-            !data.BucketWheelSlotLiftLimit_2);
-        bucketWheelFeedChuteData.isLowerLimit = GetToggleState(!data.BucketWheelSlotLowerLimit,
-            !data.BucketWheelSlotLowerLimit_2);
+        bucketWheelFeedChuteData.isLiftLimit = GetToggleState(data.BucketWheelSlotLiftLimit,
+            data.BucketWheelSlotLiftLimit_2);
+        bucketWheelFeedChuteData.isLowerLimit = GetToggleState(data.BucketWheelSlotLowerLimit,
+            data.BucketWheelSlotLowerLimit_2);
         bucketWheelFeedChuteData.isLiftRunning = GetToggleState(data.BucketWheelSlotLift,
             data.BucketWheelSlotLift_2);
         bucketWheelFeedChuteData.isLowerRunning = GetToggleState(data.BucketWheelSlotLower,
@@ -93,6 +93,8 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.DiversionBaffleDownRunning_2);
         shuntPlateData.isLowerRunning = GetToggleState(data.DiversionBaffleUpRunning,
             data.DiversionBaffleUpRunning_2);
+        shuntPlateData.isDiversionPlateTimeout =
+            GetToggleState(data.DiversionPlateTimeout, data.DiversionPlateTimeout_2);
         ShuntPlateItem?.UpdateData(shuntPlateData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
 

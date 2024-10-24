@@ -214,106 +214,110 @@ public class HideButtonCtrBase : PanelBase
     {
         if (machine== Machine.BucketWheelStackerReclaimer)
         {
-            shakerStopBtn.SetSystemState(data.VibrationMotorRunning==false);
-            shakerStartBtn.SetSystemState(data.VibrationMotorRunning);
-            powerSupplyCloseBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed);
-            powerSupplyOpenBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed==false);
+            shakerStopBtn.SetSystemState(data.VibrationMotorRunning==false,true);
+            shakerStartBtn.SetSystemState(data.VibrationMotorRunning,true);
+            powerSupplyCloseBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed,true);
+            powerSupplyOpenBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed==false,true);
             if (data.LeftClampRelaxLimit==true && data.RightClampRelaxLimit==true)
             {
-                disengageClampBtn.SetSystemState(true);
-                engageClampBtn.SetSystemState(false);
+                disengageClampBtn.SetSystemState(true,true);
+                engageClampBtn.SetSystemState(false,true);
             }
             else
             {
-                engageClampBtn.SetSystemState(true);
-                disengageClampBtn.SetSystemState(false);
+                engageClampBtn.SetSystemState(true,true);
+                disengageClampBtn.SetSystemState(false,true);
             }
-            impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed==false);
-            impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed);
-            lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed);
-            lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed==false);
-            systemUnlockBtn.SetSystemState(data.SystemInterlockSwitch==false);
-            systemLockBtn.SetSystemState(data.SystemInterlockSwitch);
-            oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning==false);
-            oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning);
-            bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB);
-            bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning);
-            bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning==false);
+            impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed==false,true);
+            impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed,true);
+            lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed,true);
+            lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed==false,true);
+            systemUnlockBtn.SetSystemState(data.SystemInterlockSwitch==false,true);
+            systemLockBtn.SetSystemState(data.SystemInterlockSwitch,true);
+            oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning==false,true);
+            oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning,true);
+            bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB,true);
+            bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning,true);
+            bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning==false,true);
             // if (data.SuspensionBeltMaterialUnloadingRunningContact==true&&data.Single_Action&&data.SuspensionGlueRunCommand&&cantileverTakeMaterStopBtn.red.activeSelf)
             // {
             //     PileTakeMaterPop(TaskType.PILEMATER,data.BeltRealyDis);
             // }
-            cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact);
+            cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact,true);
             
-            draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning);
-            draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false);
-            heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning);
-            heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning==false);
+            draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning,true);
+            draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false,true);
+            heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning,true);
+            heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning==false,true);
             
             if (data.SuspensionBeltMaterialUnloadingRunningContact==false &&data.SuspensionBeltMaterialLoadingRunningContact==false)
             {
-                cantileverTakeMaterStopBtn.SetSystemState(true);
+                cantileverTakeMaterStopBtn.SetSystemState(true,true);
             }
             else
             {
-                cantileverTakeMaterStopBtn.SetSystemState(false);
+                cantileverTakeMaterStopBtn.SetSystemState(false,true);
             }
-            takeMaterDownBtn.SetSystemState(!data.BucketWheelSlotLowerLimit);
-            if (data.BucketWheelSlotLowerLimit&&data.BucketWheelSlotLiftLimit)
+            takeMaterDownBtn.SetSystemState(data.BucketWheelSlotLowerLimit,true);
+            if (data.BucketWheelSlotLowerLimit==false&&data.BucketWheelSlotLiftLimit==false)
             {
-                takeMaterStopBtn.SetSystemState(true);
+                takeMaterStopBtn.SetSystemState(true,true);
+            }
+            else
+            {
+                takeMaterStopBtn.SetSystemState(false,true);
             }
         }
         else
         {
-            shakerStopBtn.SetSystemState(data.VibrationMotorRunning_2==false);
-            shakerStartBtn.SetSystemState(data.VibrationMotorRunning_2);
-            powerSupplyCloseBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed_2);
-            powerSupplyOpenBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed_2==false);
+            shakerStopBtn.SetSystemState(data.VibrationMotorRunning_2==false,true);
+            shakerStartBtn.SetSystemState(data.VibrationMotorRunning_2,true);
+            powerSupplyCloseBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed_2,true);
+            powerSupplyOpenBrakeBtn.SetSystemState(data.LowVoltageControlPowerClosed_2==false,true);
             if (data.LeftClampRelaxLimit_2==true && data.RightClampRelaxLimit_2==true)
             {
-                disengageClampBtn.SetSystemState(true);
-                engageClampBtn.SetSystemState(false);
+                disengageClampBtn.SetSystemState(true,true);
+                engageClampBtn.SetSystemState(false,true);
             }
             else
             {
-                engageClampBtn.SetSystemState(true);
-                disengageClampBtn.SetSystemState(false);
+                engageClampBtn.SetSystemState(true,true);
+                disengageClampBtn.SetSystemState(false,true);
             }
-            impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2==false);
-            impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2);
-            lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed_2);
-            lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed_2==false);
-            systemUnlockBtn.SetSystemState(data.SystemInterlockSwitch_2==false);
-            systemLockBtn.SetSystemState(data.SystemInterlockSwitch_2);
-            oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false);
-            oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2);
-            bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB_2);
-            bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning_2);
-            bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning_2==false);
+            impetusSupplyOpenBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2==false,true);
+            impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2,true);
+            lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed_2,true);
+            lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed_2==false,true);
+            systemUnlockBtn.SetSystemState(data.SystemInterlockSwitch_2==false,true);
+            systemLockBtn.SetSystemState(data.SystemInterlockSwitch_2,true);
+            oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false,true);
+            oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2,true);
+            bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB_2,true);
+            bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning_2,true);
+            bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning_2==false,true);
             // if (data.SuspensionBeltMaterialUnloadingRunningContact_2==true&&data.Single_Action_2&&data.SuspensionGlueRunCommand_2&&cantileverTakeMaterStopBtn.red.activeSelf)
             // {
             //     PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis_2);
             // }
-            cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact_2);
+            cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact_2,true);
             
-            draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning);
-            draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false);
-            heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning);
-            heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning==false);
+            draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning,true);
+            draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false,true);
+            heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning,true);
+            heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning==false,true);
             
             if (data.SuspensionBeltMaterialUnloadingRunningContact_2==false &&data.SuspensionBeltMaterialLoadingRunningContact_2==false)
             {
-                cantileverTakeMaterStopBtn.SetSystemState(true);
+                cantileverTakeMaterStopBtn.SetSystemState(true,true);
             }
             else
             {
-                cantileverTakeMaterStopBtn.SetSystemState(false);
+                cantileverTakeMaterStopBtn.SetSystemState(false,true);
             }
-            takeMaterDownBtn.SetSystemState(!data.BucketWheelSlotLowerLimit_2);
-            if (data.BucketWheelSlotLowerLimit_2)
+            takeMaterDownBtn.SetSystemState(data.BucketWheelSlotLowerLimit_2,true);
+            if (data.BucketWheelSlotLowerLimit_2==false)
             {
-                takeMaterStopBtn.SetSystemState(true);
+                takeMaterStopBtn.SetSystemState(true,true);
             }
         }
        

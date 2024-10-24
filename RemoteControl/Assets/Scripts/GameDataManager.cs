@@ -1007,6 +1007,23 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelFault));
             }
+            
+            if (newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand && _systemVariables.CentralControlRoomNoStackingOrDiversionCommand == false)
+            {
+                //中控室没有允许堆料或分流命令
+                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆料或分流命令", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                // AddOrUpdateWarningDesQueue("斗轮机故障", Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand), "中控室没有允许堆料或分流命令",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand == false && _systemVariables.CentralControlRoomNoStackingOrDiversionCommand == true)
+            {
+                //中控室没有允许堆料或分流命令解除
+                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆料或分流命令解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand));
+            }
 
             if (newSystemVariables.LargeCarFault && _systemVariables.LargeCarFault == false)
             {
@@ -1884,7 +1901,24 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.DiversionBaffleMotorOverload));
             }
 
-
+            if (newSystemVariables.DiversionPlateTimeout &&
+                _systemVariables.DiversionPlateTimeout == false)
+            {
+                //分流挡板运行超时
+                DataManager.Instance.InsertHistoryWarningMc("分流挡板运行超时", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                // AddOrUpdateWarningDesQueue("分流挡板-电机过载", Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DiversionPlateTimeout), "分流挡板运行超时",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DiversionPlateTimeout == false &&
+                     _systemVariables.DiversionPlateTimeout == true)
+            {
+                //分流挡板运行超时
+                DataManager.Instance.InsertHistoryWarningMc("分流挡板运行超时解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DiversionPlateTimeout));
+            }
             if (newSystemVariables.CableReelMotorOverload && _systemVariables.CableReelMotorOverload == false)
             {
                 //夹轨/卷筒-电缆卷筒-卷筒电机过载
@@ -2932,6 +2966,22 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelFault_2));
             }
 
+            if (newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 && _systemVariables.CentralControlRoomNoStackingOrDiversionCommand_2  == false)
+            {
+                //中控室没有允许堆料或分流命令
+                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆料或分流命令", GetUserName(),
+                    Machine.BucketWheel);
+                // AddOrUpdateWarningDesQueue("斗轮机故障", Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 ), "中控室没有允许堆料或分流命令",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2  == false && _systemVariables.CentralControlRoomNoStackingOrDiversionCommand_2  == true)
+            {
+                //中控室没有允许堆料或分流命令解除
+                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆料或分流命令解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2));
+            }
             if (newSystemVariables.LargeCarFault_2 && _systemVariables.LargeCarFault_2 == false)
             {
                 //大车-大车故障
@@ -3819,6 +3869,25 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("分流挡板-电机过载解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.DiversionBaffleMotorOverload_2));
+            }
+            
+            if (newSystemVariables.DiversionPlateTimeout_2 &&
+                _systemVariables.DiversionPlateTimeout_2 == false)
+            {
+                //分流挡板运行超时
+                DataManager.Instance.InsertHistoryWarningMc("分流挡板运行超时", GetUserName(),
+                    Machine.BucketWheel);
+                // AddOrUpdateWarningDesQueue("分流挡板-电机过载", Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DiversionPlateTimeout_2), "分流挡板运行超时",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DiversionPlateTimeout_2 == false &&
+                     _systemVariables.DiversionPlateTimeout_2 == true)
+            {
+                //分流挡板运行超时
+                DataManager.Instance.InsertHistoryWarningMc("分流挡板运行超时解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DiversionPlateTimeout_2));
             }
 
             if (newSystemVariables.CableReelMotorOverload_2 && _systemVariables.CableReelMotorOverload_2 == false)

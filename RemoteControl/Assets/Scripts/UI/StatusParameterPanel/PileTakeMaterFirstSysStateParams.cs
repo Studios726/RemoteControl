@@ -83,6 +83,8 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
             data.BucketWheelDiversionRunning_2);
         bucketWheelCenterRoomSignalData.isBucketWheelMalfunction=GetToggleState(data.BucketWheelFault,
             data.BucketWheelFault_2);
+        bucketWheelCenterRoomSignalData.isCentralControlRoomNoStackingOrDiversionCommand=GetToggleState(data.CentralControlRoomNoStackingOrDiversionCommand,
+            data.CentralControlRoomNoStackingOrDiversionCommand_2);
         BucketWheelCenterRoomSignalItem?.UpdateData(bucketWheelCenterRoomSignalData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //堆取料流程状态
@@ -96,13 +98,13 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         pileTakeFlowStateData.isBaffleShuntPos = GetToggleState(
             data.DiversionPlateLimit, data.DiversionPlateLimit_2);
         pileTakeFlowStateData.isFeedChannelPileMater = GetToggleState(
-            !data.BucketWheelSlotLiftLimit, !data.BucketWheelSlotLiftLimit_2);
+            data.BucketWheelSlotLiftLimit, data.BucketWheelSlotLiftLimit_2);
         pileTakeFlowStateData.isSuspensoidTakeMaterRun = GetToggleState(
             data.SuspensionBeltMaterialUnloadingRunningContact, data.SuspensionBeltMaterialUnloadingRunningContact_2);
         pileTakeFlowStateData.isBucketWheelRun = GetToggleState(
             data.BucketWheelMotorRunning, data.BucketWheelMotorRunning_2);
         pileTakeFlowStateData.isFeedChannelTake = GetToggleState(
-            !data.BucketWheelSlotLowerLimit, !data.BucketWheelSlotLowerLimit_2);
+            data.BucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit_2);
         PileTakeFlowStateItem?.UpdateData(pileTakeFlowStateData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //操作方式

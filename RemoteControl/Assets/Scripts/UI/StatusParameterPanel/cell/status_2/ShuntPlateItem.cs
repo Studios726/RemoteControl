@@ -29,6 +29,10 @@ public struct ShuntPlateData
     /// 抬起运行
     /// </summary>
     public bool isLowerRunning;
+    /// <summary>
+    ///  分流挡板运行超时
+    /// </summary>
+    public bool isDiversionPlateTimeout;
 }
 public class ShuntPlateItem :StatusParmItemBase<ShuntPlateData>
 {
@@ -56,6 +60,10 @@ public class ShuntPlateItem :StatusParmItemBase<ShuntPlateData>
     /// 抬起运行
     /// </summary>
     public ToggleDIY LowerRunning;
+    /// <summary>
+    /// 分流挡板运行超时
+    /// </summary>
+    public  ToggleDIY DiversionPlateTimeout;
     public override void UpdateData(ShuntPlateData data,bool isConnect=false)
     {
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
@@ -64,5 +72,6 @@ public class ShuntPlateItem :StatusParmItemBase<ShuntPlateData>
         SetToggleState(LowerLimit, data.isLowerLimit,false,isConnect);
         SetToggleState(LiftRunning, data.isLiftRunning,false,isConnect);
         SetToggleState(LowerRunning, data.isLowerRunning,false,isConnect);
+        SetToggleState(DiversionPlateTimeout,data.isDiversionPlateTimeout,false,isConnect);
     }
 }

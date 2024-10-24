@@ -37,6 +37,10 @@ public struct BucketWheelCenterRoomSignalData
     /// 斗轮机故障
     /// </summary>
     public bool isBucketWheelMalfunction;
+/// <summary>
+/// 中控室没有允许堆料或分流命令
+/// </summary>
+    public bool isCentralControlRoomNoStackingOrDiversionCommand;
 }
 /// <summary>
 /// 斗轮机与中控室信号
@@ -75,7 +79,7 @@ public class BucketWheelCenterRoomSignalItem : StatusParmItemBase<BucketWheelCen
     /// 斗轮机故障
     /// </summary>
     public ToggleDIY BucketWheelMalfunctionToggle;
-
+    public ToggleDIY CentralControlRoomNoStackingOrDiversionCommandToggle;
     public override void UpdateData(BucketWheelCenterRoomSignalData data,bool isConnect=false)
     {
         SetToggleState(AllowPileMaterSignalToggle, data.isAllowPileMaterSignal,false,isConnect);
@@ -86,6 +90,7 @@ public class BucketWheelCenterRoomSignalItem : StatusParmItemBase<BucketWheelCen
         SetToggleState(BucketWheelShuntRunToggle, data.isBucketWheelShuntRun,false,isConnect);
         SetToggleState(LongDistanceCtrScramStopToggle, data.isLongDistanceCtrScramStop,true,isConnect);
         SetToggleState(BucketWheelMalfunctionToggle, data.isBucketWheelMalfunction,true,isConnect);
+        SetToggleState(CentralControlRoomNoStackingOrDiversionCommandToggle, data.isCentralControlRoomNoStackingOrDiversionCommand,false,isConnect);
     }
 
 

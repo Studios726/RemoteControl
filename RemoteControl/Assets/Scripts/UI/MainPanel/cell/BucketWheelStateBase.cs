@@ -137,7 +137,7 @@ public class BucketWheelStateBase : MonoBehaviour
         SetToggleState(systemChain, data.SystemInterlockSwitch_2, false, data.D1PLC1CommunicationState);
         // SetToggleState(recondition, data.SystemInterlockSwitch, false, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelMalfunction, data.BucketWheelFault_2, true, data.D1PLC1CommunicationState);
-        // SetToggleState(buzzerAlarm, data.BucketWheelFault, true, data.D1PLC1CommunicationState);
+        SetToggleState(buzzerAlarm, data.StartAlarmStatus_2, true, data.D1PLC1CommunicationState);
         // SetToggleState(buzzerAlarm, data.BucketWheelFault, true, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelRun, data.BucketWheelMotorRunning_2, false, data.D1PLC1CommunicationState);
         SetToggleState(reclaimerSignal, data.AllowBucketWheelMaterialUnloading_2, false, data.D1PLC1CommunicationState);
@@ -154,7 +154,7 @@ public class BucketWheelStateBase : MonoBehaviour
         SetToggleState(rightSideRun, data.SLEW_Angle_2>0, false, data.D1PLC1CommunicationState);
         
         SetToggleState(suspensoidTakeMaterRun, data.SuspensionBeltMaterialUnloadingRunningContact_2, false, data.D1PLC1CommunicationState);
-        SetToggleState(bucketWheelSlotLowerLimit, !data.BucketWheelSlotLowerLimit_2, false, data.D1PLC1CommunicationState);
+        SetToggleState(bucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit_2, false, data.D1PLC1CommunicationState);
     }
 
     public void Update()

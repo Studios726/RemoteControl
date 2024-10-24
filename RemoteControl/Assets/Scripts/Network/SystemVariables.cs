@@ -228,6 +228,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool TailCarOilPumpMotorContactAuxiliaryFault { get; set; }
         public bool VibrationMotorFault { get; set; }
         public bool ReelEmptySwitch { get; set; }
+        public bool StartAlarmStatus { get; set; }
         public bool WindproofSystemCableNotOpen { get; set; }
         public bool LargeCarLimitAction { get; set; }// 200
 
@@ -1349,6 +1350,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool RotarySpeedGivenSelection_2 { get; set; }
         public bool RotaryFanRunning_2 { get; set; }
         public bool VariableAmplitudeLowerElectromagneticValveOpen_2 { get; set; }
+        public bool StartAlarmStatus_2 { get; set; }
         public short RiseCount_2 { get; set; }
         public bool SingleAction_2 { get; set; }
         public bool LinkAction_2 { get; set; }

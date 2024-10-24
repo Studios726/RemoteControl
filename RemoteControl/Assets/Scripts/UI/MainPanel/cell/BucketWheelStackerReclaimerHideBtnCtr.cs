@@ -185,17 +185,17 @@ public class BucketWheelStackerReclaimerHideBtnCtr : HideButtonCtrBase
             }
         }
         base.UpdateData(data);
-        pileMaterBtn.SetSystemState(data.SuspensionBeltMaterialLoadingRunningContact);
-        pileMaterUpBtn.SetSystemState(!data.BucketWheelSlotLiftLimit);
-        damBoardPileMaterDownBtn.SetSystemState(data.BaffleDownLimit);
-        damBoardPileMaterUpBtn.SetSystemState(data.BaffleUpLimit);
+        pileMaterBtn.SetSystemState(data.SuspensionBeltMaterialLoadingRunningContact,true);
+        pileMaterUpBtn.SetSystemState(data.BucketWheelSlotLiftLimit,true);
+        damBoardPileMaterDownBtn.SetSystemState(data.BaffleDownLimit,true);
+        damBoardPileMaterUpBtn.SetSystemState(data.BaffleUpLimit,true);
         if (data.BaffleDownLimit==false&&data.BaffleUpLimit==false)
         {
-            damBoardPileMaterStopBtn.SetSystemState(true);
+            damBoardPileMaterStopBtn.SetSystemState(true,true);
         }
         else
         {
-            damBoardPileMaterStopBtn.SetSystemState(false);
+            damBoardPileMaterStopBtn.SetSystemState(false,true);
         }
         
     }
