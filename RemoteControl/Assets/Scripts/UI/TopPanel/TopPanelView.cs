@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using RemoteControl.Event;
+using ShenYangRemoteSystem.Subclass;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Utility;
 
@@ -27,6 +30,12 @@ public class TopPanelView : UIView<TopPanelCtr>
     private Color selectColor = new Color(0, 0.98f, 1,1);
     private Color normalColor = Color.white;
     public TMP_Text _lastText;
+    public ButtonCell pileScramStopBtn;
+    public GameObject pileScramStopYellow;
+    public ButtonCell takeScramStopBtn;
+    public GameObject takeScramStopYellow;
+    public Timer pileScramStopTimer;
+    public Timer takeScramStopTimer;
 
     public override void InitUIElements(UIArgs uiArgs)
     {
@@ -43,6 +52,10 @@ public class TopPanelView : UIView<TopPanelCtr>
         _settingBtn = _userPnl.FindComponent<Button>("SettingBtn");
         _logoutBtn = _userPnl.FindComponent<Button>("LogoutBtn");
         _logoutBtn2 = _userPnl.FindComponent<Button>("LogoutBtn_2");
+        pileScramStopBtn = RootObj.transform.FindComponent <ButtonCell > ("BG/pileScramStop");
+        pileScramStopYellow= RootObj.transform.Find("BG/pileScramStop/yellow").gameObject;
+        takeScramStopBtn = RootObj.transform.FindComponent <ButtonCell > ("BG/takeScramStop");
+        takeScramStopYellow= RootObj.transform.Find("BG/takeScramStop/yellow").gameObject;
         _title = RootObj.transform.FindComponent<TMP_Text>("BG/Title/Text (TMP)");
         _title.text = ConstStr.PROJECT_NAME;
       
@@ -110,8 +123,135 @@ public class TopPanelView : UIView<TopPanelCtr>
         });
         _userPnl.gameObject.SetActive(false);
         _closeUserBtn.gameObject.SetActive(false);
+        
+        AddOnClickListener(pileScramStopBtn, (() =>
+        {
+            {
+                if (pileScramStopBtn.red.activeSelf)
+                {
+                    UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                        new ConfirmPanelArgs("是否确认复位急停？", null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP,Machine.BucketWheelStackerReclaimer)));
+                }
+                else
+                {
+                    SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP,Machine.BucketWheelStackerReclaimer);
+                }
+            }
+        }));
+        
+        AddOnClickListener(takeScramStopBtn, (() =>
+        {
+            {
+                if (takeScramStopBtn.red.activeSelf)
+                {
+                    UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                        new ConfirmPanelArgs("是否确认复位急停？", null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP,Machine.BucketWheel)));
+                }
+                else
+                {
+                    SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP,Machine.BucketWheel);
+                }
+            }
+        }));
+    }
+    public  void AddOnClickListener(ButtonCell btn, UnityAction action)
+    {
+        btn.AddListener(action);
     }
 
+    public void UpdateData(object o, EventArgs eventArgs)
+    {
+        if (GameDataManager.Instance.SystemVariables==null)
+        {
+            return;
+        }
+        UpdatePlc(GameDataManager.Instance.SystemVariables);
+
+    }
+    public  void SendPlcCommand(COMMAND_NAME mCommandName,Machine machine, int dataInt = 0)
+    {
+        if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            return;
+        }
+
+        string commandName = machine == Machine.BucketWheelStackerReclaimer
+            ? mCommandName.ToString() + "_1"
+            : mCommandName.ToString() + "_2";
+        // int dataInt = 0;
+        if (machine == Machine.BucketWheelStackerReclaimer)
+        {
+            commandName = mCommandName.ToString() + "_1";
+            dataInt = pileScramStopBtn.red.activeSelf ? 0 : 1;
+        }
+        else
+        {
+            commandName = mCommandName.ToString() + "_2";
+            dataInt = takeScramStopBtn.red.activeSelf ? 0 : 1;
+        }
+        Debug.Log($" commandName {commandName} {dataInt}");
+        GameDataManager.Instance.SendServerCommandByName(commandName, dataInt);
+    }
+    public void UpdatePlc(SystemVariables data)
+    {
+        pileScramStopBtn.SetSystemState(data.System_Emergence||data.RemoteEmergencyStop);
+        ScramStopFicker(data.System_Emergence||data.RemoteEmergencyStop,Machine.BucketWheelStackerReclaimer);
+        
+        takeScramStopBtn.SetSystemState(data.System_Emergence_2||data.RemoteEmergencyStop_2);
+        ScramStopFicker(data.System_Emergence_2||data.RemoteEmergencyStop_2,Machine.BucketWheel);
+    }
+    
+    public void ScramStopFicker(bool isFicker,Machine machine)
+    {
+        
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            if (isFicker)
+            {
+                if (pileScramStopTimer == null)
+                {
+                    // scramStopTimer.Cancel();
+                    pileScramStopTimer = Timer.Register(1, true, true,
+                        (() => { pileScramStopYellow.SetActive(!pileScramStopYellow.activeSelf); }));
+                }
+           
+            }
+            else
+            {
+                if (pileScramStopTimer != null)
+                {
+                    pileScramStopTimer.Cancel();
+                    pileScramStopTimer = null;
+                }
+
+                pileScramStopYellow.SetActive(false);
+            }
+        }else
+        {
+            if (isFicker)
+            {
+                if (takeScramStopTimer == null)
+                {
+                    // scramStopTimer.Cancel();
+                    takeScramStopTimer = Timer.Register(1, true, true,
+                        (() => { takeScramStopYellow.SetActive(!takeScramStopYellow.activeSelf); }));
+                }
+           
+            }
+            else
+            {
+                if (takeScramStopTimer != null)
+                {
+                    takeScramStopTimer.Cancel();
+                    takeScramStopTimer = null;
+                }
+
+                takeScramStopYellow.SetActive(false);
+            } 
+        }
+        
+    }
     public void SetSelectState(TMP_Text tmpText )
     {
         if (_lastText!=null)

@@ -19,6 +19,8 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell rightToggle;
     public ButtonCell AutoMaxToggle;
     public ButtonCell SemiAutoToggle;
+    public ButtonCell RightAngleToggle;
+    public ButtonCell ObliqueAngleToggle;
     public InputField leftTakeMaterText;
     public InputField rightTakeMaterText;
     public InputField takeMaterStep;
@@ -121,7 +123,10 @@ public class BucketWheelTaskBase : PanelBase
             // leftToggle.isOn = false;
             // rightToggle.isOn = true;
         }
-
+        AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
+        SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
+        RightAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.RIGHTANGLE,true);
+        ObliqueAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.OBLIQUEANGLE,true);
         leftTakeMaterText.text = taskCommand.LeftRightRange.startValue.ToString();
         rightTakeMaterText.text = taskCommand.LeftRightRange.endValue.ToString();
         takeMaterStep.text = taskCommand.StepLength.ToString();
@@ -232,6 +237,18 @@ public class BucketWheelTaskBase : PanelBase
             AutoMaxToggle.SetSystemState(false,true);
             SemiAutoToggle.SetSystemState(true,true);
         } ));
+        
+        AddOnClickListener(RightAngleToggle,(() =>
+        {
+            RightAngleToggle.SetSystemState(true,true);
+            ObliqueAngleToggle.SetSystemState(false,true);
+        } ));
+        AddOnClickListener(ObliqueAngleToggle,(() =>
+        {
+            RightAngleToggle.SetSystemState(false,true);
+            ObliqueAngleToggle.SetSystemState(true,true);
+        } ));
+        
         AddOnClickListener(useTimeBtn,(() =>
         {
             useTimeBtn.SetSystemState(!useTimeBtn.red.activeSelf,true);
@@ -346,6 +363,7 @@ public class BucketWheelTaskBase : PanelBase
         if (operationType == OperationType.START)
         {
             taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
+            taskCommand.AngleEntryMode=RightAngleToggle.red.activeSelf?AngleEntryMode.RIGHTANGLE:AngleEntryMode.OBLIQUEANGLE;
             taskCommand.Command_Type = 0;
             float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
             float endValue = stopTakeMaterText.text == "" ? 0 : float.Parse(stopTakeMaterText.text);
@@ -396,6 +414,11 @@ public class BucketWheelTaskBase : PanelBase
         takeMaterReversingBtn.SetSelectState(false);
         takeMaterEndBtn.SetSelectState(false);
         curTaskButtonCell?.SetSelectState(false);
+
+        AutoMaxToggle.SetSystemState(false, true);
+        SemiAutoToggle.SetSystemState(true, true);
+        RightAngleToggle.SetSystemState(true, true);
+        ObliqueAngleToggle.SetSystemState(false, true);
     }
 
     public virtual void InputFieldValueRange(InputField inputField, int min, int max)

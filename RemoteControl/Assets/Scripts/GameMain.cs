@@ -71,7 +71,6 @@ namespace RemoteControl
             connectionPC.Init("ws://" + GameDataManager.Instance.IpConfig.TaskIP, SocketType.TaskPC);
             connectionSCA = new GameObject().AddComponent<ClientConnection>();
             connectionSCA.Init("ws://" + GameDataManager.Instance.IpConfig.YuanIP, SocketType.SCA);
-            Debug.LogError($" tao {GameDataManager.Instance.IpConfig.TaoIP} {GameDataManager.Instance.IpConfig.TaskIP} {GameDataManager.Instance.IpConfig.YuanIP}");
             MessageCenter.Instance.RegisterListener(MessageType.RC, connectionRC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.PC, connectionPC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.SCA, connectionSCA.WebSend);

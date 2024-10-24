@@ -63,10 +63,6 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     
     public void UpdateTaskDes2(object o, EventArgs eventArgs)
     {
-        // if (GameDataManager.Instance.BucketWheelQueue.Count>0)
-        // {
-        //     view._bucketWheelTask2.UpdateDes(GameDataManager.Instance.BucketWheelQueue);
-        // }
         List<WarningCellData> datas = new List<WarningCellData>();
         if (GameDataManager.Instance.WarningCellDataDict.Count>0)
         {

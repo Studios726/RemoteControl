@@ -9,6 +9,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public ButtonCell rightPileMaterToggle;
     public ButtonCell PileAutoMaxToggle;
     public ButtonCell PileSemiAutoToggle;
+    
+    public ButtonCell PileRightAngleToggle;
+    public ButtonCell PileObliqueAngleToggle;
+    
     public InputField startLeftPileMaterText;
     public InputField endLeftPileMaterText;
     public InputField pileMaterHeightText;
@@ -47,6 +51,17 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             PileAutoMaxToggle.SetSystemState(false,true);
             PileSemiAutoToggle.SetSystemState(true,true);
         } ));
+        
+        AddOnClickListener(PileRightAngleToggle,(() =>
+        {
+            PileRightAngleToggle.SetSystemState(true,true);
+            PileObliqueAngleToggle.SetSystemState(false,true);
+        } ));
+        AddOnClickListener(PileObliqueAngleToggle,(() =>
+        {
+            PileRightAngleToggle.SetSystemState(false,true);
+            PileObliqueAngleToggle.SetSystemState(true,true);
+        } ));
     }
 
     public override void UpdateData(TaskCommand taskCommand)
@@ -80,6 +95,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             pileMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0]==1,true);
             pileMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
             pileMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1,true);
+            
+            PileAutoMaxToggle.SetSystemState(taskCommand.AutoMode == AutoMode.AUTOMAX,true);
+            PileSemiAutoToggle.SetSystemState(taskCommand.AutoMode == AutoMode.SemiAuto,true);
+            PileRightAngleToggle.SetSystemState(taskCommand.AngleEntryMode == AngleEntryMode.RIGHTANGLE,true);
+            PileObliqueAngleToggle.SetSystemState(taskCommand.AngleEntryMode == AngleEntryMode.OBLIQUEANGLE,true);
         }
     
       
@@ -119,6 +139,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         if (operationType==OperationType.START)
         {
             taskCommand.AutoMode = PileAutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
+            taskCommand.AngleEntryMode = PileRightAngleToggle.red.activeSelf ? AngleEntryMode.RIGHTANGLE : AngleEntryMode.OBLIQUEANGLE;
             taskCommand.Command_Type = 0;
             float startValue = startPileMaterText.text == "" ? 0 : float.Parse(startPileMaterText.text);
             float endValue = endPileMaterText.text == "" ? 0 : float.Parse(endPileMaterText.text);
@@ -156,5 +177,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         pileMaterStartBtn.SetSelectState(false);
         pileMaterStopBtn.SetSelectState(false);
         pileMaterEndBtn.SetSelectState(false);
+        
+        PileAutoMaxToggle.SetSystemState(false,true);
+        PileSemiAutoToggle.SetSystemState(true,true);
+        PileRightAngleToggle.SetSystemState(true,true);
+        PileObliqueAngleToggle.SetSystemState(false,true);
     }
 }

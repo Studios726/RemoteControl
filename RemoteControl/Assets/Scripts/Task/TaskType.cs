@@ -11,7 +11,18 @@ public enum AutoMode
 {
     AUTOMAX,//全自动
     SemiAuto//半自动
-    
+}
+
+public  enum AngleEntryMode
+{
+    /// <summary>
+    /// 直角
+    /// </summary>
+    RIGHTANGLE,
+    /// <summary>
+    /// 斜角
+    /// </summary>
+    OBLIQUEANGLE
 }
 public enum OperationType
 {

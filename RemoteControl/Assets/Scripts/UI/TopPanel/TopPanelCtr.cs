@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using RemoteControl.Event;
 using UnityEngine;
 
 public class TopPanelCtr : UIPresenter<TopPanelView>
@@ -18,5 +19,19 @@ public class TopPanelCtr : UIPresenter<TopPanelView>
     {
         base.ShowView(uiArgs);
         view.SetSelectState(view._controlText);
+    }
+
+    public override void SetPanelData(UIArgs uiArgs)
+    {
+        Addlistener();
+    }
+    
+    public override void Dispose()
+    {
+        EventManager.Instance.RemoveListener(EventName.UpdateRcData, view.UpdateData);
+    }
+    public void Addlistener()
+    {
+        EventManager.Instance.AddListener(EventName.UpdateRcData, view.UpdateData);
     }
 }
