@@ -10,6 +10,8 @@ public class MachineMove : MonoBehaviour
     public Transform rotationGo_y;
     public Transform currentCanvasTransform;
     public TMP_Text errorText;
+    public Transform bucketWheelCanvasTransform;
+    public TMP_Text bucketWheelPosText;
     public Transform modelCameraTransform;
     public Animation rotClip;
     public Machine machine;
@@ -58,7 +60,11 @@ public class MachineMove : MonoBehaviour
 
         errorText.text = error;
     }
-
+    
+    public void UpdateBucketWheelPosText(string pos)
+    {
+        bucketWheelPosText.text = pos;
+    }
     public void PlayRotationClip(bool isPlay)
     {
         if (rotClip == null)
@@ -85,6 +91,12 @@ public class MachineMove : MonoBehaviour
         {
             currentCanvasTransform.LookAt(
                 currentCanvasTransform.position + modelCameraTransform.rotation * Vector3.forward,
+                modelCameraTransform.rotation * Vector3.up);
+        }
+        if (bucketWheelPosText.text != "" && modelCameraTransform != null)
+        {
+            bucketWheelCanvasTransform.LookAt(
+                bucketWheelCanvasTransform.position + modelCameraTransform.rotation * Vector3.forward,
                 modelCameraTransform.rotation * Vector3.up);
         }
     }

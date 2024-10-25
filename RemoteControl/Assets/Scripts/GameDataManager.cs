@@ -329,6 +329,7 @@ public class GameDataManager : Singleton<GameDataManager>
         UpdateDirectionBucketWheel();
         UpdateDirectionBucketWheelStackerReclaimer();
         UpdateMachineWarning();
+        UpdateBucketWheelPosText();
         UpdateWheelAnimation();
         UpdateBeltAnimation();
     }
@@ -347,7 +348,22 @@ public class GameDataManager : Singleton<GameDataManager>
                 -SystemVariables.Luff_Angle_2); //
         }
     }
-
+    /// <summary>
+    /// 更新模型斗輪數據
+    /// </summary>
+    /// <param name="pos"></param>
+    public void UpdateBucketWheelPosText()
+    {
+        float num1 = 40 * Mathf.Cos(Mathf.Abs(_systemVariables.Luff_Angle) * Mathf.Deg2Rad);
+        string x = (117.74 + _systemVariables.DC_Pos + (num1 * Mathf.Cos(_systemVariables.SLEW_Angle * Mathf.Deg2Rad))).ToString("F2");
+        string y = (40 * Mathf.Sin(_systemVariables.SLEW_Angle * Mathf.Deg2Rad) + 1.7).ToString("F2");
+        machineMove_1.UpdateBucketWheelPosText($"({x},{y})");
+        
+        float x1 = 40 * Mathf.Cos(Mathf.Abs(_systemVariables.Luff_Angle_2) * Mathf.Deg2Rad);
+        string x2 = (117.74 + _systemVariables.DC_Pos_2 + (x1 * Mathf.Cos(_systemVariables.SLEW_Angle_2 * Mathf.Deg2Rad))).ToString("F2");
+        string y2 = (40 * Mathf.Sin(_systemVariables.SLEW_Angle_2 * Mathf.Deg2Rad) + 1.7).ToString("F2");
+        machineMove_2.UpdateBucketWheelPosText($"({x2},{y2})");
+    }
     public void UpdateMachineWarning()
     {
         if (machineMove_1)

@@ -23,11 +23,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public override void Start()
     {
         base.Start();
-        InputFieldValueRange(startPileMaterText, 0, 350);
-        InputFieldValueRange(endPileMaterText, 0, 350);
-        InputFieldValueRange(startLeftPileMaterText, 0, 350);
-        InputFieldValueRange(endLeftPileMaterText, 0, 350);
-        InputFieldValueRange(pileMaterHeightText, 0, 99);
+        InputFieldValueRange(startPileMaterText, 90, 260);
+        InputFieldValueRange(endPileMaterText, 90, 260);
+        InputFieldValueRange(startLeftPileMaterText, 18, 42);
+        InputFieldValueRange(endLeftPileMaterText, 18, 42);
+        InputFieldValueRange(pileMaterHeightText, 0, 10);
         AddOnClickListener(pileMaterStartBtn,(() => { SendPileMaterCommand(OperationType.START);}));
         AddOnClickListener(pileMaterStopBtn,(() => {SendPileMaterCommand(OperationType.PAUSE);}));
         AddOnClickListener(pileMaterEndBtn,(() => {SendPileMaterCommand(OperationType.END);}));

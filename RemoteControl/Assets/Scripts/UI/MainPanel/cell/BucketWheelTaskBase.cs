@@ -253,15 +253,24 @@ public class BucketWheelTaskBase : PanelBase
         {
             useTimeBtn.SetSystemState(!useTimeBtn.red.activeSelf,true);
         }));
-        InputFieldValueRange(startTakeMaterText, 0, 350);
-        InputFieldValueRange(stopTakeMaterText, 0, 350);
-        InputFieldValueRange(leftTakeMaterText, 0, 45);
-        InputFieldValueRange(rightTakeMaterText, 0, 45);
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            InputFieldValueRange(startTakeMaterText, 90, 260);
+            InputFieldValueRange(stopTakeMaterText, 90, 260);
+        }
+        else
+        {
+            InputFieldValueRange(startTakeMaterText, 153, 323);
+            InputFieldValueRange(stopTakeMaterText, 153, 323);
+        }
+       
+        InputFieldValueRange(leftTakeMaterText, 18, 42);
+        InputFieldValueRange(rightTakeMaterText, 18, 42);
         InputFieldValueRange(timeHourText, 0, 99);
         InputFieldValueRange(timeMinuteText, 0, 60);
-        InputFieldValueRange(takeMaterStep, 0, 99);
+        InputFieldValueRange(takeMaterStep, 0.1f, 1);
         InputFieldValueRange(takeMaterNum, 0, 99999);
-        InputFieldValueRange(layerHigh, 0, 45);
+        InputFieldValueRange(layerHigh, 0, 10);
     }
 
     public virtual void WarningDown()
@@ -421,9 +430,9 @@ public class BucketWheelTaskBase : PanelBase
         ObliqueAngleToggle.SetSystemState(false, true);
     }
 
-    public virtual void InputFieldValueRange(InputField inputField, int min, int max)
+    public virtual void InputFieldValueRange(InputField inputField, float min, float max)
     {
-        inputField.text = "0";
+        inputField.text =min.ToString();
         inputField.onEndEdit.AddListener(((string value) =>
         {
             float num = 0;
