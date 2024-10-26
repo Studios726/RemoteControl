@@ -85,7 +85,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
     /// <summary>
     /// 获取任务当前状态
     /// </summary>
-    public void UpdatePcData()
+    public void UpdateTaskData()
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";

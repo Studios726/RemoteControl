@@ -45,7 +45,8 @@ public class ButtonCell : MonoBehaviour
 
         SetTextColor(textColor);
     }
-    public void SetSelectState(bool state,float duration)
+
+    public void SetSelectTimerEvent(float duration)
     {
         if (_timer!=null)
         {
@@ -56,6 +57,10 @@ public class ButtonCell : MonoBehaviour
         {
             SetSelectState(false);
         }));
+    }
+    public void SetSelectState(bool state,float duration)
+    {
+        SetSelectTimerEvent(duration);
         SetSelectState(state);
     }
     public void SetSelectState(bool state)
@@ -74,6 +79,7 @@ public class ButtonCell : MonoBehaviour
             return;
         }
         select.SetActive(state);
+        SetSelectTimerEvent(1.3f);
     }
     public void SetSystemState(bool state)
     {

@@ -378,6 +378,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         //Debug.Log("更新move  大车碰撞信息 ");
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
+            // carForwardBtn.SetSelectState(data.SR1_Travel_FWD_1MO_SB);
+            // carBackBtn.SetSelectState(data.SR1_Travel_REV_1MO_SB);
             SetText(carElectricity, data.LargeCarElectricCurrent.ToString(), TextType.Electricity);
             SetText(rotationElectricity, data.RotaryElectricCurrent.ToString(), TextType.Electricity);
             SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent.ToString(), TextType.Electricity);

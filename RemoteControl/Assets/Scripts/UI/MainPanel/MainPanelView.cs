@@ -20,6 +20,7 @@ public class MainPanelView : UIView<MainPanelCtr>
     private HideButtonCtrBase _bucketWheelHideBtnCtr2;
     private BucketWheelStackerReclaimerHideBtnCtr _bucketWheelHideBtnCtr1;
     private Button updateModelBtn;
+    private Button updateTaskBtn;
 
     public override void InitUIElements(UIArgs uiArgs)
     {
@@ -35,7 +36,7 @@ public class MainPanelView : UIView<MainPanelCtr>
             RootObj.transform.FindComponent<BucketWheelStackerReclaimerHideBtnCtr>("machine_1/hideCtrBtns");
         
         updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
-        
+        updateTaskBtn=RootObj.transform.FindComponent<Button>("updateTaskArgs");
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
         
         updateModelBtn.onClick.AddListener(() =>
@@ -50,6 +51,10 @@ public class MainPanelView : UIView<MainPanelCtr>
             }
             GameDataManager.Instance.UpdateSCAData(30);  
         });
+        updateTaskBtn.onClick.AddListener((() =>
+        {
+            TaskDataManager.Instance.UpdateTaskData();
+        }));
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
         UpdateData(GameDataManager.Instance.SystemVariables);
         TaskDataManager.Instance.GetNearestTaskDataDic();

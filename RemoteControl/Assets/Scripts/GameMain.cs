@@ -182,13 +182,13 @@ namespace RemoteControl
                     timerPc = null;
                 }
 
-                TaskDataManager.Instance.UpdatePcData();
-                timerPc = Timer.Register(3600f, true, true, () => { TaskDataManager.Instance.UpdatePcData(); });
+                TaskDataManager.Instance.UpdateTaskData();
+                timerPc = Timer.Register(3600f, true, true, () => { TaskDataManager.Instance.UpdateTaskData(); });
                 des = "任务规划连接成功";
             }
             else if (connectEventArgs.type == SocketType.SCA)
             {
-                GameDataManager.Instance.UpdateSCAData(4);
+                GameDataManager.Instance.UpdateSCAData(30);  
                 des = "三维扫描连接成功";
             }
 
