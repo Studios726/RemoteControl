@@ -392,15 +392,15 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(downAngle, data.Luff_Angle.ToString("F2"), TextType.Angle);
             SetText(pitchingAngle, data.Luff_Angle.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE.ToString("F2"), TextType.Meter);
-            aloneBtn.SetSystemState(data.Single_Action);
-            togetherBtn.SetSystemState(data.Link_Action);
-            automaticBtn.SetSystemState(data.AUTO_MODE);
+            aloneBtn.SetSystemState(data.Single_Action,true,false);
+            togetherBtn.SetSystemState(data.Link_Action,true,false);
+            automaticBtn.SetSystemState(data.AUTO_MODE,true,false);
             // if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltTake_Swicth==true &&data.SuspensionGlueRunCommand)
             // {
             //     PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis);
             // }
-            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth);
-            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth);
+            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth,true,false);
+            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth,true,false);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
             upBtn.SetTextColor(data.VariableAmplitudeUpperElectromagneticValveOpen ? runColor : normalColor);
             if (UpAngleGameObject.activeSelf != data.VariableAmplitudeUpperElectromagneticValveOpen)
@@ -486,11 +486,11 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(downAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(pitchingAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE_2.ToString("F2"), TextType.Meter);
-            aloneBtn.SetSystemState(data.Single_Action_2);
-            togetherBtn.SetSystemState(data.Link_Action_2);
-            automaticBtn.SetSystemState(data.AUTO_MODE_2);
-            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2);
-            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2);
+            aloneBtn.SetSystemState(data.Single_Action_2,true,false);
+            togetherBtn.SetSystemState(data.Link_Action_2,true,false);
+            automaticBtn.SetSystemState(data.AUTO_MODE_2,true,false);
+            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2,true,false);
+            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2,true,false);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
             if (UpAngleGameObject.activeSelf != data.VariableAmplitudeUpperElectromagneticValveOpen_2)
             {

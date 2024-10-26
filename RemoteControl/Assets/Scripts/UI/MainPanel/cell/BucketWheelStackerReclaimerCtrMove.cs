@@ -94,6 +94,6 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
         // }
        
         base.UpdateData(data);
-        pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth);
+        pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth,true,false);
     }
 }

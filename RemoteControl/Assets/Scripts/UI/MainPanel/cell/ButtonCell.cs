@@ -36,12 +36,17 @@ public class ButtonCell : MonoBehaviour
         }
     }
 
+    public void SetBgColor(Color color)
+    {
+        if (bg!=null&&bg.color!=color)
+        {
+            bg.color = color;
+        }
+
+    }
     public void SetBgAndTextColor(Color bgColor,Color textColor)
     {
-        if (bg!=null&&bg.color!=bgColor)
-        {
-            bg.color = bgColor;
-        }
+        SetBgColor(bgColor);
 
         SetTextColor(textColor);
     }
@@ -125,6 +130,20 @@ public class ButtonCell : MonoBehaviour
                 SetBgAndTextColor(bgColor1, textColor1);
             }
           
+        }
+        SetSystemState(state);
+    }
+
+    public void SetSystemState(bool state, bool isUpdateTextColor, bool isUpdateBgColor)
+    {
+        if (isUpdateTextColor)
+        {
+            SetTextColor(state?textColor2:textColor1);
+        }
+
+        if (isUpdateBgColor)
+        {
+            SetBgColor(state?bgColor2:bgColor1);
         }
         SetSystemState(state);
     }
