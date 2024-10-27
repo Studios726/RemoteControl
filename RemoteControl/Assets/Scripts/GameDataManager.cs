@@ -344,7 +344,7 @@ public class GameDataManager : Singleton<GameDataManager>
 
         if (machineMove_2)
         {
-            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2 + 64.34f, SystemVariables.SLEW_Angle_2,
+            machineMove_2.UpdatePosAndRotaionByMeter(SystemVariables.DC_Pos_2 + ConstStr.InitDistance, SystemVariables.SLEW_Angle_2,
                 -SystemVariables.Luff_Angle_2); //
         }
     }
@@ -354,15 +354,8 @@ public class GameDataManager : Singleton<GameDataManager>
     /// <param name="pos"></param>
     public void UpdateBucketWheelPosText()
     {
-        float num1 = 40 * Mathf.Cos(Mathf.Abs(_systemVariables.Luff_Angle) * Mathf.Deg2Rad);
-        string x = (53.4 + _systemVariables.DC_Pos + (num1 * Mathf.Cos(_systemVariables.SLEW_Angle * Mathf.Deg2Rad))).ToString("F2");
-        string y = (40 * Mathf.Sin(_systemVariables.SLEW_Angle * Mathf.Deg2Rad) - 1.8F).ToString("F2");
-        machineMove_1.UpdateBucketWheelPosText($"({x},{y})");
-        
-        float x1 = 40 * Mathf.Cos(Mathf.Abs(_systemVariables.Luff_Angle_2) * Mathf.Deg2Rad);
-        string x2 = (117.74 + _systemVariables.DC_Pos_2 + (x1 * Mathf.Cos(_systemVariables.SLEW_Angle_2 * Mathf.Deg2Rad))).ToString("F2");
-        string y2 = (40 * Mathf.Sin(_systemVariables.SLEW_Angle_2 * Mathf.Deg2Rad) + 1.7).ToString("F2");
-        machineMove_2.UpdateBucketWheelPosText($"({x2},{y2})");
+        machineMove_1.UpdateBucketWheelPosText($"{SystemVariables.DC_Pos.ToString("F2")}");
+        machineMove_2.UpdateBucketWheelPosText($"{SystemVariables.DC_Pos_2.ToString("F2")}");
     }
     public void UpdateMachineWarning()
     {

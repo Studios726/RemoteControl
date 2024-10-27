@@ -274,7 +274,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     private ButtonCell curCarRotMode;
     public Machine machine;
     public Color normalColor = new Color(1, 1, 1, 0.6f);
-    public Color runColor = new Color(0.4392157f, 1, 0, 1);
+    public Color runColor = new Color(1, 0, 0.1803922f, 1);
 
     public virtual void Start()
     {
