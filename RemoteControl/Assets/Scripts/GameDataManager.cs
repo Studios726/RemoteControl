@@ -355,8 +355,8 @@ public class GameDataManager : Singleton<GameDataManager>
     public void UpdateBucketWheelPosText()
     {
         float num1 = 40 * Mathf.Cos(Mathf.Abs(_systemVariables.Luff_Angle) * Mathf.Deg2Rad);
-        string x = (117.74 + _systemVariables.DC_Pos + (num1 * Mathf.Cos(_systemVariables.SLEW_Angle * Mathf.Deg2Rad))).ToString("F2");
-        string y = (40 * Mathf.Sin(_systemVariables.SLEW_Angle * Mathf.Deg2Rad) + 1.7).ToString("F2");
+        string x = (53.4 + _systemVariables.DC_Pos + (num1 * Mathf.Cos(_systemVariables.SLEW_Angle * Mathf.Deg2Rad))).ToString("F2");
+        string y = (40 * Mathf.Sin(_systemVariables.SLEW_Angle * Mathf.Deg2Rad) - 1.8F).ToString("F2");
         machineMove_1.UpdateBucketWheelPosText($"({x},{y})");
         
         float x1 = 40 * Mathf.Cos(Mathf.Abs(_systemVariables.Luff_Angle_2) * Mathf.Deg2Rad);
