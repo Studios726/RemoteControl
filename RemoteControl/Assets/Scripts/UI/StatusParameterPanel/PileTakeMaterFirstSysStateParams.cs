@@ -113,7 +113,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         OperatingModeData operatingModeData = new OperatingModeData();
         operatingModeData.isSingleAction = GetToggleState(data.SingleAction, data.SingleAction_2);
         operatingModeData.isLinkageAction = GetToggleState(data.LinkAction, data.LinkAction_2);
-        operatingModeData.isAutoAction = GetToggleState(data.Automatic, data.Automatic_2);
+        operatingModeData.isAutoAction = GetToggleState(data.AUTO_MODE, data.AUTO_MODE_2);
         operatingModeData.isLocalAction = GetToggleState(!data.Remote, !data.Remote_2);
         operatingModeData.isLongRangeAction = GetToggleState(data.Remote, data.Remote_2);
         OperatingModeItem?.UpdateData(operatingModeData,GameDataManager.Instance.GameMain.connectionRC.isConnect);

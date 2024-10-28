@@ -392,6 +392,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(downAngle, data.Luff_Angle.ToString("F2"), TextType.Angle);
             SetText(pitchingAngle, data.Luff_Angle.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE.ToString("F2"), TextType.Meter);
+            aloneBtn.SetSelectState(data.MODE==0&&data.Single_Action==false,false);
+            togetherBtn.SetSelectState(data.MODE==1&&data.Link_Action==false,false);
+            automaticBtn.SetSelectState(data.MODE==2&&data.AUTO_MODE==false,false);
             aloneBtn.SetSystemState(data.Single_Action,true,false);
             togetherBtn.SetSystemState(data.Link_Action,true,false);
             automaticBtn.SetSystemState(data.AUTO_MODE,true,false);
@@ -486,6 +489,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(downAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(pitchingAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE_2.ToString("F2"), TextType.Meter);
+            aloneBtn.SetSelectState(data.MODE_2==0&&data.Single_Action_2==false,false);
+            togetherBtn.SetSelectState(data.MODE_2==1&&data.Link_Action_2==false,false);
+            automaticBtn.SetSelectState(data.MODE_2==2&&data.AUTO_MODE_2==false,false);
             aloneBtn.SetSystemState(data.Single_Action_2,true,false);
             togetherBtn.SetSystemState(data.Link_Action_2,true,false);
             automaticBtn.SetSystemState(data.AUTO_MODE_2,true,false);
@@ -637,15 +643,15 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 DataManager.Instance.InsertHistoryLogMc("堆料开关", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.MODE_B:
-                UpdateCurCtrMode(ref curCtrMode, togetherBtn);
+                // UpdateCurCtrMode(ref curCtrMode, togetherBtn);
                 DataManager.Instance.InsertHistoryLogMc("联动", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.MODE_A:
-                UpdateCurCtrMode(ref curCtrMode, aloneBtn);
+                // UpdateCurCtrMode(ref curCtrMode, aloneBtn);
                 DataManager.Instance.InsertHistoryLogMc("单动", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.MODE_C:
-                UpdateCurCtrMode(ref curCtrMode, automaticBtn);
+                // UpdateCurCtrMode(ref curCtrMode, automaticBtn);
                 DataManager.Instance.InsertHistoryLogMc("自动", GameDataManager.Instance.GetUserName(), machine);
                 break;
             case COMMAND_NAME.TRAVEL_SPEED_SLOW:

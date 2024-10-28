@@ -83,16 +83,42 @@ public class PileTakeMaterThirdSysStateParams : MonoBehaviour
    {
       AnticollisionDeviceData deviceData = new AnticollisionDeviceData();
       deviceData.DC_SAS_LF_DSV = GetParameterValue(systemVariables.DC_SAS_LF_DSV, systemVariables.DC_SAS_LF_DSV_2);
+      deviceData.DCZQ_FZ_VALUE = GetParameterValue(systemVariables.DCZQ_FZ_VALUE, systemVariables.DCZQ_FZ_VALUE_2);
+      
       deviceData.DC_SAS_LB_DSV = GetParameterValue(systemVariables.DC_SAS_LB_DSV, systemVariables.DC_SAS_LB_DSV_2);
+      deviceData.DCZH_FZ_VALUE = GetParameterValue(systemVariables.DCZH_FZ_VALUE, systemVariables.DCZH_FZ_VALUE_2);
+      
       deviceData.DC_SAS_RF_DSV = GetParameterValue(systemVariables.DC_SAS_RF_DSV, systemVariables.DC_SAS_RF_DSV_2);
+      deviceData.DCYQ_FZ_VALUE = GetParameterValue(systemVariables.DCYQ_FZ_VALUE, systemVariables.DCYQ_FZ_VALUE_2);
+       
       deviceData.DC_SAS_RB_DSV = GetParameterValue(systemVariables.DC_SAS_RB_DSV, systemVariables.DC_SAS_RB_DSV_2);
+      deviceData.DCYH_FZ_VALUE = GetParameterValue(systemVariables.DCYH_FZ_VALUE, systemVariables.DCYH_FZ_VALUE_2);
+      
       deviceData.Luff_D_SPSV = GetParameterValue(systemVariables.Luff_D_SPSV, systemVariables.Luff_D_SPSV_2);
+      
       deviceData.Luff_U_SPSV = GetParameterValue(systemVariables.Luff_U_SPSV, systemVariables.Luff_U_SPSV_2);
+      
       deviceData.DC_FWD_SPSV = GetParameterValue(systemVariables.DC_FWD_SPSV, systemVariables.DC_FWD_SPSV_2);
+      
       deviceData.DC_REV_SPSV = GetParameterValue(systemVariables.DC_REV_SPSV, systemVariables.DC_REV_SPSV_2);
+      
       deviceData.Slew_L_SPSV= GetParameterValue(systemVariables.Slew_L_SPSV, systemVariables.Slew_L_SPSV_2);
+      
       deviceData.Slew_R_SPSV= GetParameterValue(systemVariables.Slew_R_SPSV, systemVariables.Slew_R_SPSV_2);
+
+      deviceData.XBZQ_FZ_VALUE = GetParameterValue(systemVariables.XBZQ_FZ_VALUE, systemVariables.XBZQ_FZ_VALUE_2);
+      
+      deviceData.XBZZ_FZ_VALUE = GetParameterValue(systemVariables.XBZZ_FZ_VALUE, systemVariables.XBZZ_FZ_VALUE_2);
+      
+      deviceData.XBZH_FZ_VALUE = GetParameterValue(systemVariables.XBZH_FZ_VALUE, systemVariables.XBZH_FZ_VALUE_2);
+      
+      deviceData.XBYQ_FZ_VALUE = GetParameterValue(systemVariables.XBYQ_FZ_VALUE, systemVariables.XBYQ_FZ_VALUE_2);
+      
+      deviceData.XBYZ_FZ_VALUE = GetParameterValue(systemVariables.XBYZ_FZ_VALUE, systemVariables.XBYZ_FZ_VALUE_2);
+      
+      deviceData.XBYH_FZ_VALUE = GetParameterValue(systemVariables.XBYH_FZ_VALUE, systemVariables.XBYH_FZ_VALUE_2);
       AntiCollisionDeviceParameterSetting.UpdateParameter(deviceData);
+      AntiCollisionDeviceParameterSetting.UpdateParameter(systemVariables, machine);
    }
    public bool GetToggleState(bool machine1,bool machine2)
    {

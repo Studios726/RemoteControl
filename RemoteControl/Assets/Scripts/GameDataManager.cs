@@ -854,7 +854,7 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             WarningCellDataDict[key].IsSelect = isSelect;
             WarningCellDataDict[key].ConfirmTime = confirmTime;
-        }
+        }  
     }
 
     public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, string time,bool isConfirm=false,string confirmTime = "")
