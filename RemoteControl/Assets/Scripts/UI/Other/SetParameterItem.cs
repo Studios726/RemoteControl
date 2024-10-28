@@ -17,7 +17,12 @@ public class SetParameterItem : MonoBehaviour
     {
         cell.AddListener((() =>
         {
-            
+            //
+            //
+            // GameDataManager.Instance.SendServerCommandByName(commandName,0, float.Parse(inputField.text));
+        }));
+        inputField.onEndEdit.AddListener((arg0 =>
+        {
             Debug.Log($"启用 {commandName} {inputField.text}");
             GameDataManager.Instance.SendServerCommandByName(commandName,0, float.Parse(inputField.text));
         }));

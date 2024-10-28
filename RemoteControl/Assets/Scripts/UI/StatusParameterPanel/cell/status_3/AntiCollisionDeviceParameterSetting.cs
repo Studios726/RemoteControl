@@ -166,16 +166,16 @@ public class AntiCollisionDeviceParameterSetting : MonoBehaviour
    {
       if (machine==Machine.BucketWheelStackerReclaimer)
       {
-         DC_SAS_LF_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_FRONT_SET.ToString());
-         DC_SAS_LB_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_BACK_SET.ToString());
-         DC_SAS_RF_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_FRONT_SET.ToString());
-         DC_SAS_RB_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_BACK_SET.ToString());
-         DC_FWD_SPSV.SetCommandName(COMMAND_NAME.FORWARD_LIMIT_SET.ToString());
-         DC_REV_SPSV.SetCommandName(COMMAND_NAME.BACKWARD_LIMIT_SET.ToString());
-         Slew_L_SPSV.SetCommandName(COMMAND_NAME.LEFT_LIMIT_SET.ToString());
-         Slew_R_SPSV.SetCommandName(COMMAND_NAME.RIGHT_LIMIT_SET.ToString());
-         Luff_U_SPSV.SetCommandName(COMMAND_NAME.UP_LIMIT_SET.ToString());
-         Luff_D_SPSV.SetCommandName(COMMAND_NAME.DOWN_LIMIT_SET.ToString());
+         DC_SAS_LF_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_FRONT_SET+"_1");
+         DC_SAS_LB_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_BACK_SET+"_1");
+         DC_SAS_RF_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_FRONT_SET+"_1");
+         DC_SAS_RB_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_BACK_SET+"_1");
+         DC_FWD_SPSV.SetCommandName(COMMAND_NAME.FORWARD_LIMIT_SET+"_1");
+         DC_REV_SPSV.SetCommandName(COMMAND_NAME.BACKWARD_LIMIT_SET+"_1");
+         Slew_L_SPSV.SetCommandName(COMMAND_NAME.LEFT_LIMIT_SET+"_1");
+         Slew_R_SPSV.SetCommandName(COMMAND_NAME.RIGHT_LIMIT_SET+"_1");
+         Luff_U_SPSV.SetCommandName(COMMAND_NAME.UP_LIMIT_SET+"_1");
+         Luff_D_SPSV.SetCommandName(COMMAND_NAME.DOWN_LIMIT_SET+"_1");
       }
       else
       {
