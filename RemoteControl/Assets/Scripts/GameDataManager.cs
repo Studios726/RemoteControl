@@ -351,11 +351,10 @@ public class GameDataManager : Singleton<GameDataManager>
     /// <summary>
     /// 更新模型斗輪數據
     /// </summary>
-    /// <param name="pos"></param>
     public void UpdateBucketWheelPosText()
     {
-        machineMove_1.UpdateBucketWheelPosText($"{SystemVariables.DC_Pos.ToString("F2")}");
-        machineMove_2.UpdateBucketWheelPosText($"{SystemVariables.DC_Pos_2.ToString("F2")}");
+        machineMove_1.UpdateBucketWheelPosText($"{SystemVariables.DC_Pos.ToString("F2")} m");
+        machineMove_2.UpdateBucketWheelPosText($"{SystemVariables.DC_Pos_2.ToString("F2")} m");
     }
     public void UpdateMachineWarning()
     {
