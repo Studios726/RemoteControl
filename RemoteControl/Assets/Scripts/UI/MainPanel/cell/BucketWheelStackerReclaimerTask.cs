@@ -23,14 +23,29 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public override void Start()
     {
         base.Start();
-        InputFieldValueRange(startPileMaterText, 90, 260);
-        InputFieldValueRange(endPileMaterText, 90, 260);
+        InputFieldValueRange(startPileMaterText, 0, 260);
+        InputFieldValueRange(endPileMaterText, 0, 260);
         InputFieldValueRange(startLeftPileMaterText, 18, 42);
         InputFieldValueRange(endLeftPileMaterText, 18, 42);
         InputFieldValueRange(pileMaterHeightText, 0, 10);
-        AddOnClickListener(pileMaterStartBtn,(() => { SendPileMaterCommand(OperationType.START);}));
-        AddOnClickListener(pileMaterStopBtn,(() => {SendPileMaterCommand(OperationType.PAUSE);}));
-        AddOnClickListener(pileMaterEndBtn,(() => {SendPileMaterCommand(OperationType.END);}));
+        AddOnClickListener(pileMaterStartBtn,(() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否启动自动作业？", null, () => SendPileMaterCommand(OperationType.START)));
+          
+        }));
+        AddOnClickListener(pileMaterStopBtn,(() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否暂停自动作业？", null, () => SendPileMaterCommand(OperationType.PAUSE)));
+      
+        }));
+        AddOnClickListener(pileMaterEndBtn,(() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否结束自动作业？", null, () =>    SendPileMaterCommand(OperationType.END)));
+        
+        }));
         AddOnClickListener(leftPileMaterToggle,(() =>
         {
             leftPileMaterToggle.SetSystemState(true,true);

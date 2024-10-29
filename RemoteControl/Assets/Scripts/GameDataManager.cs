@@ -5031,4 +5031,12 @@ public class GameDataManager : Singleton<GameDataManager>
             }
         }
     }
+    
+    /// <summary>
+    /// 防碰撞检测警告预警
+    /// </summary>
+    public void AnticollisionDeviceWarning()
+    {
+        
+    }
 }

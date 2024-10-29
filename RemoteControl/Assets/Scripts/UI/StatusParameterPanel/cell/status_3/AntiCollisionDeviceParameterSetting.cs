@@ -63,25 +63,50 @@ public class AnticollisionDeviceData
    /// </summary>
    public float XBZQ_FZ_VALUE;
    /// <summary>
+   /// 悬臂左前防撞设定
+   /// </summary>
+   public float SR1_Boom_SAS_LF_Ult_DSV;
+   /// <summary>
    /// 悬臂左中防撞
    /// </summary>
    public float XBZZ_FZ_VALUE;
+   /// <summary>
+   /// 悬臂左中防撞设定
+   /// </summary>
+   public float SR1_Boom_SAS_LM_Ult_DSV;
    /// <summary>
    /// 悬臂左后防撞
    /// </summary>
    public float XBZH_FZ_VALUE;
    /// <summary>
+   /// 悬臂左后防撞设定
+   /// </summary>
+   public float SR1_Boom_SAS_LB_Ult_DSV;
+   /// <summary>
    /// 悬臂右前防撞
    /// </summary>
    public float XBYQ_FZ_VALUE;
    /// <summary>
+   /// 悬臂右前防撞设定
+   /// </summary>
+   public float Boom_SAS_R_Radar_DSV;
+   /// <summary>
    /// 悬臂右中防撞
    /// </summary>
    public float XBYZ_FZ_VALUE;
+   
+   /// <summary>
+   /// 悬臂右中防撞设定
+   /// </summary>
+   public float Boom_SAS_L_Radar_DSV;
    /// <summary>
    /// 悬臂右后防撞
    /// </summary>
    public float XBYH_FZ_VALUE;
+   /// <summary>
+   /// 悬臂右后防撞设定
+   /// </summary>
+   public float Boom_SAS_R_Ult_DSV;
 }
 /// <summary>
 ///防碰撞设备参数设置
@@ -166,29 +191,43 @@ public class AntiCollisionDeviceParameterSetting : MonoBehaviour
    {
       if (machine==Machine.BucketWheelStackerReclaimer)
       {
-         DC_SAS_LF_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_FRONT_SET+"_1");
-         DC_SAS_LB_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_BACK_SET+"_1");
-         DC_SAS_RF_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_FRONT_SET+"_1");
-         DC_SAS_RB_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_BACK_SET+"_1");
-         DC_FWD_SPSV.SetCommandName(COMMAND_NAME.FORWARD_LIMIT_SET+"_1");
-         DC_REV_SPSV.SetCommandName(COMMAND_NAME.BACKWARD_LIMIT_SET+"_1");
-         Slew_L_SPSV.SetCommandName(COMMAND_NAME.LEFT_LIMIT_SET+"_1");
-         Slew_R_SPSV.SetCommandName(COMMAND_NAME.RIGHT_LIMIT_SET+"_1");
-         Luff_U_SPSV.SetCommandName(COMMAND_NAME.UP_LIMIT_SET+"_1");
-         Luff_D_SPSV.SetCommandName(COMMAND_NAME.DOWN_LIMIT_SET+"_1");
+         DC_SAS_LF_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_FRONT_SET+"_1",COMMAND_NAME.BTLFCP_BYPASS+"_1");
+         DC_SAS_LB_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_BACK_SET+"_1",COMMAND_NAME.BTLRCP_BYPASS+"_1");
+         DC_SAS_RF_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_FRONT_SET+"_1",COMMAND_NAME.BTRFCP_BYPASS+"_1");
+         DC_SAS_RB_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_BACK_SET+"_1",COMMAND_NAME.BTRRCP_BYPASS+"_1");
+         DC_FWD_SPSV.SetCommandName(COMMAND_NAME.FORWARD_LIMIT_SET+"_1",COMMAND_NAME.BTCP_BYPASS+"_1");
+         DC_REV_SPSV.SetCommandName(COMMAND_NAME.BACKWARD_LIMIT_SET+"_1",COMMAND_NAME.BTCP_BYPASS+"_1");
+         Slew_L_SPSV.SetCommandName(COMMAND_NAME.LEFT_LIMIT_SET+"_1",COMMAND_NAME.RAP_BYPASS+"_1");
+         Slew_R_SPSV.SetCommandName(COMMAND_NAME.RIGHT_LIMIT_SET+"_1",COMMAND_NAME.RAP_BYPASS+"_1");
+         Luff_U_SPSV.SetCommandName(COMMAND_NAME.UP_LIMIT_SET+"_1",COMMAND_NAME.PAP_BYPASS+"_1");
+         Luff_D_SPSV.SetCommandName(COMMAND_NAME.DOWN_LIMIT_SET+"_1",COMMAND_NAME.PAP_BYPASS+"_1");
+         
+         XBZQ_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_LEFT_FRONT_SET+"_1",COMMAND_NAME.SASLF_BYPASS+"_1");
+         XBZZ_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_LEFT_MIDDLE_SET+"_1",COMMAND_NAME.SASLM_BYPASS+"_1");
+         XBZH_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_LEFT_BACK_SET+"_1",COMMAND_NAME.SASLB_BYPASS+"_1");
+         XBYQ_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_RIGHT_FRONT_SET+"_1",COMMAND_NAME.ARFRUCP_BYPASS+"_1");
+         XBYZ_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_RIGHT_MIDDLE_SET+"_1",COMMAND_NAME.ARMUCP_BYPASS+"_1");
+         XBYH_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_RIGHT_BACK_SET+"_1",COMMAND_NAME.ARREUCP_BYPASS+"_1");
       }
       else
       {
-         DC_SAS_LF_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_FRONT_SET+"_2");
-         DC_SAS_LB_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_BACK_SET+"_2");
-         DC_SAS_RF_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_FRONT_SET+"_2");
-         DC_SAS_RB_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_BACK_SET+"_2");
-         DC_FWD_SPSV.SetCommandName(COMMAND_NAME.FORWARD_LIMIT_SET+"_2");
-         DC_REV_SPSV.SetCommandName(COMMAND_NAME.BACKWARD_LIMIT_SET+"_2");
-         Slew_L_SPSV.SetCommandName(COMMAND_NAME.LEFT_LIMIT_SET+"_2");
-         Slew_R_SPSV.SetCommandName(COMMAND_NAME.RIGHT_LIMIT_SET+"_2");
-         Luff_U_SPSV.SetCommandName(COMMAND_NAME.UP_LIMIT_SET+"_2");
-         Luff_D_SPSV.SetCommandName(COMMAND_NAME.DOWN_LIMIT_SET+"_2");
+         DC_SAS_LF_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_FRONT_SET+"_2",COMMAND_NAME.BTLFCP_BYPASS+"_2");
+         DC_SAS_LB_DSV.SetCommandName(COMMAND_NAME.CAR_LEFT_BACK_SET+"_2",COMMAND_NAME.BTLRCP_BYPASS+"_2");
+         DC_SAS_RF_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_FRONT_SET+"_2",COMMAND_NAME.BTRFCP_BYPASS+"_2");
+         DC_SAS_RB_DSV.SetCommandName(COMMAND_NAME.CAR_RIGHT_BACK_SET+"_2",COMMAND_NAME.BTRRCP_BYPASS+"_2");
+         DC_FWD_SPSV.SetCommandName(COMMAND_NAME.FORWARD_LIMIT_SET+"_2",COMMAND_NAME.BTCP_BYPASS+"_2");
+         DC_REV_SPSV.SetCommandName(COMMAND_NAME.BACKWARD_LIMIT_SET+"_2",COMMAND_NAME.BTCP_BYPASS+"_2");
+         Slew_L_SPSV.SetCommandName(COMMAND_NAME.LEFT_LIMIT_SET+"_2",COMMAND_NAME.RAP_BYPASS+"_2");
+         Slew_R_SPSV.SetCommandName(COMMAND_NAME.RIGHT_LIMIT_SET+"_2",COMMAND_NAME.RAP_BYPASS+"_2");
+         Luff_U_SPSV.SetCommandName(COMMAND_NAME.UP_LIMIT_SET+"_2",COMMAND_NAME.PAP_BYPASS+"_2");
+         Luff_D_SPSV.SetCommandName(COMMAND_NAME.DOWN_LIMIT_SET+"_2",COMMAND_NAME.PAP_BYPASS+"_2");
+         
+         XBZQ_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_LEFT_FRONT_SET+"_2",COMMAND_NAME.SASLF_BYPASS+"_2");
+         XBZZ_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_LEFT_MIDDLE_SET+"_2",COMMAND_NAME.SASLM_BYPASS+"_2");
+         XBZH_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_LEFT_BACK_SET+"_2",COMMAND_NAME.SASLB_BYPASS+"_2");
+         XBYQ_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_RIGHT_FRONT_SET+"_2",COMMAND_NAME.ARFRUCP_BYPASS+"_2");
+         XBYZ_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_RIGHT_MIDDLE_SET+"_2",COMMAND_NAME.ARMUCP_BYPASS+"_2");
+         XBYH_FZ_VALUE.SetCommandName(COMMAND_NAME.ULT_RIGHT_BACK_SET+"_2",COMMAND_NAME.ARREUCP_BYPASS+"_2");
       }
      
    }
@@ -201,41 +240,100 @@ public class AntiCollisionDeviceParameterSetting : MonoBehaviour
          DC_SAS_RF_DSV.SetButtonColor(systemVariables.DC_SAS_RF_Bypass==false);
          DC_SAS_RB_DSV.SetButtonColor(systemVariables.DC_SAS_RB_Bypass==false);
          DC_SAS_LB_DSV.SetButtonColor(systemVariables.DC_SAS_LB_Bypass == false);
+         
+         DC_FWD_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass==false);
+         DC_REV_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass==false);
+         Slew_L_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass==false);
+         Slew_R_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass==false);
+         Luff_U_SPSV.SetButtonColor(systemVariables.LuffAngle_Bypass==false);
+         Luff_D_SPSV.SetButtonColor(systemVariables.LuffAngle_Bypass==false);
+         
+         XBZQ_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_LF_Ult_Bypass==false);
+         XBZZ_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_LM_Ult_Bypass==false);
+         XBZH_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_LB_Ult_Bypass==false);
+         XBYQ_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_RF_Ult_Bypass==false);
+         XBYZ_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_RM_Ult_Bypass==false);
+         XBYH_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_RB_Ult_Bypass==false);
+         
+         DC_FWD_SPSV.SetText(systemVariables.DC_Pos);
+         DC_REV_SPSV.SetText(systemVariables.DC_Pos);
+         Slew_L_SPSV.SetText(systemVariables.SLEW_Angle);
+         Slew_R_SPSV.SetText(systemVariables.SLEW_Angle);
+         Luff_U_SPSV.SetText(systemVariables.Luff_Angle);
+         Luff_D_SPSV.SetText(systemVariables.Luff_Angle);
       }
       else
       {
+         DC_SAS_LF_DSV.SetButtonColor(systemVariables.DC_SAS_LF_Bypass_2==false);
+         DC_SAS_RF_DSV.SetButtonColor(systemVariables.DC_SAS_RF_Bypass_2==false);
+         DC_SAS_RB_DSV.SetButtonColor(systemVariables.DC_SAS_RB_Bypass_2==false);
+         DC_SAS_LB_DSV.SetButtonColor(systemVariables.DC_SAS_LB_Bypass_2 == false);
          
+         DC_FWD_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass_2==false);
+         DC_REV_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass_2==false);
+         Slew_L_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass_2==false);
+         Slew_R_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass_2==false);
+         Luff_U_SPSV.SetButtonColor(systemVariables.LuffAngle_Bypass_2==false);
+         Luff_D_SPSV.SetButtonColor(systemVariables.LuffAngle_Bypass_2==false);
+         
+         XBZQ_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_LF_Ult_Bypass_2==false);
+         XBZZ_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_LM_Ult_Bypass_2==false);
+         XBZH_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_LB_Ult_Bypass_2==false);
+         XBYQ_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_RF_Ult_Bypass_2==false);
+         XBYZ_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_RM_Ult_Bypass_2==false);
+         XBYH_FZ_VALUE.SetButtonColor(systemVariables.SR1_Boom_SAS_RB_Ult_Bypass_2==false);
+         
+         DC_FWD_SPSV.SetText(systemVariables.DC_Pos);
+         DC_REV_SPSV.SetText(systemVariables.DC_Pos);
+         Slew_L_SPSV.SetText(systemVariables.SLEW_Angle);
+         Slew_R_SPSV.SetText(systemVariables.SLEW_Angle);
+         Luff_U_SPSV.SetText(systemVariables.Luff_Angle);
+         Luff_D_SPSV.SetText(systemVariables.Luff_Angle);
       }
    }
    public void UpdateParameter(AnticollisionDeviceData deviceData)
    {
-      if (IsUpdate==false)
+      if (IsUpdate)
       {
-         return;
+         IsUpdate=false;
+         DC_SAS_LF_DSV.SetInputField(deviceData.DC_SAS_LF_DSV);
+         DC_SAS_LB_DSV.SetInputField(deviceData.DC_SAS_LB_DSV);
+         DC_SAS_RF_DSV.SetInputField(deviceData.DC_SAS_RF_DSV);
+         DC_SAS_RB_DSV.SetInputField(deviceData.DC_SAS_RB_DSV);
+         DC_FWD_SPSV.SetInputField(deviceData.DC_FWD_SPSV);
+         DC_REV_SPSV.SetInputField(deviceData.DC_REV_SPSV);
+         Slew_L_SPSV.SetInputField(deviceData.Slew_L_SPSV);
+         Slew_R_SPSV.SetInputField(deviceData.Slew_R_SPSV);
+         Luff_U_SPSV.SetInputField(deviceData.Luff_U_SPSV);
+         Luff_D_SPSV.SetInputField(deviceData.Luff_D_SPSV);
+         XBZQ_FZ_VALUE.SetInputField(deviceData.SR1_Boom_SAS_LF_Ult_DSV);
+         XBZZ_FZ_VALUE.SetInputField(deviceData.SR1_Boom_SAS_LM_Ult_DSV);
+         XBZH_FZ_VALUE.SetInputField(deviceData.SR1_Boom_SAS_LB_Ult_DSV);
+         XBYQ_FZ_VALUE.SetInputField(deviceData.Boom_SAS_R_Radar_DSV);
+         XBYZ_FZ_VALUE.SetInputField(deviceData.Boom_SAS_L_Radar_DSV);
+         XBYH_FZ_VALUE.SetInputField(deviceData.Boom_SAS_R_Ult_DSV);
       }
-      IsUpdate=false;
-      DC_SAS_LF_DSV.SetText(deviceData.DCZQ_FZ_VALUE);
-      DC_SAS_LF_DSV.SetInputField(deviceData.DC_SAS_LF_DSV);
-      DC_SAS_LB_DSV.SetText(deviceData.DCZH_FZ_VALUE);
-      DC_SAS_LB_DSV.SetInputField(deviceData.DC_SAS_LB_DSV);
-      DC_SAS_RF_DSV.SetText(deviceData.DCYQ_FZ_VALUE);
-      DC_SAS_RF_DSV.SetInputField(deviceData.DC_SAS_RF_DSV);
-      DC_SAS_RB_DSV.SetText(deviceData.DCYH_FZ_VALUE);
-      DC_SAS_RB_DSV.SetInputField(deviceData.DC_SAS_RB_DSV);
       
-      DC_FWD_SPSV.SetInputField(deviceData.DC_FWD_SPSV);
-      DC_REV_SPSV.SetInputField(deviceData.DC_REV_SPSV);
-      Slew_L_SPSV.SetInputField(deviceData.Slew_L_SPSV);
-      Slew_R_SPSV.SetInputField(deviceData.Slew_R_SPSV);
-      Luff_U_SPSV.SetInputField(deviceData.Luff_U_SPSV);
-      Luff_D_SPSV.SetInputField(deviceData.Luff_D_SPSV);
+      DC_SAS_LF_DSV.SetText(deviceData.DCZQ_FZ_VALUE);
+    
+      DC_SAS_LB_DSV.SetText(deviceData.DCZH_FZ_VALUE);
+    
+      DC_SAS_RF_DSV.SetText(deviceData.DCYQ_FZ_VALUE);
+    
+      DC_SAS_RB_DSV.SetText(deviceData.DCYH_FZ_VALUE);
       
       XBZQ_FZ_VALUE.SetText(deviceData.XBZQ_FZ_VALUE);
+ 
       XBZZ_FZ_VALUE.SetText(deviceData.XBZZ_FZ_VALUE);
+     
       XBZH_FZ_VALUE.SetText(deviceData.XBZH_FZ_VALUE);
+     
       XBYQ_FZ_VALUE.SetText(deviceData.XBYQ_FZ_VALUE);
+     
       XBYZ_FZ_VALUE.SetText(deviceData.XBYZ_FZ_VALUE);
+     
       XBYH_FZ_VALUE.SetText(deviceData.XBYH_FZ_VALUE);
+    
       
    }
 

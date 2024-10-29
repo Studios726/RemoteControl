@@ -11,15 +11,18 @@ public class SetParameterItem : MonoBehaviour
     public ButtonCell cell;
     public ButtonCell resetBtn;
     public string commandName;
+    public string useCommand;
     public Action<string> Action;
 
     private void Start()
     {
         cell.AddListener((() =>
         {
-            //
-            //
-            // GameDataManager.Instance.SendServerCommandByName(commandName,0, float.Parse(inputField.text));
+            GameDataManager.Instance.SendServerCommandByName(useCommand,0);
+        }));
+        resetBtn.AddListener((() =>
+        {
+            GameDataManager.Instance.SendServerCommandByName(useCommand,1);
         }));
         inputField.onEndEdit.AddListener((arg0 =>
         {
@@ -43,8 +46,9 @@ public class SetParameterItem : MonoBehaviour
         inputField.text =str.ToString("F2");
     }
     // public k
-    public void SetCommandName(string command)
+    public void SetCommandName(string command,string useCommand="")
     {
         commandName = command;
+        useCommand = useCommand;
     }
 }

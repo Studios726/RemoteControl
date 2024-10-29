@@ -193,10 +193,30 @@ public class BucketWheelTaskBase : PanelBase
                     new ConfirmPanelArgs("是否确认复位？", null, () => SendPlcCommand(COMMAND_NAME.ERR_RESET)));
             }));
         // AddOnClickListener(warningBtn, (() => { SendPlcCommand(COMMAND_NAME.STARTUP_ALARM); }));
-        AddOnClickListener(takeMaterStartBtn, (() => { SendTaskCommand(OperationType.START); }));
-        AddOnClickListener(takeMaterStopBtn, (() => { SendTaskCommand(OperationType.PAUSE); }));
-        AddOnClickListener(takeMaterReversingBtn, (() => { SendTaskCommand(OperationType.REVERSING); }));
-        AddOnClickListener(takeMaterEndBtn, (() => { SendTaskCommand(OperationType.END); }));
+        AddOnClickListener(takeMaterStartBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否启动自动作业？", null, () => SendTaskCommand(OperationType.START)));
+            
+        }));
+        AddOnClickListener(takeMaterStopBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否暂停自动作业？", null, () => SendTaskCommand(OperationType.PAUSE)));
+         
+        }));
+        AddOnClickListener(takeMaterReversingBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否换向自动作业？", null, () =>   SendTaskCommand(OperationType.REVERSING)));
+          
+        }));
+        AddOnClickListener(takeMaterEndBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否结束自动作业？", null, () =>    SendTaskCommand(OperationType.END)));
+          
+        }));
         confirmWarningBtn.onClick.AddListener((() =>
         {
              GameDataManager.Instance.UpdateWarningConfirmTime(machine);
@@ -255,8 +275,8 @@ public class BucketWheelTaskBase : PanelBase
         }));
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
-            InputFieldValueRange(startTakeMaterText, 90, 260);
-            InputFieldValueRange(stopTakeMaterText, 90, 260);
+            InputFieldValueRange(startTakeMaterText, 0, 260);
+            InputFieldValueRange(stopTakeMaterText, 0, 260);
         }
         else
         {
@@ -264,8 +284,8 @@ public class BucketWheelTaskBase : PanelBase
             InputFieldValueRange(stopTakeMaterText, 153, 323);
         }
        
-        InputFieldValueRange(leftTakeMaterText, 18, 42);
-        InputFieldValueRange(rightTakeMaterText, 18, 42);
+        InputFieldValueRange(leftTakeMaterText, 0, 42);
+        InputFieldValueRange(rightTakeMaterText, 0, 42);
         InputFieldValueRange(timeHourText, 0, 99);
         InputFieldValueRange(timeMinuteText, 0, 60);
         InputFieldValueRange(takeMaterStep, 0.1f, 1);

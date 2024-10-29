@@ -280,6 +280,92 @@ public enum COMMAND_NAME
     /// 下附极限设定
     /// </summary>
     DOWN_LIMIT_SET,
+    /// <summary>
+    /// 大车防撞保护旁路
+    /// </summary>
+    BTCP_BYPASS,
+    /// <summary>
+    /// 悬臂防撞保护旁路
+    /// </summary>
+    ABP_BYPASS,
+    /// <summary>
+    /// 大车位置软保护旁路
+    /// </summary>
+    BTPP_BYPASS,
+    /// <summary>
+    /// 回转角度软保护旁路
+    /// </summary>
+    RAP_BYPASS,
+    /// <summary>
+    /// 俯仰角度软保护旁路
+    /// </summary>
+    PAP_BYPASS,
+    /// <summary>
+    /// 大车右前防撞保护旁路
+    /// </summary>
+    BTRFCP_BYPASS,
+    /// <summary>
+    /// 大车左前防撞保护旁路
+    /// </summary>
+    BTLFCP_BYPASS,
+    /// <summary>
+    /// 大车右后防撞保护旁路
+    /// </summary>
+    BTRRCP_BYPASS,
+    /// <summary>
+    /// 大车左后防撞保护旁路
+    /// </summary>
+    BTLRCP_BYPASS,
+    /// <summary>
+    /// 悬臂右前超声波防撞保护旁路
+    /// </summary>
+    ARFRUCP_BYPASS,
+    /// <summary>
+    /// 悬臂右中超声波防撞保护旁路
+    /// </summary>
+    ARMUCP_BYPASS,
+    /// <summary>
+    /// 悬臂右后超声波防撞保护旁路
+    /// </summary>
+    ARREUCP_BYPASS,
+    /// <summary>
+    /// 悬臂右前防撞超声波保护距离设定
+    /// </summary>
+    ULT_RIGHT_FRONT_SET,
+    /// <summary>
+    /// 悬臂右中防撞超声波保护距离设定
+    /// </summary>
+    ULT_RIGHT_MIDDLE_SET,
+    /// <summary>
+    /// 悬臂右后防撞超声波保护距离设定
+    /// </summary>
+    ULT_RIGHT_BACK_SET,
+    /// <summary>
+    /// 悬臂左前防撞超声波保护距离设定
+    /// </summary>
+    ULT_LEFT_FRONT_SET,
+    /// <summary>
+    /// 悬臂左中防撞超声波保护距离设定
+    /// </summary>
+    ULT_LEFT_MIDDLE_SET,
+    /// <summary>
+    /// 悬臂左后防撞超声波保护距离设定
+    /// </summary>
+    ULT_LEFT_BACK_SET,
+    /// <summary>
+    /// 悬臂左前超声波防撞保护旁路
+    /// </summary>
+    SASLF_BYPASS,
+    /// <summary>
+    /// 悬臂左中超声波防撞保护旁路
+    /// </summary>
+    SASLM_BYPASS,
+    /// <summary>
+    /// 悬臂左后超声波防撞保护旁路
+    /// </summary>
+    SASLB_BYPASS
+    
+    
     
     
     

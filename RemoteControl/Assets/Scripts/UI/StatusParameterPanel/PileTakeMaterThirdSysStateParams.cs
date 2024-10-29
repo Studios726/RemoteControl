@@ -117,6 +117,18 @@ public class PileTakeMaterThirdSysStateParams : MonoBehaviour
       deviceData.XBYZ_FZ_VALUE = GetParameterValue(systemVariables.XBYZ_FZ_VALUE, systemVariables.XBYZ_FZ_VALUE_2);
       
       deviceData.XBYH_FZ_VALUE = GetParameterValue(systemVariables.XBYH_FZ_VALUE, systemVariables.XBYH_FZ_VALUE_2);
+      deviceData.SR1_Boom_SAS_LF_Ult_DSV = GetParameterValue(systemVariables.SR1_Boom_SAS_LF_Ult_DSV,
+         systemVariables.SR1_Boom_SAS_LF_Ult_DSV_2);
+      deviceData.SR1_Boom_SAS_LM_Ult_DSV = GetParameterValue(systemVariables.SR1_Boom_SAS_LM_Ult_DSV,
+         systemVariables.SR1_Boom_SAS_LM_Ult_DSV_2);
+      deviceData.SR1_Boom_SAS_LB_Ult_DSV = GetParameterValue(systemVariables.SR1_Boom_SAS_LB_Ult_DSV,
+         systemVariables.SR1_Boom_SAS_LB_Ult_DSV_2);
+      deviceData.Boom_SAS_L_Radar_DSV = GetParameterValue(systemVariables.Boom_SAS_L_Radar_DSV,
+         systemVariables.Boom_SAS_L_Radar_DSV_2);
+      deviceData.Boom_SAS_R_Radar_DSV = GetParameterValue(systemVariables.Boom_SAS_R_Radar_DSV,
+         systemVariables.Boom_SAS_R_Radar_DSV_2);
+      deviceData.Boom_SAS_R_Ult_DSV = GetParameterValue(systemVariables.Boom_SAS_R_Ult_DSV,
+         systemVariables.Boom_SAS_R_Ult_DSV_2);
       AntiCollisionDeviceParameterSetting.UpdateParameter(deviceData);
       AntiCollisionDeviceParameterSetting.UpdateParameter(systemVariables, machine);
    }

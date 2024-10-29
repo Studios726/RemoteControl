@@ -9,8 +9,8 @@ namespace ShenYangRemoteSystem.Subclass
     public class SystemVariables
     {
         public DateTime TimeStamp { get; set; }
-        public string MCString { get; set; }
-        //数据字符串：用于存放向mc系统转发的内容
+
+        
         public bool D1PLC1CommunicationState { get; set; }//堆/取料机机上PLC通信状态
         public bool D1PLC2CommunicationState { get; set; }//堆/取料机无人值守PLC通信状态
         public bool D2PLC1CommunicationState { get; set; }//取料机机上PLC通信状态
@@ -26,7 +26,17 @@ namespace ShenYangRemoteSystem.Subclass
         public bool VMCommunicationState { get; set; }//视频监测子系统通信状态
 
 
+        public bool BucketWheelLoadingPreconditions { get; set; }//斗轮机1取料先决条件
+        public bool BucketWheelLoadingPreconditions_2 { get; set; }//斗轮机2取料先决条件
 
+        
+        public string MCString { get; set; }
+
+
+
+
+
+        #region D1PLC1
 
         // D1PLC1
         // ID1
@@ -228,7 +238,6 @@ namespace ShenYangRemoteSystem.Subclass
         public bool TailCarOilPumpMotorContactAuxiliaryFault { get; set; }
         public bool VibrationMotorFault { get; set; }
         public bool ReelEmptySwitch { get; set; }
-        public bool StartAlarmStatus { get; set; }
         public bool WindproofSystemCableNotOpen { get; set; }
         public bool LargeCarLimitAction { get; set; }// 200
 
@@ -424,8 +433,13 @@ namespace ShenYangRemoteSystem.Subclass
         public bool ProtectionFault { get; set; }
 
 
+        //10.17
+        public bool SuspensionGlueRunCommand { get; set; }
+        public short BeltRealyDis { get; set; }
 
 
+        //10.23
+        public bool StartAlarmStatus { get; set; }
 
 
 
@@ -494,6 +508,13 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
+
+
+
+        #endregion
+
+
+        #region D1PLC2
 
         // D1PLC2
         //ID1
@@ -823,9 +844,9 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DC_SAS_LF_Bypass { get; set; }
         public bool DC_SAS_RB_Bypass { get; set; }
         public bool DC_SAS_LB_Bypass { get; set; }
-        public bool Boom_SAS_RR_Bypass { get; set; }
-        public bool Boom_SAS_LR_Bypass { get; set; }
-        public bool Boom_SAS_RU_Bypass { get; set; }
+        public bool SR1_Boom_SAS_RF_Ult_Bypass { get; set; }
+        public bool SR1_Boom_SAS_RM_Ult_Bypass { get; set; }
+        public bool SR1_Boom_SAS_RB_Ult_Bypass { get; set; }
         public bool Boom_SAS_LU_Bypass { get; set; }
         public short XBTB_Baffle_CW { get; set; }
         public short XBTB_Baffle_TTSet { get; set; }
@@ -1157,17 +1178,43 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Link_Action { get; set; }
         public bool AUTO_MODE { get; set; }
         public short MODE { get; set; }
-        
-        public bool SuspensionGlueRunCommand{ get; set; }
-        public short BeltRealyDis{ get; set; }
-        public bool SuspensionGlueRunCommand_2{ get; set; }
-        public short BeltRealyDis_2{ get; set; }
 
 
 
 
 
 
+        //10.29
+        public bool XBZQ_FZ_CH_FAULT { get; set; }
+        public bool XBZZ_FZ_CH_FAULT { get; set; }
+        public bool XBZH_FZ_CH_FAULT { get; set; }
+        public bool XBYQ_FZ_CH_FAULT { get; set; }
+        public bool XBYZ_FZ_CH_FAULT { get; set; }
+        public bool XBYH_FZ_CH_FAULT { get; set; }
+        public bool QJY_CH_FAULT { get; set; }
+        public bool DCZQ_FZ_CH_FAULT { get; set; }
+        public bool DCYQ_FZ_CH_FAULT { get; set; }
+        public bool DCZH_FZ_CH_FAULT { get; set; }
+        public bool DCYH_FZ_CH_FAULT { get; set; }
+        public bool XBTB_LWJ_CH_FAULT { get; set; }
+        public bool SR1_Boom_SAS_RF_Ult_Alarm { get; set; }
+        public bool SR1_Boom_SAS_RM_Ult_Alarm { get; set; }
+        public bool SR1_Boom_SAS_RB_Ult_Alarm { get; set; }
+        public bool SR1_Boom_SAS_LF_Ult_Alarm { get; set; }
+        public bool SR1_Boom_SAS_LM_Ult_Alarm { get; set; }
+        public bool SR1_Boom_SAS_LB_Ult_Alarm { get; set; }
+        public bool SR1_DC_SAS_LF_Alarm { get; set; }
+        public bool SR1_DC_SAS_RF_Alarm { get; set; }
+        public bool SR1_DC_SAS_LB_Alarm { get; set; }
+        public bool SR1_DC_SAS_RB_Alarm { get; set; }
+        public float SR1_Boom_SAS_LF_Ult_DSV { get; set; }
+        public float SR1_Boom_SAS_LM_Ult_DSV { get; set; }
+        public float SR1_Boom_SAS_LB_Ult_DSV { get; set; }
+        public bool SR1_Boom_SAS_LF_Ult_Bypass { get; set; }
+        public bool SR1_Boom_SAS_LM_Ult_Bypass { get; set; }
+        public bool SR1_Boom_SAS_LB_Ult_Bypass { get; set; }
+        public bool SR1_SCADA_COMM { get; set; }
+        public bool SR1_SCADA_COMM_FAULT { get; set; }
 
 
 
@@ -1234,6 +1281,44 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
+
+
+        #region D2PLC1
 
         // D2PLC1
 
@@ -1350,7 +1435,6 @@ namespace ShenYangRemoteSystem.Subclass
         public bool RotarySpeedGivenSelection_2 { get; set; }
         public bool RotaryFanRunning_2 { get; set; }
         public bool VariableAmplitudeLowerElectromagneticValveOpen_2 { get; set; }
-        public bool StartAlarmStatus_2 { get; set; }
         public short RiseCount_2 { get; set; }
         public bool SingleAction_2 { get; set; }
         public bool LinkAction_2 { get; set; }
@@ -1634,6 +1718,18 @@ namespace ShenYangRemoteSystem.Subclass
         public bool LightPowerClosed_2 { get; set; }
 
 
+        //9.26
+        public bool CantileverHeadFault_2 { get; set; }
+        public bool ProtectionFault_2 { get; set; }
+
+
+        //10.17
+        public bool SuspensionGlueRunCommand_2 { get; set; }
+        public short BeltRealyDis_2 { get; set; }
+
+
+        //10.23
+        public bool StartAlarmStatus_2 { get; set; }
 
 
 
@@ -1674,6 +1770,43 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
+
+
+        #region D2PLC2
 
         // D2PLC2
         public float XBZQ_FZ_VALUE_2 { get; set; }
@@ -2093,9 +2226,9 @@ namespace ShenYangRemoteSystem.Subclass
         public bool DC_SAS_LF_Bypass_2 { get; set; }
         public bool DC_SAS_RB_Bypass_2 { get; set; }
         public bool DC_SAS_LB_Bypass_2 { get; set; }
-        public bool Boom_SAS_RR_Bypass_2 { get; set; }
-        public bool Boom_SAS_LR_Bypass_2 { get; set; }
-        public bool Boom_SAS_RU_Bypass_2 { get; set; }
+        public bool SR1_Boom_SAS_RF_Ult_Bypass_2 { get; set; }
+        public bool SR1_Boom_SAS_RM_Ult_Bypass_2 { get; set; }
+        public bool SR1_Boom_SAS_RB_Ult_Bypass_2 { get; set; }
         public bool Boom_SAS_LU_Bypass_2 { get; set; }
         public short DC_RF_SAS_LBT_2 { get; set; }
         public short DC_RB_SAS_LBT_2 { get; set; }
@@ -2535,11 +2668,39 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
+        //10.29
+        public bool XBZQ_FZ_CH_FAULT_2 { get; set; }
+        public bool XBZZ_FZ_CH_FAULT_2 { get; set; }
+        public bool XBZH_FZ_CH_FAULT_2 { get; set; }
+        public bool XBYQ_FZ_CH_FAULT_2 { get; set; }
+        public bool XBYZ_FZ_CH_FAULT_2 { get; set; }
+        public bool XBYH_FZ_CH_FAULT_2 { get; set; }
+        public bool QJY_CH_FAULT_2 { get; set; }
+        public bool DCZQ_FZ_CH_FAULT_2 { get; set; }
+        public bool DCYQ_FZ_CH_FAULT_2 { get; set; }
+        public bool DCZH_FZ_CH_FAULT_2 { get; set; }
+        public bool DCYH_FZ_CH_FAULT_2 { get; set; }
+        public bool XBTB_LWJ_CH_FAULT_2 { get; set; }
+        public bool SR1_Boom_SAS_RF_Ult_Alarm_2 { get; set; }
+        public bool SR1_Boom_SAS_RM_Ult_Alarm_2 { get; set; }
+        public bool SR1_Boom_SAS_RB_Ult_Alarm_2 { get; set; }
+        public bool SR1_Boom_SAS_LF_Ult_Alarm_2 { get; set; }
+        public bool SR1_Boom_SAS_LM_Ult_Alarm_2 { get; set; }
+        public bool SR1_Boom_SAS_LB_Ult_Alarm_2 { get; set; }
+        public bool SR1_DC_SAS_LF_Alarm_2 { get; set; }
+        public bool SR1_DC_SAS_RF_Alarm_2 { get; set; }
+        public bool SR1_DC_SAS_LB_Alarm_2 { get; set; }
+        public bool SR1_DC_SAS_RB_Alarm_2 { get; set; }
+        public float SR1_Boom_SAS_LF_Ult_DSV_2 { get; set; }
+        public float SR1_Boom_SAS_LM_Ult_DSV_2 { get; set; }
+        public float SR1_Boom_SAS_LB_Ult_DSV_2 { get; set; }
+        public bool SR1_Boom_SAS_LF_Ult_Bypass_2 { get; set; }
+        public bool SR1_Boom_SAS_LM_Ult_Bypass_2 { get; set; }
+        public bool SR1_Boom_SAS_LB_Ult_Bypass_2 { get; set; }
+        public bool SR1_SCADA_COMM_2 { get; set; }
+        public bool SR1_SCADA_COMM_FAULT_2 { get; set; }
 
 
-        //9.26
-        public bool CantileverHeadFault_2 { get; set; }
-        public bool ProtectionFault_2 { get; set; }
 
 
 
@@ -2551,5 +2712,31 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #endregion
     }
 }

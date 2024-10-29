@@ -239,10 +239,7 @@ public class HideButtonCtrBase : PanelBase
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB,true);
             bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning,true);
             bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning==false,true);
-            // if (data.SuspensionBeltMaterialUnloadingRunningContact==true&&data.Single_Action&&data.SuspensionGlueRunCommand&&cantileverTakeMaterStopBtn.red.activeSelf)
-            // {
-            //     PileTakeMaterPop(TaskType.PILEMATER,data.BeltRealyDis);
-            // }
+           
             cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact,true);
             
             draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning,true);
