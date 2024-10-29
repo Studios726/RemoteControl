@@ -210,6 +210,15 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 俯仰角度
     /// </summary>
     public Text downAngle;
+    
+    /// <summary>
+    /// 前进位置
+    /// </summary>
+    public Text forwardPos;
+    /// <summary>
+    /// 后退位置
+    /// </summary>
+    public Text backPos;
 
     /// <summary>
     /// 俯仰角度
@@ -261,6 +270,15 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 右转角度object
     /// </summary>
     public GameObject RightAangleGameObject;
+    /// <summary>
+    /// 前进位置object
+    /// </summary>
+    public GameObject ForwardPosGameObject;
+    /// <summary>
+    /// 后退位置object
+    /// </summary>
+    public GameObject BackPosGameObject;
+    
     
     private ButtonCell curCtrMode;
     private ButtonCell curPileTakeMode;
@@ -392,6 +410,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(downAngle, data.Luff_Angle.ToString("F2"), TextType.Angle);
             SetText(pitchingAngle, data.Luff_Angle.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE.ToString("F2"), TextType.Meter);
+            SetText(forwardPos, data.DC_Pos.ToString("F2"), TextType.Meter);
+            SetText(backPos, data.DC_Pos.ToString("F2"), TextType.Meter);
             aloneBtn.SetSelectState(data.MODE==0&&data.Single_Action==false,false);
             togetherBtn.SetSelectState(data.MODE==1&&data.Link_Action==false,false);
             automaticBtn.SetSelectState(data.MODE==2&&data.AUTO_MODE==false,false);
@@ -468,6 +488,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             carBackBtn.SetTextColor(data.LargeCarReverseCommand ? runColor : normalColor);
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand);
             carForwardBtn.SetTextColor(data.LargeCarForwardCommand ? runColor : normalColor);
+            ForwardPosGameObject.SetActive(data.LargeCarForwardCommand);
+            BackPosGameObject.SetActive(data.LargeCarReverseCommand);
             carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB == false,true);
             carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB,true);
             float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle) * Mathf.Deg2Rad);
@@ -487,6 +509,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(rightAngle, data.SLEW_Angle_2.ToString("F2"), TextType.Angle);
             SetText(upAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(downAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
+            SetText(forwardPos, data.DC_Pos_2.ToString("F2"), TextType.Meter);
+            SetText(backPos, data.DC_Pos_2.ToString("F2"), TextType.Meter);
             SetText(pitchingAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE_2.ToString("F2"), TextType.Meter);
             aloneBtn.SetSelectState(data.MODE_2==0&&data.Single_Action_2==false,false);
@@ -530,6 +554,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             carBackBtn.SetTextColor(data.LargeCarReverseCommand_2 ? runColor : normalColor);
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand_2);
             carForwardBtn.SetTextColor(data.LargeCarForwardCommand_2 ? runColor : normalColor);
+            
+            ForwardPosGameObject.SetActive(data.LargeCarForwardCommand_2);
+            BackPosGameObject.SetActive(data.LargeCarReverseCommand_2);
+            
             carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB_2 == false,true);
             carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB_2,true);
             if (data.LargeCarForwardCommand_2 == false && data.LargeCarReverseCommand_2 == false)

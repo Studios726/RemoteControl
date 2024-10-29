@@ -353,8 +353,8 @@ public class GameDataManager : Singleton<GameDataManager>
     /// </summary>
     public void UpdateBucketWheelPosText()
     {
-        machineMove_1.UpdateBucketWheelPosText($"{SystemVariables.DC_Pos.ToString("F2")} m");
-        machineMove_2.UpdateBucketWheelPosText($"{SystemVariables.DC_Pos_2.ToString("F2")} m");
+        machineMove_1.UpdateBucketWheelPosText($"{(SystemVariables.DC_Pos+ConstStr.InitPosition_1).ToString("F2")} m");
+        machineMove_2.UpdateBucketWheelPosText($"{(SystemVariables.DC_Pos_2+ConstStr.InitPosition_2).ToString("F2")} m");
     }
     public void UpdateMachineWarning()
     {
@@ -921,11 +921,45 @@ public class GameDataManager : Singleton<GameDataManager>
         if (_systemVariables == null)
         {
             _systemVariables = new SystemVariables();
+            _systemVariables.D1PLC1CommunicationState = true;
+            _systemVariables.D1PLC2CommunicationState = true;
+            _systemVariables.D2PLC1CommunicationState = true;
+            _systemVariables.D2PLC2CommunicationState = true;
             isUpdate = true;
         }
 
         if (_systemVariables != null)
         {
+            if (newSystemVariables.D1PLC1CommunicationState==false&&_systemVariables.D1PLC1CommunicationState)
+            {
+                //堆取料机PLC断线
+                DataManager.Instance.InsertHistoryWarningMc("PLC1断线", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D1PLC1CommunicationState), "PLC1断线",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }else if (newSystemVariables.D1PLC1CommunicationState&&_systemVariables.D1PLC1CommunicationState==false)
+            {
+                //堆取料机PLC1断线解除
+                DataManager.Instance.InsertHistoryWarningMc("PLC1断线解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.D1PLC1CommunicationState));
+            }
+            
+            if (newSystemVariables.D1PLC2CommunicationState==false&&_systemVariables.D1PLC2CommunicationState)
+            {
+                //堆取料机PLC断线
+                DataManager.Instance.InsertHistoryWarningMc("PLC2断线", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D1PLC2CommunicationState), "PLC2断线",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }else if (newSystemVariables.D1PLC2CommunicationState&&_systemVariables.D1PLC2CommunicationState==false)
+            {
+                //堆取料机PLC1断线解除
+                DataManager.Instance.InsertHistoryWarningMc("PLC2断线解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.D1PLC2CommunicationState));
+            }
+            
             // 存儲警告信息
             if (newSystemVariables.DriverRoomEmergencyStopButton &&
                 _systemVariables.DriverRoomEmergencyStopButton == false)
@@ -2884,6 +2918,36 @@ public class GameDataManager : Singleton<GameDataManager>
             //333333333333333333
 
             //取料机
+            if (newSystemVariables.D2PLC1CommunicationState==false&&_systemVariables.D2PLC1CommunicationState)
+            {
+                //堆取料机PLC断线
+                DataManager.Instance.InsertHistoryWarningMc("PLC1断线", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D2PLC1CommunicationState), "PLC1断线",
+                    Machine.BucketWheel, false, "");
+            }else if (newSystemVariables.D2PLC1CommunicationState&&_systemVariables.D2PLC1CommunicationState==false)
+            {
+                //堆取料机PLC1断线解除
+                DataManager.Instance.InsertHistoryWarningMc("PLC1断线解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.D2PLC1CommunicationState));
+            }
+            
+            if (newSystemVariables.D2PLC2CommunicationState==false&&_systemVariables.D2PLC2CommunicationState)
+            {
+                //堆取料机PLC断线
+                DataManager.Instance.InsertHistoryWarningMc("PLC2断线", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D2PLC2CommunicationState), "PLC2断线",
+                    Machine.BucketWheel, false, "");
+            }else if (newSystemVariables.D2PLC2CommunicationState&&_systemVariables.D2PLC2CommunicationState==false)
+            {
+                //堆取料机PLC1断线解除
+                DataManager.Instance.InsertHistoryWarningMc("PLC2断线解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.D2PLC2CommunicationState));
+            }
+
             if (newSystemVariables.DriverRoomEmergencyStopButton_2 &&
                 _systemVariables.DriverRoomEmergencyStopButton_2 == false)
             {

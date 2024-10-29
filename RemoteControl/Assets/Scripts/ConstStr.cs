@@ -126,6 +126,8 @@ public static class ConstStr
     #endregion
 
     public const float InitDistance = 64.34f;//取料机差值
+    public const float InitPosition_1 = 53.4f;
+    public const float InitPosition_2 = 117.74f;
 }
 
 public enum Machine
