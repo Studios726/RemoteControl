@@ -408,8 +408,10 @@ public class TaskCommand
     //自动模式
     public AutoMode AutoMode{ get; set;}
     public AngleEntryMode AngleEntryMode{ get; set; }
-    //启动0 暂停1 换向2 结束3
+    //启动0 暂停1 换向2 结束
     public OperationType OperationCommand { get; set; }
+
+    public int ResetState { get; set; }
     // 取料范围，可以是一个区间
     public TaskRange MaterialRange { get; set; }
 

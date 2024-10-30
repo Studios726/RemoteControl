@@ -1,4 +1,5 @@
 using System;
+using RemoteControl.Event;
 using UnityEngine.UI;
 
 public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
@@ -16,6 +17,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public InputField startLeftPileMaterText;
     public InputField endLeftPileMaterText;
     public InputField pileMaterHeightText;
+    public ButtonCell pileResetTaskBtn;
     public ButtonCell pileMaterStartBtn;
     public ButtonCell pileMaterStopBtn;
     public ButtonCell pileMaterEndBtn;
@@ -28,6 +30,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         InputFieldValueRange(startLeftPileMaterText, 18, 42);
         InputFieldValueRange(endLeftPileMaterText, 18, 42);
         InputFieldValueRange(pileMaterHeightText, 0, 10);
+        AddOnClickListener(pileResetTaskBtn,(() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否重置自动作业？", null, () => SendPileMaterCommand(OperationType.RESET)));
+        }));
         AddOnClickListener(pileMaterStartBtn,(() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
@@ -77,6 +84,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             PileRightAngleToggle.SetSystemState(false,true);
             PileObliqueAngleToggle.SetSystemState(true,true);
         } ));
+        EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 
     public override void UpdateData(TaskCommand taskCommand)
@@ -107,6 +115,8 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             }
             startLeftPileMaterText.text=taskCommand.LeftRightRange.startValue.ToString();
             endLeftPileMaterText.text=taskCommand.LeftRightRange.endValue.ToString();
+            
+            pileResetTaskBtn.SetSystemState(taskCommand.ResetState==1,true);
             pileMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0]==1,true);
             pileMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
             pileMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1,true);
@@ -133,29 +143,39 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             return;
         }
         
+        TaskCommand taskCommand = new TaskCommand();
         if (operationType==OperationType.START)
         {
+            DataManager.Instance.InsertHistoryLogMc("堆取料机-启动任务", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStartBtn);
         }else if (operationType==OperationType.PAUSE)
         {
+            DataManager.Instance.InsertHistoryLogMc("堆取料机-暂停任务", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStopBtn);
         }else if (operationType == OperationType.END)
         {
+            DataManager.Instance.InsertHistoryLogMc("堆取料机-任务结束", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterEndBtn);
+        }else if (operationType == OperationType.RESET)
+        {
+            DataManager.Instance.InsertHistoryLogMc("堆取料机-任务重置", GameDataManager.Instance.GetUserName(), machine);
+            pileResetTaskBtn.SetSelectState(true);
+            taskCommand.ResetState = 1;
         }
-        TaskCommand taskCommand = new TaskCommand();
+     
         taskCommand.QuerySystem = "MC";
-       
-        taskCommand.OperationCommand = operationType;
         taskCommand.TaskType = TaskType.PILEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
         taskCommand.TaskCreateTime = DateTime.Now;
-        if (operationType==OperationType.START)
+        if (operationType==OperationType.START|| operationType == OperationType.RESET)
         {
             taskCommand.AutoMode = PileAutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
             taskCommand.AngleEntryMode = PileRightAngleToggle.red.activeSelf ? AngleEntryMode.RIGHTANGLE : AngleEntryMode.OBLIQUEANGLE;
-            taskCommand.Command_Type = 0;
+            taskCommand.Command_Type = operationType == OperationType.RESET?2:0;
             float startValue = startPileMaterText.text == "" ? 0 : float.Parse(startPileMaterText.text);
             float endValue = endPileMaterText.text == "" ? 0 : float.Parse(endPileMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
@@ -185,6 +205,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public override void ResetState()
     {
         base.ResetState();
+        pileResetTaskBtn.SetSystemState(false,true);
         pileMaterStartBtn.SetSystemState(false,true);
         pileMaterStopBtn.SetSystemState(false,true);
         pileMaterEndBtn.SetSystemState(false,true);
@@ -192,7 +213,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         pileMaterStartBtn.SetSelectState(false);
         pileMaterStopBtn.SetSelectState(false);
         pileMaterEndBtn.SetSelectState(false);
-        
+        pileResetTaskBtn.SetSelectState(false);
         PileAutoMaxToggle.SetSystemState(false,true);
         PileSemiAutoToggle.SetSystemState(true,true);
         PileRightAngleToggle.SetSystemState(true,true);

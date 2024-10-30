@@ -13,20 +13,27 @@ public class SetParameterItem : MonoBehaviour
     public string commandName;
     public string useCommand;
     public Action<string> Action;
+    public Machine machine;
+    public string des;
 
     private void Start()
     {
         cell.AddListener((() =>
-        {
+        {    
+            DataManager.Instance.InsertHistoryLogMc(des+"启用", GameDataManager.Instance.GetUserName(), machine);
+            Debug.Log($"启用 {des} {machine}");
             GameDataManager.Instance.SendServerCommandByName(useCommand,0);
         }));
         resetBtn.AddListener((() =>
         {
+            DataManager.Instance.InsertHistoryLogMc(des+"切除", GameDataManager.Instance.GetUserName(), machine);
+            Debug.Log($"切除 {des} {machine}");
             GameDataManager.Instance.SendServerCommandByName(useCommand,1);
         }));
         inputField.onEndEdit.AddListener((arg0 =>
         {
-            Debug.Log($"启用 {commandName} {inputField.text}");
+            Debug.Log($"设定修改 {des} {machine}");
+            DataManager.Instance.InsertHistoryLogMc(des+"设定修改", GameDataManager.Instance.GetUserName(), machine);
             GameDataManager.Instance.SendServerCommandByName(commandName,0, float.Parse(inputField.text));
         }));
     }
@@ -46,8 +53,10 @@ public class SetParameterItem : MonoBehaviour
         inputField.text =str.ToString("F2");
     }
     // public k
-    public void SetCommandName(string command,string useCommand="")
+    public void SetCommandName(Machine machine,string command,string useCommand="",string des="")
     {
+        this.machine = machine;
+        this.des = des;
         commandName = command;
         useCommand = useCommand;
     }

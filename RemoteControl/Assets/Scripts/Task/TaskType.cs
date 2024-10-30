@@ -45,7 +45,11 @@ public enum OperationType
     /// <summary>
     /// 恢复
     /// </summary>
-    RECOVER = 4
+    RECOVER = 4,
+    /// <summary>
+    /// 重置
+    /// </summary>
+    RESET
 }
 
 public class TaskData

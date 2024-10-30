@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using RemoteControl.Event;
 using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,6 +18,7 @@ public class BucketWheelTaskBase : PanelBase
     public InputField stopTakeMaterText;
     public ButtonCell leftToggle;
     public ButtonCell rightToggle;
+    public ButtonCell resetTaskBtn;
     public ButtonCell AutoMaxToggle;
     public ButtonCell SemiAutoToggle;
     public ButtonCell RightAngleToggle;
@@ -113,15 +115,11 @@ public class BucketWheelTaskBase : PanelBase
         {
             leftToggle.SetSystemState(true,true);
             rightToggle.SetSystemState(false,true);
-            // leftToggle.isOn = true;
-            // rightToggle.isOn = false;
         }
         else
         {
             leftToggle.SetSystemState(false,true);
             rightToggle.SetSystemState(true,true);
-            // leftToggle.isOn = false;
-            // rightToggle.isOn = true;
         }
         AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
         SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
@@ -148,6 +146,7 @@ public class BucketWheelTaskBase : PanelBase
 
         takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1,true);
         takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
+        resetTaskBtn.SetSystemState(taskCommand.ResetState==1,true);
         if (taskCommand.AllData.OperationCommandList[2] == 1)
         {
             if (reversingTimer != null)
@@ -193,6 +192,12 @@ public class BucketWheelTaskBase : PanelBase
                     new ConfirmPanelArgs("是否确认复位？", null, () => SendPlcCommand(COMMAND_NAME.ERR_RESET)));
             }));
         // AddOnClickListener(warningBtn, (() => { SendPlcCommand(COMMAND_NAME.STARTUP_ALARM); }));
+        AddOnClickListener(resetTaskBtn,(() =>
+        {
+              UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                            new ConfirmPanelArgs("是否重置自动作业参数？", null, () => 
+                                SendTaskCommand(OperationType.RESET)));
+        }));
         AddOnClickListener(takeMaterStartBtn, (() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
@@ -291,6 +296,7 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(takeMaterStep, 0.1f, 1);
         InputFieldValueRange(takeMaterNum, 0, 99999);
         InputFieldValueRange(layerHigh, 0, 10);
+        EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 
     public virtual void WarningDown()
@@ -357,43 +363,48 @@ public class BucketWheelTaskBase : PanelBase
             UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("当前操作无效的"));
             return;
         }
-
+        TaskCommand taskCommand = new TaskCommand();
         if (operationType == OperationType.START)
         {
-            DataManager.Instance.InsertHistoryLogMc("启动任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("取料机-启动任务", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterStartBtn);
         }
         else if (operationType == OperationType.PAUSE)
         {
-            DataManager.Instance.InsertHistoryLogMc("暂停任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("取料机-暂停任务", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterStopBtn);
         }
         else if (operationType == OperationType.REVERSING)
         {
-            DataManager.Instance.InsertHistoryLogMc("任务换向", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("取料机-任务换向", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterReversingBtn);
         }
         else if (operationType == OperationType.END)
         {
-            DataManager.Instance.InsertHistoryLogMc("任务结束", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("取料机-任务结束", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterEndBtn);
+        }else if (operationType == OperationType.RESET)
+        {
+            resetTaskBtn.SetSelectState(true);
+            DataManager.Instance.InsertHistoryLogMc("取料机-任务重置", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.ResetState = 1;
         }
-
-        Debug.Log($"message {machine} {operationType}");
-        TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
         //taskCommand.Command_Type = 0;
-        taskCommand.OperationCommand = operationType;
         taskCommand.TaskType = TaskType.TAKEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
         taskCommand.TaskCreateTime = DateTime.Now; //.ToString("yyyy-MM-dd HH:mm:ss")
         taskCommand.OperatorSystem = "MC";
-        if (operationType == OperationType.START)
+        if (operationType == OperationType.START || operationType == OperationType.RESET)
         {
             taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
             taskCommand.AngleEntryMode=RightAngleToggle.red.activeSelf?AngleEntryMode.RIGHTANGLE:AngleEntryMode.OBLIQUEANGLE;
-            taskCommand.Command_Type = 0;
+            taskCommand.Command_Type = operationType == OperationType.RESET?2:0;
             float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
             float endValue = stopTakeMaterText.text == "" ? 0 : float.Parse(stopTakeMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
@@ -442,6 +453,8 @@ public class BucketWheelTaskBase : PanelBase
         takeMaterStopBtn.SetSelectState(false);
         takeMaterReversingBtn.SetSelectState(false);
         takeMaterEndBtn.SetSelectState(false);
+        resetBtn.SetSelectState(false);
+        resetBtn.SetSystemState(false,true);
         curTaskButtonCell?.SetSelectState(false);
 
         AutoMaxToggle.SetSystemState(false, true);
