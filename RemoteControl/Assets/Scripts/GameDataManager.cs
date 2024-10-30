@@ -967,7 +967,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //司机室急停
                 DataManager.Instance.InsertHistoryWarningMc("司机室急停", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("司机室急停", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.DriverRoomEmergencyStopButton), "司机室急停",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -986,7 +985,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //电气室急停
                 DataManager.Instance.InsertHistoryWarningMc("电气室急停", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("电气室急停", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ElectricalRoomEmergencyStopButton), "电气室急停",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1004,7 +1002,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //急停继电器
                 DataManager.Instance.InsertHistoryWarningMc("急停继电器", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("急停继电器", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.EmergencyStopRelay), "急停继电器",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1021,7 +1018,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //远程急停
                 DataManager.Instance.InsertHistoryWarningMc("远程急停", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("远程急停", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RemoteEmergencyStop), "远程急停",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1038,7 +1034,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //斗轮机故障
                 DataManager.Instance.InsertHistoryWarningMc("斗轮机故障", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("斗轮机故障", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelFault), "斗轮机故障",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1055,7 +1050,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //中控室没有允许堆料或分流命令
                 DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆料或分流命令", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("斗轮机故障", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand), "中控室没有允许堆料或分流命令",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1072,7 +1066,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-大车故障
                 DataManager.Instance.InsertHistoryWarningMc("大车-大车故障", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-大车故障", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarFault), "大车-大车故障",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1090,7 +1083,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-变频器故障
                 DataManager.Instance.InsertHistoryWarningMc("大车-变频器故障", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-变频器故障", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarFrequencyConverterFault), "大车-变频器故障",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1109,7 +1101,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-制动电阻超温
                 DataManager.Instance.InsertHistoryWarningMc("大车-制动电阻超温", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-制动电阻超温", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarBrakeResistorOverheatSwitch), "大车-制动电阻超温",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1128,7 +1119,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-大车集中润滑低油位
                 DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-大车集中润滑低油位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel),
                     "大车-大车集中润滑低油位",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1148,7 +1138,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-大车集中润滑堵油
                 DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-大车集中润滑堵油", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage),
                     "大车-大车集中润滑堵油",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1167,7 +1156,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-前进限位
                 DataManager.Instance.InsertHistoryWarningMc("大车-前进限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-前进限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarForwardLimit), "大车-前进限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1184,7 +1172,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-前进极限
                 DataManager.Instance.InsertHistoryWarningMc("大车-前进极限", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-前进极限", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarForwardExtremeLimit), "大车-前进极限",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1202,7 +1189,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-后退限位
                 DataManager.Instance.InsertHistoryWarningMc("大车-后退限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-后退限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarReverseLimit), "大车-后退限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1219,7 +1205,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-后退极限
                 DataManager.Instance.InsertHistoryWarningMc("大车-后退极限", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-后退极限", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarReverseExtremeLimit), "大车-后退极限",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1237,7 +1222,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //大车-两车碰撞报警
                 DataManager.Instance.InsertHistoryWarningMc("大车-两车碰撞报警", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("大车-两车碰撞报警", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.TwoMachineCollisionAlarm), "大车-两车碰撞报警",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1256,7 +1240,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-主电机过载
                 DataManager.Instance.InsertHistoryWarningMc("变幅-主电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-主电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeMotorOverload), "变幅-主电机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1274,7 +1257,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-上仰限位
                 DataManager.Instance.InsertHistoryWarningMc("变幅-上仰限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-上仰限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeUpperLimit), "变幅-上仰限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1293,7 +1275,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-上仰极限
                 DataManager.Instance.InsertHistoryWarningMc("变幅-上仰极限", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-上仰极限", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeUpperExtremeLimit), "变幅-上仰极限",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1311,7 +1292,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-下俯限位
                 DataManager.Instance.InsertHistoryWarningMc("变幅-下俯限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-下俯限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeLowerLimit), "变幅-下俯限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1330,7 +1310,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-下俯极限
                 DataManager.Instance.InsertHistoryWarningMc("变幅-下俯极限", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-下俯极限", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeLowerExtremeLimit), "变幅-下俯极限",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1349,7 +1328,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-下俯禁区
                 DataManager.Instance.InsertHistoryWarningMc("变幅-下俯禁区", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-下俯禁区", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeLowerForbiddenZoneLimit),
                     "变幅-下俯禁区",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1369,7 +1347,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-泵站高温报警
                 DataManager.Instance.InsertHistoryWarningMc("变幅-泵站高温报警", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-泵站高温报警", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudePumpStationOverheatAlarm),
                     "变幅-泵站高温报警",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1389,7 +1366,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-油液位低信号
                 DataManager.Instance.InsertHistoryWarningMc("变幅-油液位低信号", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-油液位低信号", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeOilLevelVeryLowSignal),
                     "变幅-油液位低信号",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1409,7 +1385,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-液位超低信号
                 DataManager.Instance.InsertHistoryWarningMc("变幅-液位超低信号", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-液位超低信号", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableAmplitudeOilLevelLowSignal), "变幅-液位超低信号",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1428,7 +1403,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //变幅-泵站堵油信号
                 DataManager.Instance.InsertHistoryWarningMc("变幅-泵站堵油信号", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("变幅-泵站堵油信号", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VariableFrequencyOilBlockageSignal), "变幅-泵站堵油信号",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1447,7 +1421,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-变频器故障
                 DataManager.Instance.InsertHistoryWarningMc("回转-变频器故障", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-变频器故障", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryFrequencyConverterFault), "回转-变频器故障",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1465,8 +1438,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-制动器过载
                 DataManager.Instance.InsertHistoryWarningMc("回转-制动器过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-制动器过载", Machine.BucketWheelStackerReclaimer);
-
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryBrakeOverload), "回转-制动器过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1483,7 +1454,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-风机过载
                 DataManager.Instance.InsertHistoryWarningMc("回转-风机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-风机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryFanOverload), "回转-风机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1501,7 +1471,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-制动电阻超温
                 DataManager.Instance.InsertHistoryWarningMc("回转-制动电阻超温", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-制动电阻超温", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryBrakeResistorOverheatSwitch), "回转-制动电阻超温",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1519,7 +1488,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-回转故障
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转故障", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-回转故障", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryFault), "回转-回转故障",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1536,7 +1504,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-左转限位
                 DataManager.Instance.InsertHistoryWarningMc("回转-左转限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-左转限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryLeftTurnLimit), "回转-左转限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1553,7 +1520,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-左转极限
                 DataManager.Instance.InsertHistoryWarningMc("回转-左转极限", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-左转极限", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryLeftTurnExtremeLimit), "回转-左转极限",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1572,7 +1538,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-左转禁区限位
                 DataManager.Instance.InsertHistoryWarningMc("回转-左转禁区限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-左转禁区限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryLeftTurnForbiddenZoneLimit), "回转-左转禁区限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1590,7 +1555,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-右转限位
                 DataManager.Instance.InsertHistoryWarningMc("回转-右转限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-右转限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryRightTurnLimit), "回转-右转限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1607,7 +1571,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-右转极限
                 DataManager.Instance.InsertHistoryWarningMc("回转-右转极限", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-右转极限", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryRightTurnExtremeLimit), "回转-右转极限",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1626,7 +1589,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-右转禁区限位
                 DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-右转禁区限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit), "回转-右转禁区限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1645,7 +1607,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-右转防撞限位
                 DataManager.Instance.InsertHistoryWarningMc("回转-右转防撞限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-右转防撞限位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenLimit), "回转-右转防撞限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1663,7 +1624,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-回转过力矩
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转过力矩", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-回转过力矩", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryOverTorque), "回转-回转过力矩",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1681,7 +1641,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-回转集中润滑堵油
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-回转集中润滑堵油", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault),
                     "回转-回转集中润滑堵油",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1701,7 +1660,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //回转-回转集中润滑低油位
                 DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("回转-回转集中润滑低油位", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault),
                     "回转-回转集中润滑低油位",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1720,7 +1678,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //斗轮/槽-电机过载
                 DataManager.Instance.InsertHistoryWarningMc("斗轮/槽-电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("斗轮/槽-电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelMotorOverload), "斗轮/槽-电机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1738,7 +1695,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //斗轮/槽-斗轮过力矩开关
                 DataManager.Instance.InsertHistoryWarningMc("斗轮/槽-斗轮过力矩开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("斗轮/槽-斗轮过力矩开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelOverTorqueSwitch), "斗轮/槽-斗轮过力矩开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1757,7 +1713,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //斗轮导料槽-电机过载
                 DataManager.Instance.InsertHistoryWarningMc("斗轮导料槽-电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("斗轮/槽-电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelSlotMotorOverload), "斗轮/槽-电机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1775,7 +1730,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //悬胶/挡板-电机过载
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("悬胶/挡板-电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltMotorOverload), "悬胶/挡板-电机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1794,7 +1748,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //悬胶/挡板-一级跑偏开关
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-一级跑偏开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("悬胶/挡板-一级跑偏开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltFirstLevelDeviationSwitch),
                     "悬胶/挡板-一级跑偏开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1814,8 +1767,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //悬胶/挡板-二级跑偏开关
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-二级跑偏开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("悬胶/挡板-二级跑偏开关", Machine.BucketWheelStackerReclaimer);
-
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltSecondLevelDeviationSwitch),
                     "悬胶/挡板-二级跑偏开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1834,7 +1785,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //悬胶/挡板-打滑检测开关
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-打滑检测开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("悬胶/挡板-打滑检测开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltSlip), "悬胶/挡板-打滑检测开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1852,7 +1802,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //悬胶/挡板-纵向撕裂开关
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-纵向撕裂开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("悬胶/挡板-纵向撕裂开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltLongitudinalTearSwitch),
                     "悬胶/挡板-纵向撕裂开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1872,7 +1821,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //悬胶/挡板-急停拉线开关
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-急停拉线开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("悬胶/挡板-急停拉线开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltEmergencyStopSwitch), "悬胶/挡板-急停拉线开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1891,7 +1839,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //悬胶/挡板-料流检测开关
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-料流检测开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("悬胶/挡板-料流检测开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltMaterialFlowDetectionSwitch),
                     "悬胶/挡板-料流检测开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -1911,7 +1858,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //悬胶/挡板-中部料斗堵煤
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("悬胶/挡板-中部料斗堵煤", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralMaterialDustDetectionSwitch), "悬胶/挡板-中部料斗堵煤",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1930,7 +1876,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //分流挡板-电机过载
                 DataManager.Instance.InsertHistoryWarningMc("分流挡板-电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("分流挡板-电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.DiversionBaffleMotorOverload), "分流挡板-电机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1949,7 +1894,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //分流挡板运行超时
                 DataManager.Instance.InsertHistoryWarningMc("分流挡板运行超时", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("分流挡板-电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.DiversionPlateTimeout), "分流挡板运行超时",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1966,7 +1910,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-电缆卷筒-卷筒电机过载
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("电缆卷筒-卷筒电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload), "电缆卷筒-卷筒电机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -1984,7 +1927,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过紧限位1", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1), "电缆卷筒-卷筒过紧限位1",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2002,7 +1944,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过松限位1", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1), "电缆卷筒-卷筒过松限位1",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2019,7 +1960,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位2
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过紧限位2", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2), "电缆卷筒-卷筒过紧限位2",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2037,7 +1977,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位2
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过松限位2", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2), "电缆卷筒-卷筒过松限位2",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2055,7 +1994,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-电缆卷筒-卷筒空盘开关
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒空盘开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("电缆卷筒-卷筒空盘开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelEmptySwitch), "电缆卷筒-卷筒空盘开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2072,7 +2010,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //抑尘振打-洒水抑尘-干雾系统气压低
                 DataManager.Instance.InsertHistoryWarningMc("洒水抑尘-干雾系统气压低", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("洒水抑尘-干雾系统气压低", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.DryFogSystemLowAirPressure), "洒水抑尘-干雾系统气压低",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2091,7 +2028,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //抑尘振打-洒水抑尘-干雾系统水压低
                 DataManager.Instance.InsertHistoryWarningMc("洒水抑尘-干雾系统水压低", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("洒水抑尘-干雾系统水压低", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.DryFogSystemLowWaterPressure), "洒水抑尘-干雾系统水压低",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2109,7 +2045,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //抑尘振打-洒水抑尘-干雾系统过滤器堵塞
                 DataManager.Instance.InsertHistoryWarningMc("洒水抑尘-干雾系统过滤器堵塞", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("洒水抑尘-干雾系统过滤器堵塞", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.DryFogSystemFilterClogged), "洒水抑尘-干雾系统过滤器堵塞",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2127,7 +2062,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //抑尘振打-洒水抑尘-水箱液位低开关
                 DataManager.Instance.InsertHistoryWarningMc("洒水抑尘-水箱液位低开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("洒水抑尘-水箱液位低开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.WaterTankLowLevelSwitch), "洒水抑尘-水箱液位低开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2145,7 +2079,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //抑尘振打-振打电机-振打电机过载
                 DataManager.Instance.InsertHistoryWarningMc("振打电机-振打电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("振打电机-振打电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.VibrationMotorOverload), "振打电机-振打电机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2163,7 +2096,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-夹轨器-电机过载
                 DataManager.Instance.InsertHistoryWarningMc("夹轨器-电机过载", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("夹轨器-电机过载", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ClampingDeviceMotorOverload), "夹轨器-电机过载",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2181,7 +2113,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //夹轨/卷筒-夹轨器故障
                 DataManager.Instance.InsertHistoryWarningMc("夹轨器故障", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("夹轨器故障", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ClampFault), "夹轨器故障",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2199,7 +2130,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //尾车胶带-尾车从动滚筒轴承上限报警
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车从动滚筒轴承上限报警", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("尾车胶带-尾车从动滚筒轴承上限报警", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingUpperLimitAlarm),
                     "尾车胶带-尾车从动滚筒轴承上限报警",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -2219,7 +2149,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //尾车胶带-尾车从动滚筒轴承下限报警
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车从动滚筒轴承下限报警", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("尾车胶带-尾车从动滚筒轴承下限报警", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarDrivenRollerBearingLowerLimitAlarm),
                     "尾车胶带-尾车从动滚筒轴承下限报警",
                     Machine.BucketWheelStackerReclaimer, false, "");
@@ -2239,7 +2168,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //尾车胶带-尾车一级跑偏开关
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车一级跑偏开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("尾车胶带-尾车一级跑偏开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarFirstLevelDeviationSwitch), "尾车胶带-尾车一级跑偏开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2258,7 +2186,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //尾车胶带-尾车二级跑偏开关
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车二级跑偏开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("尾车胶带-尾车二级跑偏开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarSecondLevelDeviationSwitch), "尾车胶带-尾车二级跑偏开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2276,7 +2203,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //尾车胶带-尾车急停拉线开关
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车急停拉线开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("尾车胶带-尾车急停拉线开关", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarEmergencyStopSwitch), "尾车胶带-尾车急停拉线开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
@@ -2295,7 +2221,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 //尾车胶带-尾车胶带纵向撕裂
                 DataManager.Instance.InsertHistoryWarningMc("尾车胶带-尾车胶带纵向撕裂", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                // AddOrUpdateWarningDesQueue("尾车胶带-尾车胶带纵向撕裂", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.TailCarBeltLongitudinalTearing), "尾车胶带-尾车胶带纵向撕裂",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
