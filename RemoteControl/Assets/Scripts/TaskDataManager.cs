@@ -7,6 +7,52 @@ using UnityEngine;
 
 public class TaskDataManager : Singleton<TaskDataManager>
 {
+    private static readonly Dictionary<int, string> _codeDescriptions = new Dictionary<int, string>
+    {
+        {-1, "任务进行中"},
+        {0, "作业完成"},
+        {1, "堆料完成，区间不可堆料"},
+        {2, "取料完成，区间无料可取"},
+        {3, "作业已被结束"},
+        {4, "控制模式由自动切换为手动，任务结束"},
+        {101, "调臂区间煤堆高度超限"},
+        {102, "设备限位/故障触发"},
+        {103, "设备碰撞预警"},
+        {104, "设备预超限位"},
+        {105, "异常完成，回转超极限"},
+        {106, "异常完成，俯仰超极限"},
+        {150, "堆料作业暂停中"},
+        {151, "取料作业暂停中"},
+        {201, "取料中，已换向"},
+        {301, "堆料暂停自动解除"},
+        {302, "堆料中，暂停不可用"},
+        {303, "取料中，暂停不可用"},
+        {304, "取料中，暂停已解除"},
+        {401, "取料中，换向不可用"},
+        {402, "取料中，已换向"},
+        {501, "取料任务规划中"},
+        {502, "取料任务规划完成"},
+        {503, "夹轨器放松指令已发送"},
+        {504, "夹轨器放松完成"},
+        {505, "夹轨器夹紧指令已发送"},
+        {506, "夹轨器夹紧完成"},
+        {507, "收到允许取料信号，开始取料"},
+        {508, "未收到允许取料信号，等待中"},
+        {509, "俯仰油泵启动指令已发送"},
+        {510, "俯仰油泵启动完成"},
+        {511, "俯仰油泵停止指令已发送"},
+        {512, "俯仰油泵停止完成"},
+        {513, "导料槽取料落下指令已发送"},
+        {514, "导料槽取料落下完成"},
+        {515, "导料槽停止指令已发送"},
+        {516, "导料槽停止完成"},
+        {517, "悬臂皮带取料启动指令已发送"},
+        {518, "悬臂皮带取料启动完成"},
+        {519, "悬臂皮带停止指令已发送"},
+        {1000, "与远程驱动通信中断"},
+        {1001, "堆料范围不恰当"},
+        {1002, "取料范围不恰当"}
+    };
     private TaskVariables _taskVariables;
     public TaskVariables TaskVariables
     {
@@ -107,6 +153,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
             }else if(taskVariables.Error==2)
             {
                 tips = "当前机器正在执行任务";
+            }
+            else  if(taskVariables.Error==3)
+            {
+                tips = $"当前任务无法执行该操作，请检查相关作业条件";
             }
             else
             {
@@ -282,122 +332,14 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     public void AddOrUpdateTaskDesQueue(int code,Machine machine)
     {
-        Debug.Log($">>>>>>>code {code}");
         string des = "";
-        int rank = 3;
-        if (code==-1)
+        if (_codeDescriptions.TryGetValue(code, out string description))
         {
-            des ="任务进行中";
-        }else if (code == 0)
-        {
-            des = "作业完成";
-        }else if (code == 1)
-        {
-            des = "堆料完成，区间不可堆料";
-            rank = 1;
-        }else if (code == 2)
-        {
-            des = "取料完成，区间无料可取";
-            rank = 1;
-        }else if (code == 3)
-        {
-            des = "作业已被结束";
-        }else if (code == 101)
-        {
-            des = "调臂区间煤堆高度超限";
-            rank = 1;
-        }else if (code == 102)
-        {
-            des = "设备限位/故障触发";
-            rank = 1;
-        }else if (code == 103)
-        {
-            des = "设备碰撞预警";
-            rank = 1;
-        }else if (code == 104)
-        {
-            des = "设备预超限位";
-            rank = 1;
-        }else if (code == 105)
-        {
-            des = "异常完成，回转超极限";
-            rank = 1;
-        }else if (code == 106)
-        {
-            des = "异常完成，俯仰超极限";
-            rank = 1;
-        }else if (code == 150)
-        {
-            des = "堆料作业暂停中";
+            des= description;
         }
-        else if (code == 151)
-        {
-            des = "取料作业暂停中";
-        } else if (code == 201)
-        {
-            des = "取料中，已换向";
-        }
-        else if (code == 301)
-        {
-            des = "堆料暂停自动解除";
-            rank = 1;
-        }
-        else if (code == 302)
-        {
-            des = "堆料中，暂停不可用";
-            rank = 1;
-        }
-        else if (code == 303)
-        {
-            des = "取料中，暂停不可用";
-            rank = 1;
-        }
-        else if (code == 304)
-        {
-            des = "取料解除暂停";
-            rank = 1;
-        }
-        else if (code == 401)
-        {
-            des = "取料中，换向不可用";
-            rank = 1;
-        }else if (code == 402)
-        {
-            des = "取料换向成功";
-            rank = 1;
-        }
-        else if (code == 1000)
-        {
-            des = "与远程驱动通信中断";
-            rank = 1;
-        }
-        else if (code == 1001)
-        {
-            des = "堆料范围不恰当";
-            rank = 1;
-        }
-        else if (code == 1002)
-        {
-            des = "取料范围不恰当";
-            rank = 1;
-        }
-        else
-        {
-            des = $"错误码 {code}";
-            rank = 0;
-        }
+        des=$"错误码 {code}";
         GameDataManager.Instance.AddOrUpdateWarningDesDict(code.ToString(), des,
             machine, false, "");
-        // if (machine==Machine.BucketWheelStackerReclaimer)
-        // {
-        //     GameDataManager.Instance.AddOrUpdateWarningDesQueue(des,Machine.BucketWheelStackerReclaimer,rank);
-        //     
-        // }
-        // else
-        // {
-        //     GameDataManager.Instance.AddOrUpdateWarningDesQueue(des,Machine.BucketWheelStackerReclaimer,rank);
-        // }
-      
     }
 
     public int IsCanSendTaskCommond(Machine machine,TaskType taskType,OperationType operationType)
