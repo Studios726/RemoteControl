@@ -20,15 +20,26 @@ public class SetParameterItem : MonoBehaviour
     {
         cell.AddListener((() =>
         {    
-            DataManager.Instance.InsertHistoryLogMc(des+"启用", GameDataManager.Instance.GetUserName(), machine);
-            Debug.Log($"启用 {des} {machine}");
-            GameDataManager.Instance.SendServerCommandByName(useCommand,0);
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs(des+"启用?", null, () =>
+                {
+                    DataManager.Instance.InsertHistoryLogMc(des+"启用", GameDataManager.Instance.GetUserName(), machine);
+                    Debug.Log($"启用 {des} {machine} {useCommand}");
+                    GameDataManager.Instance.SendServerCommandByName(useCommand,0);
+                }));
+          
         }));
         resetBtn.AddListener((() =>
         {
-            DataManager.Instance.InsertHistoryLogMc(des+"切除", GameDataManager.Instance.GetUserName(), machine);
-            Debug.Log($"切除 {des} {machine}");
-            GameDataManager.Instance.SendServerCommandByName(useCommand,1);
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs(des+"切除?", null, () =>
+                {
+                    DataManager.Instance.InsertHistoryLogMc(des+"切除", GameDataManager.Instance.GetUserName(), machine);
+                    Debug.Log($"切除 {des} {machine} {useCommand}");
+                    GameDataManager.Instance.SendServerCommandByName(useCommand,1);
+                }));
+
+         
         }));
         inputField.onEndEdit.AddListener((arg0 =>
         {
@@ -58,6 +69,6 @@ public class SetParameterItem : MonoBehaviour
         this.machine = machine;
         this.des = des;
         commandName = command;
-        useCommand = useCommand;
+        this.useCommand = useCommand;
     }
 }

@@ -195,8 +195,8 @@ public class AntiCollisionDeviceParameterSetting : MonoBehaviour
          DC_SAS_LB_DSV.SetCommandName(machine,COMMAND_NAME.CAR_LEFT_BACK_SET+"_1",COMMAND_NAME.BTLRCP_BYPASS+"_1","大车左后防碰撞");
          DC_SAS_RF_DSV.SetCommandName(machine,COMMAND_NAME.CAR_RIGHT_FRONT_SET+"_1",COMMAND_NAME.BTRFCP_BYPASS+"_1","大车右前防碰撞");
          DC_SAS_RB_DSV.SetCommandName(machine,COMMAND_NAME.CAR_RIGHT_BACK_SET+"_1",COMMAND_NAME.BTRRCP_BYPASS+"_1","大车右后防碰撞");
-         DC_FWD_SPSV.SetCommandName(machine,COMMAND_NAME.FORWARD_LIMIT_SET+"_1",COMMAND_NAME.BTCP_BYPASS+"_1","大车前进极限");
-         DC_REV_SPSV.SetCommandName(machine,COMMAND_NAME.BACKWARD_LIMIT_SET+"_1",COMMAND_NAME.BTCP_BYPASS+"_1","大车后退极限");
+         DC_FWD_SPSV.SetCommandName(machine,COMMAND_NAME.FORWARD_LIMIT_SET+"_1",COMMAND_NAME.BTPP_BYPASS+"_1","大车前进极限");
+         DC_REV_SPSV.SetCommandName(machine,COMMAND_NAME.BACKWARD_LIMIT_SET+"_1",COMMAND_NAME.BTPP_BYPASS+"_1","大车后退极限");
          Slew_L_SPSV.SetCommandName(machine,COMMAND_NAME.LEFT_LIMIT_SET+"_1",COMMAND_NAME.RAP_BYPASS+"_1","左转极限");
          Slew_R_SPSV.SetCommandName(machine,COMMAND_NAME.RIGHT_LIMIT_SET+"_1",COMMAND_NAME.RAP_BYPASS+"_1","右转极限");
          Luff_U_SPSV.SetCommandName(machine,COMMAND_NAME.UP_LIMIT_SET+"_1",COMMAND_NAME.PAP_BYPASS+"_1","上仰极限");
@@ -215,8 +215,8 @@ public class AntiCollisionDeviceParameterSetting : MonoBehaviour
          DC_SAS_LB_DSV.SetCommandName(machine,COMMAND_NAME.CAR_LEFT_BACK_SET+"_2",COMMAND_NAME.BTLRCP_BYPASS+"_2","大车左后防碰撞");
          DC_SAS_RF_DSV.SetCommandName(machine,COMMAND_NAME.CAR_RIGHT_FRONT_SET+"_2",COMMAND_NAME.BTRFCP_BYPASS+"_2","大车右前防碰撞");
          DC_SAS_RB_DSV.SetCommandName(machine,COMMAND_NAME.CAR_RIGHT_BACK_SET+"_2",COMMAND_NAME.BTRRCP_BYPASS+"_2","大车右后防碰撞");
-         DC_FWD_SPSV.SetCommandName(machine,COMMAND_NAME.FORWARD_LIMIT_SET+"_2",COMMAND_NAME.BTCP_BYPASS+"_2","大车前进极限");
-         DC_REV_SPSV.SetCommandName(machine,COMMAND_NAME.BACKWARD_LIMIT_SET+"_2",COMMAND_NAME.BTCP_BYPASS+"_2","大车后退极限");
+         DC_FWD_SPSV.SetCommandName(machine,COMMAND_NAME.FORWARD_LIMIT_SET+"_2",COMMAND_NAME.BTPP_BYPASS+"_2","大车前进极限");
+         DC_REV_SPSV.SetCommandName(machine,COMMAND_NAME.BACKWARD_LIMIT_SET+"_2",COMMAND_NAME.BTPP_BYPASS+"_2","大车后退极限");
          Slew_L_SPSV.SetCommandName(machine,COMMAND_NAME.LEFT_LIMIT_SET+"_2",COMMAND_NAME.RAP_BYPASS+"_2","左转极限");
          Slew_R_SPSV.SetCommandName(machine,COMMAND_NAME.RIGHT_LIMIT_SET+"_2",COMMAND_NAME.RAP_BYPASS+"_2","右转极限");
          Luff_U_SPSV.SetCommandName(machine,COMMAND_NAME.UP_LIMIT_SET+"_2",COMMAND_NAME.PAP_BYPASS+"_2","上仰极限");
@@ -241,8 +241,8 @@ public class AntiCollisionDeviceParameterSetting : MonoBehaviour
          DC_SAS_RB_DSV.SetButtonColor(systemVariables.DC_SAS_RB_Bypass==false);
          DC_SAS_LB_DSV.SetButtonColor(systemVariables.DC_SAS_LB_Bypass == false);
          
-         DC_FWD_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass==false);
-         DC_REV_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass==false);
+         DC_FWD_SPSV.SetButtonColor(systemVariables.DCPos_Bypass==false);
+         DC_REV_SPSV.SetButtonColor(systemVariables.DCPos_Bypass==false);
          Slew_L_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass==false);
          Slew_R_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass==false);
          Luff_U_SPSV.SetButtonColor(systemVariables.LuffAngle_Bypass==false);
@@ -269,8 +269,8 @@ public class AntiCollisionDeviceParameterSetting : MonoBehaviour
          DC_SAS_RB_DSV.SetButtonColor(systemVariables.DC_SAS_RB_Bypass_2==false);
          DC_SAS_LB_DSV.SetButtonColor(systemVariables.DC_SAS_LB_Bypass_2 == false);
          
-         DC_FWD_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass_2==false);
-         DC_REV_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass_2==false);
+         DC_FWD_SPSV.SetButtonColor(systemVariables.DCPos_Bypass_2==false);
+         DC_REV_SPSV.SetButtonColor(systemVariables.DCPos_Bypass_2==false);
          Slew_L_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass_2==false);
          Slew_R_SPSV.SetButtonColor(systemVariables.SlewAngle_Bypass_2==false);
          Luff_U_SPSV.SetButtonColor(systemVariables.LuffAngle_Bypass_2==false);
