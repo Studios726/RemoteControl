@@ -44,7 +44,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         AddOnClickListener(pileMaterStopBtn,(() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否暂停自动作业？", null, () => SendPileMaterCommand(OperationType.PAUSE)));
+                new ConfirmPanelArgs(pileMaterStopBtn.red.activeSelf?"是否恢复自动作业?":"是否暂停自动作业？", null, () => SendPileMaterCommand(OperationType.PAUSE)));
       
         }));
         AddOnClickListener(pileMaterEndBtn,(() =>
@@ -146,22 +146,22 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         TaskCommand taskCommand = new TaskCommand();
         if (operationType==OperationType.START)
         {
-            DataManager.Instance.InsertHistoryLogMc("堆取料机-启动任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("堆料-启动任务", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStartBtn);
         }else if (operationType==OperationType.PAUSE)
         {
-            DataManager.Instance.InsertHistoryLogMc("堆取料机-暂停任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc(pileMaterStopBtn.red.activeSelf?"堆料-恢复任务":"堆料-暂停任务", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStopBtn);
         }else if (operationType == OperationType.END)
         {
-            DataManager.Instance.InsertHistoryLogMc("堆取料机-任务结束", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("堆料-任务结束", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterEndBtn);
         }else if (operationType == OperationType.RESET)
         {
-            DataManager.Instance.InsertHistoryLogMc("堆取料机-任务重置", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("堆料-任务重置", GameDataManager.Instance.GetUserName(), machine);
             pileResetTaskBtn.SetSelectState(true);
             taskCommand.ResetState = 1;
         }
