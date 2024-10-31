@@ -52,18 +52,6 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateDes(List<WarningCellData> datas)
     {
-        // warningTexts[0].text ="";
-        // warningTexts[1].text ="";
-        // warningTexts[2].text ="";
-        // if (queue.Count>0)
-        // {
-        //     int index = 0;
-        //     foreach (var data in queue)
-        //     {
-        //         warningTexts[index].text = data.Des;
-        //         index = index + 1;
-        //     }
-        // }
         warningList.RefreshList(datas);
     }
 
@@ -289,8 +277,8 @@ public class BucketWheelTaskBase : PanelBase
             InputFieldValueRange(stopTakeMaterText, 153, 323);
         }
        
-        InputFieldValueRange(leftTakeMaterText, 0, 42);
-        InputFieldValueRange(rightTakeMaterText, 0, 42);
+        InputFieldValueRange(leftTakeMaterText, 12, 90);
+        InputFieldValueRange(rightTakeMaterText, 12, 90);
         InputFieldValueRange(timeHourText, 0, 99);
         InputFieldValueRange(timeMinuteText, 0, 60);
         InputFieldValueRange(takeMaterStep, 0.1f, 1);
