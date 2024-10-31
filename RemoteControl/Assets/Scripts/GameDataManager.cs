@@ -67,8 +67,6 @@ public class GameDataManager : Singleton<GameDataManager>
     // private int count;
     public Queue<WarningData> BucketWheelQueue = new Queue<WarningData>();
     public Queue<WarningData> BucketWheelStackerReclaimerQueue = new Queue<WarningData>();
-    // public List<WarningCellData> BucketWheelWarningCellDataList = new List<WarningCellData>();
-    // public List<WarningCellData> BucketWheelStackerReclaimerWarningCellDataList = new List<WarningCellData>();
     public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
     public McWarningRecord LastMcWarningRecord;
     public bool IsCanPop;
