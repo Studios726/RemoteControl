@@ -84,7 +84,7 @@ public class ButtonCell : MonoBehaviour
             return;
         }
         select.SetActive(state);
-        if (isReset)
+        if (isReset&&state)
         {
             SetSelectTimerEvent(1.3f);
         }

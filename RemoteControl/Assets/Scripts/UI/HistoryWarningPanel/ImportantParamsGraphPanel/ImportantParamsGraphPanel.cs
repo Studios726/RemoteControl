@@ -156,7 +156,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             lastButton.SetSelectState(false);
         }
         lastButton = btn;
-        lastButton.SetSelectState(true);
+        lastButton.SetSelectState(true,false);
     }
     public void ResetLastChart(LineChart go)
     {
