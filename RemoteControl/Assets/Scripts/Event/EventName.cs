@@ -22,6 +22,7 @@ namespace RemoteControl.Event
         public  const string ExitGame = "ExitGame";
         public const string PlayBeltAnim = "PlayBeltAnim";
         public const string StopPlayBeltAnim = "StopPlayBeltAnim";
+        public const string UpdateChartData = "UpdateChartData";
 
     }
 }

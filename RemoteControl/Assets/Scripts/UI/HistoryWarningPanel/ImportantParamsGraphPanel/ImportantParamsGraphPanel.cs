@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using RemoteControl.Event;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,6 +19,33 @@ public class ElectricityData
     public DateTime Time { get;  set; }
 
     public int Value {  get;  set; }
+}
+
+public struct CData
+{
+   public DateTime date{ get;  set; }
+   public float Value { get; set; }
+
+   public CData(DateTime d,float v)
+   {
+       date = d;
+       Value = v;
+   }
+}
+public enum ChartName
+{
+    None,
+    BucketWheelCurrent_1,
+    BucketWheelCurrent_2,
+    TrolleyCurrent_1,
+    TrolleyCurrent_2,
+    SlewingCurrent_1,
+    SlewingCurrent_2,
+    SuspendedGelCurrent_1,
+    SuspendedGelCurrent_2,
+    CantileverCurrent_1,
+    CantileverCurrent_2,
+ 
 }
 public class HistoryChartData
 {
@@ -47,72 +75,86 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public LineChart bucketWheelChart_2;
     private MySqlDataReader _dataReader = null;
     private DataSet dataSet;
-    public ButtonCell bucketWheelCurrent_1;//���ֵ���
+    public ButtonCell bucketWheelCurrent_1;//斗轮电流
     public ButtonCell bucketWheelCurrent_2;
-    public ButtonCell trolleyCurrent_1;//�󳵵���
+    public ButtonCell trolleyCurrent_1;//大车电流
     public ButtonCell trolleyCurrent_2;
-    public ButtonCell slewingCurrent_1;//��ת����
+    public ButtonCell slewingCurrent_1;//回转电流
     public ButtonCell slewingCurrent_2;
-    public ButtonCell suspendedGelCurrent_1;//��������
+    public ButtonCell suspendedGelCurrent_1;//悬胶电流
     public ButtonCell suspendedGelCurrent_2;
-    public ButtonCell cantileverCurrent_1;//���۵���
+    public ButtonCell cantileverCurrent_1;//悬臂流量
     public ButtonCell cantileverCurrent_2;
     public SearchPanel searchPanel;
     private ButtonCell lastButton;
     private LineChart lastChart;
     private HistoryChartData historyChartData;
+    private bool dynamicUpdateData;
+    private ChartName curChartName;
+    private Queue<CData> tempChartData= new Queue<CData>();
+    private float tempChartValue;
     public void Start()
     {
         AddOnClickListener(bucketWheelCurrent_1, () =>
         {
             ResetLastButtonState(bucketWheelCurrent_1);
             UpdateCurChart(nameof(bucketWheelCurrent_1));
+            curChartName = ChartName.BucketWheelCurrent_1;
         });
 
         AddOnClickListener(bucketWheelCurrent_2, () =>
         {
             ResetLastButtonState(bucketWheelCurrent_2);
             UpdateCurChart(nameof(bucketWheelCurrent_2));
+            curChartName = ChartName.BucketWheelCurrent_2;
         });
         AddOnClickListener(trolleyCurrent_1, () =>
         {
             ResetLastButtonState(trolleyCurrent_1);
             UpdateCurChart(nameof(trolleyCurrent_1));
+            curChartName = ChartName.TrolleyCurrent_1;
         });
         AddOnClickListener(trolleyCurrent_2, () =>
         {
             ResetLastButtonState(trolleyCurrent_2);
             UpdateCurChart(nameof(trolleyCurrent_2));
+            curChartName = ChartName.TrolleyCurrent_2;
         });
         AddOnClickListener(slewingCurrent_1, () =>
         {
             ResetLastButtonState(slewingCurrent_1);
             UpdateCurChart(nameof(slewingCurrent_1));
+            curChartName = ChartName.SlewingCurrent_1;
         });
         AddOnClickListener(slewingCurrent_2, () =>
         {
             ResetLastButtonState(slewingCurrent_2);
             UpdateCurChart(nameof(slewingCurrent_2));
+            curChartName = ChartName.SlewingCurrent_2;
         });
         AddOnClickListener(suspendedGelCurrent_1, () =>
         {
             ResetLastButtonState(suspendedGelCurrent_1);
             UpdateCurChart(nameof(suspendedGelCurrent_1));
+            curChartName = ChartName.SuspendedGelCurrent_1;
         });
         AddOnClickListener(suspendedGelCurrent_2, () =>
         {
             ResetLastButtonState(suspendedGelCurrent_2);
             UpdateCurChart(nameof(suspendedGelCurrent_2));
+            curChartName = ChartName.SuspendedGelCurrent_2;
         });
         AddOnClickListener(cantileverCurrent_1, () =>
         {
             ResetLastButtonState(cantileverCurrent_1);
             UpdateCurChart(nameof(cantileverCurrent_1));
+            curChartName = ChartName.CantileverCurrent_1;
         });
         AddOnClickListener(cantileverCurrent_2, () =>
         {
             ResetLastButtonState(cantileverCurrent_2);
             UpdateCurChart(nameof(cantileverCurrent_2));
+            curChartName = ChartName.CantileverCurrent_2;
         });
         InitChart();
         lastButton = bucketWheelCurrent_1;
@@ -121,6 +163,17 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         bucketWheelCurrent_1.Invoke();
         searchPanel.SetSearchAction(UpdateCurChartByTime);
     }
+
+    private void OnEnable()
+    {
+        EventManager.Instance.AddListener(EventName.UpdateChartData, DynamicUpdateData);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Instance.RemoveListener(EventName.UpdateChartData, DynamicUpdateData);
+    }
+
     public void InitChart()
     {
         trolleyElectricityChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
@@ -151,12 +204,15 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     //}
     public void ResetLastButtonState(ButtonCell btn)
     {
+        
         if (lastButton != null)
         {
             lastButton.SetSelectState(false);
         }
         lastButton = btn;
         lastButton.SetSelectState(true,false);
+        dynamicUpdateData = true;
+        tempChartData.Clear();
     }
     public void ResetLastChart(LineChart go)
     {
@@ -177,95 +233,95 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         {
             ResetLastChart(bucketWheelChart_1);
             historyChartData.SetData(bucketWheelChart_1, ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC, Machine.BucketWheelStackerReclaimer);
-            if (bucketWheelChart_1.series[0].data.Count <= 0)
-            {
-                GetSqlData(bucketWheelChart_1, ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
-            }
+            // if (bucketWheelChart_1.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(bucketWheelChart_1, ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
+            // }
         }
         else if (str == nameof(bucketWheelCurrent_2))
         {
 
             ResetLastChart(bucketWheelChart_2);
             historyChartData.SetData(bucketWheelChart_2, ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC, Machine.BucketWheel);
-            if (bucketWheelChart_2.series[0].data.Count <= 0)
-            {
-                GetSqlData(bucketWheelChart_2, ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC, Machine.BucketWheel,false,"","",true);
-            }
+            // if (bucketWheelChart_2.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(bucketWheelChart_2, ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC, Machine.BucketWheel,false,"","",true);
+            // }
         }
         else if (str == nameof(trolleyCurrent_1))
         {
             ResetLastChart(trolleyElectricityChart_1);
             historyChartData.SetData(trolleyElectricityChart_1, ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, Machine.BucketWheelStackerReclaimer);
-            if (trolleyElectricityChart_1.series[0].data.Count <= 0)
-            {
-                GetSqlData(trolleyElectricityChart_1, ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
-            }
+            // if (trolleyElectricityChart_1.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(trolleyElectricityChart_1, ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
+            // }
         }
         else if (str == nameof(trolleyCurrent_2)) {
             ResetLastChart(trolleyElectricityChart_2);
             historyChartData.SetData(trolleyElectricityChart_2, ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, Machine.BucketWheel);
-            if (trolleyElectricityChart_2.series[0].data.Count <= 0)
-            {
-                GetSqlData(trolleyElectricityChart_2, ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, Machine.BucketWheel,false,"","",true);
-            }
+            // if (trolleyElectricityChart_2.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(trolleyElectricityChart_2, ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC, Machine.BucketWheel,false,"","",true);
+            // }
         }
         else if(str== nameof(suspendedGelCurrent_1))
         {
          
             ResetLastChart(suspensoidChart_1);
             historyChartData.SetData(suspensoidChart_1, ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, Machine.BucketWheelStackerReclaimer);
-            if (suspensoidChart_1.series[0].data.Count <= 0)
-            {
-                GetSqlData(suspensoidChart_1, ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
-            }
+            // if (suspensoidChart_1.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(suspensoidChart_1, ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
+            // }
         }
         else if (str == nameof(suspendedGelCurrent_2))
         {
         
             ResetLastChart(suspensoidChart_2);
             historyChartData.SetData(suspensoidChart_2, ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, Machine.BucketWheel);
-            if (suspensoidChart_2.series[0].data.Count <= 0)
-            {
-                GetSqlData(suspensoidChart_2, ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, Machine.BucketWheel,false,"","",true);
-            }
+            // if (suspensoidChart_2.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(suspensoidChart_2, ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC, Machine.BucketWheel,false,"","",true);
+            // }
         }
         
         else if (str == nameof(cantileverCurrent_1))
         {
             ResetLastChart(cantileverChart_1);
             historyChartData.SetData(cantileverChart_1, ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, Machine.BucketWheelStackerReclaimer);
-            if (cantileverChart_1.series[0].data.Count <= 0)
-            {
-                GetSqlData(cantileverChart_1, ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
-            }
+            // if (cantileverChart_1.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(cantileverChart_1, ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
+            // }
         }
         else if (str == nameof(cantileverCurrent_2))
         {
             ResetLastChart(cantileverChart_2);
             historyChartData.SetData(cantileverChart_2, ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, Machine.BucketWheel);
-            if (cantileverChart_2.series[0].data.Count <= 0)
-            {
-                GetSqlData(cantileverChart_2, ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC,Machine.BucketWheel,false,"","",true);
-            }
+            // if (cantileverChart_2.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(cantileverChart_2, ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC,Machine.BucketWheel,false,"","",true);
+            // }
         }
         else if (str == nameof(slewingCurrent_1))
         {
             ResetLastChart(slewingChart_1);
             historyChartData.SetData(slewingChart_1, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, Machine.BucketWheelStackerReclaimer);
-            if (slewingChart_1.series[0].data.Count <= 0)
-            {
-                GetSqlData(slewingChart_1, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
-            }
+            // if (slewingChart_1.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(slewingChart_1, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, Machine.BucketWheelStackerReclaimer,false,"","",true);
+            // }
         }
         else if (str == nameof(slewingCurrent_2))
         {
         
             ResetLastChart(slewingChart_2);
             historyChartData.SetData(slewingChart_2, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, Machine.BucketWheel);
-            if (slewingChart_2.series[0].data.Count <= 0)
-            {
-                GetSqlData(slewingChart_2, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,Machine.BucketWheel,false,"","",true);
-            }
+            // if (slewingChart_2.series[0].data.Count <= 0)
+            // {
+            //     GetSqlData(slewingChart_2, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,Machine.BucketWheel,false,"","",true);
+            // }
         }
     } 
     public async void GetSqlData(LineChart lineChart,string chartName, Machine machine,bool isUseTime =false,string startTime="",string endTime="",bool isLimit=false,int limit=1000)
@@ -286,6 +342,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
                     limit, isUseTime, startTime, endTime);
             });
         }
+        dynamicUpdateData = false;
         lineChart.series[0].data.Clear();
         if (dataSet==null)
         {
@@ -293,34 +350,11 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         }
         int addNum=dataSet.Tables[0].Rows.Count / 1000;
         addNum = addNum == 0 ? 1 : addNum;
-       
         DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
         for (int i = dataRowCollection.Count -1; i >= 0; i-=addNum)
         {
             lineChart.AddData(0, DateTime.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME].ToString()), float.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_VALUE].ToString()));
         }
-        // int m = 1;
-        // int s = 1;
-        // for (int i = 0; i < 1000; i++)
-        // {
-        //     s = s + 1;
-        //     if (i%60==0)
-        //     {
-        //         m = m + 1;
-        //         s = 0;
-        //     }
-        //     lineChart.AddData(0, new DateTime(2024,1,15,15,m,s), Random.Range(25, 30));
-        // }
-        // lineChart.AddData(0, new DateTime(2024,8,15,19,51,59), 9);
-        // lineChart.AddData(0, new DateTime(2024,8,13,14,53,45), 15);
-        // lineChart.AddData(0, new DateTime(2024,8,7,17,49,45), 6);
-        // lineChart.AddData(0, new DateTime(2024,8,7,15,49,45), 2);
-        // lineChart.AddData(0, new DateTime(2024,8,6,15,49,43), 6);
-     
-       
-        
-        
-        
     }
 
     public void UpdateCurChartByTime(string startTime, string endTime, MechanicalType mechanicalType,string other)
@@ -338,5 +372,60 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public void AddOnClickListener(ButtonCell btn, UnityAction action)
     {
         btn.AddListener(action);
+    }
+
+    private void UpdateChartData(float value)
+    {
+        lastChart.ClearData();
+        tempChartData.Enqueue(new CData(DateTime.Now,value));
+        if (tempChartData.Count>1000)
+        {
+            tempChartData.Dequeue();
+        }
+        foreach (var data in tempChartData)
+        {
+            lastChart.AddData(0, data.date, data.Value);
+        }
+    }
+    public void DynamicUpdateData(object sender, EventArgs e)
+    {
+        
+        if (dynamicUpdateData&&GameDataManager.Instance.SystemVariables!=null)
+        {
+            if (curChartName==ChartName.BucketWheelCurrent_1)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.BucketWheelElectricCurrent;
+            }else if (curChartName== ChartName.BucketWheelCurrent_2)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.BucketWheelElectricCurrent_2;
+            }else if (curChartName==ChartName.TrolleyCurrent_1)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.LargeCarElectricCurrent;
+            }else if (curChartName==ChartName.TrolleyCurrent_2)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.LargeCarElectricCurrent_2;
+            }else if (curChartName==ChartName.SlewingCurrent_1)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.RotaryElectricCurrent;
+            }else if (curChartName==ChartName.SlewingCurrent_2)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.RotaryElectricCurrent_2;
+            }else if (curChartName==ChartName.SuspendedGelCurrent_1)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent;
+            }else if (curChartName==ChartName.SuspendedGelCurrent_2)
+            {
+               tempChartValue = GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent_2;
+            }else if (curChartName==ChartName.CantileverCurrent_1)
+            {
+                // tempChartValue = GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent_2;
+                tempChartValue = Random.Range(45, 50);
+            }else if (curChartName==ChartName.CantileverCurrent_2)
+            {
+                // tempChartValue = GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent_2;
+                tempChartValue = Random.Range(45, 50);
+            }
+            UpdateChartData(tempChartValue);
+        }
     }
 }
