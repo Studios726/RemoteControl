@@ -173,7 +173,7 @@ public class GameDataManager : Singleton<GameDataManager>
         UpdateMachine();
 
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
-        EventManager.Instance.TriggerEvent(EventName.UpdateChartData, null);
+        // EventManager.Instance.TriggerEvent(EventName.UpdateChartData, null);
     }
 
     //悬胶皮带运行提示
