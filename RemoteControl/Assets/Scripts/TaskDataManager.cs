@@ -222,9 +222,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     private Dictionary<string, TaskData> nearestTaskDataDic = new Dictionary<string, TaskData>();
     private Dictionary<string, TaskData> curTaskDic = new Dictionary<string, TaskData>();
-    public Queue<string> BucketWheelQueue = new Queue<string>();
-    public Queue<string> BucketWheelStackerReclaimerQueue = new Queue<string>();
-
     public void SendTaskCommand(TaskCommand taskCommand)
     {
         taskCommand.CommonTaskParameters = GetCommonTaskParameters();
