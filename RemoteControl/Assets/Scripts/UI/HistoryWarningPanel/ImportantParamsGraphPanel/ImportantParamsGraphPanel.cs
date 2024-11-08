@@ -166,11 +166,14 @@ public class ImportantParamsGraphPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        tempChartData.Clear();
         EventManager.Instance.AddListener(EventName.UpdateChartData, DynamicUpdateData);
     }
 
     private void OnDisable()
     {
+        searchPanel.Reset();
+        tempChartData.Clear();
         EventManager.Instance.RemoveListener(EventName.UpdateChartData, DynamicUpdateData);
     }
 
@@ -198,10 +201,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         bucketWheelChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         bucketWheelChart_2.series[0].data.Clear();
     }
-    //public void OnEnable()
-    //{
-        
-    //}
+ 
     public void ResetLastButtonState(ButtonCell btn)
     {
         
@@ -213,6 +213,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         lastButton.SetSelectState(true,false);
         dynamicUpdateData = true;
         tempChartData.Clear();
+        searchPanel.Reset();
     }
     public void ResetLastChart(LineChart go)
     {

@@ -398,7 +398,7 @@ public class SearchPanel : MonoBehaviour
         go.SetActive(isActive);
     }
 
-    void ResetDateUI()
+    public void ResetDateUI()
     {
         SetActive(scrollviewY, false);
         SetActive(scrollviewM, false);
@@ -437,12 +437,32 @@ public class SearchPanel : MonoBehaviour
         SetActive(endMinuteBtn2.gameObject, false);
     }
 
+    public void ResetDateText()
+    {
+        startYText.text ="";
+        startMText.text ="";
+        startDText.text ="";
+        startHText.text ="";
+        startMinuteText.text ="";
+
+        endYText.text ="";
+        endMText.text ="";
+        endDText.text ="";
+        endHText.text ="";
+        endMinuteText.text ="";
+    }
+
+    public void Reset()
+    {
+        ResetDateUI();
+        ResetDateText();
+    }
     public void SearchHistroyRecord()
     {
         string OperatorPerson = "管理员";
         string startTime = null, endTime = null;
         
-        bool useDate = true, useOperator =OperatorPerson != string.Empty;
+        bool useDate = true;
         
         try
         {

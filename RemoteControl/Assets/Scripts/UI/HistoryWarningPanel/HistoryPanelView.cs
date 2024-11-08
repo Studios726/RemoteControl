@@ -6,12 +6,13 @@ using Utility;
 
 public enum PanelType
 {
-    AlarmPanel=0,
-    LogPanel=1,
-    ParameTerPanel=2,
-    TaskPanel=3
+    AlarmPanel = 0,
+    LogPanel = 1,
+    ParameTerPanel = 2,
+    TaskPanel = 3
 }
-public class HistoryPanelView :UIView<HistoryPanelCtr>
+
+public class HistoryPanelView : UIView<HistoryPanelCtr>
 {
     private Button _alarmBtn;
     private Button _operationBtn;
@@ -35,6 +36,7 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
 
     public GameObject curOffBtn;
     public GameObject curOnBtn;
+
     public override void InitUIElements(UIArgs uiArgs = null)
     {
         _alarmBtn = RootObj.transform.FindComponent<Button>("Btns/alarmBtnOff");
@@ -47,10 +49,12 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
         _taskBtnOn = RootObj.transform.FindComponent<Button>("Btns/taskOn");
         _alarmPanel = RootObj.transform.Find("AlarmPanel").gameObject;
         _alarmReclaimerList = RootObj.transform.FindComponent<HistoryList>("AlarmPanel/alarmScrollView_2/Scroll View");
-        _alarmStackerReclaimerList = RootObj.transform.FindComponent<HistoryList>("AlarmPanel/alarmScrollView_1/Scroll View");
-        _logPanel=RootObj.transform.Find("LogPanel").gameObject;
+        _alarmStackerReclaimerList =
+            RootObj.transform.FindComponent<HistoryList>("AlarmPanel/alarmScrollView_1/Scroll View");
+        _logPanel = RootObj.transform.Find("LogPanel").gameObject;
         _logReclaimerList = RootObj.transform.FindComponent<HistoryList>("LogPanel/alarmScrollView_2/Scroll View");
-        _logmStackerReclaimerList = RootObj.transform.FindComponent<HistoryList>("LogPanel/alarmScrollView_1/Scroll View");
+        _logmStackerReclaimerList =
+            RootObj.transform.FindComponent<HistoryList>("LogPanel/alarmScrollView_1/Scroll View");
         _parameterPanel = RootObj.transform.Find("ImportantParamsGraphPanel").gameObject;
         _reclaimer = RootObj.transform.FindComponent<SearchPanel>("reclaimerSearchPanel");
         _stackerReclaimer = RootObj.transform.FindComponent<SearchPanel>("StackerReclaimerSearchPanel");
@@ -73,17 +77,26 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
 
     private void InitRecord()
     {
-        // string warning = "history_warning";
-        // string log = "history_logs";
-        string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC} ORDER BY id DESC LIMIT 20;";
-        string warningSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC} ORDER BY id DESC LIMIT 20;";
-        string  logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG1_MC}  ORDER BY id DESC LIMIT 20;";
-        string  logSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_LOG2_MC}  ORDER BY id DESC LIMIT 20;";
+        // GetLatestOperationLogs();
+        GetLatestWarningLogs();
+    }
+
+    private void GetLatestWarningLogs()
+    {
+        string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC} ORDER BY id DESC LIMIT 100;";
+        string warningSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC} ORDER BY id DESC LIMIT 100;";
         _ctr.RequestData(warningSql, MechanicalType.StackerReclaimer, PanelType.AlarmPanel);
         _ctr.RequestData(warningSql2, MechanicalType.Reclaimer, PanelType.AlarmPanel);
+    }
+
+    private void GetLatestOperationLogs()
+    {
+        string logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG1_MC}  ORDER BY id DESC LIMIT 100;";
+        string logSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_LOG2_MC}  ORDER BY id DESC LIMIT 100;";
         _ctr.RequestData(logSql, MechanicalType.StackerReclaimer, PanelType.LogPanel);
         _ctr.RequestData(logSql2, MechanicalType.Reclaimer, PanelType.LogPanel);
     }
+
     private void ShowAlarmPanel()
     {
         RestCurBtn(_alarmBtn.gameObject, _alarmBtnOn.gameObject);
@@ -93,7 +106,11 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
         _taskPanel.SetActive(false);
         _parameterPanel.SetActive(false);
         SearchPanelActive(true);
+        GetLatestWarningLogs();
+        _reclaimer.Reset();
+        _stackerReclaimer.Reset();
     }
+
     private void ShowLogPanel()
     {
         RestCurBtn(_operationBtn.gameObject, _operationBtnOn.gameObject);
@@ -103,7 +120,11 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
         _parameterPanel.SetActive(false);
         _taskPanel.SetActive(false);
         SearchPanelActive(true);
+        GetLatestOperationLogs();
+        _reclaimer.Reset();
+        _stackerReclaimer.Reset();
     }
+
     private void ShowParameterPanel()
     {
         RestCurBtn(_parameterBtn.gameObject, _parameterBtnOn.gameObject);
@@ -118,7 +139,7 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
     void ShowTaskPanel()
     {
         RestCurBtn(_taskBtn.gameObject, _taskBtnOn.gameObject);
-        curPanelType=PanelType.TaskPanel;
+        curPanelType = PanelType.TaskPanel;
         _alarmPanel.SetActive(false);
         _logPanel.SetActive(false);
         _reclaimer.gameObject.SetActive(false);
@@ -126,6 +147,7 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
         _parameterPanel.SetActive(false);
         _taskPanel.SetActive(true);
     }
+
     void SearchPanelActive(bool isActive)
     {
         _reclaimer.gameObject.SetActive(isActive);
@@ -134,57 +156,56 @@ public class HistoryPanelView :UIView<HistoryPanelCtr>
 
     public void ShowStatePane(StatusParameterChildID id)
     {
-
         Debug.Log($"状态参数打开 {id}");
-        
     }
+
     public void RestCurBtn(GameObject offgo, GameObject ongo)
     {
         if (curOffBtn != null)
         {
             curOffBtn.SetActive(true);
         }
+
         if (curOnBtn != null)
         {
             curOnBtn.SetActive(false);
         }
+
         offgo.SetActive(false);
         ongo.SetActive(true);
         curOffBtn = offgo;
         curOnBtn = ongo;
     }
 
-    public void RefreshList(List<HistoryData> historyDatas,MechanicalType mechanicalType,PanelType panelType)
+    public void RefreshList(List<HistoryData> historyDatas, MechanicalType mechanicalType, PanelType panelType)
     {
         // Debug.Log($"RefreshList  mechanicalType{mechanicalType} ,panelType {panelType}");
-        if (mechanicalType==MechanicalType.Reclaimer)
+        if (mechanicalType == MechanicalType.Reclaimer)
         {
-            if (panelType==PanelType.AlarmPanel)
+            if (panelType == PanelType.AlarmPanel)
             {
                 _alarmReclaimerList.RefreshList(historyDatas);
             }
-            else if(panelType==PanelType.LogPanel)
+            else if (panelType == PanelType.LogPanel)
             {
                 _logReclaimerList.RefreshList(historyDatas);
             }
             else
             {
-                
             }
         }
         else
         {
-            if (panelType==PanelType.AlarmPanel)
+            if (panelType == PanelType.AlarmPanel)
             {
                 _alarmStackerReclaimerList.RefreshList(historyDatas);
             }
-            else if(panelType==PanelType.LogPanel)
+            else if (panelType == PanelType.LogPanel)
             {
                 _logmStackerReclaimerList.RefreshList(historyDatas);
             }
             else
             {
-                
             }
         }
     }

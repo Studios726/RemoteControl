@@ -33,15 +33,6 @@ namespace RemoteControl
             CreatConnect(null, null);
             UIManager.Instance.OpenUI(UIID.LoginPanel);
             chartTimer = Timer.Register(5, true, true, (() => { GameDataManager.Instance.RecordChart(); }));
-          
-            // Timer.Register(1, true, true,
-            //     (() =>
-            //     {
-            //        
-            //         SystemVariables a = new SystemVariables();
-            //         GameDataManager.Instance.SetSystemVariables(a);
-            //         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
-            //     }));
         }
 
         public void OnExitGame()

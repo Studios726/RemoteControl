@@ -1,3 +1,4 @@
+using System;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,21 @@ public class HistoryTaskPanel : MonoBehaviour
     private void Start()
     {
         searchPanel.SetSearchAction(SearchRecord);
-        InitRecord();
     }
     public void InitRecord()
     {
-         mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(10);
+         mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(100);
          ReadRecord();
+    }
+
+    private void OnEnable()
+    {
+        InitRecord();
+    }
+
+    private void OnDisable()
+    {
+        searchPanel.Reset();
     }
 
     public void ReadRecord()
