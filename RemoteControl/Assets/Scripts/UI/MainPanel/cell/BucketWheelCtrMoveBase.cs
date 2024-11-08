@@ -210,11 +210,12 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 俯仰角度
     /// </summary>
     public Text downAngle;
-    
+
     /// <summary>
     /// 前进位置
     /// </summary>
     public Text forwardPos;
+
     /// <summary>
     /// 后退位置
     /// </summary>
@@ -254,32 +255,83 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 俯仰停止
     /// </summary>
     public ButtonCell stopBtn;
+
+    // <summary>
+    /// 斗轮停止
+    /// </summary>
+    public ButtonCell bucketWheelStopBtn;
+
+    /// <summary>
+    /// 斗轮启动
+    /// </summary>
+    public ButtonCell bucketWheelStartBtn;
+
+    /// <summary>
+    /// 变幅油泵停止
+    /// </summary>
+    public ButtonCell oilPumpStopBtn;
+
+    /// <summary>
+    /// 变幅油泵启动
+    /// </summary>
+    public ButtonCell oilPumpStartBtn;
+
+    /// <summary>
+    /// 夹轨器夹紧
+    /// </summary>
+    public ButtonCell engageClampBtn;
+
+    /// <summary>
+    /// 夹轨器松开
+    /// </summary>
+    public ButtonCell disengageClampBtn;
+
+    /// <summary>
+    /// 振打器停止
+    /// </summary>
+    public ButtonCell shakerStopBtn;
+
+    /// <summary>
+    /// 振打器启动
+    /// </summary>
+    public ButtonCell shakerStartBtn;
+
+    /// <summary>
+    /// 升压电磁阀
+    /// </summary>
+    public ToggleDIY StepUpSolenoidValveToggle;
+    
     /// <summary>
     /// 上仰角度object
     /// </summary>
     public GameObject UpAngleGameObject;
+
     /// <summary>
     /// 下仰角度object
     /// </summary>
     public GameObject DownAngelGameObject;
+
     /// <summary>
     /// 左转角度object
     /// </summary>
     public GameObject LeftAngleGameObject;
+
     /// <summary>
     /// 右转角度object
     /// </summary>
     public GameObject RightAangleGameObject;
+
     /// <summary>
     /// 前进位置object
     /// </summary>
     public GameObject ForwardPosGameObject;
+
     /// <summary>
     /// 后退位置object
     /// </summary>
     public GameObject BackPosGameObject;
-    
-    
+
+
     private ButtonCell curCtrMode;
     private ButtonCell curPileTakeMode;
     private ButtonCell curCarMoveMode;
@@ -373,15 +425,13 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                     UIManager.Instance.OpenUI(UIID.ConfirmPanel,
                         new ConfirmPanelArgs("是否确认左转？", null,
                             (() => { SendMessageToServer(COMMAND_NAME.ROTATE_LEFT); })));
-                    
                 }
             ));
         AddOnClickListener(rightBtn, (() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
                 new ConfirmPanelArgs("是否确认右转？", null,
-                    (() => {  SendMessageToServer(COMMAND_NAME.ROTATE_RIGHT); })));
-           
+                    (() => { SendMessageToServer(COMMAND_NAME.ROTATE_RIGHT); })));
         }));
         AddOnClickListener(rotStopBtn, (() =>
         {
@@ -389,6 +439,18 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SendMessageToServer(COMMAND_NAME.ELEVATE_STOP);
         }));
         AddOnClickListener(stopBtn, (() => SendMessageToServer(COMMAND_NAME.ELEVATE_STOP)));
+        
+        AddOnClickListener(bucketWheelStartBtn,(() =>SendMessageToServer(COMMAND_NAME.BUCKET_START,null) ));
+        AddOnClickListener(bucketWheelStopBtn,(() =>SendMessageToServer(COMMAND_NAME.BUCKET_STOP,null) ));
+        
+        AddOnClickListener(oilPumpStartBtn,(() =>SendMessageToServer(COMMAND_NAME.OILBUMP_ON,null) ));
+        AddOnClickListener(oilPumpStopBtn,(() =>SendMessageToServer(COMMAND_NAME.OILBUMP_OFF,null) ));
+        
+        AddOnClickListener(engageClampBtn,(() =>SendMessageToServer(COMMAND_NAME.RAIL_CLAMP,null) ));
+        AddOnClickListener(disengageClampBtn,(() =>SendMessageToServer(COMMAND_NAME.RAIL_RELAX,null) ));
+        
+        AddOnClickListener(shakerStartBtn,(() =>SendMessageToServer(COMMAND_NAME.VIBRATOR_START,null) ));
+        AddOnClickListener(shakerStopBtn,(() =>SendMessageToServer(COMMAND_NAME.VIBRATOR_STOP,null) ));
     }
 
     public virtual void UpdateData(SystemVariables data)
@@ -412,18 +474,40 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE.ToString("F2"), TextType.Meter);
             SetText(forwardPos, data.DC_Pos.ToString("F2"), TextType.Meter);
             SetText(backPos, data.DC_Pos.ToString("F2"), TextType.Meter);
-            aloneBtn.SetSelectState(data.MODE==0&&data.Single_Action==false,false);
-            togetherBtn.SetSelectState(data.MODE==1&&data.Link_Action==false,false);
-            automaticBtn.SetSelectState(data.MODE==2&&data.AUTO_MODE==false,false);
-            aloneBtn.SetSystemState(data.Single_Action,true,false);
-            togetherBtn.SetSystemState(data.Link_Action,true,false);
-            automaticBtn.SetSystemState(data.AUTO_MODE,true,false);
+            aloneBtn.SetSelectState(data.MODE == 0 && data.Single_Action == false, false);
+            togetherBtn.SetSelectState(data.MODE == 1 && data.Link_Action == false, false);
+            automaticBtn.SetSelectState(data.MODE == 2 && data.AUTO_MODE == false, false);
+            aloneBtn.SetSystemState(data.Single_Action, true, false);
+            togetherBtn.SetSystemState(data.Link_Action, true, false);
+            automaticBtn.SetSystemState(data.AUTO_MODE, true, false);
+            StepUpSolenoidValveToggle.SetState(data.VariableAmplitudeBoostValveOpen?1:0);
+            
+            bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning,true);
+            bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning==false,true);
+            
+            oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning==false,true);
+            oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning,true);
+            
+            shakerStopBtn.SetSystemState(data.VibrationMotorRunning==false,true);
+            shakerStartBtn.SetSystemState(data.VibrationMotorRunning,true);
+            
+            if (data.LeftClampRelaxLimit==true && data.RightClampRelaxLimit==true)
+            {
+                disengageClampBtn.SetSystemState(true,true);
+                engageClampBtn.SetSystemState(false,true);
+            }
+            else
+            {
+                engageClampBtn.SetSystemState(true,true);
+                disengageClampBtn.SetSystemState(false,true);
+            }
+            
             // if (stopTakeMaterBtn.red.activeSelf&&data.SR1_BeltTS_Stop_Swicth==false&&data.SR1_BeltTake_Swicth==true &&data.SuspensionGlueRunCommand)
             // {
             //     PileTakeMaterPop(TaskType.TAKEMATER,data.BeltRealyDis);
             // }
-            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth,true,false);
-            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth,true,false);
+            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth, true, false);
+            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth, true, false);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen);
             upBtn.SetTextColor(data.VariableAmplitudeUpperElectromagneticValveOpen ? runColor : normalColor);
             if (UpAngleGameObject.activeSelf != data.VariableAmplitudeUpperElectromagneticValveOpen)
@@ -490,8 +574,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             carForwardBtn.SetTextColor(data.LargeCarForwardCommand ? runColor : normalColor);
             ForwardPosGameObject.SetActive(data.LargeCarForwardCommand);
             BackPosGameObject.SetActive(data.LargeCarReverseCommand);
-            carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB == false,true);
-            carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB,true);
+            carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB == false, true);
+            carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB, true);
             float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle) * Mathf.Deg2Rad);
             string x = (53.4 + data.DC_Pos + (x1 * Mathf.Cos(data.SLEW_Angle * Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle * Mathf.Deg2Rad) - 1.8F).ToString("F2");
@@ -513,14 +597,36 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(backPos, data.DC_Pos_2.ToString("F2"), TextType.Meter);
             SetText(pitchingAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE_2.ToString("F2"), TextType.Meter);
-            aloneBtn.SetSelectState(data.MODE_2==0&&data.Single_Action_2==false,false);
-            togetherBtn.SetSelectState(data.MODE_2==1&&data.Link_Action_2==false,false);
-            automaticBtn.SetSelectState(data.MODE_2==2&&data.AUTO_MODE_2==false,false);
-            aloneBtn.SetSystemState(data.Single_Action_2,true,false);
-            togetherBtn.SetSystemState(data.Link_Action_2,true,false);
-            automaticBtn.SetSystemState(data.AUTO_MODE_2,true,false);
-            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2,true,false);
-            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2,true,false);
+            aloneBtn.SetSelectState(data.MODE_2 == 0 && data.Single_Action_2 == false, false);
+            togetherBtn.SetSelectState(data.MODE_2 == 1 && data.Link_Action_2 == false, false);
+            automaticBtn.SetSelectState(data.MODE_2 == 2 && data.AUTO_MODE_2 == false, false);
+            aloneBtn.SetSystemState(data.Single_Action_2, true, false);
+            togetherBtn.SetSystemState(data.Link_Action_2, true, false);
+            automaticBtn.SetSystemState(data.AUTO_MODE_2, true, false);
+            StepUpSolenoidValveToggle.SetState(data.VariableAmplitudeBoostValveOpen_2?1:0);
+            
+            bucketWheelStartBtn.SetSystemState(data.BucketWheelMotorRunning_2,true);
+            bucketWheelStopBtn.SetSystemState(data.BucketWheelMotorRunning_2==false,true);
+            
+            oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false,true);
+            oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2,true);
+            
+            shakerStopBtn.SetSystemState(data.VibrationMotorRunning_2==false,true);
+            shakerStartBtn.SetSystemState(data.VibrationMotorRunning_2,true);
+            
+            if (data.LeftClampRelaxLimit_2==true && data.RightClampRelaxLimit_2==true)
+            {
+                disengageClampBtn.SetSystemState(true,true);
+                engageClampBtn.SetSystemState(false,true);
+            }
+            else
+            {
+                engageClampBtn.SetSystemState(true,true);
+                disengageClampBtn.SetSystemState(false,true);
+            }
+            
+            takeMaterBtn.SetSystemState(data.SR1_BeltTake_Swicth_2, true, false);
+            stopTakeMaterBtn.SetSystemState(data.SR1_BeltTS_Stop_Swicth_2, true, false);
             upBtn.SetSystemState(data.VariableAmplitudeUpperElectromagneticValveOpen_2);
             if (UpAngleGameObject.activeSelf != data.VariableAmplitudeUpperElectromagneticValveOpen_2)
             {
@@ -554,12 +660,12 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             carBackBtn.SetTextColor(data.LargeCarReverseCommand_2 ? runColor : normalColor);
             carForwardBtn.SetSystemState(data.LargeCarForwardCommand_2);
             carForwardBtn.SetTextColor(data.LargeCarForwardCommand_2 ? runColor : normalColor);
-            
+
             ForwardPosGameObject.SetActive(data.LargeCarForwardCommand_2);
             BackPosGameObject.SetActive(data.LargeCarReverseCommand_2);
-            
-            carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB_2 == false,true);
-            carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB_2,true);
+
+            carSlowBtn.SetSystemState(data.SR1_Travel_Speed_SB_2 == false, true);
+            carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB_2, true);
             if (data.LargeCarForwardCommand_2 == false && data.LargeCarReverseCommand_2 == false)
             {
                 carStopBtn.SetSystemState(true);
@@ -594,11 +700,12 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
             bucketWheelPos.text = $"({x} , {y})";
         }
+
         SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos - data.DC_Pos_2) + 64.34).ToString("F2"), TextType.Meter);
     }
 
     //堆取料弹窗提示
-    public virtual void PileTakeMaterPop(TaskType taskType,int time)
+    public virtual void PileTakeMaterPop(TaskType taskType, int time)
     {
         // if (togetherBtn.red.activeSelf==true)
         // {
@@ -613,7 +720,6 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         //         //斗轮运行倒计时
         //     }
         // }
-        
     }
 
     public void AddOnClickListener(Button btn, UnityAction action)
@@ -733,6 +839,108 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         }
 
         GameDataManager.Instance.SendServerCommandByName(commandName);
+    }
+
+    public void SendMessageToServer(COMMAND_NAME command, Action action = null)
+    {
+        if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            return;
+        }
+
+        string des = "";
+        switch (command)
+        {
+            case COMMAND_NAME.RAIL_RELAX:
+                des = "是否确认夹轨器放松?";
+                break;
+            case COMMAND_NAME.RAIL_CLAMP:
+                des = "是否确认夹轨器夹紧?";
+                break;
+            case COMMAND_NAME.BUCKET_START:
+                des = "是否确认斗轮启动?";
+                break;
+            case COMMAND_NAME.BUCKET_STOP:
+                des = "是否确认斗轮停止?";
+                break;
+            case COMMAND_NAME.OILBUMP_ON:
+                des = "是否确认主车油泵启动?";
+                break;
+            case COMMAND_NAME.OILBUMP_OFF:
+                des = "是否确认主车油泵停止?";
+                break;
+            case COMMAND_NAME.VIBRATOR_START:
+                des = "是否确认振打器启动?";
+                break;
+            case COMMAND_NAME.VIBRATOR_STOP:
+                des = "是否确认振打器停止?";
+                break;
+            default:
+                break;
+        }
+
+        UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(des, null, (() =>
+        {
+            action?.Invoke();
+            ConfirmSendMessageToServer(command);
+        })));
+    }
+
+    public void ConfirmSendMessageToServer(COMMAND_NAME command)
+    {
+        string commandName = machine == Machine.BucketWheelStackerReclaimer
+            ? command.ToString() + "_1"
+            : command.ToString() + "_2";
+        int dataInt = 0;
+        Debug.Log($"message {machine}   {commandName}");
+        switch (command)
+        {
+            case COMMAND_NAME.RAIL_RELAX:
+                disengageClampBtn.SetSelectState(true);
+                engageClampBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("夹轨器放松", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.RAIL_CLAMP:
+                engageClampBtn.SetSelectState(true);
+                disengageClampBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("夹轨器夹紧", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.BUCKET_START:
+                bucketWheelStartBtn.SetSelectState(true);
+                bucketWheelStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("斗轮启动", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.BUCKET_STOP:
+                bucketWheelStopBtn.SetSelectState(true);
+                bucketWheelStartBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("斗轮停止", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.OILBUMP_ON:
+                oilPumpStartBtn.SetSelectState(true);
+                oilPumpStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("主车油泵启动", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.OILBUMP_OFF:
+                oilPumpStopBtn.SetSelectState(true);
+                oilPumpStartBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("主车油泵关闭", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.VIBRATOR_START:
+                shakerStartBtn.SetSelectState(true);
+                shakerStopBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("振打器启动", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.VIBRATOR_STOP:
+                shakerStopBtn.SetSelectState(true);
+                shakerStartBtn.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("振打器停止", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            default:
+                break;
+        }
+
+        GameDataManager.Instance.SendServerCommandByName(commandName, dataInt);
     }
 
     public virtual void SetText(Text text, string value, TextType type)
