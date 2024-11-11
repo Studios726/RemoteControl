@@ -378,10 +378,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     private void UpdateChartData(float value)
     {
         lastChart.ClearData();
-        // if (tempChartData.Count==0&& value<=1)
-        // {
-        //     value = 0.1f;
-        // }
         tempChartData.Enqueue(new CData(DateTime.Now,value));
         if (tempChartData.Count>200)
         {

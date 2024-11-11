@@ -14,6 +14,11 @@ public class HistoryPanelCtr :UIPresenter<HistoryPanelView>
       
    }
 
+   public override void SetPanelData(UIArgs uiArgs)
+   {
+       view.InitPanelUI();
+   }
+
    public void SearchRecord(string startTime,string endTime, MechanicalType type,string OperatorPerson="")
    {
       Debug.Log($"搜索开始日期{startTime}  结束日期{endTime} 机器类型{type}");

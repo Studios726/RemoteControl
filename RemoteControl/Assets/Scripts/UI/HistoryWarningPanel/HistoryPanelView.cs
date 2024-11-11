@@ -72,7 +72,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _stackerReclaimer.SetSearchAction(_ctr.SearchRecord);
         curOffBtn = _alarmBtn.gameObject;
         curOnBtn = _alarmBtnOn.gameObject;
-        InitRecord();
+        // InitRecord();
     }
 
     private void InitRecord()
@@ -81,6 +81,17 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         GetLatestWarningLogs();
     }
 
+    public void InitPanelUI()
+    {
+        if (_alarmBtn)
+        {
+            _alarmBtn.onClick?.Invoke();
+        }
+        else
+        {
+            InitRecord();
+        }
+    }
     private void GetLatestWarningLogs()
     {
         string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC} ORDER BY id DESC LIMIT 100;";
