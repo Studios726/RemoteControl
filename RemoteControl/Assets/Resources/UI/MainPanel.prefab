@@ -901,6 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &198688766613756855
 GameObject:
@@ -1039,6 +1040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &236271955496600508
 GameObject:
@@ -1177,6 +1179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &242769922139363644
 GameObject:
@@ -2804,6 +2807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &396022066745939310
 GameObject:
@@ -3470,6 +3474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &432618354635451018
 GameObject:
@@ -3608,6 +3613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &442564103231736707
 GameObject:
@@ -4011,15 +4017,15 @@ RectTransform:
   m_GameObject: {fileID: 467064787373052682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8561184651534667873}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 23.8}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.6999998, y: 0.5}
+  m_SizeDelta: {x: 95.84, y: 12.05}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &11822383423847913
 CanvasRenderer:
@@ -4051,7 +4057,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 18
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -4062,7 +4068,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: "\u505C\u6B62"
 --- !u!1 &471283857777645630
 GameObject:
   m_ObjectHideFlags: 0
@@ -4359,6 +4365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &530140160472576023
 GameObject:
@@ -4993,6 +5000,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &618394433276085081
 GameObject:
@@ -6371,15 +6379,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.30588236, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 00a79ee9248a7404c9b74db9d35e6071, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6918,6 +6926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &813316813044280622
 GameObject:
@@ -7673,6 +7682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &887018760768442507
 GameObject:
@@ -7958,6 +7968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &896841056562889481
 GameObject:
@@ -8289,6 +8300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &932653999220115960
 GameObject:
@@ -9151,6 +9163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1080621273422487025
 GameObject:
@@ -9522,6 +9535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1112926636262650216
 GameObject:
@@ -9660,6 +9674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1113359720965180532
 GameObject:
@@ -9953,6 +9968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!114 &6257510028753423968
 MonoBehaviour:
@@ -9967,6 +9983,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1121733073943932661
 GameObject:
@@ -10335,6 +10352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1157613987317737890
 GameObject:
@@ -11026,6 +11044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1212444825122316934
 GameObject:
@@ -11243,6 +11262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1223947573837036491
 GameObject:
@@ -11381,6 +11401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1244543206267108723
 GameObject:
@@ -12322,6 +12343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1388401712332709506
 GameObject:
@@ -12761,6 +12783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1414331281633956532
 GameObject:
@@ -12978,6 +13001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1462446434153821245
 GameObject:
@@ -13116,6 +13140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1490481754975005577
 GameObject:
@@ -13409,6 +13434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1518426872907443286
 GameObject:
@@ -13705,6 +13731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1569482112602982892
 GameObject:
@@ -14073,6 +14100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!114 &5162243389150393270
 MonoBehaviour:
@@ -14087,6 +14115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1592532758077211972
 GameObject:
@@ -15690,6 +15719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1760754421877372983
 GameObject:
@@ -16526,6 +16556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1838008710230200693
 GameObject:
@@ -17336,6 +17367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1918922289012776706
 GameObject:
@@ -17474,6 +17506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1939957207046856185
 GameObject:
@@ -17691,6 +17724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1948255729734074066
 GameObject:
@@ -17904,6 +17938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1955968659753560116
 GameObject:
@@ -18117,6 +18152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1980329463893983896
 GameObject:
@@ -18334,6 +18370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1989464238633233349
 GameObject:
@@ -18472,6 +18509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &1996991291883990700
 GameObject:
@@ -18689,6 +18727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2013270616046003926
 GameObject:
@@ -19060,6 +19099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2045110544239813865
 GameObject:
@@ -19977,6 +20017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2137151772432898551
 GameObject:
@@ -20115,6 +20156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2137962629639125724
 GameObject:
@@ -20533,6 +20575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2155993806306411963
 GameObject:
@@ -20750,6 +20793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2173139612465317044
 GameObject:
@@ -20889,6 +20933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2178350537286717997
 GameObject:
@@ -21256,6 +21301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2234998020507483225
 GameObject:
@@ -23076,6 +23122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2491044956257509641
 GameObject:
@@ -24664,7 +24711,7 @@ RectTransform:
   m_GameObject: {fileID: 2759986760618657706}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.00037384033}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1185422589702747215}
@@ -24699,14 +24746,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.29803923, b: 0.28627452, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 64ef5e2cb26ba094d87a331040ed79ea, type: 3}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -24747,7 +24794,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: a7b8175ed903f754b832526686d22089, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -24773,6 +24820,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2762982815180633297
 GameObject:
@@ -25587,6 +25635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2881286156284543848
 GameObject:
@@ -25804,6 +25853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &2895749481598499862
 GameObject:
@@ -26478,6 +26528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3015825590374080267
 GameObject:
@@ -27005,7 +27056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5466733500522125425
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27025,7 +27076,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 325.8, y: -585}
+  m_AnchoredPosition: {x: 325.9, y: -585}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4498683398925490415
@@ -27123,6 +27174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3071299474984263673
 GameObject:
@@ -27340,6 +27392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3085005509750705381
 GameObject:
@@ -27478,6 +27531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3086068872980419276
 GameObject:
@@ -27771,6 +27825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3100261933751456705
 GameObject:
@@ -27990,6 +28045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3128293928580004232
 GameObject:
@@ -28286,6 +28342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3142840030229475903
 GameObject:
@@ -29202,6 +29259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3269106074023781477
 GameObject:
@@ -29841,7 +29899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8165983408314937245
 RectTransform:
   m_ObjectHideFlags: 0
@@ -30720,6 +30778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!114 &1293525747729064768
 MonoBehaviour:
@@ -30734,6 +30793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3345714640496926780
 GameObject:
@@ -31502,6 +31562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3524660683636171776
 GameObject:
@@ -31640,6 +31701,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3525667436085266222
 GameObject:
@@ -32236,6 +32298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3620299373420680820
 GameObject:
@@ -33310,6 +33373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3731648978147111155
 GameObject:
@@ -33748,6 +33812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3777024789474361161
 GameObject:
@@ -34123,6 +34188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3842378518106463241
 GameObject:
@@ -34261,6 +34327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3843836334738273930
 GameObject:
@@ -34712,6 +34779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3875643471076767259
 GameObject:
@@ -34834,7 +34902,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 7512330679735965613}
   m_Direction: 2
   m_Value: 0.0000044194185
-  m_Size: 0.17986482
+  m_Size: 0.17964509
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -34976,6 +35044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &3885921650988827402
 GameObject:
@@ -36568,6 +36637,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4054130118280231156
 GameObject:
@@ -36864,6 +36934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4071631440366731177
 GameObject:
@@ -37081,6 +37152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4075715709770899901
 GameObject:
@@ -37452,6 +37524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4089770308418345163
 GameObject:
@@ -37590,6 +37663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4092934699274496026
 GameObject:
@@ -39048,6 +39122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4271206044560993081
 GameObject:
@@ -39186,6 +39261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4304861749835424267
 GameObject:
@@ -39403,6 +39479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4351273255356224911
 GameObject:
@@ -39854,6 +39931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4364777229633122199
 GameObject:
@@ -39992,6 +40070,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4407656611273298688
 GameObject:
@@ -40443,6 +40522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4431931203290357518
 GameObject:
@@ -41049,6 +41129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4505888383391090162
 GameObject:
@@ -41707,6 +41788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4564166417643477750
 GameObject:
@@ -43447,6 +43529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4733669865020452735
 GameObject:
@@ -44811,6 +44894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &4902467736931238746
 GameObject:
@@ -45230,7 +45314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 246.0882}
+  m_AnchoredPosition: {x: 0, y: 246.08517}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &4927179432514975834
@@ -46150,6 +46234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5017148722126753474
 GameObject:
@@ -46935,7 +47020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 245.99986}
+  m_AnchoredPosition: {x: 0, y: 246.00165}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &5111754348916924329
@@ -47151,6 +47236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5122199592226334448
 GameObject:
@@ -48363,6 +48449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5202033035412459627
 GameObject:
@@ -48778,6 +48865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5256715146723720519
 GameObject:
@@ -49429,6 +49517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5408277688566456938
 GameObject:
@@ -50029,6 +50118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5451588284259280772
 GameObject:
@@ -50715,6 +50805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5550348037914674264
 GameObject:
@@ -51280,6 +51371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5616968241759395764
 GameObject:
@@ -52177,6 +52269,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5697021700524207188
 GameObject:
@@ -53672,6 +53765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &5947928251684663533
 GameObject:
@@ -54194,6 +54288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6014330599353324626
 GameObject:
@@ -54627,6 +54722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6041885129556894677
 GameObject:
@@ -55232,6 +55328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6081878013611486119
 GameObject:
@@ -55680,6 +55777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6136159261846721343
 GameObject:
@@ -56364,6 +56462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6181790536456593260
 GameObject:
@@ -56660,6 +56759,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6208472363634697312
 GameObject:
@@ -56878,6 +56978,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6217561378804752870
 GameObject:
@@ -57371,6 +57472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6272612994322809324
 GameObject:
@@ -58093,6 +58195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6367600847654880658
 GameObject:
@@ -58231,6 +58334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6389744716746858299
 GameObject:
@@ -58448,6 +58552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6425382190934954036
 GameObject:
@@ -59540,6 +59645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6554865360373166938
 GameObject:
@@ -59678,6 +59784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6559225287572746994
 GameObject:
@@ -60042,6 +60149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6586920727286070196
 GameObject:
@@ -60490,6 +60598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6644013234579009572
 GameObject:
@@ -61635,6 +61744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6787724202003388997
 GameObject:
@@ -61924,6 +62034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6852807808023321294
 GameObject:
@@ -63120,6 +63231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6981323578718748279
 GameObject:
@@ -63409,6 +63521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &6996463269856126776
 GameObject:
@@ -63547,6 +63660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7001505938596729250
 GameObject:
@@ -63685,6 +63799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7017518084013561030
 GameObject:
@@ -63903,6 +64018,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7037088275943296849
 GameObject:
@@ -64274,6 +64390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7083486437054544253
 GameObject:
@@ -64412,6 +64529,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7094154636167382290
 GameObject:
@@ -64704,6 +64822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7131289454657257752
 GameObject:
@@ -65948,6 +66067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7273959231662683342
 GameObject:
@@ -66583,6 +66703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7336941101050575977
 GameObject:
@@ -67294,6 +67415,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7406151017170489375
 GameObject:
@@ -68449,6 +68571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7540176615995526946
 GameObject:
@@ -69096,6 +69219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7623034047257592860
 GameObject:
@@ -69712,6 +69836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7733786129163263474
 GameObject:
@@ -70396,6 +70521,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7793250393100110257
 GameObject:
@@ -70534,6 +70660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7796396723785261585
 GameObject:
@@ -70672,6 +70799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7800841709258089406
 GameObject:
@@ -71040,6 +71168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &7859166952649519874
 GameObject:
@@ -72595,6 +72724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8007859820759358074
 GameObject:
@@ -73271,6 +73401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8082708960505826349
 GameObject:
@@ -73638,6 +73769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8139881128542945884
 GameObject:
@@ -73934,6 +74066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8159540185267524332
 GameObject:
@@ -74072,6 +74205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8169803033324408330
 GameObject:
@@ -74290,6 +74424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8184788343581785132
 GameObject:
@@ -74583,6 +74718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8210220355282333294
 GameObject:
@@ -75705,6 +75841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8322076809726035600
 GameObject:
@@ -75922,6 +76059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8444237258391810309
 GameObject:
@@ -76807,6 +76945,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8515286389160321240
 GameObject:
@@ -77099,6 +77238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8557863157151533931
 GameObject:
@@ -77770,6 +77910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8580586854997520252
 GameObject:
@@ -79349,6 +79490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8885655060720466498
 GameObject:
@@ -79875,6 +80017,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &8918522165824411080
 GameObject:
@@ -81498,6 +81641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1 &9185863780777982454
 GameObject:
@@ -82664,6 +82808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!224 &6169457156731143818 stripped
 RectTransform:
@@ -84570,11 +84715,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.6000009
+      value: -0.00000035762787
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 3.9999998
+      value: -0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -84606,11 +84751,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.39999962
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.79999924
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -85382,6 +85527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1001 &1618622125560926582
 PrefabInstance:
@@ -85550,6 +85696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1001 &1639853329891456181
 PrefabInstance:
@@ -86816,6 +86963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1001 &2066036842154954301
 PrefabInstance:
@@ -87897,6 +88045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!224 &8543138887674975816 stripped
 RectTransform:
@@ -89027,6 +89176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!224 &8194249172353297900 stripped
 RectTransform:
@@ -90757,6 +90907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!224 &8817211725425537870 stripped
 RectTransform:
@@ -91964,6 +92115,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1001 &3639681458766895077
 PrefabInstance:
@@ -96465,6 +96617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!224 &2216794965700276426 stripped
 RectTransform:
@@ -97590,6 +97743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!224 &1779028465384003862 stripped
 RectTransform:
@@ -98690,6 +98844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1001 &6079122423867037895
 PrefabInstance:
@@ -99807,6 +99962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!1001 &6400773420086474424
 PrefabInstance:
@@ -103955,6 +104111,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   red: {fileID: 0}
+  redImage: {fileID: 0}
   select: {fileID: 0}
 --- !u!224 &4196304641957690673 stripped
 RectTransform:
@@ -105428,6 +105585,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8561184651534667873}
     m_Modifications:
+    - target: {fileID: 723736599424117407, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723736599424117407, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -105454,11 +105619,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 3.6000009
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 3.8999996
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -105490,11 +105655,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.39999962
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.8499985
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4775600140379039756, guid: f691ebb95775290469fd93c62ad4418f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

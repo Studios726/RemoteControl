@@ -10,6 +10,7 @@ public class ButtonCell : MonoBehaviour
 {
     private Button btn;
     public GameObject red;
+    public Image redImage;
     private Text text;
     public GameObject select;
     private UnityAction lastAction;
@@ -24,10 +25,20 @@ public class ButtonCell : MonoBehaviour
         bg = GetComponent<Image>();
         btn = GetComponent<Button>();
         red = transform.Find("Image").gameObject;
+        redImage = transform.FindComponent<Image>("Image");
+        redImage.color= new Color(1, 1, 1, 0.6f);
         text = transform.FindComponent<Text>("Text");
         select = transform.Find("select").gameObject;
     }
 
+    public void SetRedAlpha(float alpha)
+    {
+        if (redImage.color.a==alpha)
+        {
+            return;
+        }
+        redImage.color= new Color(0.3f, 0, 0, alpha);
+    }
     public void SetTextColor(Color color)
     {
         if (text !=null&&text.color!=color)

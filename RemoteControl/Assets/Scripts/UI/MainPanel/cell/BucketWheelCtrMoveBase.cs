@@ -524,6 +524,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             downBtn.SetTextColor(data.VariableAmplitudeLowerElectromagneticValveOpen ? runColor : normalColor);
             if (data.LargeCarForwardCommand == false && data.LargeCarReverseCommand == false)
             {
+                carStopBtn.SetRedAlpha(1);
                 carStopBtn.SetSystemState(true);
             }
             else
@@ -546,6 +547,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 data.VariableAmplitudeLowerElectromagneticValveOpen == false)
             {
                 rotStopBtn.SetSystemState(true);
+                rotStopBtn.SetRedAlpha(1);
                 stopBtn.SetSystemState(true);
             }
             else
@@ -668,6 +670,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             carFastBtn.SetSystemState(data.SR1_Travel_Speed_SB_2, true);
             if (data.LargeCarForwardCommand_2 == false && data.LargeCarReverseCommand_2 == false)
             {
+                carStopBtn.SetRedAlpha(1);
                 carStopBtn.SetSystemState(true);
             }
             else
@@ -687,7 +690,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
             if (data.RotaryLeftTurnCommand_2 == false && data.RotaryRightTurnCommand_2 == false)
             {
+              
                 rotStopBtn.SetSystemState(true);
+                rotStopBtn.SetRedAlpha(1);
             }
             else
             {
