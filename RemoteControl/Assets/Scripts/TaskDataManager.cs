@@ -485,10 +485,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
             MySqlDataReader mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(5);
             while (mySqlDataReader.Read())
             {
-                string taskID = mySqlDataReader["TaskID"].ToString();
+                string taskID = mySqlDataReader[ConstStr.DATA_TASK_ID].ToString();
                 if (nearestTaskDataDic.ContainsKey(taskID) == false)
                 {
-                    nearestTaskDataDic.Add(taskID, new TaskData(taskID, mySqlDataReader["TaskState"].ToString()));
+                    nearestTaskDataDic.Add(taskID, new TaskData(taskID, mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString()));
                 }
             }
         }

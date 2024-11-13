@@ -166,12 +166,14 @@ public class ImportantParamsGraphPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        dynamicUpdateData = true;
         tempChartData.Clear();
         EventManager.Instance.AddListener(EventName.UpdateChartData, DynamicUpdateData);
     }
 
     private void OnDisable()
     {
+        dynamicUpdateData = false;
         searchPanel.Reset();
         tempChartData.Clear();
         EventManager.Instance.RemoveListener(EventName.UpdateChartData, DynamicUpdateData);

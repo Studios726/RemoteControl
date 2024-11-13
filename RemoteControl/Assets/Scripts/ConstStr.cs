@@ -32,7 +32,7 @@ public static class ConstStr
 
     #region dataName
     #region table name
-    public const string DATABASE_LOGIN_TABLE = "login";
+    public const string DATABASE_LOGIN_TABLE = "sys_user";
     public const string DATABASE_ACCOUNTOPERATION_TABLE = "accountoperation";
     public const string DATABASE_VARIABLE_TABLE = "plcvariables";
     public const string DATABASE_HISTORY_TASK_MC = "history_task_mc";
@@ -42,72 +42,83 @@ public static class ConstStr
     public const string DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC = "history_bucketWheelElectricity";
     public const string DATABASE_HISTORY_CANTILEVER_Flow_MC = "history_cantileverFlow";
     public const string DATABASE_HISTORY_LOG1_MC = "history_logs";
-    public const string DATABASE_HISTORY_LOG2_MC = "history_logs_2";
+    public const string DATABASE_HISTORY_LOG2_MC = "history_logs_two";
     public const string DATABASE_HISTORY_WARNING1_MC = "history_warning";
-    public const string DATABASE_HISTORY_WARNING2_MC = "history_warning_2";
+    public const string DATABASE_HISTORY_WARNING2_MC = "history_warning_two";
     public const string DATABASE_TASK_CONFIG = "task_config";
     #endregion
 
     #region login
-    public const string DATA_USERNAME = "Account";
-    public const string DATA_PASSWORD = "Password";
-    public const string DATA_IS_ADMIN = "IsAdmin";
-    public const string DATA_INDEX = "Index";
-    public const string DATA_DEPARTMENT = "Department";
-    public const string DATA_JOB = "Job";
-    public const string DATA_DEFAULT_PASSWORD = "DefaultPassword";
-    public const string DATA_NAME = "UserName";
+    public const string DATA_USERNAME = "username";
+    public const string DATA_PASSWORD = "password";
+    public const string DATA_IS_ADMIN = "super_admin";
+    // public const string DATA_INDEX = "Index";
+    // public const string DATA_DEPARTMENT = "Department";
+    // public const string DATA_JOB = "Job";
+    // public const string DATA_DEFAULT_PASSWORD = "DefaultPassword";
+    public const string DATA_NAME = "real_name";
     #endregion
     #region history_task_mc
-    public const string DATA_TASK_ID = "TaskID";
-    public const string DATA_OPERATO_RSYSTEM = "OperatorSystem";
-    public const string DATA_TASK_CREATE_TIME = "TaskCreateTime";
-    public const string DATA_MACHINE = "Machine";
-    public const string DATA_TASK_TYPE = "TaskType";
-    public const string DATA_MATERIAL_RANGE_START = "MaterialRangeStart";
-    public const string DATA_MATERIAL_RANGE_END = "MaterialRangeEnd";
-    public const string DATA_SIDE_SELECTION = "SideSelection";
-    public const string DATA_LEFT_RIGHT_RANGE_START = "LeftRightRangeStart";
-    public const string DATA_LEFT_RIGHT_RANGE_END = "LeftRightRangeEnd";
-    public const string DATA_STEP_LENGTH = "StepLength";
-    public const string DATA_IS_TIMED = "IsTimed";
-    public const string DATA_TIMEDAT = "TimedAt";
-    public const string DATA_IS_QUANTIFIED = "IsQuantified";
-    public const string DATA_QUANTITY = "Quantity";
-    public const string DATA_OPERATOR = "Operator";
-    public const string DATA_TASK_STATE = "TaskState";
-    public const string DATA_TASK_TAKE_MATE_HIGH = "TakeMateHigh";
-    public const string DATA_TASK_LAYER_HIGH = "LayerHigh";
+    public const string DATA_TASK_ID = "task_id";
+    public const string DATA_OPERATO_RSYSTEM = "operator_system";
+    public const string DATA_TASK_CREATE_TIME = "task_create_time";
+    public const string DATA_MACHINE = "machine";
+    public const string DATA_TASK_TYPE = "task_type";
+    public const string DATA_MATERIAL_RANGE_START = "material_range_start";
+    public const string DATA_MATERIAL_RANGE_END = "material_range_end";
+    public const string DATA_SIDE_SELECTION = "side_selection";
+    public const string DATA_LEFT_RIGHT_RANGE_START = "left_right_range_start";
+    public const string DATA_LEFT_RIGHT_RANGE_END = "left_right_range_end";
+    public const string DATA_STEP_LENGTH = "step_length";
+    public const string DATA_IS_TIMED = "is_timed";
+    public const string DATA_TIMEDAT = "timed_at";
+    public const string DATA_IS_QUANTIFIED = "is_quantified";
+    public const string DATA_QUANTITY = "quantity";
+    public const string DATA_OPERATOR = "operator";
+    public const string DATA_TASK_STATE = "task_state";
+    public const string DATA_TASK_TAKE_MATE_HIGH = "take_mate_high";
+    public const string DATA_TASK_LAYER_HIGH = "layer_high";
+    public const string DATA_TASK_AUTO_MODE = "auto_mode";
+    public const string DATA_TASK_ANGLE_ENTRY_MODE = "angle_entry_mode";
+    public const string DATA_TASK_STATE2 = "state";
     #endregion
     #region history_cartelectricity
-    public const string DATA_HISTORY_CARTELECTRICITY_NAME = "Name";
-    public const string DATA_HISTORY_CARTELECTRICITY_TIME = "Time";
-    public const string DATA_HISTORY_CARTELECTRICITY_MACHINE = "Machine";
-    public const string DATA_HISTORY_CARTELECTRICITY_VALUE = "Value";
+    public const string DATA_HISTORY_CARTELECTRICITY_NAME = "name";
+    public const string DATA_HISTORY_CARTELECTRICITY_TIME = "time";
+    public const string DATA_HISTORY_CARTELECTRICITY_MACHINE = "machine";
+    public const string DATA_HISTORY_CARTELECTRICITY_VALUE = "value";
+    public const string DATA_HISTORY_CARTELECTRICITY_CREATOR = "creator";
+    public const string DATA_HISTORY_CARTELECTRICITY_Create_date = "create_date";
     #endregion
     #region history_logs
     public const string DATA_HISTORY_LOGS_TIME = "time";
     public const string DATA_HISTORY_LOGS_INFO = "info";
     public const string DATA_HISTORY_LOGS_OPERATOR = "operator";
+    public const string DATA_HISTORY_LOGS_CREATE_DATE = "create_date";
+    public const string DATA_HISTORY_LOGS_CREATOR = "creator";
     #endregion
     #region history_warning
     public const string DATA_HISTORY_WARNING_TIME = "time";
     public const string DATA_HISTORY_WARNING_INFO = "info";
     public const string DATA_HISTORY_WARNING_OPERATOR = "operator";
+    public const string DATA_HISTORY_WARNING_CREATE_DATE = "create_date";
+    public const string DATA_HISTORY_WARNING_CREATOR = "creator";
     #endregion
     #region task_config
-    public const string DATA_TASK_CONFIG_ID = "ID";
-    public const string DATA_TASK_CONFIG_HEAPDOS = "HeapDis";
-    public const string DATA_TASK_CONFIG_MOVEMODEL = "MoveModel";
-    public const string DATA_TASK_CONFIG_FETCHPILEDEPTH = "FetchPileDepth";
-    public const string DATA_TASK_CONFIG_FETCHVERTICALRANGEADD = "FetchVerticalRangeAdd";
-    public const string DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB = "FetchHorizontalRangeSub";
+    public const string DATA_TASK_CONFIG_ID = "id";
+    public const string DATA_TASK_CONFIG_HEAPDOS = "heap_dis";
+    public const string DATA_TASK_CONFIG_MOVEMODEL = "move_model";
+    public const string DATA_TASK_CONFIG_FETCHPILEDEPTH = "fetch_pile_depth";
+    public const string DATA_TASK_CONFIG_FETCHVERTICALRANGEADD = "fetch_vertical_range_add";
+    public const string DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB = "fetch_horizontal_range_sub";
+    public const string DATA_TASK_CONFIG_CREATOR = "creator";
+    public const string DATA_TASK_CONFIG_CREATE_DATE = "create_date";
     #endregion
     #region
-    public const string DATA_ACCOUNT_OPERATION_INDEX = "Index";
-    public const string DATA_ACCOUNT_OPERATION_TIME = "Time";
-    public const string DATA_ACCOUNT_OPERATION_OPERATOR = "Operator";
-    public const string DATA_ACCOUNT_OPERATION_DETAIL = "Detail";
+    public const string DATA_ACCOUNT_OPERATION_INDEX = "index";
+    public const string DATA_ACCOUNT_OPERATION_TIME = "time";
+    public const string DATA_ACCOUNT_OPERATION_OPERATOR = "operator";
+    public const string DATA_ACCOUNT_OPERATION_DETAIL = "detail";
     #endregion
 
     #region plc variables
