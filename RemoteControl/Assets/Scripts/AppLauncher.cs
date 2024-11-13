@@ -26,6 +26,7 @@ public class AppLauncher : MonoBehaviour
         {
             ExitGamePop();
         });
+        FullScreen();
     }
 
     public void Update()
@@ -88,6 +89,29 @@ public class AppLauncher : MonoBehaviour
 
         };
         UIManager.Instance.Init(uiLayers);
+    }
+
+    public void FullScreen()
+    {
+        Resolution[] resolutions = Screen.resolutions;//获取设置当前屏幕分辩率
+        //找到最大分辨率
+        int width = resolutions[0].width, height = resolutions[0].height;
+        //对数组进行排序
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (resolutions[i].width > width)
+            {
+                width = resolutions[i].width;
+                height = resolutions[i].height;
+            }
+            if (resolutions[i].width == width && height > resolutions[i].height)
+            {
+                width = resolutions[i].width;
+                height = resolutions[i].height;
+            }
+        }
+        Screen.SetResolution(width, height, true);
+
     }
     private void GameStart()
     {

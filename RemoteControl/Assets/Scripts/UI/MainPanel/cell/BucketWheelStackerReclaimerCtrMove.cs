@@ -79,6 +79,6 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
     public override void UpdateData(SystemVariables data)
     {
         base.UpdateData(data);
-        pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth,true,false);
+        pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth,true,false); 
     }
 }
