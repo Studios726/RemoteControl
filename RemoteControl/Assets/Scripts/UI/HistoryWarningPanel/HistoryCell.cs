@@ -15,10 +15,21 @@ public class HistoryCell : MonoBehaviour
     public Text timeText;
     public Text infoText;
     public Text operatorUserText;
-    public void UpdateDisplay(string userId, string time,string info,string name)
+    public void UpdateDisplay(string userId, string time,string info,string name,bool isColor=false)
     {
         idText.text = userId;
         timeText.text = time;
+        if (isColor)
+        {
+            if (info.Contains("解除")||info.Contains("成功"))
+            {
+                infoText.color = Color.white;
+            }
+            else
+            {
+                infoText.color = Color.red;
+            }
+        }
         infoText.text = info;
         operatorUserText.text = name;
     }

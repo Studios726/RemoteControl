@@ -167,7 +167,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
 
     public void ShowStatePane(StatusParameterChildID id)
     {
-        Debug.Log($"状态参数打开 {id}");
+        Debug.Log($"鐘舵�佸弬鏁版墦寮� {id}");
     }
 
     public void RestCurBtn(GameObject offgo, GameObject ongo)
@@ -195,11 +195,11 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         {
             if (panelType == PanelType.AlarmPanel)
             {
-                _alarmReclaimerList.RefreshList(historyDatas);
+                _alarmReclaimerList.RefreshList(historyDatas,panelType);
             }
             else if (panelType == PanelType.LogPanel)
             {
-                _logReclaimerList.RefreshList(historyDatas);
+                _logReclaimerList.RefreshList(historyDatas,panelType);
             }
             else
             {
@@ -209,11 +209,11 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         {
             if (panelType == PanelType.AlarmPanel)
             {
-                _alarmStackerReclaimerList.RefreshList(historyDatas);
+                _alarmStackerReclaimerList.RefreshList(historyDatas,panelType);
             }
             else if (panelType == PanelType.LogPanel)
             {
-                _logmStackerReclaimerList.RefreshList(historyDatas);
+                _logmStackerReclaimerList.RefreshList(historyDatas,panelType);
             }
             else
             {
