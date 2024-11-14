@@ -16,6 +16,7 @@ public enum MessageType
     RC, // 由于是示例，这里省略了枚举值的赋值。
     PC,
     SCA,
+    FM
 }
 
 public class MessageCenter : Singleton<MessageCenter>
@@ -109,6 +110,19 @@ public class MessageCenter : Singleton<MessageCenter>
             {
                 string json = Decompress(message);
                 GameDataManager.Instance.DeSerializeScaJson(json);
+            }
+            catch (Exception)
+            {
+
+                Debug.Log($"数据解析失败 socketType {socketType}");
+            }
+        }else if (socketType == SocketType.FM)
+        {
+            try
+            {
+                string json =message;
+                List<FlowMeter_data> data= JsonMgr.DeSerialize<List<FlowMeter_data>>(json);
+                GameDataManager.Instance.SetFlowMeterData(data);
             }
             catch (Exception)
             {

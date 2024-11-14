@@ -67,7 +67,7 @@ public class GameDataManager : Singleton<GameDataManager>
     private string _taoIP;
 
     private IpConfig _ipConfig;
-
+    public List<FlowMeter_data> flowMeterDataList=new List<FlowMeter_data>();
     // private int count;
     public Queue<WarningData> BucketWheelQueue = new Queue<WarningData>();
     public Queue<WarningData> BucketWheelStackerReclaimerQueue = new Queue<WarningData>();
@@ -173,9 +173,28 @@ public class GameDataManager : Singleton<GameDataManager>
         UpdateMachine();
 
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
-        // EventManager.Instance.TriggerEvent(EventName.UpdateChartData, null);
     }
 
+    public void SetFlowMeterData(List<FlowMeter_data> datas)
+    {
+        flowMeterDataList = datas;
+        EventManager.Instance.TriggerEvent(EventName.UpdateFlowMeterData, null);
+    }
+
+    public FlowMeter_data GetFlowMeterData(Machine machine)
+    {
+        if (flowMeterDataList.Count >0)//更新流量
+        {
+            for (int i = 0; i < flowMeterDataList.Count; i++)
+            {
+                if (flowMeterDataList[i].id==(int)machine)
+                {
+                    return flowMeterDataList[i];
+                }
+            }
+        }
+        return  null;
+    }
     //悬胶皮带运行提示
     public void PileTakeMaterPop(TaskType taskType, int time)
     {
@@ -231,7 +250,6 @@ public class GameDataManager : Singleton<GameDataManager>
     public void SetScaReportAndDem(SendDataReportAndDEM sendDataReportAndDEM)
     {
         _sendDataReportAndDem = sendDataReportAndDEM;
-        Debug.Log($"模型数据状态 {_sendDataReportAndDem.code}");
         EventManager.Instance.TriggerEvent(EventName.RefreshModel, null);
     }
 
@@ -709,14 +727,30 @@ public class GameDataManager : Singleton<GameDataManager>
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
 
+    /// <summary>
+    /// 获取三维数据
+    /// </summary>
+    /// <param name="query_type"></param>
     public void UpdateSCAData(int query_type)
     {
-        Debug.Log("堆料模型更新");
         SystemCommand serverCommand = new SystemCommand();
         serverCommand.QUERY_SYSTEM = "MC";
         serverCommand.DATA_TYPE = 3;
         serverCommand.QUERY_TYPE = query_type;
         MessageCenter.Instance.SendMessage(MessageType.SCA, serverCommand);
+    }
+
+    /// <summary>
+    /// 获取流量计数据
+    /// </summary>
+    /// <param name="query_type"></param>
+    public void UpdateFMData(int query_type)
+    {
+        SystemCommand serverCommand = new SystemCommand();
+        serverCommand.QUERY_SYSTEM = "MC";
+        serverCommand.DATA_TYPE = 3;
+        serverCommand.QUERY_TYPE = query_type;
+        MessageCenter.Instance.SendMessage(MessageType.FM, serverCommand);
     }
 
     public void RecordChart()
@@ -746,7 +780,14 @@ public class GameDataManager : Singleton<GameDataManager>
 
             // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
             //     Machine.BucketWheelStackerReclaimer);
-
+            if (flowMeterDataList.Count>0)//更新流量
+            {
+                for (int i = 0; i < flowMeterDataList.Count; i++)
+                {
+                    DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, (float)flowMeterDataList[i].FlowRealtime, "悬臂流量",
+                        (Machine)flowMeterDataList[i].id);
+                }
+            }
             DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
                 _systemVariables.BucketWheelElectricCurrent_2, "斗轮电流",
                 Machine.BucketWheel);
@@ -931,6 +972,8 @@ public class GameDataManager : Singleton<GameDataManager>
         //     EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
         // }
     }
+
+    #region
 
     public void RecordWarning(SystemVariables newSystemVariables)
     {
@@ -8800,6 +8843,8 @@ public class GameDataManager : Singleton<GameDataManager>
             UpdateWarningByLastMcWarningRecord();
         }
     }
+
+    #endregion
 
     public void UpdateWarningByLastMcWarningRecord()
     {

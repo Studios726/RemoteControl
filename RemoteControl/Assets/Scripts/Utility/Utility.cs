@@ -12,7 +12,9 @@ namespace Utility
         None,
         Meter,
         Angle,
-        Electricity
+        Electricity,
+        Tonne,//吨
+        TonneHour
 
     }
     public static class Utility
@@ -45,6 +47,12 @@ namespace Utility
             else if (textType == TextType.Electricity)
             {
                 str = str + "A";
+            } else if (textType == TextType.Tonne)
+            {
+                str = str + "t";
+            }else if (textType == TextType.TonneHour)
+            {
+                str = str + "t/h";
             }
             text.text = str;
         }

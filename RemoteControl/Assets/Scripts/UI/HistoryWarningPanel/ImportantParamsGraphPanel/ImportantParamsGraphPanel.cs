@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using RemoteControl.Event;
+using ShangHaiPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -423,11 +424,12 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             }else if (curChartName==ChartName.CantileverCurrent_1)
             {
                 // tempChartValue = GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent_2;
-                tempChartValue = Random.Range(45, 50);
+                FlowMeter_data data= GameDataManager.Instance.GetFlowMeterData(Machine.BucketWheelStackerReclaimer);
+                tempChartValue = data==null?0:(float)data.FlowRealtime;
             }else if (curChartName==ChartName.CantileverCurrent_2)
             {
-                // tempChartValue = GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent_2;
-                tempChartValue = Random.Range(45, 50);
+                FlowMeter_data data= GameDataManager.Instance.GetFlowMeterData(Machine.BucketWheel);
+                tempChartValue = data==null?0:(float)data.FlowRealtime;
             }
             UpdateChartData(tempChartValue);
         }

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Mime;
+using ShangHaiPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -458,8 +459,6 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         //Debug.Log("更新move  大车碰撞信息 ");
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
-            // carForwardBtn.SetSelectState(data.SR1_Travel_FWD_1MO_SB);
-            // carBackBtn.SetSelectState(data.SR1_Travel_REV_1MO_SB);
             SetText(carElectricity, data.LargeCarElectricCurrent.ToString(), TextType.Electricity);
             SetText(rotationElectricity, data.RotaryElectricCurrent.ToString(), TextType.Electricity);
             SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent.ToString(), TextType.Electricity);
@@ -582,6 +581,20 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             string x = (53.4 + data.DC_Pos + (x1 * Mathf.Cos(data.SLEW_Angle * Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle * Mathf.Deg2Rad) - 1.8F).ToString("F2");
             bucketWheelPos.text = $"({x} , {y})";
+
+            FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
+            if (flowMeterData != null)//更新流量
+            {
+                SetText(thisTakeMater, flowMeterData.Once_extra_weight.ToString(), TextType.Tonne);
+                SetText(dayTakeMater, flowMeterData.Oneday_extra_weight.ToString(), TextType.Tonne);
+                SetText(cantileverFlow, flowMeterData.FlowRealtime.ToString(), TextType.TonneHour);
+            }
+            else
+            {
+                SetText(thisTakeMater, "0", TextType.Tonne);
+                SetText(dayTakeMater, "0", TextType.Tonne);
+                SetText(cantileverFlow, "0", TextType.TonneHour);
+            }
         }
         else
         {
@@ -704,6 +717,19 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             string y = (40 * Mathf.Sin(data.SLEW_Angle_2 * Mathf.Deg2Rad) + 1.7).ToString("F2");
 
             bucketWheelPos.text = $"({x} , {y})";
+            FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
+            if (flowMeterData != null)//更新流量
+            {
+                SetText(thisTakeMater, flowMeterData.Once_extra_weight.ToString(), TextType.Tonne);
+                SetText(dayTakeMater, flowMeterData.Oneday_extra_weight.ToString(), TextType.Tonne);
+                SetText(cantileverFlow, flowMeterData.FlowRealtime.ToString(), TextType.TonneHour);
+            }
+            else
+            {
+                SetText(thisTakeMater, "0", TextType.Tonne);
+                SetText(dayTakeMater, "0", TextType.Tonne);
+                SetText(cantileverFlow, "0", TextType.TonneHour);
+            }
         }
 
         SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos - data.DC_Pos_2) + 64.34).ToString("F2"), TextType.Meter);

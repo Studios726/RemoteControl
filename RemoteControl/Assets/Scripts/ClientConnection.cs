@@ -9,7 +9,8 @@ public enum SocketType
 {
     TaoRC=0,
     TaskPC=1,
-    SCA=2
+    SCA=2,
+    FM=3//流量计
 }
 public class ClientConnection:MonoBehaviour
 {

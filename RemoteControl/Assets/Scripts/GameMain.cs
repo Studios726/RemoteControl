@@ -17,6 +17,7 @@ namespace RemoteControl
         public ClientConnection connectionRC;
         public ClientConnection connectionPC;
         public ClientConnection connectionSCA;
+        public ClientConnection connectionFM;
         private MachineMove machineMove_1;
         private MachineMove machineMove_2;
         private Timer timerRc;
@@ -67,9 +68,12 @@ namespace RemoteControl
             connectionPC.Init("ws://" + GameDataManager.Instance.IpConfig.TaskIP, SocketType.TaskPC);
             connectionSCA = new GameObject().AddComponent<ClientConnection>();
             connectionSCA.Init("ws://" + GameDataManager.Instance.IpConfig.YuanIP, SocketType.SCA);
+            connectionFM = new GameObject().AddComponent<ClientConnection>();
+            connectionFM.Init("ws://" + GameDataManager.Instance.IpConfig.FmIP, SocketType.FM);
             MessageCenter.Instance.RegisterListener(MessageType.RC, connectionRC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.PC, connectionPC.WebSend);
             MessageCenter.Instance.RegisterListener(MessageType.SCA, connectionSCA.WebSend);
+            MessageCenter.Instance.RegisterListener(MessageType.FM, connectionFM.WebSend);
         }
 
         public void ReadConfig()
@@ -95,6 +99,7 @@ namespace RemoteControl
                 config.YuanIP = Address.serviceYuanIP;
                 config.TaskIP = Address.serviceTaskIP;
                 config.DataIP = Address.serviceIP;
+                config.FmIP= Address.serviceFmIP;
                 GameDataManager.Instance.SetIpConfig(config);
             }
         }
@@ -134,6 +139,12 @@ namespace RemoteControl
             {
                 connectionSCA.OnClose();
                 connectionSCA = null;
+            }
+            
+            if (connectionFM != null && connectionFM.isConnect)
+            {
+                connectionFM.OnClose();
+                connectionFM = null;
             }
 
             if (chartTimer != null)
@@ -182,6 +193,10 @@ namespace RemoteControl
             {
                 GameDataManager.Instance.UpdateSCAData(30);  
                 des = "三维扫描连接成功";
+            }else if (connectEventArgs.type == SocketType.FM)
+            {
+                GameDataManager.Instance.UpdateFMData(1);  
+                des = "流量计连接成功";
             }
 
             Debug.Log("----------------------Success " + connectEventArgs.type);
@@ -222,6 +237,10 @@ namespace RemoteControl
             {
                 des = "三维扫描连接失败";
                 isInsert = connectionSCA.ReconnectCount == 0;
+            }else if (connectEventArgs.type == SocketType.FM)
+            {
+                des = "流量计连接失败";
+                isInsert = connectionFM.ReconnectCount == 0;
             }
 
             Debug.Log("----------------------Fail " + connectEventArgs.type);
@@ -253,6 +272,10 @@ namespace RemoteControl
             {
                 des = "SCA 重连";
                 isInsert = connectionSCA.ReconnectCount == 0;
+            } else if (connectEventArgs.type == SocketType.FM)
+            {
+                des = "SCA 重连";
+                isInsert = connectionFM.ReconnectCount == 0;
             }
 
             if (isInsert)

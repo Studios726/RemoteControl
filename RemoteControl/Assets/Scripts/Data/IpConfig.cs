@@ -8,4 +8,5 @@ public class IpConfig
    public string TaoIP{get;set;}
    public string TaskIP{get;set;}
    public string YuanIP{get;set;}
+   public string FmIP{get;set;}
 }

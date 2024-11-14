@@ -1,9 +1,11 @@
 using ShenYangRemoteSystem.Subclass;
 using System.Collections;
 using System.Collections.Generic;
+using ShangHaiPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
 {
@@ -80,5 +82,17 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
     {
         base.UpdateData(data);
         pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth,true,false); 
+        
+        FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
+        if (flowMeterData != null)//更新流量
+        {
+            SetText(thisPileMater, flowMeterData.Once_piling_weight.ToString(), TextType.Tonne);
+              SetText(dayPileMater, flowMeterData.Oneday_piling_weight.ToString(), TextType.Tonne);
+        }
+        else
+        {
+            SetText(thisPileMater, "0", TextType.Tonne);
+            SetText(dayPileMater, "0", TextType.Tonne);
+        }
     }
 }
