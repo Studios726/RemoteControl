@@ -114,7 +114,7 @@ public class GameDataManager : Singleton<GameDataManager>
             return curAccountInfo.name;
         }
 
-        return "管理者";
+        return "";
     }
 
     public void SetIp(string ip)

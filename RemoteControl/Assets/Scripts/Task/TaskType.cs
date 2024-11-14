@@ -56,11 +56,12 @@ public class TaskData
 {
     public string TaskID { get; set; }
     public string TaskState { get; set; }
-
-    public TaskData(string taskID, string taskState)
+    public string State { get; set; }
+    public TaskData(string taskID, string taskState,string state="1")
     {
         TaskID = taskID;
         TaskState = taskState;
+        State = state;
     }
 
     public Machine Machine { get; set; }

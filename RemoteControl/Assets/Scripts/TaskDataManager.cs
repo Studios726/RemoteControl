@@ -332,17 +332,14 @@ public class TaskDataManager : Singleton<TaskDataManager>
             UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(tips, null, null));
             return;
         }
-
+        if (nearestTaskDataDic.Count <= 0)
+        {
+            GetNearestTaskDataDic();
+        }
         if (taskVariables.McData.Count > 0)
         {
-            if (nearestTaskDataDic.Count <= 0)
-            {
-                GetNearestTaskDataDic();
-            }
-
             for (int i = 0; i < taskVariables.McData.Count; i++)
             {
-                // Debug.LogError($" code {taskVariables.McData[i].AllData.Code}  {taskVariables.McData[i].Machine} {taskVariables.McData[i].AllData.ProcessingProgress} ");
                 AddOrUpdateTaskData(taskVariables.McData[i]);
                 if (nearestTaskDataDic.ContainsKey(taskVariables.McData[i].TaskID))
                 {
@@ -398,10 +395,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     TaskCommand taskCommand = taskVariables.McData[i];
                     nearestTaskDataDic.Add(taskVariables.McData[i].TaskID,
                         new TaskData(taskVariables.McData[i].TaskID,
-                            taskVariables.McData[i].AllData.ProcessingProgress.ToString()));
-                    DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
+                            taskVariables.McData[i].AllData.ProcessingProgress.ToString(),"1"));
+                    bool succ=DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
                         taskVariables.McData[i].AllData.ProcessingProgress.ToString());
-
+                    Debug.LogError($" succ>>>>>>>>>>>>>{succ}");
                     if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
                     {
                         AddOrUpdateTaskDesQueue(-1, Machine.BucketWheelStackerReclaimer); //hard code 
@@ -410,6 +407,21 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     {
                         AddOrUpdateTaskDesQueue(-1, Machine.BucketWheel);
                     }
+                }
+                if (taskVariables.McData[i].AllData.OperationCommandList[3]==1)//任务结束更新数据库
+                {
+                    DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, "2");
+                }
+            }
+        }
+        else
+        {
+            foreach (var data in nearestTaskDataDic)//任务规划崩溃处理最近任务完成状态
+            {
+                if (data.Value.State!="2")
+                {
+                    data.Value.State = "2";
+                    DataManager.Instance.UpdateHistoryTaskMcCompleteState(data.Value.TaskID, "2");
                 }
             }
         }
@@ -488,7 +500,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 string taskID = mySqlDataReader[ConstStr.DATA_TASK_ID].ToString();
                 if (nearestTaskDataDic.ContainsKey(taskID) == false)
                 {
-                    nearestTaskDataDic.Add(taskID, new TaskData(taskID, mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString()));
+                    nearestTaskDataDic.Add(taskID, new TaskData(taskID, mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString(),mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString()));
                 }
             }
         }
