@@ -88,7 +88,7 @@ public class BucketWheelStackerReclaimerState : BucketWheelStateBase
                 des=des;
             }
             des=data.SuspensionBeltMaterialUnloadingRunningContact?des+" 取料运行中":des+" 堆料运行中";
-            runTip.SetText(des+"取料运行中");
+            runTip.SetText(des);
         }
         else
         {
