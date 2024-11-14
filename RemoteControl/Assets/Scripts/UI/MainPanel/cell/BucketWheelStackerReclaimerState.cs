@@ -70,6 +70,29 @@ public class BucketWheelStackerReclaimerState : BucketWheelStateBase
         SetToggleState(diversionPlateLimit, data.DiversionPlateLimit, false, data.D1PLC1CommunicationState);
         SetToggleState(suspensoidTakeMaterRun, data.SuspensionBeltMaterialUnloadingRunningContact, false, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit, false, data.D1PLC1CommunicationState);
-
+        if (data.SuspensionBeltMaterialUnloadingRunningContact||data.SuspensionBeltMaterialLoadingRunningContact)
+        {
+            string des =data.Remote?"远程":"本地";
+            if (data.Single_Action)
+            {
+                des=des+" 单动";
+            }else if (data.Link_Action)
+            {
+                des=des+" 联动";
+            }else if (data.AUTO_MODE)
+            {
+                des=des+" 自动";
+            }
+            else
+            {
+                des=des;
+            }
+            des=data.SuspensionBeltMaterialUnloadingRunningContact?des+" 取料运行中":des+" 堆料运行中";
+            runTip.SetText(des+"取料运行中");
+        }
+        else
+        {
+            runTip.Hide();
+        }
    }
 }

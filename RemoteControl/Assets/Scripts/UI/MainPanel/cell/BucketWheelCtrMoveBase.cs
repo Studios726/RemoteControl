@@ -331,8 +331,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 后退位置object
     /// </summary>
     public GameObject BackPosGameObject;
-
-
+    
     private ButtonCell curCtrMode;
     private ButtonCell curPileTakeMode;
     private ButtonCell curCarMoveMode;
@@ -346,7 +345,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     public Machine machine;
     public Color normalColor = new Color(1, 1, 1, 0.6f);
     public Color runColor = new Color(1, 0, 0.1803922f, 1);
-
+    
     public virtual void Start()
     {
         Init();

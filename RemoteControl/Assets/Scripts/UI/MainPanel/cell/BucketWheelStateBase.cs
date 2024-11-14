@@ -124,11 +124,18 @@ public class BucketWheelStateBase : MonoBehaviour
     /// 导料槽取料位
     /// </summary>
     public ToggleDIY bucketWheelSlotLowerLimit;
+    
+    /// <summary>
+    /// 运行状态提示
+    /// </summary>
+    public RunStateTip runTip;
+    
     public float pastTime = 0;
     public Machine machine;
-
+    
     public virtual void UpdateData(SystemVariables data)
     {
+      
         //Debug.Log("更新参数状态");
         SetToggleState(localControl, !data.Remote_2, false, data.D1PLC1CommunicationState);
         SetToggleState(lowVoltagePowerClosed, data.LowVoltagePowerClosed_2, false, data.D1PLC1CommunicationState);
@@ -155,6 +162,29 @@ public class BucketWheelStateBase : MonoBehaviour
         
         SetToggleState(suspensoidTakeMaterRun, data.SuspensionBeltMaterialUnloadingRunningContact_2, false, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit_2, false, data.D1PLC1CommunicationState);
+        if (data.SuspensionBeltMaterialUnloadingRunningContact_2)
+        {
+            string des =data.Remote_2?"远程":"本地";
+            if (data.Single_Action_2)
+            {
+                des=des+" 单动";
+            }else if (data.Link_Action_2)
+            {
+                des=des+" 联动";
+            }else if (data.AUTO_MODE_2)
+            {
+                des=des+" 自动";
+            }
+            else
+            {
+                des=des;
+            }
+            runTip.SetText(des+" 取料运行中");
+        }
+        else
+        {
+            runTip.Hide();
+        }
     }
 
     public void Update()
