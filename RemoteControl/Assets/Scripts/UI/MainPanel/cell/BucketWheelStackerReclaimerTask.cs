@@ -216,7 +216,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         pileResetTaskBtn.SetSelectState(false);
         PileAutoMaxToggle.SetSystemState(false,true);
         PileSemiAutoToggle.SetSystemState(true,true);
-        PileRightAngleToggle.SetSystemState(true,true);
-        PileObliqueAngleToggle.SetSystemState(false,true);
+        PileRightAngleToggle.SetSystemState(false,true);
+        PileObliqueAngleToggle.SetSystemState(true,true);
     }
 }

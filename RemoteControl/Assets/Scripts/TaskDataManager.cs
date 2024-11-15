@@ -366,7 +366,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         taskData.TaskState = taskVariables.McData[i].AllData.Code.ToString();
                         DataManager.Instance.UpdateHistoryTaskMc(taskData.TaskID,
                             taskData.TaskState);
-                        GameDataManager.Instance.UpdateSCAData(1);
                         if (taskVariables.McData[i].Machine == Machine.BucketWheelStackerReclaimer)
                         {
                             AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,
@@ -423,6 +422,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     data.Value.State = "2";
                     DataManager.Instance.UpdateHistoryTaskMcCompleteState(data.Value.TaskID, "2");
                 }
+            }
+
+            foreach (var data in _codeDescriptions)
+            {
+                GameDataManager.Instance.RemoveWarningDesDict(data.Key.ToString());
             }
         }
 

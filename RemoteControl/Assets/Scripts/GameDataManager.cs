@@ -956,6 +956,8 @@ public class GameDataManager : Singleton<GameDataManager>
             WarningCellDataDict.Remove(key);
             UpdatePlcWarningRecordData();
         }
+        EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
+        EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
     }
 
     public void AddOrUpdateWarningDesQueue(string des, Machine machine, int rank = 0)

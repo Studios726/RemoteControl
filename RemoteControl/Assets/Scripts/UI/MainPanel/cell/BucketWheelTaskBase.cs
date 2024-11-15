@@ -447,8 +447,8 @@ public class BucketWheelTaskBase : PanelBase
 
         AutoMaxToggle.SetSystemState(false, true);
         SemiAutoToggle.SetSystemState(true, true);
-        RightAngleToggle.SetSystemState(true, true);
-        ObliqueAngleToggle.SetSystemState(false, true);
+        RightAngleToggle.SetSystemState(false, true);
+        ObliqueAngleToggle.SetSystemState(true, true);
     }
 
     public virtual void InputFieldValueRange(InputField inputField, float min, float max)
