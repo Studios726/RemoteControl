@@ -8857,6 +8857,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(data.Value.Key, data.Value.Des, data.Value.Machine, false,
                     data.Value.TriggerDateTime, data.Value.IsConfirm, data.Value.ConfirmTime);
             }
+            UpdatePlcWarningRecordData();
         }
     }
 }

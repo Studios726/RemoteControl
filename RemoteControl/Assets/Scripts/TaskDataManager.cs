@@ -524,8 +524,9 @@ public class TaskDataManager : Singleton<TaskDataManager>
             des = $"错误码 {code}";
         }
 
-        GameDataManager.Instance.AddOrUpdateWarningDesDict(code.ToString(), des,
+        GameDataManager.Instance.AddOrUpdateWarningDesDict(code.ToString()+machine.ToString(), des,
             machine, false, "");
+        GameDataManager.Instance.UpdatePlcWarningRecordData();
     }
 
     public int IsCanSendTaskCommond(Machine machine, TaskType taskType, OperationType operationType)
