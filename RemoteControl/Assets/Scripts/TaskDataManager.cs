@@ -395,9 +395,8 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     nearestTaskDataDic.Add(taskVariables.McData[i].TaskID,
                         new TaskData(taskVariables.McData[i].TaskID,
                             taskVariables.McData[i].AllData.ProcessingProgress.ToString(),"1"));
-                    bool succ=DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
+                    DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
                         taskVariables.McData[i].AllData.ProcessingProgress.ToString());
-                    Debug.LogError($" succ>>>>>>>>>>>>>{succ}");
                     if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
                     {
                         AddOrUpdateTaskDesQueue(-1, Machine.BucketWheelStackerReclaimer); //hard code 
@@ -523,7 +522,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             des = $"错误码 {code}";
         }
-
         GameDataManager.Instance.AddOrUpdateWarningDesDict(code.ToString()+machine.ToString(), des,
             machine, false, "");
         GameDataManager.Instance.UpdatePlcWarningRecordData();
