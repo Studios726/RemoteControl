@@ -232,8 +232,8 @@ public class HideButtonCtrBase : PanelBase
             impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed,true);
             lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed,true);
             lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed==false,true);
-            systemUnlockBtn.SetSystemState(data.SystemInterlockSwitch==false,true);
-            systemLockBtn.SetSystemState(data.SystemInterlockSwitch,true);
+            systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich==false,true);
+            systemLockBtn.SetSystemState(data.SR1_Interlock_Swich,true);
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning==false,true);
             oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning,true);
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB,true);
@@ -285,8 +285,8 @@ public class HideButtonCtrBase : PanelBase
             impetusSupplyCloseBrakeBtn.SetSystemState(data.LowVoltagePowerClosed_2,true);
             lightCloseBrakeBtn.SetSystemState(data.LightPowerClosed_2,true);
             lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed_2==false,true);
-            systemUnlockBtn.SetSystemState(data.SystemInterlockSwitch_2==false,true);
-            systemLockBtn.SetSystemState(data.SystemInterlockSwitch_2,true);
+            systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich_2==false,true);
+            systemLockBtn.SetSystemState(data.SR1_Interlock_Swich_2,true);
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false,true);
             oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2,true);
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB_2,true);
