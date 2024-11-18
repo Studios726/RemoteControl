@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using RemoteControl.Event;
 using UnityEngine.UI;
 
@@ -171,6 +172,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
         taskCommand.TaskCreateTime = DateTime.Now;
+        taskCommand.FinishMethod =new List<int>(){0,0};
         if (operationType==OperationType.START|| operationType == OperationType.RESET)
         {
             taskCommand.AutoMode = PileAutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
@@ -199,7 +201,14 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         {
             taskCommand.Command_Type = 2;
         }
-        TaskDataManager.Instance.SendTaskCommand(taskCommand);
+        if (operationType== OperationType.END)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel, new ConfirmTaskPanelArgs(taskCommand));
+        }
+        else
+        {
+            TaskDataManager.Instance.SendTaskCommand(taskCommand);
+        }
     }
 
     public override void ResetState()

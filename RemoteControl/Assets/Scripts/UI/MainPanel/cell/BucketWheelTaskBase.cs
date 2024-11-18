@@ -293,8 +293,6 @@ public class BucketWheelTaskBase : PanelBase
         warningBtn.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         warningBtn.transform.Find("Image").gameObject.SetActive(true);
         warningBtn.transform.FindComponent<Text>("Text").color = new Color(1, 0, 0.1803922f, 1);
-    // private Color textColor1 = new Color(0.1411765f, 1, 1, 1);
-    // private Color textColor2 = new Color(1, 0, 0.1803922f, 1);
         SendPlcCommand(COMMAND_NAME.STARTUP_ALARM, 1);
     }
 
@@ -388,6 +386,7 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
         taskCommand.TaskCreateTime = DateTime.Now; //.ToString("yyyy-MM-dd HH:mm:ss")
         taskCommand.OperatorSystem = "MC";
+        taskCommand.FinishMethod =new List<int>(){0,0};
         if (operationType == OperationType.START || operationType == OperationType.RESET)
         {
             taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
@@ -416,8 +415,15 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.Command_Type = 2;
         }
 
-        Debug.LogError("TaskID" + taskCommand.TaskID);
-        TaskDataManager.Instance.SendTaskCommand(taskCommand);
+        if (operationType== OperationType.END)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel, new ConfirmTaskPanelArgs(taskCommand));
+        }
+        else
+        {
+            TaskDataManager.Instance.SendTaskCommand(taskCommand);
+        }
+     
     }
 
     public virtual void UpdateCurCtrMode(ref ButtonCell ctr, ButtonCell btn)

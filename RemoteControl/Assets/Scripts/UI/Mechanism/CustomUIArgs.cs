@@ -8,6 +8,32 @@ public class CustomUIArgs:UIArgs
     
 }
 
+public  class ConfirmTaskPanelArgs : UIArgs
+{
+    private Action _cancleAction;
+    private Action _confirmAction;
+    private  TaskCommand _taskCommand;
+    public   TaskCommand TaskCommand{
+        get => _taskCommand;
+        set => _taskCommand = value;
+    }
+    public Action CancleAction
+    {
+        get  =>_cancleAction;
+        set => _cancleAction = value;
+    }
+    public Action ConfirmAction
+    {
+        get  =>_confirmAction;
+        set => _confirmAction = value;
+    }
+    public  ConfirmTaskPanelArgs(TaskCommand taskCommand, Action cancleAction=null, Action confirmAction=null)
+    {
+        CancleAction = cancleAction;
+        ConfirmAction = confirmAction;
+        TaskCommand = taskCommand;
+    }
+}
 public class ConfirmPanelArgs : UIArgs
 {
     private string _describe;

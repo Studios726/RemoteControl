@@ -443,6 +443,8 @@ public class TaskCommand
    
     public AllData  AllData { get; set; }
     public CommonTaskParameters CommonTaskParameters{ get; set; }
+    
+    public List<int> FinishMethod {  get; set; }
 }
 public class AllData
 {
