@@ -2,6 +2,7 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using RemoteControl.Event;
 using UnityEngine;
 
 
@@ -20,21 +21,12 @@ public partial class DataManager
         }
         else
         {
-            // if (info.password.Equals(password))
-            // {
-            //     _currentAccount = info;
-            //     GameDataManager.Instance.curAccountInfo = info;
-            //     return true;
-            // }
-            // else
-            // {
-            //     return false;
-            // }
             bool passVer = BCrypt.Net.BCrypt.Verify(password, info.password);
             if (passVer)
             {
                 _currentAccount = info;
                 GameDataManager.Instance.curAccountInfo = info;
+                EventManager.Instance.TriggerEvent(EventName.UpdateAccountData,null);
                 return true;
             } 
             else

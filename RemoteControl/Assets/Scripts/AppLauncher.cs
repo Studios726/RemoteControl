@@ -35,6 +35,8 @@ public class AppLauncher : MonoBehaviour
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控", (() => isQuit = false),()=>
             {
+                DataManager.Instance.InsertHistoryLogMc("退出登录-ESC", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+                DataManager.Instance.InsertHistoryLogMc("退出登录-ESC", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
                 isQuit = true;
                 _gameMain.OnExitGame();
             }));
@@ -74,6 +76,8 @@ public class AppLauncher : MonoBehaviour
     {
         UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控", (() => isQuit = false),()=>
         {
+            DataManager.Instance.InsertHistoryLogMc("退出登录", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryLogMc("退出登录", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             isQuit = true;
             _gameMain.OnExitGame();
         }));

@@ -24,6 +24,7 @@ namespace RemoteControl.Event
         public const string StopPlayBeltAnim = "StopPlayBeltAnim";
         public const string UpdateChartData = "UpdateChartData";
         public const string UpdateFlowMeterData = "UpdateFlowMeterData";
+        public const string UpdateAccountData = "UpdateAccountData";
 
     }
 }

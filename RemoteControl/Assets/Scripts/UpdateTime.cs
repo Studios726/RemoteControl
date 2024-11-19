@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class UpdateTime : MonoBehaviour
 {
-    readonly string[] Day = new string[] { "ÖÜÈÕ", "ÖÜÒ»", "ÖÜ¶ş", "ÖÜÈı", "ÖÜËÄ", "ÖÜÎå", "ÖÜÁù" };
+    readonly string[] Day = new string[] { "å‘¨æ—¥", "å‘¨ä¸€", "å‘¨äºŒ", "å‘¨ä¸‰", "å‘¨å››", "å‘¨äº”", "å‘¨å…­" };
     private TMP_Text _time;
 
     // Start is called before the first frame update
@@ -19,7 +19,7 @@ public class UpdateTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Ê±¼ä»»ĞĞ²¢ÒÆ¶¯ ljz
+        //æ—¶é—´æ¢è¡Œå¹¶ç§»åŠ¨ ljz
         _time.text = DateTime.Now.ToString("yyyy/MM/dd");
         string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
         _time.text += week;

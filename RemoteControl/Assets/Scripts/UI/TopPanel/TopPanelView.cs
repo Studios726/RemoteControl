@@ -262,8 +262,8 @@ public class TopPanelView : UIView<TopPanelCtr>
         _lastText = tmpText;
         _lastText.color = selectColor;
     }
-    public void UpdateCurrentAccount(AccountInfo account)
+    public void UpdateCurrentAccount(object o, EventArgs eventArgs)
     {
-        _userTxt.text = account.name;
+        _userTxt.text =GameDataManager.Instance.GetUserName();
     }
 }

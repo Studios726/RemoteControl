@@ -42,6 +42,7 @@ public class ConfirmTaskPanelView: UIView<ConfirmTaskPanelCtr>
                     args.TaskCommand.FinishMethod[0]= _zeroAdjustmentDevice.isOn ? 1 : 0;
                     args.TaskCommand.FinishMethod[1] = _closingDeviceToggle.isOn ? 1 : 0;
                     Debug.Log($"{ args.TaskCommand.FinishMethod[0]} { args.TaskCommand.FinishMethod[1] }");
+                    TaskDataManager.Instance.SendTaskCommand(args.TaskCommand);
                     args.ConfirmAction?.Invoke();
                 });
             }
