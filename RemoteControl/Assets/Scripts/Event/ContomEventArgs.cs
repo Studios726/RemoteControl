@@ -44,24 +44,37 @@ public class TaskLogArgs : EventArgs
         this.des = str;
         this.time = taskCommand.AllData.CodeTime;
         this.taskCommand = taskCommand;
-        for (int i = 0; i < taskCommand.AllData.NextPositionList.Count; i++)//[回转，俯仰，前进dd]
+        pos = "下一目标点 ";
+        if (taskCommand.AllData.NextPositionList==null)
         {
-            if (i==0)
+            taskCommand.AllData.NextPositionList = new List<int>();
+            taskCommand.AllData.NextPositionList.Add(0);
+            taskCommand.AllData.NextPositionList.Add(0);
+            taskCommand.AllData.NextPositionList.Add(0);
+        }
+       
+        if (taskCommand.AllData.NextPositionList!=null)
+        {
+            for (int i = 0; i < taskCommand.AllData.NextPositionList.Count; i++)//[回转，俯仰，前进dd]
             {
-                pos = $"回转 {taskCommand.AllData.NextPositionList[i]}°";
-            }else if (i==1)
-            {
-                pos = $"俯仰 {taskCommand.AllData.NextPositionList[i]}°";
-            }
-            else if (i==2)
-            {
-                pos = $"前进 {taskCommand.AllData.NextPositionList[i]}m";
-            }
-            else
-            {
-                //无
+                if (i==0)
+                {
+                    pos =pos+ $"回转: {taskCommand.AllData.NextPositionList[i]}° ";
+                }else if (i==1)
+                {
+                    pos =pos+ $"俯仰: {taskCommand.AllData.NextPositionList[i]}° ";
+                }
+                else if (i==2)
+                {
+                    pos =pos+$"前进: {taskCommand.AllData.NextPositionList[i]}m";
+                }
+                else
+                {
+                    //无
+                }
             }
         }
+       
     }
 }
 public class UpdateModelDirectionEventArgs:EventArgs

@@ -96,7 +96,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     {
         TaskLogArgs args = (TaskLogArgs)eventArgs;
         List<TaskLogCellData> datas = new List<TaskLogCellData>();
-        datas.Add(new TaskLogCellData("",args.des,DateTime.Now,Machine.BucketWheelStackerReclaimer,args.pos));
+        datas.Add(new TaskLogCellData("",args.des,args.time,Machine.BucketWheelStackerReclaimer,args.pos));
         view._bucketWheelTask1.UpdateTaskLog(datas);
        
     }
@@ -104,7 +104,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     {
         TaskLogArgs args = (TaskLogArgs)eventArgs;
         List<TaskLogCellData> datas = new List<TaskLogCellData>();
-        datas.Add(new TaskLogCellData("",args.des,DateTime.Now,Machine.BucketWheel,args.pos));
+        datas.Add(new TaskLogCellData("",args.des,args.time,Machine.BucketWheel,args.pos));
         view._bucketWheelTask2.UpdateTaskLog(datas);
     }
     public override void Dispose()

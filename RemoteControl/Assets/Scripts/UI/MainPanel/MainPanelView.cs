@@ -59,6 +59,7 @@ public class MainPanelView : UIView<MainPanelCtr>
         UpdateData(GameDataManager.Instance.SystemVariables);
         TaskDataManager.Instance.GetNearestTaskDataDic();
         GameDataManager.Instance.DeleteThreeMonthData();
+        TaskDataManager.Instance.UpdateTaskData();
     }
 
     private void ActiveHideBtnCtr2()

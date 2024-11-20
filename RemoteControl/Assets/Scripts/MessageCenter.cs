@@ -102,8 +102,6 @@ public class MessageCenter : Singleton<MessageCenter>
             {
                 Debug.Log($"数据解析失败 socketType {nameof(SocketType.TaskPC)}");
             }
-           
-           
         }else if (socketType == SocketType.SCA)
         {
             try
