@@ -222,6 +222,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     private Dictionary<string, TaskData> nearestTaskDataDic = new Dictionary<string, TaskData>();
     private Dictionary<string, TaskData> curTaskDic = new Dictionary<string, TaskData>();
+    // private Dictionary<string,List<int>>
     public void SendTaskCommand(TaskCommand taskCommand)
     {
         taskCommand.CommonTaskParameters = GetCommonTaskParameters();
@@ -522,9 +523,21 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             des = $"错误码 {code}";
         }
-        GameDataManager.Instance.AddOrUpdateWarningDesDict(code.ToString()+machine.ToString(), des,
-            machine, false, "");
-        GameDataManager.Instance.UpdatePlcWarningRecordData();
+
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1,this,new TaskLogArgs(des,DateTime.Now,""));
+        }
+        else
+        {
+            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2,this,new TaskLogArgs(des,DateTime.Now,""));
+        }
+
+        DataManager.Instance.InsertHistoryLogMc(des, GameDataManager.Instance.GetUserName(), machine);
+        //
+        // GameDataManager.Instance.AddOrUpdateWarningDesDict(code.ToString()+machine.ToString(), des,
+        //     machine, false, "");
+        // GameDataManager.Instance.UpdatePlcWarningRecordData();
     }
 
     public int IsCanSendTaskCommond(Machine machine, TaskType taskType, OperationType operationType)

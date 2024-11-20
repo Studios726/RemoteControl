@@ -63,6 +63,11 @@ namespace RemoteControl.Event
                 handlerDic[eventName]?.Invoke(sender, args);
         }
 
+        public void TriggerEvent(string eventName)
+        {
+            if (handlerDic.ContainsKey(eventName))
+                handlerDic[eventName]?.Invoke(null,null);
+        }
         /// <summary>
         /// 清空所有事件
         /// </summary>

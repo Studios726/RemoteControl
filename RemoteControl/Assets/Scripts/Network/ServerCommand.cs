@@ -443,13 +443,16 @@ public class TaskCommand
    
     public AllData  AllData { get; set; }
     public CommonTaskParameters CommonTaskParameters{ get; set; }
-    
+    //任务结束执行方式[调零，关设备] 0 否 1 是
     public List<int> FinishMethod {  get; set; }
 }
 public class AllData
 {
     //public string InfoIcon { get; set; }   
     public int Code {  get; set; }
+    public DateTime CodeTime{ get; set; }
+    public DateTime TaskEndTime{ get; set; }
+    public List<int> NextPositionList {  get; set; }
     public int ProcessingProgress {  get; set; }
     public List<int> OperationCommandList {  get; set; }
 }

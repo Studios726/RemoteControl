@@ -1,13 +1,12 @@
-using Knivt.Tools.UI;
-using System;
 using System.Collections;
 using System.Collections.Generic;
+using Knivt.Tools.UI;
 using UnityEngine;
 
-public class WarningList :UICyclicScrollList<WarningCell, WarningCellData>
+public class TaskLogList :UICyclicScrollList<TaskLogCell, TaskLogCellData>
 {
-    private List<WarningCellData> datas = new List<WarningCellData>();
-    public void RefreshList(List<WarningCellData> historyDatas)
+    private List<TaskLogCellData> datas = new List<TaskLogCellData>();
+    public void RefreshList(List<TaskLogCellData> historyDatas)
     {
         datas.Clear();
         for (int i = 0; i < historyDatas.Count; i++)
@@ -16,9 +15,10 @@ public class WarningList :UICyclicScrollList<WarningCell, WarningCellData>
         }
         Initlize(datas);
     }
-    protected override void ResetCellData(WarningCell cell, WarningCellData data, int dataIndex)
+    protected override void ResetCellData(TaskLogCell cell, TaskLogCellData data, int dataIndex)
     {
         cell.gameObject.SetActive(true);
         cell.UpdateDisplay(data);
     }
 }
+

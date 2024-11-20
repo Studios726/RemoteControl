@@ -24,11 +24,11 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         Addlistener();
         view.UpdateData(null,null);
         view.UpdatePcData(null, null);
-        UpdateTaskDes1(null, null);
-        UpdateTaskDes2(null, null);
+        UpdateWarningDes1(null, null);
+        UpdateWarningDes2(null, null);
     }
 
-    public void UpdateTaskDes1(object o, EventArgs eventArgs)
+    public void UpdateWarningDes1(object o, EventArgs eventArgs)
     {
         List<WarningCellData> datas = new List<WarningCellData>();
         if (GameDataManager.Instance.WarningCellDataDict.Count>0)
@@ -61,7 +61,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
       
     }
     
-    public void UpdateTaskDes2(object o, EventArgs eventArgs)
+    public void UpdateWarningDes2(object o, EventArgs eventArgs)
     {
         List<WarningCellData> datas = new List<WarningCellData>();
         if (GameDataManager.Instance.WarningCellDataDict.Count>0)
@@ -91,20 +91,41 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         }
         view._bucketWheelTask2.UpdateDes(datas);
     }
+
+    public void UpdateTaskLog1(object o, EventArgs eventArgs)
+    {
+        TaskLogArgs args = (TaskLogArgs)eventArgs;
+        List<TaskLogCellData> datas = new List<TaskLogCellData>();
+        datas.Add(new TaskLogCellData("",args.des,DateTime.Now,Machine.BucketWheelStackerReclaimer,args.pos));
+        view._bucketWheelTask1.UpdateTaskLog(datas);
+       
+    }
+    public void UpdateTaskLog2(object o, EventArgs eventArgs)
+    {
+        TaskLogArgs args = (TaskLogArgs)eventArgs;
+        List<TaskLogCellData> datas = new List<TaskLogCellData>();
+        datas.Add(new TaskLogCellData("",args.des,DateTime.Now,Machine.BucketWheel,args.pos));
+        view._bucketWheelTask2.UpdateTaskLog(datas);
+    }
     public override void Dispose()
     {
         EventManager.Instance.RemoveListener(EventName.UpdateRcData, view.UpdateData);
         EventManager.Instance.RemoveListener(EventName.UpdatePcData, view.UpdatePcData);
-        EventManager.Instance.RemoveListener(EventName.RefreshTaskDes1,UpdateTaskDes1);
-        EventManager.Instance.RemoveListener(EventName.RefreshTaskDes2,UpdateTaskDes2);
+        EventManager.Instance.RemoveListener(EventName.RefreshWarningDes1,UpdateWarningDes1);
+        EventManager.Instance.RemoveListener(EventName.RefreshWarningDes2,UpdateWarningDes2);
+        EventManager.Instance.RemoveListener(EventName.RefreshTaskDes1,UpdateTaskLog1);
+        EventManager.Instance.RemoveListener(EventName.RefreshTaskDes2,UpdateTaskLog2);
     }
    
     public void Addlistener()
     {
         EventManager.Instance.AddListener(EventName.UpdateRcData, view.UpdateData);
         EventManager.Instance.AddListener(EventName.UpdatePcData, view.UpdatePcData);
-        EventManager.Instance.AddListener(EventName.RefreshTaskDes1,UpdateTaskDes1);
-        EventManager.Instance.AddListener(EventName.RefreshTaskDes2,UpdateTaskDes2);
+        EventManager.Instance.AddListener(EventName.RefreshWarningDes1,UpdateWarningDes1);
+        EventManager.Instance.AddListener(EventName.RefreshWarningDes2,UpdateWarningDes2);
+        EventManager.Instance.AddListener(EventName.RefreshTaskDes1,UpdateTaskLog1);
+        EventManager.Instance.AddListener(EventName.RefreshTaskDes2,UpdateTaskLog2);
+        
     }
 
     public void SendMessage(string message)

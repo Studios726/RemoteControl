@@ -44,7 +44,7 @@ public class BucketWheelTaskBase : PanelBase
     private Timer reversingTimer;
     private Timer scramStopTimer;
     public WarningList warningList;
-
+    public TaskLogList taskLogList;
     public virtual void Start()
     {
         Init();
@@ -55,6 +55,10 @@ public class BucketWheelTaskBase : PanelBase
         warningList.RefreshList(datas);
     }
 
+    public virtual void UpdateTaskLog(List<TaskLogCellData> datas)
+    {
+        taskLogList.RefreshList(datas);
+    }
     public void UpdatePlc(SystemVariables data)
     {
         if (machine == Machine.BucketWheelStackerReclaimer)

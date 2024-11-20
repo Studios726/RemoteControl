@@ -31,6 +31,20 @@ public class BeltRunArgs : EventArgs
         this.isPlayTakeBeltAnim = isPlayTakeBeltAnim;
     }
 }
+
+public class TaskLogArgs : EventArgs
+{
+    public string des;
+    public DateTime time;
+    public string pos;
+
+    public TaskLogArgs(string str,DateTime dateTime,string  pos)
+    {
+        this.des = str;
+        this.time = dateTime;
+        this.pos = pos;
+    }
+}
 public class UpdateModelDirectionEventArgs:EventArgs
 {
     public ModelDirection[] Direction;

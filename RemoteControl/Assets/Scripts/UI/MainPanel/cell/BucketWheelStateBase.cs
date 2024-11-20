@@ -162,7 +162,7 @@ public class BucketWheelStateBase : MonoBehaviour
         
         SetToggleState(suspensoidTakeMaterRun, data.SuspensionBeltMaterialUnloadingRunningContact_2, false, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelSlotLowerLimit, data.BucketWheelSlotLowerLimit_2, false, data.D1PLC1CommunicationState);
-        if (data.SuspensionBeltMaterialUnloadingRunningContact_2)
+        if (data.BucketWheelMaterialUnloadingRunning_2)
         {
             string des =data.Remote_2?"远程":"本地";
             if (data.Single_Action_2)

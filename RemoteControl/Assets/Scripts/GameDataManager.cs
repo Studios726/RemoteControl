@@ -859,7 +859,7 @@ public class GameDataManager : Singleton<GameDataManager>
             if ((DateTime.Now - warningData.Time).TotalSeconds >= 8)
             {
                 BucketWheelStackerReclaimerQueue.Dequeue();
-                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
+                EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
             }
         }
 
@@ -869,7 +869,7 @@ public class GameDataManager : Singleton<GameDataManager>
             if ((DateTime.Now - warningData.Time).TotalSeconds >= 8)
             {
                 BucketWheelQueue.Dequeue();
-                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
+                EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
             }
         }
     }
@@ -891,11 +891,11 @@ public class GameDataManager : Singleton<GameDataManager>
 
             if (machine == Machine.BucketWheelStackerReclaimer)
             {
-                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
+                EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
             }
             else
             {
-                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
+                EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
             }
         }
     }
@@ -921,11 +921,11 @@ public class GameDataManager : Singleton<GameDataManager>
             new WarningCellData(key, des, DateTime.Now, machine, isConfirm, isSelect, confirmTime));
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
+            EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
         }
         else
         {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
+            EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
         }
     }
 
@@ -940,11 +940,11 @@ public class GameDataManager : Singleton<GameDataManager>
                 new WarningCellData(key, des, TriggerTime, machine, isConfirm, isSelect, confirmTime));
             if (machine == Machine.BucketWheelStackerReclaimer)
             {
-                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
+                EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
             }
             else
             {
-                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
+                EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
             }
         }
     }
@@ -956,8 +956,8 @@ public class GameDataManager : Singleton<GameDataManager>
             WarningCellDataDict.Remove(key);
             UpdatePlcWarningRecordData();
         }
-        EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, null);
-        EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, null);
+        EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
+        EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
     }
 
     public void AddOrUpdateWarningDesQueue(string des, Machine machine, int rank = 0)

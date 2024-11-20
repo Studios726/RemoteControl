@@ -16,6 +16,8 @@ namespace RemoteControl.Event
         public const string RefreshModel = "RefreshModel";
         public const string RefreshTaskDes1 = "RefreshTaskDes_1";
         public const string RefreshTaskDes2 = "RefreshTaskDes_2";
+        public const string RefreshWarningDes1 = "RefreshWarningDes1";
+        public const string RefreshWarningDes2 = "RefreshWarningDes2";
         public const string KeyCodeTab="KeyCodeTab";
         public const string RefreshScreen = "RefreshScreen";
         public const string UpdateModelDirection = "UpdateModelDirection";
