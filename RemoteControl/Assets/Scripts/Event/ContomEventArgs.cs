@@ -37,12 +37,31 @@ public class TaskLogArgs : EventArgs
     public string des;
     public DateTime time;
     public string pos;
+    public TaskCommand taskCommand;
 
-    public TaskLogArgs(string str,DateTime dateTime,string  pos)
+    public TaskLogArgs(string str,TaskCommand taskCommand)
     {
         this.des = str;
-        this.time = dateTime;
-        this.pos = pos;
+        this.time = taskCommand.AllData.CodeTime;
+        this.taskCommand = taskCommand;
+        for (int i = 0; i < taskCommand.AllData.NextPositionList.Count; i++)//[回转，俯仰，前进dd]
+        {
+            if (i==0)
+            {
+                pos = $"回转 {taskCommand.AllData.NextPositionList[i]}°";
+            }else if (i==1)
+            {
+                pos = $"俯仰 {taskCommand.AllData.NextPositionList[i]}°";
+            }
+            else if (i==2)
+            {
+                pos = $"前进 {taskCommand.AllData.NextPositionList[i]}m";
+            }
+            else
+            {
+                //无
+            }
+        }
     }
 }
 public class UpdateModelDirectionEventArgs:EventArgs

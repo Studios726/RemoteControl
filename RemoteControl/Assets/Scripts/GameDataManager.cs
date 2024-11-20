@@ -380,10 +380,16 @@ public class GameDataManager : Singleton<GameDataManager>
     /// </summary>
     public void UpdateBucketWheelPosText()
     {
-        machineMove_1.UpdateBucketWheelPosText(
-            $"{(SystemVariables.DC_Pos + ConstStr.InitPosition_1).ToString("F2")} m");
-        machineMove_2.UpdateBucketWheelPosText(
-            $"{(SystemVariables.DC_Pos_2 + ConstStr.InitPosition_2).ToString("F2")} m");
+        if (machineMove_1 &&machineMove_2)
+        {
+            machineMove_1.UpdateBucketWheelPosText(
+                $"{(SystemVariables.DC_Pos + ConstStr.InitPosition_1).ToString("F2")} m");
+            machineMove_2.UpdateBucketWheelPosText(
+                $"{(SystemVariables.DC_Pos_2 + ConstStr.InitPosition_2).ToString("F2")} m");
+            machineMove_1.UpdateBucketWheelHeighText(SystemVariables.Luff_Angle);
+            machineMove_2.UpdateBucketWheelHeighText(SystemVariables.Luff_Angle_2);
+        }
+       
     }
 
     public void UpdateMachineWarning()

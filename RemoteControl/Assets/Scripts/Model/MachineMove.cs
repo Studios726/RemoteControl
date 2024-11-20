@@ -12,6 +12,8 @@ public class MachineMove : MonoBehaviour
     public TMP_Text errorText;
     public Transform bucketWheelCanvasTransform;
     public TMP_Text bucketWheelPosText;
+    public Transform heighCanvasTransform;
+    public TMP_Text bucketWheelHeighText;
     public Transform modelCameraTransform;
     public Animation rotClip;
     public Machine machine;
@@ -65,6 +67,17 @@ public class MachineMove : MonoBehaviour
     {
         bucketWheelPosText.text = pos;
     }
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="SLEW_Angle"> 俯仰角度</param>
+    public void UpdateBucketWheelHeighText(float SLEW_Angle)
+    {
+      
+        bucketWheelHeighText.text = (40 * Mathf.Sin(SLEW_Angle * Mathf.Deg2Rad) + 1.7).ToString("F2");;
+        Debug.Log($"SLEW_Angle{machine} {SLEW_Angle} {bucketWheelHeighText.text}" );
+    }
+    
     public void PlayRotationClip(bool isPlay)
     {
         if (rotClip == null)
@@ -97,6 +110,13 @@ public class MachineMove : MonoBehaviour
         {
             bucketWheelCanvasTransform.LookAt(
                 bucketWheelCanvasTransform.position + modelCameraTransform.rotation * Vector3.forward,
+                modelCameraTransform.rotation * Vector3.up);
+        }
+
+        if (bucketWheelHeighText.text != "" && modelCameraTransform != null)
+        {
+            heighCanvasTransform.LookAt(
+                heighCanvasTransform.position + modelCameraTransform.rotation * Vector3.forward,
                 modelCameraTransform.rotation * Vector3.up);
         }
     }

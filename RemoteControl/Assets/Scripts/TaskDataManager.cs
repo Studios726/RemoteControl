@@ -226,6 +226,8 @@ public class TaskDataManager : Singleton<TaskDataManager>
     public void SendTaskCommand(TaskCommand taskCommand)
     {
         taskCommand.CommonTaskParameters = GetCommonTaskParameters();
+        string json = JsonMgr.Serialize<TaskCommand>(taskCommand);
+        Debug.Log($"json {json}");
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
@@ -354,11 +356,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                             GameDataManager.Instance.UpdateSCAData(1);
                             if (taskVariables.McData[i].Machine == Machine.BucketWheelStackerReclaimer)
                             {
-                                AddOrUpdateTaskDesQueue(0, Machine.BucketWheelStackerReclaimer);
+                                AddOrUpdateTaskDesQueue(0, Machine.BucketWheelStackerReclaimer,taskVariables.McData[i]);
                             }
                             else
                             {
-                                AddOrUpdateTaskDesQueue(0, Machine.BucketWheel);
+                                AddOrUpdateTaskDesQueue(0, Machine.BucketWheel,taskVariables.McData[i]);
                             }
                         }
                     }
@@ -370,11 +372,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         if (taskVariables.McData[i].Machine == Machine.BucketWheelStackerReclaimer)
                         {
                             AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,
-                                Machine.BucketWheelStackerReclaimer);
+                                Machine.BucketWheelStackerReclaimer,taskVariables.McData[i]);
                         }
                         else
                         {
-                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel);
+                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel,taskVariables.McData[i]);
                         }
                     }
                     else
@@ -382,11 +384,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         if (taskVariables.McData[i].Machine == Machine.BucketWheelStackerReclaimer)
                         {
                             AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,
-                                Machine.BucketWheelStackerReclaimer);
+                                Machine.BucketWheelStackerReclaimer,taskVariables.McData[i]);
                         }
                         else
                         {
-                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel);
+                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel,taskVariables.McData[i]);
                         }
                     }
                 }
@@ -400,11 +402,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         taskVariables.McData[i].AllData.ProcessingProgress.ToString());
                     if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
                     {
-                        AddOrUpdateTaskDesQueue(-1, Machine.BucketWheelStackerReclaimer); //hard code 
+                        AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheelStackerReclaimer,taskCommand); //hard code 
                     }
                     else
                     {
-                        AddOrUpdateTaskDesQueue(-1, Machine.BucketWheel);
+                        AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel,taskCommand);
                     }
                 }
                 if (taskVariables.McData[i].AllData.OperationCommandList[3]==1)//任务结束更新数据库
@@ -423,11 +425,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     DataManager.Instance.UpdateHistoryTaskMcCompleteState(data.Value.TaskID, "2");
                 }
             }
-
-            foreach (var data in _codeDescriptions)
-            {
-                GameDataManager.Instance.RemoveWarningDesDict(data.Key.ToString());
-            }
+            //
+            // foreach (var data in _codeDescriptions)
+            // {
+            //     GameDataManager.Instance.RemoveWarningDesDict(data.Key.ToString());
+            // }
         }
 
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
@@ -475,7 +477,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
             {
                 long timestamp = 0;
                 timestamp = taskCommand.TimedAt * 60 - (long)(DateTime.Now - taskCommand.TaskCreateTime).TotalSeconds;
-                Debug.LogError($"timestamp == {timestamp}");
                 if (timestamp > 0)
                 {
                     taskData.AddTimer(
@@ -512,7 +513,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         return nearestTaskDataDic;
     }
 
-    public void AddOrUpdateTaskDesQueue(int code, Machine machine)
+    public void AddOrUpdateTaskDesQueue(int code, Machine machine,TaskCommand taskCommand)
     {
         string des = "";
         if (_codeDescriptions.TryGetValue(code, out string description))
@@ -526,11 +527,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1,this,new TaskLogArgs(des,DateTime.Now,""));
+            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1,this,new TaskLogArgs(des,taskCommand));
         }
         else
         {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2,this,new TaskLogArgs(des,DateTime.Now,""));
+            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2,this,new TaskLogArgs(des,taskCommand));
         }
 
         DataManager.Instance.InsertHistoryLogMc(des, GameDataManager.Instance.GetUserName(), machine);

@@ -452,6 +452,7 @@ public class AllData
     public int Code {  get; set; }
     public DateTime CodeTime{ get; set; }
     public DateTime TaskEndTime{ get; set; }
+    //[回转，俯仰，前进dd]
     public List<int> NextPositionList {  get; set; }
     public int ProcessingProgress {  get; set; }
     public List<int> OperationCommandList {  get; set; }
