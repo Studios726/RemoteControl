@@ -73,7 +73,7 @@ public class MachineMove : MonoBehaviour
     /// <param name="SLEW_Angle"> 俯仰角度</param>
     public void UpdateBucketWheelHeighText(float SLEW_Angle)
     {
-        bucketWheelHeighText.text = (40 * Mathf.Sin(SLEW_Angle * Mathf.Deg2Rad) + 1.7).ToString("F2");;
+        bucketWheelHeighText.text = (40 * Mathf.Sin(SLEW_Angle * Mathf.Deg2Rad) + ConstStr.InitBucketWheelHeigh).ToString("F2");;
     }
     
     public void PlayRotationClip(bool isPlay)

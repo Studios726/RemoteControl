@@ -47,7 +47,7 @@ public class TaskLogArgs : EventArgs
         pos = "下一目标点 ";
         if (taskCommand.AllData.NextPositionList==null)
         {
-            taskCommand.AllData.NextPositionList = new List<int>();
+            taskCommand.AllData.NextPositionList = new List<float>();
             taskCommand.AllData.NextPositionList.Add(0);
             taskCommand.AllData.NextPositionList.Add(0);
             taskCommand.AllData.NextPositionList.Add(0);

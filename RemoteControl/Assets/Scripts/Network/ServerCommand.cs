@@ -455,7 +455,7 @@ public class AllData
      //任务结束时间
      public DateTime TaskEndTime{ get; set; }
     // [回转，俯仰，前进]
-    public List<int> NextPositionList {  get; set; }
+    public List<float> NextPositionList {  get; set; }
     public int ProcessingProgress {  get; set; }
     public List<int> OperationCommandList {  get; set; }
 }

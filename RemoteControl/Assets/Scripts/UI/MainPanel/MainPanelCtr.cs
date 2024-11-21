@@ -94,17 +94,38 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskLog1(object o, EventArgs eventArgs)
     {
-        TaskLogArgs args = (TaskLogArgs)eventArgs;
+        // TaskLogArgs args = (TaskLogArgs)eventArgs;
         List<TaskLogCellData> datas = new List<TaskLogCellData>();
-        datas.Add(new TaskLogCellData("",args.des,args.time,Machine.BucketWheelStackerReclaimer,args.pos));
+        foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
+        {
+            for (int i = 0; i < data.Value.Count; i++)
+            {
+                if (data.Value[i].Machine==Machine.BucketWheelStackerReclaimer)
+                {
+                    datas.Add(new TaskLogCellData("",data.Value[i].Des,data.Value[i].Time,Machine.BucketWheelStackerReclaimer,data.Value[i].Pos));
+                }
+            }
+        }
+        datas.Reverse();
         view._bucketWheelTask1.UpdateTaskLog(datas);
        
     }
     public void UpdateTaskLog2(object o, EventArgs eventArgs)
     {
-        TaskLogArgs args = (TaskLogArgs)eventArgs;
+        // TaskLogArgs args = (TaskLogArgs)eventArgs;
         List<TaskLogCellData> datas = new List<TaskLogCellData>();
-        datas.Add(new TaskLogCellData("",args.des,args.time,Machine.BucketWheel,args.pos));
+        foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
+        {
+            for (int i = 0; i < data.Value.Count; i++)
+            {
+                if (data.Value[i].Machine==Machine.BucketWheel)
+                {
+                    datas.Add(new TaskLogCellData("",data.Value[i].Des,data.Value[i].Time,Machine.BucketWheel,data.Value[i].Pos));
+                }
+            }
+        }
+
+        datas.Reverse();
         view._bucketWheelTask2.UpdateTaskLog(datas);
     }
     public override void Dispose()

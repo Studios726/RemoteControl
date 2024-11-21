@@ -145,7 +145,7 @@ public partial class DataManager
            $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{userName}','{taskState}','{taskCommand.TaskID}','{taskCommand.TakeMateHigh}','{taskCommand.LayerHigh}','{taskCommand.AutoMode}','{(int)taskCommand.AngleEntryMode}','{completeState}')";
         return MySqlHelper.ExecuteSql(query) > 0; ;
     }
-    public bool UpdateHistoryTaskMcCompleteState(string taskID,string completeState)
+    public bool UpdateHistoryTaskMcCompleteState(string taskID,string completeState,DateTime dateTime)
     {
         string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE2} = {completeState} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
         bool success=MySqlHelper.ExecuteSql(query) > 0; 

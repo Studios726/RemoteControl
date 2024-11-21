@@ -38,12 +38,17 @@ public class MainPanelView : UIView<MainPanelCtr>
         updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
         updateTaskBtn=RootObj.transform.FindComponent<Button>("updateTaskArgs");
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
-        
+        int code = 1;
         updateModelBtn.onClick.AddListener(() =>
         {
-            // string json = Resources.Load("Json/info").ToString();
+            string json = Resources.Load<TextAsset>("Json/task").text;
             // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
             // GameDataManager.Instance.SetScaReportAndDem(dem);
+            TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
+            taskVariables.McData[0].AllData.Code = code;
+            taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
+            TaskDataManager.Instance.SetTaskVariables(taskVariables);
+            code++;
             if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));

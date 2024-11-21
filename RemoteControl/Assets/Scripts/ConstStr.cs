@@ -139,6 +139,7 @@ public static class ConstStr
     public const float InitDistance = 64.34f;//取料机差值
     public const float InitPosition_1 = 53.4f;
     public const float InitPosition_2 = 117.74f;
+    public const float InitBucketWheelHeigh = 7.48f;
 }
 
 public enum Machine
