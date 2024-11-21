@@ -103,7 +103,7 @@ public class BucketWheelTaskBase : PanelBase
     {
         startTakeMaterText.text = taskCommand.MaterialRange.startValue.ToString();
         stopTakeMaterText.text = taskCommand.MaterialRange.endValue.ToString();
-        if (taskCommand.SideSelection == "LIFT")
+        if (taskCommand.SideSelection == "LEFT")
         {
             leftToggle.SetSystemState(true,true);
             rightToggle.SetSystemState(false,true);
@@ -399,7 +399,7 @@ public class BucketWheelTaskBase : PanelBase
             float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
             float endValue = stopTakeMaterText.text == "" ? 0 : float.Parse(stopTakeMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
-            taskCommand.SideSelection = leftToggle.red.activeSelf ? "LIFT" : "RIGHT";
+            taskCommand.SideSelection = leftToggle.red.activeSelf ? "LEFT" : "RIGHT";
             float startLeftRightRangeValue = leftTakeMaterText.text == "" ? 0 : float.Parse(leftTakeMaterText.text);
             float endLeftRightRangeValue = rightTakeMaterText.text == "" ? 0 : float.Parse(rightTakeMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);

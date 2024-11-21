@@ -99,7 +99,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             startPileMaterText.text = taskCommand.MaterialRange.startValue.ToString();
             endPileMaterText.text = taskCommand.MaterialRange.endValue.ToString();
             
-            if (taskCommand.SideSelection=="LIFT")
+            if (taskCommand.SideSelection=="LEFT")
             {
                 leftPileMaterToggle.SetSystemState(true,true);
                 rightPileMaterToggle.SetSystemState(false,true);
@@ -181,7 +181,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             float startValue = startPileMaterText.text == "" ? 0 : float.Parse(startPileMaterText.text);
             float endValue = endPileMaterText.text == "" ? 0 : float.Parse(endPileMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
-            taskCommand.SideSelection = leftPileMaterToggle.red.activeSelf ? "LIFT" : "RIGHT";
+            taskCommand.SideSelection = leftPileMaterToggle.red.activeSelf ? "LEFT" : "RIGHT";
             float startLeftRightRangeValue = startLeftPileMaterText.text == "" ? 0 : float.Parse(startLeftPileMaterText.text);
             float endLeftRightRangeValue = endLeftPileMaterText.text == "" ? 0 : float.Parse(endLeftPileMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
