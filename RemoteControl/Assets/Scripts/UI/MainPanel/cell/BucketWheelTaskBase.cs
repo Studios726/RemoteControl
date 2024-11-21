@@ -285,7 +285,7 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(rightTakeMaterText, 12, 90);
         InputFieldValueRange(timeHourText, 0, 99);
         InputFieldValueRange(timeMinuteText, 0, 60);
-        InputFieldValueRange(takeMaterStep, 0.1f, 1);
+        InputFieldValueRange(takeMaterStep, 0.1f, 3);
         InputFieldValueRange(takeMaterNum, 0, 99999);
         InputFieldValueRange(layerHigh, 0, 10);
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
