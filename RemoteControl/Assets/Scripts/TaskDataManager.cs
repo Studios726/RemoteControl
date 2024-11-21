@@ -614,6 +614,8 @@ public class TaskDataManager : Singleton<TaskDataManager>
         else
         {
             taskCodeDesDictionary.Clear();
+            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
+            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
         }
     }
 

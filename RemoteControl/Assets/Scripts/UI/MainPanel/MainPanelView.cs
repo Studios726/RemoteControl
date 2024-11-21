@@ -38,7 +38,6 @@ public class MainPanelView : UIView<MainPanelCtr>
         updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
         updateTaskBtn=RootObj.transform.FindComponent<Button>("updateTaskArgs");
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
-        int code = 1;
         updateModelBtn.onClick.AddListener(() =>
         {
             // string json = Resources.Load<TextAsset>("Json/task").text;
