@@ -70,10 +70,10 @@ public class MachineMove : MonoBehaviour
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="SLEW_Angle"> 俯仰角度</param>
-    public void UpdateBucketWheelHeighText(float SLEW_Angle)
+    /// <param name="Luff_Angle"> 俯仰角度</param>
+    public void UpdateBucketWheelHeighText(float Luff_Angle)
     {
-        bucketWheelHeighText.text = (40 * Mathf.Sin(SLEW_Angle * Mathf.Deg2Rad) + ConstStr.InitBucketWheelHeigh).ToString("F2");;
+        bucketWheelHeighText.text = (40 * Mathf.Sin(Luff_Angle * Mathf.Deg2Rad) + ConstStr.InitBucketWheelHeigh).ToString("F2")+" m";
     }
     
     public void PlayRotationClip(bool isPlay)
