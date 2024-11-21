@@ -184,25 +184,35 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     {
         trolleyElectricityChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         trolleyElectricityChart_1.series[0].data.Clear();
+        trolleyElectricityChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
         slewingChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         slewingChart_1.series[0].data.Clear();
+        slewingChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
         suspensoidChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         suspensoidChart_1.series[0].data.Clear();
+        suspensoidChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
         cantileverChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         cantileverChart_1.series[0].data.Clear();
+        cantileverChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
         bucketWheelChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         bucketWheelChart_1.series[0].data.Clear();
+        bucketWheelChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
 
         trolleyElectricityChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         trolleyElectricityChart_2.series[0].data.Clear();
+        trolleyElectricityChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
         slewingChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         slewingChart_2.series[0].data.Clear();
+        slewingChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
         suspensoidChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         suspensoidChart_2.series[0].data.Clear();
+        suspensoidChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
         cantileverChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         cantileverChart_2.series[0].data.Clear();
+        cantileverChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
         bucketWheelChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
         bucketWheelChart_2.series[0].data.Clear();
+        bucketWheelChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
     }
  
     public void ResetLastButtonState(ButtonCell btn)

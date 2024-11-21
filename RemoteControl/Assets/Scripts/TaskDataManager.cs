@@ -534,7 +534,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2,this,new TaskLogArgs(des,taskCommand));
         }
 
-        DataManager.Instance.InsertHistoryLogMc(des, GameDataManager.Instance.GetUserName(), machine);
+        if (GameDataManager.Instance.IsAdmin())
+        {
+            DataManager.Instance.InsertHistoryLogMc(des, GameDataManager.Instance.GetUserName(), machine);
+        }
         //
         // GameDataManager.Instance.AddOrUpdateWarningDesDict(code.ToString()+machine.ToString(), des,
         //     machine, false, "");
