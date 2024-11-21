@@ -283,7 +283,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
     {
         taskCommand.CommonTaskParameters = GetCommonTaskParameters();
         string json = JsonMgr.Serialize<TaskCommand>(taskCommand);
-        Debug.Log($"json {json}");
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
