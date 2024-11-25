@@ -62,8 +62,10 @@ public class TopPanelView : UIView<TopPanelCtr>
         _lastText = _controlText;
         _userTxt.text =GameDataManager.Instance.GetUserName();
 
-        _controlBtn.onClick.AddListener(() => //´ò¿ªÔ¶³Ì²Ù×÷½çÃæ
+        _controlBtn.onClick.AddListener(() => //ï¿½ï¿½Ô¶ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
+            DataManager.Instance.InsertHistoryLogMc("è¿œç¨‹æ§åˆ¶", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryLogMc("è¿œç¨‹æ§åˆ¶", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             UIManager.Instance.OpenUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
@@ -72,15 +74,18 @@ public class TopPanelView : UIView<TopPanelCtr>
         });
         _superviseBtn.onClick.AddListener(() =>
         {
-          
+            DataManager.Instance.InsertHistoryLogMc("çŠ¶æ€å‚æ•°", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryLogMc("çŠ¶æ€å‚æ•°", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             UIManager.Instance.OpenUI(UIID.StatusParaeterPanel);
             UIManager.Instance.CloseUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
             SetSelectState(_superviseText);
         });
-        _alarmBtn.onClick.AddListener(() => //´ò¿ª±¨¾¯´¦Àí½çÃæ
+        _alarmBtn.onClick.AddListener(() => //ï¿½ò¿ª±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
+            DataManager.Instance.InsertHistoryLogMc("å†å²æ•°æ®", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryLogMc("å†å²æ•°æ®", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             UIManager.Instance.OpenUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.MainPanel);
@@ -90,6 +95,8 @@ public class TopPanelView : UIView<TopPanelCtr>
         });
         _userBtn.onClick.AddListener(() =>
         {
+            DataManager.Instance.InsertHistoryLogMc("ç”¨æˆ·ç®¡ç†", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            DataManager.Instance.InsertHistoryLogMc("ç”¨æˆ·ç®¡ç†", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             _userPnl.gameObject.SetActive(!_userPnl.gameObject.activeSelf);
             _closeUserBtn.gameObject.SetActive(!_closeUserBtn.gameObject.activeSelf);
         });
@@ -130,7 +137,7 @@ public class TopPanelView : UIView<TopPanelCtr>
                 if (pileScramStopBtn.red.activeSelf)
                 {
                     UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                        new ConfirmPanelArgs("ÊÇ·ñÈ·ÈÏ¸´Î»¼±Í££¿", null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP,Machine.BucketWheelStackerReclaimer)));
+                        new ConfirmPanelArgs("ï¿½Ç·ï¿½È·ï¿½Ï¸ï¿½Î»ï¿½ï¿½Í£ï¿½ï¿½", null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP,Machine.BucketWheelStackerReclaimer)));
                 }
                 else
                 {
@@ -145,7 +152,7 @@ public class TopPanelView : UIView<TopPanelCtr>
                 if (takeScramStopBtn.red.activeSelf)
                 {
                     UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                        new ConfirmPanelArgs("ÊÇ·ñÈ·ÈÏ¸´Î»¼±Í££¿", null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP,Machine.BucketWheel)));
+                        new ConfirmPanelArgs("ï¿½Ç·ï¿½È·ï¿½Ï¸ï¿½Î»ï¿½ï¿½Í£ï¿½ï¿½", null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP,Machine.BucketWheel)));
                 }
                 else
                 {
