@@ -2899,6 +2899,197 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.DC_Encoder_ERR));
             }
 
+            if (newSystemVariables.QJY_CH_FAULT == true && _systemVariables.QJY_CH_FAULT == false)
+            {
+                // 倾角仪异常
+                DataManager.Instance.InsertHistoryWarningMc("倾角仪异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.QJY_CH_FAULT), "倾角仪异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.QJY_CH_FAULT == false && _systemVariables.QJY_CH_FAULT == true)
+            {
+                //倾角仪异常解除
+                DataManager.Instance.InsertHistoryWarningMc("倾角仪异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.QJY_CH_FAULT));
+            }
+
+            if (newSystemVariables.XBTB_LWJ_CH_FAULT == true && _systemVariables.XBTB_LWJ_CH_FAULT == false)
+            {
+                // 垂直料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("垂直料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBTB_LWJ_CH_FAULT), "垂直料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.XBTB_LWJ_CH_FAULT == false && _systemVariables.XBTB_LWJ_CH_FAULT == true)
+            {
+                // 垂直料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("垂直料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBTB_LWJ_CH_FAULT));
+            }
+
+            if (newSystemVariables.DCZQ_FZ_CH_FAULT == true && _systemVariables.DCZQ_FZ_CH_FAULT == false)
+            {
+                // 大车左前料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("大车左前料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DCZQ_FZ_CH_FAULT), "大车左前料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DCZQ_FZ_CH_FAULT == false && _systemVariables.DCZQ_FZ_CH_FAULT == true)
+            {
+                // 大车左前料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("大车左前料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DCZQ_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.DCZH_FZ_CH_FAULT == true && _systemVariables.DCZH_FZ_CH_FAULT == false)
+            {
+                // 大车左后料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("大车左后料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DCZH_FZ_CH_FAULT), "大车左后料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DCZH_FZ_CH_FAULT == false && _systemVariables.DCZH_FZ_CH_FAULT == true)
+            {
+                // 大车左后料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("大车左后料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DCZH_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.DCYQ_FZ_CH_FAULT == true && _systemVariables.DCYQ_FZ_CH_FAULT == false)
+            {
+                // 大车右前料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("大车右前料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DCYQ_FZ_CH_FAULT), "大车右前料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DCYQ_FZ_CH_FAULT == false && _systemVariables.DCYQ_FZ_CH_FAULT == true)
+            {
+                // 大车右前料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("大车右前料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DCYQ_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.DCYH_FZ_CH_FAULT == true && _systemVariables.DCYH_FZ_CH_FAULT == false)
+            {
+                // 大车右后料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("大车右后料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DCYH_FZ_CH_FAULT), "大车右后料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.DCYH_FZ_CH_FAULT == false && _systemVariables.DCYH_FZ_CH_FAULT == true)
+            {
+                // 大车右后料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("大车右后料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.DCYH_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.XBZQ_FZ_CH_FAULT == true && _systemVariables.XBZQ_FZ_CH_FAULT == false)
+            {
+                // 悬臂左前料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左前料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBZQ_FZ_CH_FAULT), "悬臂左前料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.XBZQ_FZ_CH_FAULT == false && _systemVariables.XBZQ_FZ_CH_FAULT == true)
+            {
+                // 悬臂左前料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左前料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBZQ_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.XBZZ_FZ_CH_FAULT == true && _systemVariables.XBZZ_FZ_CH_FAULT == false)
+            {
+                // 悬臂左中料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左中料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBZZ_FZ_CH_FAULT), "悬臂左中料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.XBZZ_FZ_CH_FAULT == false && _systemVariables.XBZZ_FZ_CH_FAULT == true)
+            {
+                // 悬臂左中料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左中料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBZZ_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.XBZH_FZ_CH_FAULT == true && _systemVariables.XBZH_FZ_CH_FAULT == false)
+            {
+                // 悬臂左后料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左后料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBZH_FZ_CH_FAULT), "悬臂左后料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.XBZH_FZ_CH_FAULT == false && _systemVariables.XBZH_FZ_CH_FAULT == true)
+            {
+                // 悬臂左后料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左后料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBZH_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.XBYQ_FZ_CH_FAULT == true && _systemVariables.XBYQ_FZ_CH_FAULT == false)
+            {
+                // 悬臂右前料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右前料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBYQ_FZ_CH_FAULT), "悬臂右前料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.XBYQ_FZ_CH_FAULT == false && _systemVariables.XBYQ_FZ_CH_FAULT == true)
+            {
+                // 悬臂右前料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右前料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBYQ_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.XBYZ_FZ_CH_FAULT == true && _systemVariables.XBYZ_FZ_CH_FAULT == false)
+            {
+                // 悬臂右中料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右中料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBYZ_FZ_CH_FAULT), "悬臂右中料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.XBYZ_FZ_CH_FAULT == false && _systemVariables.XBYZ_FZ_CH_FAULT == true)
+            {
+                // 悬臂右中料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右中料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBYZ_FZ_CH_FAULT));
+            }
+
+            if (newSystemVariables.XBYH_FZ_CH_FAULT == true && _systemVariables.XBYH_FZ_CH_FAULT == false)
+            {
+                // 悬臂右后料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右后料位计异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBYH_FZ_CH_FAULT), "悬臂右后料位计异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.XBYH_FZ_CH_FAULT == false && _systemVariables.XBYH_FZ_CH_FAULT == true)
+            {
+                // 悬臂右后料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右后料位计异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBYH_FZ_CH_FAULT));
+            }
             if (newSystemVariables.Slew_Encoder_ERR == true && _systemVariables.Slew_Encoder_ERR == false)
             {
                 // 回转编码器异常
@@ -6935,7 +7126,197 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.Slew_Encoder_ERR_2));
             }
+            if (newSystemVariables.QJY_CH_FAULT_2 == true && _systemVariables.QJY_CH_FAULT_2  == false)
+            {
+                // 倾角仪异常
+                DataManager.Instance.InsertHistoryWarningMc("倾角仪异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.QJY_CH_FAULT_2 ), "倾角仪异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.QJY_CH_FAULT_2  == false && _systemVariables.QJY_CH_FAULT_2  == true)
+            {
+                //倾角仪异常解除
+                DataManager.Instance.InsertHistoryWarningMc("倾角仪异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.QJY_CH_FAULT_2 ));
+            }
+            if (newSystemVariables.XBTB_LWJ_CH_FAULT_2 == true && _systemVariables.XBTB_LWJ_CH_FAULT_2 == false)
+            {
+                // 垂直料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("垂直料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBTB_LWJ_CH_FAULT_2), "垂直料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.XBTB_LWJ_CH_FAULT_2 == false && _systemVariables.XBTB_LWJ_CH_FAULT_2 == true)
+            {
+                // 垂直料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("垂直料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBTB_LWJ_CH_FAULT_2));
+            }
 
+            if (newSystemVariables.DCZQ_FZ_CH_FAULT_2 == true && _systemVariables.DCZQ_FZ_CH_FAULT_2 == false)
+            {
+                // 大车左前料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("大车左前料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DCZQ_FZ_CH_FAULT_2), "大车左前料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DCZQ_FZ_CH_FAULT_2 == false && _systemVariables.DCZQ_FZ_CH_FAULT_2 == true)
+            {
+                // 大车左前料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("大车左前料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DCZQ_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.DCZH_FZ_CH_FAULT_2 == true && _systemVariables.DCZH_FZ_CH_FAULT_2 == false)
+            {
+                // 大车左后料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("大车左后料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DCZH_FZ_CH_FAULT_2), "大车左后料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DCZH_FZ_CH_FAULT_2 == false && _systemVariables.DCZH_FZ_CH_FAULT_2 == true)
+            {
+                // 大车左后料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("大车左后料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DCZH_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.DCYQ_FZ_CH_FAULT_2 == true && _systemVariables.DCYQ_FZ_CH_FAULT_2 == false)
+            {
+                // 大车右前料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("大车右前料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DCYQ_FZ_CH_FAULT_2), "大车右前料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DCYQ_FZ_CH_FAULT_2 == false && _systemVariables.DCYQ_FZ_CH_FAULT_2 == true)
+            {
+                // 大车右前料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("大车右前料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DCYQ_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.DCYH_FZ_CH_FAULT_2 == true && _systemVariables.DCYH_FZ_CH_FAULT_2 == false)
+            {
+                // 大车右后料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("大车右后料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.DCYH_FZ_CH_FAULT_2), "大车右后料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.DCYH_FZ_CH_FAULT_2 == false && _systemVariables.DCYH_FZ_CH_FAULT_2 == true)
+            {
+                // 大车右后料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("大车右后料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.DCYH_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.XBZQ_FZ_CH_FAULT_2 == true && _systemVariables.XBZQ_FZ_CH_FAULT_2 == false)
+            {
+                // 悬臂左前料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左前料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBZQ_FZ_CH_FAULT_2), "悬臂左前料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.XBZQ_FZ_CH_FAULT_2 == false && _systemVariables.XBZQ_FZ_CH_FAULT_2 == true)
+            {
+                // 悬臂左前料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左前料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBZQ_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.XBZZ_FZ_CH_FAULT_2 == true && _systemVariables.XBZZ_FZ_CH_FAULT_2 == false)
+            {
+                // 悬臂左中料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左中料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBZZ_FZ_CH_FAULT_2), "悬臂左中料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.XBZZ_FZ_CH_FAULT_2 == false && _systemVariables.XBZZ_FZ_CH_FAULT_2 == true)
+            {
+                // 悬臂左中料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左中料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBZZ_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.XBZH_FZ_CH_FAULT_2 == true && _systemVariables.XBZH_FZ_CH_FAULT_2 == false)
+            {
+                // 悬臂左后料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左后料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBZH_FZ_CH_FAULT_2), "悬臂左后料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.XBZH_FZ_CH_FAULT_2 == false && _systemVariables.XBZH_FZ_CH_FAULT_2 == true)
+            {
+                // 悬臂左后料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂左后料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBZH_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.XBYQ_FZ_CH_FAULT_2 == true && _systemVariables.XBYQ_FZ_CH_FAULT_2 == false)
+            {
+                // 悬臂右前料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右前料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBYQ_FZ_CH_FAULT_2), "悬臂右前料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.XBYQ_FZ_CH_FAULT_2 == false && _systemVariables.XBYQ_FZ_CH_FAULT_2 == true)
+            {
+                // 悬臂右前料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右前料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBYQ_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.XBYZ_FZ_CH_FAULT_2 == true && _systemVariables.XBYZ_FZ_CH_FAULT_2 == false)
+            {
+                // 悬臂右中料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右中料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBYZ_FZ_CH_FAULT_2), "悬臂右中料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.XBYZ_FZ_CH_FAULT_2 == false && _systemVariables.XBYZ_FZ_CH_FAULT_2 == true)
+            {
+                // 悬臂右中料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右中料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBYZ_FZ_CH_FAULT_2));
+            }
+
+            if (newSystemVariables.XBYH_FZ_CH_FAULT_2 == true && _systemVariables.XBYH_FZ_CH_FAULT_2 == false)
+            {
+                // 悬臂右后料位计异常
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右后料位计异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.XBYH_FZ_CH_FAULT_2), "悬臂右后料位计异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.XBYH_FZ_CH_FAULT_2 == false && _systemVariables.XBYH_FZ_CH_FAULT_2 == true)
+            {
+                // 悬臂右后料位计异常解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂右后料位计异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.XBYH_FZ_CH_FAULT_2));
+            }
+            
             if (newSystemVariables.RightAnchorNotLifted_2 == true && _systemVariables.RightAnchorNotLifted_2 == false)
             {
                 // 右侧锚锭没有抬起
