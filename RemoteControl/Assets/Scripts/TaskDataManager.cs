@@ -281,62 +281,33 @@ public class TaskDataManager : Singleton<TaskDataManager>
     // private Dictionary<string,List<int>>
     public void SendTaskCommand(TaskCommand taskCommand)
     {
-        taskCommand.CommonTaskParameters = GetCommonTaskParameters();
+        int id = taskCommand.Machine == Machine.BucketWheelStackerReclaimer ? 1 : 2;
+        taskCommand.CommonTaskParameters = GetCommonTaskParameters(taskCommand.Machine);
         string json = JsonMgr.Serialize<TaskCommand>(taskCommand);
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
-    public CommonTaskParameters GetCommonTaskParameters()
+    public CommonTaskParameters GetCommonTaskParameters(Machine machine)
     {
-        if (_taskConfig == null)
+        CommonTaskParameters commonTaskParameters = new CommonTaskParameters();
+        MySqlDataReader reader = DataManager.Instance.GetTaskConfigMc(machine);
+        while (reader.Read())
         {
-            _taskConfig = new CommonTaskParameters();
-            MySqlDataReader reader = DataManager.Instance.GetTaskConfigMc();
-            while (reader.Read())
-            {
-                _taskConfig.HeapDis = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString());
-                _taskConfig.MoveModel = int.Parse(reader[ConstStr.DATA_TASK_CONFIG_MOVEMODEL].ToString());
-                _taskConfig.FetchPileDepth = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
-                ;
-                _taskConfig.FetchVerticalRangeAdd =
-                    float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString());
-                _taskConfig.FetchHorizontalRangeSub =
-                    float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
-            }
+            commonTaskParameters.HeapDis = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString());
+            commonTaskParameters.MoveModel = int.Parse(reader[ConstStr.DATA_TASK_CONFIG_MOVEMODEL].ToString());
+            commonTaskParameters.FetchPileDepth = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
+            ;
+            commonTaskParameters.FetchVerticalRangeAdd =
+                float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString());
+            commonTaskParameters.FetchHorizontalRangeSub =
+                float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
         }
-
-        return TaskConfig;
+        return commonTaskParameters;
     }
 
-    public void UpdateCommonTaskParameters(string name, string value)
+    public void UpdateCommonTaskParameters(string name, string value,Machine machine)
     {
-        if (_taskConfig == null)
-        {
-            GetCommonTaskParameters();
-        }
-
-        if (ConstStr.DATA_TASK_CONFIG_HEAPDOS == name)
-        {
-            _taskConfig.HeapDis = float.Parse(value);
-        }
-        else if (ConstStr.DATA_TASK_CONFIG_MOVEMODEL == name)
-        {
-            _taskConfig.MoveModel = int.Parse(value);
-        }
-        else if (ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH == name)
-        {
-            _taskConfig.FetchPileDepth = float.Parse(value);
-        }
-        else if (ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD == name)
-        {
-            _taskConfig.FetchVerticalRangeAdd = float.Parse(value);
-        }
-        else if (ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB == name)
-        {
-            _taskConfig.FetchHorizontalRangeSub = float.Parse(value);
-        }
-
-        DataManager.Instance.UpdateTaskConfig(name, value);
+        DataManager.Instance.UpdateTaskConfig(name, value,machine);
     }
 
     public void SendChangeTaskStateCommand(Machine machine, OperationType operationType, TaskType taskType)

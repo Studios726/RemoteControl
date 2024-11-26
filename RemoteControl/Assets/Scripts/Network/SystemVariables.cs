@@ -443,7 +443,10 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
-
+        //11.3
+        public bool COMM_FROM_SCADA_HART { get; set; }
+        public bool COMM_FROM_SCADA_FAULT { get; set; }
+        public bool COMM_TO_SCADA_HART { get; set; }
 
 
 
@@ -1217,12 +1220,18 @@ namespace ShenYangRemoteSystem.Subclass
         public bool SR1_SCADA_COMM_FAULT { get; set; }
 
 
+        //11.1
+        public bool SR1_Soft_Travel_Start_Alarm { get; set; }
 
 
 
 
-
-
+        //11.19
+        public bool SR1_TO_SCADA_COMM_Heart { get; set; }
+        public bool SR1_SofT_Take_START { get; set; }
+        public bool SR1_SofT_Take_STOP { get; set; }
+        public bool SR1_Soft_Stack_START { get; set; }
+        public bool SR1_Soft_Stack_STOP { get; set; }
 
 
 
@@ -1733,7 +1742,10 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
-
+        //11.3
+        public bool COMM_FROM_SCADA_HART_2 { get; set; }
+        public bool COMM_FROM_SCADA_FAULT_2 { get; set; }
+        public bool COMM_TO_SCADA_HART_2 { get; set; }
 
 
 
@@ -2701,15 +2713,21 @@ namespace ShenYangRemoteSystem.Subclass
         public bool SR1_SCADA_COMM_FAULT_2 { get; set; }
 
 
+        //11.1
+        public bool SR1_Soft_Travel_Start_Alarm_2 { get; set; }
+
+
+        //11.3
 
 
 
 
-
-
-
-
-
+        //11.19
+        public bool SR1_TO_SCADA_COMM_Heart_2 { get; set; }
+        public bool SR1_SofT_Take_START_2 { get; set; }
+        public bool SR1_SofT_Take_STOP_2 { get; set; }
+        public bool SR1_Soft_Stack_START_2 { get; set; }
+        public bool SR1_Soft_Stack_STOP_2 { get; set; }
 
 
 

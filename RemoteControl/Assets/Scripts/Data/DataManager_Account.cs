@@ -271,9 +271,9 @@ public partial class DataManager
         return MySqlHelper.ExecuteSql(query) > 0;
     }
     
-    public bool InsertHistoryWarningMc(string des,string userName,Machine machine)
+    public bool InsertHistoryWarningMc(string des,string userName,Machine machine,bool isRecord=false)
     {
-        if (GameDataManager.Instance.IsAdmin())
+        if (GameDataManager.Instance.IsAdmin()||isRecord)
         {
             string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;
         
@@ -288,16 +288,18 @@ public partial class DataManager
       
     }
     
-    public MySqlDataReader GetTaskConfigMc()
+    public MySqlDataReader GetTaskConfigMc(Machine machine)
     {
+        int id = machine == Machine.BucketWheelStackerReclaimer ? 1 : 2;
         string tabName = ConstStr.DATABASE_TASK_CONFIG;
-        string query = $"SELECT * FROM {tabName} WHERE {ConstStr.DATA_TASK_CONFIG_ID}=1";
+        string query = $"SELECT * FROM {tabName} WHERE {ConstStr.DATA_TASK_CONFIG_ID}={id}";
         MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
         return mySqlDataReader;
     }
-    public bool UpdateTaskConfig(string name,string value)
+    public bool UpdateTaskConfig(string name,string value,Machine machine)
     {
-        string query = $"UPDATE {ConstStr.DATABASE_TASK_CONFIG} SET {name} = {value} WHERE {ConstStr.DATA_TASK_CONFIG_ID} = 1";
+        int id = machine == Machine.BucketWheelStackerReclaimer ? 1 : 2;
+        string query = $"UPDATE {ConstStr.DATABASE_TASK_CONFIG} SET {name} = {value} WHERE {ConstStr.DATA_TASK_CONFIG_ID} = {id}";
         bool success=MySqlHelper.ExecuteSql(query) > 0; 
         return success; 
     }

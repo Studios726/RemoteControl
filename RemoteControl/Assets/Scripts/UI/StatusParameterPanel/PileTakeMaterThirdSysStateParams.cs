@@ -34,6 +34,18 @@ public class PileTakeMaterThirdSysStateParams : MonoBehaviour
       AutoControlDeviceData data =new AutoControlDeviceData();
       data.Slew_Encoder_ERR=GetToggleState(systemVariables.Slew_Encoder_ERR,systemVariables.Slew_Encoder_ERR_2);
       data.DC_Encoder_ERR=GetToggleState(systemVariables.DC_Encoder_ERR,systemVariables.DC_Encoder_ERR_2);
+      data.QJY_CH_FAULT=GetToggleState(systemVariables.QJY_CH_FAULT,systemVariables.QJY_CH_FAULT_2);
+      data.XBTB_LWJ_CH_FAULT=GetToggleState(systemVariables.XBTB_LWJ_CH_FAULT,systemVariables.XBTB_LWJ_CH_FAULT_2);
+      data.DCZQ_FZ_CH_FAULT=GetToggleState(systemVariables.DCZQ_FZ_CH_FAULT,systemVariables.DCZQ_FZ_CH_FAULT_2);
+      data.DCZH_FZ_CH_FAULT=GetToggleState(systemVariables.DCZH_FZ_CH_FAULT,systemVariables.DCZH_FZ_CH_FAULT_2);
+      data.DCYQ_FZ_CH_FAULT=GetToggleState(systemVariables.DCYQ_FZ_CH_FAULT,systemVariables.DCYQ_FZ_CH_FAULT_2);
+      data.DCYH_FZ_CH_FAULT=GetToggleState(systemVariables.DCYH_FZ_CH_FAULT,systemVariables.DCYH_FZ_CH_FAULT_2);
+      data.XBZQ_FZ_CH_FAULT=GetToggleState(systemVariables.XBZQ_FZ_CH_FAULT,systemVariables.XBZQ_FZ_CH_FAULT_2);
+      data.XBZZ_FZ_CH_FAULT=GetToggleState(systemVariables.XBZZ_FZ_CH_FAULT,systemVariables.XBZZ_FZ_CH_FAULT_2);
+      data.XBZH_FZ_CH_FAULT=GetToggleState(systemVariables.XBZH_FZ_CH_FAULT,systemVariables.XBZH_FZ_CH_FAULT_2);
+      data.XBYQ_FZ_CH_FAULT=GetToggleState(systemVariables.XBYQ_FZ_CH_FAULT,systemVariables.XBYQ_FZ_CH_FAULT_2);
+      data.XBYZ_FZ_CH_FAULT=GetToggleState(systemVariables.XBYZ_FZ_CH_FAULT,systemVariables.XBYZ_FZ_CH_FAULT_2);
+      data.XBYH_FZ_CH_FAULT=GetToggleState(systemVariables.XBYH_FZ_CH_FAULT,systemVariables.XBYH_FZ_CH_FAULT_2);
       AutoControlDeviceStatus.UpdateData(data,GameDataManager.Instance.GameMain.connectionRC.isConnect);
    }
    //防冲限速器状态

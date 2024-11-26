@@ -201,9 +201,9 @@ namespace RemoteControl
 
             Debug.Log("----------------------Success " + connectEventArgs.type);
             DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                Machine.BucketWheelStackerReclaimer);
+                Machine.BucketWheelStackerReclaimer,true);
             DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                Machine.BucketWheel);
+                Machine.BucketWheel,true);
         }
 
         public void ConnectionFail(object o, EventArgs eventArgs)
@@ -247,9 +247,9 @@ namespace RemoteControl
             if (isInsert == true)
             {
                 DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
+                    Machine.BucketWheelStackerReclaimer,true);
                 DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                    Machine.BucketWheel);
+                    Machine.BucketWheel,true);
             }
         }
 
@@ -281,9 +281,9 @@ namespace RemoteControl
             if (isInsert)
             {
                 DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
+                    Machine.BucketWheelStackerReclaimer,true);
                 DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                    Machine.BucketWheel);
+                    Machine.BucketWheel,true);
             }
         }
 
