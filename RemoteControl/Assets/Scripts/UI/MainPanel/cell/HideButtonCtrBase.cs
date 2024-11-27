@@ -298,10 +298,10 @@ public class HideButtonCtrBase : PanelBase
             // }
             cantileverTakeMaterStartBtn.SetSystemState(data.SuspensionBeltMaterialUnloadingRunningContact_2,true);
             
-            draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning,true);
-            draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning==false,true);
-            heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning,true);
-            heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning==false,true);
+            draughtFanStartBtn.SetSystemState(data.VariableAmplitudeFanRunning_2,true);
+            draughtFanStopBtn.SetSystemState(data.VariableAmplitudeFanRunning_2==false,true);
+            heaterStartBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning_2,true);
+            heaterStopBtn.SetSystemState(data.VariableAmplitudeOilHeaterRunning_2==false,true);
             
             if (data.SuspensionBeltMaterialUnloadingRunningContact_2==false &&data.SuspensionBeltMaterialLoadingRunningContact_2==false)
             {
