@@ -281,9 +281,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
     // private Dictionary<string,List<int>>
     public void SendTaskCommand(TaskCommand taskCommand)
     {
-        int id = taskCommand.Machine == Machine.BucketWheelStackerReclaimer ? 1 : 2;
         taskCommand.CommonTaskParameters = GetCommonTaskParameters(taskCommand.Machine);
-        string json = JsonMgr.Serialize<TaskCommand>(taskCommand);
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
