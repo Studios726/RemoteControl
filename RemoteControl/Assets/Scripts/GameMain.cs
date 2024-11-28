@@ -31,7 +31,7 @@ namespace RemoteControl
             ReadConfig();
             AddListener();
             InitMode();
-            CreatConnect(null, null);
+            // CreatConnect(null, null);
             UIManager.Instance.OpenUI(UIID.LoginPanel);
             chartTimer = Timer.Register(5, true, true, (() => { GameDataManager.Instance.RecordChart(); }));
             Timer.Register(1, true, true, (() => {   EventManager.Instance.TriggerEvent(EventName.UpdateChartData, null);; }));
