@@ -367,8 +367,7 @@ public class BucketWheelTaskBase : PanelBase
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterStopBtn);
             int dataInt = takeMaterStopBtn.red.activeSelf?0:1;
             string commandName=machine==Machine.BucketWheelStackerReclaimer?COMMAND_NAME.TAKE_PAUSE.ToString()+"_1":COMMAND_NAME.TAKE_PAUSE.ToString()+"_2";
-            GameDataManager.Instance.SendServerCommandRC(commandName,6,4,dataInt);
-            Debug.Log($">>>>>>>>>{commandName } {dataInt}");
+            GameDataManager.Instance.SendServerCommandRC(commandName,6,2,dataInt);
         }
         else if (operationType == OperationType.REVERSING)
         {
