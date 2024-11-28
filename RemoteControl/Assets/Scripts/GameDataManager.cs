@@ -732,7 +732,17 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.DATA_FLOAT = dataFloat;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
-
+    public void SendServerCommandRC(string commandName,int dataType,int queryType, int dataInt = 0, float dataFloat = 0)
+    {
+        ServerCommand serverCommand = new ServerCommand();
+        serverCommand.QUERY_SYSTEM = "MC";
+        serverCommand.DATA_TYPE = dataType;
+        serverCommand.QUERY_TYPE = queryType;
+        serverCommand.COMMAND_NAME = commandName;
+        serverCommand.DATA_INT = dataInt;
+        serverCommand.DATA_FLOAT = dataFloat;
+        MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
+    }
     /// <summary>
     /// 获取三维数据
     /// </summary>

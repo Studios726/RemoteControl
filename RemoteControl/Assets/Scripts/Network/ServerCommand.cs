@@ -363,7 +363,11 @@ public enum COMMAND_NAME
     /// <summary>
     /// 悬臂左后超声波防撞保护旁路
     /// </summary>
-    SASLB_BYPASS
+    SASLB_BYPASS,
+    /// <summary>
+    /// 取料任务暂停
+    /// </summary>
+    TAKE_PAUSE
     
     
     
