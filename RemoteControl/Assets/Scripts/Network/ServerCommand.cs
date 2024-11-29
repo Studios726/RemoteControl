@@ -367,7 +367,11 @@ public enum COMMAND_NAME
     /// <summary>
     /// 取料任务暂停
     /// </summary>
-    TAKE_PAUSE
+    TAKE_PAUSE,
+    /// <summary>
+    /// 堆料任务暂停
+    /// </summary>
+    STACK_PAUSE
     
     
     
