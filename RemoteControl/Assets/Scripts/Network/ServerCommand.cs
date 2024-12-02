@@ -399,7 +399,7 @@ public class TaskCommand
     //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认
     public int Command_Type { get; set; }
     //0新任务 1恢复上次任务
-    public int IsNewTask{ get; set; }
+    public int IsTaskContinued{ get; set; }
     //任务ID
     public string TaskID {  get; set; }
     //任务创建时间

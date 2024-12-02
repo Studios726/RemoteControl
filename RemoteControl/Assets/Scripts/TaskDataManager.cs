@@ -380,7 +380,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         {
                             taskData.TaskState = "1";
                             DataManager.Instance.UpdateHistoryTaskMc(taskData.TaskID, "1");
-                            DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, "2",
+                            DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, TaskStatus.Completed,
                                 taskVariables.McData[i].AllData.TaskEndTime);
                             GameDataManager.Instance.UpdateSCAData(1);
                             if (taskVariables.McData[i].Machine == Machine.BucketWheelStackerReclaimer)
@@ -423,13 +423,21 @@ public class TaskDataManager : Singleton<TaskDataManager>
                                 taskVariables.McData[i]);
                         }
                     }
+                    
+                    
+                    if (taskData.State!=TaskStatus.Completed&&taskVariables.McData[i].AllData.OperationCommandList[3] == 1) //任务结束更新数据库
+                    {
+                        taskData.State = TaskStatus.Completed;
+                        DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, TaskStatus.Completed,
+                            taskVariables.McData[i].AllData.TaskEndTime);
+                    }
                 }
                 else
                 {
                     TaskCommand taskCommand = taskVariables.McData[i];
                     nearestTaskDataDic.Add(taskVariables.McData[i].TaskID,
                         new TaskData(taskVariables.McData[i].TaskID,
-                            taskVariables.McData[i].AllData.ProcessingProgress.ToString(), "1"));
+                            taskVariables.McData[i].AllData.ProcessingProgress.ToString(), TaskStatus.InProgress));
                     DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
                         taskVariables.McData[i].AllData.ProcessingProgress.ToString());
                     if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
@@ -441,23 +449,24 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     {
                         AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel, taskCommand);
                     }
+                    if (taskVariables.McData[i].AllData.OperationCommandList[3] == 1) //任务结束更新数据库
+                    {
+                        nearestTaskDataDic[taskVariables.McData[i].TaskID].State = TaskStatus.Completed;
+                        DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, TaskStatus.Completed,
+                            taskVariables.McData[i].AllData.TaskEndTime);
+                    }
                 }
 
-                if (taskVariables.McData[i].AllData.OperationCommandList[3] == 1) //任务结束更新数据库
-                {
-                    DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, "2",
-                        taskVariables.McData[i].AllData.TaskEndTime);
-                }
             }
         }
         else
         {
             foreach (var data in nearestTaskDataDic) //任务规划崩溃处理最近任务完成状态
             {
-                if (data.Value.State != "2")
+                if (data.Value.State != TaskStatus.Completed)
                 {
-                    data.Value.State = "2";
-                    DataManager.Instance.UpdateHistoryTaskMcCompleteState(data.Value.TaskID, "2", DateTime.Now);
+                    data.Value.State =TaskStatus.Completed;
+                    DataManager.Instance.UpdateHistoryTaskMcCompleteState(data.Value.TaskID, TaskStatus.Completed, DateTime.Now);
                 }
             }
         }
@@ -537,7 +546,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 {
                     nearestTaskDataDic.Add(taskID,
                         new TaskData(taskID, mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString(),
-                            mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString()));
+                            (TaskStatus)Enum.Parse(typeof(TaskStatus), mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString())));
                 }
             }
         }

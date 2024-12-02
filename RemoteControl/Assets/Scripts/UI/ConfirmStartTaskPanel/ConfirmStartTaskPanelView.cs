@@ -57,6 +57,7 @@ public class ConfirmStartTaskPanelView : UIView<ConfirmStartTaskPanelCtr>
 
                     if (_restoreTask.isOn==true ||_startNewTask.isOn==true)
                     {
+                        args.TaskCommand.IsTaskContinued=_startNewTask.isOn?0:1;
                         TaskDataManager.Instance.SendTaskCommand(args.TaskCommand);
                     }
                     args.ConfirmAction?.Invoke();

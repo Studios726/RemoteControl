@@ -141,23 +141,55 @@ public partial class DataManager
     }
     public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userName,string taskState,string completeState="1")
     {
-        string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`,`{ConstStr.DATA_TASK_AUTO_MODE}`,`{ConstStr.DATA_TASK_ANGLE_ENTRY_MODE}`,`{ConstStr.DATA_TASK_STATE2}`) " +
-           $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{userName}','{taskState}','{taskCommand.TaskID}','{taskCommand.TakeMateHigh}','{taskCommand.LayerHigh}','{taskCommand.AutoMode}','{(int)taskCommand.AngleEntryMode}','{completeState}')";
-        return MySqlHelper.ExecuteSql(query) > 0; ;
+        if (GameDataManager.Instance.IsAdmin())
+        {
+            string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`,`{ConstStr.DATA_TASK_AUTO_MODE}`,`{ConstStr.DATA_TASK_ANGLE_ENTRY_MODE}`,`{ConstStr.DATA_TASK_STATE2}`) " +
+                           $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{taskCommand.TimedAt}','{1}','{taskCommand.Quantity}','{userName}','{taskState}','{taskCommand.TaskID}','{taskCommand.TakeMateHigh}','{taskCommand.LayerHigh}','{taskCommand.AutoMode}','{(int)taskCommand.AngleEntryMode}','{completeState}')";
+            return MySqlHelper.ExecuteSql(query) > 0; ;
+        }
+        else
+        {
+            return false;
+        }
+       
     }
-    public bool UpdateHistoryTaskMcCompleteState(string taskID,string completeState,DateTime dateTime)
+    public bool UpdateHistoryTaskMcCompleteState(string taskID,TaskStatus completeState,DateTime dateTime)
     {
-        string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE2} = {completeState} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
-        bool success=MySqlHelper.ExecuteSql(query) > 0; 
-        return success; 
+        if (GameDataManager.Instance.IsAdmin())
+        {
+            string state = "0";
+            if (completeState == TaskStatus.InProgress)
+            {
+                state = "1";
+            }else if (completeState == TaskStatus.Completed)
+            {
+                state ="2";
+            }
+            string query = $"UPDATE `{ConstStr.DATABASE_HISTORY_TASK_MC}` SET `{ConstStr.DATA_TASK_STATE2}` = '{state}' , `{ConstStr.DATA_TASK_END_TIME}`='{dateTime}' WHERE `{ConstStr.DATA_TASK_ID}` = '{taskID}'";
+            bool success=MySqlHelper.ExecuteSql(query) > 0; 
+            return success; 
+        }
+        else
+        {
+            return false; 
+        }
+     
     }
     
     public bool UpdateHistoryTaskMc(string taskID,string taskState)
     {
-        string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE} = {taskState} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
-        bool success=MySqlHelper.ExecuteSql(query) > 0; 
-        // Debug.LogError($"更新任务状态 { taskID } { state} {success}");
-        return success; 
+        if (GameDataManager.Instance.IsAdmin())
+        {
+            string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE} = {taskState} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
+            bool success=MySqlHelper.ExecuteSql(query) > 0; 
+            // Debug.LogError($"更新任务状态 { taskID } { state} {success}");
+            return success; 
+        }
+        else
+        {
+            return false; 
+        }
+    
     }
     public MySqlDataReader GetHistoryTaskMc(int limit)
     {

@@ -7,6 +7,12 @@ public enum TaskType
     None
 }
 
+public enum TaskStatus
+{
+    Preset,//预设
+    InProgress,//进行中
+    Completed//已完成
+}
 public enum AutoMode
 {
     AUTOMAX,//全自动
@@ -66,8 +72,8 @@ public class TaskData
 {
     public string TaskID { get; set; }
     public string TaskState { get; set; }
-    public string State { get; set; }
-    public TaskData(string taskID, string taskState,string state="1")
+    public TaskStatus State { get; set; }
+    public TaskData(string taskID, string taskState,TaskStatus state=TaskStatus.InProgress)
     {
         TaskID = taskID;
         TaskState = taskState;
