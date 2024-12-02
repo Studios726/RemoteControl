@@ -8,4 +8,5 @@ public partial class UIID
     public static readonly UIID HistoryPanel = new UIID("HistoryWarningPanel",typeof(HistoryPanelView),typeof(HistoryPanelCtr),Layer.UILayer);
     public static readonly UIID StatusParaeterPanel = new UIID("StatusParameterPanel", typeof(StatusParameterPanelView), typeof(StatusParameterPanelCtr), Layer.UILayer);
     public static readonly UIID ConfirmTaskPanel = new UIID("ConfirmTaskPanel", typeof(ConfirmTaskPanelView), typeof(ConfirmTaskPanelCtr), Layer.UIPopupLayer);
+    public static readonly UIID ConfirmStartTaskPanel = new UIID("ConfirmStartTaskPanel", typeof(ConfirmStartTaskPanelView), typeof(ConfirmStartTaskPanelCtr), Layer.UIPopupLayer);
 }

@@ -396,8 +396,10 @@ public class TaskCommand
 {
     public int ID { get; set; }
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3发送通用参数
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认
     public int Command_Type { get; set; }
+    //0新任务 1恢复上次任务
+    public int IsNewTask{ get; set; }
     //任务ID
     public string TaskID {  get; set; }
     //任务创建时间
@@ -416,10 +418,12 @@ public class TaskCommand
     //自动模式
     public AutoMode AutoMode{ get; set;}
     public AngleEntryMode AngleEntryMode{ get; set; }
-    //启动0 暂停1 换向2 结束
+    //启动0 暂停1 换向2 结束3,边界确认 6
     public OperationType OperationCommand { get; set; }
 
     public int ResetState { get; set; }
+    //左转右转边界确认按钮
+    public int TurnConfirmState{ get; set;}
     // 取料范围，可以是一个区间
     public TaskRange MaterialRange { get; set; }
 
@@ -448,7 +452,8 @@ public class TaskCommand
     public float TakeMateHigh {  get; set; }
     //层高
     public float LayerHigh {  get; set; }
-   
+    //1 左转 2 右转
+    public TurnMode TurnMode{  get; set; }
     public AllData  AllData { get; set; }
     public CommonTaskParameters CommonTaskParameters{ get; set; }
     //任务结束执行方式[调零，关设备] 0 否 1 是

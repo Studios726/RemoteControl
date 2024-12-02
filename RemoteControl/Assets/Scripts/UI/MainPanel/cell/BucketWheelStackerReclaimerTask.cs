@@ -189,7 +189,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             float endLeftRightRangeValue = endLeftPileMaterText.text == "" ? 0 : float.Parse(endLeftPileMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
             taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text);
-            taskCommand.IsTimed = timeOpenToggle.isOn;
+            taskCommand.IsTimed = false; //timeOpenToggle.isOn;
             taskCommand.TimedAt = int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
             taskCommand.IsQuantified = quantityOpenToggle.isOn;
             taskCommand.Quantity = int.Parse(takeMaterNum.text);

@@ -13,6 +13,12 @@ public enum AutoMode
     SemiAuto//半自动
 }
 
+public enum TurnMode
+{
+    None,
+    LEFTTURN,//左转
+    RIGHTTURN//右转
+}
 public  enum AngleEntryMode
 {
     /// <summary>
@@ -49,7 +55,11 @@ public enum OperationType
     /// <summary>
     /// 重置
     /// </summary>
-    RESET
+    RESET=5,
+    /// <summary>
+    /// 边界确认
+    /// </summary>
+    TurnConfirm=6,
 }
 
 public class TaskData

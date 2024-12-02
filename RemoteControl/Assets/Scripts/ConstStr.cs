@@ -81,6 +81,7 @@ public static class ConstStr
     public const string DATA_TASK_AUTO_MODE = "auto_mode";
     public const string DATA_TASK_ANGLE_ENTRY_MODE = "angle_entry_mode";
     public const string DATA_TASK_STATE2 = "state";
+    public const string DATA_TASK_END_TIME = "task_end_time";
     #endregion
     #region history_cartelectricity
     public const string DATA_HISTORY_CARTELECTRICITY_NAME = "name";
