@@ -74,6 +74,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
     public McWarningRecord LastMcWarningRecord;
     public bool IsCanPop;
+    public bool IsCanPopTakeMater;
 
     public SystemVariables SystemVariables
     {
@@ -132,6 +133,7 @@ public class GameDataManager : Singleton<GameDataManager>
         if (_systemVariables == null)
         {
             IsCanPop = true;
+            IsCanPopTakeMater = true;
         }
 
         if (systemVariables.MCString != null)
@@ -167,7 +169,16 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             IsCanPop = false;
             Timer.Register(_systemVariables.BeltRealyDis, false, false, (() => { IsCanPop = true; }));
-            PileTakeMaterPop(TaskType.None, _systemVariables.BeltRealyDis);
+            PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis);
+        }
+
+       
+        if (_systemVariables.SuspensionGlueRunCommand_2&&IsCanPopTakeMater&& _systemVariables.BeltRealyDis_2 > 0 &&
+            curAccountInfo != null)
+        {
+            IsCanPopTakeMater = false;
+            Timer.Register(_systemVariables.BeltRealyDis_2, false, false, (() => { IsCanPopTakeMater = true; }));
+            PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis_2);
         }
 
         UpdateMachine();

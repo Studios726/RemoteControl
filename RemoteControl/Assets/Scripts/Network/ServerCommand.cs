@@ -420,9 +420,9 @@ public class TaskCommand
     public AngleEntryMode AngleEntryMode{ get; set; }
     //启动0 暂停1 换向2 结束3,边界确认 6
     public OperationType OperationCommand { get; set; }
-
+    //任务参数重置 点击发送 1
     public int ResetState { get; set; }
-    //左转右转边界确认按钮
+    //左转右转边界确认按钮 点击发送 1
     public int TurnConfirmState{ get; set;}
     // 取料范围，可以是一个区间
     public TaskRange MaterialRange { get; set; }
@@ -451,7 +451,7 @@ public class TaskCommand
     //堆料高度
     public float TakeMateHigh {  get; set; }
     //层高
-    public float LayerHigh {  get; set; }
+    public float LayerHigh {  get; set; }  
     //1 左转 2 右转
     public TurnMode TurnMode{  get; set; }
     public AllData  AllData { get; set; }

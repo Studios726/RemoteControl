@@ -208,6 +208,7 @@ public class BucketWheelTaskBase : PanelBase
         
         AddOnClickListener(confirmTurnBtn, (() =>
         {
+            
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
                 new ConfirmPanelArgs("是否边界确认？", null, () => 
                     SendTaskCommand(OperationType.TurnConfirm)));
@@ -519,6 +520,7 @@ public class BucketWheelTaskBase : PanelBase
         
         leftTurnToggle.SetSystemState(false, true);
         rightTurnToggle.SetSystemState(false, true);
+        confirmTurnBtn.SetSystemState(false,true);
     }
 
     public virtual void InputFieldValueRange(InputField inputField, float min, float max)
