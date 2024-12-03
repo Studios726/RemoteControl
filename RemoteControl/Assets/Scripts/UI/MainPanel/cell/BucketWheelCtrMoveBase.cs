@@ -296,7 +296,16 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 振打器启动
     /// </summary>
     public ButtonCell shakerStartBtn;
-
+    /// <summary>
+    /// 步进前进
+    /// </summary>
+    public ButtonCell stepForward;
+    /// <summary>
+    /// 步进后退
+    /// </summary>
+    public ButtonCell stepBack;
+    public InputField stepInputField;
+    public bool isStepInput;
     /// <summary>
     /// 升压电磁阀
     /// </summary>
@@ -451,6 +460,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         
         AddOnClickListener(shakerStartBtn,(() =>SendMessageToServer(COMMAND_NAME.VIBRATOR_START,null) ));
         AddOnClickListener(shakerStopBtn,(() =>SendMessageToServer(COMMAND_NAME.VIBRATOR_STOP,null) ));
+        
+        AddOnClickListener(stepForward,(() => SendMessageToServer(COMMAND_NAME.CAR_FORWARD,null)));
+        AddOnClickListener(stepBack,(() => SendMessageToServer(COMMAND_NAME.CAR_REVERSE,null)));
+        SetStepInputFieldEvent(0, 150);
     }
 
     public virtual void UpdateData(SystemVariables data)
@@ -488,7 +501,12 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             
             shakerStopBtn.SetSystemState(data.VibrationMotorRunning==false,true);
             shakerStartBtn.SetSystemState(data.VibrationMotorRunning,true);
-            
+            stepForward.SetSystemState(data.DC_FWD_FixS_Run,true);
+            stepBack.SetSystemState(data.DC_REV_FixS_Run,true);
+            if (isStepInput==false)
+            {
+                stepInputField.text=data.DC_FixSize.ToString();
+            }
             if (data.LeftClampRelaxLimit==true && data.RightClampRelaxLimit==true)
             {
                 disengageClampBtn.SetSystemState(true,true);
@@ -628,6 +646,13 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             shakerStopBtn.SetSystemState(data.VibrationMotorRunning_2==false,true);
             shakerStartBtn.SetSystemState(data.VibrationMotorRunning_2,true);
             
+            stepForward.SetSystemState(data.DC_FWD_FixS_Run_2,true);
+            stepBack.SetSystemState(data.DC_REV_FixS_Run_2,true);
+
+            if (isStepInput==false)
+            {
+                stepInputField.text=data.DC_FixSize_2.ToString();
+            }
             if (data.LeftClampRelaxLimit_2==true && data.RightClampRelaxLimit_2==true)
             {
                 disengageClampBtn.SetSystemState(true,true);
@@ -779,7 +804,34 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         ctr = btn;
         ctr.SetSelectState(true);
     }
+    public void SetStepInputFieldEvent(float min, float max)
+    {
+        stepInputField.text =min.ToString();
+        stepInputField.onEndEdit.AddListener(((string value) =>
+        {
+            float num = 0;
+            if (float.TryParse(value, out num))
+            {
+                num = num < min ? min : num;
+                num = num > max ? max : num;
+            }
 
+            stepInputField.text = num.ToString();
+            
+            COMMAND_NAME command = COMMAND_NAME.CAR_FIXSIZE_SET;
+            string commandName = machine == Machine.BucketWheelStackerReclaimer
+                ? command.ToString() + "_1"
+                : command.ToString() + "_2";
+            isStepInput = false;
+            float dataFloat=float.Parse(stepInputField.text);
+            GameDataManager.Instance.SendServerCommandByName(commandName, 0,dataFloat);
+            DataManager.Instance.InsertHistoryLogMc("大车定长行走步长", GameDataManager.Instance.GetUserName(), machine);
+        }));
+        stepInputField.onValueChanged.AddListener(((string value) =>
+        {
+            isStepInput = true;
+        }));
+    }
     public virtual void SendMessageToServer(COMMAND_NAME command)
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
@@ -791,7 +843,6 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         string commandName = machine == Machine.BucketWheelStackerReclaimer
             ? command.ToString() + "_1"
             : command.ToString() + "_2";
-        Debug.Log($"sendMessage {machine} {commandName}");
         switch (command)
         {
             case COMMAND_NAME.BELTSSTOP_BUTTON:
@@ -871,7 +922,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         GameDataManager.Instance.SendServerCommandByName(commandName);
     }
 
-    public void SendMessageToServer(COMMAND_NAME command, Action action = null)
+    public void SendMessageToServer(COMMAND_NAME command,Action action = null)
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
         {
@@ -906,6 +957,12 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             case COMMAND_NAME.VIBRATOR_STOP:
                 des = "是否确认振打器停止?";
                 break;
+            case COMMAND_NAME.CAR_FORWARD:
+                des = "是否确认步进前进";
+                break;
+            case COMMAND_NAME.CAR_REVERSE:
+                des = "是否确认步进后退";
+                break;
             default:
                 break;
         }
@@ -923,6 +980,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             ? command.ToString() + "_1"
             : command.ToString() + "_2";
         int dataInt = 0;
+        float dataFloat = 0;
         Debug.Log($"message {machine}   {commandName}");
         switch (command)
         {
@@ -966,11 +1024,23 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 shakerStartBtn.SetSelectState(false);
                 DataManager.Instance.InsertHistoryLogMc("振打器停止", GameDataManager.Instance.GetUserName(), machine);
                 break;
+            case COMMAND_NAME.CAR_FORWARD:
+                float.TryParse(stepInputField.text, out dataFloat);
+                stepForward.SetSelectState(true);
+                stepBack.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("步进前进", GameDataManager.Instance.GetUserName(), machine);
+                break;
+            case COMMAND_NAME.CAR_REVERSE:
+                float.TryParse(stepInputField.text, out dataFloat);
+                stepBack.SetSelectState(true);
+                stepForward.SetSelectState(false);
+                DataManager.Instance.InsertHistoryLogMc("步进后退", GameDataManager.Instance.GetUserName(), machine);
+                break;
             default:
                 break;
         }
-
-        GameDataManager.Instance.SendServerCommandByName(commandName, dataInt);
+      
+        GameDataManager.Instance.SendServerCommandByName(commandName, dataInt,dataFloat);
     }
 
     public virtual void SetText(Text text, string value, TextType type)

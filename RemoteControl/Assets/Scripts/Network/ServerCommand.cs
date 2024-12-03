@@ -371,15 +371,20 @@ public enum COMMAND_NAME
     /// <summary>
     /// 堆料任务暂停
     /// </summary>
-    STACK_PAUSE
+    STACK_PAUSE,
+    /// <summary>
+    /// 步进前进
+    /// </summary>
+    CAR_FORWARD,
+    /// <summary>
+    /// 步进后退
+    /// </summary>
+    CAR_REVERSE,
+    /// <summary>
+    /// 步进数值设定
+    /// </summary>
+    CAR_FIXSIZE_SET
     
-    
-    
-    
-    
-    
-    
-        
 }
 public static class ServerCommandDataType
 {
