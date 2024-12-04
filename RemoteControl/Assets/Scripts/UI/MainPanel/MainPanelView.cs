@@ -57,6 +57,11 @@ public class MainPanelView : UIView<MainPanelCtr>
         });
         updateTaskBtn.onClick.AddListener((() =>
         {
+            if (GameDataManager.Instance.GameMain.connectionPC.isConnect==false)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                return;
+            }
             TaskDataManager.Instance.UpdateTaskData();
         }));
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);

@@ -359,7 +359,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(tips, null, null));
             return;
         }
-
+        EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
         if (nearestTaskDataDic.Count <= 0)
         {
             GetNearestTaskDataDic();
@@ -470,8 +470,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 }
             }
         }
-
-        EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 
     public void AddOrUpdateTaskData(TaskCommand taskCommand)
