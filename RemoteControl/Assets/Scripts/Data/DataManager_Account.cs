@@ -141,6 +141,7 @@ public partial class DataManager
     }
     public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userName,string taskState,string completeState="1")
     {
+        return false;
         if (GameDataManager.Instance.IsAdmin())
         {
             string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`,`{ConstStr.DATA_TASK_AUTO_MODE}`,`{ConstStr.DATA_TASK_ANGLE_ENTRY_MODE}`,`{ConstStr.DATA_TASK_STATE2}`) " +
@@ -155,6 +156,7 @@ public partial class DataManager
     }
     public bool UpdateHistoryTaskMcCompleteState(string taskID,TaskStatus completeState,DateTime dateTime)
     {
+        return false;
         if (GameDataManager.Instance.IsAdmin())
         {
             string state = "0";
@@ -178,6 +180,7 @@ public partial class DataManager
     
     public bool UpdateHistoryTaskMc(string taskID,string taskState)
     {
+        return false;
         if (GameDataManager.Instance.IsAdmin())
         {
             string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE} = {taskState} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
@@ -296,6 +299,7 @@ public partial class DataManager
     }
     public bool InsertHistoryLogMc(string des,string userName,Machine machine)
     {
+        return false;
         string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
         
         string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_LOGS_TIME}`,`{ConstStr.DATA_HISTORY_LOGS_INFO}`,`{ConstStr.DATA_HISTORY_LOGS_OPERATOR}`) " +
@@ -305,6 +309,7 @@ public partial class DataManager
     
     public bool InsertHistoryWarningMc(string des,string userName,Machine machine,bool isRecord=false)
     {
+        return false;
         if (GameDataManager.Instance.IsAdmin()||isRecord)
         {
             string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;
@@ -330,6 +335,7 @@ public partial class DataManager
     }
     public bool UpdateTaskConfig(string name,string value,Machine machine)
     {
+        return false;
         int id = machine == Machine.BucketWheelStackerReclaimer ? 1 : 2;
         string query = $"UPDATE {ConstStr.DATABASE_TASK_CONFIG} SET {name} = {value} WHERE {ConstStr.DATA_TASK_CONFIG_ID} = {id}";
         bool success=MySqlHelper.ExecuteSql(query) > 0; 

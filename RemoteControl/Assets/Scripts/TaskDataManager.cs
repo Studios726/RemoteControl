@@ -288,18 +288,18 @@ public class TaskDataManager : Singleton<TaskDataManager>
     public CommonTaskParameters GetCommonTaskParameters(Machine machine)
     {
         CommonTaskParameters commonTaskParameters = new CommonTaskParameters();
-        MySqlDataReader reader = DataManager.Instance.GetTaskConfigMc(machine);
-        while (reader.Read())
-        {
-            commonTaskParameters.HeapDis = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString());
-            commonTaskParameters.MoveModel = int.Parse(reader[ConstStr.DATA_TASK_CONFIG_MOVEMODEL].ToString());
-            commonTaskParameters.FetchPileDepth = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
-            ;
-            commonTaskParameters.FetchVerticalRangeAdd =
-                float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString());
-            commonTaskParameters.FetchHorizontalRangeSub =
-                float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
-        }
+        // MySqlDataReader reader = DataManager.Instance.GetTaskConfigMc(machine);
+        // while (reader.Read())
+        // {
+        //     commonTaskParameters.HeapDis = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString());
+        //     commonTaskParameters.MoveModel = int.Parse(reader[ConstStr.DATA_TASK_CONFIG_MOVEMODEL].ToString());
+        //     commonTaskParameters.FetchPileDepth = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
+        //     ;
+        //     commonTaskParameters.FetchVerticalRangeAdd =
+        //         float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString());
+        //     commonTaskParameters.FetchHorizontalRangeSub =
+        //         float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
+        // }
         return commonTaskParameters;
     }
 
@@ -538,17 +538,17 @@ public class TaskDataManager : Singleton<TaskDataManager>
     {
         if (nearestTaskDataDic.Count <= 0)
         {
-            MySqlDataReader mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(5);
-            while (mySqlDataReader.Read())
-            {
-                string taskID = mySqlDataReader[ConstStr.DATA_TASK_ID].ToString();
-                if (nearestTaskDataDic.ContainsKey(taskID) == false)
-                {
-                    nearestTaskDataDic.Add(taskID,
-                        new TaskData(taskID, mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString(),
-                            (TaskStatus)Enum.Parse(typeof(TaskStatus), mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString())));
-                }
-            }
+            // MySqlDataReader mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(5);
+            // while (mySqlDataReader.Read())
+            // {
+            //     string taskID = mySqlDataReader[ConstStr.DATA_TASK_ID].ToString();
+            //     if (nearestTaskDataDic.ContainsKey(taskID) == false)
+            //     {
+            //         nearestTaskDataDic.Add(taskID,
+            //             new TaskData(taskID, mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString(),
+            //                 (TaskStatus)Enum.Parse(typeof(TaskStatus), mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString())));
+            //     }
+            // }
         }
 
         return nearestTaskDataDic;

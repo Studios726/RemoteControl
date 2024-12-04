@@ -12,51 +12,51 @@ public enum StatusParameterChildID
 public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
 {
     /// <summary>
-    /// 1#堆取料系统状态-off
+    /// 1#?????????-off
     /// </summary>
     public Button stateBtn_1_1_off;
     /// <summary>
-    /// 1#堆取料系统状态二off
+    /// 1#???????????off
     /// </summary>
     public Button stateBtn_1_2_off;
     /// <summary>
-    /// 1#堆取料系统参数off
+    /// 1#???????????off
     /// </summary>
     public Button stateBtn_1_3_off;
     /// <summary>
-    /// 2#堆取料系统状态一off
+    /// 2#??????????off
     /// </summary>
     public Button stateBtn_2_1_off;
     /// <summary>
-    ///  2#堆取料系统状态二off
+    ///  2#???????????off
     /// </summary>
     public Button stateBtn_2_2_off;
     /// <summary>
-    /// 2#堆取料系统参数off
+    /// 2#???????????off
     /// </summary>
     public Button stateBtn_2_3_off;
     /// <summary>
-    /// 1#堆取料系统状态-on
+    /// 1#?????????-on
     /// </summary>
     public Button stateBtn_1_1_on;
     /// <summary>
-    /// 1#堆取料系统状态二on
+    /// 1#???????????on
     /// </summary>
     public Button stateBtn_1_2_on;
     /// <summary>
-    /// 1#堆取料系统参数on
+    /// 1#???????????on
     /// </summary>
     public Button stateBtn_1_3_on;
     /// <summary>
-    /// 2#堆取料系统状态一on
+    /// 2#??????????on
     /// </summary>
     public Button stateBtn_2_1_on;
     /// <summary>
-    ///  2#堆取料系统状态二on
+    ///  2#???????????on
     /// </summary>
     public Button stateBtn_2_2_on;
     /// <summary>
-    /// 2#堆取料系统参数on
+    /// 2#???????????on
     /// </summary>
     public Button stateBtn_2_3_on;
 
@@ -130,7 +130,7 @@ public class StatusParameterPanelView : UIView<StatusParameterPanelCtr>
     {
 
         CurStatusParameterChildID = id;
-        Debug.Log($"状态参数打开 {id}");
+        Debug.Log($"???????? {id}");
         if (id == StatusParameterChildID.State_1_1)
         {
             ResetCurBtn(stateBtn_1_1_off.gameObject,stateBtn_1_1_on.gameObject, state_1_1);

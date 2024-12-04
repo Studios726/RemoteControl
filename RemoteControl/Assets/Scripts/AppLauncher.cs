@@ -26,7 +26,7 @@ public class AppLauncher : MonoBehaviour
         {
             ExitGamePop();
         });
-        FullScreen();
+        // FullScreen();
     }
 
     public void Update()
