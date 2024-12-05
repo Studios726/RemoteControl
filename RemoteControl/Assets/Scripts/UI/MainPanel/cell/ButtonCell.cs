@@ -31,6 +31,13 @@ public class ButtonCell : MonoBehaviour
         select = transform.Find("select").gameObject;
     }
 
+    public void SetRunImageColor(Color color)
+    {
+        if (redImage&&redImage.color!=color)
+        {
+            redImage.color = color;
+        }
+    }
     public void SetRedAlpha(float alpha)
     {
         if (redImage.color.a==alpha)
