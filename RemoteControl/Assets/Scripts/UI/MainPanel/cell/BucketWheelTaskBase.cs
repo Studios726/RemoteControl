@@ -135,20 +135,20 @@ public class BucketWheelTaskBase : PanelBase
         rightTakeMaterText.text = taskCommand.LeftRightRange.endValue.ToString();
         takeMaterStep.text = taskCommand.StepLength.ToString();
         layerHigh.text = taskCommand.LayerHigh.ToString();
-        timeOpenToggle.isOn = taskCommand.IsTimed;
+        // timeOpenToggle.isOn = taskCommand.IsTimed;
         // useTimeBtn.SetSystemState(taskCommand.IsTimed,true);
-        if (timeOpenToggle.isOn)
-        {
-            quantityOpenToggle.isOn = false;
-            timeHourText.text = Mathf.FloorToInt(taskCommand.TimedAt / 60).ToString();
-            timeMinuteText.text = (taskCommand.TimedAt % 60).ToString();
-        }
-        else
-        {
-            quantityOpenToggle.isOn = true;
-            timeOpenToggle.isOn = false;
-            takeMaterNum.text = taskCommand.Quantity.ToString();
-        }
+        // if (timeOpenToggle.isOn)
+        // {
+        //     quantityOpenToggle.isOn = false;
+        //     timeHourText.text = Mathf.FloorToInt(taskCommand.TimedAt / 60).ToString();
+        //     timeMinuteText.text = (taskCommand.TimedAt % 60).ToString();
+        // }
+        // else
+        // {
+        //     quantityOpenToggle.isOn = true;
+        //     timeOpenToggle.isOn = false;
+        //     takeMaterNum.text = taskCommand.Quantity.ToString();
+        // }
 
         takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1,true);
         takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
@@ -457,11 +457,13 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
             taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text);
             taskCommand.IsTimed = false;//useTimeBtn.red.activeSelf;
-            taskCommand.TimedAt = int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
-            taskCommand.IsQuantified = quantityOpenToggle.isOn;
-            taskCommand.Quantity = int.Parse(takeMaterNum.text);
+            taskCommand.TimedAt = 0;// int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
+            taskCommand.IsQuantified = false;// quantityOpenToggle.isOn;
+            taskCommand.Quantity = 0;// int.Parse(takeMaterNum.text);
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
             taskCommand.LayerHigh = layerHigh.text == "" ? 0 : float.Parse(layerHigh.text);
+            taskCommand.TakeMateHigh = 0;
+            taskCommand.PileMateHigh = 0;
             AllData allData = new AllData();
             taskCommand.AllData = allData;
         }else if (operationType == OperationType.TurnConfirm )

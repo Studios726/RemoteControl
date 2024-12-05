@@ -453,8 +453,10 @@ public class TaskCommand
 
     // 定量多少，如果IsQuantified为true，则此字段有效
     public int Quantity { get; set; }
-    //堆料高度
+    //取料高度
     public float TakeMateHigh {  get; set; }
+    //堆料高度
+    public float PileMateHigh {  get; set; }
     //层高
     public float LayerHigh {  get; set; }  
     //1 左转 2 右转

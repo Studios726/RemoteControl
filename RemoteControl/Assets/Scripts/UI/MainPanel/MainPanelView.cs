@@ -28,15 +28,15 @@ public class MainPanelView : UIView<MainPanelCtr>
         _bucketWheelCtrMove2 = RootObj.transform.FindComponent<BucketWheelCtrMoveBase>("machine_2/Bg_2");
         _bucketWheelTask2 = RootObj.transform.FindComponent<BucketWheelTaskBase>("machine_2/Bg_3");
         _bucketWheelHideBtnCtr2 = RootObj.transform.FindComponent<HideButtonCtrBase>("machine_2/hideCtrBtns");
-        
+
         _bucketWheelState1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerState>("machine_1/Bg_1");
         _bucketWheelCtrMove1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerCtrMove>("machine_1/Bg_2");
         _bucketWheelTask1 = RootObj.transform.FindComponent<BucketWheelStackerReclaimerTask>("machine_1/Bg_3");
         _bucketWheelHideBtnCtr1 =
             RootObj.transform.FindComponent<BucketWheelStackerReclaimerHideBtnCtr>("machine_1/hideCtrBtns");
-        
+
         updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
-        updateTaskBtn=RootObj.transform.FindComponent<Button>("updateTaskArgs");
+        updateTaskBtn = RootObj.transform.FindComponent<Button>("updateTaskArgs");
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
         updateModelBtn.onClick.AddListener(() =>
         {
@@ -48,20 +48,24 @@ public class MainPanelView : UIView<MainPanelCtr>
             // taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
             // TaskDataManager.Instance.SetTaskVariables(taskVariables);
             // code++;
-            if (GameDataManager.Instance.GameMain.connectionSCA.isConnect==false)
+            if (GameDataManager.Instance.GameMain.connectionSCA.isConnect == false)
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                    new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
                 return;
             }
-            GameDataManager.Instance.UpdateSCAData(30);  
+
+            GameDataManager.Instance.UpdateSCAData(30);
         });
         updateTaskBtn.onClick.AddListener((() =>
         {
-            if (GameDataManager.Instance.GameMain.connectionPC.isConnect==false)
+            if (GameDataManager.Instance.GameMain.connectionPC.isConnect == false)
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                    new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
                 return;
             }
+
             TaskDataManager.Instance.UpdateTaskData();
         }));
         _bucketWheelCtrMove1.hideBtn.onClick.AddListener(ActiveHideBtnCtr1);
@@ -87,23 +91,25 @@ public class MainPanelView : UIView<MainPanelCtr>
 
     public void UpdateData(SystemVariables data)
     {
-        if (data==null)
+        if (data == null)
         {
             return;
         }
+
         _bucketWheelState2.UpdateData(data);
         _bucketWheelState1.UpdateData(data);
         _bucketWheelCtrMove2.UpdateData(data);
         _bucketWheelCtrMove1.UpdateData(data);
-        if (_bucketWheelHideBtnCtr1.gameObject.activeSelf==true)
+        if (_bucketWheelHideBtnCtr1.gameObject.activeSelf == true)
         {
             _bucketWheelHideBtnCtr1.UpdateData(data);
         }
 
-        if (_bucketWheelHideBtnCtr2.gameObject.activeSelf==true)
+        if (_bucketWheelHideBtnCtr2.gameObject.activeSelf == true)
         {
-              _bucketWheelHideBtnCtr2.UpdateData(data);
+            _bucketWheelHideBtnCtr2.UpdateData(data);
         }
+
         _bucketWheelTask2.UpdatePlc(data);
         _bucketWheelTask1.UpdatePlc(data);
     }
@@ -129,15 +135,31 @@ public class MainPanelView : UIView<MainPanelCtr>
         // Debug.Log($">>>>>>>>>>>>>>>>>>>>>>> 任务更新 {taskVariables.McData.Count}");
         if (taskVariables.McData.Count > 0)
         {
-            for (int i = 0; i < taskVariables.McData.Count; i++)
+            if (taskVariables.McData.Count == 1)
             {
-                if (taskVariables.McData[i].Machine == Machine.BucketWheel)
+                if (taskVariables.McData[0].Machine == Machine.BucketWheel)
                 {
-                    _bucketWheelTask2.UpdateData(taskVariables.McData[i]);
+                    _bucketWheelTask2.UpdateData(taskVariables.McData[0]);
+                    _bucketWheelTask1?.ResetState();
                 }
                 else
                 {
-                    _bucketWheelTask1.UpdateData(taskVariables.McData[i]);
+                    _bucketWheelTask1.UpdateData(taskVariables.McData[0]);
+                    _bucketWheelTask2?.ResetState();
+                }
+            }
+            else
+            {
+                for (int i = 0; i < taskVariables.McData.Count; i++)
+                {
+                    if (taskVariables.McData[i].Machine == Machine.BucketWheel)
+                    {
+                        _bucketWheelTask2.UpdateData(taskVariables.McData[i]);
+                    }
+                    else
+                    {
+                        _bucketWheelTask1.UpdateData(taskVariables.McData[i]);
+                    }
                 }
             }
         }

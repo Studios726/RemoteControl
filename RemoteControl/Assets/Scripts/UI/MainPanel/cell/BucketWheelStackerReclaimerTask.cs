@@ -93,12 +93,17 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         if (taskCommand.TaskType == TaskType.TAKEMATER)
         {
             base.UpdateData(taskCommand);
+            pileResetTaskBtn.SetSystemState(false,true);
+            pileMaterStartBtn.SetSystemState(false,true);
+            pileMaterStopBtn.SetSystemState(false,true);
+            pileMaterEndBtn.SetSystemState(false,true);
         }
         else
         {
+            base.ResetState();
             startPileMaterText.text = taskCommand.MaterialRange.startValue.ToString();
             endPileMaterText.text = taskCommand.MaterialRange.endValue.ToString();
-            
+            pileMaterHeightText.text = taskCommand.PileMateHigh.ToString();
             if (taskCommand.SideSelection=="LEFT")
             {
                 leftPileMaterToggle.SetSystemState(true,true);
@@ -178,8 +183,8 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         taskCommand.FinishMethod =new List<int>(){0,0};
         if (operationType==OperationType.START|| operationType == OperationType.RESET)
         {
-            taskCommand.AutoMode = PileAutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
-            taskCommand.AngleEntryMode = PileRightAngleToggle.red.activeSelf ? AngleEntryMode.RIGHTANGLE : AngleEntryMode.OBLIQUEANGLE;
+            taskCommand.AutoMode = AutoMode.AUTOMAX;// PileAutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
+            taskCommand.AngleEntryMode = AngleEntryMode.RIGHTANGLE;// PileRightAngleToggle.red.activeSelf ? AngleEntryMode.RIGHTANGLE : AngleEntryMode.OBLIQUEANGLE;
             taskCommand.Command_Type = operationType == OperationType.RESET?2:0;
             float startValue = startPileMaterText.text == "" ? 0 : float.Parse(startPileMaterText.text);
             float endValue = endPileMaterText.text == "" ? 0 : float.Parse(endPileMaterText.text);
@@ -190,13 +195,14 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
             taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text);
             taskCommand.IsTimed = false; //timeOpenToggle.isOn;
-            taskCommand.TimedAt = int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
-            taskCommand.IsQuantified = quantityOpenToggle.isOn;
-            taskCommand.Quantity = int.Parse(takeMaterNum.text);
+            taskCommand.TimedAt = 0;//int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
+            taskCommand.IsQuantified =false; // quantityOpenToggle.isOn;
+            taskCommand.Quantity =0; // int.Parse(takeMaterNum.text);
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
             taskCommand.OperatorSystem = "MC";
             taskCommand.LayerHigh = 0;
-            taskCommand.TakeMateHigh= float.Parse(pileMaterHeightText.text);
+            taskCommand.TakeMateHigh = 0;
+            taskCommand.PileMateHigh= float.Parse(pileMaterHeightText.text);
             AllData allData = new AllData();
             taskCommand.AllData = allData;
         }
