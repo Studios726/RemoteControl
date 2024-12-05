@@ -134,7 +134,7 @@ public class BucketWheelTaskBase : PanelBase
         leftTakeMaterText.text = taskCommand.LeftRightRange.startValue.ToString();
         rightTakeMaterText.text = taskCommand.LeftRightRange.endValue.ToString();
         takeMaterStep.text = taskCommand.StepLength.ToString();
-        layerHigh.text = taskCommand.LayerHigh.ToString();
+        // layerHigh.text = taskCommand.LayerHigh.ToString();
         // timeOpenToggle.isOn = taskCommand.IsTimed;
         // useTimeBtn.SetSystemState(taskCommand.IsTimed,true);
         // if (timeOpenToggle.isOn)

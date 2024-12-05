@@ -98,6 +98,7 @@ public class ClientConnection:MonoBehaviour
     {
         isConnect = false;
         Debug.LogFormat("OnClosed: code={0}, msg={1} , type={2}", code, message,socketType);
+        ReconnectCount=0;
         EventManager.Instance.TriggerEvent(EventName.ConnectionClose, this, new ConnectEventArgs(socketType));
         webSocket = null;
         ReConnect();
@@ -114,6 +115,7 @@ public class ClientConnection:MonoBehaviour
         }
 #endif
         EventManager.Instance.TriggerEvent(EventName.ConnectionError, this, new ConnectEventArgs(socketType));
+        ReconnectCount++;
         Debug.LogFormat("OnError: error occured: {0}\n{1}", (ex != null ? ex : "Unknown Error " + errorMsg), socketType);
         webSocket = null;
         ReConnect();
@@ -140,7 +142,6 @@ public class ClientConnection:MonoBehaviour
     {
         Debug.Log($"正在重连websocket{socketType}");
         yield return new WaitForSeconds(5);
-        ReconnectCount++;
         EventManager.Instance.TriggerEvent(EventName.ReConnect, this,new ConnectEventArgs(socketType));
         CreateWebSocket();
         this.lockReconnect = false;
