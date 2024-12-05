@@ -358,6 +358,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     public virtual void Start()
     {
         Init();
+        SetBtnColor();
     }
 
     public virtual void Init()
@@ -466,6 +467,16 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         SetStepInputFieldEvent(0, 150);
     }
 
+    public virtual void SetBtnColor()
+    {
+        upBtn.SetRunImageColor(Color.green);
+        downBtn.SetRunImageColor(Color.green);
+        leftBtn.SetRunImageColor(Color.green);
+        rightBtn.SetRunImageColor(Color.green);
+        carBackBtn.SetRunImageColor(Color.green);
+        carForwardBtn.SetRunImageColor(Color.green);
+        
+    }
     public virtual void UpdateData(SystemVariables data)
     {
         //Debug.Log("更新move  大车碰撞信息 ");
