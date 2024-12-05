@@ -82,11 +82,11 @@ public class MessageCenter : Singleton<MessageCenter>
                 SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
                 GameDataManager.Instance.SetSystemVariables(systemVariables);
             }
-            catch (Exception)
+            catch (Exception e)
             {
             
                 // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
-                Debug.Log($"数据解析失败 socketType {nameof(SocketType.TaoRC)}");
+                Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)} {e.Message}");
             }
            
         }else if(socketType== SocketType.TaskPC)
@@ -98,9 +98,10 @@ public class MessageCenter : Singleton<MessageCenter>
                 TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
                 TaskDataManager.Instance.SetTaskVariables(taskVariables);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Debug.Log($"数据解析失败 socketType {nameof(SocketType.TaskPC)}");
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
+                Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message}");
             }
         }else if (socketType == SocketType.SCA)
         {
@@ -109,10 +110,10 @@ public class MessageCenter : Singleton<MessageCenter>
                 string json = Decompress(message);
                 GameDataManager.Instance.DeSerializeScaJson(json);
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                Debug.Log($"数据解析失败 socketType {socketType}");
+                Debug.LogError($"数据解析失败 socketType {socketType} {e.Message}");
             }
         }else if (socketType == SocketType.FM)
         {
@@ -121,11 +122,10 @@ public class MessageCenter : Singleton<MessageCenter>
                 string json =message;
                 List<FlowMeter_data> data= JsonMgr.DeSerialize<List<FlowMeter_data>>(json);
                 GameDataManager.Instance.SetFlowMeterData(data);
-            }
-            catch (Exception)
+            } 
+            catch (Exception e)
             {
-
-                Debug.Log($"数据解析失败 socketType {socketType}");
+                Debug.LogError($"数据解析失败 socketType {socketType} {e.Message}");
             }
         }
         EventManager.Instance.TriggerEvent(EventName.Message, this, new MessageEventArgs(message, socketType));
