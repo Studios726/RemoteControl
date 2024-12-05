@@ -94,13 +94,15 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 string json = Decompress(message);
-                // Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
+                Debug.Log($"收到数据 {SocketType.TaskPC} {json}");
                 TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
                 TaskDataManager.Instance.SetTaskVariables(taskVariables);
             }
             catch (Exception e)
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
+                // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
+                //解压失败重新获取任务相关数据
+                TaskDataManager.Instance.UpdateTaskData();
                 Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message}");
             }
         }else if (socketType == SocketType.SCA)
@@ -112,7 +114,8 @@ public class MessageCenter : Singleton<MessageCenter>
             }
             catch (Exception e)
             {
-
+                //解压失败获取新的sca数据
+                GameDataManager.Instance.UpdateSCAData(30);
                 Debug.LogError($"数据解析失败 socketType {socketType} {e.Message}");
             }
         }else if (socketType == SocketType.FM)
@@ -168,7 +171,8 @@ public class MessageCenter : Singleton<MessageCenter>
     //解压字符串
     public static string Decompress(string compressedText)
     {
-        byte[] compressedBuffer = Convert.FromBase64String(compressedText); using (MemoryStream compressedStream = new MemoryStream(compressedBuffer))
+        byte[] compressedBuffer = Convert.FromBase64String(compressedText);
+        using (MemoryStream compressedStream = new MemoryStream(compressedBuffer))
         {
             using (GZipStream gzipStream = new GZipStream(compressedStream, CompressionMode.Decompress))
             {
