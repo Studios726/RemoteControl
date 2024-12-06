@@ -443,10 +443,10 @@ public class TaskCommand
 
     // public string
     // 是否定时
-    public bool IsTimed { get; set; }
-
-    // 定时时间，如果IsTimed为true，则此字段有效
-    public int TimedAt { get; set; }
+    // public bool IsTimed { get; set; }
+    //
+    // // 定时时间，如果IsTimed为true，则此字段有效
+    // public int TimedAt { get; set; }
 
     // 是否定量
     // public bool IsQuantified { get; set; }

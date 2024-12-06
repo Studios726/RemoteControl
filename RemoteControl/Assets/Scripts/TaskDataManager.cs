@@ -370,7 +370,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             for (int i = 0; i < taskVariables.McData.Count; i++)
             {
-                AddOrUpdateTaskData(taskVariables.McData[i]);
+                // AddOrUpdateTaskData(taskVariables.McData[i]);
                 if (nearestTaskDataDic.ContainsKey(taskVariables.McData[i].TaskID))
                 {
                     TaskData taskData = nearestTaskDataDic[taskVariables.McData[i].TaskID];
@@ -471,7 +471,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             }
         }
     }
-
+    //处理定时任务
     public void AddOrUpdateTaskData(TaskCommand taskCommand)
     {
         if (curTaskDic.ContainsKey(taskCommand.TaskID))
@@ -510,23 +510,23 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
             TaskData taskData = new TaskData(taskCommand.TaskID, taskCommand.AllData.Code.ToString());
             taskData.Machine = taskCommand.Machine;
-            if (taskCommand.IsTimed == true && taskCommand.TaskType == TaskType.TAKEMATER)
-            {
-                long timestamp = 0;
-                timestamp = taskCommand.TimedAt * 60 - (long)(DateTime.Now - taskCommand.TaskCreateTime).TotalSeconds;
-                if (timestamp > 0)
-                {
-                    taskData.AddTimer(
-                        () =>
-                        {
-                            SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END, taskCommand.TaskType);
-                        }, timestamp);
-                }
-                else
-                {
-                    SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END, taskCommand.TaskType);
-                }
-            }
+            // if (taskCommand.IsTimed == true && taskCommand.TaskType == TaskType.TAKEMATER)
+            // {
+            //     long timestamp = 0;
+            //     timestamp = taskCommand.TimedAt * 60 - (long)(DateTime.Now - taskCommand.TaskCreateTime).TotalSeconds;
+            //     if (timestamp > 0)
+            //     {
+            //         taskData.AddTimer(
+            //             () =>
+            //             {
+            //                 SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END, taskCommand.TaskType);
+            //             }, timestamp);
+            //     }
+            //     else
+            //     {
+            //         SendChangeTaskStateCommand(taskCommand.Machine, OperationType.END, taskCommand.TaskType);
+            //     }
+            // }
 
             curTaskDic.Add(taskCommand.TaskID, taskData);
         }

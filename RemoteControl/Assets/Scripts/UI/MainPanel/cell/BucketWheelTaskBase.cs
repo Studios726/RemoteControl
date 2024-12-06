@@ -456,8 +456,8 @@ public class BucketWheelTaskBase : PanelBase
             float endLeftRightRangeValue = rightTakeMaterText.text == "" ? 0 : float.Parse(rightTakeMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
             taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text);
-            taskCommand.IsTimed = false;//useTimeBtn.red.activeSelf;
-            taskCommand.TimedAt = 0;// int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
+            // taskCommand.IsTimed = false;//useTimeBtn.red.activeSelf;
+            // taskCommand.TimedAt = 0;// int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
             // taskCommand.IsQuantified = false;// quantityOpenToggle.isOn;
             // taskCommand.Quantity = 0;// int.Parse(takeMaterNum.text);
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
