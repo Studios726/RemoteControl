@@ -94,8 +94,7 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 // string json = Decompress(message);
-                string json = message;
-                TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
+                TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(message);
                 TaskDataManager.Instance.SetTaskVariables(taskVariables);
                 // Debug.LogError($"{json}");
             }
@@ -104,6 +103,8 @@ public class MessageCenter : Singleton<MessageCenter>
                 // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
                 //解压失败重新获取任务相关数据
                 TaskDataManager.Instance.UpdateTaskData();
+                // TaskDataManager.Instance.TestStr = e.Message + "<>" + message;
+                // EventManager.Instance.TriggerEvent(EventName.TestEvent);
                 Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
             }
         }else if (socketType == SocketType.SCA)

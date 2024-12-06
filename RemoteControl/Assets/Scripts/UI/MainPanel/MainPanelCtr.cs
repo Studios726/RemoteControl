@@ -10,7 +10,6 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     {
         base.ShowView(uiArgs);
         Timer.Register(0.1f, () => GameDataManager.Instance.SetMachineActive(true));
-
     }
 
     public override void HideView()
@@ -136,17 +135,18 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         EventManager.Instance.RemoveListener(EventName.RefreshWarningDes2,UpdateWarningDes2);
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes1,UpdateTaskLog1);
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes2,UpdateTaskLog2);
+        // EventManager.Instance.RemoveListener(EventName.TestEvent, view.SetTestInputField);
     }
-   
+
     public void Addlistener()
     {
         EventManager.Instance.AddListener(EventName.UpdateRcData, view.UpdateData);
         EventManager.Instance.AddListener(EventName.UpdatePcData, view.UpdatePcData);
-        EventManager.Instance.AddListener(EventName.RefreshWarningDes1,UpdateWarningDes1);
-        EventManager.Instance.AddListener(EventName.RefreshWarningDes2,UpdateWarningDes2);
-        EventManager.Instance.AddListener(EventName.RefreshTaskDes1,UpdateTaskLog1);
-        EventManager.Instance.AddListener(EventName.RefreshTaskDes2,UpdateTaskLog2);
-        
+        EventManager.Instance.AddListener(EventName.RefreshWarningDes1, UpdateWarningDes1);
+        EventManager.Instance.AddListener(EventName.RefreshWarningDes2, UpdateWarningDes2);
+        EventManager.Instance.AddListener(EventName.RefreshTaskDes1, UpdateTaskLog1);
+        EventManager.Instance.AddListener(EventName.RefreshTaskDes2, UpdateTaskLog2);
+        // EventManager.Instance.AddListener(EventName.TestEvent, view.SetTestInputField);
     }
 
     public void SendMessage(string message)

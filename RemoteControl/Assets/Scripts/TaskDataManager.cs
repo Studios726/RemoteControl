@@ -261,7 +261,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     public Dictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = new Dictionary<string, List<TaskCodeDes>>();
     private TaskVariables _taskVariables;
-
+    // public string TestStr;
     public TaskVariables TaskVariables
     {
         get => _taskVariables;
