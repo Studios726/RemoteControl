@@ -449,16 +449,16 @@ public class TaskCommand
     public int TimedAt { get; set; }
 
     // 是否定量
-    public bool IsQuantified { get; set; }
+    // public bool IsQuantified { get; set; }
 
     // 定量多少，如果IsQuantified为true，则此字段有效
-    public int Quantity { get; set; }
+    // public int Quantity { get; set; }
     //取料高度
-    public float TakeMateHigh {  get; set; }
+    // public float TakeMateHigh {  get; set; }1
     //堆料高度
     public float PileMateHigh {  get; set; }
     //层高
-    public float LayerHigh {  get; set; }  
+    // public float LayerHigh {  get; set; }  
     //1 左转 2 右转
     public TurnMode TurnMode{  get; set; }
     public AllData  AllData { get; set; }

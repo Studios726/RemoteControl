@@ -196,12 +196,12 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text);
             taskCommand.IsTimed = false; //timeOpenToggle.isOn;
             taskCommand.TimedAt = 0;//int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
-            taskCommand.IsQuantified =false; // quantityOpenToggle.isOn;
-            taskCommand.Quantity =0; // int.Parse(takeMaterNum.text);
+            // taskCommand.IsQuantified =false; // quantityOpenToggle.isOn;
+            // taskCommand.Quantity =0; // int.Parse(takeMaterNum.text);
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
             taskCommand.OperatorSystem = "MC";
-            taskCommand.LayerHigh = 0;
-            taskCommand.TakeMateHigh = 0;
+            // taskCommand.LayerHigh = 0;
+            // taskCommand.TakeMateHigh = 0;
             taskCommand.PileMateHigh= float.Parse(pileMaterHeightText.text);
             AllData allData = new AllData();
             taskCommand.AllData = allData;
