@@ -10,20 +10,20 @@ public class TaskLogCellData
     public string Des;
     public string pos;
     public string TriggerTime;
-    public DateTime TriggerDateTime;
+    public string TriggerDateTime;
     public double Timestamp;
     public Machine Machine;
 
-    public TaskLogCellData(string key,string des,DateTime dateTime, Machine machine,string pos
+    public TaskLogCellData(string key,string des,string dateTime, Machine machine,string pos
        )
     {
         this.Key = key;
         this.Des = des;
         this.Machine = machine;
-        this.TriggerTime = dateTime.ToString("HH:mm:ss");
+        this.TriggerTime =dateTime;
         this.TriggerDateTime = dateTime;
         this.pos = pos;
-        this.Timestamp =(dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local)).TotalSeconds;
+        this.Timestamp = 0;//(dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local)).TotalSeconds;
     }
 }
 public class TaskLogCell : MonoBehaviour

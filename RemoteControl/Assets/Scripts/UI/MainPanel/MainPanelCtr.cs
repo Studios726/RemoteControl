@@ -114,19 +114,22 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     {
         // TaskLogArgs args = (TaskLogArgs)eventArgs;
         List<TaskLogCellData> datas = new List<TaskLogCellData>();
-        foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
+        if (TaskDataManager.Instance.taskCodeDesDictionary.Count > 0)
         {
-            for (int i = 0; i < data.Value.Count; i++)
+            foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
             {
-                if (data.Value[i].Machine == Machine.BucketWheelStackerReclaimer)
+                for (int i = 0; i < data.Value.Count; i++)
                 {
-                    datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time,
-                        Machine.BucketWheelStackerReclaimer, data.Value[i].Pos));
+                    if (data.Value[i].Machine == Machine.BucketWheelStackerReclaimer)
+                    {
+                        datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time,
+                            Machine.BucketWheelStackerReclaimer, data.Value[i].Pos));
+                    }
                 }
             }
-        }
 
-        datas.Reverse();
+            datas.Reverse();
+        }
         view._bucketWheelTask1.UpdateTaskLog(datas);
     }
 
@@ -134,19 +137,21 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
     {
         // TaskLogArgs args = (TaskLogArgs)eventArgs;
         List<TaskLogCellData> datas = new List<TaskLogCellData>();
-        foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
+        if (TaskDataManager.Instance.taskCodeDesDictionary.Count>0)
         {
-            for (int i = 0; i < data.Value.Count; i++)
+            foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
             {
-                if (data.Value[i].Machine == Machine.BucketWheel)
+                for (int i = 0; i < data.Value.Count; i++)
                 {
-                    datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time, Machine.BucketWheel,
-                        data.Value[i].Pos));
+                    if (data.Value[i].Machine == Machine.BucketWheel)
+                    {
+                        datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time, Machine.BucketWheel,
+                            data.Value[i].Pos));
+                    }
                 }
             }
+            datas.Reverse();
         }
-
-        datas.Reverse();
         view._bucketWheelTask2.UpdateTaskLog(datas);
     }
 

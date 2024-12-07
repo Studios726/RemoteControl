@@ -35,7 +35,7 @@ public class BeltRunArgs : EventArgs
 public class TaskLogArgs : EventArgs
 {
     public string des;
-    public DateTime time;
+    public string time;
     public string pos;
     public TaskCommand taskCommand;
 

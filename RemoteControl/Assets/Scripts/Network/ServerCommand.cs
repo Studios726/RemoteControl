@@ -471,9 +471,9 @@ public class AllData
     //public string InfoIcon { get; set; }   
     public int Code {  get; set; }
     //code 触发code时间
-     public DateTime CodeTime{ get; set; }
+     public string CodeTime{ get; set; }
      //任务结束时间
-     public DateTime TaskEndTime{ get; set; }
+     public string TaskEndTime{ get; set; }
     // [回转，俯仰，前进]
     public List<float> NextPositionList {  get; set; }
     public int ProcessingProgress {  get; set; }

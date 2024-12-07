@@ -22,6 +22,7 @@ public class MainPanelView : UIView<MainPanelCtr>
     private Button updateModelBtn;
     private Button updateTaskBtn;
     private InputField testInputField;
+    public List<string> TaskMessageList = new List<string>();
 
     public override void InitUIElements(UIArgs uiArgs)
     {
@@ -40,27 +41,26 @@ public class MainPanelView : UIView<MainPanelCtr>
         updateTaskBtn = RootObj.transform.FindComponent<Button>("updateTaskArgs");
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
         testInputField = RootObj.transform.FindComponent<InputField>("Image/InputField");
-        int code = 1;
         updateModelBtn.onClick.AddListener(() =>
         {
-            TaskDataManager.Instance.TestStr = "8888" + "<>" + "9999";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            code = code + 1;
             try
             {
-                string json = Resources.Load<TextAsset>("Json/task").text;
-                // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
-                // GameDataManager.Instance.SetScaReportAndDem(dem);
-                TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
-                taskVariables.McData[0].AllData.Code = code;
-                taskVariables.McData[0].AllData.CodeTime=DateTime.Now;
-                // taskVariables.McData[0].AllData.Code = code;
-                // taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
-                TaskDataManager.Instance.SetTaskVariables(taskVariables);
-                
-                string str = JsonMgr.Serialize(TaskDataManager.Instance.TaskMessageList);
-                TaskDataManager.Instance.TestStr =str+"><";
-                EventManager.Instance.TriggerEvent(EventName.TestEvent);
+                // string json2 = Resources.Load<TextAsset>("Json/task").text;
+                // TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json2);
+                // TaskDataManager.Instance.SetTaskVariables(taskVariables);
+                // if (code<TaskMessageList.Count)
+                // {
+                //     string json =TaskMessageList[code];
+                //     Debug.Log($"{code}>>>>>>>>>>>>>>>>>>>{json}");
+                //     code++;
+                //     // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
+                //     // GameDataManager.Instance.SetScaReportAndDem(dem);
+                //     TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
+                //     // taskVariables.McData[0].AllData.Code = code;
+                //     // taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
+                //     TaskDataManager.Instance.SetTaskVariables(taskVariables);
+                // }
+              
             }
             catch (Exception e)
             {
@@ -157,8 +157,7 @@ public class MainPanelView : UIView<MainPanelCtr>
         {
             return;
         }
-
-        // Debug.Log($">>>>>>>>>>>>>>>>>>>>>>> 任务更新 {taskVariables.McData.Count}");
+        
         if (taskVariables.McData.Count > 0)
         {
             if (taskVariables.McData.Count == 1)

@@ -12,23 +12,24 @@ using UnityEngine;
 public struct TaskCodeDes
 {
     public int Code { get; set; }
-    public DateTime Time { get; set; }
+    public string Time { get; set; }
     public string Des { get; set; }
     public Machine Machine { get; set; }
     public List<float> NextPositionList { get; set; }
     public string Pos { get; set; }
 
-    public TaskCodeDes(int code, DateTime time, string des, Machine machine, List<float> list)
+    public TaskCodeDes(int code, string time, string des, Machine machine, List<float> list)
     {
         Code = code;
-        Time = DateTime.Now;
+        Time =time;
         Des = des;
         Machine = machine;
-        if (list == null || list.Count <= 0||list.Count > 3)
+        if (list == null || list.Count <= 0 || list.Count > 3)
         {
             list = new List<float> { 0, 0, 0 };
         }
-        NextPositionList =new List<float>(list) ; // 或者 NextPositionList = list.ToList();
+
+        NextPositionList = new List<float>(list); // 或者 NextPositionList = list.ToList();
         StringBuilder sb = new StringBuilder("下一目标点 ");
         if (list != null)
         {
@@ -48,8 +49,8 @@ public struct TaskCodeDes
                 }
             }
         }
-        Pos = sb.ToString();
 
+        Pos = sb.ToString();
     }
 }
 
@@ -254,7 +255,9 @@ public class TaskDataManager : Singleton<TaskDataManager>
         { 2019, "变幅油泵故障解除" }
     };
 
-    public ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = new ConcurrentDictionary<string, List<TaskCodeDes>>();
+    public ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary =
+        new ConcurrentDictionary<string, List<TaskCodeDes>>();
+
     private TaskVariables _taskVariables;
     public string TestStr;
     public List<string> TaskMessageList = new List<string>();
@@ -322,7 +325,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
     /// <summary>
     /// 获取任务当前状态
     /// </summary>
-    public void UpdateTaskData(int type=1)
+    public void UpdateTaskData(int type = 1)
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
@@ -358,7 +361,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
             UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(tips, null, null));
             return;
         }
-
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
         if (nearestTaskDataDic.Count <= 0)
         {
@@ -371,13 +373,12 @@ public class TaskDataManager : Singleton<TaskDataManager>
         }
         catch (Exception e)
         {
-           
-            string str = JsonMgr.Serialize(TaskMessageList);
-            TestStr ="<111111>"+str+"-----" +e.Message+"=======";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            taskCodeDesDictionary.Clear();
-            UpdateTaskData(4);
-            Debug.LogError($"任务描述处理报错{e.Message}");
+            // string str = JsonMgr.Serialize(TaskMessageList);
+            // TestStr ="<111111>"+str+"-----" +e.Message+"=======";
+            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            taskCodeDesDictionary?.Clear();
+            // UpdateTaskData(4);
+            // Debug.LogError($"任务描述处理报错{e.Message}");
         }
 
         if (taskVariables.McData.Count > 0)
@@ -441,7 +442,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 {
                     data.Value.State = TaskStatus.Completed;
                     DataManager.Instance.UpdateHistoryTaskMcCompleteState(data.Value.TaskID, TaskStatus.Completed,
-                        DateTime.Now);
+                        "");
                 }
             }
         }
@@ -528,7 +529,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
         return nearestTaskDataDic;
     }
-    // public ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = new ConcurrentDictionary<string, List<TaskCodeDes>>();
+
     public void CheckTaskDesDesDictionary(TaskVariables taskVariables)
     {
         if (taskVariables.McData.Count > 0) // 把旧数据删除
@@ -536,7 +537,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             if (taskCodeDesDictionary != null && taskCodeDesDictionary.Count > 0)
             {
                 HashSet<string> taskIDsToRemove = new HashSet<string>();
-
+            
                 foreach (var data in taskCodeDesDictionary)
                 {
                     if (!taskVariables.McData.Any(mcData => mcData.TaskID == data.Key))
@@ -544,7 +545,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         taskIDsToRemove.Add(data.Key);
                     }
                 }
-
+            
                 foreach (var taskId in taskIDsToRemove)
                 {
                     taskCodeDesDictionary.TryRemove(taskId, out _);
@@ -559,32 +560,82 @@ public class TaskDataManager : Singleton<TaskDataManager>
         }
         else
         {
-            taskCodeDesDictionary.Clear();
+            taskCodeDesDictionary?.Clear();
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
         }
     }
-    private void AddTaskCodeDesToList(List<TaskCodeDes> taskList, int code, DateTime codeTime, string des, Machine machine, List<float> nextPositionList)
+
+    private void AddTaskCodeDesToList(List<TaskCodeDes> taskList, int code, string codeTime, string des,
+        Machine machine, List<float> nextPositionList)
     {
+        if (codeTime == null)
+        {
+            codeTime = "";
+        }
+
+        if (des==null)
+        {
+            des = "";
+        }
         taskList.Add(new TaskCodeDes(code, codeTime, des, machine, nextPositionList));
     }
+
     public void AddOrUpdateTaskDesDictionary(string des, TaskCommand taskCommand)
     {
         if (taskCommand == null || taskCommand.AllData == null)
         {
-            throw new ArgumentNullException(nameof(taskCommand), "TaskCommand or its AllData property cannot be null.");
-        }
-
-        var taskList = taskCodeDesDictionary.GetOrAdd(taskCommand.TaskID, _ => new List<TaskCodeDes>());
-
-        // 检查是否存在相同的任务代码和机器
-        if (taskList.Any(tcd => tcd.Code == taskCommand.AllData.Code &&tcd.Time == taskCommand.AllData.CodeTime && tcd.Machine == taskCommand.Machine))
-        {
+            Debug.LogError("TaskCommand or its AllData property cannot be null.");
             return;
         }
 
+        // if (taskCodeDesDictionary.ContainsKey(taskCommand.TaskID) == false)
+        // {
+        //     if (taskCodeDesDictionary.TryAdd(taskCommand.TaskID, new List<TaskCodeDes>()))
+        //     {
+        //         if (taskCommand.AllData.CodeTime==null)
+        //         {
+        //             taskCommand.AllData.CodeTime = "";
+        //         }
+        //         AddTaskCodeDesToList(taskCodeDesDictionary[taskCommand.TaskID], taskCommand.AllData.Code,
+        //             taskCommand.AllData.CodeTime, des, taskCommand.Machine,
+        //             taskCommand.AllData.NextPositionList);
+        //     }
+        // }
+        // else
+        // {
+        //     List<TaskCodeDes> tempList = taskCodeDesDictionary[taskCommand.TaskID];
+        //     if (tempList.Count > 0)
+        //     {
+        //         if (taskCommand.AllData.CodeTime==null)
+        //         {
+        //             taskCommand.AllData.CodeTime = "";
+        //         }
+        //         if (tempList[tempList.Count - 1].Code == taskCommand.AllData.Code &&
+        //             tempList[tempList.Count - 1].Time == taskCommand.AllData.CodeTime &&
+        //             tempList[tempList.Count - 1].Machine == taskCommand.Machine)
+        //         {
+        //             return;
+        //         }
+        //         AddTaskCodeDesToList(taskCodeDesDictionary[taskCommand.TaskID], taskCommand.AllData.Code,
+        //             taskCommand.AllData.CodeTime, des, taskCommand.Machine,
+        //             taskCommand.AllData.NextPositionList);
+        //     }
+        // }
+
+        var taskList = taskCodeDesDictionary.GetOrAdd(taskCommand.TaskID, _ => new List<TaskCodeDes>());
+        
+        // 检查是否存在相同的任务代码和机器
+        if (taskList.Any(tcd =>
+                tcd.Code == taskCommand.AllData.Code && tcd.Time == taskCommand.AllData.CodeTime &&
+                tcd.Machine == taskCommand.Machine))
+        {
+            return;
+        }
+        
         // 添加新的任务代码描述
-        AddTaskCodeDesToList(taskList, taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine, taskCommand.AllData.NextPositionList);
+        AddTaskCodeDesToList(taskList, taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,
+            taskCommand.AllData.NextPositionList);
 
         // 触发事件
         if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
@@ -612,7 +663,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         return des;
     }
 
-    public void AddOrUpdateTaskDesQueue(int code, Machine machine, TaskCommand taskCommand)
+    public void f(int code, Machine machine, TaskCommand taskCommand)
     {
         // TODO 待完善
         // string des = "";

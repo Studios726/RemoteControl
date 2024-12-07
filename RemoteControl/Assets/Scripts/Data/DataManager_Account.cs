@@ -153,7 +153,7 @@ public partial class DataManager
         }
        
     }
-    public bool UpdateHistoryTaskMcCompleteState(string taskID,TaskStatus completeState,DateTime dateTime)
+    public bool UpdateHistoryTaskMcCompleteState(string taskID,TaskStatus completeState,string dateTime)
     {
         if (GameDataManager.Instance.IsAdmin())
         {
@@ -165,7 +165,7 @@ public partial class DataManager
             {
                 state ="2";
             }
-            string query = $"UPDATE `{ConstStr.DATABASE_HISTORY_TASK_MC}` SET `{ConstStr.DATA_TASK_STATE2}` = '{state}' , `{ConstStr.DATA_TASK_END_TIME}`='{dateTime}' WHERE `{ConstStr.DATA_TASK_ID}` = '{taskID}'";
+            string query = $"UPDATE `{ConstStr.DATABASE_HISTORY_TASK_MC}` SET `{ConstStr.DATA_TASK_STATE2}` = '{state}' , `{ConstStr.DATA_TASK_END_TIME}`='{DateTime.Now}' WHERE `{ConstStr.DATA_TASK_ID}` = '{taskID}'";
             bool success=MySqlHelper.ExecuteSql(query) > 0; 
             return success; 
         }
