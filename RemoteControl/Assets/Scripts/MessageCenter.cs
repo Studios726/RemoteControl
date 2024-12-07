@@ -103,7 +103,7 @@ public class MessageCenter : Singleton<MessageCenter>
             {
                 // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
                 //解压失败重新获取任务相关数据
-                TaskDataManager.Instance.UpdateTaskData();
+                TaskDataManager.Instance.UpdateTaskData(4);
                 string str = JsonMgr.Serialize(TaskDataManager.Instance.TaskMessageList);
                 TaskDataManager.Instance.TestStr ="<22222>"+str+"><" +e.Message + "<>" + message+"======";
                 EventManager.Instance.TriggerEvent(EventName.TestEvent);

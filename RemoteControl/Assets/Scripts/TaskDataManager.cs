@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
 using RemoteControl.Event;
@@ -19,7 +21,7 @@ public struct TaskCodeDes
     public TaskCodeDes(int code, DateTime time, string des, Machine machine, List<float> list)
     {
         Code = code;
-        Time = time;
+        Time = DateTime.Now;
         Des = des;
         Machine = machine;
         if (list == null || list.Count <= 0||list.Count > 3)
@@ -252,7 +254,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         { 2019, "变幅油泵故障解除" }
     };
 
-    public Dictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = new Dictionary<string, List<TaskCodeDes>>();
+    public ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = new ConcurrentDictionary<string, List<TaskCodeDes>>();
     private TaskVariables _taskVariables;
     public string TestStr;
     public List<string> TaskMessageList = new List<string>();
@@ -320,11 +322,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
     /// <summary>
     /// 获取任务当前状态
     /// </summary>
-    public void UpdateTaskData()
+    public void UpdateTaskData(int type=1)
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.QuerySystem = "MC";
-        taskCommand.Command_Type = 1;
+        taskCommand.Command_Type = type;
         taskCommand.OperatorSystem = "MC";
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
         // Debug.Log("获取当前任务状态");
@@ -374,7 +376,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             TestStr ="<111111>"+str+"-----" +e.Message+"=======";
             EventManager.Instance.TriggerEvent(EventName.TestEvent);
             taskCodeDesDictionary.Clear();
-            UpdateTaskData();
+            UpdateTaskData(4);
             Debug.LogError($"任务描述处理报错{e.Message}");
         }
 
@@ -526,41 +528,30 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
         return nearestTaskDataDic;
     }
-
+    // public ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = new ConcurrentDictionary<string, List<TaskCodeDes>>();
     public void CheckTaskDesDesDictionary(TaskVariables taskVariables)
     {
-        if (taskVariables.McData.Count > 0) //把旧数据删除
+        if (taskVariables.McData.Count > 0) // 把旧数据删除
         {
-            if (taskCodeDesDictionary.Count > 0)
+            if (taskCodeDesDictionary != null && taskCodeDesDictionary.Count > 0)
             {
-                List<string> taskIDs = new List<string>();
+                HashSet<string> taskIDsToRemove = new HashSet<string>();
+
                 foreach (var data in taskCodeDesDictionary)
                 {
-                    bool isContain = false;
-                    for (int i = 0; i < taskVariables.McData.Count; i++)
+                    if (!taskVariables.McData.Any(mcData => mcData.TaskID == data.Key))
                     {
-                        if (data.Key == taskVariables.McData[i].TaskID)
-                        {
-                            isContain = true;
-                        }
-                    }
-
-                    if (isContain == false)
-                    {
-                        taskIDs.Add(data.Key);
+                        taskIDsToRemove.Add(data.Key);
                     }
                 }
 
-                for (int i = 0; i < taskIDs.Count; i++)
+                foreach (var taskId in taskIDsToRemove)
                 {
-                    if (taskCodeDesDictionary.ContainsKey(taskIDs[i]))
-                    {
-                        taskCodeDesDictionary.Remove(taskIDs[i]);
-                    }
+                    taskCodeDesDictionary.TryRemove(taskId, out _);
                 }
             }
 
-            for (int i = 0; i < taskVariables.McData.Count; i++) //刷新code
+            for (int i = 0; i < taskVariables.McData.Count; i++) // 刷新code
             {
                 AddOrUpdateTaskDesDictionary(GetDesByTaskCode(taskVariables.McData[i].AllData.Code),
                     taskVariables.McData[i]);
@@ -573,42 +564,29 @@ public class TaskDataManager : Singleton<TaskDataManager>
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
         }
     }
-
+    private void AddTaskCodeDesToList(List<TaskCodeDes> taskList, int code, DateTime codeTime, string des, Machine machine, List<float> nextPositionList)
+    {
+        taskList.Add(new TaskCodeDes(code, codeTime, des, machine, nextPositionList));
+    }
     public void AddOrUpdateTaskDesDictionary(string des, TaskCommand taskCommand)
     {
-        if (taskCodeDesDictionary.ContainsKey(taskCommand.TaskID))
+        if (taskCommand == null || taskCommand.AllData == null)
         {
-            if (taskCodeDesDictionary[taskCommand.TaskID] != null &&
-                taskCodeDesDictionary[taskCommand.TaskID].Count > 0)
-            {
-                for (int i = 0; i < taskCodeDesDictionary[taskCommand.TaskID].Count; i++)
-                {
-                    if (taskCodeDesDictionary[taskCommand.TaskID][i].Code == taskCommand.AllData.Code &&
-                        taskCodeDesDictionary[taskCommand.TaskID][i].Time == taskCommand.AllData.CodeTime &&
-                        taskCodeDesDictionary[taskCommand.TaskID][i].Machine == taskCommand.Machine)
-                    {
-                        return;
-                    }
-                }
-            }
-            taskCodeDesDictionary[taskCommand.TaskID].Add(new TaskCodeDes(taskCommand.AllData.Code,
-                taskCommand.AllData.CodeTime, des, taskCommand.Machine, taskCommand.AllData.NextPositionList));
-        }
-        else
-        {
-            if (taskCodeDesDictionary.ContainsKey(taskCommand.TaskID) == false)
-            {
-                taskCodeDesDictionary.Add(taskCommand.TaskID, new List<TaskCodeDes>()
-                {
-                    new TaskCodeDes(taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,
-                        taskCommand.AllData.NextPositionList)
-                });
-            }
-
-            // taskCodeDesDictionary[taskCommand.TaskID] = new List<TaskCodeDes>()
-            //     { new TaskCodeDes(taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,taskCommand.AllData.NextPositionList) };
+            throw new ArgumentNullException(nameof(taskCommand), "TaskCommand or its AllData property cannot be null.");
         }
 
+        var taskList = taskCodeDesDictionary.GetOrAdd(taskCommand.TaskID, _ => new List<TaskCodeDes>());
+
+        // 检查是否存在相同的任务代码和机器
+        if (taskList.Any(tcd => tcd.Code == taskCommand.AllData.Code &&tcd.Time == taskCommand.AllData.CodeTime && tcd.Machine == taskCommand.Machine))
+        {
+            return;
+        }
+
+        // 添加新的任务代码描述
+        AddTaskCodeDesToList(taskList, taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine, taskCommand.AllData.NextPositionList);
+
+        // 触发事件
         if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
