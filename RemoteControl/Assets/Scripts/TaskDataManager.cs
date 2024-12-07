@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using MySql.Data.MySqlClient;
 using RemoteControl.Event;
 using Unity.VisualScripting;
@@ -12,49 +13,41 @@ public struct TaskCodeDes
     public DateTime Time { get; set; }
     public string Des { get; set; }
     public Machine Machine { get; set; }
-    public List<float>NextPositionList { get; set; }
+    public List<float> NextPositionList { get; set; }
     public string Pos { get; set; }
-    public TaskCodeDes(int code, DateTime time, string des, Machine machine,List<float> list)
+
+    public TaskCodeDes(int code, DateTime time, string des, Machine machine, List<float> list)
     {
         Code = code;
         Time = time;
         Des = des;
         Machine = machine;
-        NextPositionList = new List<float>();
-        for (int i = 0; i < list.Count; i++)
+        if (list == null || list.Count <= 0||list.Count > 3)
         {
-            NextPositionList.Add(list[i]);
+            list = new List<float> { 0, 0, 0 };
         }
-        Pos = "下一目标点 ";
-        if (list==null)
+        NextPositionList =new List<float>(list) ; // 或者 NextPositionList = list.ToList();
+        StringBuilder sb = new StringBuilder("下一目标点 ");
+        if (list != null)
         {
-            list= new List<float>();
-            list.Add(0);
-            list.Add(0);
-            list.Add(0);
-        }
-       
-        if (list!=null)
-        {
-            for (int i = 0; i < list.Count; i++)//[回转，俯仰，前进dd]
+            for (int i = 0; i < list.Count; i++)
             {
-                if (i==0)
+                switch (i)
                 {
-                    Pos =Pos+ $"回转: {list[i].ToString("F1")}° ";
-                }else if (i==1)
-                {
-                    Pos =Pos+ $"俯仰: {list[i].ToString("F1")}° ";
-                }
-                else if (i==2)
-                {
-                    Pos =Pos+$"前进: {list[i].ToString("F1")}m";
-                }
-                else
-                {
-                    //无
+                    case 0:
+                        sb.Append($"回转: {list[i].ToString("F1")}° ");
+                        break;
+                    case 1:
+                        sb.Append($"俯仰: {list[i].ToString("F1")}° ");
+                        break;
+                    case 2:
+                        sb.Append($"前进: {list[i].ToString("F1")}m");
+                        break;
                 }
             }
         }
+        Pos = sb.ToString();
+
     }
 }
 
@@ -261,7 +254,9 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     public Dictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = new Dictionary<string, List<TaskCodeDes>>();
     private TaskVariables _taskVariables;
-    // public string TestStr;
+    public string TestStr;
+    public List<string> TaskMessageList = new List<string>();
+
     public TaskVariables TaskVariables
     {
         get => _taskVariables;
@@ -293,19 +288,21 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             commonTaskParameters.HeapDis = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString());
             commonTaskParameters.MoveModel = int.Parse(reader[ConstStr.DATA_TASK_CONFIG_MOVEMODEL].ToString());
-            commonTaskParameters.FetchPileDepth = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
+            commonTaskParameters.FetchPileDepth =
+                float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
             ;
             commonTaskParameters.FetchVerticalRangeAdd =
                 float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString());
             commonTaskParameters.FetchHorizontalRangeSub =
                 float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
         }
+
         return commonTaskParameters;
     }
 
-    public void UpdateCommonTaskParameters(string name, string value,Machine machine)
+    public void UpdateCommonTaskParameters(string name, string value, Machine machine)
     {
-        DataManager.Instance.UpdateTaskConfig(name, value,machine);
+        DataManager.Instance.UpdateTaskConfig(name, value, machine);
     }
 
     public void SendChangeTaskStateCommand(Machine machine, OperationType operationType, TaskType taskType)
@@ -359,18 +356,32 @@ public class TaskDataManager : Singleton<TaskDataManager>
             UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(tips, null, null));
             return;
         }
+
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
         if (nearestTaskDataDic.Count <= 0)
         {
             GetNearestTaskDataDic();
         }
 
-        CheckTaskDesDesDictionary(taskVariables);
+        try
+        {
+            CheckTaskDesDesDictionary(taskVariables);
+        }
+        catch (Exception e)
+        {
+           
+            string str = JsonMgr.Serialize(TaskMessageList);
+            TestStr ="<111111>"+str+"-----" +e.Message+"=======";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            taskCodeDesDictionary.Clear();
+            UpdateTaskData();
+            Debug.LogError($"任务描述处理报错{e.Message}");
+        }
+
         if (taskVariables.McData.Count > 0)
         {
             for (int i = 0; i < taskVariables.McData.Count; i++)
             {
-                // AddOrUpdateTaskData(taskVariables.McData[i]);
                 if (nearestTaskDataDic.ContainsKey(taskVariables.McData[i].TaskID))
                 {
                     TaskData taskData = nearestTaskDataDic[taskVariables.McData[i].TaskID];
@@ -380,18 +391,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         {
                             taskData.TaskState = "1";
                             DataManager.Instance.UpdateHistoryTaskMc(taskData.TaskID, "1");
-                            DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, TaskStatus.Completed,
+                            DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID,
+                                TaskStatus.Completed,
                                 taskVariables.McData[i].AllData.TaskEndTime);
                             GameDataManager.Instance.UpdateSCAData(1);
-                            if (taskVariables.McData[i].Machine == Machine.BucketWheelStackerReclaimer)
-                            {
-                                AddOrUpdateTaskDesQueue(0, Machine.BucketWheelStackerReclaimer,
-                                    taskVariables.McData[i]);
-                            }
-                            else
-                            {
-                                AddOrUpdateTaskDesQueue(0, Machine.BucketWheel, taskVariables.McData[i]);
-                            }
                         }
                     }
                     else if (taskData.TaskState != taskVariables.McData[i].AllData.Code.ToString())
@@ -399,36 +402,14 @@ public class TaskDataManager : Singleton<TaskDataManager>
                         taskData.TaskState = taskVariables.McData[i].AllData.Code.ToString();
                         DataManager.Instance.UpdateHistoryTaskMc(taskData.TaskID,
                             taskData.TaskState);
-                        if (taskVariables.McData[i].Machine == Machine.BucketWheelStackerReclaimer)
-                        {
-                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,
-                                Machine.BucketWheelStackerReclaimer, taskVariables.McData[i]);
-                        }
-                        else
-                        {
-                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel,
-                                taskVariables.McData[i]);
-                        }
                     }
-                    else
-                    {
-                        if (taskVariables.McData[i].Machine == Machine.BucketWheelStackerReclaimer)
-                        {
-                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,
-                                Machine.BucketWheelStackerReclaimer, taskVariables.McData[i]);
-                        }
-                        else
-                        {
-                            AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel,
-                                taskVariables.McData[i]);
-                        }
-                    }
-                    
-                    
-                    if (taskData.State!=TaskStatus.Completed&&taskVariables.McData[i].AllData.OperationCommandList[3] == 1) //任务结束更新数据库
+
+                    if (taskData.State != TaskStatus.Completed &&
+                        taskVariables.McData[i].AllData.OperationCommandList[3] == 1) //任务结束更新数据库
                     {
                         taskData.State = TaskStatus.Completed;
-                        DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, TaskStatus.Completed,
+                        DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID,
+                            TaskStatus.Completed,
                             taskVariables.McData[i].AllData.TaskEndTime);
                     }
                 }
@@ -440,23 +421,14 @@ public class TaskDataManager : Singleton<TaskDataManager>
                             taskVariables.McData[i].AllData.ProcessingProgress.ToString(), TaskStatus.InProgress));
                     DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
                         taskVariables.McData[i].AllData.ProcessingProgress.ToString());
-                    if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
-                    {
-                        AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code,
-                            Machine.BucketWheelStackerReclaimer, taskCommand); //hard code 
-                    }
-                    else
-                    {
-                        AddOrUpdateTaskDesQueue(taskVariables.McData[i].AllData.Code, Machine.BucketWheel, taskCommand);
-                    }
                     if (taskVariables.McData[i].AllData.OperationCommandList[3] == 1) //任务结束更新数据库
                     {
                         nearestTaskDataDic[taskVariables.McData[i].TaskID].State = TaskStatus.Completed;
-                        DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID, TaskStatus.Completed,
+                        DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID,
+                            TaskStatus.Completed,
                             taskVariables.McData[i].AllData.TaskEndTime);
                     }
                 }
-
             }
         }
         else
@@ -465,12 +437,14 @@ public class TaskDataManager : Singleton<TaskDataManager>
             {
                 if (data.Value.State != TaskStatus.Completed)
                 {
-                    data.Value.State =TaskStatus.Completed;
-                    DataManager.Instance.UpdateHistoryTaskMcCompleteState(data.Value.TaskID, TaskStatus.Completed, DateTime.Now);
+                    data.Value.State = TaskStatus.Completed;
+                    DataManager.Instance.UpdateHistoryTaskMcCompleteState(data.Value.TaskID, TaskStatus.Completed,
+                        DateTime.Now);
                 }
             }
         }
     }
+
     //处理定时任务
     public void AddOrUpdateTaskData(TaskCommand taskCommand)
     {
@@ -544,7 +518,8 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 {
                     nearestTaskDataDic.Add(taskID,
                         new TaskData(taskID, mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString(),
-                            (TaskStatus)Enum.Parse(typeof(TaskStatus), mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString())));
+                            (TaskStatus)Enum.Parse(typeof(TaskStatus),
+                                mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString())));
                 }
             }
         }
@@ -554,34 +529,38 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     public void CheckTaskDesDesDictionary(TaskVariables taskVariables)
     {
-        if (taskVariables.McData.Count > 0)//把旧数据删除
+        if (taskVariables.McData.Count > 0) //把旧数据删除
         {
-            if (taskCodeDesDictionary.Count>0)
+            if (taskCodeDesDictionary.Count > 0)
             {
-                List<string>taskIDs=new List<string>();
+                List<string> taskIDs = new List<string>();
                 foreach (var data in taskCodeDesDictionary)
-                {   
-                    bool isContain=false;
+                {
+                    bool isContain = false;
                     for (int i = 0; i < taskVariables.McData.Count; i++)
                     {
-                        if (data.Key== taskVariables.McData[i].TaskID)
+                        if (data.Key == taskVariables.McData[i].TaskID)
                         {
                             isContain = true;
                         }
                     }
-                    if (isContain==false)
+
+                    if (isContain == false)
                     {
                         taskIDs.Add(data.Key);
                     }
                 }
+
                 for (int i = 0; i < taskIDs.Count; i++)
                 {
-                    taskCodeDesDictionary.Remove(taskIDs[i]);
+                    if (taskCodeDesDictionary.ContainsKey(taskIDs[i]))
+                    {
+                        taskCodeDesDictionary.Remove(taskIDs[i]);
+                    }
                 }
-                
             }
-           
-            for (int i = 0; i < taskVariables.McData.Count; i++)//刷新code
+
+            for (int i = 0; i < taskVariables.McData.Count; i++) //刷新code
             {
                 AddOrUpdateTaskDesDictionary(GetDesByTaskCode(taskVariables.McData[i].AllData.Code),
                     taskVariables.McData[i]);
@@ -612,22 +591,31 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     }
                 }
             }
-
             taskCodeDesDictionary[taskCommand.TaskID].Add(new TaskCodeDes(taskCommand.AllData.Code,
-                taskCommand.AllData.CodeTime, des, taskCommand.Machine,taskCommand.AllData.NextPositionList));
+                taskCommand.AllData.CodeTime, des, taskCommand.Machine, taskCommand.AllData.NextPositionList));
         }
         else
         {
-            taskCodeDesDictionary[taskCommand.TaskID] = new List<TaskCodeDes>()
-                { new TaskCodeDes(taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,taskCommand.AllData.NextPositionList) };
+            if (taskCodeDesDictionary.ContainsKey(taskCommand.TaskID) == false)
+            {
+                taskCodeDesDictionary.Add(taskCommand.TaskID, new List<TaskCodeDes>()
+                {
+                    new TaskCodeDes(taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,
+                        taskCommand.AllData.NextPositionList)
+                });
+            }
+
+            // taskCodeDesDictionary[taskCommand.TaskID] = new List<TaskCodeDes>()
+            //     { new TaskCodeDes(taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,taskCommand.AllData.NextPositionList) };
         }
+
         if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
         {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, new TaskLogArgs(des, taskCommand));
+            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
         }
         else
         {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, new TaskLogArgs(des, taskCommand));
+            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
         }
     }
 
@@ -648,23 +636,24 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     public void AddOrUpdateTaskDesQueue(int code, Machine machine, TaskCommand taskCommand)
     {
-        string des = "";
-        if (_codeDescriptions.TryGetValue(code, out string description))
-        {
-            des = description;
-        }
-        else
-        {
-            des = $"错误码 {code}";
-        }
-        if (machine == Machine.BucketWheelStackerReclaimer)
-        {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, new TaskLogArgs(des, taskCommand));
-        }
-        else
-        {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, new TaskLogArgs(des, taskCommand));
-        }
+        // TODO 待完善
+        // string des = "";
+        // if (_codeDescriptions.TryGetValue(code, out string description))
+        // {
+        //     des = description;
+        // }
+        // else
+        // {
+        //     des = $"错误码 {code}";
+        // }
+        // if (machine == Machine.BucketWheelStackerReclaimer)
+        // {
+        //     EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, new TaskLogArgs(des, taskCommand));
+        // }
+        // else
+        // {
+        //     EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, new TaskLogArgs(des, taskCommand));
+        // }
     }
 
     public int IsCanSendTaskCommond(Machine machine, TaskType taskType, OperationType operationType)
