@@ -21,7 +21,7 @@ public class MainPanelView : UIView<MainPanelCtr>
     private BucketWheelStackerReclaimerHideBtnCtr _bucketWheelHideBtnCtr1;
     private Button updateModelBtn;
     private Button updateTaskBtn;
-    // private InputField testInputField;
+    private InputField testInputField;
 
     public override void InitUIElements(UIArgs uiArgs)
     {
@@ -39,11 +39,33 @@ public class MainPanelView : UIView<MainPanelCtr>
         updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
         updateTaskBtn = RootObj.transform.FindComponent<Button>("updateTaskArgs");
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
-        // testInputField = RootObj.transform.FindComponent<InputField>("Image/InputField");
+        testInputField = RootObj.transform.FindComponent<InputField>("Image/InputField");
+        int code = 1;
         updateModelBtn.onClick.AddListener(() =>
         {
-            // TaskDataManager.Instance.TestStr = "8888" + "<>" + "9999";
-            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            TaskDataManager.Instance.TestStr = "8888" + "<>" + "9999";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            code = code + 1;
+            try
+            {
+                string json = Resources.Load<TextAsset>("Json/task").text;
+                // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
+                // GameDataManager.Instance.SetScaReportAndDem(dem);
+                TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
+                taskVariables.McData[0].AllData.Code = code;
+                taskVariables.McData[0].AllData.CodeTime=DateTime.Now;
+                // taskVariables.McData[0].AllData.Code = code;
+                // taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
+                TaskDataManager.Instance.SetTaskVariables(taskVariables);
+                
+                string str = JsonMgr.Serialize(TaskDataManager.Instance.TaskMessageList);
+                TaskDataManager.Instance.TestStr =str+"><";
+                EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($">>>>>>>>>>>>>>>>>{e.Message}");
+            }
             // string json = Resources.Load<TextAsset>("Json/task").text;
             // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
             // GameDataManager.Instance.SetScaReportAndDem(dem);
@@ -176,7 +198,7 @@ public class MainPanelView : UIView<MainPanelCtr>
 
     public void SetTestInputField(object o, EventArgs eventArgs)
     {
-        // testInputField.text=testInputField.text+" -------- "+TaskDataManager.Instance.TestStr;
+        testInputField.text=testInputField.text+" -------- "+TaskDataManager.Instance.TestStr;
     }
     public void AddOnClickListener(Button btn, UnityAction action)
     {

@@ -66,11 +66,12 @@ public class TopPanelView : UIView<TopPanelCtr>
         {
             DataManager.Instance.InsertHistoryLogMc("远程控制", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
             DataManager.Instance.InsertHistoryLogMc("远程控制", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
+            SetSelectState(_controlText);
             UIManager.Instance.OpenUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.StatusParaeterPanel);
             UIManager.Instance.CloseUI(UIID.SettingPanel);
-            SetSelectState(_controlText);
+          
         });
         _superviseBtn.onClick.AddListener(() =>
         {
