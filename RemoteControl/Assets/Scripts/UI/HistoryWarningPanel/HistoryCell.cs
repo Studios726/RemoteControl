@@ -24,10 +24,16 @@ public class HistoryCell : MonoBehaviour
             if (info.Contains("解除")||info.Contains("成功"))
             {
                 infoText.color = Color.white;
+                idText.color = Color.white;
+                operatorUserText.color=Color.white;
+                timeText.color=Color.white;
             }
             else
             {
                 infoText.color = Color.red;
+                idText.color = Color.red;
+                operatorUserText.color=Color.red;
+                timeText.color=Color.red;
             }
         }
         infoText.text = info;
