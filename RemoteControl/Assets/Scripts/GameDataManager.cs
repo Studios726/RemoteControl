@@ -5121,19 +5121,19 @@ public class GameDataManager : Singleton<GameDataManager>
                 _systemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 == false)
             {
                 //中控室没有允许堆料或分流命令
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆料或分流命令", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许取料命令", GetUserName(),
                     Machine.BucketWheel);
                 // AddOrUpdateWarningDesQueue("斗轮机故障", Machine.BucketWheelStackerReclaimer);
                 AddOrUpdateWarningDesDict(
                     nameof(newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2),
-                    "中控室没有允许堆料或分流命令",
+                    "中控室没有允许取料命令",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 == false &&
                      _systemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 == true)
             {
                 //中控室没有允许堆料或分流命令解除
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆料或分流命令解除", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许取料命令解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2));
             }

@@ -98,20 +98,18 @@ public class MessageCenter : Singleton<MessageCenter>
             {
                 try
                 {
-                    // string json = Decompress(message);
                     TaskDataManager.Instance.TaskMessageList.Add(message);
                     TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(message);
                     TaskDataManager.Instance.SetTaskVariables(taskVariables);
-                    // Debug.LogError($"{json}");
                 }
                 catch (Exception e)
                 {
                     //解压失败重新获取任务相关数据
-                    TaskDataManager.Instance.UpdateTaskData(4);
+                    // TaskDataManager.Instance.UpdateTaskData(4);
                     // string str = JsonMgr.Serialize(TaskDataManager.Instance.TaskMessageList);
                     // TaskDataManager.Instance.TestStr ="<22222>"+str+"><" +e.Message + "<>" + message+"======";
                     // EventManager.Instance.TriggerEvent(EventName.TestEvent);
-                    Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
+                    Debug.Log($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
                 }
             }
            
