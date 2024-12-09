@@ -105,10 +105,7 @@ public class MessageCenter : Singleton<MessageCenter>
                 catch (Exception e)
                 {
                     //解压失败重新获取任务相关数据
-                    // TaskDataManager.Instance.UpdateTaskData(4);
-                    // string str = JsonMgr.Serialize(TaskDataManager.Instance.TaskMessageList);
-                    // TaskDataManager.Instance.TestStr ="<22222>"+str+"><" +e.Message + "<>" + message+"======";
-                    // EventManager.Instance.TriggerEvent(EventName.TestEvent);
+                    TaskDataManager.Instance.UpdateTaskData(4);
                     Debug.Log($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
                 }
             }
