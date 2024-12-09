@@ -14,6 +14,8 @@ public class ConfirmTaskPanelView: UIView<ConfirmTaskPanelCtr>
     private Text _name;
     public override void InitUIElements(UIArgs uiArgs = null)
     {
+        _name = RootObj.transform.FindComponent<Text>("bg/title/name");
+        _title = RootObj.transform.Find("bg/title").gameObject;
         _confirmBtn = RootObj.transform.FindComponent<Button>("bg/confirmBtn");
         _cancelBtn = RootObj.transform.FindComponent<Button>("bg/cancelBtn");
         _zeroAdjustmentDevice = RootObj.transform.FindComponent<Toggle>("bg/ZeroAdjustmentDevice");

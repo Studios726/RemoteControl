@@ -141,8 +141,8 @@ public static class ConstStr
     public const float InitPosition_1 = 53.4f;
     public const float InitPosition_2 = 117.74f;
     public const float InitBucketWheelHeigh = 7.48f;
-    public const string BucketWheelStackerReclaimerName = "斗轮堆取料机";
-    public const string BucketWheelName = "斗轮取料机";
+    public const string BucketWheelStackerReclaimerName = "1#斗轮堆取料机";
+    public const string BucketWheelName = "2#斗轮取料机";
 }
 
 public enum Machine

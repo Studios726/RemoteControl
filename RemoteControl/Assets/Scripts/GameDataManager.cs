@@ -700,6 +700,7 @@ public class GameDataManager : Singleton<GameDataManager>
         catch (Exception ex)
         {
             Debug.LogError($"异步任务执行失败: {ex.Message}");
+            return;
         }
 
         Mesh mesh = new Mesh();
