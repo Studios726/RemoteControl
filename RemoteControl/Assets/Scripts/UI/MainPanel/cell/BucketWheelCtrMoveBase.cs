@@ -368,35 +368,35 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将控制方式切换为单动模式", null,
+                    new ConfirmPanelArgs("是否将控制方式切换为单动模式",GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.MODE_A); })));
             }));
         AddOnClickListener(togetherBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将控制方式切换为联动模式", null,
+                    new ConfirmPanelArgs("是否将控制方式切换为联动模式",GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.MODE_B); })));
             }));
         AddOnClickListener(automaticBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将控制方式切换为自动模式", null,
+                    new ConfirmPanelArgs("是否将控制方式切换为自动模式",GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.MODE_C); })));
             }));
         AddOnClickListener(takeMaterBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将堆/取料控制切换为取料状态", null,
+                    new ConfirmPanelArgs("是否将堆/取料控制切换为取料状态", GameDataManager.Instance.GetMachineName(machine),null,
                         (() => { SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON); })));
             }));
         AddOnClickListener(stopTakeMaterBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将堆/取料控制切换为停止状态", null,
+                    new ConfirmPanelArgs("是否将堆/取料控制切换为停止状态",GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON); })));
             }));
         AddOnClickListener(carFastBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_FAST)));
@@ -405,7 +405,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs(GameDataManager.Instance.IsRailClampRelaxed(machine), null,
+                    new ConfirmPanelArgs(GameDataManager.Instance.IsRailClampRelaxed(machine), GameDataManager.Instance.GetMachineName(machine),null,
                         (() => { SendMessageToServer(COMMAND_NAME.MOVE_BACKWARD); })));
             }));
         AddOnClickListener(carStopBtn, (() => SendMessageToServer(COMMAND_NAME.MOVE_STOP)));
@@ -413,34 +413,34 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs(GameDataManager.Instance.IsRailClampRelaxed(machine), null,
+                    new ConfirmPanelArgs(GameDataManager.Instance.IsRailClampRelaxed(machine), GameDataManager.Instance.GetMachineName(machine),null,
                         (() => { SendMessageToServer(COMMAND_NAME.MOVE_FORWARD); })));
             }));
         AddOnClickListener(upBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs(GameDataManager.Instance.IsOilPumpStarted(machine), null,
+                    new ConfirmPanelArgs(GameDataManager.Instance.IsOilPumpStarted(machine),GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.ELEVATE_UP); })));
             }));
         AddOnClickListener(downBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs(GameDataManager.Instance.IsOilPumpStarted(machine), null,
+                    new ConfirmPanelArgs(GameDataManager.Instance.IsOilPumpStarted(machine),GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.ELEVATE_DOWN); })));
             }));
         AddOnClickListener(leftBtn, (() =>
                 {
                     UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                        new ConfirmPanelArgs("是否确认左转？", null,
+                        new ConfirmPanelArgs("是否确认左转？", GameDataManager.Instance.GetMachineName(machine),null,
                             (() => { SendMessageToServer(COMMAND_NAME.ROTATE_LEFT); })));
                 }
             ));
         AddOnClickListener(rightBtn, (() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否确认右转？", null,
+                new ConfirmPanelArgs("是否确认右转？",GameDataManager.Instance.GetMachineName(machine), null,
                     (() => { SendMessageToServer(COMMAND_NAME.ROTATE_RIGHT); })));
         }));
         AddOnClickListener(rotStopBtn, (() =>
@@ -847,7 +847,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
 
@@ -937,7 +937,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
 
@@ -977,8 +977,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             default:
                 break;
         }
-
-        UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(des, null, (() =>
+        UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(des,GameDataManager.Instance.GetMachineName(machine), null, (() =>
         {
             action?.Invoke();
             ConfirmSendMessageToServer(command);

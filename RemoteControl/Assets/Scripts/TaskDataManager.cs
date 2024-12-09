@@ -254,7 +254,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         { 2018, "保护故障解除" },
         { 2019, "变幅油泵故障解除" }
     };
-
+    private static object o = new object();
     public ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary =
         new ConcurrentDictionary<string, List<TaskCodeDes>>();
 
@@ -358,7 +358,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 tips = $"任务异常稍后重试{taskVariables.Error}";
             }
 
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(tips, null, null));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(tips,"任务规划", null, null));
             return;
         }
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
@@ -377,7 +377,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             // TestStr ="<111111>"+str+"-----" +e.Message+"=======";
             // EventManager.Instance.TriggerEvent(EventName.TestEvent);
             taskCodeDesDictionary?.Clear();
-            // UpdateTaskData(4);
+            UpdateTaskData(4);
             // Debug.LogError($"任务描述处理报错{e.Message}");
         }
 
@@ -532,37 +532,40 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     public void CheckTaskDesDesDictionary(TaskVariables taskVariables)
     {
-        if (taskVariables.McData.Count > 0) // 把旧数据删除
+        lock (o)
         {
-            if (taskCodeDesDictionary != null && taskCodeDesDictionary.Count > 0)
+            if (taskVariables.McData.Count > 0) // 把旧数据删除
             {
-                HashSet<string> taskIDsToRemove = new HashSet<string>();
-            
-                foreach (var data in taskCodeDesDictionary)
+                if (taskCodeDesDictionary != null && taskCodeDesDictionary.Count > 0)
                 {
-                    if (!taskVariables.McData.Any(mcData => mcData.TaskID == data.Key))
+                    HashSet<string> taskIDsToRemove = new HashSet<string>();
+            
+                    foreach (var data in taskCodeDesDictionary)
                     {
-                        taskIDsToRemove.Add(data.Key);
+                        if (!taskVariables.McData.Any(mcData => mcData.TaskID == data.Key))
+                        {
+                            taskIDsToRemove.Add(data.Key);
+                        }
+                    }
+            
+                    foreach (var taskId in taskIDsToRemove)
+                    {
+                        taskCodeDesDictionary.TryRemove(taskId, out _);
                     }
                 }
-            
-                foreach (var taskId in taskIDsToRemove)
+
+                for (int i = 0; i < taskVariables.McData.Count; i++) // 刷新code
                 {
-                    taskCodeDesDictionary.TryRemove(taskId, out _);
+                    AddOrUpdateTaskDesDictionary(GetDesByTaskCode(taskVariables.McData[i].AllData.Code),
+                        taskVariables.McData[i]);
                 }
             }
-
-            for (int i = 0; i < taskVariables.McData.Count; i++) // 刷新code
+            else
             {
-                AddOrUpdateTaskDesDictionary(GetDesByTaskCode(taskVariables.McData[i].AllData.Code),
-                    taskVariables.McData[i]);
+                taskCodeDesDictionary?.Clear();
+                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
+                EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
             }
-        }
-        else
-        {
-            taskCodeDesDictionary?.Clear();
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
         }
     }
 

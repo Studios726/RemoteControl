@@ -327,7 +327,7 @@ public class HideButtonCtrBase : PanelBase
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
 
@@ -436,7 +436,7 @@ public class HideButtonCtrBase : PanelBase
             default:
                 break;
         }
-        UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(des,null,(() =>
+        UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(des,GameDataManager.Instance.GetMachineName(machine),null,(() =>
         {
             action?.Invoke();
             ConfirmSendMessageToServer(command);

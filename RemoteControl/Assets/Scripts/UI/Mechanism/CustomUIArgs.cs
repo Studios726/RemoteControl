@@ -12,10 +12,15 @@ public  class ConfirmTaskPanelArgs : UIArgs
 {
     private Action _cancleAction;
     private Action _confirmAction;
+    private string _title;
     private  TaskCommand _taskCommand;
     public   TaskCommand TaskCommand{
         get => _taskCommand;
         set => _taskCommand = value;
+    }
+    public string TitleName{
+        get => _title;
+        set => _title = value;
     }
     public Action CancleAction
     {
@@ -27,8 +32,9 @@ public  class ConfirmTaskPanelArgs : UIArgs
         get  =>_confirmAction;
         set => _confirmAction = value;
     }
-    public  ConfirmTaskPanelArgs(TaskCommand taskCommand, Action cancleAction=null, Action confirmAction=null)
+    public  ConfirmTaskPanelArgs(TaskCommand taskCommand,string title, Action cancleAction=null, Action confirmAction=null)
     {
+        TitleName = title;
         CancleAction = cancleAction;
         ConfirmAction = confirmAction;
         TaskCommand = taskCommand;
@@ -37,6 +43,7 @@ public  class ConfirmTaskPanelArgs : UIArgs
 public class ConfirmPanelArgs : UIArgs
 {
     private string _describe;
+    private string _title;
     private Action _cancleAction;
     private Action _confirmAction;
     private int _duration;
@@ -44,6 +51,10 @@ public class ConfirmPanelArgs : UIArgs
     public string Describe{
         get => _describe;
         set => _describe = value;
+    }
+    public string TitleName{
+        get => _title;
+        set => _title = value;
     }
     public int Duration{
         get => _duration;
@@ -63,9 +74,10 @@ public class ConfirmPanelArgs : UIArgs
         get  =>_confirmAction;
         set => _confirmAction = value;
     }
-    public ConfirmPanelArgs(string des, Action cancleAction=null, Action confirmAction=null,int time=0,int time2=0)
+    public ConfirmPanelArgs(string des,string title, Action cancleAction=null, Action confirmAction=null,int time=0,int time2=0)
     {
         Describe = des;
+        TitleName = title;
         CancleAction = cancleAction;
         ConfirmAction = confirmAction;
         Duration = time;

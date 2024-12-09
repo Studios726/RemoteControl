@@ -14,10 +14,14 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
     private float _duration;
     private float _duration2;
     private string _content;
+    private GameObject _title;
+    private Text _name;
 
     public override void InitUIElements(UIArgs uiArgs = null)
     {
         _des = RootObj.transform.FindComponent<Text>("bg/des");
+        _name = RootObj.transform.FindComponent<Text>("bg/title/name");
+        _title = RootObj.transform.Find("bg/title").gameObject;
         _confirmBtn = RootObj.transform.FindComponent<Button>("bg/confirmBtn");
         _cancelBtn = RootObj.transform.FindComponent<Button>("bg/cancelBtn");
         // 保证UI元素初始化后再调用UpdateUI，避免NullReferenceException
@@ -36,6 +40,8 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
         {
             _content = args.Describe;
             _des.text = args.Describe;
+            _title.SetActive(args.TitleName!="");
+            _name.text=args.TitleName;
             if (_confirmBtn != null)
             {
                 _confirmBtn.onClick.RemoveAllListeners();

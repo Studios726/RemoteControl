@@ -77,7 +77,7 @@ public class MainPanelView : UIView<MainPanelCtr>
             if (GameDataManager.Instance.GameMain.connectionSCA.isConnect == false)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP));
+                    new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP,"三维扫描"));
                 return;
             }
 
@@ -88,7 +88,7 @@ public class MainPanelView : UIView<MainPanelCtr>
             if (GameDataManager.Instance.GameMain.connectionPC.isConnect == false)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                    new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,"任务规划"));
                 return;
             }
 

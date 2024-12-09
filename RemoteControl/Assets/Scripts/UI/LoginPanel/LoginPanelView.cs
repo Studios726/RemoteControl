@@ -90,10 +90,10 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         }
         else if (_accountInput.text=="")
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("账号不能为空"));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("账号不能为空","登录"));
         }else if (_passwordInput.text=="")
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("密码不能为空"));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("密码不能为空","登录"));
         }
 
         

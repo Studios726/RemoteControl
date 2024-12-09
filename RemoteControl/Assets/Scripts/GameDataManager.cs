@@ -169,7 +169,7 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             IsCanPop = false;
             Timer.Register(_systemVariables.BeltRealyDis, false, false, (() => { IsCanPop = true; }));
-            PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis);
+            PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis,Machine.BucketWheelStackerReclaimer);
         }
 
        
@@ -178,7 +178,7 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             IsCanPopTakeMater = false;
             Timer.Register(_systemVariables.BeltRealyDis_2, false, false, (() => { IsCanPopTakeMater = true; }));
-            PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis_2);
+            PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis_2,Machine.BucketWheel);
         }
 
         UpdateMachine();
@@ -207,24 +207,32 @@ public class GameDataManager : Singleton<GameDataManager>
         return  null;
     }
     //悬胶皮带运行提示
-    public void PileTakeMaterPop(TaskType taskType, int time)
+    public void PileTakeMaterPop(TaskType taskType, int time,Machine machine)
     {
+        string title=machine==Machine.BucketWheelStackerReclaimer?ConstStr.BucketWheelStackerReclaimerName:ConstStr.BucketWheelName;
         if (taskType == TaskType.PILEMATER)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s", null, null, time));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s",title, null, null, time));
         }
         else if (taskType == TaskType.TAKEMATER)
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s", null, null, time));
+                new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s",title, null, null, time));
         }
         else
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("悬胶运行倒计时 {0}s", null, null, time));
+                new ConfirmPanelArgs("悬胶运行倒计时 {0}s","斗轮机",null, null, time));
         }
     }
 
+    public string GetMachineName(Machine machine)
+    {
+        string title = machine == Machine.BucketWheelStackerReclaimer
+            ? ConstStr.BucketWheelStackerReclaimerName
+            : ConstStr.BucketWheelName;
+        return title;
+    }
     public bool GetPlcConnection(Machine machine)
     {
         if (_systemVariables == null)

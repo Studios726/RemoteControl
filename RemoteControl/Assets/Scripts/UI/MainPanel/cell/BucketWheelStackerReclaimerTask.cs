@@ -34,24 +34,24 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         AddOnClickListener(pileResetTaskBtn,(() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否重置自动作业？", null, () => SendPileMaterCommand(OperationType.RESET)));
+                new ConfirmPanelArgs("是否重置自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () => SendPileMaterCommand(OperationType.RESET)));
         }));
         AddOnClickListener(pileMaterStartBtn,(() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否启动自动作业？", null, () => SendPileMaterCommand(OperationType.START)));
+                new ConfirmPanelArgs("是否启动自动作业？", GameDataManager.Instance.GetMachineName(machine),null, () => SendPileMaterCommand(OperationType.START)));
           
         }));
         AddOnClickListener(pileMaterStopBtn,(() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs(pileMaterStopBtn.red.activeSelf?"是否恢复自动作业?":"是否暂停自动作业？", null, () => SendPileMaterCommand(OperationType.PAUSE)));
+                new ConfirmPanelArgs(pileMaterStopBtn.red.activeSelf?"是否恢复自动作业?":"是否暂停自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () => SendPileMaterCommand(OperationType.PAUSE)));
       
         }));
         AddOnClickListener(pileMaterEndBtn,(() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否结束自动作业？", null, () =>    SendPileMaterCommand(OperationType.END)));
+                new ConfirmPanelArgs("是否结束自动作业？", GameDataManager.Instance.GetMachineName(machine),null, () =>    SendPileMaterCommand(OperationType.END)));
         
         }));
         AddOnClickListener(leftPileMaterToggle,(() =>
@@ -139,13 +139,13 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     {
         if (GameDataManager.Instance.GameMain.connectionPC.isConnect==false)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
         
         if (TaskDataManager.Instance.IsCanSendTaskCommond(machine,TaskType.PILEMATER,operationType)!=-1)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("当前操作无效的"));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("当前操作无效的",GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
         
@@ -212,7 +212,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         }
         if (operationType== OperationType.END)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel, new ConfirmTaskPanelArgs(taskCommand));
+            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel, new ConfirmTaskPanelArgs(taskCommand,GameDataManager.Instance.GetMachineName(machine)));
         }
         else
         {

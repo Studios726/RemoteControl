@@ -33,7 +33,7 @@ public class AppLauncher : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控", (() => isQuit = false),()=>
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控","退出远程监控", (() => isQuit = false),()=>
             {
                 DataManager.Instance.InsertHistoryLogMc("退出登录-ESC", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
                 DataManager.Instance.InsertHistoryLogMc("退出登录-ESC", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
@@ -62,7 +62,7 @@ public class AppLauncher : MonoBehaviour
     {
         if (isQuit==false)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控", (() => isQuit = false),()=>
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控","退出远程监控", (() => isQuit = false),()=>
             {
                 isQuit = true;
                 _gameMain.OnExitGame();
@@ -74,7 +74,7 @@ public class AppLauncher : MonoBehaviour
 
     public void ExitGamePop()
     {
-        UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控", (() => isQuit = false),()=>
+        UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否确定退出远程监控","退出远程监控", (() => isQuit = false),()=>
         {
             DataManager.Instance.InsertHistoryLogMc("退出登录", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
             DataManager.Instance.InsertHistoryLogMc("退出登录", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);

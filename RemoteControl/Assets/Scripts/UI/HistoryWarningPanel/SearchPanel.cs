@@ -482,7 +482,7 @@ public class SearchPanel : MonoBehaviour
             long endTimeStamp = new DateTime(endyear, endmouth, endday, endHour, endMinute,59).ToFileTime();
             if (startTimeStamp>endTimeStamp)
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("结束日期小于开始日期，请重新设置"));
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("结束日期小于开始日期，请重新设置","查询"));
                 return;
             }
         }
@@ -490,7 +490,7 @@ public class SearchPanel : MonoBehaviour
         {
             Debug.Log("日期无效");
             useDate = false;
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("日期无效，请重新检查日期，稍后查询"));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("日期无效，请重新检查日期，稍后查询","查询"));
             return;
         }
         Debug.Log($"搜索日期 {startTime} \n {endTime}");

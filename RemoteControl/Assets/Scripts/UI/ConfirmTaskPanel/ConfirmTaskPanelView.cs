@@ -10,6 +10,8 @@ public class ConfirmTaskPanelView: UIView<ConfirmTaskPanelCtr>
     private Button _cancelBtn;
     private Toggle _zeroAdjustmentDevice;//归零
     private Toggle _closingDeviceToggle;//关闭设备
+    private GameObject _title;
+    private Text _name;
     public override void InitUIElements(UIArgs uiArgs = null)
     {
         _confirmBtn = RootObj.transform.FindComponent<Button>("bg/confirmBtn");
@@ -30,6 +32,8 @@ public class ConfirmTaskPanelView: UIView<ConfirmTaskPanelCtr>
         {
             if (_confirmBtn != null)
             {
+                _title.SetActive(args.TitleName!="");
+                _name.text=args.TitleName;
                 _confirmBtn.onClick.RemoveAllListeners();
                 _confirmBtn.onClick.AddListener(() =>
                 {

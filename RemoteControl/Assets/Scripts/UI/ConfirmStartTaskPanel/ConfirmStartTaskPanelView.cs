@@ -11,10 +11,14 @@ public class ConfirmStartTaskPanelView : UIView<ConfirmStartTaskPanelCtr>
     private Button _cancelBtn;
     private Toggle _restoreTask;//归零
     private Toggle _startNewTask;//关闭设备
+    private GameObject _title;
+    private Text _name;
     public override void InitUIElements(UIArgs uiArgs = null)
     {
         _confirmBtn = RootObj.transform.FindComponent<Button>("bg/confirmBtn");
         _cancelBtn = RootObj.transform.FindComponent<Button>("bg/cancelBtn");
+        _name = RootObj.transform.FindComponent<Text>("bg/title/name");
+        _title = RootObj.transform.Find("bg/title").gameObject;
         _restoreTask = RootObj.transform.FindComponent<Toggle>("bg/RestoreTask");
         _startNewTask = RootObj.transform.FindComponent<Toggle>("bg/StartNewTask");
         _restoreTask.onValueChanged.AddListener(value =>
@@ -43,6 +47,8 @@ public class ConfirmStartTaskPanelView : UIView<ConfirmStartTaskPanelCtr>
         // 类型安全检查
         if (uiArgs is ConfirmTaskPanelArgs args)
         {
+            _title.SetActive(args.TitleName!="");
+            _name.text=args.TitleName;
             _startNewTask.isOn = false;
             _restoreTask.isOn = false;
             if (_confirmBtn != null)

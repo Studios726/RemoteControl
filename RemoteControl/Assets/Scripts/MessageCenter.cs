@@ -24,7 +24,8 @@ public class MessageCenter : Singleton<MessageCenter>
     public delegate void MessageDelHandle(string message);
 
     private Dictionary<int, List<MessageDelHandle>> messageMap = new Dictionary<int, List<MessageDelHandle>>();
-
+    private static object TaskObj = new object();
+    private static object RcObj = new object();
     public void RegisterListener(int messageType, MessageDelHandle handle)
     {
         if (handle == null) return;
@@ -75,39 +76,45 @@ public class MessageCenter : Singleton<MessageCenter>
             return;
         if(socketType== SocketType.TaoRC)
         {
-            try
+            lock (RcObj)
             {
-                string json = Decompress(message);
-                // json= Resources.Load("Json/RC").ToString();
-                SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
-                GameDataManager.Instance.SetSystemVariables(systemVariables);
-            }
-            catch (Exception e)
-            {
+                try
+                {
+                    string json = Decompress(message);
+                    // json= Resources.Load("Json/RC").ToString();
+                    SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
+                    GameDataManager.Instance.SetSystemVariables(systemVariables);
+                }
+                catch (Exception e)
+                {
             
-                // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
-                Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)} {e.Message}");
+                    // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
+                    Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)} {e.Message}");
+                }
             }
-           
         }else if(socketType== SocketType.TaskPC)
         {
-            try
+            lock (TaskObj)
             {
-                // string json = Decompress(message);
-                TaskDataManager.Instance.TaskMessageList.Add(message);
-                TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(message);
-                TaskDataManager.Instance.SetTaskVariables(taskVariables);
-                // Debug.LogError($"{json}");
+                try
+                {
+                    // string json = Decompress(message);
+                    TaskDataManager.Instance.TaskMessageList.Add(message);
+                    TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(message);
+                    TaskDataManager.Instance.SetTaskVariables(taskVariables);
+                    // Debug.LogError($"{json}");
+                }
+                catch (Exception e)
+                {
+                    //解压失败重新获取任务相关数据
+                    TaskDataManager.Instance.UpdateTaskData(4);
+                    // string str = JsonMgr.Serialize(TaskDataManager.Instance.TaskMessageList);
+                    // TaskDataManager.Instance.TestStr ="<22222>"+str+"><" +e.Message + "<>" + message+"======";
+                    // EventManager.Instance.TriggerEvent(EventName.TestEvent);
+                    Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
+                }
             }
-            catch (Exception e)
-            {
-                //解压失败重新获取任务相关数据
-                // TaskDataManager.Instance.UpdateTaskData(4);
-                // string str = JsonMgr.Serialize(TaskDataManager.Instance.TaskMessageList);
-                // TaskDataManager.Instance.TestStr ="<22222>"+str+"><" +e.Message + "<>" + message+"======";
-                // EventManager.Instance.TriggerEvent(EventName.TestEvent);
-                Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
-            }
+           
         }else if (socketType == SocketType.SCA)
         {
             try

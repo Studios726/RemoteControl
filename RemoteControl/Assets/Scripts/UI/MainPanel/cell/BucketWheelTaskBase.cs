@@ -184,7 +184,7 @@ public class BucketWheelTaskBase : PanelBase
                 if (scramStopBtn.red.activeSelf)
                 {
                     UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                        new ConfirmPanelArgs("是否确认复位急停？", null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP)));
+                        new ConfirmPanelArgs("是否确认复位急停？",GameDataManager.Instance.GetMachineName(machine), null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP)));
                 }
                 else
                 {
@@ -196,13 +196,13 @@ public class BucketWheelTaskBase : PanelBase
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否确认复位？", null, () => SendPlcCommand(COMMAND_NAME.ERR_RESET)));
+                    new ConfirmPanelArgs("是否确认复位？",GameDataManager.Instance.GetMachineName(machine), null, () => SendPlcCommand(COMMAND_NAME.ERR_RESET)));
             }));
         // AddOnClickListener(warningBtn, (() => { SendPlcCommand(COMMAND_NAME.STARTUP_ALARM); }));
         AddOnClickListener(resetTaskBtn,(() =>
         {
               UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                            new ConfirmPanelArgs("是否重置自动作业参数？", null, () => 
+                            new ConfirmPanelArgs("是否重置自动作业参数？", GameDataManager.Instance.GetMachineName(machine),null, () => 
                                 SendTaskCommand(OperationType.RESET)));
         }));
         
@@ -210,7 +210,7 @@ public class BucketWheelTaskBase : PanelBase
         {
             
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否边界确认？", null, () => 
+                new ConfirmPanelArgs("是否边界确认？",GameDataManager.Instance.GetMachineName(machine), null, () => 
                     SendTaskCommand(OperationType.TurnConfirm)));
         }));
         AddOnClickListener(takeMaterStartBtn, (() =>
@@ -218,7 +218,7 @@ public class BucketWheelTaskBase : PanelBase
             if (leftTurnToggle.red.activeSelf==false&&rightTurnToggle.red.activeSelf==false)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("请选择初始设定，稍微重试"));
+                    new ConfirmPanelArgs("请选择初始设定，稍微重试",GameDataManager.Instance.GetMachineName(machine)));
             }
             else
             {
@@ -230,19 +230,19 @@ public class BucketWheelTaskBase : PanelBase
         AddOnClickListener(takeMaterStopBtn, (() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs(takeMaterStopBtn.red.activeSelf?"是否恢复自动作业？":"是否暂停自动作业？", null, () => SendTaskCommand(OperationType.PAUSE)));
+                new ConfirmPanelArgs(takeMaterStopBtn.red.activeSelf?"是否恢复自动作业？":"是否暂停自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () => SendTaskCommand(OperationType.PAUSE)));
          
         }));
         AddOnClickListener(takeMaterReversingBtn, (() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否换向自动作业？", null, () =>   SendTaskCommand(OperationType.REVERSING)));
+                new ConfirmPanelArgs("是否换向自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () =>   SendTaskCommand(OperationType.REVERSING)));
           
         }));
         AddOnClickListener(takeMaterEndBtn, (() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否结束自动作业？", null, () =>    SendTaskCommand(OperationType.END)));
+                new ConfirmPanelArgs("是否结束自动作业？", GameDataManager.Instance.GetMachineName(machine),null, () =>    SendTaskCommand(OperationType.END)));
           
         }));
         confirmWarningBtn.onClick.AddListener((() =>
@@ -355,7 +355,7 @@ public class BucketWheelTaskBase : PanelBase
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
 
@@ -386,13 +386,13 @@ public class BucketWheelTaskBase : PanelBase
         if (GameDataManager.Instance.GameMain.connectionPC.isConnect == false)
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP));
+                new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
 
         if (TaskDataManager.Instance.IsCanSendTaskCommond(machine, TaskType.TAKEMATER, operationType) != -1)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("当前操作无效的"));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("当前操作无效的",GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
         TaskCommand taskCommand = new TaskCommand();
@@ -477,11 +477,11 @@ public class BucketWheelTaskBase : PanelBase
 
         if (operationType== OperationType.END)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel, new ConfirmTaskPanelArgs(taskCommand));
+            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel, new ConfirmTaskPanelArgs(taskCommand,GameDataManager.Instance.GetMachineName(machine)));
         }else if (operationType==OperationType.START)
         {
             UIManager.Instance.OpenUI(UIID.ConfirmStartTaskPanel,
-                new ConfirmTaskPanelArgs(taskCommand));
+                new ConfirmTaskPanelArgs(taskCommand,GameDataManager.Instance.GetMachineName(machine)));
         }
         else
         {

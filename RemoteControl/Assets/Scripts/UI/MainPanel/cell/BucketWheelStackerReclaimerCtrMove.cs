@@ -29,11 +29,11 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
         // AddOnClickListener(pileMaterResetBtn,(() => SendMessageToServer("堆料重置")));
         AddOnClickListener(takeMaterBtn, (() =>
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将堆/取料控制切换为取料状态",null,(() =>
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将堆/取料控制切换为取料状态",GameDataManager.Instance.GetMachineName(machine),null,(() =>
             {
                 if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
                 {
-                    UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                    UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
                     return;
                 }
                 SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON);
@@ -45,11 +45,11 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
         }));
         AddOnClickListener(stopTakeMaterBtn, (() =>
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将堆/取料控制切换为停止状态",null,(() =>
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将堆/取料控制切换为停止状态",GameDataManager.Instance.GetMachineName(machine),null,(() =>
             {
                 if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
                 {
-                    UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                    UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
                     return;
                 }
                 SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON);
@@ -61,11 +61,11 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
         }));
         AddOnClickListener(pileMaterTakeBtn,(() =>
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将堆/取料控制切换为堆料状态",null,(() =>
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("是否将堆/取料控制切换为堆料状态",GameDataManager.Instance.GetMachineName(machine),null,(() =>
             {
                 if (GameDataManager.Instance.GameMain.connectionRC.isConnect==false)
                 {
-                    UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+                    UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
                     return;
                 }
                 SendMessageToServer(COMMAND_NAME.BELTSTACK_BUTTON);

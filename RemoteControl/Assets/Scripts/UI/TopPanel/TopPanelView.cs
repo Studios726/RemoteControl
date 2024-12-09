@@ -180,7 +180,7 @@ public class TopPanelView : UIView<TopPanelCtr>
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
 
