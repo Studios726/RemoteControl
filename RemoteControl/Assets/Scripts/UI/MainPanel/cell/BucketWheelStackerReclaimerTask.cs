@@ -152,12 +152,12 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         TaskCommand taskCommand = new TaskCommand();
         if (operationType==OperationType.START)
         {
-            DataManager.Instance.InsertHistoryLogMc("堆料-启动任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("自动堆料-启动任务", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStartBtn);
         }else if (operationType==OperationType.PAUSE)
         {
-            DataManager.Instance.InsertHistoryLogMc(pileMaterStopBtn.red.activeSelf?"堆料-恢复任务":"堆料-暂停任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc(pileMaterStopBtn.red.activeSelf?"自动堆料-恢复任务":"自动堆料-暂停任务", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterStopBtn);
             int dataInt = pileMaterStopBtn.red.activeSelf?0:1;
@@ -165,12 +165,12 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             GameDataManager.Instance.SendServerCommandRC(commandName,6,2,dataInt);
         }else if (operationType == OperationType.END)
         {
-            DataManager.Instance.InsertHistoryLogMc("堆料-任务结束", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("自动堆料-任务结束", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curPileTaskButtonCell,pileMaterEndBtn);
         }else if (operationType == OperationType.RESET)
         {
-            DataManager.Instance.InsertHistoryLogMc("堆料-任务重置", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("自动堆料-任务重置", GameDataManager.Instance.GetUserName(), machine);
             pileResetTaskBtn.SetSelectState(true);
             taskCommand.ResetState = 1;
         }

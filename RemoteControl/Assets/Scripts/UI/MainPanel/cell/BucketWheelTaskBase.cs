@@ -398,13 +398,13 @@ public class BucketWheelTaskBase : PanelBase
         TaskCommand taskCommand = new TaskCommand();
         if (operationType == OperationType.START)
         {
-            DataManager.Instance.InsertHistoryLogMc("取料-启动任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("自动取料-启动任务", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterStartBtn);
         }
         else if (operationType == OperationType.PAUSE)
         {
-            DataManager.Instance.InsertHistoryLogMc(takeMaterStopBtn.red.activeSelf?"取料-恢复任务":"取料-暂停任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc(takeMaterStopBtn.red.activeSelf?"自动取料-恢复任务":"自动取料-暂停任务", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterStopBtn);
             int dataInt = takeMaterStopBtn.red.activeSelf?0:1;
@@ -413,24 +413,24 @@ public class BucketWheelTaskBase : PanelBase
         }
         else if (operationType == OperationType.REVERSING)
         {
-            DataManager.Instance.InsertHistoryLogMc("取料-任务换向", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("自动取料-任务换向", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterReversingBtn);
         }
         else if (operationType == OperationType.END)
         {
-            DataManager.Instance.InsertHistoryLogMc("取料-任务结束", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("自动取料-任务结束", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterEndBtn);
         }else if (operationType == OperationType.RESET)
         {
             resetTaskBtn.SetSelectState(true);
-            DataManager.Instance.InsertHistoryLogMc("取料-任务重置", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("自动取料-任务重置", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.ResetState = 1;
         }else if (operationType==OperationType.TurnConfirm)
         {
             confirmTurnBtn.SetSelectState(true);
-            DataManager.Instance.InsertHistoryLogMc("取料-边界确认", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc("自动取料-边界确认", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.TurnConfirmState = 1;
             // taskCommand.OperationCommand = operationType;
         }
