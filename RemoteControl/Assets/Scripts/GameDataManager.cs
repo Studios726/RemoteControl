@@ -1022,6 +1022,8 @@ public class GameDataManager : Singleton<GameDataManager>
             _systemVariables.D1PLC2CommunicationState = true;
             _systemVariables.D2PLC1CommunicationState = true;
             _systemVariables.D2PLC2CommunicationState = true;
+            _systemVariables.ReelOverTensionLimit1_2 = true;
+            _systemVariables.ReelOverTensionLimit1 = true;
             isUpdate = true;
         }
         
@@ -2025,72 +2027,72 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload));
             }
 
-            if (newSystemVariables.ReelOverTensionLimit1 == false && _systemVariables.ReelOverTensionLimit1 == true)
+            if (newSystemVariables.ReelOverTensionLimit1 == false && newSystemVariables.RollerOverTightLimit2 &&(_systemVariables.ReelOverTensionLimit1 == true||_systemVariables.RollerOverTightLimit2 == false ) )
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧1过紧2限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1), "电缆卷筒-卷筒过紧限位1",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1), "电缆卷筒-卷筒过紧1过紧2限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.ReelOverTensionLimit1 == true &&
-                     _systemVariables.ReelOverTensionLimit1 == false)
+            else if (newSystemVariables.ReelOverTensionLimit1 == true && newSystemVariables.RollerOverTightLimit2 == false &&( _systemVariables.ReelOverTensionLimit1 == false||_systemVariables.RollerOverTightLimit2 == true))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1解除
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1解除", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧1过紧2限位解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1));
             }
 
-            if (newSystemVariables.ReelOverLooseLimit1 && _systemVariables.ReelOverLooseLimit1 == false)
+            if (newSystemVariables.ReelOverLooseLimit1 &&newSystemVariables.RollerOverLooseLimit2 &&(_systemVariables.ReelOverLooseLimit1 == false||_systemVariables.RollerOverLooseLimit2 == false) )
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松1过松2限位", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1), "电缆卷筒-卷筒过松限位1",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1), "电缆卷筒-卷筒过松1过松2限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.ReelOverLooseLimit1 == false && _systemVariables.ReelOverLooseLimit1 == true)
+            else if (newSystemVariables.ReelOverLooseLimit1 == false && newSystemVariables.RollerOverLooseLimit2==false&&(_systemVariables.ReelOverLooseLimit1 == true||_systemVariables.RollerOverLooseLimit2==true))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1));
+              
             }
 
-            if (newSystemVariables.RollerOverTightLimit2 && _systemVariables.RollerOverTightLimit2 == false)
-            {
-                //夹轨/卷筒-电缆卷筒-卷筒过紧限位2
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2), "电缆卷筒-卷筒过紧限位2",
-                    Machine.BucketWheelStackerReclaimer, false, "");
-            }
-            else if (newSystemVariables.RollerOverTightLimit2 == false &&
-                     _systemVariables.RollerOverTightLimit2 == true)
-            {
-                //夹轨/卷筒-电缆卷筒-卷筒过紧限位2解除
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2解除", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                RemoveWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2));
-            }
-
-            if (newSystemVariables.RollerOverLooseLimit2 && _systemVariables.RollerOverLooseLimit2 == false)
-            {
-                //夹轨/卷筒-电缆卷筒-卷筒过松限位2
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2), "电缆卷筒-卷筒过松限位2",
-                    Machine.BucketWheelStackerReclaimer, false, "");
-            }
-            else if (newSystemVariables.RollerOverLooseLimit2 == false &&
-                     _systemVariables.RollerOverLooseLimit2 == true)
-            {
-                //夹轨/卷筒-电缆卷筒-卷筒过松限位2解除
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2解除", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                RemoveWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2));
-            }
+            // if (newSystemVariables.RollerOverTightLimit2 && _systemVariables.RollerOverTightLimit2 == false)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过紧限位2
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2), "电缆卷筒-卷筒过紧限位2",
+            //         Machine.BucketWheelStackerReclaimer, false, "");
+            // }
+            // else if (newSystemVariables.RollerOverTightLimit2 == false &&
+            //          _systemVariables.RollerOverTightLimit2 == true)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过紧限位2解除
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2解除", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2));
+            // }
+            //
+            // if (newSystemVariables.RollerOverLooseLimit2 && _systemVariables.RollerOverLooseLimit2 == false)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过松限位2
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2), "电缆卷筒-卷筒过松限位2",
+            //         Machine.BucketWheelStackerReclaimer, false, "");
+            // }
+            // else if (newSystemVariables.RollerOverLooseLimit2 == false &&
+            //          _systemVariables.RollerOverLooseLimit2 == true)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过松限位2解除
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2解除", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2));
+            // }
 
             if (newSystemVariables.ReelEmptySwitch && _systemVariables.ReelEmptySwitch == false)
             {
@@ -6073,78 +6075,110 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload_2));
             }
 
-            if (newSystemVariables.ReelOverTensionLimit1_2 == false &&
-                _systemVariables.ReelOverTensionLimit1_2 == true)
+             if (newSystemVariables.ReelOverTensionLimit1_2 == false && newSystemVariables.RollerOverTightLimit2_2 &&(_systemVariables.ReelOverTensionLimit1_2 == true||_systemVariables.RollerOverTightLimit2_2 == false ) )
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧1过紧2限位", GetUserName(),
                     Machine.BucketWheel);
-                AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过紧限位1", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1_2), "电缆卷筒-卷筒过紧限位1",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1_2), "电缆卷筒-卷筒过紧1过紧2限位",
                     Machine.BucketWheel, false, "");
+              
             }
-            else if (newSystemVariables.ReelOverTensionLimit1_2 == true &&
-                     _systemVariables.ReelOverTensionLimit1_2 == false)
+            else if (newSystemVariables.ReelOverTensionLimit1_2 == true && newSystemVariables.RollerOverTightLimit2_2 == false &&( _systemVariables.ReelOverTensionLimit1_2 == false||_systemVariables.RollerOverTightLimit2_2 == true))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1解除
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1解除", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧1过紧2限位解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1_2));
             }
 
-            if (newSystemVariables.ReelOverLooseLimit1_2 && _systemVariables.ReelOverLooseLimit1_2 == false)
+            if (newSystemVariables.ReelOverLooseLimit1_2 &&newSystemVariables.RollerOverLooseLimit2_2 &&(_systemVariables.ReelOverLooseLimit1_2 == false||_systemVariables.RollerOverLooseLimit2_2 == false) )
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松1过松2限位", GetUserName(),
                     Machine.BucketWheel);
-                AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过松限位1", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1_2), "电缆卷筒-卷筒过松限位1",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1_2), "电缆卷筒-卷筒过松1过松2限位",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.ReelOverLooseLimit1_2 == false &&
-                     _systemVariables.ReelOverLooseLimit1_2 == true)
+            else if (newSystemVariables.ReelOverLooseLimit1_2 == false &&newSystemVariables.RollerOverLooseLimit2_2==false&&(_systemVariables.ReelOverLooseLimit1_2 == true||_systemVariables.RollerOverLooseLimit2_2==true) )
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1_2));
             }
+            // if (newSystemVariables.ReelOverTensionLimit1_2 == false &&
+            //     _systemVariables.ReelOverTensionLimit1_2 == true)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1", GetUserName(),
+            //         Machine.BucketWheel);
+            //     AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过紧限位1", Machine.BucketWheel);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1_2), "电缆卷筒-卷筒过紧限位1",
+            //         Machine.BucketWheel, false, "");
+            // }
+            // else if (newSystemVariables.ReelOverTensionLimit1_2 == true &&
+            //          _systemVariables.ReelOverTensionLimit1_2 == false)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过紧限位1解除
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位1解除", GetUserName(),
+            //         Machine.BucketWheel);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1_2));
+            // }
+            //
+            // if (newSystemVariables.ReelOverLooseLimit1_2 && _systemVariables.ReelOverLooseLimit1_2 == false)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过松限位1
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1", GetUserName(),
+            //         Machine.BucketWheel);
+            //     AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过松限位1", Machine.BucketWheel);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1_2), "电缆卷筒-卷筒过松限位1",
+            //         Machine.BucketWheel, false, "");
+            // }
+            // else if (newSystemVariables.ReelOverLooseLimit1_2 == false &&
+            //          _systemVariables.ReelOverLooseLimit1_2 == true)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过松限位1解除
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1解除", GetUserName(),
+            //         Machine.BucketWheel);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1_2));
+            // }
 
-            if (newSystemVariables.RollerOverTightLimit2_2 && _systemVariables.RollerOverTightLimit2_2 == false)
-            {
-                //夹轨/卷筒-电缆卷筒-卷筒过紧限位2
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2", GetUserName(),
-                    Machine.BucketWheel);
-                AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过紧限位2", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2_2), "电缆卷筒-卷筒过紧限位2",
-                    Machine.BucketWheel, false, "");
-            }
-            else if (newSystemVariables.RollerOverTightLimit2_2 == false &&
-                     _systemVariables.RollerOverTightLimit2_2 == true)
-            {
-                //夹轨/卷筒-电缆卷筒-卷筒过紧限位2解除
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2解除", GetUserName(),
-                    Machine.BucketWheel);
-                RemoveWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2_2));
-            }
-
-            if (newSystemVariables.RollerOverLooseLimit2_2 && _systemVariables.RollerOverLooseLimit2_2 == false)
-            {
-                //夹轨/卷筒-电缆卷筒-卷筒过松限位2
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2", GetUserName(),
-                    Machine.BucketWheel);
-                AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过松限位2", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2_2), "电缆卷筒-卷筒过松限位2",
-                    Machine.BucketWheel, false, "");
-            }
-            else if (newSystemVariables.RollerOverLooseLimit2_2 == false &&
-                     _systemVariables.RollerOverLooseLimit2_2 == true)
-            {
-                //夹轨/卷筒-电缆卷筒-卷筒过松限位2解除
-                DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2解除", GetUserName(),
-                    Machine.BucketWheel);
-                RemoveWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2_2));
-            }
+            // if (newSystemVariables.RollerOverTightLimit2_2 && _systemVariables.RollerOverTightLimit2_2 == false)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过紧限位2
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2", GetUserName(),
+            //         Machine.BucketWheel);
+            //     AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过紧限位2", Machine.BucketWheel);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2_2), "电缆卷筒-卷筒过紧限位2",
+            //         Machine.BucketWheel, false, "");
+            // }
+            // else if (newSystemVariables.RollerOverTightLimit2_2 == false &&
+            //          _systemVariables.RollerOverTightLimit2_2 == true)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过紧限位2解除
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧限位2解除", GetUserName(),
+            //         Machine.BucketWheel);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.RollerOverTightLimit2_2));
+            // }
+            //
+            // if (newSystemVariables.RollerOverLooseLimit2_2 && _systemVariables.RollerOverLooseLimit2_2 == false)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过松限位2
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2", GetUserName(),
+            //         Machine.BucketWheel);
+            //     AddOrUpdateWarningDesQueue("电缆卷筒-卷筒过松限位2", Machine.BucketWheel);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2_2), "电缆卷筒-卷筒过松限位2",
+            //         Machine.BucketWheel, false, "");
+            // }
+            // else if (newSystemVariables.RollerOverLooseLimit2_2 == false &&
+            //          _systemVariables.RollerOverLooseLimit2_2 == true)
+            // {
+            //     //夹轨/卷筒-电缆卷筒-卷筒过松限位2解除
+            //     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位2解除", GetUserName(),
+            //         Machine.BucketWheel);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.RollerOverLooseLimit2_2));
+            // }
 
             if (newSystemVariables.ReelEmptySwitch_2 && _systemVariables.ReelEmptySwitch_2 == false)
             {

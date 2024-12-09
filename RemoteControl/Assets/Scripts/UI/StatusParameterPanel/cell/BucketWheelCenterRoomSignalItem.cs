@@ -83,7 +83,7 @@ public class BucketWheelCenterRoomSignalItem : StatusParmItemBase<BucketWheelCen
     public override void UpdateData(BucketWheelCenterRoomSignalData data,bool isConnect=false)
     {
         SetToggleState(AllowPileMaterSignalToggle, data.isAllowPileMaterSignal,false,isConnect);
-        SetToggleState(BucketWheelPileMaterRunToggle, data.isAllowPileMaterSignal,false,isConnect);
+        SetToggleState(BucketWheelPileMaterRunToggle, data.isBucketWheelPileMaterRune,false,isConnect);
         SetToggleState(AllowTakeMaterSignalToggle, data.isAllowTakeMaterSignal,false,isConnect);
         SetToggleState(BucketWheelTakeMaterRunToggle, data.isBucketWheelTakeMaterRun,false,isConnect);
         SetToggleState(AllowShuntSignalToggle, data.isAllowShuntSignal,false,isConnect);
