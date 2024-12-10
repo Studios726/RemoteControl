@@ -314,22 +314,22 @@ public class BucketWheelTaskBase : PanelBase
         // }));
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
-            InputFieldValueRange(startTakeMaterText, 0, 260);
-            InputFieldValueRange(stopTakeMaterText, 0, 260);
+            InputFieldValueRange(startTakeMaterText, 0, 260,0);
+            InputFieldValueRange(stopTakeMaterText, 0, 260,0);
         }
         else
         {
-            InputFieldValueRange(startTakeMaterText, 153, 323);
-            InputFieldValueRange(stopTakeMaterText, 153, 323);
+            InputFieldValueRange(startTakeMaterText, 153, 323,153);
+            InputFieldValueRange(stopTakeMaterText, 153, 323,323);
         }
        
-        InputFieldValueRange(leftTakeMaterText, 12, 90);
-        InputFieldValueRange(rightTakeMaterText, 12, 90);
-        InputFieldValueRange(timeHourText, 0, 99);
-        InputFieldValueRange(timeMinuteText, 0, 60);
-        InputFieldValueRange(takeMaterStep, 0.1f, 3);
-        InputFieldValueRange(takeMaterNum, 0, 99999);
-        InputFieldValueRange(layerHigh, 0, 10);
+        InputFieldValueRange(leftTakeMaterText, 12, 90,12);
+        InputFieldValueRange(rightTakeMaterText, 12, 90,90);
+        InputFieldValueRange(timeHourText, 0, 99,0);
+        InputFieldValueRange(timeMinuteText, 0, 60,0);
+        InputFieldValueRange(takeMaterStep, 0.1f, 3,0.7f);
+        InputFieldValueRange(takeMaterNum, 0, 99999,0);
+        InputFieldValueRange(layerHigh, 0, 10,0);
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 
@@ -525,9 +525,9 @@ public class BucketWheelTaskBase : PanelBase
         confirmTurnBtn.SetSystemState(false,true);
     }
 
-    public virtual void InputFieldValueRange(InputField inputField, float min, float max)
+    public virtual void InputFieldValueRange(InputField inputField, float min, float max,float defaultValue)
     {
-        inputField.text =min.ToString();
+        inputField.text =defaultValue.ToString();
         inputField.onEndEdit.AddListener(((string value) =>
         {
             float num = 0;

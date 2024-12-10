@@ -43,29 +43,29 @@ public class MainPanelView : UIView<MainPanelCtr>
         testInputField = RootObj.transform.FindComponent<InputField>("Image/InputField");
         updateModelBtn.onClick.AddListener(() =>
         {
-            try
-            {
-                // string json2 = Resources.Load<TextAsset>("Json/task").text;
-                // TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json2);
-                // TaskDataManager.Instance.SetTaskVariables(taskVariables);
-                // if (code<TaskMessageList.Count)
-                // {
-                //     string json =TaskMessageList[code];
-                //     Debug.Log($"{code}>>>>>>>>>>>>>>>>>>>{json}");
-                //     code++;
-                //     // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
-                //     // GameDataManager.Instance.SetScaReportAndDem(dem);
-                //     TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
-                //     // taskVariables.McData[0].AllData.Code = code;
-                //     // taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
-                //     TaskDataManager.Instance.SetTaskVariables(taskVariables);
-                // }
-              
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($">>>>>>>>>>>>>>>>>{e.Message}");
-            }
+            // try
+            // {
+            //     // string json2 = Resources.Load<TextAsset>("Json/task").text;
+            //     // TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json2);
+            //     // TaskDataManager.Instance.SetTaskVariables(taskVariables);
+            //     // if (code<TaskMessageList.Count)
+            //     // {
+            //     //     string json =TaskMessageList[code];
+            //     //     Debug.Log($"{code}>>>>>>>>>>>>>>>>>>>{json}");
+            //     //     code++;
+            //     //     // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
+            //     //     // GameDataManager.Instance.SetScaReportAndDem(dem);
+            //     //     TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
+            //     //     // taskVariables.McData[0].AllData.Code = code;
+            //     //     // taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
+            //     //     TaskDataManager.Instance.SetTaskVariables(taskVariables);
+            //     // }
+            //   
+            // }
+            // catch (Exception e)
+            // {
+            //     Debug.LogError($">>>>>>>>>>>>>>>>>{e.Message}");
+            // }
             // string json = Resources.Load<TextAsset>("Json/task").text;
             // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
             // GameDataManager.Instance.SetScaReportAndDem(dem);

@@ -98,7 +98,7 @@ public class MessageCenter : Singleton<MessageCenter>
             {
                 try
                 {
-                    TaskDataManager.Instance.TaskMessageList.Add(message);
+                    // TaskDataManager.Instance.TaskMessageList.Add(message);
                     TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(message);
                     TaskDataManager.Instance.SetTaskVariables(taskVariables);
                 }
@@ -106,7 +106,7 @@ public class MessageCenter : Singleton<MessageCenter>
                 {
                     //解压失败重新获取任务相关数据
                     TaskDataManager.Instance.UpdateTaskData(4);
-                    Debug.Log($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
+                    Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
                 }
             }
            

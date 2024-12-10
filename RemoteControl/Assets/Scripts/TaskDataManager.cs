@@ -9,7 +9,7 @@ using RemoteControl.Event;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public struct TaskCodeDes
+public class TaskCodeDes
 {
     public int Code { get; set; }
     public string Time { get; set; }
@@ -28,7 +28,6 @@ public struct TaskCodeDes
         {
             list = new List<float> { 0, 0, 0 };
         }
-
         NextPositionList = new List<float>(list); // 或者 NextPositionList = list.ToList();
         StringBuilder sb = new StringBuilder("下一目标点 ");
         if (list != null)
@@ -50,6 +49,31 @@ public struct TaskCodeDes
             }
         }
 
+        Pos = sb.ToString();
+    }
+
+    public void UpdateNextPositionList(List<float> list)
+    {
+        NextPositionList = new List<float>(list); 
+        StringBuilder sb = new StringBuilder("下一目标点 ");
+        if (list != null)
+        {
+            for (int i = 0; i < list.Count; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        sb.Append($"回转: {list[i].ToString("F1")}° ");
+                        break;
+                    case 1:
+                        sb.Append($"俯仰: {list[i].ToString("F1")}° ");
+                        break;
+                    case 2:
+                        sb.Append($"前进: {list[i].ToString("F1")}m");
+                        break;
+                }
+            }
+        }
         Pos = sb.ToString();
     }
 }
@@ -378,7 +402,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             // EventManager.Instance.TriggerEvent(EventName.TestEvent);
             taskCodeDesDictionary?.Clear();
             UpdateTaskData(4);
-            // Debug.LogError($"任务描述处理报错{e.Message}");
+            Debug.LogError($"任务描述处理报错{e.Message}");
         }
 
         if (taskVariables.McData.Count > 0)
@@ -627,19 +651,25 @@ public class TaskDataManager : Singleton<TaskDataManager>
         // }
 
         var taskList = taskCodeDesDictionary.GetOrAdd(taskCommand.TaskID, _ => new List<TaskCodeDes>());
-        
         // 检查是否存在相同的任务代码和机器
         if (taskList.Any(tcd =>
                 tcd.Code == taskCommand.AllData.Code && tcd.Time == taskCommand.AllData.CodeTime &&
                 tcd.Machine == taskCommand.Machine))
         {
-            return;
+            for (int i = 0; i < taskCodeDesDictionary[taskCommand.TaskID].Count; i++)
+            {
+                if (taskCodeDesDictionary[taskCommand.TaskID][i].Code==taskCommand.AllData.Code&&taskCodeDesDictionary[taskCommand.TaskID][i].Machine==taskCommand.Machine&&taskCodeDesDictionary[taskCommand.TaskID][i].Time==taskCommand.AllData.CodeTime)
+                {
+                    taskCodeDesDictionary[taskCommand.TaskID][i].UpdateNextPositionList(taskCommand.AllData.NextPositionList);
+                }
+            }
         }
-        
-        // 添加新的任务代码描述
-        AddTaskCodeDesToList(taskList, taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,
-            taskCommand.AllData.NextPositionList);
-
+        else
+        {
+            // 添加新的任务代码描述
+            AddTaskCodeDesToList(taskList, taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,
+                taskCommand.AllData.NextPositionList);
+        }
         // 触发事件
         if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
         {
