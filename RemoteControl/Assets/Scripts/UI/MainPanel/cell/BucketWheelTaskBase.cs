@@ -127,6 +127,7 @@ public class BucketWheelTaskBase : PanelBase
         }
         AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
         SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
+        confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
         RightAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.RIGHTANGLE,true);
         ObliqueAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.OBLIQUEANGLE,true);
         leftTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.LEFTTURN,true);
@@ -279,11 +280,13 @@ public class BucketWheelTaskBase : PanelBase
         {
             AutoMaxToggle.SetSystemState(true,true);
             SemiAutoToggle.SetSystemState(false,true);
+            confirmTurnBtn.gameObject.SetActive(false);
         } ));
         AddOnClickListener(SemiAutoToggle,(() =>
         {
             AutoMaxToggle.SetSystemState(false,true);
             SemiAutoToggle.SetSystemState(true,true);
+            confirmTurnBtn.gameObject.SetActive(true);
         } ));
         
         AddOnClickListener(RightAngleToggle,(() =>

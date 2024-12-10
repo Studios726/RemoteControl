@@ -354,7 +354,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     public Machine machine;
     public Color normalColor = new Color(1, 1, 1, 0.6f);
     public Color runColor = new Color(1, 0, 0.1803922f, 1);
-    
+    private string pos1;
+    private string pos2;
     public virtual void Start()
     {
         Init();
@@ -482,11 +483,12 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         //Debug.Log("更新move  大车碰撞信息 ");
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
+            pos1 = (data.DC_Pos + ConstStr.InitPosition_1).ToString("F2");
             SetText(carElectricity, data.LargeCarElectricCurrent.ToString(), TextType.Electricity);
             SetText(rotationElectricity, data.RotaryElectricCurrent.ToString(), TextType.Electricity);
             SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent.ToString(), TextType.Electricity);
             SetText(cantileverBeltElectricity, data.SuspensionBeltElectricCurrent.ToString(), TextType.Electricity);
-            SetText(carPos, data.DC_Pos.ToString("F2"), TextType.Meter);
+            SetText(carPos, pos1, TextType.Meter);
             SetText(rotationAngle, data.SLEW_Angle.ToString("F2"), TextType.Angle);
             SetText(leftAngle, data.SLEW_Angle.ToString("F2"), TextType.Angle);
             SetText(rightAngle, data.SLEW_Angle.ToString("F2"), TextType.Angle);
@@ -494,8 +496,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             SetText(downAngle, data.Luff_Angle.ToString("F2"), TextType.Angle);
             SetText(pitchingAngle, data.Luff_Angle.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE.ToString("F2"), TextType.Meter);
-            SetText(forwardPos, data.DC_Pos.ToString("F2"), TextType.Meter);
-            SetText(backPos, data.DC_Pos.ToString("F2"), TextType.Meter);
+            SetText(forwardPos, pos1, TextType.Meter);
+            SetText(backPos, pos1, TextType.Meter);
             aloneBtn.SetSelectState(data.MODE == 0 && data.Single_Action == false, false);
             togetherBtn.SetSelectState(data.MODE == 1 && data.Link_Action == false, false);
             automaticBtn.SetSelectState(data.MODE == 2 && data.AUTO_MODE == false, false);
@@ -626,18 +628,19 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         }
         else
         {
+            pos2 = (data.DC_Pos_2 + ConstStr.InitPosition_2).ToString("F2");
             SetText(carElectricity, data.LargeCarElectricCurrent_2.ToString(), TextType.Electricity);
             SetText(rotationElectricity, data.RotaryElectricCurrent_2.ToString(), TextType.Electricity);
             SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent_2.ToString(), TextType.Electricity);
             SetText(cantileverBeltElectricity, data.SuspensionBeltElectricCurrent_2.ToString(), TextType.Electricity);
-            SetText(carPos, data.DC_Pos_2.ToString("F2"), TextType.Meter);
+            SetText(carPos, pos2, TextType.Meter);
             SetText(rotationAngle, data.SLEW_Angle_2.ToString("F2"), TextType.Angle);
             SetText(leftAngle, data.SLEW_Angle_2.ToString("F2"), TextType.Angle);
             SetText(rightAngle, data.SLEW_Angle_2.ToString("F2"), TextType.Angle);
             SetText(upAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(downAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
-            SetText(forwardPos, data.DC_Pos_2.ToString("F2"), TextType.Meter);
-            SetText(backPos, data.DC_Pos_2.ToString("F2"), TextType.Meter);
+            SetText(forwardPos, pos2, TextType.Meter);
+            SetText(backPos, pos2, TextType.Meter);
             SetText(pitchingAngle, data.Luff_Angle_2.ToString("F2"), TextType.Angle);
             SetText(cantileverHeight, data.XBTB_LWJ_VALUE_2.ToString("F2"), TextType.Meter);
             aloneBtn.SetSelectState(data.MODE_2 == 0 && data.Single_Action_2 == false, false);
@@ -767,7 +770,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             }
         }
 
-        SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos - data.DC_Pos_2) + 64.34).ToString("F2"), TextType.Meter);
+        SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos - data.DC_Pos_2) + ConstStr.InitDistance).ToString("F2"), TextType.Meter);
     }
 
     //堆取料弹窗提示
