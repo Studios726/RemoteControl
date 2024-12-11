@@ -587,9 +587,9 @@ public class GameDataManager : Singleton<GameDataManager>
         }));
         SetScaReportAndDem(cursendDataReportAndDem);
     }
-
+  
     public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,
-        GameObject model = null)
+        GameObject model = null,MeshFilter meshFilter=null,MeshRenderer meshRenderer=null,MeshCollider meshCollider=null,Mesh cachedMesh=null)
     {
         if (sendDataReportAndDem == null || sendDataReportAndDem.SendCoalHeapDEM == null)
         {
@@ -703,18 +703,22 @@ public class GameDataManager : Singleton<GameDataManager>
             return;
         }
 
-        Mesh mesh = new Mesh();
-        mesh.indexFormat = IndexFormat.UInt32;
-        mesh.vertices = vertices;
-        mesh.triangles = triangles;
-        mesh.colors = colorList;
-        model.transform.localRotation = Quaternion.identity;
-        MeshFilter meshFilter = model.GetComponent<MeshFilter>();
-        MeshRenderer meshRenderer = model.GetComponent<MeshRenderer>();
-        MeshCollider meshCollider = model.GetComponent<MeshCollider>();
-        meshFilter.mesh = mesh;
-        meshRenderer.sharedMaterial = material;
-        meshFilter.mesh.RecalculateNormals();
+        try
+        {
+            cachedMesh.indexFormat = IndexFormat.UInt32;
+            cachedMesh.vertices = vertices;
+            cachedMesh.triangles = triangles;
+            cachedMesh.colors = colorList;
+            model.transform.localRotation = Quaternion.identity;
+            meshFilter.mesh = cachedMesh;
+            meshRenderer.sharedMaterial = material;
+            meshFilter.mesh.RecalculateNormals();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("加载模型失败");
+        }
+     
         // meshCollider.sharedMesh = mesh;
     }
 

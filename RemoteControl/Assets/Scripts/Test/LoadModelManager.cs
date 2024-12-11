@@ -8,6 +8,10 @@ public class LoadModelManager : MonoBehaviour
     public Material red;
     public Transform parent;
     public GameObject model;
+    public MeshFilter meshFilter;
+    public MeshRenderer meshRenderer;
+    public MeshCollider meshCollider;
+    public Mesh cachedMesh;
     void Start()
     {
         //string jsonData = Resources.Load("Json/info").ToString();
@@ -22,11 +26,16 @@ public class LoadModelManager : MonoBehaviour
         {
             model = new GameObject("coalModel");
             model.transform.SetParent(parent);
-             model.AddComponent<MeshFilter>();
-             model.AddComponent<MeshRenderer>();
-             model.AddComponent<MeshCollider>();
+            meshFilter=model.AddComponent<MeshFilter>();
+            meshRenderer= model.AddComponent<MeshRenderer>();
+            meshCollider= model.AddComponent<MeshCollider>();
         }
-        await GameDataManager.Instance.SpawnCoalModel(parent, red, GameDataManager.Instance.SendDataReportAndDEM,model);
+        if (cachedMesh == null)
+        {
+            cachedMesh = new Mesh();
+            cachedMesh.MarkDynamic(); // 标记为动态更新
+        }
+        await GameDataManager.Instance.SpawnCoalModel(parent, red, GameDataManager.Instance.SendDataReportAndDEM,model, meshFilter, meshRenderer, meshCollider,cachedMesh);
         model.name = "coalModel";
     }
 

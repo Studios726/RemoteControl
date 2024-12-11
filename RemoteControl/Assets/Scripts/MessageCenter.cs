@@ -120,7 +120,7 @@ public class MessageCenter : Singleton<MessageCenter>
             catch (Exception e)
             {
                 //解压失败获取新的sca数据
-                GameDataManager.Instance.UpdateSCAData(30);
+                // GameDataManager.Instance.UpdateSCAData(30);
                 Debug.LogError($"数据解析失败 socketType {socketType} {e.Message}");
             }
         }else if (socketType == SocketType.FM)
