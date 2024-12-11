@@ -43,6 +43,8 @@ public class MainPanelView : UIView<MainPanelCtr>
         testInputField = RootObj.transform.FindComponent<InputField>("Image/InputField");
         updateModelBtn.onClick.AddListener(() =>
         {
+            TaskDataManager.Instance.TestStr =$"<1>";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
             // try
             // {
             //     // string json2 = Resources.Load<TextAsset>("Json/task").text;

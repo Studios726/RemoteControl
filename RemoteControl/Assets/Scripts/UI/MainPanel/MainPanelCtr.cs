@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class MainPanelCtr : UIPresenter<MainPanelView>
 {
+    private static object lockObject = new object();
     public override void ShowView(UIArgs uiArgs = null)
     {
         base.ShowView(uiArgs);
@@ -112,70 +113,76 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskLog1(object o, EventArgs eventArgs)
     {
-        try
+        lock (lockObject)
         {
-            List<TaskLogCellData> datas = new List<TaskLogCellData>();
-            if (TaskDataManager.Instance.taskCodeDesDictionary.Count > 0)
+            try
             {
-                foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
+                List<TaskLogCellData> datas = new List<TaskLogCellData>();
+                if (TaskDataManager.Instance.taskCodeDesDictionary.Count > 0)
                 {
-                    for (int i = 0; i < data.Value.Count; i++)
+                    foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
                     {
-                        if (data.Value[i].Machine == Machine.BucketWheelStackerReclaimer)
+                        for (int i = 0; i < data.Value.Count; i++)
                         {
-                            datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time,
-                                Machine.BucketWheelStackerReclaimer, data.Value[i].Pos));
+                            if (data.Value[i].Machine == Machine.BucketWheelStackerReclaimer)
+                            {
+                                datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time,
+                                    Machine.BucketWheelStackerReclaimer, data.Value[i].Pos));
+                            }
                         }
                     }
-                }
 
-                datas.Reverse();
+                    datas.Reverse();
+                }
+                view._bucketWheelTask1.UpdateTaskLog(datas);
             }
-            view._bucketWheelTask1.UpdateTaskLog(datas);
+            catch (Exception e)
+            {
+                // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
+                TaskDataManager.Instance.TestStr =$"<2>{e.Message}";
+                EventManager.Instance.TriggerEvent(EventName.TestEvent);
+                TaskDataManager.Instance.UpdateTaskData(4);
+                Debug.LogError($"MainPanel UpdateTaskLog1 {e.Message} ");
+            }
         }
-        catch (Exception e)
-        {
-            // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-            // TaskDataManager.Instance.TestStr ="<4444444>"+str+"-----" +e.Message+"=======";
-            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            TaskDataManager.Instance.UpdateTaskData(4);
-           Debug.LogError($"MainPanel UpdateTaskLog1 {e.Message} ");
-        }
+       
         // TaskLogArgs args = (TaskLogArgs)eventArgs;
        
     }
 
     public void UpdateTaskLog2(object o, EventArgs eventArgs)
     {
-        try
+        lock (lockObject)
         {
-            List<TaskLogCellData> datas = new List<TaskLogCellData>();
-            if (TaskDataManager.Instance.taskCodeDesDictionary.Count>0)
+            try
             {
-                foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
+                List<TaskLogCellData> datas = new List<TaskLogCellData>();
+                if (TaskDataManager.Instance.taskCodeDesDictionary.Count>0)
                 {
-                    for (int i = 0; i < data.Value.Count; i++)
+                    foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
                     {
-                        if (data.Value[i].Machine == Machine.BucketWheel)
+                        for (int i = 0; i < data.Value.Count; i++)
                         {
-                            datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time, Machine.BucketWheel,
-                                data.Value[i].Pos));
+                            if (data.Value[i].Machine == Machine.BucketWheel)
+                            {
+                                datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time, Machine.BucketWheel,
+                                    data.Value[i].Pos));
+                            }
                         }
                     }
+                    datas.Reverse();
                 }
-                datas.Reverse();
+                view._bucketWheelTask2.UpdateTaskLog(datas);
             }
-            view._bucketWheelTask2.UpdateTaskLog(datas);
+            catch (Exception e)
+            {
+                // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
+                TaskDataManager.Instance.TestStr =$"<1>{e.Message}";
+                EventManager.Instance.TriggerEvent(EventName.TestEvent);
+                TaskDataManager.Instance.UpdateTaskData(4);
+                Debug.LogError($"MainPanel UpdateTaskLog2 {e.Message} ");
+            }
         }
-        catch (Exception e)
-        {
-            // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-            // TaskDataManager.Instance.TestStr ="<33333>"+str+"-----" +e.Message+"=======";
-            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            TaskDataManager.Instance.UpdateTaskData(4);
-            Debug.LogError($"MainPanel UpdateTaskLog2 {e.Message} ");
-        }
-        
     }
 
     public override void Dispose()

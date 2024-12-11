@@ -525,8 +525,8 @@ public class BucketWheelTaskBase : PanelBase
         RightAngleToggle.SetSystemState(false, true);
         ObliqueAngleToggle.SetSystemState(true, true);
         
-        leftTurnToggle.SetSystemState(false, true);
-        rightTurnToggle.SetSystemState(false, true);
+        // leftTurnToggle.SetSystemState(false, true);
+        // rightTurnToggle.SetSystemState(false, true);
         confirmTurnBtn.SetSystemState(false,true);
     }
 

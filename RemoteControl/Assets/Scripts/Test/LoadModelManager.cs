@@ -37,6 +37,7 @@ public class LoadModelManager : MonoBehaviour
         }
         await GameDataManager.Instance.SpawnCoalModel(parent, red, GameDataManager.Instance.SendDataReportAndDEM,model, meshFilter, meshRenderer, meshCollider,cachedMesh);
         model.name = "coalModel";
+        Resources.UnloadUnusedAssets();
     }
 
     private void OnDestroy()

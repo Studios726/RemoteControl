@@ -105,6 +105,8 @@ public class MessageCenter : Singleton<MessageCenter>
                 catch (Exception e)
                 {
                     //解压失败重新获取任务相关数据
+                    TaskDataManager.Instance.TestStr =$"<44>{e.Message}";
+                    EventManager.Instance.TriggerEvent(EventName.TestEvent);
                     TaskDataManager.Instance.UpdateTaskData(4);
                     Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
                 }
@@ -114,6 +116,7 @@ public class MessageCenter : Singleton<MessageCenter>
         {
             try
             {
+                // Debug.LogError(">>>>>>>>>>..模型更新");
                 string json = Decompress(message);
                 GameDataManager.Instance.DeSerializeScaJson(json);
             }

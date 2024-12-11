@@ -394,17 +394,19 @@ public class TaskDataManager : Singleton<TaskDataManager>
         try
         {
             CheckTaskDesDesDictionary(taskVariables);
+            // 触发事件
         }
         catch (Exception e)
         {
             // string str = JsonMgr.Serialize(TaskMessageList);
-            // TestStr ="<111111>"+str+"-----" +e.Message+"=======";
-            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            TestStr =$"<3>{e.Message}";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
             taskCodeDesDictionary?.Clear();
             UpdateTaskData(4);
             Debug.LogError($"任务描述处理报错{e.Message}");
         }
-
+        EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
+        EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
         if (taskVariables.McData.Count > 0)
         {
             for (int i = 0; i < taskVariables.McData.Count; i++)
@@ -615,41 +617,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             Debug.LogError("TaskCommand or its AllData property cannot be null.");
             return;
         }
-
-        // if (taskCodeDesDictionary.ContainsKey(taskCommand.TaskID) == false)
-        // {
-        //     if (taskCodeDesDictionary.TryAdd(taskCommand.TaskID, new List<TaskCodeDes>()))
-        //     {
-        //         if (taskCommand.AllData.CodeTime==null)
-        //         {
-        //             taskCommand.AllData.CodeTime = "";
-        //         }
-        //         AddTaskCodeDesToList(taskCodeDesDictionary[taskCommand.TaskID], taskCommand.AllData.Code,
-        //             taskCommand.AllData.CodeTime, des, taskCommand.Machine,
-        //             taskCommand.AllData.NextPositionList);
-        //     }
-        // }
-        // else
-        // {
-        //     List<TaskCodeDes> tempList = taskCodeDesDictionary[taskCommand.TaskID];
-        //     if (tempList.Count > 0)
-        //     {
-        //         if (taskCommand.AllData.CodeTime==null)
-        //         {
-        //             taskCommand.AllData.CodeTime = "";
-        //         }
-        //         if (tempList[tempList.Count - 1].Code == taskCommand.AllData.Code &&
-        //             tempList[tempList.Count - 1].Time == taskCommand.AllData.CodeTime &&
-        //             tempList[tempList.Count - 1].Machine == taskCommand.Machine)
-        //         {
-        //             return;
-        //         }
-        //         AddTaskCodeDesToList(taskCodeDesDictionary[taskCommand.TaskID], taskCommand.AllData.Code,
-        //             taskCommand.AllData.CodeTime, des, taskCommand.Machine,
-        //             taskCommand.AllData.NextPositionList);
-        //     }
-        // }
-
+        
         var taskList = taskCodeDesDictionary.GetOrAdd(taskCommand.TaskID, _ => new List<TaskCodeDes>());
         // 检查是否存在相同的任务代码和机器
         if (taskList.Any(tcd =>
@@ -669,15 +637,6 @@ public class TaskDataManager : Singleton<TaskDataManager>
             // 添加新的任务代码描述
             AddTaskCodeDesToList(taskList, taskCommand.AllData.Code, taskCommand.AllData.CodeTime, des, taskCommand.Machine,
                 taskCommand.AllData.NextPositionList);
-        }
-        // 触发事件
-        if (taskCommand.Machine == Machine.BucketWheelStackerReclaimer)
-        {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
-        }
-        else
-        {
-            EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
         }
     }
 
