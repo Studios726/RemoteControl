@@ -70,8 +70,17 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateTaskLog(List<TaskLogCellData> datas)
     {
-        taskLogList.RefreshList(datas);
         taskLogScrollRect.verticalNormalizedPosition = 1f;
+        try
+        {
+            taskLogList.RefreshList(datas);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($">>>>>>>>>>>>>>>{e.Message}");
+            return;
+        }
+    
     }
     public void UpdatePlc(SystemVariables data)
     {

@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using RemoteControl.Event;
-using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class MainPanelCtr : UIPresenter<MainPanelView>
 {
-    private static object lockObject = new object();
-    private static object lockWarningObject = new object();
+    private readonly static object lockObject = new object();
+    private readonly static object lockObject2 = new object();
+    private readonly static object lockWarningObject = new object();
     public override void ShowView(UIArgs uiArgs = null)
     {
         base.ShowView(uiArgs);
@@ -139,9 +142,10 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
             try
             {
                 List<TaskLogCellData> datas = new List<TaskLogCellData>();
-                if (TaskDataManager.Instance.taskCodeDesDictionary.Count > 0)
+                ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = TaskDataManager.Instance?.taskCodeDesDictionary;
+                if (taskCodeDesDictionary != null&&taskCodeDesDictionary.Count > 0)
                 {
-                    foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
+                    foreach (var data in taskCodeDesDictionary)
                     {
                         for (int i = 0; i < data.Value.Count; i++)
                         {
@@ -159,8 +163,13 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
             }
             catch (Exception e)
             {
-                // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-                TaskDataManager.Instance.TestStr =$"<2>{e.Message}";
+                StackTrace stackTrace = new StackTrace(e, true);
+                string test = "";
+                foreach (var frame in stackTrace.GetFrames())
+                {
+                    test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                }
+                TaskDataManager.Instance.TestStr =$"<2>{e.Message} {test}";
                 EventManager.Instance.TriggerEvent(EventName.TestEvent);
                 TaskDataManager.Instance.UpdateTaskData(4);
                 Debug.LogError($"MainPanel UpdateTaskLog1 {e.Message} ");
@@ -173,14 +182,15 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskLog2(object o, EventArgs eventArgs)
     {
-        lock (lockObject)
+        lock (lockObject2)
         {
             try
             {
                 List<TaskLogCellData> datas = new List<TaskLogCellData>();
-                if (TaskDataManager.Instance.taskCodeDesDictionary.Count>0)
+                ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = TaskDataManager.Instance?.taskCodeDesDictionary;
+                if (taskCodeDesDictionary != null&&taskCodeDesDictionary.Count>0)
                 {
-                    foreach (var data in TaskDataManager.Instance.taskCodeDesDictionary)
+                    foreach (var data in taskCodeDesDictionary)
                     {
                         for (int i = 0; i < data.Value.Count; i++)
                         {
@@ -197,8 +207,15 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
             }
             catch (Exception e)
             {
+                // 创建栈跟踪对象
+                StackTrace stackTrace = new StackTrace(e, true);
+                string test = "";
+                foreach (var frame in stackTrace.GetFrames())
+                {
+                    test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                }
                 // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-                TaskDataManager.Instance.TestStr =$"<1>{e.Message}";
+                TaskDataManager.Instance.TestStr =$"<1>{e.Message} {test}";
                 EventManager.Instance.TriggerEvent(EventName.TestEvent);
                 TaskDataManager.Instance.UpdateTaskData(4);
                 Debug.LogError($"MainPanel UpdateTaskLog2 {e.Message} ");
