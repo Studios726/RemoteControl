@@ -188,7 +188,7 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         rotaryMechanismData.isFanOverload =
             GetToggleState(data.RotaryFanOverload, data.RotaryFanOverload_2);
         rotaryMechanismData.isBrakingResistorOverheating =
-            GetToggleState(data.RotaryBrakeResistorOverheatSwitch, data.RotaryBrakeResistorOverheatSwitch_2);
+            GetToggleState(!data.RotaryBrakeResistorOverheatSwitch, !data.RotaryBrakeResistorOverheatSwitch_2);
         rotaryMechanismData.isRotaryFault =
             GetToggleState(data.RotaryFault, data.RotaryFault_2);
         rotaryMechanismData.isLeftTurnLimit =

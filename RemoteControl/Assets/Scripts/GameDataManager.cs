@@ -1574,8 +1574,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.RotaryFanOverload));
             }
 
-            if (newSystemVariables.RotaryBrakeResistorOverheatSwitch &&
-                _systemVariables.RotaryBrakeResistorOverheatSwitch == false)
+            if (newSystemVariables.RotaryBrakeResistorOverheatSwitch==false &&
+                _systemVariables.RotaryBrakeResistorOverheatSwitch == true)
             {
                 //回转-制动电阻超温
                 DataManager.Instance.InsertHistoryWarningMc("回转-制动电阻超温", GetUserName(),
@@ -1583,8 +1583,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryBrakeResistorOverheatSwitch), "回转-制动电阻超温",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.RotaryBrakeResistorOverheatSwitch == false &&
-                     _systemVariables.RotaryBrakeResistorOverheatSwitch == true)
+            else if (newSystemVariables.RotaryBrakeResistorOverheatSwitch == true &&
+                     _systemVariables.RotaryBrakeResistorOverheatSwitch == false)
             {
                 //回转-制动电阻超温解除
                 DataManager.Instance.InsertHistoryWarningMc("回转-制动电阻超温解除", GetUserName(),
@@ -5583,8 +5583,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.RotaryFanOverload_2));
             }
 
-            if (newSystemVariables.RotaryBrakeResistorOverheatSwitch_2 &&
-                _systemVariables.RotaryBrakeResistorOverheatSwitch_2 == false)
+            if (newSystemVariables.RotaryBrakeResistorOverheatSwitch_2==false &&
+                _systemVariables.RotaryBrakeResistorOverheatSwitch_2 == true)
             {
                 //回转-制动电阻超温
                 DataManager.Instance.InsertHistoryWarningMc("回转-制动电阻超温", GetUserName(),
@@ -5594,8 +5594,8 @@ public class GameDataManager : Singleton<GameDataManager>
                     "回转-制动电阻超温",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.RotaryBrakeResistorOverheatSwitch_2 == false &&
-                     _systemVariables.RotaryBrakeResistorOverheatSwitch_2 == true)
+            else if (newSystemVariables.RotaryBrakeResistorOverheatSwitch_2 == true &&
+                     _systemVariables.RotaryBrakeResistorOverheatSwitch_2 == false)
             {
                 //回转-制动电阻超温解除
                 DataManager.Instance.InsertHistoryWarningMc("回转-制动电阻超温解除", GetUserName(),
