@@ -7,6 +7,7 @@ using UnityEngine;
 public class MainPanelCtr : UIPresenter<MainPanelView>
 {
     private static object lockObject = new object();
+    private static object lockWarningObject = new object();
     public override void ShowView(UIArgs uiArgs = null)
     {
         base.ShowView(uiArgs);
@@ -47,84 +48,88 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateWarningDes1(object o, EventArgs eventArgs)
     {
-        try
+        lock (lockWarningObject)
         {
-            List<WarningCellData> datas = new List<WarningCellData>();
-            if (GameDataManager.Instance.WarningCellDataDict.Count > 0)
+            try
             {
-                foreach (var keyCellData in GameDataManager.Instance.WarningCellDataDict)
+                List<WarningCellData> datas = new List<WarningCellData>();
+                if (GameDataManager.Instance.WarningCellDataDict.Count > 0)
                 {
-                    if (keyCellData.Value.Machine == Machine.BucketWheelStackerReclaimer)
+                    foreach (var keyCellData in GameDataManager.Instance.WarningCellDataDict)
                     {
-                        datas.Add(keyCellData.Value);
-                    }
-                }
-            }
-
-            int n = datas.Count;
-            if (n>=1)
-            {
-                for (int i = 0; i < n - 1; i++)
-                {
-                    for (int j = 0; j < n - i - 1; j++)
-                    {
-                        if (datas[j].Timestamp < datas[j + 1].Timestamp)
+                        if (keyCellData.Value.Machine == Machine.BucketWheelStackerReclaimer)
                         {
-                            WarningCellData temp = datas[j];
-                            datas[j] = datas[j + 1];
-                            datas[j + 1] = temp;
+                            datas.Add(keyCellData.Value);
                         }
                     }
                 }
+
+                int n = datas.Count;
+                if (n>=1)
+                {
+                    for (int i = 0; i < n - 1; i++)
+                    {
+                        for (int j = 0; j < n - i - 1; j++)
+                        {
+                            if (datas[j].Timestamp < datas[j + 1].Timestamp)
+                            {
+                                WarningCellData temp = datas[j];
+                                datas[j] = datas[j + 1];
+                                datas[j + 1] = temp;
+                            }
+                        }
+                    }
+                }
+                view._bucketWheelTask1.UpdateDes(datas);
             }
-            view._bucketWheelTask1.UpdateDes(datas);
+            catch (Exception e)
+            {
+                Debug.LogError("数据更新失败");
+            }
         }
-        catch (Exception e)
-        {
-           Debug.LogError("数据更新失败");
-        }
-       
     }
 
     public void UpdateWarningDes2(object o, EventArgs eventArgs)
     {
-        try
+        lock (lockWarningObject)
         {
-            List<WarningCellData> datas = new List<WarningCellData>();
-            if (GameDataManager.Instance.WarningCellDataDict.Count > 0)
+            try
             {
-                foreach (var keyCellData in GameDataManager.Instance.WarningCellDataDict)
+                List<WarningCellData> datas = new List<WarningCellData>();
+                if (GameDataManager.Instance.WarningCellDataDict.Count > 0)
                 {
-                    if (keyCellData.Value.Machine == Machine.BucketWheel)
+                    foreach (var keyCellData in GameDataManager.Instance.WarningCellDataDict)
                     {
-                        datas.Add(keyCellData.Value);
-                    }
-                }
-            }
-
-            int n = datas.Count;
-            if (n>=1)
-            {
-                for (int i = 0; i < n - 1; i++)
-                {
-                    for (int j = 0; j < n - i - 1; j++)
-                    {
-                        if (datas[j].Timestamp < datas[j + 1].Timestamp)
+                        if (keyCellData.Value.Machine == Machine.BucketWheel)
                         {
-                            WarningCellData temp = datas[j];
-                            datas[j] = datas[j + 1];
-                            datas[j + 1] = temp;
+                            datas.Add(keyCellData.Value);
                         }
                     }
                 }
+
+                int n = datas.Count;
+                if (n>=1)
+                {
+                    for (int i = 0; i < n - 1; i++)
+                    {
+                        for (int j = 0; j < n - i - 1; j++)
+                        {
+                            if (datas[j].Timestamp < datas[j + 1].Timestamp)
+                            {
+                                WarningCellData temp = datas[j];
+                                datas[j] = datas[j + 1];
+                                datas[j + 1] = temp;
+                            }
+                        }
+                    }
+                }
+                view._bucketWheelTask2.UpdateDes(datas);
             }
-            view._bucketWheelTask2.UpdateDes(datas);
+            catch (Exception e)
+            {
+                Debug.LogError("数据更新失败");
+            }
         }
-        catch (Exception e)
-        {
-           Debug.LogError("数据更新失败");
-        }
-       
     }
 
     public void UpdateTaskLog1(object o, EventArgs eventArgs)
