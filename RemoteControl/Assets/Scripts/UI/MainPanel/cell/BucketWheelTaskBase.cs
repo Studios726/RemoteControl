@@ -57,6 +57,7 @@ public class BucketWheelTaskBase : PanelBase
     private Timer scramStopTimer;
     public WarningList warningList;
     public TaskLogList taskLogList;
+    public ScrollRect taskLogScrollRect;
     public virtual void Start()
     {
         Init();
@@ -70,6 +71,7 @@ public class BucketWheelTaskBase : PanelBase
     public virtual void UpdateTaskLog(List<TaskLogCellData> datas)
     {
         taskLogList.RefreshList(datas);
+        taskLogScrollRect.verticalNormalizedPosition = 1f;
     }
     public void UpdatePlc(SystemVariables data)
     {
