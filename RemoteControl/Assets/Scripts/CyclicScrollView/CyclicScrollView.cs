@@ -317,11 +317,16 @@ namespace Knivt.Tools.UI
             if (viewDirection == UICyclicScrollDirection.Vertical)
             {
                 index = Mathf.RoundToInt(-position.y / ItemSize.y);
-                return index;
+                // return index;
             }
             else if (viewDirection == UICyclicScrollDirection.Horizontal)
             {
                 index = Mathf.RoundToInt(position.x / ItemSize.x);
+            }
+            // 检查索引是否为 -1 并返回合理值
+            if (index == -1)
+            {
+                index = 0;
             }
             return index;
         }

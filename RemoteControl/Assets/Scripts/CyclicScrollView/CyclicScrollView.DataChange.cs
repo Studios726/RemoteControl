@@ -54,19 +54,24 @@ namespace Knivt.Tools.UI
                 count++;
                 int startIndex = bundle.index * _ItemCellCount;
                 int endIndex = startIndex + bundle.Cells.Length - 1;
-                if (startIndex==-1)
-                {
-                    Debug.LogError($"列表处理报错{bundle.index }  {_ItemCellCount}");
-                }
                 //防止越界...
                 if (endIndex >= Datas.Count)
                 {
                     flag = true;
                     endIndex = Datas.Count - 1;
                 }
+
+                if (startIndex<0)
+                {
+                    startIndex = 0;
+                }
                 int i = startIndex, j = 0;
                 for (; i <= endIndex && j < bundle.Cells.Length; i++, j++)
                 {
+                    if (i < 0 || i >= Datas.Count)
+                    {
+                        continue;
+                    }
                     ResetCellData(bundle.Cells[j], Datas.ElementAt(i), i);
                 }
                 if (flag == true)

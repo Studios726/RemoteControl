@@ -37,6 +37,11 @@ namespace Knivt.Tools.UI
                 bundle = new ViewCellBundle<C>(_ItemCellCount);
                 bundle.position = postion;
                 bundle.index = itemIndex;
+                if (itemIndex==-1)
+                {
+                    Debug.LogError($">>>>>>>>>>>>>> itemIndex {itemIndex}");
+                }
+               
                 int i = itemIndex * _ItemCellCount;
                 int length = itemIndex * _ItemCellCount + bundle.Cells.Length;
 
@@ -60,6 +65,10 @@ namespace Knivt.Tools.UI
                 bundle = _cellBundlePool.Dequeue();
                 bundle.position = postion;
                 bundle.index = itemIndex;
+                if (itemIndex==-1)
+                {
+                    Debug.LogError($">>>>>>>>>>>>>> 222itemIndex {itemIndex}");
+                }
                 int i = itemIndex * _ItemCellCount;
                 int celllength = itemIndex * _ItemCellCount + bundle.Cells.Length;
                 int j = 0;

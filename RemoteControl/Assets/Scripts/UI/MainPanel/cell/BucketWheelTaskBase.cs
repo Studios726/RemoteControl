@@ -74,21 +74,32 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateTaskLog(List<TaskLogCellData> datas)
     {
-        taskLogScrollRect.verticalNormalizedPosition = 1f;
+        // taskLogScrollRect.verticalNormalizedPosition = 0;
+        taskLogScrollRect.verticalNormalizedPosition = 0.5f;
         try
         {
             taskLogList.RefreshList(datas);
+            taskLogScrollRect.verticalNormalizedPosition = 1f;
         }
         catch (Exception e)
         {
             RefrashLogCount++;
             isRefrash = true;
+            StackTrace stackTrace = new StackTrace(e, true);
+            string test = "";
+            foreach (var frame in stackTrace.GetFrames())
+            {
+                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+            }
+            TaskDataManager.Instance.TestStr =$"<5555>{e.Message} {test} ";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            Debug.LogError($">>>>>>>>>>>>>>>>>>>>{e.Message} {test} {RefrashLogCount}");
         }
 
         if (isRefrash&&RefrashLogCount<5)
         {
             taskLogList.Refrash();
-            taskLogScrollRect.verticalNormalizedPosition =0.5f;
+            taskLogScrollRect.verticalNormalizedPosition =0.4f;
             TaskDataManager.Instance.SetTaskVariables(TaskDataManager.Instance.TaskVariables);
         }
         else
