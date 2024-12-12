@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using RemoteControl.Event;
 using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
+using Debug = UnityEngine.Debug;
 
 public class BucketWheelTaskBase : PanelBase
 {
@@ -58,6 +60,8 @@ public class BucketWheelTaskBase : PanelBase
     public WarningList warningList;
     public TaskLogList taskLogList;
     public ScrollRect taskLogScrollRect;
+    public int RefrashLogCount = 0;
+    public bool isRefrash;
     public virtual void Start()
     {
         Init();
@@ -77,10 +81,22 @@ public class BucketWheelTaskBase : PanelBase
         }
         catch (Exception e)
         {
-            Debug.LogError($">>>>>>>>>>>>>>>{e.Message}");
-            return;
+            RefrashLogCount++;
+            isRefrash = true;
         }
-    
+
+        if (isRefrash&&RefrashLogCount<5)
+        {
+            taskLogList.Refrash();
+            taskLogScrollRect.verticalNormalizedPosition =0.5f;
+            TaskDataManager.Instance.SetTaskVariables(TaskDataManager.Instance.TaskVariables);
+        }
+        else
+        {
+            RefrashLogCount = 0;
+        }
+
+        isRefrash = false;
     }
     public void UpdatePlc(SystemVariables data)
     {

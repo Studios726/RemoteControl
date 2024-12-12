@@ -285,7 +285,8 @@ public class TaskDataManager : Singleton<TaskDataManager>
     private TaskVariables _taskVariables;
     public string TestStr;
     public List<string> TaskMessageList = new List<string>();
-
+    public Queue<List<TaskLogCellData>> PileTakeLogQueue = new Queue<List<TaskLogCellData>>();
+    public Queue<List<TaskLogCellData>> TakeLogQueue = new Queue<List<TaskLogCellData>>();
     public TaskVariables TaskVariables
     {
         get => _taskVariables;
@@ -585,16 +586,48 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     AddOrUpdateTaskDesDictionary(GetDesByTaskCode(taskVariables.McData[i].AllData.Code),
                         taskVariables.McData[i]);
                 }
+
+                AddTakeLogQueue();
             }
             else
             {
                 taskCodeDesDictionary?.Clear();
+                AddTakeLogQueue();
                 EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
                 EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);
             }
         }
     }
 
+    public void AddTakeLogQueue()
+    {
+        List<TaskLogCellData> pileTakeData = new List<TaskLogCellData>();
+        List<TaskLogCellData> takeData = new List<TaskLogCellData>();
+        ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = TaskDataManager.Instance?.taskCodeDesDictionary;
+        if (taskCodeDesDictionary != null&&taskCodeDesDictionary.Count > 0)
+        {
+            foreach (var data in taskCodeDesDictionary)
+            {
+                for (int i = 0; i < data.Value.Count; i++)
+                {
+                    if (data.Value[i].Machine == Machine.BucketWheelStackerReclaimer)
+                    {
+                        pileTakeData.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time,
+                            Machine.BucketWheelStackerReclaimer, data.Value[i].Pos));
+                    }else if (data.Value[i].Machine == Machine.BucketWheel)
+                    {
+                        takeData.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time,
+                            Machine.BucketWheelStackerReclaimer, data.Value[i].Pos));
+                    }
+                }
+            }
+
+            pileTakeData.Reverse();
+            takeData.Reverse();
+            PileTakeLogQueue.Enqueue(pileTakeData);
+            TakeLogQueue.Enqueue(takeData);
+        }
+    }
     private void AddTaskCodeDesToList(List<TaskCodeDes> taskList, int code, string codeTime, string des,
         Machine machine, List<float> nextPositionList)
     {

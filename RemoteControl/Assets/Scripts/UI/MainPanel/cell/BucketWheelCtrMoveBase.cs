@@ -615,9 +615,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
             if (flowMeterData != null)//更新流量
             {
-                SetText(thisTakeMater, flowMeterData.Once_extra_weight.ToString(), TextType.Tonne);
-                SetText(dayTakeMater, flowMeterData.Oneday_extra_weight.ToString(), TextType.Tonne);
-                SetText(cantileverFlow, flowMeterData.FlowRealtime.ToString(), TextType.TonneHour);
+                SetText(thisTakeMater, flowMeterData.Once_extra_weight.ToString("F2"), TextType.Tonne);
+                SetText(dayTakeMater, flowMeterData.Oneday_extra_weight.ToString("F2"), TextType.Tonne);
+                SetText(cantileverFlow, flowMeterData.FlowRealtime.ToString("F2"), TextType.TonneHour);
             }
             else
             {
@@ -758,9 +758,9 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
             if (flowMeterData != null)//更新流量
             {
-                SetText(thisTakeMater, flowMeterData.Once_extra_weight.ToString(), TextType.Tonne);
-                SetText(dayTakeMater, flowMeterData.Oneday_extra_weight.ToString(), TextType.Tonne);
-                SetText(cantileverFlow, flowMeterData.FlowRealtime.ToString(), TextType.TonneHour);
+                SetText(thisTakeMater, flowMeterData.Once_extra_weight.ToString("F2"), TextType.Tonne);
+                SetText(dayTakeMater, flowMeterData.Oneday_extra_weight.ToString("F2"), TextType.Tonne);
+                SetText(cantileverFlow, flowMeterData.FlowRealtime.ToString("F2"), TextType.TonneHour);
             }
             else
             {

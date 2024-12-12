@@ -86,8 +86,8 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
         FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
         if (flowMeterData != null)//更新流量
         {
-            SetText(thisPileMater, flowMeterData.Once_piling_weight.ToString(), TextType.Tonne);
-              SetText(dayPileMater, flowMeterData.Oneday_piling_weight.ToString(), TextType.Tonne);
+            SetText(thisPileMater, flowMeterData.Once_piling_weight.ToString("F2"), TextType.Tonne);
+              SetText(dayPileMater, flowMeterData.Oneday_piling_weight.ToString("F2"), TextType.Tonne);
         }
         else
         {

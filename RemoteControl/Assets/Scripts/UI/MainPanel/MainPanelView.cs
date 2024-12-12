@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Utility;
+using Random = UnityEngine.Random;
 
 public class MainPanelView : UIView<MainPanelCtr>
 {
@@ -43,47 +44,21 @@ public class MainPanelView : UIView<MainPanelCtr>
         testInputField = RootObj.transform.FindComponent<InputField>("Image/InputField");
         updateModelBtn.onClick.AddListener(() =>
         {
-            TaskDataManager.Instance.TestStr =$"<1>";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            // try
+            // double d = 4.5;
+            // float tempChartValue = (float)d;
+            // Debug.Log($">>>>>>>>>>>>>>{tempChartValue} {(float)Math.Round(tempChartValue, 2)}");
+            // tempChartValue=(float)Math.Round(tempChartValue,2);
+            // TaskDataManager.Instance.TestStr =$"<1>";
+            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
+           
+            // if (GameDataManager.Instance.GameMain.connectionSCA.isConnect == false)
             // {
-            //     // string json2 = Resources.Load<TextAsset>("Json/task").text;
-            //     // TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json2);
-            //     // TaskDataManager.Instance.SetTaskVariables(taskVariables);
-            //     // if (code<TaskMessageList.Count)
-            //     // {
-            //     //     string json =TaskMessageList[code];
-            //     //     Debug.Log($"{code}>>>>>>>>>>>>>>>>>>>{json}");
-            //     //     code++;
-            //     //     // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
-            //     //     // GameDataManager.Instance.SetScaReportAndDem(dem);
-            //     //     TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
-            //     //     // taskVariables.McData[0].AllData.Code = code;
-            //     //     // taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
-            //     //     TaskDataManager.Instance.SetTaskVariables(taskVariables);
-            //     // }
-            //   
+            //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+            //         new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP,"三维扫描"));
+            //     return;
             // }
-            // catch (Exception e)
-            // {
-            //     Debug.LogError($">>>>>>>>>>>>>>>>>{e.Message}");
-            // }
-            // string json = Resources.Load<TextAsset>("Json/task").text;
-            // SendDataReportAndDEM dem = JsonMgr.DeSerialize<SendDataReportAndDEM>(json);
-            // GameDataManager.Instance.SetScaReportAndDem(dem);
-            // TaskVariables taskVariables = JsonMgr.DeSerialize<TaskVariables>(json);
-            // taskVariables.McData[0].AllData.Code = code;
-            // taskVariables.McData[0].AllData.CodeTime = DateTime.Now;
-            // TaskDataManager.Instance.SetTaskVariables(taskVariables);
-            // code++;
-            if (GameDataManager.Instance.GameMain.connectionSCA.isConnect == false)
-            {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs(ConstStr.SCA_SERVER_CONNECTION_FAIL_TIP,"三维扫描"));
-                return;
-            }
-
-            GameDataManager.Instance.UpdateSCAData(30);
+            //
+            // GameDataManager.Instance.UpdateSCAData(30);
         });
         updateTaskBtn.onClick.AddListener((() =>
         {

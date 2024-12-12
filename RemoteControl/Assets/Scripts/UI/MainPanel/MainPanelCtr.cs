@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using RemoteControl.Event;
 using Debug = UnityEngine.Debug;
+using Random = UnityEngine.Random;
 
 public class MainPanelCtr : UIPresenter<MainPanelView>
 {
     private readonly static object lockObject = new object();
     private readonly static object lockObject2 = new object();
     private readonly static object lockWarningObject = new object();
+    public Timer TaskLogTimer;
     public override void ShowView(UIArgs uiArgs = null)
     {
         base.ShowView(uiArgs);
@@ -33,6 +35,14 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
               
             }
         );
+        if (TaskLogTimer==null)
+        {
+            TaskLogTimer = Timer.Register(1, true, false, (() =>
+            {
+                UpdateTaskLog1(null,null);
+                UpdateTaskLog2(null,null);
+            }));
+        }
     }
 
     public override void HideView()
@@ -137,44 +147,68 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskLog1(object o, EventArgs eventArgs)
     {
-        lock (lockObject)
+        try
         {
-            try
+            if (TaskDataManager.Instance.PileTakeLogQueue!=null&&TaskDataManager.Instance.PileTakeLogQueue.Count>0)
             {
-                List<TaskLogCellData> datas = new List<TaskLogCellData>();
-                ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = TaskDataManager.Instance?.taskCodeDesDictionary;
-                if (taskCodeDesDictionary != null&&taskCodeDesDictionary.Count > 0)
-                {
-                    foreach (var data in taskCodeDesDictionary)
-                    {
-                        for (int i = 0; i < data.Value.Count; i++)
-                        {
-                            if (data.Value[i].Machine == Machine.BucketWheelStackerReclaimer)
-                            {
-                                datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time,
-                                    Machine.BucketWheelStackerReclaimer, data.Value[i].Pos));
-                            }
-                        }
-                    }
-
-                    datas.Reverse();
-                }
-                view._bucketWheelTask1.UpdateTaskLog(datas);
-            }
-            catch (Exception e)
-            {
-                StackTrace stackTrace = new StackTrace(e, true);
-                string test = "";
-                foreach (var frame in stackTrace.GetFrames())
-                {
-                    test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
-                }
-                TaskDataManager.Instance.TestStr =$"<2>{e.Message} {test}";
-                EventManager.Instance.TriggerEvent(EventName.TestEvent);
-                TaskDataManager.Instance.UpdateTaskData(4);
-                Debug.LogError($"MainPanel UpdateTaskLog1 {e.Message} ");
+                List<TaskLogCellData> data = TaskDataManager.Instance.PileTakeLogQueue.Dequeue();
+                view._bucketWheelTask1.UpdateTaskLog(data);
             }
         }
+        catch (Exception e)
+        {
+            // 创建栈跟踪对象
+            StackTrace stackTrace = new StackTrace(e, true);
+            string test = "";
+            foreach (var frame in stackTrace.GetFrames())
+            {
+                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+            }
+            // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
+            TaskDataManager.Instance.TestStr =$"<1>{e.Message} {test}";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            TaskDataManager.Instance.UpdateTaskData(4);
+            Debug.LogError($"MainPanel UpdateTaskLog {e.Message} ");
+        }
+      
+        // lock (lockObject)
+        // {
+        //     try
+        //     {
+        //         List<TaskLogCellData> datas = new List<TaskLogCellData>();
+        //         ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = TaskDataManager.Instance?.taskCodeDesDictionary;
+        //         if (taskCodeDesDictionary != null&&taskCodeDesDictionary.Count > 0)
+        //         {
+        //             foreach (var data in taskCodeDesDictionary)
+        //             {
+        //                 for (int i = 0; i < data.Value.Count; i++)
+        //                 {
+        //                     if (data.Value[i].Machine == Machine.BucketWheelStackerReclaimer)
+        //                     {
+        //                         datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time,
+        //                             Machine.BucketWheelStackerReclaimer, data.Value[i].Pos));
+        //                     }
+        //                 }
+        //             }
+        //
+        //             datas.Reverse();
+        //         }
+        //         view._bucketWheelTask1.UpdateTaskLog(datas);
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         StackTrace stackTrace = new StackTrace(e, true);
+        //         string test = "";
+        //         foreach (var frame in stackTrace.GetFrames())
+        //         {
+        //             test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+        //         }
+        //         TaskDataManager.Instance.TestStr =$"<2>{e.Message} {test}";
+        //         EventManager.Instance.TriggerEvent(EventName.TestEvent);
+        //         TaskDataManager.Instance.UpdateTaskData(4);
+        //         Debug.LogError($"MainPanel UpdateTaskLog1 {e.Message} ");
+        //     }
+        // }
        
         // TaskLogArgs args = (TaskLogArgs)eventArgs;
        
@@ -182,45 +216,69 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
 
     public void UpdateTaskLog2(object o, EventArgs eventArgs)
     {
-        lock (lockObject2)
+        try
         {
-            try
+            if (TaskDataManager.Instance.TakeLogQueue!=null&&TaskDataManager.Instance.TakeLogQueue.Count>0)
             {
-                List<TaskLogCellData> datas = new List<TaskLogCellData>();
-                ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = TaskDataManager.Instance?.taskCodeDesDictionary;
-                if (taskCodeDesDictionary != null&&taskCodeDesDictionary.Count>0)
-                {
-                    foreach (var data in taskCodeDesDictionary)
-                    {
-                        for (int i = 0; i < data.Value.Count; i++)
-                        {
-                            if (data.Value[i].Machine == Machine.BucketWheel)
-                            {
-                                datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time, Machine.BucketWheel,
-                                    data.Value[i].Pos));
-                            }
-                        }
-                    }
-                    datas.Reverse();
-                }
-                view._bucketWheelTask2.UpdateTaskLog(datas);
-            }
-            catch (Exception e)
-            {
-                // 创建栈跟踪对象
-                StackTrace stackTrace = new StackTrace(e, true);
-                string test = "";
-                foreach (var frame in stackTrace.GetFrames())
-                {
-                    test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
-                }
-                // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-                TaskDataManager.Instance.TestStr =$"<1>{e.Message} {test}";
-                EventManager.Instance.TriggerEvent(EventName.TestEvent);
-                TaskDataManager.Instance.UpdateTaskData(4);
-                Debug.LogError($"MainPanel UpdateTaskLog2 {e.Message} ");
+                List<TaskLogCellData> data = TaskDataManager.Instance.TakeLogQueue.Dequeue();
+                view._bucketWheelTask2.UpdateTaskLog(data);
             }
         }
+        catch (Exception e)
+        {
+            // 创建栈跟踪对象
+            StackTrace stackTrace = new StackTrace(e, true);
+            string test = "";
+            foreach (var frame in stackTrace.GetFrames())
+            {
+                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+            }
+            // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
+            TaskDataManager.Instance.TestStr =$"<1>{e.Message} {test}";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            TaskDataManager.Instance.UpdateTaskData(4);
+            Debug.LogError($"MainPanel UpdateTaskLog {e.Message} ");
+        }
+       
+        // lock (lockObject2)
+        // {
+        //     try
+        //     {
+        //         List<TaskLogCellData> datas = new List<TaskLogCellData>();
+        //         ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary = TaskDataManager.Instance?.taskCodeDesDictionary;
+        //         if (taskCodeDesDictionary != null&&taskCodeDesDictionary.Count>0)
+        //         {
+        //             foreach (var data in taskCodeDesDictionary)
+        //             {
+        //                 for (int i = 0; i < data.Value.Count; i++)
+        //                 {
+        //                     if (data.Value[i].Machine == Machine.BucketWheel)
+        //                     {
+        //                         datas.Add(new TaskLogCellData("", data.Value[i].Des, data.Value[i].Time, Machine.BucketWheel,
+        //                             data.Value[i].Pos));
+        //                     }
+        //                 }
+        //             }
+        //             datas.Reverse();
+        //         }
+        //         view._bucketWheelTask2.UpdateTaskLog(datas);
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         // 创建栈跟踪对象
+        //         StackTrace stackTrace = new StackTrace(e, true);
+        //         string test = "";
+        //         foreach (var frame in stackTrace.GetFrames())
+        //         {
+        //             test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+        //         }
+        //         // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
+        //         TaskDataManager.Instance.TestStr =$"<1>{e.Message} {test}";
+        //         EventManager.Instance.TriggerEvent(EventName.TestEvent);
+        //         TaskDataManager.Instance.UpdateTaskData(4);
+        //         Debug.LogError($"MainPanel UpdateTaskLog2 {e.Message} ");
+        //     }
+        // }
     }
 
     public override void Dispose()
@@ -232,6 +290,11 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes1, UpdateTaskLog1);
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes2, UpdateTaskLog2);
         EventManager.Instance.RemoveListener(EventName.TestEvent, view.SetTestInputField);
+        if (TaskLogTimer!=null)
+        {
+            TaskLogTimer.Cancel();
+            TaskLogTimer = null;
+        }
     }
 
     public void Addlistener()
