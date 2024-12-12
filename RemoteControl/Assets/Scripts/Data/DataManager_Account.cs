@@ -196,12 +196,12 @@ public partial class DataManager
         string query = "";
         if (limit == 0)
         {
-            query= $"Select * from {ConstStr.DATABASE_HISTORY_TASK_MC}";
+            query= $"Select * from {ConstStr.DATABASE_HISTORY_TASK_MC} ORDER BY task_create_time DESC";
 
         }
         else
         {
-            query = $"Select * from {ConstStr.DATABASE_HISTORY_TASK_MC} ORDER BY id DESC LIMIT {limit};";
+            query = $"Select * from {ConstStr.DATABASE_HISTORY_TASK_MC} ORDER BY task_create_time DESC LIMIT {limit};";
         }
         MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
         return mySqlDataReader;
@@ -262,13 +262,12 @@ public partial class DataManager
         string query = "";
         if (isUseTime == false)
         {
-            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine}  ORDER BY id DESC LIMIT {limit};";
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine} Order By time DESC LIMIT {limit} ";
         }
         else
         {
-            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY id DESC LIMIT {limit}";
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine})  Order By time DESC LIMIT {limit}";
         }
-        // Debug.Log($"命令 {query}");
         DataSet dataSet = MySqlHelper.GetDataSet(query);
         return  dataSet;
     }
@@ -278,11 +277,11 @@ public partial class DataManager
         string query = "";
         if (isUseTime == false)
         {
-            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine}  ORDER BY id DESC;";
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE}={machine} Order By time DESC ;";
         }
         else
         {
-            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY id DESC";
+            query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY time DESC";
         }
         DataSet dataSet = MySqlHelper.GetDataSet(query);
         return  dataSet;

@@ -94,16 +94,16 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
     }
     private void GetLatestWarningLogs()
     {
-        string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC} ORDER BY id DESC LIMIT 100;";
-        string warningSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC} ORDER BY id DESC LIMIT 100;";
+        string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC}  Order By time DESC  LIMIT 100 ;";
+        string warningSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC} Order By time DESC LIMIT 100;";
         _ctr.RequestData(warningSql, MechanicalType.StackerReclaimer, PanelType.AlarmPanel);
         _ctr.RequestData(warningSql2, MechanicalType.Reclaimer, PanelType.AlarmPanel);
     }
 
     private void GetLatestOperationLogs()
     {
-        string logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG1_MC}  ORDER BY id DESC LIMIT 100;";
-        string logSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_LOG2_MC}  ORDER BY id DESC LIMIT 100;";
+        string logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG1_MC}  Order By time DESC LIMIT 100;";
+        string logSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_LOG2_MC}  Order By time DESC LIMIT 100;";
         _ctr.RequestData(logSql, MechanicalType.StackerReclaimer, PanelType.LogPanel);
         _ctr.RequestData(logSql2, MechanicalType.Reclaimer, PanelType.LogPanel);
     }

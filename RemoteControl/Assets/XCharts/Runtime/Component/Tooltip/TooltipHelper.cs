@@ -51,7 +51,8 @@ namespace XCharts.Runtime
                         DateTime dateTime =
                             new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local).AddSeconds(
                                 double.Parse(strings[0]));
-                        param.columns.Add(strings[1]+"\n"+dateTime.ToString("HH:mm:ss"));
+                        string num = float.Parse(strings[1]).ToString("F2");
+                        param.columns.Add(num+"\n"+dateTime.ToString("HH:mm:ss"));
                     }
                 }
             }

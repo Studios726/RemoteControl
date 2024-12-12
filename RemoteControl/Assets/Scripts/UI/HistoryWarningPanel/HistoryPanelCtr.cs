@@ -45,15 +45,15 @@ public class HistoryPanelCtr :UIPresenter<HistoryPanelView>
       }
       else if (useDate && useOperator)
       {
-          sql += $"`operator` = '{OperatorPerson}' AND `time` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `id` DESC;";
+          sql += $"`operator` = '{OperatorPerson}' AND `time` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `time` DESC;";
       }
       else if (useDate)
       {
-          sql += $"`time` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `id` DESC;";
+          sql += $"`time` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `time` DESC;";
       }
       else
       {
-          sql += $"`operator` = '{OperatorPerson}' ORDER BY `id` DESC;";
+          sql += $"`operator` = '{OperatorPerson}' ORDER BY `time` DESC;";
       }
       
       if (_dataReader != null)
