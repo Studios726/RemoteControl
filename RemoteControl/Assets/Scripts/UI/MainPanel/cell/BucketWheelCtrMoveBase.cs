@@ -369,39 +369,50 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将控制方式切换为单动模式",GameDataManager.Instance.GetMachineName(machine), null,
+                    new ConfirmPanelArgs("是否将控制方式切换为单动模式?",GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.MODE_A); })));
             }));
         AddOnClickListener(togetherBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将控制方式切换为联动模式",GameDataManager.Instance.GetMachineName(machine), null,
+                    new ConfirmPanelArgs("是否将控制方式切换为联动模式?",GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.MODE_B); })));
             }));
         AddOnClickListener(automaticBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将控制方式切换为自动模式",GameDataManager.Instance.GetMachineName(machine), null,
+                    new ConfirmPanelArgs("是否将控制方式切换为自动模式?",GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.MODE_C); })));
             }));
         AddOnClickListener(takeMaterBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将堆/取料控制切换为取料状态", GameDataManager.Instance.GetMachineName(machine),null,
+                    new ConfirmPanelArgs("是否将堆/取料控制切换为取料状态?", GameDataManager.Instance.GetMachineName(machine),null,
                         (() => { SendMessageToServer(COMMAND_NAME.BELTTAKE_BUTTON); })));
             }));
         AddOnClickListener(stopTakeMaterBtn,
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否将堆/取料控制切换为停止状态",GameDataManager.Instance.GetMachineName(machine), null,
+                    new ConfirmPanelArgs("是否将堆/取料控制切换为停止状态?",GameDataManager.Instance.GetMachineName(machine), null,
                         (() => { SendMessageToServer(COMMAND_NAME.BELTSSTOP_BUTTON); })));
             }));
-        AddOnClickListener(carFastBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_FAST)));
-        AddOnClickListener(carSlowBtn, (() => SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_SLOW)));
+        AddOnClickListener(carFastBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否改为大车行走快速?",GameDataManager.Instance.GetMachineName(machine), null,
+                    (() => {  SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_FAST); })));
+           
+        }));
+        AddOnClickListener(carSlowBtn, (() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否改为大车行走慢速?",GameDataManager.Instance.GetMachineName(machine), null,
+                    (() => { SendMessageToServer(COMMAND_NAME.TRAVEL_SPEED_SLOW); })));
+        }));
         AddOnClickListener(carBackBtn,
             (() =>
             {
@@ -972,10 +983,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 des = "是否确认振打器停止?";
                 break;
             case COMMAND_NAME.CAR_FORWARD:
-                des = "是否确认步进前进";
+                des = "是否确认步进前进?";
                 break;
             case COMMAND_NAME.CAR_REVERSE:
-                des = "是否确认步进后退";
+                des = "是否确认步进后退?";
                 break;
             default:
                 break;
