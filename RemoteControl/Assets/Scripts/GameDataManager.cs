@@ -5136,7 +5136,7 @@ public class GameDataManager : Singleton<GameDataManager>
             else if (newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 == false &&
                      _systemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 == true)
             {
-                //中控室没有允许堆料或分流命令解除
+                //中控室没有允许取料命令解除
                 DataManager.Instance.InsertHistoryWarningMc("中控室没有允许取料命令解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2));
@@ -7506,18 +7506,18 @@ public class GameDataManager : Singleton<GameDataManager>
             if (newSystemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2 == true &&
                 _systemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2 == false)
             {
-                // 悬臂胶带堆料接触器辅助触点故障
-                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带堆料接触器辅助触点故障", GetUserName(),
+                // 悬臂胶带取料接触器辅助触点故障
+                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带取料接触器辅助触点故障", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2),
-                    "悬臂胶带堆料接触器辅助触点故障",
+                    "悬臂胶带取料接触器辅助触点故障",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2 == false &&
                      _systemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2 == true)
             {
-                // 悬臂胶带堆料接触器辅助触点故障解除
-                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带堆料接触器辅助触点故障解除", GetUserName(),
+                // 悬臂胶带取料接触器辅助触点故障解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带取料接触器辅助触点故障解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2));
             }
@@ -8576,17 +8576,17 @@ public class GameDataManager : Singleton<GameDataManager>
 
             if (newSystemVariables.StackingSwitchFault_2 == true && _systemVariables.StackingSwitchFault_2 == false)
             {
-                // 堆取料开关故障
-                DataManager.Instance.InsertHistoryWarningMc("堆取料开关故障", GetUserName(),
+                // 取料开关故障
+                DataManager.Instance.InsertHistoryWarningMc("取料开关故障", GetUserName(),
                     Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.StackingSwitchFault_2), "堆取料开关故障",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.StackingSwitchFault_2), "取料开关故障",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.StackingSwitchFault_2 == false &&
                      _systemVariables.StackingSwitchFault_2 == true)
             {
-                // 堆取料开关故障解除
-                DataManager.Instance.InsertHistoryWarningMc("堆取料开关故障解除", GetUserName(),
+                // 取料开关故障解除
+                DataManager.Instance.InsertHistoryWarningMc("取料开关故障解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.StackingSwitchFault_2));
             }
