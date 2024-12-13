@@ -4519,24 +4519,24 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.StackingSwitchFault));
             }
 
-            if (newSystemVariables.CentralControlRoomNoStackingCommand == true &&
-                _systemVariables.CentralControlRoomNoStackingCommand == false)
-            {
-                // 中控室没有允许堆取料命令
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingCommand),
-                    "中控室没有允许堆取料命令",
-                    Machine.BucketWheelStackerReclaimer, false, "");
-            }
-            else if (newSystemVariables.CentralControlRoomNoStackingCommand == false &&
-                     _systemVariables.CentralControlRoomNoStackingCommand == true)
-            {
-                // 中控室没有允许堆取料命令解除
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令解除", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingCommand));
-            }
+            // if (newSystemVariables.CentralControlRoomNoStackingCommand == true &&
+            //     _systemVariables.CentralControlRoomNoStackingCommand == false)
+            // {
+            //     // 中控室没有允许堆取料命令
+            //     DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingCommand),
+            //         "中控室没有允许堆取料命令",
+            //         Machine.BucketWheelStackerReclaimer, false, "");
+            // }
+            // else if (newSystemVariables.CentralControlRoomNoStackingCommand == false &&
+            //          _systemVariables.CentralControlRoomNoStackingCommand == true)
+            // {
+            //     // 中控室没有允许堆取料命令解除
+            //     DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令解除", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingCommand));
+            // }
 
             if (newSystemVariables.BucketWheelMotorMainCircuitBreakerFault == true &&
                 _systemVariables.BucketWheelMotorMainCircuitBreakerFault == false)
@@ -4771,24 +4771,24 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelFeederTimeout));
             }
 
-            if (newSystemVariables.CentralControlRoomNoStackingUnloadingCommand == true &&
-                _systemVariables.CentralControlRoomNoStackingUnloadingCommand == false)
-            {
-                // 中控室没有允许堆取料命令
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingUnloadingCommand),
-                    "中控室没有允许堆取料命令",
-                    Machine.BucketWheelStackerReclaimer, false, "");
-            }
-            else if (newSystemVariables.CentralControlRoomNoStackingUnloadingCommand == false &&
-                     _systemVariables.CentralControlRoomNoStackingUnloadingCommand == true)
-            {
-                // 中控室没有允许堆取料命令解除
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令解除", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingUnloadingCommand));
-            }
+            // if (newSystemVariables.CentralControlRoomNoStackingUnloadingCommand == true &&
+            //     _systemVariables.CentralControlRoomNoStackingUnloadingCommand == false)
+            // {
+            //     // 中控室没有允许堆取料命令
+            //     DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingUnloadingCommand),
+            //         "中控室没有允许堆取料命令",
+            //         Machine.BucketWheelStackerReclaimer, false, "");
+            // }
+            // else if (newSystemVariables.CentralControlRoomNoStackingUnloadingCommand == false &&
+            //          _systemVariables.CentralControlRoomNoStackingUnloadingCommand == true)
+            // {
+            //     // 中控室没有允许堆取料命令解除
+            //     DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令解除", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingUnloadingCommand));
+            // }
 
             if (newSystemVariables.TailCarBeltFirstLevelDeviation == true &&
                 _systemVariables.TailCarBeltFirstLevelDeviation == false)
@@ -5124,7 +5124,7 @@ public class GameDataManager : Singleton<GameDataManager>
             if (newSystemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 &&
                 _systemVariables.CentralControlRoomNoStackingOrDiversionCommand_2 == false)
             {
-                //中控室没有允许堆料或分流命令
+                //中控室没有允许取料命令命令
                 DataManager.Instance.InsertHistoryWarningMc("中控室没有允许取料命令", GetUserName(),
                     Machine.BucketWheel);
                 // AddOrUpdateWarningDesQueue("斗轮机故障", Machine.BucketWheelStackerReclaimer);
@@ -8591,24 +8591,24 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.StackingSwitchFault_2));
             }
 
-            if (newSystemVariables.CentralControlRoomNoStackingCommand_2 == true &&
-                _systemVariables.CentralControlRoomNoStackingCommand_2 == false)
-            {
-                // 中控室没有允许堆取料命令
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令", GetUserName(),
-                    Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingCommand_2),
-                    "中控室没有允许堆取料命令",
-                    Machine.BucketWheel, false, "");
-            }
-            else if (newSystemVariables.CentralControlRoomNoStackingCommand_2 == false &&
-                     _systemVariables.CentralControlRoomNoStackingCommand_2 == true)
-            {
-                // 中控室没有允许堆取料命令解除
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令解除", GetUserName(),
-                    Machine.BucketWheel);
-                RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingCommand_2));
-            }
+            // if (newSystemVariables.CentralControlRoomNoStackingCommand_2 == true &&
+            //     _systemVariables.CentralControlRoomNoStackingCommand_2 == false)
+            // {
+            //     // 中控室没有允许取料命令
+            //     DataManager.Instance.InsertHistoryWarningMc("中控室没有允许取料命令", GetUserName(),
+            //         Machine.BucketWheel);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingCommand_2),
+            //         "中控室没有允许取料命令",
+            //         Machine.BucketWheel, false, "");
+            // }
+            // else if (newSystemVariables.CentralControlRoomNoStackingCommand_2 == false &&
+            //          _systemVariables.CentralControlRoomNoStackingCommand_2 == true)
+            // {
+            //     // 中控室没有允许取料命令解除
+            //     DataManager.Instance.InsertHistoryWarningMc("中控室没有允许取料命令解除", GetUserName(),
+            //         Machine.BucketWheel);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingCommand_2));
+            // }
 
             if (newSystemVariables.BucketWheelMotorMainCircuitBreakerFault_2 == true &&
                 _systemVariables.BucketWheelMotorMainCircuitBreakerFault_2 == false)
@@ -8846,24 +8846,24 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelFeederTimeout_2));
             }
 
-            if (newSystemVariables.CentralControlRoomNoStackingUnloadingCommand_2 == true &&
-                _systemVariables.CentralControlRoomNoStackingUnloadingCommand_2 == false)
-            {
-                // 中控室没有允许堆取料命令
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令", GetUserName(),
-                    Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingUnloadingCommand_2),
-                    "中控室没有允许堆取料命令",
-                    Machine.BucketWheel, false, "");
-            }
-            else if (newSystemVariables.CentralControlRoomNoStackingUnloadingCommand_2 == false &&
-                     _systemVariables.CentralControlRoomNoStackingUnloadingCommand_2 == true)
-            {
-                // 中控室没有允许堆取料命令解除
-                DataManager.Instance.InsertHistoryWarningMc("中控室没有允许堆取料命令解除", GetUserName(),
-                    Machine.BucketWheel);
-                RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingUnloadingCommand_2));
-            }
+            // if (newSystemVariables.CentralControlRoomNoStackingUnloadingCommand_2 == true &&
+            //     _systemVariables.CentralControlRoomNoStackingUnloadingCommand_2 == false)
+            // {
+            //     // 中控室没有允许取料命令
+            //     DataManager.Instance.InsertHistoryWarningMc("中控室没有允许取料命令", GetUserName(),
+            //         Machine.BucketWheel);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingUnloadingCommand_2),
+            //         "中控室没有允许取料命令",
+            //         Machine.BucketWheel, false, "");
+            // }
+            // else if (newSystemVariables.CentralControlRoomNoStackingUnloadingCommand_2 == false &&
+            //          _systemVariables.CentralControlRoomNoStackingUnloadingCommand_2 == true)
+            // {
+            //     // 中控室没有允许取料命令解除
+            //     DataManager.Instance.InsertHistoryWarningMc("中控室没有允许取料命令解除", GetUserName(),
+            //         Machine.BucketWheel);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.CentralControlRoomNoStackingUnloadingCommand_2));
+            // }
 
             if (newSystemVariables.TailCarBeltFirstLevelDeviation_2 == true &&
                 _systemVariables.TailCarBeltFirstLevelDeviation_2 == false)
