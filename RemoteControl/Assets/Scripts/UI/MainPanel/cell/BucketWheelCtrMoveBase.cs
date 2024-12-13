@@ -495,10 +495,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
             pos1 = (data.DC_Pos + ConstStr.InitPosition_1).ToString("F2");
-            SetText(carElectricity, data.LargeCarElectricCurrent.ToString(), TextType.Electricity);
-            SetText(rotationElectricity, data.RotaryElectricCurrent.ToString(), TextType.Electricity);
-            SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent.ToString(), TextType.Electricity);
-            SetText(cantileverBeltElectricity, data.SuspensionBeltElectricCurrent.ToString(), TextType.Electricity);
+            SetText(carElectricity, data.LargeCarElectricCurrent.ToString("F2"), TextType.Electricity);
+            SetText(rotationElectricity, data.RotaryElectricCurrent.ToString("F2"), TextType.Electricity);
+            SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent.ToString("F2"), TextType.Electricity);
+            SetText(cantileverBeltElectricity, data.SuspensionBeltElectricCurrent.ToString("F2"), TextType.Electricity);
             SetText(carPos, pos1, TextType.Meter);
             SetText(rotationAngle, data.SLEW_Angle.ToString("F2"), TextType.Angle);
             SetText(leftAngle, data.SLEW_Angle.ToString("F2"), TextType.Angle);
@@ -621,7 +621,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle) * Mathf.Deg2Rad);
             string x = (53.4 + data.DC_Pos + (x1 * Mathf.Cos(data.SLEW_Angle * Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle * Mathf.Deg2Rad) - 1.8F).ToString("F2");
-            bucketWheelPos.text = $"({x} , {y})";
+            string z = (40 * Mathf.Sin(data.Luff_Angle * Mathf.Deg2Rad) + ConstStr.InitBucketWheelHeigh).ToString("F2");
+            bucketWheelPos.text = $"({x} , {y} , {z})";
 
             FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
             if (flowMeterData != null)//更新流量
@@ -640,10 +641,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         else
         {
             pos2 = (data.DC_Pos_2 + ConstStr.InitPosition_2).ToString("F2");
-            SetText(carElectricity, data.LargeCarElectricCurrent_2.ToString(), TextType.Electricity);
-            SetText(rotationElectricity, data.RotaryElectricCurrent_2.ToString(), TextType.Electricity);
-            SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent_2.ToString(), TextType.Electricity);
-            SetText(cantileverBeltElectricity, data.SuspensionBeltElectricCurrent_2.ToString(), TextType.Electricity);
+            SetText(carElectricity, data.LargeCarElectricCurrent_2.ToString("F2"), TextType.Electricity);
+            SetText(rotationElectricity, data.RotaryElectricCurrent_2.ToString("F2"), TextType.Electricity);
+            SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent_2.ToString("F2"), TextType.Electricity);
+            SetText(cantileverBeltElectricity, data.SuspensionBeltElectricCurrent_2.ToString("F2"), TextType.Electricity);
             SetText(carPos, pos2, TextType.Meter);
             SetText(rotationAngle, data.SLEW_Angle_2.ToString("F2"), TextType.Angle);
             SetText(leftAngle, data.SLEW_Angle_2.ToString("F2"), TextType.Angle);
@@ -764,8 +765,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle_2) * Mathf.Deg2Rad);
             string x = (117.74 + data.DC_Pos_2 + (x1 * Mathf.Cos(data.SLEW_Angle_2 * Mathf.Deg2Rad))).ToString("F2");
             string y = (40 * Mathf.Sin(data.SLEW_Angle_2 * Mathf.Deg2Rad) + 1.7).ToString("F2");
-
-            bucketWheelPos.text = $"({x} , {y})";
+            string z = (40 * Mathf.Sin(data.Luff_Angle_2 * Mathf.Deg2Rad) + ConstStr.InitBucketWheelHeigh).ToString("F2");
+            bucketWheelPos.text = $"({x} , {y} , {z})";
             FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
             if (flowMeterData != null)//更新流量
             {
