@@ -544,6 +544,10 @@ MonoBehaviour:
   red: {fileID: 2100000, guid: 19705d66c0ed97145a483c25dadc1b51, type: 2}
   parent: {fileID: 462563580}
   model: {fileID: 0}
+  meshFilter: {fileID: 0}
+  meshRenderer: {fileID: 0}
+  meshCollider: {fileID: 0}
+  cachedMesh: {fileID: 0}
 --- !u!4 &267106903
 Transform:
   m_ObjectHideFlags: 0
@@ -6695,13 +6699,25 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 1114782397628655961, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2589432349100900467, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
       propertyPath: modelCameraTransform
       value: 
       objectReference: {fileID: 1431835160}
+    - target: {fileID: 3217696330442256287, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3717711411464068493, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
       propertyPath: m_Name
       value: machine1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5005332510720568926, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8654435239851183504, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7005,14 +7021,26 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 1938937817105851742, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3562959181751862570, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
       propertyPath: m_Name
       value: machine2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4122887985655931800, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4407568502695229097, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
       propertyPath: modelCameraTransform
       value: 
       objectReference: {fileID: 1431835160}
+    - target: {fileID: 5829485731187221081, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6034022479026651707, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
       propertyPath: m_LocalPosition.x
       value: 59.8

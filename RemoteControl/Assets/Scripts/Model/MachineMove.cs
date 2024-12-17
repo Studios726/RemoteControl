@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class MachineMove : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class MachineMove : MonoBehaviour
     public Transform rotationGo_y;
     public Transform currentCanvasTransform;
     public TMP_Text errorText;
+    public RectTransform errorTextRectTransform;
+    public RectTransform bgRectTransform;
     public Transform bucketWheelCanvasTransform;
     public TMP_Text bucketWheelPosText;
     public Transform heighCanvasTransform;
@@ -30,7 +33,6 @@ public class MachineMove : MonoBehaviour
         }
        
     }
-
     public void UpdatePosAndRotaionByMeter(float meter, float rotAngleY, float rotAngleZ)
     {
         if (machine==Machine.BucketWheelStackerReclaimer)
@@ -61,8 +63,20 @@ public class MachineMove : MonoBehaviour
         }
 
         errorText.text = error;
+        // SetBgHigh();
     }
-    
+
+    public void SetBgHigh()
+    {
+        
+        float y = errorTextRectTransform.rect.height-20.1f+32.7f;
+        if (bgRectTransform.sizeDelta.y!=y)
+        {
+            bgRectTransform.sizeDelta=new Vector2(bgRectTransform.sizeDelta.x,y) ;
+            Debug.Log($">>>>>>>>>>>>>> { y } {errorTextRectTransform.rect.height} {bgRectTransform.sizeDelta.y}");
+        }
+       
+    }
     public void UpdateBucketWheelPosText(string pos)
     {
         bucketWheelPosText.text = pos;
@@ -117,5 +131,7 @@ public class MachineMove : MonoBehaviour
                 heighCanvasTransform.position + modelCameraTransform.rotation * Vector3.forward,
                 modelCameraTransform.rotation * Vector3.up);
         }
+
+        SetBgHigh();
     }
 }
