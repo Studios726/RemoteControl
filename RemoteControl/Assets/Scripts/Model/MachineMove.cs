@@ -68,14 +68,19 @@ public class MachineMove : MonoBehaviour
 
     public void SetBgHigh()
     {
-        
-        float y = errorTextRectTransform.rect.height-20.1f+32.7f;
-        if (bgRectTransform.sizeDelta.y!=y)
+        if (errorText.text=="")
         {
-            bgRectTransform.sizeDelta=new Vector2(bgRectTransform.sizeDelta.x,y) ;
-            Debug.Log($">>>>>>>>>>>>>> { y } {errorTextRectTransform.rect.height} {bgRectTransform.sizeDelta.y}");
+            bgRectTransform.sizeDelta=new Vector2(bgRectTransform.sizeDelta.x,0) ;
         }
-       
+        else
+        {
+            float y = errorTextRectTransform.rect.height-20.1f+32.7f;
+            if (bgRectTransform.sizeDelta.y!=y)
+            {
+                bgRectTransform.sizeDelta=new Vector2(bgRectTransform.sizeDelta.x,y) ;
+                Debug.Log($">>>>>>>>>>>>>> { y } {errorTextRectTransform.rect.height} {bgRectTransform.sizeDelta.y}");
+            }
+        }
     }
     public void UpdateBucketWheelPosText(string pos)
     {
