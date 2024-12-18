@@ -325,7 +325,7 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         if (_systemVariables == null)
         {
-            return "夹轨器未放松，是否继续执行";
+            return "夹轨器未放松，是否继续执行?";
         }
         else
         {
@@ -335,11 +335,11 @@ public class GameDataManager : Singleton<GameDataManager>
                 : (_systemVariables.LeftClampRelaxLimit_2 && _systemVariables.RightClampRelaxLimit_2);
             if (isRelaxed)
             {
-                des = "夹轨器已放松，是否继续执行";
+                des = "夹轨器已放松，是否继续执行?";
             }
             else
             {
-                des = "夹轨器未放松，是否继续执行";
+                des = "夹轨器未放松，是否继续执行?";
             }
 
             return des;

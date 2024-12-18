@@ -448,9 +448,9 @@ public class BucketWheelTaskBase : PanelBase
             DataManager.Instance.InsertHistoryLogMc(takeMaterStopBtn.red.activeSelf?"自动取料-恢复任务":"自动取料-暂停任务", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterStopBtn);
-            int dataInt = takeMaterStopBtn.red.activeSelf?0:1;
-            string commandName=machine==Machine.BucketWheelStackerReclaimer?COMMAND_NAME.TAKE_PAUSE.ToString()+"_1":COMMAND_NAME.TAKE_PAUSE.ToString()+"_2";
-            GameDataManager.Instance.SendServerCommandRC(commandName,6,2,dataInt);
+            // int dataInt = takeMaterStopBtn.red.activeSelf?0:1;
+            // string commandName=machine==Machine.BucketWheelStackerReclaimer?COMMAND_NAME.TAKE_PAUSE.ToString()+"_1":COMMAND_NAME.TAKE_PAUSE.ToString()+"_2";
+            // GameDataManager.Instance.SendServerCommandRC(commandName,6,2,dataInt);
         }
         else if (operationType == OperationType.REVERSING)
         {
