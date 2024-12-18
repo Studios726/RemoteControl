@@ -446,7 +446,9 @@ namespace ShenYangRemoteSystem.Subclass
         //11.3
         public bool COMM_FROM_SCADA_HART { get; set; }
         public bool COMM_FROM_SCADA_FAULT { get; set; }
-        public bool COMM_TO_SCADA_HART { get; set; }
+        
+        public bool COMM_TO_SCADA_HART{ get; set; }
+     
 
 
 
@@ -1228,6 +1230,8 @@ namespace ShenYangRemoteSystem.Subclass
 
         //11.19
         public bool SR1_TO_SCADA_COMM_Heart { get; set; }
+      
+
         public bool SR1_SofT_Take_START { get; set; }
         public bool SR1_SofT_Take_STOP { get; set; }
         public bool SR1_Soft_Stack_START { get; set; }
@@ -1235,14 +1239,23 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
+        //11.28
+        public bool SR1_SOFT_Take_PAUSE { get; set; }
+        public bool SR1_SOFT_Stack_PAUSE { get; set; }
 
 
 
+        //12.3
+        public bool SR1_REMOTE_PLANT_COMM_FAULT { get; set; }
+        public bool SR1_REMOTE_PLANT_COMM_FAULT_0 { get; set; }
 
 
 
-
-
+        //12.9
+        public float SR1_Encode_DC_PresetValue_SCADA { get; set; }
+        public float SR1_EncodeSLEW_PresetValue_SCADA { get; set; }
+        public bool SR1_Encode_DC_Adjust_SB { get; set; }
+        public bool SR1_Encode_SLEW_Adjust_SB { get; set; }
 
 
 
@@ -1745,7 +1758,9 @@ namespace ShenYangRemoteSystem.Subclass
         //11.3
         public bool COMM_FROM_SCADA_HART_2 { get; set; }
         public bool COMM_FROM_SCADA_FAULT_2 { get; set; }
-        public bool COMM_TO_SCADA_HART_2 { get; set; }
+
+        public bool COMM_TO_SCADA_HART_2{ get; set; }
+    
 
 
 
@@ -2722,12 +2737,44 @@ namespace ShenYangRemoteSystem.Subclass
 
 
 
-        //11.19
-        public bool SR1_TO_SCADA_COMM_Heart_2 { get; set; }
+        //
+        public bool SR1_TO_SCADA_COMM_Heart_2{ get; set; }
+      
+
         public bool SR1_SofT_Take_START_2 { get; set; }
         public bool SR1_SofT_Take_STOP_2 { get; set; }
         public bool SR1_Soft_Stack_START_2 { get; set; }
         public bool SR1_Soft_Stack_STOP_2 { get; set; }
+
+
+        //11.28
+        public bool SR1_SOFT_Take_PAUSE_2 { get; set; }
+        public bool SR1_SOFT_Stack_PAUSE_2 { get; set; }
+
+
+
+        //12.3
+        public bool SR1_REMOTE_PLANT_COMM_FAULT_2 { get; set; }
+        public bool SR1_REMOTE_PLANT_COMM_FAULT_0_2 { get; set; }
+
+
+
+        //12.9
+        public float SR1_Encode_DC_PresetValue_SCADA_2 { get; set; }
+        public float SR1_EncodeSLEW_PresetValue_SCADA_2 { get; set; }
+        public bool SR1_Encode_DC_Adjust_SB_2 { get; set; }
+        public bool SR1_Encode_SLEW_Adjust_SB_2 { get; set; }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -4993,6 +4993,25 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.DriverRoomBalancePumpMotorAuxiliaryContactFault));
             }
 
+            if (newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0 == true &&
+                _systemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0 == false)
+            {
+                // 远程任务规划子系统通讯异常
+                DataManager.Instance.InsertHistoryWarningMc("远程任务规划子系统通讯异常", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0),
+                    "远程任务规划子系统通讯异常",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0 == false &&
+                     _systemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0 == true)
+            {
+                // 司机室平衡油泵电机辅助触点故障解除
+                DataManager.Instance.InsertHistoryWarningMc("远程任务规划子系统通讯异常解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0));
+            }
+            
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>取料机报错信息<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
             //取料机
@@ -9191,6 +9210,25 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("左侧锚锭没有抬起解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.LeftAnchorNotLifted_2));
+            }
+            
+            if (newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2 == true &&
+                _systemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2 == false)
+            {
+                // 远程任务规划子系统通讯异常
+                DataManager.Instance.InsertHistoryWarningMc("远程任务规划子系统通讯异常", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2),
+                    "远程任务规划子系统通讯异常",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2 == false &&
+                     _systemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2 == true)
+            {
+                // 司机室平衡油泵电机辅助触点故障解除
+                DataManager.Instance.InsertHistoryWarningMc("远程任务规划子系统通讯异常解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2));
             }
         }
 
