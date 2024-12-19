@@ -400,15 +400,17 @@ public class TaskDataManager : Singleton<TaskDataManager>
         }
         catch (Exception e)
         {
+            taskCodeDesDictionary?.Clear();
+            TestStr =$"<TaskPC2> {DateTime.Now.ToString("HH:mm:ss")} {e.Message}";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
             StackTrace stackTrace = new StackTrace(e, true);
             string test = "";
             foreach (var frame in stackTrace.GetFrames())
             {
                 test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
             }
-            TestStr =$"<2> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
+            TestStr =$"<TaskPC2> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
             EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            taskCodeDesDictionary?.Clear();
             Debug.LogError($"任务描述处理报错{e.Message}");
         }
         EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);

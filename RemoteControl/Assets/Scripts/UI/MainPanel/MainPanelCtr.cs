@@ -161,6 +161,8 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         }
         catch (Exception e)
         {
+            TaskDataManager.Instance.TestStr =$"<TaskPC11> {DateTime.Now.ToString("HH:mm:ss")} {e.Message}";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
             // 创建栈跟踪对象
             StackTrace stackTrace = new StackTrace(e, true);
             string test = "";
@@ -168,7 +170,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
             {
                 test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
             }
-            TaskDataManager.Instance.TestStr =$"<1> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
+            TaskDataManager.Instance.TestStr =$"<TaskPC11> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
             EventManager.Instance.TriggerEvent(EventName.TestEvent);
             // TaskDataManager.Instance.UpdateTaskData(4);
             Debug.LogError($"MainPanel UpdateTaskLog {e.Message} ");
@@ -229,6 +231,8 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         }
         catch (Exception e)
         {
+            TaskDataManager.Instance.TestStr =$"<TaskPC1> {DateTime.Now.ToString("HH:mm:ss")} {e.Message}";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
             // // 创建栈跟踪对象
             StackTrace stackTrace = new StackTrace(e, true);
             string test = "";
@@ -237,7 +241,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
                 test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
             }
             // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-            TaskDataManager.Instance.TestStr =$"<1> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
+            TaskDataManager.Instance.TestStr =$"<TaskPC1> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
             EventManager.Instance.TriggerEvent(EventName.TestEvent);
             // TaskDataManager.Instance.UpdateTaskData(4);
             Debug.LogError($"MainPanel UpdateTaskLog {e.Message} ");

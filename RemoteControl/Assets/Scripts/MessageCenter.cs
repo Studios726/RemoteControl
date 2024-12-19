@@ -88,6 +88,8 @@ public class MessageCenter : Singleton<MessageCenter>
                 }
                 catch (Exception e)
                 {
+                    TaskDataManager.Instance.TestStr =$"<TaoRC> {DateTime.Now.ToString("HH:mm:ss")} {e.Message}";
+                    EventManager.Instance.TriggerEvent(EventName.TestEvent);
                     StackTrace stackTrace = new StackTrace(e, true);
                     string test = "";
                     foreach (var frame in stackTrace.GetFrames())
@@ -112,15 +114,17 @@ public class MessageCenter : Singleton<MessageCenter>
                 }
                 catch (Exception e)
                 {
+                    TaskDataManager.Instance.UpdateTaskData(4);
+                    TaskDataManager.Instance.TestStr =$"<TaskPC3> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {message}";
+                    EventManager.Instance.TriggerEvent(EventName.TestEvent);
                     StackTrace stackTrace = new StackTrace(e, true);
                     string test = "";
                     foreach (var frame in stackTrace.GetFrames())
                     {
                         test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
                     }
-                    TaskDataManager.Instance.TestStr =$"<3> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
+                    TaskDataManager.Instance.TestStr =$"<TaskPC3> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
                     EventManager.Instance.TriggerEvent(EventName.TestEvent);
-                    TaskDataManager.Instance.UpdateTaskData(4);
                     Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
                 }
             }
