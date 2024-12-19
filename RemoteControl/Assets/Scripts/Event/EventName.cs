@@ -28,6 +28,7 @@ namespace RemoteControl.Event
         public const string UpdateFlowMeterData = "UpdateFlowMeterData";
         public const string UpdateAccountData = "UpdateAccountData";
         public const string TestEvent = "TestEvent";
+        public const string ShowTestEvent = "ShowTestEvent";
 
     }
 }

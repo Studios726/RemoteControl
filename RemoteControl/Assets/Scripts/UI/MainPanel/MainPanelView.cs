@@ -23,6 +23,7 @@ public class MainPanelView : UIView<MainPanelCtr>
     private Button updateModelBtn;
     private Button updateTaskBtn;
     private InputField testInputField;
+    private GameObject testGo;
     public List<string> TaskMessageList = new List<string>();
 
     public override void InitUIElements(UIArgs uiArgs)
@@ -41,9 +42,12 @@ public class MainPanelView : UIView<MainPanelCtr>
         updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
         updateTaskBtn = RootObj.transform.FindComponent<Button>("updateTaskArgs");
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
-        testInputField = RootObj.transform.FindComponent<InputField>("Image/InputField");
+        testInputField = RootObj.transform.FindComponent<InputField>("test/InputField");
+        testGo = RootObj.transform.Find("test").gameObject;
         updateModelBtn.onClick.AddListener(() =>
         {
+            TaskDataManager.Instance.TestStr =$"<1>88888";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
             // double d = 4.5;
             // float tempChartValue = (float)d;
             // Debug.Log($">>>>>>>>>>>>>>{tempChartValue} {(float)Math.Round(tempChartValue, 2)}");
@@ -175,6 +179,11 @@ public class MainPanelView : UIView<MainPanelCtr>
     public void SetTestInputField(object o, EventArgs eventArgs)
     {
         testInputField.text=testInputField.text+" -------- "+TaskDataManager.Instance.TestStr;
+    }
+
+    public void ShowTestInput(object o, EventArgs eventArgs)
+    {
+        testGo.SetActive(!testGo.activeSelf);
     }
     public void AddOnClickListener(Button btn, UnityAction action)
     {

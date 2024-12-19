@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
 using RemoteControl.Event;
 using Unity.VisualScripting;
-using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class TaskCodeDes
 {
@@ -399,11 +400,15 @@ public class TaskDataManager : Singleton<TaskDataManager>
         }
         catch (Exception e)
         {
-            // string str = JsonMgr.Serialize(TaskMessageList);
-            TestStr =$"<3>{e.Message}";
+            StackTrace stackTrace = new StackTrace(e, true);
+            string test = "";
+            foreach (var frame in stackTrace.GetFrames())
+            {
+                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+            }
+            TestStr =$"<2> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
             EventManager.Instance.TriggerEvent(EventName.TestEvent);
             taskCodeDesDictionary?.Clear();
-            UpdateTaskData(4);
             Debug.LogError($"任务描述处理报错{e.Message}");
         }
         EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);

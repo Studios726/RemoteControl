@@ -13,6 +13,7 @@ public class LoginPanelView : UIView<LoginPanelCtr>
     public GameObject _error;
     public Timer timer;
     public Text _IP;
+    private Text version;
     public override void InitUIElements(UIArgs uiArgs)
     {
         _accountInput = RootObj.transform.Find("Bg/accountInput").GetComponent<TMP_InputField>();
@@ -20,6 +21,7 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         _loginBtn = RootObj.transform.Find("Bg/loginBtn").GetComponent<UnityEngine.UI.Button>();
         _toggle = RootObj.transform.Find("Bg/Toggle").GetComponent<UnityEngine.UI.Toggle>();
         _IP = RootObj.transform.FindComponent<Text>("IP");
+        version = RootObj.transform.FindComponent<Text>("version");
         _error = RootObj.transform.Find("error").gameObject;
         _loginBtn.onClick.AddListener(Login);
         _passwordInput.onSubmit.AddListener(OnSubmit);
@@ -34,7 +36,8 @@ public class LoginPanelView : UIView<LoginPanelCtr>
         //            GameDataManager.Instance.IpConfig.TaskIP +"\n RC IP "+
         //            GameDataManager.Instance.IpConfig.TaoIP;
         _IP.text = "";
-       
+        version.text = ConstStr.Version;
+
     }
 
     public void OnSubmit(string str)

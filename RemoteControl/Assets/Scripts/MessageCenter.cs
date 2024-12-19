@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using System.Diagnostics;
 using RemoteControl.Event;
 using ShenYangRemoteSystem.Subclass;
 using UnityEngine.Networking.PlayerConnection;
@@ -10,6 +10,7 @@ using System.IO.Compression;
 using System.Threading;
 using Newtonsoft.Json;
 using ShangHaiPro;
+using Debug = UnityEngine.Debug;
 
 public enum MessageType
 {
@@ -87,7 +88,14 @@ public class MessageCenter : Singleton<MessageCenter>
                 }
                 catch (Exception e)
                 {
-            
+                    StackTrace stackTrace = new StackTrace(e, true);
+                    string test = "";
+                    foreach (var frame in stackTrace.GetFrames())
+                    {
+                        test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                    }
+                    TaskDataManager.Instance.TestStr =$"<TaoRC> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
+                    EventManager.Instance.TriggerEvent(EventName.TestEvent);
                     // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
                     Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)} {e.Message}");
                 }
@@ -104,8 +112,13 @@ public class MessageCenter : Singleton<MessageCenter>
                 }
                 catch (Exception e)
                 {
-                    //解压失败重新获取任务相关数据
-                    TaskDataManager.Instance.TestStr =$"<44>{e.Message}";
+                    StackTrace stackTrace = new StackTrace(e, true);
+                    string test = "";
+                    foreach (var frame in stackTrace.GetFrames())
+                    {
+                        test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                    }
+                    TaskDataManager.Instance.TestStr =$"<3> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
                     EventManager.Instance.TriggerEvent(EventName.TestEvent);
                     TaskDataManager.Instance.UpdateTaskData(4);
                     Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");

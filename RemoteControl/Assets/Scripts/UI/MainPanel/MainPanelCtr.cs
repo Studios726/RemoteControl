@@ -162,15 +162,14 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         catch (Exception e)
         {
             // 创建栈跟踪对象
-            // StackTrace stackTrace = new StackTrace(e, true);
-            // string test = "";
-            // foreach (var frame in stackTrace.GetFrames())
-            // {
-            //     test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
-            // }
-            // // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-            // TaskDataManager.Instance.TestStr =$"<1>{e.Message} {test}";
-            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            StackTrace stackTrace = new StackTrace(e, true);
+            string test = "";
+            foreach (var frame in stackTrace.GetFrames())
+            {
+                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+            }
+            TaskDataManager.Instance.TestStr =$"<1> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
             // TaskDataManager.Instance.UpdateTaskData(4);
             Debug.LogError($"MainPanel UpdateTaskLog {e.Message} ");
         }
@@ -231,15 +230,15 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         catch (Exception e)
         {
             // // 创建栈跟踪对象
-            // StackTrace stackTrace = new StackTrace(e, true);
-            // string test = "";
-            // foreach (var frame in stackTrace.GetFrames())
-            // {
-            //     test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
-            // }
-            // // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-            // TaskDataManager.Instance.TestStr =$"<1>{e.Message} {test}";
-            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            StackTrace stackTrace = new StackTrace(e, true);
+            string test = "";
+            foreach (var frame in stackTrace.GetFrames())
+            {
+                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+            }
+            // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
+            TaskDataManager.Instance.TestStr =$"<1> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
+            EventManager.Instance.TriggerEvent(EventName.TestEvent);
             // TaskDataManager.Instance.UpdateTaskData(4);
             Debug.LogError($"MainPanel UpdateTaskLog {e.Message} ");
         }
@@ -310,6 +309,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         EventManager.Instance.AddListener(EventName.RefreshTaskDes1, UpdateTaskLog1);
         EventManager.Instance.AddListener(EventName.RefreshTaskDes2, UpdateTaskLog2);
         EventManager.Instance.AddListener(EventName.TestEvent, view.SetTestInputField);
+        EventManager.Instance.AddListener(EventName.ShowTestEvent,view.ShowTestInput);
     }
 
     public void SendMessage(string message)

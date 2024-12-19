@@ -11,6 +11,7 @@ public class AppLauncher : MonoBehaviour
     private bool isQuit;
     private int previousWidth;
     private int previousHeight;
+    private int keyCodeCount_k;
     private void Awake()
     {
 
@@ -43,6 +44,15 @@ public class AppLauncher : MonoBehaviour
         }else if (Input.GetKeyDown(KeyCode.Tab))
         {
             EventManager.Instance.TriggerEvent(EventName.KeyCodeTab, null);
+        }
+        else if (Input.GetKeyDown(KeyCode.K))
+        {
+            keyCodeCount_k++;
+            if (keyCodeCount_k>=3)
+            {
+                EventManager.Instance.TriggerEvent(EventName.ShowTestEvent);
+                keyCodeCount_k = 0;
+            }
         }
         if (Screen.width!= previousWidth || Screen.height!= previousHeight)
         {
