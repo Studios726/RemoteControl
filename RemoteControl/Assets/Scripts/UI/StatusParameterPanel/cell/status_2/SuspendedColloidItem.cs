@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Asn1.Crmf;
 using UnityEngine;
 using UnityEngine.UI;
 public struct SuspendedColloidData
@@ -56,6 +57,10 @@ public struct SuspendedColloidData
     /// 中部料斗堵煤
     /// </summary>
     public bool isMiddleHopperCoalBlocking;
+    /// <summary>
+    /// 中部料斗堵煤开关
+    /// </summary>
+    public bool isCentralHopperCloggedDetectionSwitch;
 }
 /// <summary>
 /// 悬胶
@@ -114,6 +119,10 @@ public class SuspendedColloidItem : StatusParmItemBase<SuspendedColloidData>
     /// 中部料斗堵煤
     /// </summary>
     public ToggleDIY MiddleHopperCoalBlocking;
+    /// <summary>
+    /// 中部料斗堵煤开关
+    /// </summary>
+    public ToggleDIY CentralHopperCloggedDetectionSwitch;
     public override void UpdateData(SuspendedColloidData data,bool isConnect=false)
     {
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
@@ -129,5 +138,6 @@ public class SuspendedColloidItem : StatusParmItemBase<SuspendedColloidData>
         SetToggleState(EmergencyStopCableSwitch, data.isEmergencyStopCableSwitch,true,isConnect);
         SetToggleState(MaterialFlowDetectionSwitch, data.isMaterialFlowDetectionSwitch,true,isConnect);
         SetToggleState(MiddleHopperCoalBlocking, data.isMiddleHopperCoalBlocking,true,isConnect);
+        SetToggleState(CentralHopperCloggedDetectionSwitch, data.isCentralHopperCloggedDetectionSwitch,true,isConnect);
     }
 }

@@ -207,6 +207,8 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.SuspensionBeltMaterialFlowDetectionSwitch, data.SuspensionBeltMaterialFlowDetectionSwitch_2);
         suspendedColloidData.isMiddleHopperCoalBlocking = GetToggleState(!data.CentralMaterialDustDetectionSwitch,
             !data.CentralMaterialDustDetectionSwitch_2);
+        suspendedColloidData.isCentralHopperCloggedDetectionSwitch =
+            GetToggleState(data.CentralHopperCloggedDetectionSwitch, data.CentralHopperCloggedDetectionSwitch_2);
         SuspendedColloidItem?.UpdateData(suspendedColloidData ,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
 

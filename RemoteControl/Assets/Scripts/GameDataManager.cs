@@ -1037,15 +1037,15 @@ public class GameDataManager : Singleton<GameDataManager>
             if (newSystemVariables.D1PLC1CommunicationState == false && _systemVariables.D1PLC1CommunicationState)
             {
                 //堆取料机PLC断线
-                DataManager.Instance.InsertHistoryWarningMc("PLC1断线", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("斗轮机PLC1断线", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D1PLC1CommunicationState), "PLC1断线",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D1PLC1CommunicationState), "斗轮机PLC1断线",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.D1PLC1CommunicationState && _systemVariables.D1PLC1CommunicationState == false)
             {
                 //堆取料机PLC1断线解除
-                DataManager.Instance.InsertHistoryWarningMc("PLC1断线解除", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("斗轮机PLC1断线解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.D1PLC1CommunicationState));
             }
@@ -1053,15 +1053,15 @@ public class GameDataManager : Singleton<GameDataManager>
             if (newSystemVariables.D1PLC2CommunicationState == false && _systemVariables.D1PLC2CommunicationState)
             {
                 //堆取料机PLC断线
-                DataManager.Instance.InsertHistoryWarningMc("PLC2断线", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("无人值守PLC2断线", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D1PLC2CommunicationState), "PLC2断线",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D1PLC2CommunicationState), "无人值守PLC2断线",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.D1PLC2CommunicationState && _systemVariables.D1PLC2CommunicationState == false)
             {
-                //堆取料机PLC1断线解除
-                DataManager.Instance.InsertHistoryWarningMc("PLC2断线解除", GetUserName(),
+                //堆取料机PLC2断线解除
+                DataManager.Instance.InsertHistoryWarningMc("无人值守PLC2断线解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.D1PLC2CommunicationState));
             }
@@ -4489,16 +4489,16 @@ public class GameDataManager : Singleton<GameDataManager>
                 _systemVariables.CentralHopperCloggedDetectionSwitch == false)
             {
                 // 中部料斗堵煤检测开关
-                DataManager.Instance.InsertHistoryWarningMc("中部料斗堵煤检测开关", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤检测开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralHopperCloggedDetectionSwitch), "中部料斗堵煤检测开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralHopperCloggedDetectionSwitch), "悬胶/挡板-中部料斗堵煤检测开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.CentralHopperCloggedDetectionSwitch == false &&
                      _systemVariables.CentralHopperCloggedDetectionSwitch == true)
             {
                 // 中部料斗堵煤检测开关解除
-                DataManager.Instance.InsertHistoryWarningMc("中部料斗堵煤检测开关解除", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤检测开关解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.CentralHopperCloggedDetectionSwitch));
             }
@@ -5018,16 +5018,16 @@ public class GameDataManager : Singleton<GameDataManager>
             if (newSystemVariables.D2PLC1CommunicationState == false && _systemVariables.D2PLC1CommunicationState)
             {
                 //堆取料机PLC断线
-                DataManager.Instance.InsertHistoryWarningMc("PLC1断线", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("斗轮机PLC1断线", GetUserName(),
                     Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D2PLC1CommunicationState), "PLC1断线",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D2PLC1CommunicationState), "斗轮机PLC1断线",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.D2PLC1CommunicationState &&
                      _systemVariables.D2PLC1CommunicationState == false)
             {
                 //堆取料机PLC1断线解除
-                DataManager.Instance.InsertHistoryWarningMc("PLC1断线解除", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("斗轮机PLC1断线解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.D2PLC1CommunicationState));
             }
@@ -5035,16 +5035,16 @@ public class GameDataManager : Singleton<GameDataManager>
             if (newSystemVariables.D2PLC2CommunicationState == false && _systemVariables.D2PLC2CommunicationState)
             {
                 //堆取料机PLC断线
-                DataManager.Instance.InsertHistoryWarningMc("PLC2断线", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("无人值守PLC2断线", GetUserName(),
                     Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D2PLC2CommunicationState), "PLC2断线",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.D2PLC2CommunicationState), "无人值守PLC2断线",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.D2PLC2CommunicationState &&
                      _systemVariables.D2PLC2CommunicationState == false)
             {
                 //堆取料机PLC1断线解除
-                DataManager.Instance.InsertHistoryWarningMc("PLC2断线解除", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("无人值守PLC2断线解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.D2PLC2CommunicationState));
             }
@@ -8578,17 +8578,17 @@ public class GameDataManager : Singleton<GameDataManager>
                 _systemVariables.CentralHopperCloggedDetectionSwitch_2 == false)
             {
                 // 中部料斗堵煤检测开关
-                DataManager.Instance.InsertHistoryWarningMc("中部料斗堵煤检测开关", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤检测开关", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralHopperCloggedDetectionSwitch_2),
-                    "中部料斗堵煤检测开关",
+                    "悬胶/挡板-中部料斗堵煤检测开关",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.CentralHopperCloggedDetectionSwitch_2 == false &&
                      _systemVariables.CentralHopperCloggedDetectionSwitch_2 == true)
             {
                 // 中部料斗堵煤检测开关解除
-                DataManager.Instance.InsertHistoryWarningMc("中部料斗堵煤检测开关解除", GetUserName(),
+                DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤检测开关解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.CentralHopperCloggedDetectionSwitch_2));
             }

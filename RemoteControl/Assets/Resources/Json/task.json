@@ -1,1 +1,123 @@
-{"McData": [{"ID": 0, "QuerySystem": "MC", "Command_Type": 0, "TaskID": "241120161633", "OperatorSystem": "MC", "Machine": 0, "TaskType": 1, "OperationCommand": 0, "MaterialRange": {"startValue": 0.0, "endValue": 0.0}, "SideSelection": "LIFT", "LeftRightRange": {"startValue": 12.0, "endValue": 12.0}, "StepLength": 0.1, "IsTimed": false, "TimedAt": 0, "IsQuantified": false, "Quantity": 0, "TakeMateHigh": 0.0, "LayerHigh": 0.0, "OperatorName": "\u7ba1\u7406\u5458", "CommonTaskParameters": {"HeapDis": 3.5, "MoveModel": 0, "FetchPileDepth": 2.8, "FetchVerticalRangeAdd": 1.0, "FetchHorizontalRangeSub": 1.0}, "TaskCreateTime": "2024-11-20T16:16:33.105991+08:00", "nowState": null, "AllData": {"OperationCommandList": [0, 0, 0, 1], "Code": -1, "ProcessingProgress": 1, "CodeTime": "2024-11-20T15:20:08.643000", "TaskEndTime": "2024-11-20T15:20:08.643000", "NextPositionList": [999, 999, 999]}, "AutoMode": 1, "AngleEntryMode": 1, "ResetState": 0, "FinishMethod": [0, 0], "FinishCode": 0}, {"ID": 0, "QuerySystem": "MC", "Command_Type": 0, "TaskID": "241120161925", "OperatorSystem": "MC", "Machine": 1, "TaskType": 1, "OperationCommand": 0, "MaterialRange": {"startValue": 153.0, "endValue": 153.0}, "SideSelection": "LIFT", "LeftRightRange": {"startValue": 12.0, "endValue": 12.0}, "StepLength": 0.1, "IsTimed": false, "TimedAt": 0, "IsQuantified": true, "Quantity": 0, "TakeMateHigh": 0.0, "LayerHigh": 0.0, "OperatorName": "\u7ba1\u7406\u5458", "CommonTaskParameters": {"HeapDis": 3.5, "MoveModel": 0, "FetchPileDepth": 2.8, "FetchVerticalRangeAdd": 1.0, "FetchHorizontalRangeSub": 1.0}, "TaskCreateTime": "2024-11-20T16:19:25.7349419+08:00", "nowState": null, "AllData": {"OperationCommandList": [0, 0, 0, 1], "Code": -1, "ProcessingProgress": 1, "CodeTime": "2024-11-20T15:20:08.643000", "TaskEndTime": "2024-11-20T15:20:08.643000", "NextPositionList": [999, 999, 999]}, "AutoMode": 1, "AngleEntryMode": 1, "ResetState": 0, "FinishMethod": [0, 1], "FinishCode": 2}], "Error": 0}
+{
+  "McData": [
+    {
+      "ID": 0,
+      "QuerySystem": "MC",
+      "Command_Type": 0,
+      "TaskID": "241207111621",
+      "TaskCreateTime": "2024-12-07T11:16:21.0758174+08:00",
+      "nowState": "0",
+      "OperatorName": "AAAa",
+      "OperatorSystem": "MC",
+      "Machine": 0,
+      "TaskType": 1,
+      "OperationCommand": 0,
+      "MaterialRange": {
+        "startValue": 50.0,
+        "endValue": 220.0
+      },
+      "SideSelection": "RIGHT",
+      "LeftRightRange": {
+        "startValue": 20.0,
+        "endValue": 44.0
+      },
+      "StepLength": 0.5,
+      "PileMateHigh": 0.0,
+      "AutoMode": 1,
+      "AngleEntryMode": 1,
+      "CommonTaskParameters": {
+        "HeapDis": 3.5,
+        "MoveModel": 0,
+        "FetchPileDepth": 2.8,
+        "FetchVerticalRangeAdd": 1.0,
+        "FetchHorizontalRangeSub": 1.0
+      },
+      "TurnMode": 2,
+      "TurnConfirmState": 0,
+      "IsTaskContinued": 0,
+      "FinishMethod": [
+        0,
+        1
+      ],
+      "ResetState": 0,
+      "AllData": {
+        "OperationCommandList": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Code": -1,
+        "ProcessingProgress": 1,
+        "CodeTime": "2024-12-07T11:31:21.842294",
+        "TaskEndTime": "2024-12-07T11:16:11.974503",
+        "NextPositionList": [
+          33.512561112499995,
+          999,
+          81.1000275
+        ],
+        "TaskCreateTime": "2024-12-07T11:16:21.0758174+08:00"
+      }
+    },
+    {
+      "ID": 0,
+      "QuerySystem": "MC",
+      "Command_Type": 0,
+      "TaskID": "241207113114",
+      "TaskCreateTime": "2024-12-07T11:31:14.285945+08:00",
+      "nowState": "0",
+      "OperatorName": "AAAa",
+      "OperatorSystem": "MC",
+      "Machine": 1,
+      "TaskType": 1,
+      "OperationCommand": 0,
+      "MaterialRange": {
+        "startValue": 153.0,
+        "endValue": 323.0
+      },
+      "SideSelection": "LEFT",
+      "LeftRightRange": {
+        "startValue": 15.0,
+        "endValue": 50.0
+      },
+      "StepLength": 0.6,
+      "PileMateHigh": 0.0,
+      "AutoMode": 1,
+      "AngleEntryMode": 1,
+      "CommonTaskParameters": {
+        "HeapDis": 3.5,
+        "MoveModel": 0,
+        "FetchPileDepth": 2.8,
+        "FetchVerticalRangeAdd": 1.0,
+        "FetchHorizontalRangeSub": 1.0
+      },
+      "TurnMode": 2,
+      "TurnConfirmState": 0,
+      "IsTaskContinued": 1,
+      "FinishMethod": [
+        0,
+        1
+      ],
+      "ResetState": 0,
+      "AllData": {
+        "OperationCommandList": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "Code": -1,
+        "ProcessingProgress": 1,
+        "CodeTime": "2024-12-07T11:31:21.860851",
+        "TaskEndTime": "2024-12-07T11:16:11.974503",
+        "NextPositionList": [
+          999,
+          999,
+          999
+        ],
+        "TaskCreateTime": "2024-12-07T11:31:14.285945+08:00"
+      }
+    }
+  ],
+  "Error": 0
+}
