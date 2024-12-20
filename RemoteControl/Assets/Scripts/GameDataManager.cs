@@ -75,7 +75,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public McWarningRecord LastMcWarningRecord;
     public bool IsCanPop;
     public bool IsCanPopTakeMater;
-
+    public bool IsUpdatePlcWarningRecord;
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
@@ -967,7 +967,8 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
         }
-        UpdatePlcWarningRecordData();
+
+        IsUpdatePlcWarningRecord = true;
     }
 
     public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, DateTime TriggerTime,
@@ -1021,6 +1022,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public void RecordWarning(SystemVariables newSystemVariables)
     {
         bool isUpdate = false;
+        IsUpdatePlcWarningRecord = false;
         if (_systemVariables == null)
         {
             _systemVariables = new SystemVariables();
@@ -9238,6 +9240,12 @@ public class GameDataManager : Singleton<GameDataManager>
             //同步历史警告信息操作
             UpdateWarningByLastMcWarningRecord();
         }
+
+        if (IsUpdatePlcWarningRecord)
+        {
+            UpdatePlcWarningRecordData();
+        }
+    
     }
 
     #endregion
