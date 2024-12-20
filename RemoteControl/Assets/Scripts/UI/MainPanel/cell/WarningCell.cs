@@ -15,9 +15,10 @@ public class WarningCellData
     public DateTime TriggerDateTime;
     public double Timestamp;
     public Machine Machine;
+    public bool IsDataSynchronized;
 
     public WarningCellData(string key,string des,DateTime dateTime, Machine machine, bool isConfirm = false, bool isSelect = false,
-        string confirmTime = "")
+        string confirmTime = "",bool isIsDataSynchronized=true)
     {
         this.Key = key;
         this.Des = des;
@@ -28,6 +29,7 @@ public class WarningCellData
         this.IsSelect = isSelect;
         this.TriggerDateTime = dateTime;
         this.Timestamp =(dateTime - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local)).TotalSeconds;
+        IsDataSynchronized = isIsDataSynchronized;
     }
 }
 

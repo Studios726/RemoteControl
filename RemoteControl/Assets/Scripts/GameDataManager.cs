@@ -157,7 +157,7 @@ public class GameDataManager : Singleton<GameDataManager>
             }
             catch (Exception e)
             {
-                Debug.Log("解析失败");
+                Debug.LogError("解析失败");
             }
         }
 
@@ -950,7 +950,7 @@ public class GameDataManager : Singleton<GameDataManager>
     }
 
     public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, string time,
-        bool isConfirm = false, string confirmTime = "")
+        bool isConfirm = false, string confirmTime = "",bool isDataSynchronized=true)
     {
         if (WarningCellDataDict.ContainsKey(key))
         {
@@ -958,7 +958,7 @@ public class GameDataManager : Singleton<GameDataManager>
         }
 
         WarningCellDataDict.Add(key,
-            new WarningCellData(key, des, DateTime.Now, machine, isConfirm, isSelect, confirmTime));
+            new WarningCellData(key, des, DateTime.Now, machine, isConfirm, isSelect, confirmTime,isDataSynchronized));
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
@@ -967,6 +967,7 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
         }
+        UpdatePlcWarningRecordData();
     }
 
     public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, DateTime TriggerTime,
@@ -9231,7 +9232,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2));
             }
         }
-
+        // Debug.LogError($">>>>>>>>>{isUpdate} {LastMcWarningRecord!=null}");
         if (isUpdate == true && LastMcWarningRecord != null)
         {
             //同步历史警告信息操作
@@ -9247,10 +9248,12 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             foreach (var data in LastMcWarningRecord.WarningCellDataDict)
             {
-                AddOrUpdateWarningDesDict(data.Value.Key, data.Value.Des, data.Value.Machine, false,
-                    data.Value.TriggerDateTime, data.Value.IsConfirm, data.Value.ConfirmTime);
+                if (data.Value.IsDataSynchronized)
+                {
+                    AddOrUpdateWarningDesDict(data.Value.Key, data.Value.Des, data.Value.Machine, false,
+                        data.Value.TriggerDateTime, data.Value.IsConfirm, data.Value.ConfirmTime);
+                }
             }
-            UpdatePlcWarningRecordData();
         }
     }
 }

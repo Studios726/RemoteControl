@@ -494,7 +494,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         //Debug.Log("更新move  大车碰撞信息 ");
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
-            pos1 = (data.DC_Pos + ConstStr.InitPosition_1).ToString("F2");
+            pos1 = data.DC_Pos.ToString("F2");
             SetText(carElectricity, data.LargeCarElectricCurrent.ToString("F2"), TextType.Electricity);
             SetText(rotationElectricity, data.RotaryElectricCurrent.ToString("F2"), TextType.Electricity);
             SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent.ToString("F2"), TextType.Electricity);
@@ -640,7 +640,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         }
         else
         {
-            pos2 = (data.DC_Pos_2 + ConstStr.InitPosition_2).ToString("F2");
+            pos2 = data.DC_Pos_2.ToString("F2");
             SetText(carElectricity, data.LargeCarElectricCurrent_2.ToString("F2"), TextType.Electricity);
             SetText(rotationElectricity, data.RotaryElectricCurrent_2.ToString("F2"), TextType.Electricity);
             SetText(bucketWheelElectricity, data.BucketWheelElectricCurrent_2.ToString("F2"), TextType.Electricity);

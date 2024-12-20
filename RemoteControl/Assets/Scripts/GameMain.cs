@@ -204,6 +204,8 @@ namespace RemoteControl
                 Machine.BucketWheelStackerReclaimer,true);
             DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
                 Machine.BucketWheel,true);
+            GameDataManager.Instance.RemoveWarningDesDict(connectEventArgs.type.ToString());
+            GameDataManager.Instance.RemoveWarningDesDict(connectEventArgs.type.ToString()+"_2");
         }
 
         public void ConnectionFail(object o, EventArgs eventArgs)
@@ -246,6 +248,8 @@ namespace RemoteControl
             Debug.Log("----------------------Fail " + connectEventArgs.type);
             if (isInsert == true)
             {
+                GameDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString(),des,Machine.BucketWheelStackerReclaimer,false,"",false,"",false);
+                GameDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString()+"_2",des,Machine.BucketWheel,false,"",false,"",false);
                 DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
                     Machine.BucketWheelStackerReclaimer,true);
                 DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
