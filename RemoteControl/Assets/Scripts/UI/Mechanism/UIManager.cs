@@ -12,6 +12,7 @@ public class UIManager : Singleton<UIManager>
    private List<GameObject> _canvasList = new List<GameObject>();
    private GameObject _uiRoot;
    private GameObject _canvasPrefab;
+   private GameObject debugGo;
    
    public void HideCanvasParent()
    {
@@ -22,6 +23,15 @@ public class UIManager : Singleton<UIManager>
       _uiRoot.SetActive(true);
    }
 
+   public void InitDebugTool()
+   {
+      GameObject go=Resources.Load<GameObject>("UI/IngameDebugConsole");
+      if (go!=null)
+      {
+         debugGo = GameObject.Instantiate(go);
+      }
+   
+   }
    public void Init(UILayer[] uiLayers)
    {
       _canvasPrefab = Resources.Load<GameObject>("UI/Canvas");

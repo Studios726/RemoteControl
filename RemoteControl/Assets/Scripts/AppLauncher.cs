@@ -103,6 +103,8 @@ public class AppLauncher : MonoBehaviour
 
         };
         UIManager.Instance.Init(uiLayers);
+        //生成调试工具
+        UIManager.Instance.InitDebugTool();
     }
 
     public void FullScreen()

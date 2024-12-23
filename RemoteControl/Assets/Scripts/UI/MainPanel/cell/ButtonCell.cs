@@ -173,7 +173,7 @@ public class ButtonCell : MonoBehaviour
     {
         if (btn==null)
         {
-            Debug.Log("按钮没有初始化");
+            // Debug.Log("按钮没有初始化");
             return;
         }
         if (lastAction!=null)
