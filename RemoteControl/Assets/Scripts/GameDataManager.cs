@@ -210,13 +210,14 @@ public class GameDataManager : Singleton<GameDataManager>
     public void PileTakeMaterPop(TaskType taskType, int time,Machine machine)
     {
         string title=machine==Machine.BucketWheelStackerReclaimer?ConstStr.BucketWheelStackerReclaimerName:ConstStr.BucketWheelName;
+        UIID uiID =machine==Machine.BucketWheelStackerReclaimer?UIID.ConfirmPanel_1:UIID.ConfirmPanel_2;
         if (taskType == TaskType.PILEMATER)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s",title, null, null, time));
+            UIManager.Instance.OpenUI(uiID, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s",title, null, null, time));
         }
         else if (taskType == TaskType.TAKEMATER)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+            UIManager.Instance.OpenUI(uiID,
                 new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s",title, null, null, time));
         }
         else

@@ -5,6 +5,8 @@ public partial class UIID
     public static readonly UIID TopPanel = new UIID("TopPanel",typeof(TopPanelView),typeof(TopPanelCtr),Layer.UITopLayer);
     public static readonly UIID SettingPanel = new UIID("SettingPanel",typeof(SettingPanelView),typeof(SettingPanelCtr),Layer.UILayer);
     public static readonly UIID ConfirmPanel = new UIID("ConfirmPanel",typeof(ConfirmPanelView),typeof(ConfirmPanelCtr),Layer.UIPopupLayer);
+    public static readonly UIID ConfirmPanel_1 = new UIID("ConfirmPanel_1",typeof(ConfirmPanelView),typeof(ConfirmPanelCtr),Layer.UIPopupLayer);
+    public static readonly UIID ConfirmPanel_2 = new UIID("ConfirmPanel_2",typeof(ConfirmPanelView),typeof(ConfirmPanelCtr),Layer.UIPopupLayer);
     public static readonly UIID HistoryPanel = new UIID("HistoryWarningPanel",typeof(HistoryPanelView),typeof(HistoryPanelCtr),Layer.UILayer);
     public static readonly UIID StatusParaeterPanel = new UIID("StatusParameterPanel", typeof(StatusParameterPanelView), typeof(StatusParameterPanelCtr), Layer.UILayer);
     public static readonly UIID ConfirmTaskPanel = new UIID("ConfirmTaskPanel", typeof(ConfirmTaskPanelView), typeof(ConfirmTaskPanelCtr), Layer.UIPopupLayer);
