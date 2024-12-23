@@ -40,11 +40,13 @@ public class TaskCodeDes
                     case 0:
                         sb.Append($"回转: {list[i].ToString("F1")}° ");
                         break;
-                    case 1:
-                        sb.Append($"俯仰: {list[i].ToString("F1")}° ");
-                        break;
+                    // case 1:
+                    //     sb.Append($"俯仰: {list[i].ToString("F1")}° ");
+                    //     break;
                     case 2:
                         sb.Append($"前进: {list[i].ToString("F1")}m");
+                        break;
+                    default:
                         break;
                 }
             }
@@ -66,11 +68,13 @@ public class TaskCodeDes
                     case 0:
                         sb.Append($"回转: {list[i].ToString("F1")}° ");
                         break;
-                    case 1:
-                        sb.Append($"俯仰: {list[i].ToString("F1")}° ");
-                        break;
+                    // case 1:
+                    //     sb.Append($"俯仰: {list[i].ToString("F1")}° ");
+                    //     break;
                     case 2:
                         sb.Append($"前进: {list[i].ToString("F1")}m");
+                        break;
+                    default:
                         break;
                 }
             }
