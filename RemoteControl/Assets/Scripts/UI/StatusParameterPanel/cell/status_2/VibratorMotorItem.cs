@@ -17,6 +17,10 @@ public struct VibratorMotorData
     /// 振打电机运行
     /// </summary>
     public bool isVibrationMotorRunning;
+    /// <summary>
+    /// 振打器故障
+    /// </summary>
+    public bool isVibrationMotorFault;
 }
 /// <summary>
 /// 振打电机
@@ -35,10 +39,12 @@ public class VibratorMotorItem : StatusParmItemBase<VibratorMotorData>
     /// 振打电机运行
     /// </summary>
     public ToggleDIY VibrationMotorRunning;
+    public ToggleDIY VibrationMotorFault;
     public override void UpdateData(VibratorMotorData data,bool isConnect=false)
     {
         SetToggleState(VibrationMotorMainCircuitBreaker, data.isVibrationMotorMainCircuitBreaker,false,isConnect);
         SetToggleState(VibrationMotorOverload, data.isVibrationMotorOverload,true,isConnect);
         SetToggleState(VibrationMotorRunning, data.isVibrationMotorRunning,false,isConnect);
+        SetToggleState(VibrationMotorFault, data.isVibrationMotorFault,true,isConnect);
     }
 }

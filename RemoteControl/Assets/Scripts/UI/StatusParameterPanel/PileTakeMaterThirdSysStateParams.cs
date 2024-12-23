@@ -141,6 +141,10 @@ public class PileTakeMaterThirdSysStateParams : MonoBehaviour
          systemVariables.Boom_SAS_R_Radar_DSV_2);
       deviceData.Boom_SAS_R_Ult_DSV = GetParameterValue(systemVariables.Boom_SAS_R_Ult_DSV,
          systemVariables.Boom_SAS_R_Ult_DSV_2);
+      deviceData.SR1_Encode_DC_PresetValue_SCADA = GetParameterValue(systemVariables.SR1_Encode_DC_PresetValue_SCADA,
+         systemVariables.SR1_Encode_DC_PresetValue_SCADA_2);
+      deviceData.SR1_EncodeSLEW_PresetValue_SCADA = GetParameterValue(systemVariables.SR1_EncodeSLEW_PresetValue_SCADA,
+         systemVariables.SR1_EncodeSLEW_PresetValue_SCADA_2);
       AntiCollisionDeviceParameterSetting.UpdateParameter(deviceData);
       AntiCollisionDeviceParameterSetting.UpdateParameter(systemVariables, machine);
    }

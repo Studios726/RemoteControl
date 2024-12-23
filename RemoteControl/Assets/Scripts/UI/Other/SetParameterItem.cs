@@ -21,7 +21,7 @@ public class SetParameterItem : MonoBehaviour
         cell.AddListener((() =>
         {    
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs(des+"启用?", null, () =>
+                new ConfirmPanelArgs(des+"启用?",GameDataManager.Instance.GetMachineName(machine), null, () =>
                 {
                     DataManager.Instance.InsertHistoryLogMc(des+"启用", GameDataManager.Instance.GetUserName(), machine);
                     Debug.Log($"启用 {des} {machine} {useCommand}");
@@ -32,7 +32,7 @@ public class SetParameterItem : MonoBehaviour
         resetBtn.AddListener((() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs(des+"切除?", null, () =>
+                new ConfirmPanelArgs(des+"切除?",GameDataManager.Instance.GetMachineName(machine), null, () =>
                 {
                     DataManager.Instance.InsertHistoryLogMc(des+"切除", GameDataManager.Instance.GetUserName(), machine);
                     Debug.Log($"切除 {des} {machine} {useCommand}");
@@ -43,7 +43,7 @@ public class SetParameterItem : MonoBehaviour
         }));
         inputField.onEndEdit.AddListener((arg0 =>
         {
-            Debug.Log($"设定修改 {des} {machine}");
+            Debug.Log($"设定修改 {des} {machine} {commandName}");
             DataManager.Instance.InsertHistoryLogMc(des+"设定修改", GameDataManager.Instance.GetUserName(), machine);
             GameDataManager.Instance.SendServerCommandByName(commandName,0, float.Parse(inputField.text));
         }));

@@ -111,6 +111,7 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             data.VibrationMotorOverload_2);
         vibratorMotorData.isVibrationMotorRunning = GetToggleState(data.VibrationMotorRunning,
             data.VibrationMotorRunning_2);
+        vibratorMotorData.isVibrationMotorFault = GetToggleState(data.VibrationMotorFault, data.VibrationMotorFault_2);
         VibratorMotorItem?.UpdateData(vibratorMotorData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
 

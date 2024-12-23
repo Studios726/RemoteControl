@@ -383,7 +383,24 @@ public enum COMMAND_NAME
     /// <summary>
     /// 步进数值设定
     /// </summary>
-    CAR_FIXSIZE_SET
+    CAR_FIXSIZE_SET,
+    /// <summary>
+    /// 大车编码器手动预设值
+    /// </summary>
+    DC_VALUE_SET,
+    /// <summary>
+    /// 回转编码器手动预设值
+    /// </summary>
+    SLEW_VALUE_SET,
+    /// <summary>
+    /// 大车编码器手动校准
+    /// </summary>
+    DC_ADJUST,
+    /// <summary>
+    /// 回转编码器手动校准
+    /// </summary>
+    SLEW_ADJUST,
+    
     
 }
 public static class ServerCommandDataType
