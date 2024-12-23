@@ -39,13 +39,6 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         {
             TaskLogTimer = Timer.Register(1, true, false, (() =>
             {
-                // List<TaskLogCellData> data = new List<TaskLogCellData>();
-                // int count = Random.Range(0, 100);
-                // for (int i = 0; i < count; i++)
-                // {
-                //     data.Add(new TaskLogCellData("",i.ToString(),DateTime.Now.ToString("h:mm:ss"),Machine.BucketWheelStackerReclaimer,"888888888"));
-                // }
-                // view._bucketWheelTask1.UpdateTaskLog(data);
                 UpdateTaskLog1(null,null);
                 UpdateTaskLog2(null,null);
             }));
@@ -101,7 +94,13 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
             }
             catch (Exception e)
             {
-                Debug.LogError("数据更新失败");
+                Debug.LogError($"数据更新失败 {e.Message} ");
+                // 创建栈跟踪对象
+                StackTrace stackTrace = new StackTrace(e, true);
+                foreach (var frame in stackTrace.GetFrames())
+                {
+                    Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
+                }
             }
         }
     }
@@ -144,7 +143,13 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
             }
             catch (Exception e)
             {
-                Debug.LogError("数据更新失败");
+                Debug.LogError($"数据更新失败 {e.Message}");
+                // 创建栈跟踪对象
+                StackTrace stackTrace = new StackTrace(e, true);
+                foreach (var frame in stackTrace.GetFrames())
+                {
+                    Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
+                }
             }
         }
     }
@@ -161,19 +166,13 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         }
         catch (Exception e)
         {
-            TaskDataManager.Instance.TestStr =$"<TaskPC11> {DateTime.Now.ToString("HH:mm:ss")} {e.Message}";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            Debug.LogError($"{e.Message} ");
             // 创建栈跟踪对象
             StackTrace stackTrace = new StackTrace(e, true);
-            string test = "";
             foreach (var frame in stackTrace.GetFrames())
             {
-                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
             }
-            TaskDataManager.Instance.TestStr =$"<TaskPC11> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            // TaskDataManager.Instance.UpdateTaskData(4);
-            Debug.LogError($"MainPanel UpdateTaskLog {e.Message} ");
         }
       
         // lock (lockObject)
@@ -231,20 +230,13 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         }
         catch (Exception e)
         {
-            TaskDataManager.Instance.TestStr =$"<TaskPC1> {DateTime.Now.ToString("HH:mm:ss")} {e.Message}";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            // // 创建栈跟踪对象
+            Debug.LogError($"{e.Message} ");
+            // 创建栈跟踪对象
             StackTrace stackTrace = new StackTrace(e, true);
-            string test = "";
             foreach (var frame in stackTrace.GetFrames())
             {
-                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
             }
-            // string str = JsonMgr.Serialize(TaskDataManager.Instance.taskCodeDesDictionary);
-            TaskDataManager.Instance.TestStr =$"<TaskPC1> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            // TaskDataManager.Instance.UpdateTaskData(4);
-            Debug.LogError($"MainPanel UpdateTaskLog {e.Message} ");
         }
        
         // lock (lockObject2)
@@ -296,7 +288,6 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         EventManager.Instance.RemoveListener(EventName.RefreshWarningDes2, UpdateWarningDes2);
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes1, UpdateTaskLog1);
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes2, UpdateTaskLog2);
-        EventManager.Instance.RemoveListener(EventName.TestEvent, view.SetTestInputField);
         if (TaskLogTimer!=null)
         {
             TaskLogTimer.Cancel();
@@ -312,8 +303,6 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         EventManager.Instance.AddListener(EventName.RefreshWarningDes2, UpdateWarningDes2);
         EventManager.Instance.AddListener(EventName.RefreshTaskDes1, UpdateTaskLog1);
         EventManager.Instance.AddListener(EventName.RefreshTaskDes2, UpdateTaskLog2);
-        EventManager.Instance.AddListener(EventName.TestEvent, view.SetTestInputField);
-        EventManager.Instance.AddListener(EventName.ShowTestEvent,view.ShowTestInput);
     }
 
     public void SendMessage(string message)

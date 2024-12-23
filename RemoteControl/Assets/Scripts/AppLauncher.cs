@@ -45,15 +45,6 @@ public class AppLauncher : MonoBehaviour
         {
             EventManager.Instance.TriggerEvent(EventName.KeyCodeTab, null);
         }
-        else if (Input.GetKeyDown(KeyCode.K))
-        {
-            keyCodeCount_k++;
-            if (keyCodeCount_k>=3)
-            {
-                EventManager.Instance.TriggerEvent(EventName.ShowTestEvent);
-                keyCodeCount_k = 0;
-            }
-        }
         if (Screen.width!= previousWidth || Screen.height!= previousHeight)
         {
             Debug.Log("屏幕分辨率发生变化: " + Screen.width + " x " + Screen.height);

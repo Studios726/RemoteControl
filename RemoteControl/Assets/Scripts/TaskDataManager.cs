@@ -413,17 +413,13 @@ public class TaskDataManager : Singleton<TaskDataManager>
         catch (Exception e)
         {
             taskCodeDesDictionary?.Clear();
-            TestStr =$"<TaskPC2> {DateTime.Now.ToString("HH:mm:ss")} {e.Message}";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
+            Debug.LogError($"数据更新失败 {e.Message} ");
+            // 创建栈跟踪对象
             StackTrace stackTrace = new StackTrace(e, true);
-            string test = "";
             foreach (var frame in stackTrace.GetFrames())
             {
-                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
             }
-            TestStr =$"<TaskPC2> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            Debug.LogError($"任务描述处理报错{e.Message}");
         }
         EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes1, this, null);
         EventManager.Instance.TriggerEvent(EventName.RefreshTaskDes2, this, null);

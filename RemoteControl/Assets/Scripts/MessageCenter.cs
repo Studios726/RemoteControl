@@ -82,24 +82,18 @@ public class MessageCenter : Singleton<MessageCenter>
                 try
                 {
                     string json = Decompress(message);
-                    // json= Resources.Load("Json/RC").ToString();
                     SystemVariables systemVariables = JsonMgr.DeSerialize<SystemVariables>(json);
                     GameDataManager.Instance.SetSystemVariables(systemVariables);
                 }
                 catch (Exception e)
                 {
-                    TaskDataManager.Instance.TestStr =$"<TaoRC> {DateTime.Now.ToString("HH:mm:ss")} {e.Message}";
-                    EventManager.Instance.TriggerEvent(EventName.TestEvent);
+                    Debug.Log($"数据解析失败 socketType {socketType} message {message} error {e.Message}");
+                    // 创建栈跟踪对象
                     StackTrace stackTrace = new StackTrace(e, true);
-                    string test = "";
                     foreach (var frame in stackTrace.GetFrames())
                     {
-                        test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                        Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
                     }
-                    TaskDataManager.Instance.TestStr =$"<TaoRC> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
-                    EventManager.Instance.TriggerEvent(EventName.TestEvent);
-                    // UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("数据解析失败"));
-                    Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaoRC)} {e.Message}");
                 }
             }
         }else if(socketType== SocketType.TaskPC)
@@ -115,17 +109,13 @@ public class MessageCenter : Singleton<MessageCenter>
                 catch (Exception e)
                 {
                     TaskDataManager.Instance.UpdateTaskData(4);
-                    TaskDataManager.Instance.TestStr =$"<TaskPC3> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {message}";
-                    EventManager.Instance.TriggerEvent(EventName.TestEvent);
+                    Debug.Log($"数据解析失败 socketType {socketType} message {message} error {e.Message}");
+                    // 创建栈跟踪对象
                     StackTrace stackTrace = new StackTrace(e, true);
-                    string test = "";
                     foreach (var frame in stackTrace.GetFrames())
                     {
-                        test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                        Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
                     }
-                    TaskDataManager.Instance.TestStr =$"<TaskPC3> {DateTime.Now.ToString("HH:mm:ss")} {e.Message} {test}";
-                    EventManager.Instance.TriggerEvent(EventName.TestEvent);
-                    Debug.LogError($"数据解析失败 socketType {nameof(SocketType.TaskPC)} {e.Message} >>>{message}<<<");
                 }
             }
            
@@ -139,9 +129,13 @@ public class MessageCenter : Singleton<MessageCenter>
             }
             catch (Exception e)
             {
-                //解压失败获取新的sca数据
-                // GameDataManager.Instance.UpdateSCAData(30);
-                Debug.LogError($"数据解析失败 socketType {socketType} {e.Message}");
+                Debug.Log($"数据解析失败 socketType {socketType} message {message} error {e.Message}");
+                // 创建栈跟踪对象
+                StackTrace stackTrace = new StackTrace(e, true);
+                foreach (var frame in stackTrace.GetFrames())
+                {
+                    Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
+                }
             }
         }else if (socketType == SocketType.FM)
         {
@@ -182,6 +176,10 @@ public class MessageCenter : Singleton<MessageCenter>
                 {
                     if (handle != null)
                     {
+                        if (messageType==MessageType.PC)
+                        {
+                            Debug.Log($"发送数据成功{messageType} " + json);
+                        }
                         handle(json);
                     }
                 }

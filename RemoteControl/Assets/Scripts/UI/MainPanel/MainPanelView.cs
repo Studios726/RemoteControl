@@ -22,8 +22,6 @@ public class MainPanelView : UIView<MainPanelCtr>
     private BucketWheelStackerReclaimerHideBtnCtr _bucketWheelHideBtnCtr1;
     private Button updateModelBtn;
     private Button updateTaskBtn;
-    private InputField testInputField;
-    private GameObject testGo;
     public List<string> TaskMessageList = new List<string>();
 
     public override void InitUIElements(UIArgs uiArgs)
@@ -42,8 +40,6 @@ public class MainPanelView : UIView<MainPanelCtr>
         updateModelBtn = RootObj.transform.FindComponent<Button>("updateModel");
         updateTaskBtn = RootObj.transform.FindComponent<Button>("updateTaskArgs");
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
-        testInputField = RootObj.transform.FindComponent<InputField>("test/InputField");
-        testGo = RootObj.transform.Find("test").gameObject;
         updateModelBtn.onClick.AddListener(() =>
         {
             TaskDataManager.Instance.TestStr =$"<1>88888";
@@ -175,16 +171,7 @@ public class MainPanelView : UIView<MainPanelCtr>
             _bucketWheelTask1?.ResetState();
         }
     }
-
-    public void SetTestInputField(object o, EventArgs eventArgs)
-    {
-        testInputField.text=testInputField.text+" -------- "+TaskDataManager.Instance.TestStr;
-    }
-
-    public void ShowTestInput(object o, EventArgs eventArgs)
-    {
-        testGo.SetActive(!testGo.activeSelf);
-    }
+    
     public void AddOnClickListener(Button btn, UnityAction action)
     {
         btn.onClick.AddListener(action);
