@@ -86,14 +86,12 @@ public class BucketWheelTaskBase : PanelBase
             RefrashLogCount++;
             isRefrash = true;
             StackTrace stackTrace = new StackTrace(e, true);
-            string test = "";
+          
             foreach (var frame in stackTrace.GetFrames())
             {
-                test = test + $"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>";
+                Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
             }
-            TaskDataManager.Instance.TestStr =$"<5555>{e.Message} {test} ";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            Debug.LogError($">>>>>>>>>>>>>>>>>>>>{e.Message} {test} {RefrashLogCount}");
+            Debug.LogError($">>>>>>>>>>>>>>>>>>>>{e.Message} {RefrashLogCount}");
         }
 
         if (isRefrash&&RefrashLogCount<5)
