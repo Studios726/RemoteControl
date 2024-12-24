@@ -49,7 +49,7 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
                 {
                     if (UIManager.Instance != null)
                     {
-                        UIManager.Instance.CloseUI(UIID.ConfirmPanel);
+                        UIManager.Instance.CloseUI(args.UIID);
                     }
 
                     if (_timer != null)
@@ -69,7 +69,7 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
                 {
                     if (UIManager.Instance != null)
                     {
-                        UIManager.Instance.CloseUI(UIID.ConfirmPanel);
+                        UIManager.Instance.CloseUI(args.UIID);
                     }
 
                     if (_timer != null)
@@ -119,7 +119,7 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
                         _timer = null;
                         if (UIManager.Instance != null)
                         {
-                            UIManager.Instance.CloseUI(UIID.ConfirmPanel);
+                            UIManager.Instance.CloseUI(args.UIID);
                         }
                     }
                 }, null, true);

@@ -48,6 +48,7 @@ public class ConfirmPanelArgs : UIArgs
     private Action _confirmAction;
     private int _duration;
     private int _duration2;
+    private UIID _uiID;
     public string Describe{
         get => _describe;
         set => _describe = value;
@@ -64,6 +65,10 @@ public class ConfirmPanelArgs : UIArgs
         get => _duration2;
         set => _duration2 = value;
     }
+    public UIID UIID{
+        get => _uiID;
+        set => _uiID = value;
+    }
     public Action CancleAction
     {
         get  =>_cancleAction;
@@ -74,7 +79,7 @@ public class ConfirmPanelArgs : UIArgs
         get  =>_confirmAction;
         set => _confirmAction = value;
     }
-    public ConfirmPanelArgs(string des,string title, Action cancleAction=null, Action confirmAction=null,int time=0,int time2=0)
+    public ConfirmPanelArgs(string des,string title, Action cancleAction=null, Action confirmAction=null,int time=0,int time2=0,UIID uiID=null)
     {
         Describe = des;
         TitleName = title;
@@ -82,5 +87,14 @@ public class ConfirmPanelArgs : UIArgs
         ConfirmAction = confirmAction;
         Duration = time;
         Duration2 = time2;
+        if (uiID==null)
+        {
+            UIID=UIID.ConfirmPanel;
+        }
+        else
+        {
+            UIID=uiID;
+        }
+     
     }
 }

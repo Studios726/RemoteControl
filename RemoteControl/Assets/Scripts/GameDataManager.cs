@@ -213,12 +213,12 @@ public class GameDataManager : Singleton<GameDataManager>
         UIID uiID =machine==Machine.BucketWheelStackerReclaimer?UIID.ConfirmPanel_1:UIID.ConfirmPanel_2;
         if (taskType == TaskType.PILEMATER)
         {
-            UIManager.Instance.OpenUI(uiID, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s",title, null, null, time));
+            UIManager.Instance.OpenUI(uiID, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s",title, null, null, time,0,uiID));
         }
         else if (taskType == TaskType.TAKEMATER)
         {
             UIManager.Instance.OpenUI(uiID,
-                new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s",title, null, null, time));
+                new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s",title, null, null, time,0,uiID));
         }
         else
         {
