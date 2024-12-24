@@ -785,7 +785,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             }
         }
 
-        SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos - data.DC_Pos_2) + ConstStr.InitDistance).ToString("F2"), TextType.Meter);
+        SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos+ConstStr.InitPosition_1 - data.DC_Pos_2-ConstStr.InitPosition_2)).ToString("F2"), TextType.Meter);
     }
 
     //堆取料弹窗提示
