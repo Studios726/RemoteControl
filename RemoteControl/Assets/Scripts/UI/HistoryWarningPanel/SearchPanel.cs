@@ -149,7 +149,7 @@ public class SearchPanel : MonoBehaviour
             timeType = TimeType.StartTime;
             if (startMText.text=="" || startYText.text=="")
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("请确认年份和月份填写正确",null,null));
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("请确认年份和月份填写正确","日期",null,null));
                 return;
             }
             SetActive(startDBtn.gameObject,false);
@@ -163,7 +163,7 @@ public class SearchPanel : MonoBehaviour
             timeType = TimeType.EndTime;
             if (endMText.text=="" || endYText.text=="")
             {
-                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("请确认年份和月份填写正确",null,null));
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("请确认年份和月份填写正确","日期",null,null));
                 return;
             }
             SetActive(endDBtn.gameObject,false);

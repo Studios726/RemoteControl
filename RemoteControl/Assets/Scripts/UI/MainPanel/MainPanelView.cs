@@ -42,15 +42,8 @@ public class MainPanelView : UIView<MainPanelCtr>
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
         updateModelBtn.onClick.AddListener(() =>
         {
-            TaskDataManager.Instance.TestStr =$"<1>88888";
-            EventManager.Instance.TriggerEvent(EventName.TestEvent);
-            // double d = 4.5;
-            // float tempChartValue = (float)d;
-            // Debug.Log($">>>>>>>>>>>>>>{tempChartValue} {(float)Math.Round(tempChartValue, 2)}");
-            // tempChartValue=(float)Math.Round(tempChartValue,2);
-            // TaskDataManager.Instance.TestStr =$"<1>";
-            // EventManager.Instance.TriggerEvent(EventName.TestEvent);
-           
+            // GameDataManager.Instance.PileTakeMaterPop(TaskType.None, 5, Machine.BucketWheel);
+            GameDataManager.Instance.PileTakeMaterPop(TaskType.PILEMATER, 15, Machine.BucketWheel);
             // if (GameDataManager.Instance.GameMain.connectionSCA.isConnect == false)
             // {
             //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,
