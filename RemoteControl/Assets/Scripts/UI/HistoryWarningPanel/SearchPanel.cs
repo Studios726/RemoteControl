@@ -98,7 +98,7 @@ public class SearchPanel : MonoBehaviour
 
     private Action<string, string, MechanicalType,string> searchAction;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         scrollviewYPos = scrollviewY.transform.localPosition;
         scrollviewMPos = scrollviewM.transform.localPosition;
@@ -211,6 +211,7 @@ public class SearchPanel : MonoBehaviour
         }));
 
         searchBtn.onClick.AddListener(SearchHistroyRecord);
+        
     }
 
     public void SetHistoryPanel(HistoryPanelCtr ctr)
@@ -437,6 +438,29 @@ public class SearchPanel : MonoBehaviour
         SetActive(endMinuteBtn2.gameObject, false);
     }
 
+    public void SetDateText(string[] start,string[] end)
+    {
+        startYText.text =start[0];
+        startMText.text =start[1];
+        startDText.text =start[2];
+        startHText.text =start[3];
+        startMinuteText.text =start[4];
+
+        endYText.text =end[0];
+        endMText.text =end[1];
+        endDText.text =end[2];
+        endHText.text =end[3];
+        endMinuteText.text =end[4];
+    }
+
+    public string GetStartDateText()
+    {
+        return $"{startYText.text}-{startMText.text}-{startDText.text}-{startHText.text}-{startMinuteText.text}";
+    }
+    public string GetEndDateText()
+    {
+        return $"{endYText.text}-{endMText.text}-{endDText.text}-{endHText.text}-{endMinuteText.text}";
+    }
     public void ResetDateText()
     {
         startYText.text ="";
