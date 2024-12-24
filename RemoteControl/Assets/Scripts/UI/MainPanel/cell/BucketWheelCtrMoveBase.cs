@@ -751,15 +751,18 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 stopBtn.SetSystemState(false);
             }
 
-            if (data.RotaryLeftTurnCommand_2 == false && data.RotaryRightTurnCommand_2 == false)
+            if (data.RotaryLeftTurnCommand_2 == false && data.RotaryRightTurnCommand_2 == false&& data.VariableAmplitudeUpperElectromagneticValveOpen_2 == false &&
+                data.VariableAmplitudeLowerElectromagneticValveOpen_2 == false)
             {
               
                 rotStopBtn.SetSystemState(true);
                 rotStopBtn.SetRedAlpha(1);
+                stopBtn.SetSystemState(true);
             }
             else
             {
                 rotStopBtn.SetSystemState(false);
+                stopBtn.SetSystemState(false);
             }
 
             float x1 = 40 * Mathf.Cos(Mathf.Abs(data.Luff_Angle_2) * Mathf.Deg2Rad);
