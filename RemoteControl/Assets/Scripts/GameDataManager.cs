@@ -4866,23 +4866,23 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.VibrationMotorOverloading));
             }
 
-            if (newSystemVariables.BucketWheelMotorContactor == true &&
-                _systemVariables.BucketWheelMotorContactor == false)
-            {
-                // 斗轮电机接触器
-                DataManager.Instance.InsertHistoryWarningMc("斗轮电机接触器", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelMotorContactor), "斗轮电机接触器",
-                    Machine.BucketWheelStackerReclaimer, false, "");
-            }
-            else if (newSystemVariables.BucketWheelMotorContactor == false &&
-                     _systemVariables.BucketWheelMotorContactor == true)
-            {
-                // 斗轮电机接触器解除
-                DataManager.Instance.InsertHistoryWarningMc("斗轮电机接触器解除", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelMotorContactor));
-            }
+            // if (newSystemVariables.BucketWheelMotorContactor == true &&
+            //     _systemVariables.BucketWheelMotorContactor == false)
+            // {
+            //     // 斗轮电机接触器
+            //     DataManager.Instance.InsertHistoryWarningMc("斗轮电机接触器", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelMotorContactor), "斗轮电机接触器",
+            //         Machine.BucketWheelStackerReclaimer, false, "");
+            // }
+            // else if (newSystemVariables.BucketWheelMotorContactor == false &&
+            //          _systemVariables.BucketWheelMotorContactor == true)
+            // {
+            //     // 斗轮电机接触器解除
+            //     DataManager.Instance.InsertHistoryWarningMc("斗轮电机接触器解除", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelMotorContactor));
+            // }
 
             if (newSystemVariables.PowerCableRollerNotRunning == true &&
                 _systemVariables.PowerCableRollerNotRunning == false)
@@ -5014,6 +5014,25 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("远程任务规划子系统通讯异常解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0));
+            }
+            
+            if (newSystemVariables.SuspensionBeltFault == true &&
+                _systemVariables.SuspensionBeltFault == false)
+            {
+                // 悬臂胶带故障
+                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带故障", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault),
+                    "悬臂胶带故障",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.SuspensionBeltFault == false &&
+                     _systemVariables.SuspensionBeltFault == true)
+            {
+                //悬臂胶带故障解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带故障解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault));
             }
             
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>取料机报错信息<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -8960,23 +8979,23 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.VibrationMotorOverloading_2));
             }
 
-            if (newSystemVariables.BucketWheelMotorContactor_2 == true &&
-                _systemVariables.BucketWheelMotorContactor_2 == false)
-            {
-                // 斗轮电机接触器
-                DataManager.Instance.InsertHistoryWarningMc("斗轮电机接触器", GetUserName(),
-                    Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelMotorContactor_2), "斗轮电机接触器",
-                    Machine.BucketWheel, false, "");
-            }
-            else if (newSystemVariables.BucketWheelMotorContactor_2 == false &&
-                     _systemVariables.BucketWheelMotorContactor_2 == true)
-            {
-                // 斗轮电机接触器解除
-                DataManager.Instance.InsertHistoryWarningMc("斗轮电机接触器解除", GetUserName(),
-                    Machine.BucketWheel);
-                RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelMotorContactor_2));
-            }
+            // if (newSystemVariables.BucketWheelMotorContactor_2 == true &&
+            //     _systemVariables.BucketWheelMotorContactor_2 == false)
+            // {
+            //     // 斗轮电机接触器
+            //     DataManager.Instance.InsertHistoryWarningMc("斗轮电机接触器", GetUserName(),
+            //         Machine.BucketWheel);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelMotorContactor_2), "斗轮电机接触器",
+            //         Machine.BucketWheel, false, "");
+            // }
+            // else if (newSystemVariables.BucketWheelMotorContactor_2 == false &&
+            //          _systemVariables.BucketWheelMotorContactor_2 == true)
+            // {
+            //     // 斗轮电机接触器解除
+            //     DataManager.Instance.InsertHistoryWarningMc("斗轮电机接触器解除", GetUserName(),
+            //         Machine.BucketWheel);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelMotorContactor_2));
+            // }
 
             if (newSystemVariables.PowerCableRollerNotRunning_2 == true &&
                 _systemVariables.PowerCableRollerNotRunning_2 == false)
@@ -9234,6 +9253,26 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2));
             }
+            
+            if (newSystemVariables.SuspensionBeltFault_2 == true &&
+                _systemVariables.SuspensionBeltFault_2  == false)
+            {
+                // 悬臂胶带故障
+                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带故障", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault_2),
+                    "悬臂胶带故障",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.SuspensionBeltFault_2  == false &&
+                     _systemVariables.SuspensionBeltFault_2  == true)
+            {
+                //悬臂胶带故障解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带故障解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault_2 ));
+            }
+
         }
         // Debug.LogError($">>>>>>>>>{isUpdate} {LastMcWarningRecord!=null}");
         if (isUpdate == true && LastMcWarningRecord != null)

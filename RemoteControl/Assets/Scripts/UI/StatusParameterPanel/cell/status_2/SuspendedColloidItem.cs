@@ -61,6 +61,10 @@ public struct SuspendedColloidData
     /// 中部料斗堵煤开关
     /// </summary>
     public bool isCentralHopperCloggedDetectionSwitch;
+    /// <summary>
+    /// 悬臂胶带故障
+    /// </summary>
+    public bool isSuspensionBeltFault;
 }
 /// <summary>
 /// 悬胶
@@ -123,6 +127,7 @@ public class SuspendedColloidItem : StatusParmItemBase<SuspendedColloidData>
     /// 中部料斗堵煤开关
     /// </summary>
     public ToggleDIY CentralHopperCloggedDetectionSwitch;
+    public ToggleDIY SuspensionBeltFault;
     public override void UpdateData(SuspendedColloidData data,bool isConnect=false)
     {
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
@@ -139,5 +144,6 @@ public class SuspendedColloidItem : StatusParmItemBase<SuspendedColloidData>
         SetToggleState(MaterialFlowDetectionSwitch, data.isMaterialFlowDetectionSwitch,true,isConnect);
         SetToggleState(MiddleHopperCoalBlocking, data.isMiddleHopperCoalBlocking,true,isConnect);
         SetToggleState(CentralHopperCloggedDetectionSwitch, data.isCentralHopperCloggedDetectionSwitch,true,isConnect);
+        SetToggleState(SuspensionBeltFault, data.isSuspensionBeltFault,true,isConnect);
     }
 }
