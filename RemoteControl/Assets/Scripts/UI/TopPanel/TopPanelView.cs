@@ -64,8 +64,8 @@ public class TopPanelView : UIView<TopPanelCtr>
 
         _controlBtn.onClick.AddListener(() => //��Զ�̲�������
         {
-            DataManager.Instance.InsertHistoryLogMc("远程控制", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
-            DataManager.Instance.InsertHistoryLogMc("远程控制", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
+            // DataManager.Instance.InsertHistoryLogMc("远程控制", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            // DataManager.Instance.InsertHistoryLogMc("远程控制", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             SetSelectState(_controlText);
             UIManager.Instance.OpenUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
@@ -75,8 +75,8 @@ public class TopPanelView : UIView<TopPanelCtr>
         });
         _superviseBtn.onClick.AddListener(() =>
         {
-            DataManager.Instance.InsertHistoryLogMc("状态参数", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
-            DataManager.Instance.InsertHistoryLogMc("状态参数", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
+            // DataManager.Instance.InsertHistoryLogMc("状态参数", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            // DataManager.Instance.InsertHistoryLogMc("状态参数", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             UIManager.Instance.OpenUI(UIID.StatusParaeterPanel);
             UIManager.Instance.CloseUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.MainPanel);
@@ -85,8 +85,8 @@ public class TopPanelView : UIView<TopPanelCtr>
         });
         _alarmBtn.onClick.AddListener(() => //�򿪱����������
         {
-            DataManager.Instance.InsertHistoryLogMc("历史数据", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
-            DataManager.Instance.InsertHistoryLogMc("历史数据", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
+            // DataManager.Instance.InsertHistoryLogMc("历史数据", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            // DataManager.Instance.InsertHistoryLogMc("历史数据", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             UIManager.Instance.OpenUI(UIID.HistoryPanel);
             UIManager.Instance.CloseUI(UIID.SettingPanel);
             UIManager.Instance.CloseUI(UIID.MainPanel);
@@ -96,8 +96,8 @@ public class TopPanelView : UIView<TopPanelCtr>
         });
         _userBtn.onClick.AddListener(() =>
         {
-            DataManager.Instance.InsertHistoryLogMc("用户管理", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
-            DataManager.Instance.InsertHistoryLogMc("用户管理", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
+            // DataManager.Instance.InsertHistoryLogMc("用户管理", GameDataManager.Instance.GetUserName(), Machine.BucketWheel);
+            // DataManager.Instance.InsertHistoryLogMc("用户管理", GameDataManager.Instance.GetUserName(), Machine.BucketWheelStackerReclaimer);
             _userPnl.gameObject.SetActive(!_userPnl.gameObject.activeSelf);
             _closeUserBtn.gameObject.SetActive(!_closeUserBtn.gameObject.activeSelf);
         });

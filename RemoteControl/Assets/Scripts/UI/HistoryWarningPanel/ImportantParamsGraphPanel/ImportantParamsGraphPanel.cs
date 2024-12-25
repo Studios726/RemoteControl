@@ -65,13 +65,13 @@ public class HistoryChartData
     }
 }
 
-public class ChartCell
+public class DateCell
 {
     public string StartTime;
     public string EndTime;
     public bool IsDynamic;
 
-    public ChartCell(string startTime, string endTime, bool isDynamic = false)
+    public DateCell(string startTime, string endTime, bool isDynamic = false)
     {
         StartTime = startTime;
         EndTime = endTime;
@@ -114,7 +114,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     private ChartName curChartName;
     private Queue<CData> tempChartData = new Queue<CData>();
     private float tempChartValue;
-    private Dictionary<string, ChartCell> dateDic = new Dictionary<string, ChartCell>();
+    private Dictionary<string, DateCell> dateDic = new Dictionary<string, DateCell>();
 
     public void Start()
     {
@@ -236,16 +236,16 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         DateTime now = DateTime.Now;
         string startDate = $"{now.Year}-{now.Month}-{now.Day}" + "-0-0";
         string endDate = $"{now.Year}-{now.Month}-{now.Day}" + "-23-59";
-        dateDic.Add(ChartName.BucketWheelCurrent_1.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.BucketWheelCurrent_2.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.TrolleyCurrent_1.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.TrolleyCurrent_2.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.SlewingCurrent_1.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.SlewingCurrent_2.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.SuspendedGelCurrent_1.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.SuspendedGelCurrent_2.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.CantileverCurrent_1.ToString(), new ChartCell(startDate, endDate));
-        dateDic.Add(ChartName.CantileverCurrent_2.ToString(), new ChartCell(startDate, endDate));
+        dateDic.Add(ChartName.BucketWheelCurrent_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.BucketWheelCurrent_2.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.TrolleyCurrent_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.TrolleyCurrent_2.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.SlewingCurrent_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.SlewingCurrent_2.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.SuspendedGelCurrent_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.SuspendedGelCurrent_2.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.CantileverCurrent_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.CantileverCurrent_2.ToString(), new DateCell(startDate, endDate));
     }
 
     private void UpdateDateDic(ChartName chartName)
@@ -272,6 +272,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
                 }
                 historyBtn.gameObject.SetActive(dateDic[chartName.ToString()].IsDynamic==false);
                 dynamicBtn.gameObject.SetActive(dateDic[chartName.ToString()].IsDynamic);
+                searchPanel.gameObject.SetActive(dateDic[chartName.ToString()].IsDynamic==false);
             }
         }
     }

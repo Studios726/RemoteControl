@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,6 @@ public enum PanelType
     ParameTerPanel = 2,
     TaskPanel = 3
 }
-
 public class HistoryPanelView : UIView<HistoryPanelCtr>
 {
     private Button _alarmBtn;
@@ -36,7 +36,12 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
 
     public GameObject curOffBtn;
     public GameObject curOnBtn;
-
+    public GameObject dateBtnsGo;
+    public Button historyPileTakeBtn;
+    public Button historyTakeBtn;
+    public Button dynamicPileTakeBtn;
+    public Button dynamicTakeBtn;
+    private Dictionary<string, DateCell> dateDic = new Dictionary<string, DateCell>();
     public override void InitUIElements(UIArgs uiArgs = null)
     {
         _alarmBtn = RootObj.transform.FindComponent<Button>("Btns/alarmBtnOff");
@@ -60,7 +65,74 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _stackerReclaimer = RootObj.transform.FindComponent<SearchPanel>("StackerReclaimerSearchPanel");
         _taskPanel = RootObj.transform.Find("TaskPanel").gameObject;
 
+        dateBtnsGo=RootObj.transform.Find("dateBtns").gameObject;
+        historyPileTakeBtn = RootObj.transform.FindComponent<Button>("dateBtns/historyPileTakeBtn");
+        dynamicPileTakeBtn = RootObj.transform.FindComponent<Button>("dateBtns/dynamicPileTakeBtn");
+        dynamicTakeBtn = RootObj.transform.FindComponent<Button>("dateBtns/dynamicTakeBtn");
+        historyTakeBtn = RootObj.transform.FindComponent<Button>("dateBtns/historyTakeBtn");
 
+        historyPileTakeBtn.onClick.AddListener(() =>
+        {
+            historyPileTakeBtn.gameObject.SetActive(false);
+            dynamicPileTakeBtn.gameObject.SetActive(true);
+            if (curPanelType == PanelType.AlarmPanel)
+            {
+                dateDic[ConstStr.DATABASE_HISTORY_WARNING1_MC].IsDynamic = true;
+                LatestWarningLogsByMachine(Machine.BucketWheelStackerReclaimer, PanelType.AlarmPanel);
+            }else if (curPanelType == PanelType.LogPanel)
+            {
+                dateDic[ConstStr.DATABASE_HISTORY_LOG1_MC].IsDynamic = true;
+                LatestWarningLogsByMachine(Machine.BucketWheelStackerReclaimer, PanelType.LogPanel);
+            }
+            _stackerReclaimer.gameObject.SetActive(false);
+          
+        });
+        dynamicPileTakeBtn.onClick.AddListener(() =>
+        {
+            historyPileTakeBtn.gameObject.SetActive(true);
+            dynamicPileTakeBtn.gameObject.SetActive(false);
+            if (curPanelType == PanelType.AlarmPanel)
+            {
+                dateDic[ConstStr.DATABASE_HISTORY_WARNING1_MC].IsDynamic = false;
+            }else if (curPanelType == PanelType.LogPanel)
+            {
+                dateDic[ConstStr.DATABASE_HISTORY_LOG1_MC].IsDynamic = false;
+            }
+            _stackerReclaimer.gameObject.SetActive(true);
+            _stackerReclaimer.searchBtn.onClick.Invoke();
+        });
+        historyTakeBtn.onClick.AddListener(() =>
+        {
+            historyTakeBtn.gameObject.SetActive(false);
+            dynamicTakeBtn.gameObject.SetActive(true);
+            if (curPanelType == PanelType.AlarmPanel)
+            {
+                dateDic[ConstStr.DATABASE_HISTORY_WARNING2_MC].IsDynamic = true;
+                LatestWarningLogsByMachine(Machine.BucketWheel, PanelType.AlarmPanel);
+            }else if (curPanelType == PanelType.LogPanel)
+            {
+                dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic = true;
+                LatestWarningLogsByMachine(Machine.BucketWheel, PanelType.LogPanel);
+            }
+            _reclaimer.gameObject.SetActive(false);
+        });
+        dynamicTakeBtn.onClick.AddListener(() =>
+        {
+            historyTakeBtn.gameObject.SetActive(true);
+            dynamicTakeBtn.gameObject.SetActive(false);
+            if (curPanelType == PanelType.AlarmPanel)
+            {
+                dateDic[ConstStr.DATABASE_HISTORY_WARNING2_MC].IsDynamic = false;
+            }else if (curPanelType == PanelType.LogPanel)
+            {
+                dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic = false;
+            }
+            _reclaimer.gameObject.SetActive(true);
+            _reclaimer.searchBtn.onClick.Invoke();
+        });
+        
+        
+        
         _alarmBtn.onClick.AddListener(ShowAlarmPanel);
         _operationBtn.onClick.AddListener(ShowLogPanel);
         _parameterBtn.onClick.AddListener(ShowParameterPanel);
@@ -73,6 +145,9 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         curOffBtn = _alarmBtn.gameObject;
         curOnBtn = _alarmBtnOn.gameObject;
         // InitRecord();
+        InitDateDic();
+        SetSearchPanelDate(_stackerReclaimer,ConstStr.DATABASE_HISTORY_WARNING1_MC);
+        SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_WARNING2_MC);
     }
 
     private void InitRecord()
@@ -94,18 +169,89 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
     }
     private void GetLatestWarningLogs()
     {
-        string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC}  Order By time DESC  LIMIT 100 ;";
-        string warningSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC} Order By time DESC LIMIT 100;";
-        _ctr.RequestData(warningSql, MechanicalType.StackerReclaimer, PanelType.AlarmPanel);
-        _ctr.RequestData(warningSql2, MechanicalType.Reclaimer, PanelType.AlarmPanel);
+        string warningSql = "";
+        string warningSql2 = "";
+        if (dateDic[ConstStr.DATABASE_HISTORY_WARNING1_MC].IsDynamic)
+        {
+            warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC}  Order By time DESC  LIMIT 100 ;";
+            _ctr.RequestData(warningSql, MechanicalType.StackerReclaimer, PanelType.AlarmPanel);
+        }
+        else
+        {
+            _stackerReclaimer.searchBtn.onClick.Invoke();
+        }
+        if (dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic)
+        {
+            warningSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC} Order By time DESC LIMIT 100;";
+            _ctr.RequestData(warningSql2, MechanicalType.Reclaimer, PanelType.AlarmPanel);
+        }
+        else
+        {
+            _reclaimer.searchBtn.onClick.Invoke();
+        }
+      
     }
 
+    private void LatestWarningLogsByMachine(Machine machine,PanelType panelType)
+    {
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            if (panelType==PanelType.AlarmPanel)
+            {
+                string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING1_MC}  Order By time DESC  LIMIT 100 ;";
+                _ctr.RequestData(warningSql, MechanicalType.StackerReclaimer, PanelType.AlarmPanel);
+            }else if (panelType==PanelType.LogPanel)
+            {
+                string logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG1_MC}  Order By time DESC LIMIT 100;";
+                _ctr.RequestData(logSql, MechanicalType.StackerReclaimer, PanelType.LogPanel);
+            } else
+            {
+                Debug.Log("PanelType is null");
+            }
+        }else if (machine==Machine.BucketWheel)
+        {
+            if (panelType==PanelType.AlarmPanel)
+            {
+                string warningSql = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC}  Order By time DESC  LIMIT 100 ;";
+                _ctr.RequestData(warningSql, MechanicalType.Reclaimer, PanelType.AlarmPanel);
+            }else if (panelType==PanelType.LogPanel)
+            {
+                string logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG2_MC}  Order By time DESC LIMIT 100;";
+                _ctr.RequestData(logSql, MechanicalType.Reclaimer, PanelType.LogPanel);
+            }
+            else
+            {
+                Debug.Log("PanelType is null");
+            }
+        }
+        else
+        {
+            Debug.Log("machine is null");
+        }
+    }
     private void GetLatestOperationLogs()
     {
-        string logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG1_MC}  Order By time DESC LIMIT 100;";
-        string logSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_LOG2_MC}  Order By time DESC LIMIT 100;";
-        _ctr.RequestData(logSql, MechanicalType.StackerReclaimer, PanelType.LogPanel);
-        _ctr.RequestData(logSql2, MechanicalType.Reclaimer, PanelType.LogPanel);
+        string logSql = "";
+        string logSql2 = "";
+        if (dateDic[ConstStr.DATABASE_HISTORY_LOG1_MC].IsDynamic)
+        {
+            logSql = $"Select * from {ConstStr.DATABASE_HISTORY_LOG1_MC}  Order By time DESC LIMIT 100;";
+            _ctr.RequestData(logSql, MechanicalType.StackerReclaimer, PanelType.LogPanel);
+        }
+        else
+        {
+            _stackerReclaimer.searchBtn.onClick.Invoke();
+        }
+        if (dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic)
+        {
+            logSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_LOG2_MC}  Order By time DESC LIMIT 100;";
+            _ctr.RequestData(logSql2, MechanicalType.Reclaimer, PanelType.LogPanel);
+        }
+        else
+        {
+            _reclaimer.searchBtn.onClick.Invoke();
+        }
+     
     }
 
     private void ShowAlarmPanel()
@@ -116,10 +262,14 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _logPanel.SetActive(false);
         _taskPanel.SetActive(false);
         _parameterPanel.SetActive(false);
+        dateBtnsGo.SetActive(true);
         SearchPanelActive(true);
+        SetSearchPanelDate(_stackerReclaimer,ConstStr.DATABASE_HISTORY_WARNING1_MC);
+        SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_WARNING2_MC);
         GetLatestWarningLogs();
-        _reclaimer.Reset();
-        _stackerReclaimer.Reset();
+    
+        // _reclaimer.Reset();
+        // _stackerReclaimer.Reset();
     }
 
     private void ShowLogPanel()
@@ -130,10 +280,14 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _logPanel.SetActive(true);
         _parameterPanel.SetActive(false);
         _taskPanel.SetActive(false);
+        dateBtnsGo.SetActive(true);
         SearchPanelActive(true);
+        SetSearchPanelDate(_stackerReclaimer,ConstStr.DATABASE_HISTORY_LOG1_MC);
+        SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_LOG1_MC);
         GetLatestOperationLogs();
-        _reclaimer.Reset();
-        _stackerReclaimer.Reset();
+     
+        // _reclaimer.Reset();
+        // _stackerReclaimer.Reset();
     }
 
     private void ShowParameterPanel()
@@ -143,6 +297,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _alarmPanel.SetActive(false);
         _logPanel.SetActive(false);
         _taskPanel.SetActive(false);
+        dateBtnsGo.SetActive(false);
         _parameterPanel.SetActive(true);
         SearchPanelActive(false);
     }
@@ -153,6 +308,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         curPanelType = PanelType.TaskPanel;
         _alarmPanel.SetActive(false);
         _logPanel.SetActive(false);
+        dateBtnsGo.SetActive(false);
         _reclaimer.gameObject.SetActive(false);
         _stackerReclaimer.gameObject.SetActive(false);
         _parameterPanel.SetActive(false);
@@ -165,10 +321,10 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _stackerReclaimer.gameObject.SetActive(isActive);
     }
 
-    public void ShowStatePane(StatusParameterChildID id)
-    {
-        Debug.Log($"状态参数打开 {id}");
-    }
+    // public void ShowStatePane(StatusParameterChildID id)
+    // {
+    //     Debug.Log($"状态参数打开 {id}");
+    // }
 
     public void RestCurBtn(GameObject offgo, GameObject ongo)
     {
@@ -195,10 +351,12 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         {
             if (panelType == PanelType.AlarmPanel)
             {
+                UpdateDateDic(_reclaimer, ConstStr.DATABASE_HISTORY_WARNING2_MC);
                 _alarmReclaimerList.RefreshList(historyDatas,panelType);
             }
             else if (panelType == PanelType.LogPanel)
             {
+                UpdateDateDic(_reclaimer, ConstStr.DATABASE_HISTORY_LOG2_MC);
                 _logReclaimerList.RefreshList(historyDatas,panelType);
             }
             else
@@ -209,14 +367,69 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         {
             if (panelType == PanelType.AlarmPanel)
             {
+                UpdateDateDic(_stackerReclaimer, ConstStr.DATABASE_HISTORY_WARNING1_MC);
                 _alarmStackerReclaimerList.RefreshList(historyDatas,panelType);
             }
             else if (panelType == PanelType.LogPanel)
             {
+                UpdateDateDic(_stackerReclaimer, ConstStr.DATABASE_HISTORY_LOG1_MC);
                 _logmStackerReclaimerList.RefreshList(historyDatas,panelType);
             }
             else
             {
+            }
+        }
+    }
+    
+    private void InitDateDic()
+    {
+        DateTime now = DateTime.Now;
+        string startDate = $"{now.Year}-{now.Month}-{now.Day}" + "-0-0";
+        string endDate = $"{now.Year}-{now.Month}-{now.Day}" + "-23-59";
+        dateDic.Add(ConstStr.DATABASE_HISTORY_WARNING1_MC, new DateCell(startDate, endDate));
+        dateDic.Add(ConstStr.DATABASE_HISTORY_WARNING2_MC, new DateCell(startDate, endDate));
+        dateDic.Add(ConstStr.DATABASE_HISTORY_LOG1_MC, new DateCell(startDate, endDate));
+        dateDic.Add(ConstStr.DATABASE_HISTORY_LOG2_MC, new DateCell(startDate, endDate));
+    }
+
+    private void UpdateDateDic(SearchPanel searchPanel, string key)
+    {
+        if (dateDic.ContainsKey(key))
+        {
+            dateDic[key].StartTime =searchPanel?.GetStartDateText();
+            dateDic[key].EndTime =searchPanel?.GetEndDateText();
+        }
+    }
+
+    private void SetSearchPanelDate(SearchPanel searchPanel,string key)
+    {
+        if (searchPanel != null)
+        {
+            if (dateDic.ContainsKey(key))
+            {
+                string[] startTime = dateDic[key].StartTime.Split("-");
+                string[] endTime = dateDic[key].EndTime.Split("-");
+                if (startTime.Length>=4&&endTime.Length>=4)
+                {
+                    searchPanel.SetDateText(startTime, endTime);
+                }
+
+                if (key==ConstStr.DATABASE_HISTORY_WARNING1_MC||key == ConstStr.DATABASE_HISTORY_LOG1_MC)
+                {
+                    historyPileTakeBtn.gameObject.SetActive(dateDic[key].IsDynamic==false);
+                    dynamicPileTakeBtn.gameObject.SetActive(dateDic[key].IsDynamic);
+                    _stackerReclaimer.gameObject.SetActive(dateDic[key].IsDynamic==false);
+                    
+                }else if (key==ConstStr.DATABASE_HISTORY_WARNING2_MC||key == ConstStr.DATABASE_HISTORY_LOG2_MC)
+                {
+                    historyTakeBtn.gameObject.SetActive(dateDic[key].IsDynamic==false);
+                    dynamicTakeBtn.gameObject.SetActive(dateDic[key].IsDynamic);
+                    _reclaimer.gameObject.SetActive(dateDic[key].IsDynamic==false);
+                }
+                else
+                {
+                    Debug.Log($"key {key} 不存在");
+                }
             }
         }
     }
