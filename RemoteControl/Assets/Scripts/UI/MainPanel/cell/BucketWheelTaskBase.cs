@@ -23,6 +23,7 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell SemiAutoToggle;
     public ButtonCell RightAngleToggle;
     public ButtonCell ObliqueAngleToggle;
+    public InputField AngleEntryValue;
     /// <summary>
     /// 左转
     /// </summary>
@@ -127,12 +128,13 @@ public class BucketWheelTaskBase : PanelBase
         }
         AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
         SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
-        RightAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.RIGHTANGLE,true);
-        ObliqueAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.OBLIQUEANGLE,true);
+        // RightAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.RIGHTANGLE,true);
+        // ObliqueAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.OBLIQUEANGLE,true);
         leftTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.LEFTTURN,true);
         rightTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.RIGHTTURN,true);
         leftTakeMaterText.text = taskCommand.LeftRightRange.startValue.ToString();
         rightTakeMaterText.text = taskCommand.LeftRightRange.endValue.ToString();
+        AngleEntryValue.text = taskCommand.AngleEntryValue.ToString();
         takeMaterStep.text = taskCommand.StepLength.ToString();
         layerHigh.text = taskCommand.LayerHigh.ToString();
         timeOpenToggle.isOn = taskCommand.IsTimed;
@@ -286,17 +288,17 @@ public class BucketWheelTaskBase : PanelBase
             SemiAutoToggle.SetSystemState(true,true);
         } ));
         
-        AddOnClickListener(RightAngleToggle,(() =>
-        {
-            RightAngleToggle.SetSystemState(true,true);
-            ObliqueAngleToggle.SetSystemState(false,true);
-        } ));
-        
-        AddOnClickListener(ObliqueAngleToggle,(() =>
-        {
-            RightAngleToggle.SetSystemState(false,true);
-            ObliqueAngleToggle.SetSystemState(true,true);
-        } ));
+        // AddOnClickListener(RightAngleToggle,(() =>
+        // {
+        //     RightAngleToggle.SetSystemState(true,true);
+        //     ObliqueAngleToggle.SetSystemState(false,true);
+        // } ));
+        //
+        // AddOnClickListener(ObliqueAngleToggle,(() =>
+        // {
+        //     RightAngleToggle.SetSystemState(false,true);
+        //     ObliqueAngleToggle.SetSystemState(true,true);
+        // } ));
         
         AddOnClickListener(leftTurnToggle,(() =>
         {
@@ -330,6 +332,7 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(takeMaterStep, 0.1f, 3);
         InputFieldValueRange(takeMaterNum, 0, 99999);
         InputFieldValueRange(layerHigh, 0, 10);
+        InputFieldValueRange(AngleEntryValue, 0, 180);
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 
@@ -445,7 +448,8 @@ public class BucketWheelTaskBase : PanelBase
         if (operationType == OperationType.START || operationType == OperationType.RESET)
         {
             taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
-            taskCommand.AngleEntryMode=RightAngleToggle.red.activeSelf?AngleEntryMode.RIGHTANGLE:AngleEntryMode.OBLIQUEANGLE;
+            // taskCommand.AngleEntryMode=RightAngleToggle.red.activeSelf?AngleEntryMode.RIGHTANGLE:AngleEntryMode.OBLIQUEANGLE;
+            taskCommand.AngleEntryValue=AngleEntryValue.text==""?0:float.Parse(AngleEntryValue.text);
             taskCommand.Command_Type = operationType == OperationType.RESET?2:0;
             taskCommand.TurnMode=leftTurnToggle.red.activeSelf?TurnMode.LEFTTURN:TurnMode.RIGHTTURN;
             float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
@@ -515,8 +519,8 @@ public class BucketWheelTaskBase : PanelBase
 
         AutoMaxToggle.SetSystemState(false, true);
         SemiAutoToggle.SetSystemState(true, true);
-        RightAngleToggle.SetSystemState(false, true);
-        ObliqueAngleToggle.SetSystemState(true, true);
+        // RightAngleToggle.SetSystemState(false, true);
+        // ObliqueAngleToggle.SetSystemState(true, true);
         
         leftTurnToggle.SetSystemState(false, true);
         rightTurnToggle.SetSystemState(false, true);

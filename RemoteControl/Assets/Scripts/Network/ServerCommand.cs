@@ -423,6 +423,7 @@ public class TaskCommand
     //自动模式
     public AutoMode AutoMode{ get; set;}
     public AngleEntryMode AngleEntryMode{ get; set; }
+    public float AngleEntryValue{ get; set; }
     //启动0 暂停1 换向2 结束3,边界确认 6
     public OperationType OperationCommand { get; set; }
     //任务参数重置 点击发送 1

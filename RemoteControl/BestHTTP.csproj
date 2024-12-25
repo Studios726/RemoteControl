@@ -176,9 +176,9 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\math\raw\Nat576.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\SM2KeyExchangePrivateParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\pkcs\EncryptionScheme.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\SignatureScheme.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\digests\Blake3Digest.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cmp\CertResponse.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\SignatureScheme.cs" />
     <Compile Include="Assets\Best HTTP\Source\Connections\HTTP2\HTTP2WebSocketStream.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsHandshakeHash.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\DerPrintableString.cs" />
@@ -702,11 +702,11 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\cms\BaseDigestCalculator.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\impl\LegacyTls13Verifier.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\cms\OriginatorInfoGenerator.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\modes\gcm\Tables1kGcmExponentiator.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\digests\Sha1Digest.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsSrpIdentityManager.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\modes\gcm\Tables1kGcmExponentiator.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\parameters\FpeParameters.cs" />
     <Compile Include="Assets\Best HTTP\Source\Caching\HTTPCacheFileInfo.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\TlsSrpIdentityManager.cs" />
     <Compile Include="Assets\Best HTTP\Source\Proxies\SOCKSProxy.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\cms\CMSSignedHelper.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cryptopro\GOST3410PublicKeyAlgParameters.cs" />
