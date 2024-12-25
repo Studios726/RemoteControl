@@ -150,7 +150,6 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         
         
         Heigh= _reclaimer.transform.GetComponent<RectTransform>().rect.height;
-        Debug.LogError($"{Heigh}");
         _alarmBtn.onClick.AddListener(ShowAlarmPanel);
         _operationBtn.onClick.AddListener(ShowLogPanel);
         _parameterBtn.onClick.AddListener(ShowParameterPanel);

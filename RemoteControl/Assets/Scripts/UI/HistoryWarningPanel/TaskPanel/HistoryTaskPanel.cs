@@ -2,20 +2,87 @@ using System;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class HistoryTaskPanel : MonoBehaviour
 {
     public SearchPanel searchPanel;
     List<HistoryTaskData> historyTaskDatas = new List<HistoryTaskData>();
     public HistoryTaskList historyTaskList;
+    private DateCell dateCell;
     MySqlDataReader mySqlDataReader;
-    private void Start()
+    public Button historyBtn;//历史记录
+    public Button dynamicBtn;//实时数据
+    public HistoryScrollViewHeighChange HistoryScrollViewHeighChange;
+    public float Heigh;
+    private void Awake()
     {
         searchPanel.SetSearchAction(SearchRecord);
+        historyBtn.onClick.AddListener(() =>
+        {
+            historyBtn.gameObject.SetActive(false);
+            dynamicBtn.gameObject.SetActive(true);
+            dateCell.IsDynamic = true;
+            searchPanel.gameObject.SetActive(false);
+            HistoryScrollViewHeighChange.ChangeHeigh(Heigh);
+            InitRecord();
+        });
+        dynamicBtn.onClick.AddListener(() =>
+        {
+            historyBtn.gameObject.SetActive(true);
+            dynamicBtn.gameObject.SetActive(false);
+            dateCell.IsDynamic = false;
+            searchPanel.gameObject.SetActive(true);
+            searchPanel.searchBtn.onClick.Invoke();
+            HistoryScrollViewHeighChange.ChangeHeigh(0);
+            InitRecord();
+        });
+        Heigh = searchPanel.transform.GetComponent<RectTransform>().rect.height;
+        InitDateDic();
+        SetSearchPanelDate();
     }
+    
+    private void InitDateDic()
+    {
+        DateTime now = DateTime.Now;
+        string startDate = $"{now.Year}-{now.Month}-{now.Day}" + "-0-0";
+        string endDate = $"{now.Year}-{now.Month}-{now.Day}" + "-23-59";
+        dateCell= new DateCell(startDate, endDate);
+    }
+    private void SetSearchPanelDate()
+    {
+        if (searchPanel != null&&dateCell!=null)
+        {
+            string[] startTime = dateCell.StartTime.Split("-");
+            string[] endTime = dateCell.EndTime.Split("-");
+            if (startTime.Length>=4&&endTime.Length>=4)
+            {
+                searchPanel.SetDateText(startTime, endTime);
+            }
+            historyBtn.gameObject.SetActive(dateCell.IsDynamic==false);
+            dynamicBtn.gameObject.SetActive(dateCell.IsDynamic);
+            searchPanel.gameObject.SetActive(dateCell.IsDynamic==false);
+        }
+    }
+    
+    private void UpdateDateDic()
+    {
+        dateCell.StartTime =searchPanel?.GetStartDateText();
+        dateCell.EndTime =searchPanel?.GetEndDateText();
+    }
+
     public void InitRecord()
     {
-         mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(100);
-         ReadRecord();
+        if (dateCell.IsDynamic)
+        {
+            mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(100);
+            ReadRecord();
+        }
+        else
+        {
+            searchPanel.searchBtn.onClick.Invoke();
+        }
+  
     }
 
     private void OnEnable()
@@ -25,7 +92,7 @@ public class HistoryTaskPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        searchPanel.Reset();
+        // searchPanel.Reset();
     }
 
     public void ReadRecord()
@@ -60,12 +127,14 @@ public class HistoryTaskPanel : MonoBehaviour
     }
     public void SearchRecord(string startTime, string endTime, MechanicalType mechanicalType,string user)
     {
-        string sql = $"SELECT * FROM {ConstStr.DATABASE_HISTORY_TASK_MC} WHERE"+$"`TaskCreateTime` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `id` DESC;";
+        string sql = $"SELECT * FROM {ConstStr.DATABASE_HISTORY_TASK_MC} WHERE"+$"`{ConstStr.DATA_TASK_CREATE_TIME}` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `{ConstStr.DATA_TASK_CREATE_TIME}` DESC;";
         mySqlDataReader =DataManager.Instance.GetHistoryTaskMcBySql(sql);
         ReadRecord();
     }
     public void RefreshRecord(List<HistoryTaskData> datas)
     {
+        UpdateDateDic();
+        HistoryScrollViewHeighChange.SetScrollRectPosition(1);
         historyTaskList.RefreshList(datas);
     }
 }
