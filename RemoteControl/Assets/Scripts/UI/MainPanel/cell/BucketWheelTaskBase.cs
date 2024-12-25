@@ -25,6 +25,7 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell SemiAutoToggle;
     public ButtonCell RightAngleToggle;
     public ButtonCell ObliqueAngleToggle;
+    public InputField AngleEntryText;
     /// <summary>
     /// 左转
     /// </summary>
@@ -164,29 +165,12 @@ public class BucketWheelTaskBase : PanelBase
         AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
         SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
         confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
-        RightAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.RIGHTANGLE,true);
-        ObliqueAngleToggle.SetSystemState(taskCommand.AngleEntryMode==AngleEntryMode.OBLIQUEANGLE,true);
+        AngleEntryText.text = taskCommand.AngleEntryValue.ToString();
         leftTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.LEFTTURN,true);
         rightTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.RIGHTTURN,true);
         leftTakeMaterText.text = taskCommand.LeftRightRange.startValue.ToString();
         rightTakeMaterText.text = taskCommand.LeftRightRange.endValue.ToString();
         takeMaterStep.text = taskCommand.StepLength.ToString();
-        // layerHigh.text = taskCommand.LayerHigh.ToString();
-        // timeOpenToggle.isOn = taskCommand.IsTimed;
-        // useTimeBtn.SetSystemState(taskCommand.IsTimed,true);
-        // if (timeOpenToggle.isOn)
-        // {
-        //     quantityOpenToggle.isOn = false;
-        //     timeHourText.text = Mathf.FloorToInt(taskCommand.TimedAt / 60).ToString();
-        //     timeMinuteText.text = (taskCommand.TimedAt % 60).ToString();
-        // }
-        // else
-        // {
-        //     quantityOpenToggle.isOn = true;
-        //     timeOpenToggle.isOn = false;
-        //     takeMaterNum.text = taskCommand.Quantity.ToString();
-        // }
-
         takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1,true);
         takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
         resetTaskBtn.SetSystemState(taskCommand.ResetState==1,true);
@@ -235,7 +219,6 @@ public class BucketWheelTaskBase : PanelBase
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
                     new ConfirmPanelArgs("是否确认复位？",GameDataManager.Instance.GetMachineName(machine), null, () => SendPlcCommand(COMMAND_NAME.ERR_RESET)));
             }));
-        // AddOnClickListener(warningBtn, (() => { SendPlcCommand(COMMAND_NAME.STARTUP_ALARM); }));
         AddOnClickListener(resetTaskBtn,(() =>
         {
               UIManager.Instance.OpenUI(UIID.ConfirmPanel,
@@ -259,8 +242,6 @@ public class BucketWheelTaskBase : PanelBase
             }
             else
             {
-                // UIManager.Instance.OpenUI(UIID.ConfirmStartTaskPanel,
-                //     new ConfirmTaskPanelArgs( null, () => SendTaskCommand(OperationType.START)));
                 SendTaskCommand(OperationType.START);
             }
         }));
@@ -325,18 +306,6 @@ public class BucketWheelTaskBase : PanelBase
             confirmTurnBtn.gameObject.SetActive(true);
         } ));
         
-        AddOnClickListener(RightAngleToggle,(() =>
-        {
-            RightAngleToggle.SetSystemState(true,true);
-            ObliqueAngleToggle.SetSystemState(false,true);
-        } ));
-        
-        AddOnClickListener(ObliqueAngleToggle,(() =>
-        {
-            RightAngleToggle.SetSystemState(false,true);
-            ObliqueAngleToggle.SetSystemState(true,true);
-        } ));
-        
         AddOnClickListener(leftTurnToggle,(() =>
         {
             leftTurnToggle.SetSystemState(true,true);
@@ -347,10 +316,6 @@ public class BucketWheelTaskBase : PanelBase
             leftTurnToggle.SetSystemState(false,true);
             rightTurnToggle.SetSystemState(true,true);
         } ));
-        // AddOnClickListener(useTimeBtn,(() =>
-        // {
-        //     useTimeBtn.SetSystemState(!useTimeBtn.red.activeSelf,true);
-        // }));
         if (machine==Machine.BucketWheelStackerReclaimer)
         {
             InputFieldValueRange(startTakeMaterText, 0, 260,0);
@@ -369,6 +334,7 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(takeMaterStep, 0.1f, 3,0.7f);
         InputFieldValueRange(takeMaterNum, 0, 99999,0);
         InputFieldValueRange(layerHigh, 0, 10,0);
+        InputFieldValueRange(AngleEntryText, 0, 120,40);
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 
@@ -446,9 +412,6 @@ public class BucketWheelTaskBase : PanelBase
             DataManager.Instance.InsertHistoryLogMc(takeMaterStopBtn.red.activeSelf?"自动取料-恢复任务":"自动取料-暂停任务", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterStopBtn);
-            // int dataInt = takeMaterStopBtn.red.activeSelf?0:1;
-            // string commandName=machine==Machine.BucketWheelStackerReclaimer?COMMAND_NAME.TAKE_PAUSE.ToString()+"_1":COMMAND_NAME.TAKE_PAUSE.ToString()+"_2";
-            // GameDataManager.Instance.SendServerCommandRC(commandName,6,2,dataInt);
         }
         else if (operationType == OperationType.REVERSING)
         {
@@ -471,10 +434,8 @@ public class BucketWheelTaskBase : PanelBase
             confirmTurnBtn.SetSelectState(true);
             DataManager.Instance.InsertHistoryLogMc("自动取料-边界确认", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.TurnConfirmState = 1;
-            // taskCommand.OperationCommand = operationType;
         }
         taskCommand.QuerySystem = "MC";
-        //taskCommand.Command_Type = 0;
         taskCommand.TaskType = TaskType.TAKEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
@@ -484,7 +445,8 @@ public class BucketWheelTaskBase : PanelBase
         if (operationType == OperationType.START || operationType == OperationType.RESET)
         {
             taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
-            taskCommand.AngleEntryMode=RightAngleToggle.red.activeSelf?AngleEntryMode.RIGHTANGLE:AngleEntryMode.OBLIQUEANGLE;
+            // taskCommand.AngleEntryMode=RightAngleToggle.red.activeSelf?AngleEntryMode.RIGHTANGLE:AngleEntryMode.OBLIQUEANGLE;
+            taskCommand.AngleEntryValue =AngleEntryText.text == "" ? 0 : float.Parse(AngleEntryText.text);
             taskCommand.Command_Type = operationType == OperationType.RESET?2:0;
             taskCommand.TurnMode=leftTurnToggle.red.activeSelf?TurnMode.LEFTTURN:TurnMode.RIGHTTURN;
             float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
@@ -495,13 +457,7 @@ public class BucketWheelTaskBase : PanelBase
             float endLeftRightRangeValue = rightTakeMaterText.text == "" ? 0 : float.Parse(rightTakeMaterText.text);
             taskCommand.LeftRightRange = new TaskRange(startLeftRightRangeValue, endLeftRightRangeValue);
             taskCommand.StepLength = takeMaterStep.text == "" ? 0 : float.Parse(takeMaterStep.text);
-            // taskCommand.IsTimed = false;//useTimeBtn.red.activeSelf;
-            // taskCommand.TimedAt = 0;// int.Parse(timeHourText.text) * 60 + int.Parse(timeMinuteText.text);
-            // taskCommand.IsQuantified = false;// quantityOpenToggle.isOn;
-            // taskCommand.Quantity = 0;// int.Parse(takeMaterNum.text);
             taskCommand.TaskID = DateTime.Now.ToString("yyMMddHHmmss");
-            // taskCommand.LayerHigh = layerHigh.text == "" ? 0 : float.Parse(layerHigh.text);
-            // taskCommand.TakeMateHigh = 0;
             taskCommand.PileMateHigh = 0;
             AllData allData = new AllData();
             taskCommand.AllData = allData;
@@ -556,8 +512,8 @@ public class BucketWheelTaskBase : PanelBase
 
         AutoMaxToggle.SetSystemState(false, true);
         SemiAutoToggle.SetSystemState(true, true);
-        RightAngleToggle.SetSystemState(false, true);
-        ObliqueAngleToggle.SetSystemState(true, true);
+        // RightAngleToggle.SetSystemState(false, true);
+        // ObliqueAngleToggle.SetSystemState(true, true);
         
         // leftTurnToggle.SetSystemState(false, true);
         // rightTurnToggle.SetSystemState(false, true);

@@ -428,7 +428,6 @@ public class TaskCommand
     public DateTime TaskCreateTime { get; set; }
     //web 专属
     public string nowState { get; set; }
-    // public 
     //发布任务者
     public string OperatorName { get; set; }
     //操作系統 MC WEB
@@ -440,6 +439,7 @@ public class TaskCommand
     //自动模式
     public AutoMode AutoMode{ get; set;}
     public AngleEntryMode AngleEntryMode{ get; set; }
+    public float AngleEntryValue{ get; set; }
     //启动0 暂停1 换向2 结束3,边界确认 6
     public OperationType OperationCommand { get; set; }
     //任务参数重置 点击发送 1
@@ -457,25 +457,9 @@ public class TaskCommand
 
     // 取料步长
     public float StepLength { get; set; }
-
-    // public string
-    // 是否定时
-    // public bool IsTimed { get; set; }
-    //
-    // // 定时时间，如果IsTimed为true，则此字段有效
-    // public int TimedAt { get; set; }
-
-    // 是否定量
-    // public bool IsQuantified { get; set; }
-
-    // 定量多少，如果IsQuantified为true，则此字段有效
-    // public int Quantity { get; set; }
-    //取料高度
-    // public float TakeMateHigh {  get; set; }1
+    
     //堆料高度
     public float PileMateHigh {  get; set; }
-    //层高
-    // public float LayerHigh {  get; set; }  
     //1 左转 2 右转
     public TurnMode TurnMode{  get; set; }
     public AllData  AllData { get; set; }
