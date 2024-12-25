@@ -25,9 +25,13 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
     private GameObject _alarmPanel;
     private HistoryList _alarmReclaimerList;
     private HistoryList _alarmStackerReclaimerList;
+    private HistoryScrollViewHeighChange _alarmReclaimerHeighChange;
+    private HistoryScrollViewHeighChange _alarmStackerReclaimerHeighChange;
     private GameObject _logPanel;
     private HistoryList _logReclaimerList;
     private HistoryList _logmStackerReclaimerList;
+    private HistoryScrollViewHeighChange _logReclaimerHeighChange;
+    private HistoryScrollViewHeighChange _logStackerReclaimerHeighChange;
     private GameObject _parameterPanel;
     private GameObject _taskPanel;
     private SearchPanel _reclaimer;
@@ -41,6 +45,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
     public Button historyTakeBtn;
     public Button dynamicPileTakeBtn;
     public Button dynamicTakeBtn;
+    private float Heigh;
     private Dictionary<string, DateCell> dateDic = new Dictionary<string, DateCell>();
     public override void InitUIElements(UIArgs uiArgs = null)
     {
@@ -53,11 +58,15 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _parameterBtnOn = RootObj.transform.FindComponent<Button>("Btns/parameterOn");
         _taskBtnOn = RootObj.transform.FindComponent<Button>("Btns/taskOn");
         _alarmPanel = RootObj.transform.Find("AlarmPanel").gameObject;
+        _alarmReclaimerHeighChange=RootObj.transform.FindComponent<HistoryScrollViewHeighChange>("AlarmPanel/alarmScrollView_2");
         _alarmReclaimerList = RootObj.transform.FindComponent<HistoryList>("AlarmPanel/alarmScrollView_2/Scroll View");
+        _alarmStackerReclaimerHeighChange= RootObj.transform.FindComponent<HistoryScrollViewHeighChange>("AlarmPanel/alarmScrollView_1");
         _alarmStackerReclaimerList =
             RootObj.transform.FindComponent<HistoryList>("AlarmPanel/alarmScrollView_1/Scroll View");
         _logPanel = RootObj.transform.Find("LogPanel").gameObject;
+        _logReclaimerHeighChange= RootObj.transform.FindComponent<HistoryScrollViewHeighChange>("LogPanel/alarmScrollView_2");
         _logReclaimerList = RootObj.transform.FindComponent<HistoryList>("LogPanel/alarmScrollView_2/Scroll View");
+        _logStackerReclaimerHeighChange=RootObj.transform.FindComponent<HistoryScrollViewHeighChange>("LogPanel/alarmScrollView_1");
         _logmStackerReclaimerList =
             RootObj.transform.FindComponent<HistoryList>("LogPanel/alarmScrollView_1/Scroll View");
         _parameterPanel = RootObj.transform.Find("ImportantParamsGraphPanel").gameObject;
@@ -79,10 +88,12 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
             {
                 dateDic[ConstStr.DATABASE_HISTORY_WARNING1_MC].IsDynamic = true;
                 LatestWarningLogsByMachine(Machine.BucketWheelStackerReclaimer, PanelType.AlarmPanel);
+                _alarmStackerReclaimerHeighChange.ChangeHeigh(Heigh);
             }else if (curPanelType == PanelType.LogPanel)
             {
                 dateDic[ConstStr.DATABASE_HISTORY_LOG1_MC].IsDynamic = true;
                 LatestWarningLogsByMachine(Machine.BucketWheelStackerReclaimer, PanelType.LogPanel);
+                _logStackerReclaimerHeighChange.ChangeHeigh(Heigh);
             }
             _stackerReclaimer.gameObject.SetActive(false);
           
@@ -94,9 +105,11 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
             if (curPanelType == PanelType.AlarmPanel)
             {
                 dateDic[ConstStr.DATABASE_HISTORY_WARNING1_MC].IsDynamic = false;
+                _alarmStackerReclaimerHeighChange.ChangeHeigh(0);
             }else if (curPanelType == PanelType.LogPanel)
             {
                 dateDic[ConstStr.DATABASE_HISTORY_LOG1_MC].IsDynamic = false;
+                _logStackerReclaimerHeighChange.ChangeHeigh(0);
             }
             _stackerReclaimer.gameObject.SetActive(true);
             _stackerReclaimer.searchBtn.onClick.Invoke();
@@ -109,10 +122,12 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
             {
                 dateDic[ConstStr.DATABASE_HISTORY_WARNING2_MC].IsDynamic = true;
                 LatestWarningLogsByMachine(Machine.BucketWheel, PanelType.AlarmPanel);
+                _alarmReclaimerHeighChange.ChangeHeigh(Heigh);
             }else if (curPanelType == PanelType.LogPanel)
             {
                 dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic = true;
                 LatestWarningLogsByMachine(Machine.BucketWheel, PanelType.LogPanel);
+                _logReclaimerHeighChange.ChangeHeigh(Heigh);
             }
             _reclaimer.gameObject.SetActive(false);
         });
@@ -123,16 +138,19 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
             if (curPanelType == PanelType.AlarmPanel)
             {
                 dateDic[ConstStr.DATABASE_HISTORY_WARNING2_MC].IsDynamic = false;
+                _alarmReclaimerHeighChange.ChangeHeigh(0);
             }else if (curPanelType == PanelType.LogPanel)
             {
                 dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic = false;
+                _logReclaimerHeighChange.ChangeHeigh(0);
             }
             _reclaimer.gameObject.SetActive(true);
             _reclaimer.searchBtn.onClick.Invoke();
         });
         
         
-        
+        Heigh= _reclaimer.transform.GetComponent<RectTransform>().rect.height;
+        Debug.LogError($"{Heigh}");
         _alarmBtn.onClick.AddListener(ShowAlarmPanel);
         _operationBtn.onClick.AddListener(ShowLogPanel);
         _parameterBtn.onClick.AddListener(ShowParameterPanel);
@@ -352,11 +370,13 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
             if (panelType == PanelType.AlarmPanel)
             {
                 UpdateDateDic(_reclaimer, ConstStr.DATABASE_HISTORY_WARNING2_MC);
+                _alarmReclaimerHeighChange.SetScrollRectPosition(1);
                 _alarmReclaimerList.RefreshList(historyDatas,panelType);
             }
             else if (panelType == PanelType.LogPanel)
             {
                 UpdateDateDic(_reclaimer, ConstStr.DATABASE_HISTORY_LOG2_MC);
+                _logReclaimerHeighChange.SetScrollRectPosition(1);
                 _logReclaimerList.RefreshList(historyDatas,panelType);
             }
             else
@@ -368,11 +388,13 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
             if (panelType == PanelType.AlarmPanel)
             {
                 UpdateDateDic(_stackerReclaimer, ConstStr.DATABASE_HISTORY_WARNING1_MC);
+                _alarmStackerReclaimerHeighChange.SetScrollRectPosition(1);
                 _alarmStackerReclaimerList.RefreshList(historyDatas,panelType);
             }
             else if (panelType == PanelType.LogPanel)
             {
                 UpdateDateDic(_stackerReclaimer, ConstStr.DATABASE_HISTORY_LOG1_MC);
+                _logStackerReclaimerHeighChange.SetScrollRectPosition(1);
                 _logmStackerReclaimerList.RefreshList(historyDatas,panelType);
             }
             else

@@ -60,7 +60,6 @@ public class HistoryPanelCtr :UIPresenter<HistoryPanelView>
       {
           _dataReader.Close();
       }
-      Debug.LogError($"sql={sql}");
       RequestData(sql,type,view.curPanelType);
    }
 
