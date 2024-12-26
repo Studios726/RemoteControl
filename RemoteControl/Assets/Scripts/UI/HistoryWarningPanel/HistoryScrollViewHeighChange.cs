@@ -19,10 +19,20 @@ public class HistoryScrollViewHeighChange : MonoBehaviour
     public void ChangeHeigh(float heigh)
     {
         SetScrollRectPosition(1);
-        RectTransform.sizeDelta=new Vector2(RectTransform.sizeDelta.x, RectTransformHeight+heigh+13);
-        ScrollViewRectTransform.sizeDelta = new Vector2(ScrollViewRectTransform.sizeDelta.x, ScrollViewRectTransformHeight + heigh+13);
+        if (heigh==0)
+        {
+             
+            RectTransform.sizeDelta=new Vector2(RectTransform.sizeDelta.x, RectTransformHeight);
+            ScrollViewRectTransform.sizeDelta = new Vector2(ScrollViewRectTransform.sizeDelta.x, ScrollViewRectTransformHeight);
+        }
+        else
+        {
+             
+            RectTransform.sizeDelta=new Vector2(RectTransform.sizeDelta.x, RectTransformHeight+heigh+13);
+            ScrollViewRectTransform.sizeDelta = new Vector2(ScrollViewRectTransform.sizeDelta.x, ScrollViewRectTransformHeight + heigh+13);
+        }
+     
     }
-
     public void SetScrollRectPosition(float value)
     {
         if (ScrollRect)
