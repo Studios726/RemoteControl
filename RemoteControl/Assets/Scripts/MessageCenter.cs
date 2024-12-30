@@ -162,7 +162,6 @@ public class MessageCenter : Singleton<MessageCenter>
             try
             {
                 json = JsonMgr.Serialize<T>(body);
-                // Debug.Log($"json  {json}");
             }
             catch (Exception e)
             {
@@ -176,17 +175,13 @@ public class MessageCenter : Singleton<MessageCenter>
                 {
                     if (handle != null)
                     {
-                        if (messageType==MessageType.PC)
-                        {
-                            Debug.Log($"发送数据成功{messageType} " + json);
-                        }
                         handle(json);
                     }
                 }
             }
             catch (Exception e)
             {
-                Debug.LogError($"发送失败: {e.Message}");
+                Debug.LogError($"{messageType}发送失败: {e.Message}");
             }
         }
     }

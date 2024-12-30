@@ -23,6 +23,7 @@ namespace RemoteControl
         private Timer timerRc;
         private Timer timerPc;
         private Timer chartTimer;
+        private Timer UpdateChart;
         private Timer warningTimer;
         private bool isConnect = false;
 
@@ -34,7 +35,7 @@ namespace RemoteControl
             // CreatConnect(null, null);
             UIManager.Instance.OpenUI(UIID.LoginPanel);
             chartTimer = Timer.Register(5, true, true, (() => { GameDataManager.Instance.RecordChart(); }));
-            Timer.Register(1, true, true, (() => {   EventManager.Instance.TriggerEvent(EventName.UpdateChartData, null);; }));
+            UpdateChart=Timer.Register(1, true, true, (() => {   EventManager.Instance.TriggerEvent(EventName.UpdateChartData, null);; }));
         }
 
         public void OnExitGame()
@@ -126,25 +127,25 @@ namespace RemoteControl
             if (connectionRC != null && connectionRC.isConnect)
             {
                 connectionRC.OnClose();
-                connectionRC = null;
+                // connectionRC = null;
             }
 
             if (connectionPC != null && connectionPC.isConnect)
             {
                 connectionPC.OnClose();
-                connectionPC = null;
+                // connectionPC = null;
             }
 
             if (connectionSCA != null && connectionSCA.isConnect)
             {
                 connectionSCA.OnClose();
-                connectionSCA = null;
+                // connectionSCA = null;
             }
             
             if (connectionFM != null && connectionFM.isConnect)
             {
                 connectionFM.OnClose();
-                connectionFM = null;
+                // connectionFM = null;
             }
 
             if (chartTimer != null)
@@ -153,6 +154,11 @@ namespace RemoteControl
                 chartTimer = null;
             }
 
+            if (UpdateChart!=null)
+            {
+                UpdateChart.Cancel();
+                UpdateChart = null;
+            }
             EventManager.Instance.RemoveListener(EventName.ConnectionSuccess, ConnectionSuccess);
             EventManager.Instance.RemoveListener(EventName.ConnectionFail, ConnectionFail);
             EventManager.Instance.RemoveListener(EventName.ConnectionClose, ConnectionFail);
