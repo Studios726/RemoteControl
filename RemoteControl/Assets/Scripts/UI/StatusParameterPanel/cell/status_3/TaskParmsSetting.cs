@@ -39,13 +39,16 @@ public class TaskParmsSetting : MonoBehaviour
    private void OnEnable()
    {
       MySqlDataReader reader = DataManager.Instance.GetTaskConfigMc(Machine);
-      while (reader.Read())
+      if (reader!=null)
       {
-         HeapDis.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString()));
-         FetchPileDepth.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString()));
+         while (reader.Read())
+         {
+            HeapDis.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString()));
+            FetchPileDepth.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString()));
            
-         FetchVerticalRangeAdd.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString()));
-         FetchHorizontalRangeSub.SetCurValue( float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString()));
+            FetchVerticalRangeAdd.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString()));
+            FetchHorizontalRangeSub.SetCurValue( float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString()));
+         }
       }
    }
 }

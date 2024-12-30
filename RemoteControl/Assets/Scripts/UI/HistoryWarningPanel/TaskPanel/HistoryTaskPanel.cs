@@ -76,6 +76,10 @@ public class HistoryTaskPanel : MonoBehaviour
         if (dateCell.IsDynamic)
         {
             mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(100);
+            if (mySqlDataReader==null)
+            {
+                return;
+            }
             ReadRecord();
         }
         else
@@ -129,7 +133,10 @@ public class HistoryTaskPanel : MonoBehaviour
     {
         string sql = $"SELECT * FROM {ConstStr.DATABASE_HISTORY_TASK_MC} WHERE"+$"`{ConstStr.DATA_TASK_CREATE_TIME}` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `{ConstStr.DATA_TASK_CREATE_TIME}` DESC;";
         mySqlDataReader =DataManager.Instance.GetHistoryTaskMcBySql(sql);
-        ReadRecord();
+        if (mySqlDataReader!=null)
+        {
+            ReadRecord();
+        }
     }
     public void RefreshRecord(List<HistoryTaskData> datas)
     {

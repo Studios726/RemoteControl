@@ -9,7 +9,7 @@ public class MySqlHelper
     public static string Database = "huarun2";//"huarun";
     public static string Username = "root";
     public static string Password = "123456";
-    public static string connstr = "server=" + IP + ";database= " + Database + ";username=" + Username + ";password=" + Password + ";Charset=utf8";
+    public static string connstr = "server=" + IP + ";database= " + Database + ";username=" + Username + ";password=" + Password + ";ConnectionTimeout=3;Charset=utf8";
 
 
     #region 执行查询语句，返回MySqlDataReader
@@ -33,7 +33,7 @@ public class MySqlHelper
         catch (MySql.Data.MySqlClient.MySqlException e)
         {
             connection.Close();
-            throw new Exception(e.Message);
+            Debug.LogError($"数据库连接错误{e.Message}");
         }
         finally
         {
@@ -43,6 +43,7 @@ public class MySqlHelper
                 connection.Close();
             }
         }
+        return myReader;
     }
     #endregion
 
@@ -105,7 +106,7 @@ public class MySqlHelper
                 {
                     conn.Close();
                     //throw e;
-                    Console.WriteLine(e.Message);
+                    Debug.LogError($"数据库连接错误{e.Message}");
                 }
                 finally
                 {
@@ -175,7 +176,7 @@ public class MySqlHelper
             catch (Exception ex)
             {
                 //throw ex;
-                Console.WriteLine(ex.Message);
+                Debug.LogError($"数据库连接错误{ex.Message}");
             }
             finally
             {

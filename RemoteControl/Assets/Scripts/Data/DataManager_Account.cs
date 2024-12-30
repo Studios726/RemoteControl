@@ -88,55 +88,67 @@ public partial class DataManager
     {
         string query = $"SELECT * FROM `{ConstStr.DATABASE_LOGIN_TABLE}` WHERE `{ConstStr.DATA_USERNAME}` = \"{account}\"";
         DataSet dataSet = MySqlHelper.GetDataSet(query);
-        try
+        if (dataSet!=null&&dataSet.Tables.Count>0)
         {
-            DataRow row = dataSet.Tables[0].Rows[0];
-            int val =int.Parse(row[ConstStr.DATA_IS_ADMIN].ToString());
-            return new AccountInfo
+            try
             {
-                account = row[ConstStr.DATA_USERNAME] as string,
-                // defaultPassword =row[ConstStr.DATA_DEFAULT_PASSWORD] as string,
-                password = row[ConstStr.DATA_PASSWORD] as string,
-                // department = row[ConstStr.DATA_DEPARTMENT] as string,
-                // job = row[ConstStr.DATA_JOB] as string,
-                // index = (int)row[ConstStr.DATA_INDEX],
-                name = row[ConstStr.DATA_NAME] as string,
-                isAdmin =(val == 1)
-            };
+                DataRow row = dataSet.Tables[0].Rows[0];
+                int val =int.Parse(row[ConstStr.DATA_IS_ADMIN].ToString());
+                return new AccountInfo
+                {
+                    account = row[ConstStr.DATA_USERNAME] as string,
+                    password = row[ConstStr.DATA_PASSWORD] as string,
+                    name = row[ConstStr.DATA_NAME] as string,
+                    isAdmin =(val == 1)
+                };
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                return null;
+            }
         }
-        catch (Exception e)
+        else
         {
-            Debug.LogException(e);
             return null;
         }
+        
     }
     public List<AccountInfo> GetAccountList()
     {
         List<AccountInfo> res = new List<AccountInfo>();
         string query = $"SELECT * FROM `{ConstStr.DATABASE_LOGIN_TABLE}`";
         DataSet dataSet = MySqlHelper.GetDataSet(query);
-        try
+        if (dataSet!=null&&dataSet.Tables.Count>0)
         {
-            foreach (DataRow row in dataSet.Tables[0].Rows)
+            try
             {
-                ulong val = (ulong)row[ConstStr.DATA_IS_ADMIN];
-                res.Add(new AccountInfo
+                foreach (DataRow row in dataSet.Tables[0].Rows)
                 {
-                    account = row[ConstStr.DATA_USERNAME] as string,
-                    // defaultPassword = row[ConstStr.DATA_DEFAULT_PASSWORD] as string,
-                    password = row[ConstStr.DATA_PASSWORD] as string,
-                    // department = row[ConstStr.DATA_DEPARTMENT] as string,
-                    // job = row[ConstStr.DATA_JOB] as string,
-                    // index = (int)row[ConstStr.DATA_INDEX],
-                    name = row[ConstStr.DATA_NAME] as string,
-                    isAdmin = (val == 1)
-                });
+                    ulong val = (ulong)row[ConstStr.DATA_IS_ADMIN];
+                    res.Add(new AccountInfo
+                    {
+                        account = row[ConstStr.DATA_USERNAME] as string,
+                        // defaultPassword = row[ConstStr.DATA_DEFAULT_PASSWORD] as string,
+                        password = row[ConstStr.DATA_PASSWORD] as string,
+                        // department = row[ConstStr.DATA_DEPARTMENT] as string,
+                        // job = row[ConstStr.DATA_JOB] as string,
+                        // index = (int)row[ConstStr.DATA_INDEX],
+                        name = row[ConstStr.DATA_NAME] as string,
+                        isAdmin = (val == 1)
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
             }
         }
-        catch (Exception e)
+        else
         {
-            Debug.LogException(e);
+            Debug.Log($"Count==========={dataSet.Tables.Count}");
         }
+        
         return res;
     }
     public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userName,string taskState,string completeState="1")

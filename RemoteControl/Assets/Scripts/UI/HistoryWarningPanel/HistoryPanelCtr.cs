@@ -67,7 +67,11 @@ public class HistoryPanelCtr :UIPresenter<HistoryPanelView>
    {
        // sql = "Select * from " + Tables + " ORDER BY id DESC LIMIT 50;";
        _dataReader = MySqlHelper.ExecuteReader(sql);
-       Reader(mechanicalType,panelType);
+       if (_dataReader!=null)
+       {
+           Reader(mechanicalType,panelType);
+       }
+   
    }
    private void Reader(MechanicalType mechanicalType,PanelType panelType)
    {
