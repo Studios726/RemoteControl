@@ -714,13 +714,14 @@ public class GameDataManager : Singleton<GameDataManager>
             meshFilter.mesh = cachedMesh;
             meshRenderer.sharedMaterial = material;
             meshFilter.mesh.RecalculateNormals();
+            meshCollider.sharedMesh = cachedMesh;
         }
         catch (Exception e)
         {
             Debug.LogError("加载模型失败");
         }
      
-        // meshCollider.sharedMesh = mesh;
+      
     }
 
     /// <summary>

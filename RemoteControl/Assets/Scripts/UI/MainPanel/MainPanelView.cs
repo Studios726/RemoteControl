@@ -2,6 +2,7 @@ using ShenYangRemoteSystem.Subclass;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Crypto.Prng;
 using RemoteControl.Event;
 using ShangHaiPro;
 using UnityEngine;
@@ -23,9 +24,13 @@ public class MainPanelView : UIView<MainPanelCtr>
     private Button updateModelBtn;
     private Button updateTaskBtn;
     public List<string> TaskMessageList = new List<string>();
+    public RectTransform HeadRectTransform;
+    public Text PosText;
 
     public override void InitUIElements(UIArgs uiArgs)
     {
+        HeadRectTransform = RootObj.transform.FindComponent<RectTransform>("head");
+        PosText= RootObj.transform.FindComponent<Text>("head/Text");
         _bucketWheelState2 = RootObj.transform.FindComponent<BucketWheelStateBase>("machine_2/Bg_1");
         _bucketWheelCtrMove2 = RootObj.transform.FindComponent<BucketWheelCtrMoveBase>("machine_2/Bg_2");
         _bucketWheelTask2 = RootObj.transform.FindComponent<BucketWheelTaskBase>("machine_2/Bg_3");
@@ -164,7 +169,27 @@ public class MainPanelView : UIView<MainPanelCtr>
             _bucketWheelTask1?.ResetState();
         }
     }
-    
+
+    public void UpdateModelOnClickData(object o, EventArgs eventArgs)
+    {
+        if (eventArgs is UpdateModelOnClickEventArgs args)
+        {
+            Camera UICamera = GameObject.Find("UICamera").transform.GetComponent<Camera>();
+            Canvas canvasa = GameObject.Find("UIRoot/UILayer").transform.GetComponent<Canvas>();
+            Vector2 outVec;
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasa.GetComponent<RectTransform>(),Input.mousePosition,UICamera,out outVec))
+            {
+                HeadRectTransform.gameObject.SetActive(args.IsShow);
+                HeadRectTransform.anchoredPosition = outVec;
+                float x = args.Position.x + 167;
+                float y = args.Position.y < 0 ? 0 : args.Position.y;
+                float z = args.Position.z;
+                PosText.text = $"X:{x.ToString("F1")}\nY:{y.ToString("F1")}\nZ:{(-z).ToString("F1")}";
+            }
+           
+        }
+   
+    }
     public void AddOnClickListener(Button btn, UnityAction action)
     {
         btn.onClick.AddListener(action);

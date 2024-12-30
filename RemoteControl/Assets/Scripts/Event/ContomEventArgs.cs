@@ -87,3 +87,15 @@ public class UpdateModelDirectionEventArgs:EventArgs
         Machine = machine;
     }
 }
+
+public class UpdateModelOnClickEventArgs : EventArgs
+{
+    public Vector3 Position;
+    public bool IsShow;
+
+    public UpdateModelOnClickEventArgs(Vector3 position,bool isShow)
+    {
+        Position = position;
+        IsShow = isShow;
+    }
+}

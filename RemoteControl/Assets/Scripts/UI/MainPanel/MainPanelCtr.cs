@@ -288,6 +288,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         EventManager.Instance.RemoveListener(EventName.RefreshWarningDes2, UpdateWarningDes2);
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes1, UpdateTaskLog1);
         EventManager.Instance.RemoveListener(EventName.RefreshTaskDes2, UpdateTaskLog2);
+        EventManager.Instance.RemoveListener(EventName.ModelOnClickEvent, view.UpdateModelOnClickData);
         if (TaskLogTimer!=null)
         {
             TaskLogTimer.Cancel();
@@ -303,6 +304,7 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
         EventManager.Instance.AddListener(EventName.RefreshWarningDes2, UpdateWarningDes2);
         EventManager.Instance.AddListener(EventName.RefreshTaskDes1, UpdateTaskLog1);
         EventManager.Instance.AddListener(EventName.RefreshTaskDes2, UpdateTaskLog2);
+        EventManager.Instance.AddListener(EventName.ModelOnClickEvent, view.UpdateModelOnClickData);
     }
 
     public void SendMessage(string message)
