@@ -306,6 +306,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     public ButtonCell stepBack;
     public InputField stepInputField;
     public bool isStepInput;
+    public Timer StepInputTimer;
     /// <summary>
     /// 升压电磁阀
     /// </summary>
@@ -527,7 +528,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             shakerStartBtn.SetSystemState(data.VibrationMotorRunning,true);
             stepForward.SetSystemState(data.DC_FWD_FixS_Run,true);
             stepBack.SetSystemState(data.DC_REV_FixS_Run,true);
-            if (isStepInput==false)
+            if (stepInputField.isFocused ==false&&isStepInput==false)
             {
                 stepInputField.text=data.DC_FixSize.ToString();
             }
@@ -675,7 +676,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             stepForward.SetSystemState(data.DC_FWD_FixS_Run_2,true);
             stepBack.SetSystemState(data.DC_REV_FixS_Run_2,true);
 
-            if (isStepInput==false)
+            if (stepInputField.isFocused ==false&&isStepInput==false)
             {
                 stepInputField.text=data.DC_FixSize_2.ToString();
             }
@@ -851,14 +852,20 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             string commandName = machine == Machine.BucketWheelStackerReclaimer
                 ? command.ToString() + "_1"
                 : command.ToString() + "_2";
-            isStepInput = false;
             float dataFloat=float.Parse(stepInputField.text);
             GameDataManager.Instance.SendServerCommandByName(commandName, 0,dataFloat);
             DataManager.Instance.InsertHistoryLogMc("大车定长行走步长", GameDataManager.Instance.GetUserName(), machine);
-        }));
-        stepInputField.onValueChanged.AddListener(((string value) =>
-        {
+            if (StepInputTimer!=null)
+            {
+                StepInputTimer.Cancel();
+                StepInputTimer = null;
+            }
+
             isStepInput = true;
+            StepInputTimer = Timer.Register(2, (() =>
+            {
+                isStepInput = false;
+            }));
         }));
     }
     public virtual void SendMessageToServer(COMMAND_NAME command)
