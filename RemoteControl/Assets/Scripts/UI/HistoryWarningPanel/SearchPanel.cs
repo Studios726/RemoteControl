@@ -235,7 +235,7 @@ public class SearchPanel : MonoBehaviour
                 for (int i = 0; i < count-childCount+10; i++)
                 {
                     GameObject obj =Instantiate(searchItme, contentY);
-                    obj.transform.Find("Text").GetComponent<Text>().text = (dateTime.Year+childCount + i).ToString();
+                    obj.transform.Find("Text").GetComponent<Text>().text = (dateTime.Year+childCount + i-1).ToString();
                     obj.GetComponent<Button>().onClick.AddListener((() =>
                     {
                         SetActive(scrollviewY, false);

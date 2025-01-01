@@ -300,7 +300,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         dateBtnsGo.SetActive(true);
         SearchPanelActive(true);
         SetSearchPanelDate(_stackerReclaimer,ConstStr.DATABASE_HISTORY_LOG1_MC);
-        SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_LOG1_MC);
+        SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_LOG2_MC);
         GetLatestOperationLogs();
      
         // _reclaimer.Reset();

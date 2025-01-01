@@ -21,14 +21,14 @@ public class HistoryPanelCtr :UIPresenter<HistoryPanelView>
 
    public void SearchRecord(string startTime,string endTime, MechanicalType type,string OperatorPerson="")
    {
-      Debug.Log($"搜索开始日期{startTime}  结束日期{endTime} 机器类型{type}");
+      // Debug.Log($"搜索开始日期{startTime}  结束日期{endTime} 机器类型{type}");
       string Tables = "";
       bool useDate = true, useOperator =OperatorPerson != string.Empty;
       if (startTime=="" || endTime=="")
       {
           useDate = false;
       }
-      Debug.Log("useOperator: "+useOperator);
+      // Debug.Log("useOperator: "+useOperator);
       if (view.curPanelType==PanelType.AlarmPanel)
       {
           Tables =type==MechanicalType.StackerReclaimer? ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;

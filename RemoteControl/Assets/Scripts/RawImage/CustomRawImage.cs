@@ -32,7 +32,7 @@ public class CustomRawImage: RawImage, IPointerClickHandler
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
             //GetRawImageObj(eventData, rectTransform, PreviewCamera);
-            CheckDrawRayLine(canvasa, eventData.position, this, PreviewCamera, UICamera);
+            // CheckDrawRayLine(canvasa, eventData.position, this, PreviewCamera, UICamera);
         }
         #region UI不绑定相机
         /// <summary>
