@@ -99,6 +99,7 @@ public partial class DataManager
                     account = row[ConstStr.DATA_USERNAME] as string,
                     password = row[ConstStr.DATA_PASSWORD] as string,
                     name = row[ConstStr.DATA_NAME] as string,
+                    ID= row[ConstStr.DATA_USER_ID].ToString(),
                     isAdmin =(val == 1)
                 };
             }
@@ -151,12 +152,33 @@ public partial class DataManager
         
         return res;
     }
-    public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userName,string taskState,string completeState="1")
+
+    public string GetUserNameByUserID(string userId)
     {
+        string query = $"SELECT * FROM `{ConstStr.DATABASE_LOGIN_TABLE}` WHERE `{ConstStr.DATA_USER_ID}` = '{userId}'";
+        DataSet dataSet = MySqlHelper.GetDataSet(query);
+        if (dataSet!=null&&dataSet.Tables.Count>0)
+        {
+            try
+            {
+                DataRow row = dataSet.Tables[0].Rows[0];
+                return row[ConstStr.DATA_NAME] as string;
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                return "";
+            }
+        }
+        return "";
+    }
+    public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userId,string taskState,string completeState="1")
+    {
+        string name = GetUserNameByUserID(userId);
         if (GameDataManager.Instance.IsAdmin())
         {
             string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`,`{ConstStr.DATA_TASK_AUTO_MODE}`,`{ConstStr.DATA_TASK_ANGLE_ENTRY_MODE}`,`{ConstStr.DATA_TASK_STATE2}`) " +
-                           $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{0}','{1}','{0}','{userName}','{taskState}','{taskCommand.TaskID}','{0}','{0}','{taskCommand.AutoMode}','{(int)taskCommand.AngleEntryMode}','{completeState}')";
+                           $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{0}','{1}','{0}','{name}','{taskState}','{taskCommand.TaskID}','{0}','{0}','{taskCommand.AutoMode}','{(int)taskCommand.AngleEntryMode}','{completeState}')";
             return MySqlHelper.ExecuteSql(query) > 0; ;
         }
         else

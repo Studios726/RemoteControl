@@ -438,7 +438,7 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.QuerySystem = "MC";
         taskCommand.TaskType = TaskType.TAKEMATER;
         taskCommand.Machine = machine;
-        taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
+        taskCommand.OperatorName = GameDataManager.Instance.GetUserID();
         taskCommand.TaskCreateTime = DateTime.Now; //.ToString("yyyy-MM-dd HH:mm:ss")
         taskCommand.OperatorSystem = "MC";
         taskCommand.FinishMethod =new List<int>(){0,0};

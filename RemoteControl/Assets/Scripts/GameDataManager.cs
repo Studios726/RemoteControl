@@ -118,6 +118,15 @@ public class GameDataManager : Singleton<GameDataManager>
         return "";
     }
 
+    public string GetUserID()
+    {
+        if (curAccountInfo != null)
+        {
+            return curAccountInfo.ID;
+        }
+
+        return "";
+    }
     public void SetIp(string ip)
     {
         _taoIP = "ws://" + ip;

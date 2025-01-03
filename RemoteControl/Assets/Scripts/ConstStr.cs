@@ -57,6 +57,7 @@ public static class ConstStr
     // public const string DATA_JOB = "Job";
     // public const string DATA_DEFAULT_PASSWORD = "DefaultPassword";
     public const string DATA_NAME = "real_name";
+    public const string DATA_USER_ID = "id";
     #endregion
     #region history_task_mc
     public const string DATA_TASK_ID = "task_id";
@@ -143,7 +144,7 @@ public static class ConstStr
     public const float InitBucketWheelHeigh = 7.48f;
     public const string BucketWheelStackerReclaimerName = "1#斗轮堆取料机";
     public const string BucketWheelName = "2#斗轮取料机";
-    public const string Version = "V0.1.20250102-r";
+    public const string Version = "V0.1.20250103-z";
 }
 
 public enum Machine

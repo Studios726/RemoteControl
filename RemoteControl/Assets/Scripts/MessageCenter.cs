@@ -109,7 +109,7 @@ public class MessageCenter : Singleton<MessageCenter>
                 catch (Exception e)
                 {
                     TaskDataManager.Instance.UpdateTaskData(4);
-                    Debug.Log($"数据解析失败 socketType {socketType} message {message} error {e.Message}");
+                    Debug.Log($"{DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss")} 数据解析失败 socketType {socketType} message {message} error {e.Message}");
                     // 创建栈跟踪对象
                     StackTrace stackTrace = new StackTrace(e, true);
                     foreach (var frame in stackTrace.GetFrames())

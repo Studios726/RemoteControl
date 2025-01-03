@@ -178,7 +178,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         taskCommand.QuerySystem = "MC";
         taskCommand.TaskType = TaskType.PILEMATER;
         taskCommand.Machine = machine;
-        taskCommand.OperatorName = GameDataManager.Instance.GetUserName();
+        taskCommand.OperatorName = GameDataManager.Instance.GetUserID();
         taskCommand.TaskCreateTime = DateTime.Now;
         taskCommand.FinishMethod =new List<int>(){0,0};
         if (operationType==OperationType.START|| operationType == OperationType.RESET)
