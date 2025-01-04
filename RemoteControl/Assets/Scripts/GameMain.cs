@@ -119,7 +119,6 @@ namespace RemoteControl
         private void OnDestroy()
         {
             Dispose();
-            Debug.LogError("销毁GameMain");
         }
 
         public void Dispose()

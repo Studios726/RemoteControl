@@ -13,8 +13,10 @@ public class ConfirmStartTaskPanelView : UIView<ConfirmStartTaskPanelCtr>
     private Toggle _startNewTask;//关闭设备
     private GameObject _title;
     private Text _name;
+    private Button _bgBtn;
     public override void InitUIElements(UIArgs uiArgs = null)
     {
+        _bgBtn=RootObj.transform.FindComponent<Button>("Image");
         _confirmBtn = RootObj.transform.FindComponent<Button>("bg/confirmBtn");
         _cancelBtn = RootObj.transform.FindComponent<Button>("bg/cancelBtn");
         _name = RootObj.transform.FindComponent<Text>("bg/title/name");
@@ -86,6 +88,11 @@ public class ConfirmStartTaskPanelView : UIView<ConfirmStartTaskPanelCtr>
                     }
                 });
             }
+            _bgBtn.onClick.RemoveAllListeners();
+            _bgBtn.onClick.AddListener((() =>
+            {
+                _cancelBtn.onClick?.Invoke();
+            }));
         }
     }
 }

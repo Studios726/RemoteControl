@@ -16,6 +16,7 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
     private string _content;
     private GameObject _title;
     private Text _name;
+    private Button bgBtn;
 
     public override void InitUIElements(UIArgs uiArgs = null)
     {
@@ -24,6 +25,7 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
         _title = RootObj.transform.Find("bg/title").gameObject;
         _confirmBtn = RootObj.transform.FindComponent<Button>("bg/confirmBtn");
         _cancelBtn = RootObj.transform.FindComponent<Button>("bg/cancelBtn");
+        bgBtn= RootObj.transform.FindComponent<Button>("Image");
         // 保证UI元素初始化后再调用UpdateUI，避免NullReferenceException
         UpdateUI(uiArgs);
     }
@@ -85,7 +87,11 @@ public class ConfirmPanelView : UIView<ConfirmPanelCtr>
                     }
                 });
             }
-
+            bgBtn.onClick.RemoveAllListeners();
+            bgBtn.onClick.AddListener((() =>
+            {
+                _cancelBtn.onClick.Invoke();
+            }));
             if (args.Duration != 0 || args.Duration2 != 0)
             {
                 if (_timer != null)
