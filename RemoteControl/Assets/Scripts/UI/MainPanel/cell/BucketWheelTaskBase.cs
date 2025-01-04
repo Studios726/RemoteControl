@@ -247,8 +247,16 @@ public class BucketWheelTaskBase : PanelBase
         }));
         AddOnClickListener(takeMaterStopBtn, (() =>
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs(takeMaterStopBtn.red.activeSelf?"是否恢复自动作业？":"是否暂停自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () => SendTaskCommand(OperationType.PAUSE)));
+            if (takeMaterStopBtn.red.activeSelf)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                    new ConfirmPanelArgs(takeMaterStopBtn.red.activeSelf?"是否恢复自动作业？":"是否暂停自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () => SendTaskCommand(OperationType.PAUSE)));
+            }
+            else
+            {
+                SendTaskCommand(OperationType.PAUSE);
+            }
+       
          
         }));
         AddOnClickListener(takeMaterReversingBtn, (() =>

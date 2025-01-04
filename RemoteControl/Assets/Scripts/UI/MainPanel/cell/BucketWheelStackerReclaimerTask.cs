@@ -44,8 +44,16 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         }));
         AddOnClickListener(pileMaterStopBtn,(() =>
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs(pileMaterStopBtn.red.activeSelf?"是否恢复自动作业?":"是否暂停自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () => SendPileMaterCommand(OperationType.PAUSE)));
+            if (pileMaterStopBtn.red.activeSelf)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                    new ConfirmPanelArgs(pileMaterStopBtn.red.activeSelf?"是否恢复自动作业?":"是否暂停自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () => SendPileMaterCommand(OperationType.PAUSE)));
+            }
+            else
+            {
+                SendPileMaterCommand(OperationType.PAUSE);
+            }
+          
       
         }));
         AddOnClickListener(pileMaterEndBtn,(() =>
