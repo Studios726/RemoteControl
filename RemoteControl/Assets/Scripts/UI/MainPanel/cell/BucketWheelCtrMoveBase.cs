@@ -357,6 +357,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     public Color runColor = new Color(1, 0, 0.1803922f, 1);
     private string pos1;
     private string pos2;
+    /// <summary>
+    /// 两机距离小于80之后距离数值红黄闪烁
+    /// </summary>
+    private Timer distanceOfTwoCarsTimer;
     public virtual void Start()
     {
         Init();
@@ -786,6 +790,38 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
             }
         }
 
+        float dis = Mathf.Abs(data.DC_Pos + ConstStr.InitPosition_1 - data.DC_Pos_2 - ConstStr.InitPosition_2);
+        if (dis>=80)
+        {
+            if (distanceOfTwoCarsTimer!=null)
+            {
+                distanceOfTwoCarsTimer?.Cancel();
+                distanceOfTwoCarsTimer = null;
+            }
+
+            if (distanceOfTwoCars.color != Color.white)
+            {
+                distanceOfTwoCars.color = Color.white;
+            }
+        }
+        else
+        {
+            if (distanceOfTwoCarsTimer == null)
+            {
+                
+                distanceOfTwoCarsTimer = Timer.Register(1, true, true, (() =>
+                {
+                    if (distanceOfTwoCars.color == Color.yellow)
+                    {
+                        distanceOfTwoCars.color = Color.red;
+                    }
+                    else
+                    {
+                        distanceOfTwoCars.color= Color.yellow;
+                    }
+                }));
+            }
+        }
         SetText(distanceOfTwoCars, (Mathf.Abs(data.DC_Pos+ConstStr.InitPosition_1 - data.DC_Pos_2-ConstStr.InitPosition_2)).ToString("F2"), TextType.Meter);
     }
 
