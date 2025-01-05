@@ -47,6 +47,7 @@ public class SetParameterItem : MonoBehaviour
             DataManager.Instance.InsertHistoryLogMc(des+"设定修改", GameDataManager.Instance.GetUserName(), machine);
             GameDataManager.Instance.SendServerCommandByName(commandName,0, float.Parse(inputField.text));
         }));
+        inputField.text = "0";
     }
 
     public void SetButtonColor(bool isRun)

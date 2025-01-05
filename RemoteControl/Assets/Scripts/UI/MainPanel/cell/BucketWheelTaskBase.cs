@@ -331,8 +331,8 @@ public class BucketWheelTaskBase : PanelBase
         }
         else
         {
-            InputFieldValueRange(startTakeMaterText, 153, 323,153);
-            InputFieldValueRange(stopTakeMaterText, 153, 323,323);
+            InputFieldValueRange(startTakeMaterText, 153, 330,153);
+            InputFieldValueRange(stopTakeMaterText, 153, 330,330);
         }
        
         InputFieldValueRange(leftTakeMaterText, 12, 90,12);
@@ -342,7 +342,7 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(takeMaterStep, 0.1f, 3,0.7f);
         InputFieldValueRange(takeMaterNum, 0, 99999,0);
         InputFieldValueRange(layerHigh, 0, 10,0);
-        InputFieldValueRange(AngleEntryText, 0, 120,40);
+        InputFieldValueRange(AngleEntryText, 0, 120,2.2f);
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 

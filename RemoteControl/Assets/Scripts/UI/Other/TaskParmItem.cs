@@ -22,7 +22,7 @@ public class TaskParmItem : MonoBehaviour
       buttonCell.AddListener((() =>
       {
          UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-            new ConfirmPanelArgs($"{des}修改？", null, () =>
+            new ConfirmPanelArgs($"{des}修改？",GameDataManager.Instance.GetMachineName(Machine), null, () =>
             {
                DataManager.Instance.InsertHistoryLogMc($"{des}修改", GameDataManager.Instance.GetUserName(), Machine);
                TaskDataManager.Instance.UpdateCommonTaskParameters(name,inputField.text,Machine);

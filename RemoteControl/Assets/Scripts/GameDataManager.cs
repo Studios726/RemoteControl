@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using Random = System.Random;
 
 public struct WarningData
 {
@@ -67,7 +68,9 @@ public class GameDataManager : Singleton<GameDataManager>
     private string _taoIP;
 
     private IpConfig _ipConfig;
-    public List<FlowMeter_data> flowMeterDataList=new List<FlowMeter_data>();
+
+    public List<FlowMeter_data> flowMeterDataList = new List<FlowMeter_data>();
+
     // private int count;
     public Queue<WarningData> BucketWheelQueue = new Queue<WarningData>();
     public Queue<WarningData> BucketWheelStackerReclaimerQueue = new Queue<WarningData>();
@@ -76,6 +79,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public bool IsCanPop;
     public bool IsCanPopTakeMater;
     public bool IsUpdatePlcWarningRecord;
+
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
@@ -83,7 +87,7 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public bool IsAdmin()
     {
-        if (curAccountInfo != null && curAccountInfo.isAdmin)
+        if (curAccountInfo != null && curAccountInfo.isAdmin&&IpConfig.IsRecordData)
         {
             return true;
         }
@@ -127,6 +131,7 @@ public class GameDataManager : Singleton<GameDataManager>
 
         return "";
     }
+
     public void SetIp(string ip)
     {
         _taoIP = "ws://" + ip;
@@ -178,16 +183,16 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             IsCanPop = false;
             Timer.Register(_systemVariables.BeltRealyDis, false, false, (() => { IsCanPop = true; }));
-            PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis,Machine.BucketWheelStackerReclaimer);
+            PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis, Machine.BucketWheelStackerReclaimer);
         }
 
-       
-        if (_systemVariables.SuspensionGlueRunCommand_2&&IsCanPopTakeMater&& _systemVariables.BeltRealyDis_2 > 0 &&
+
+        if (_systemVariables.SuspensionGlueRunCommand_2 && IsCanPopTakeMater && _systemVariables.BeltRealyDis_2 > 0 &&
             curAccountInfo != null)
         {
             IsCanPopTakeMater = false;
             Timer.Register(_systemVariables.BeltRealyDis_2, false, false, (() => { IsCanPopTakeMater = true; }));
-            PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis_2,Machine.BucketWheel);
+            PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis_2, Machine.BucketWheel);
         }
 
         UpdateMachine();
@@ -203,36 +208,40 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public FlowMeter_data GetFlowMeterData(Machine machine)
     {
-        if (flowMeterDataList.Count >0)//更新流量
+        if (flowMeterDataList.Count > 0) //更新流量
         {
             for (int i = 0; i < flowMeterDataList.Count; i++)
             {
-                if (flowMeterDataList[i].id==(int)machine)
+                if (flowMeterDataList[i].id == (int)machine)
                 {
                     return flowMeterDataList[i];
                 }
             }
         }
-        return  null;
+
+        return null;
     }
+
     //悬胶皮带运行提示
-    public void PileTakeMaterPop(TaskType taskType, int time,Machine machine)
+    public void PileTakeMaterPop(TaskType taskType, int time, Machine machine)
     {
-        string title=machine==Machine.BucketWheelStackerReclaimer?ConstStr.BucketWheelStackerReclaimerName:ConstStr.BucketWheelName;
-        UIID uiID =machine==Machine.BucketWheelStackerReclaimer?UIID.ConfirmPanel_1:UIID.ConfirmPanel_2;
+        string title = machine == Machine.BucketWheelStackerReclaimer
+            ? ConstStr.BucketWheelStackerReclaimerName
+            : ConstStr.BucketWheelName;
+        UIID uiID = machine == Machine.BucketWheelStackerReclaimer ? UIID.ConfirmPanel_1 : UIID.ConfirmPanel_2;
         if (taskType == TaskType.PILEMATER)
         {
-            UIManager.Instance.OpenUI(uiID, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s",title, null, null, time,0,uiID));
+            UIManager.Instance.OpenUI(uiID, new ConfirmPanelArgs("悬胶堆料运行倒计时 {0}s", title, null, null, time, 0, uiID));
         }
         else if (taskType == TaskType.TAKEMATER)
         {
             UIManager.Instance.OpenUI(uiID,
-                new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s",title, null, null, time,0,uiID));
+                new ConfirmPanelArgs("悬胶取料运行倒计时 {0}s", title, null, null, time, 0, uiID));
         }
         else
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("悬胶运行倒计时 {0}s","斗轮机",null, null, time));
+                new ConfirmPanelArgs("悬胶运行倒计时 {0}s", "斗轮机", null, null, time));
         }
     }
 
@@ -243,6 +252,7 @@ public class GameDataManager : Singleton<GameDataManager>
             : ConstStr.BucketWheelName;
         return title;
     }
+
     public bool GetPlcConnection(Machine machine)
     {
         if (_systemVariables == null)
@@ -409,7 +419,7 @@ public class GameDataManager : Singleton<GameDataManager>
     /// </summary>
     public void UpdateBucketWheelPosText()
     {
-        if (machineMove_1 &&machineMove_2)
+        if (machineMove_1 && machineMove_2)
         {
             machineMove_1.UpdateBucketWheelPosText(
                 $"{(SystemVariables.DC_Pos + ConstStr.InitPosition_1).ToString("F2")} m");
@@ -418,7 +428,6 @@ public class GameDataManager : Singleton<GameDataManager>
             machineMove_1.UpdateBucketWheelHeighText(SystemVariables.Luff_Angle);
             machineMove_2.UpdateBucketWheelHeighText(SystemVariables.Luff_Angle_2);
         }
-       
     }
 
     public void UpdateMachineWarning()
@@ -597,9 +606,10 @@ public class GameDataManager : Singleton<GameDataManager>
         }));
         SetScaReportAndDem(cursendDataReportAndDem);
     }
-  
+
     public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,
-        GameObject model = null,MeshFilter meshFilter=null,MeshRenderer meshRenderer=null,MeshCollider meshCollider=null,Mesh cachedMesh=null)
+        GameObject model = null, MeshFilter meshFilter = null, MeshRenderer meshRenderer = null,
+        MeshCollider meshCollider = null, Mesh cachedMesh = null)
     {
         if (sendDataReportAndDem == null || sendDataReportAndDem.SendCoalHeapDEM == null)
         {
@@ -729,8 +739,6 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             Debug.LogError("加载模型失败");
         }
-     
-      
     }
 
     /// <summary>
@@ -767,7 +775,9 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.DATA_FLOAT = dataFloat;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
-    public void SendServerCommandRC(string commandName,int dataType,int queryType, int dataInt = 0, float dataFloat = 0)
+
+    public void SendServerCommandRC(string commandName, int dataType, int queryType, int dataInt = 0,
+        float dataFloat = 0)
     {
         ServerCommand serverCommand = new ServerCommand();
         serverCommand.QUERY_SYSTEM = "MC";
@@ -778,6 +788,7 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.DATA_FLOAT = dataFloat;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
     }
+
     /// <summary>
     /// 获取三维数据
     /// </summary>
@@ -810,53 +821,57 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             return;
         }
-
-        if (curAccountInfo != null && curAccountInfo.isAdmin)
+        if (curAccountInfo != null && curAccountInfo.isAdmin&&IpConfig.IsRecordData)
         {
-            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
-                _systemVariables.BucketWheelElectricCurrent, "斗轮电流",
-                Machine.BucketWheelStackerReclaimer);
-
-            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
-                _systemVariables.LargeCarElectricCurrent, "大车电流",
-                Machine.BucketWheelStackerReclaimer);
-
-            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
-                _systemVariables.RotaryElectricCurrent, "回转电流",
-                Machine.BucketWheelStackerReclaimer);
-
-            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
-                _systemVariables.SuspensionBeltElectricCurrent, "悬胶电流",
-                Machine.BucketWheelStackerReclaimer);
-
-            // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
-            //     Machine.BucketWheelStackerReclaimer);
-            if (flowMeterDataList.Count>0)//更新流量
+           
+            if (GameMain!=null&&GameMain.connectionRC.isConnect == true)
             {
-                for (int i = 0; i < flowMeterDataList.Count; i++)
+                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
+                    _systemVariables.BucketWheelElectricCurrent, "斗轮电流",
+                    Machine.BucketWheelStackerReclaimer);
+
+                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
+                    _systemVariables.LargeCarElectricCurrent, "大车电流",
+                    Machine.BucketWheelStackerReclaimer);
+
+                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
+                    _systemVariables.RotaryElectricCurrent, "回转电流",
+                    Machine.BucketWheelStackerReclaimer);
+
+                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
+                    _systemVariables.SuspensionBeltElectricCurrent, "悬胶电流",
+                    Machine.BucketWheelStackerReclaimer);
+
+                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
+                    _systemVariables.BucketWheelElectricCurrent_2, "斗轮电流",
+                    Machine.BucketWheel);
+
+                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
+                    _systemVariables.LargeCarElectricCurrent_2, "大车电流",
+                    Machine.BucketWheel);
+
+                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
+                    _systemVariables.RotaryElectricCurrent_2, "回转电流",
+                    Machine.BucketWheel);
+
+                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
+                    _systemVariables.SuspensionBeltElectricCurrent_2, "悬胶电流",
+                    Machine.BucketWheel);
+            }
+
+            if (GameMain!=null&&GameMain.connectionFM.isConnect == true)
+            {
+                if (flowMeterDataList.Count > 0) //更新流量
                 {
-                    DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, (float)flowMeterDataList[i].FlowRealtime, "悬臂流量",
-                        (Machine)flowMeterDataList[i].id);
+                    for (int i = 0; i < flowMeterDataList.Count; i++)
+                    {
+                        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC,
+                            (float)flowMeterDataList[i].FlowRealtime, "悬臂流量",
+                            (Machine)flowMeterDataList[i].id);
+                    }
                 }
             }
-            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
-                _systemVariables.BucketWheelElectricCurrent_2, "斗轮电流",
-                Machine.BucketWheel);
-
-            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
-                _systemVariables.LargeCarElectricCurrent_2, "大车电流",
-                Machine.BucketWheel);
-
-            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
-                _systemVariables.RotaryElectricCurrent_2, "回转电流",
-                Machine.BucketWheel);
-
-            DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
-                _systemVariables.SuspensionBeltElectricCurrent_2, "悬胶电流",
-                Machine.BucketWheel);
-
-            // DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC, _systemVariables, "悬臂流量",
-            //     Machine.BucketWheelStackerReclaimer);
+           
         }
     }
 
@@ -961,7 +976,7 @@ public class GameDataManager : Singleton<GameDataManager>
     }
 
     public void AddOrUpdateWarningDesDict(string key, string des, Machine machine, bool isSelect, string time,
-        bool isConfirm = false, string confirmTime = "",bool isDataSynchronized=true)
+        bool isConfirm = false, string confirmTime = "", bool isDataSynchronized = true)
     {
         if (WarningCellDataDict.ContainsKey(key))
         {
@@ -969,7 +984,7 @@ public class GameDataManager : Singleton<GameDataManager>
         }
 
         WarningCellDataDict.Add(key,
-            new WarningCellData(key, des, DateTime.Now, machine, isConfirm, isSelect, confirmTime,isDataSynchronized));
+            new WarningCellData(key, des, DateTime.Now, machine, isConfirm, isSelect, confirmTime, isDataSynchronized));
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
             EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
@@ -1009,6 +1024,7 @@ public class GameDataManager : Singleton<GameDataManager>
             WarningCellDataDict.Remove(key);
             UpdatePlcWarningRecordData();
         }
+
         EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
         EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
     }
@@ -1045,7 +1061,7 @@ public class GameDataManager : Singleton<GameDataManager>
             _systemVariables.ReelOverTensionLimit1 = true;
             isUpdate = true;
         }
-        
+
         if (_systemVariables != null)
         {
             if (newSystemVariables.D1PLC1CommunicationState == false && _systemVariables.D1PLC1CommunicationState)
@@ -1588,7 +1604,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.RotaryFanOverload));
             }
 
-            if (newSystemVariables.RotaryBrakeResistorOverheatSwitch==false &&
+            if (newSystemVariables.RotaryBrakeResistorOverheatSwitch == false &&
                 _systemVariables.RotaryBrakeResistorOverheatSwitch == true)
             {
                 //回转-制动电阻超温
@@ -2046,7 +2062,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload));
             }
 
-            if (newSystemVariables.ReelOverTensionLimit1 == false && newSystemVariables.RollerOverTightLimit2 &&(_systemVariables.ReelOverTensionLimit1 == true||_systemVariables.RollerOverTightLimit2 == false ) )
+            if (newSystemVariables.ReelOverTensionLimit1 == false && newSystemVariables.RollerOverTightLimit2 &&
+                (_systemVariables.ReelOverTensionLimit1 == true || _systemVariables.RollerOverTightLimit2 == false))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧1过紧2限位", GetUserName(),
@@ -2054,7 +2071,10 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1), "电缆卷筒-卷筒过紧1过紧2限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.ReelOverTensionLimit1 == true && newSystemVariables.RollerOverTightLimit2 == false &&( _systemVariables.ReelOverTensionLimit1 == false||_systemVariables.RollerOverTightLimit2 == true))
+            else if (newSystemVariables.ReelOverTensionLimit1 == true &&
+                     newSystemVariables.RollerOverTightLimit2 == false &&
+                     (_systemVariables.ReelOverTensionLimit1 == false ||
+                      _systemVariables.RollerOverTightLimit2 == true))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧1过紧2限位解除", GetUserName(),
@@ -2062,7 +2082,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1));
             }
 
-            if (newSystemVariables.ReelOverLooseLimit1 &&newSystemVariables.RollerOverLooseLimit2 &&(_systemVariables.ReelOverLooseLimit1 == false||_systemVariables.RollerOverLooseLimit2 == false) )
+            if (newSystemVariables.ReelOverLooseLimit1 && newSystemVariables.RollerOverLooseLimit2 &&
+                (_systemVariables.ReelOverLooseLimit1 == false || _systemVariables.RollerOverLooseLimit2 == false))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松1过松2限位", GetUserName(),
@@ -2070,13 +2091,14 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1), "电缆卷筒-卷筒过松1过松2限位",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.ReelOverLooseLimit1 == false && newSystemVariables.RollerOverLooseLimit2==false&&(_systemVariables.ReelOverLooseLimit1 == true||_systemVariables.RollerOverLooseLimit2==true))
+            else if (newSystemVariables.ReelOverLooseLimit1 == false &&
+                     newSystemVariables.RollerOverLooseLimit2 == false &&
+                     (_systemVariables.ReelOverLooseLimit1 == true || _systemVariables.RollerOverLooseLimit2 == true))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1));
-              
             }
 
             // if (newSystemVariables.RollerOverTightLimit2 && _systemVariables.RollerOverTightLimit2 == false)
@@ -3140,6 +3162,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.XBYH_FZ_CH_FAULT));
             }
+
             if (newSystemVariables.Slew_Encoder_ERR == true && _systemVariables.Slew_Encoder_ERR == false)
             {
                 // 回转编码器异常
@@ -4122,6 +4145,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.PowerReelFullDiskAlarm));
             }
+
             if (newSystemVariables.PowerReelEmptyDiskAlarm == true &&
                 _systemVariables.PowerReelEmptyDiskAlarm == false)
             {
@@ -4131,7 +4155,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.PowerReelEmptyDiskAlarm), "动力电缆卷筒空盘报警",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
-            else if (newSystemVariables.PowerReelEmptyDiskAlarm == false && _systemVariables.PowerReelEmptyDiskAlarm == true)
+            else if (newSystemVariables.PowerReelEmptyDiskAlarm == false &&
+                     _systemVariables.PowerReelEmptyDiskAlarm == true)
             {
                 // 动力电缆卷筒空盘报警解除
                 DataManager.Instance.InsertHistoryWarningMc("动力电缆卷筒空盘报警解除", GetUserName(),
@@ -4480,7 +4505,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltEmergencyStop));
             }
-            
+
             if (newSystemVariables.SuspendedBeltLongitudinalTearSwitch == true &&
                 _systemVariables.SuspendedBeltLongitudinalTearSwitch == false)
             {
@@ -4505,7 +4530,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 // 中部料斗堵煤检测开关
                 DataManager.Instance.InsertHistoryWarningMc("悬胶/挡板-中部料斗堵煤检测开关", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralHopperCloggedDetectionSwitch), "悬胶/挡板-中部料斗堵煤检测开关",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.CentralHopperCloggedDetectionSwitch),
+                    "悬胶/挡板-中部料斗堵煤检测开关",
                     Machine.BucketWheelStackerReclaimer, false, "");
             }
             else if (newSystemVariables.CentralHopperCloggedDetectionSwitch == false &&
@@ -4730,7 +4756,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.DiversionPlateCircuitBreakerFault));
             }
-            
+
             if (newSystemVariables.BucketWheelFeederCircuitBreakerFault == true &&
                 _systemVariables.BucketWheelFeederCircuitBreakerFault == false)
             {
@@ -5025,7 +5051,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0));
             }
-            
+
             if (newSystemVariables.SuspensionBeltFault == true &&
                 _systemVariables.SuspensionBeltFault == false)
             {
@@ -5044,7 +5070,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault));
             }
-            
+
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>取料机报错信息<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
             //取料机
@@ -5635,7 +5661,7 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.RotaryFanOverload_2));
             }
 
-            if (newSystemVariables.RotaryBrakeResistorOverheatSwitch_2==false &&
+            if (newSystemVariables.RotaryBrakeResistorOverheatSwitch_2 == false &&
                 _systemVariables.RotaryBrakeResistorOverheatSwitch_2 == true)
             {
                 //回转-制动电阻超温
@@ -6132,16 +6158,19 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.CableReelMotorOverload_2));
             }
 
-             if (newSystemVariables.ReelOverTensionLimit1_2 == false && newSystemVariables.RollerOverTightLimit2_2 &&(_systemVariables.ReelOverTensionLimit1_2 == true||_systemVariables.RollerOverTightLimit2_2 == false ) )
+            if (newSystemVariables.ReelOverTensionLimit1_2 == false && newSystemVariables.RollerOverTightLimit2_2 &&
+                (_systemVariables.ReelOverTensionLimit1_2 == true || _systemVariables.RollerOverTightLimit2_2 == false))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧1过紧2限位", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1_2), "电缆卷筒-卷筒过紧1过紧2限位",
                     Machine.BucketWheel, false, "");
-              
             }
-            else if (newSystemVariables.ReelOverTensionLimit1_2 == true && newSystemVariables.RollerOverTightLimit2_2 == false &&( _systemVariables.ReelOverTensionLimit1_2 == false||_systemVariables.RollerOverTightLimit2_2 == true))
+            else if (newSystemVariables.ReelOverTensionLimit1_2 == true &&
+                     newSystemVariables.RollerOverTightLimit2_2 == false &&
+                     (_systemVariables.ReelOverTensionLimit1_2 == false ||
+                      _systemVariables.RollerOverTightLimit2_2 == true))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过紧限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过紧1过紧2限位解除", GetUserName(),
@@ -6149,7 +6178,8 @@ public class GameDataManager : Singleton<GameDataManager>
                 RemoveWarningDesDict(nameof(newSystemVariables.ReelOverTensionLimit1_2));
             }
 
-            if (newSystemVariables.ReelOverLooseLimit1_2 &&newSystemVariables.RollerOverLooseLimit2_2 &&(_systemVariables.ReelOverLooseLimit1_2 == false||_systemVariables.RollerOverLooseLimit2_2 == false) )
+            if (newSystemVariables.ReelOverLooseLimit1_2 && newSystemVariables.RollerOverLooseLimit2_2 &&
+                (_systemVariables.ReelOverLooseLimit1_2 == false || _systemVariables.RollerOverLooseLimit2_2 == false))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松1过松2限位", GetUserName(),
@@ -6157,7 +6187,10 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.ReelOverLooseLimit1_2), "电缆卷筒-卷筒过松1过松2限位",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.ReelOverLooseLimit1_2 == false &&newSystemVariables.RollerOverLooseLimit2_2==false&&(_systemVariables.ReelOverLooseLimit1_2 == true||_systemVariables.RollerOverLooseLimit2_2==true) )
+            else if (newSystemVariables.ReelOverLooseLimit1_2 == false &&
+                     newSystemVariables.RollerOverLooseLimit2_2 == false &&
+                     (_systemVariables.ReelOverLooseLimit1_2 == true ||
+                      _systemVariables.RollerOverLooseLimit2_2 == true))
             {
                 //夹轨/卷筒-电缆卷筒-卷筒过松限位1解除
                 DataManager.Instance.InsertHistoryWarningMc("电缆卷筒-卷筒过松限位1解除", GetUserName(),
@@ -7182,21 +7215,23 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.Slew_Encoder_ERR_2));
             }
-            if (newSystemVariables.QJY_CH_FAULT_2 == true && _systemVariables.QJY_CH_FAULT_2  == false)
+
+            if (newSystemVariables.QJY_CH_FAULT_2 == true && _systemVariables.QJY_CH_FAULT_2 == false)
             {
                 // 倾角仪异常
                 DataManager.Instance.InsertHistoryWarningMc("倾角仪异常", GetUserName(),
                     Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.QJY_CH_FAULT_2 ), "倾角仪异常",
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.QJY_CH_FAULT_2), "倾角仪异常",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.QJY_CH_FAULT_2  == false && _systemVariables.QJY_CH_FAULT_2  == true)
+            else if (newSystemVariables.QJY_CH_FAULT_2 == false && _systemVariables.QJY_CH_FAULT_2 == true)
             {
                 //倾角仪异常解除
                 DataManager.Instance.InsertHistoryWarningMc("倾角仪异常解除", GetUserName(),
                     Machine.BucketWheel);
-                RemoveWarningDesDict(nameof(newSystemVariables.QJY_CH_FAULT_2 ));
+                RemoveWarningDesDict(nameof(newSystemVariables.QJY_CH_FAULT_2));
             }
+
             if (newSystemVariables.XBTB_LWJ_CH_FAULT_2 == true && _systemVariables.XBTB_LWJ_CH_FAULT_2 == false)
             {
                 // 垂直料位计异常
@@ -7372,7 +7407,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.XBYH_FZ_CH_FAULT_2));
             }
-            
+
             if (newSystemVariables.RightAnchorNotLifted_2 == true && _systemVariables.RightAnchorNotLifted_2 == false)
             {
                 // 右侧锚锭没有抬起
@@ -8256,13 +8291,15 @@ public class GameDataManager : Singleton<GameDataManager>
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.PowerReelEmptyDiskAlarm_2), "动力电缆卷筒空盘报警",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.PowerReelEmptyDiskAlarm_2 == false && _systemVariables.PowerReelEmptyDiskAlarm_2 == true)
+            else if (newSystemVariables.PowerReelEmptyDiskAlarm_2 == false &&
+                     _systemVariables.PowerReelEmptyDiskAlarm_2 == true)
             {
                 // 动力电缆卷筒空盘报警解除
                 DataManager.Instance.InsertHistoryWarningMc("动力电缆卷筒空盘报警解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.PowerReelEmptyDiskAlarm_2));
             }
+
             if (newSystemVariables.LargeCarOperationHandleFault_2 == true &&
                 _systemVariables.LargeCarOperationHandleFault_2 == false)
             {
@@ -8588,7 +8625,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltEmergencyStop_2));
             }
-            
+
             if (newSystemVariables.SuspendedBeltLongitudinalTearSwitch_2 == true &&
                 _systemVariables.SuspendedBeltLongitudinalTearSwitch_2 == false)
             {
@@ -8842,7 +8879,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.DiversionPlateCircuitBreakerFault_2));
             }
-            
+
             if (newSystemVariables.BucketWheelFeederCircuitBreakerFault_2 == true &&
                 _systemVariables.BucketWheelFeederCircuitBreakerFault_2 == false)
             {
@@ -9244,7 +9281,7 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.LeftAnchorNotLifted_2));
             }
-            
+
             if (newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2 == true &&
                 _systemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2 == false)
             {
@@ -9263,9 +9300,9 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2));
             }
-            
+
             if (newSystemVariables.SuspensionBeltFault_2 == true &&
-                _systemVariables.SuspensionBeltFault_2  == false)
+                _systemVariables.SuspensionBeltFault_2 == false)
             {
                 // 悬臂胶带故障
                 DataManager.Instance.InsertHistoryWarningMc("悬臂胶带故障", GetUserName(),
@@ -9274,16 +9311,16 @@ public class GameDataManager : Singleton<GameDataManager>
                     "悬臂胶带故障",
                     Machine.BucketWheel, false, "");
             }
-            else if (newSystemVariables.SuspensionBeltFault_2  == false &&
-                     _systemVariables.SuspensionBeltFault_2  == true)
+            else if (newSystemVariables.SuspensionBeltFault_2 == false &&
+                     _systemVariables.SuspensionBeltFault_2 == true)
             {
                 //悬臂胶带故障解除
                 DataManager.Instance.InsertHistoryWarningMc("悬臂胶带故障解除", GetUserName(),
                     Machine.BucketWheel);
-                RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault_2 ));
+                RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault_2));
             }
-
         }
+
         // Debug.LogError($">>>>>>>>>{isUpdate} {LastMcWarningRecord!=null}");
         if (isUpdate == true && LastMcWarningRecord != null)
         {
@@ -9295,7 +9332,6 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             UpdatePlcWarningRecordData();
         }
-    
     }
 
     #endregion

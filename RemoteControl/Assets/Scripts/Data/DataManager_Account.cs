@@ -174,6 +174,10 @@ public partial class DataManager
     }
     public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userId,string taskState,string completeState="1")
     {
+        if (GameDataManager.Instance.IpConfig.IsRecordData==false)
+        {
+            return false;
+        }
         string name = GetUserNameByUserID(userId);
         if (GameDataManager.Instance.IsAdmin())
         {
@@ -302,6 +306,7 @@ public partial class DataManager
         {
             query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine})  Order By time DESC LIMIT {limit}";
         }
+        // Debug.LogError($"query>>>>>>>>>{query}");
         DataSet dataSet = MySqlHelper.GetDataSet(query);
         return  dataSet;
     }
@@ -329,15 +334,27 @@ public partial class DataManager
     }
     public bool InsertHistoryLogMc(string des,string userName,Machine machine)
     {
-        string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
+        if (GameDataManager.Instance.IpConfig.IsRecordData)
+        {
+            string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_LOG1_MC:ConstStr.DATABASE_HISTORY_LOG2_MC;
         
-        string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_LOGS_TIME}`,`{ConstStr.DATA_HISTORY_LOGS_INFO}`,`{ConstStr.DATA_HISTORY_LOGS_OPERATOR}`) " +
-                       $"VALUES ('{DateTime.Now}','{des}','{userName}')";
-        return MySqlHelper.ExecuteSql(query) > 0;
+            string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_LOGS_TIME}`,`{ConstStr.DATA_HISTORY_LOGS_INFO}`,`{ConstStr.DATA_HISTORY_LOGS_OPERATOR}`) " +
+                           $"VALUES ('{DateTime.Now}','{des}','{userName}')";
+            return MySqlHelper.ExecuteSql(query) > 0;
+        }
+        else
+        {
+            return false;
+        }
+      
     }
     
     public bool InsertHistoryWarningMc(string des,string userName,Machine machine,bool isRecord=false)
     {
+        if (GameDataManager.Instance.IpConfig.IsRecordData==false)
+        {
+            return false;
+        }
         if (GameDataManager.Instance.IsAdmin()||isRecord)
         {
             string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;

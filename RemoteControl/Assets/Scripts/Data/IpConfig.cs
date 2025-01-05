@@ -9,4 +9,5 @@ public class IpConfig
    public string TaskIP{get;set;}
    public string YuanIP{get;set;}
    public string FmIP{get;set;}
+   public bool IsRecordData{get;set;}
 }

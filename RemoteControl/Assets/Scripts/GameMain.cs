@@ -34,8 +34,25 @@ namespace RemoteControl
             InitMode();
             // CreatConnect(null, null);
             UIManager.Instance.OpenUI(UIID.LoginPanel);
-            chartTimer = Timer.Register(5, true, true, (() => { GameDataManager.Instance.RecordChart(); }));
-            UpdateChart=Timer.Register(1, true, true, (() => {   EventManager.Instance.TriggerEvent(EventName.UpdateChartData, null);; }));
+            if (chartTimer!=null)
+            {
+                chartTimer?.Cancel();
+                chartTimer = null;
+            }
+
+            if (UpdateChart!=null)
+            {
+                UpdateChart?.Cancel();
+                UpdateChart = null;
+            }
+            chartTimer = Timer.Register(5, true, true, (() =>
+            {
+                GameDataManager.Instance.RecordChart();
+            }));
+            UpdateChart=Timer.Register(1, true, true, (() =>
+            {
+                EventManager.Instance.TriggerEvent(EventName.UpdateChartData, null);;
+            }));
         }
 
         public void OnExitGame()
@@ -101,6 +118,7 @@ namespace RemoteControl
                 config.TaskIP = Address.serviceTaskIP;
                 config.DataIP = Address.serviceIP;
                 config.FmIP= Address.serviceFmIP;
+                config.IsRecordData = true;
                 GameDataManager.Instance.SetIpConfig(config);
             }
         }

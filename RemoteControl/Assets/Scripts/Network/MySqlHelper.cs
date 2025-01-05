@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Threading.Tasks;
 using UnityEngine;
 using MySql.Data.MySqlClient;
 
@@ -92,26 +93,58 @@ public class MySqlHelper
     /// <returns></returns>
     public static int ExecuteSql(string sql)
     {
+         ExecuteSqlAsync(sql);
+        // using (MySqlConnection conn = new MySqlConnection(connstr))
+        // {
+        //     using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+        //     {
+        //         try
+        //         {
+        //             conn.Open();
+        //             int rows = cmd.ExecuteNonQuery();
+        //             return rows;
+        //         }
+        //         catch (MySql.Data.MySqlClient.MySqlException e)
+        //         {
+        //             conn.Close();
+        //             //throw e;
+        //             Debug.LogError($"数据库连接错误{e.Message}");
+        //         }
+        //         finally
+        //         {
+        //             cmd.Dispose();
+        //             conn.Close();
+        //         }
+        //     }
+        // }
+
+        return 1;
+    }
+    
+    public static async Task<int> ExecuteSqlAsync(string sql)
+    {
         using (MySqlConnection conn = new MySqlConnection(connstr))
         {
             using (MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
                 try
                 {
-                    conn.Open();
+                    await Task.Run((() =>
+                    {
+                        conn.Open();
+                    }));
                     int rows = cmd.ExecuteNonQuery();
                     return rows;
                 }
                 catch (MySql.Data.MySqlClient.MySqlException e)
                 {
                     conn.Close();
-                    //throw e;
                     Debug.LogError($"数据库连接错误{e.Message}");
                 }
                 finally
                 {
-                    cmd.Dispose();
-                    conn.Close();
+                   cmd.Dispose();
+                   conn.Close();
                 }
             }
         }
