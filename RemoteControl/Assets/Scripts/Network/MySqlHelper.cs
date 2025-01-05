@@ -28,7 +28,7 @@ public class MySqlHelper
         try
         {
             connection.Open();
-            myReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+            myReader=cmd.ExecuteReader(CommandBehavior.CloseConnection);
             return myReader;
         }
         catch (MySql.Data.MySqlClient.MySqlException e)
@@ -42,6 +42,7 @@ public class MySqlHelper
             {
                 cmd.Dispose();
                 connection.Close();
+                connection.Dispose();
             }
         }
         return myReader;
@@ -197,25 +198,24 @@ public class MySqlHelper
     /// <returns></returns>
     public static DataSet GetDataSet(string sql)
     {
-        using (MySqlConnection conn = new MySqlConnection(connstr))
+        try
         {
-            DataSet ds = new DataSet();
-            try
+            using (MySqlConnection conn = new MySqlConnection(connstr))
+            using (MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
                 conn.Open();
-                MySqlDataAdapter DataAdapter = new MySqlDataAdapter(sql, conn);
-                DataAdapter.Fill(ds);
+                using (MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd))
+                using (DataSet ds = new DataSet())
+                {
+                    dataAdapter.Fill(ds);
+                    return ds;
+                }
             }
-            catch (Exception ex)
-            {
-                //throw ex;
-                Debug.LogError($"数据库连接错误{ex.Message}");
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return ds;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"数据库连接错误: {ex.Message}\nSQL: {sql}\n连接字符串: {connstr}");
+            return null;
         }
     }
     #endregion
