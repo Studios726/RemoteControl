@@ -41,7 +41,12 @@ public class HistoryTaskPanel : MonoBehaviour
         InitDateDic();
         SetSearchPanelDate();
     }
-    
+
+    private void Start()
+    {
+        InitRecord();
+    }
+
     private void InitDateDic()
     {
         DateTime now = DateTime.Now;
@@ -91,6 +96,7 @@ public class HistoryTaskPanel : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log(">>>>>>>>>>>OnEnable Task");
         InitRecord();
     }
 
@@ -113,12 +119,16 @@ public class HistoryTaskPanel : MonoBehaviour
             data.thingRange = mySqlDataReader[ConstStr.DATA_MATERIAL_RANGE_START].ToString() + "-" + mySqlDataReader[ConstStr.DATA_MATERIAL_RANGE_END].ToString();
             data.leftRightRange = mySqlDataReader[ConstStr.DATA_LEFT_RIGHT_RANGE_START].ToString() + "-" + mySqlDataReader[ConstStr.DATA_LEFT_RIGHT_RANGE_END].ToString();
             data.leftRightSelect = mySqlDataReader[ConstStr.DATA_SIDE_SELECTION].ToString()=="LEFT"?"左":"右";
-            data.takePileLength = mySqlDataReader[ConstStr.DATA_TASK_TAKE_MATE_HIGH].ToString();
+            data.takePileLength = mySqlDataReader[ConstStr.DATA_STEP_LENGTH].ToString();
+            data.takeStepLength= mySqlDataReader[ConstStr.DATA_STEP_LENGTH].ToString();
+            data.pileHigh=mySqlDataReader[ConstStr.DATA_TASK_TAKE_MATE_HIGH].ToString();
             data.layerHigh = mySqlDataReader[ConstStr.DATA_TASK_LAYER_HIGH].ToString();
             data.timeAt = mySqlDataReader[ConstStr.DATA_TIMEDAT].ToString();
             data.quantity = mySqlDataReader[ConstStr.DATA_QUANTITY].ToString();
             data.operationName = mySqlDataReader[ConstStr.DATA_OPERATOR].ToString();
-            data.state = mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString();
+            data.state = mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString();
+            data.autoMode= mySqlDataReader[ConstStr.DATA_TASK_AUTO_MODE].ToString()==AutoMode.SemiAuto.ToString()?"人工":"自动";
+            data.angleExpansionFactor = "0";
             historyTaskDatas.Add(data);
             ++counter;
             if (counter == 1000)

@@ -14,11 +14,15 @@ public struct HistoryTaskData
     public string leftRightRange;
     public string leftRightSelect;
     public string takePileLength;
+    public string takeStepLength;
+    public string pileHigh;
     public string layerHigh;
     public string timeAt;
     public string quantity;
+    public string angleExpansionFactor;//扩角系数
     public string operationName;
     public string state;
+    public string autoMode;
 }
 public class HistoryTaskCell : MonoBehaviour
 {
@@ -29,10 +33,10 @@ public class HistoryTaskCell : MonoBehaviour
     public Text thingRangeText;
     public Text leftRightRangeText;
     public Text leftRightSelectText;
-    public Text takePileLengthText;
-    public Text layerHighText;
-    public Text timeAtText;
-    public Text quantityText;
+    public Text takeStepLengthText;
+    public Text pileHighText;
+    public Text autoModeText;
+    public Text angleExpansionFactor;
     public Text operationNameText;
     public Text stateText;
     public void UpdateDisplay(HistoryTaskData historyTaskData)
@@ -44,12 +48,14 @@ public class HistoryTaskCell : MonoBehaviour
         thingRangeText.text = historyTaskData.thingRange;
         leftRightSelectText.text = historyTaskData.leftRightSelect;
         leftRightRangeText.text = historyTaskData.leftRightRange;
-        takePileLengthText.text = historyTaskData.takePileLength;
-        takePileLengthText.text = historyTaskData.takePileLength;
-        layerHighText.text = historyTaskData.layerHigh;
-        timeAtText.text = historyTaskData.timeAt;
-        quantityText.text = historyTaskData.quantity;
+        takeStepLengthText.text = historyTaskData.takeStepLength;
+        // takePileLengthText.text = historyTaskData.takePileLength;
+        pileHighText.text = historyTaskData.pileHigh;
+        autoModeText.text = historyTaskData.autoMode;
+        angleExpansionFactor.text = historyTaskData.angleExpansionFactor;
         operationNameText.text = historyTaskData.operationName;
-        stateText.text = historyTaskData.state;
+        stateText.text =historyTaskData.state=="1"? "进行中":"完成";
+        
+        
     }
 }

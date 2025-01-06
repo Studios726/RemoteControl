@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7046625422401680113}
   - component: {fileID: 6073671173812086774}
   m_Layer: 5
-  m_Name: pileTakeLength
+  m_Name: takeStepLength
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 1362540729702498620}
   - component: {fileID: 1499480920737712790}
   m_Layer: 5
-  m_Name: layerHigh
+  m_Name: pileHigh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -425,10 +425,10 @@ MonoBehaviour:
   thingRangeText: {fileID: 4832857559639317996}
   leftRightRangeText: {fileID: 1305738464103454330}
   leftRightSelectText: {fileID: 1460257353289597067}
-  takePileLengthText: {fileID: 6073671173812086774}
-  layerHighText: {fileID: 1499480920737712790}
-  timeAtText: {fileID: 6458904882025061794}
-  quantityText: {fileID: 5237880712266132037}
+  takeStepLengthText: {fileID: 6073671173812086774}
+  pileHighText: {fileID: 1499480920737712790}
+  autoModeText: {fileID: 6458904882025061794}
+  angleExpansionFactor: {fileID: 5237880712266132037}
   operationNameText: {fileID: 7699585369378416415}
   stateText: {fileID: 2943959949401587847}
 --- !u!1 &4050291867314167340
@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 6430343370271935689}
   - component: {fileID: 6458904882025061794}
   m_Layer: 5
-  m_Name: timeAt
+  m_Name: autoMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 372153556672894772}
   - component: {fileID: 5237880712266132037}
   m_Layer: 5
-  m_Name: quantity
+  m_Name: angleExpansionFactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
