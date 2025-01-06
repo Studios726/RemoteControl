@@ -39,7 +39,7 @@ public class MySqlHelper
         catch (MySql.Data.MySqlClient.MySqlException e)
         {
             connectionReader.Close();
-            Debug.LogError($"数据库连接错误{e.Message}");
+            Debug.Log($"读取数据库连接错误{DateTime.Now.ToString("g")} {e.Message} {sqlString}");
         }
         finally
         {
@@ -146,7 +146,7 @@ public class MySqlHelper
                 catch (MySql.Data.MySqlClient.MySqlException e)
                 {
                     conn.Close();
-                    Debug.LogError($"数据库连接错误{e.Message}");
+                    Debug.Log($"异步写入数据库连接错误{DateTime.Now.ToString("g")} {e.Message} {sql}");
                 }
                 finally
                 {
@@ -220,7 +220,7 @@ public class MySqlHelper
         }
         catch (Exception ex)
         {
-            Debug.LogError($"数据库连接错误: {ex.Message}\nSQL: {sql}\n连接字符串: {connstr}");
+            Debug.Log($"读取数据库连接错误: {DateTime.Now.ToString("g")} {ex.Message}\nSQL: {sql}\n连接字符串: {connstr}");
             return null;
         }
     }

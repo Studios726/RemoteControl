@@ -491,12 +491,15 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         }
 
         dynamicUpdateData = false;
-        lineChart.series[0].data.Clear();
+        if (dataSet != null)
+        {
+            lineChart.series[0].data.Clear();
+        }
         if (dataSet == null||dataSet.Tables.Count<=0||dataSet.Tables[0].Rows.Count<=0)
         {
             return;
         }
-
+       
         UpdateDateDic(curChartName);
         int addNum = dataSet.Tables[0].Rows.Count / 1000;
         addNum = addNum == 0 ? 1 : addNum;
