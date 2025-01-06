@@ -12,7 +12,7 @@ public class MySqlHelper
     public static string Password = "123456";
     public static string connstr = "server=" + IP + ";database= " + Database + ";username=" + Username + ";password=" + Password + ";ConnectionTimeout=3;Charset=utf8";
 
-
+    private static MySqlConnection connectionReader;
     #region 执行查询语句，返回MySqlDataReader
 
     /// <summary>
@@ -21,19 +21,24 @@ public class MySqlHelper
     /// <param name="sqlString"></param>
     /// <returns></returns>
     public static MySqlDataReader ExecuteReader(string sqlString)
-    {
-        MySqlConnection connection = new MySqlConnection(connstr);
-        MySqlCommand cmd = new MySqlCommand(sqlString, connection);
+    {  
+        //临时处理 避免重复创建hard code
+        if (connectionReader==null)
+        {
+            connectionReader = new MySqlConnection(connstr);
+        }
+        connectionReader.Close();
+        MySqlCommand cmd = new MySqlCommand(sqlString, connectionReader);
         MySqlDataReader myReader = null;
         try
         {
-            connection.Open();
+            connectionReader.Open();
             myReader=cmd.ExecuteReader(CommandBehavior.CloseConnection);
             return myReader;
         }
         catch (MySql.Data.MySqlClient.MySqlException e)
         {
-            connection.Close();
+            connectionReader.Close();
             Debug.LogError($"数据库连接错误{e.Message}");
         }
         finally
@@ -41,8 +46,9 @@ public class MySqlHelper
             if (myReader == null)
             {
                 cmd.Dispose();
-                connection.Close();
-                connection.Dispose();
+                connectionReader.Close();
+                connectionReader.Dispose();
+                connectionReader = null;
             }
         }
         return myReader;
