@@ -96,7 +96,6 @@ public class HistoryTaskPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log(">>>>>>>>>>>OnEnable Task");
         InitRecord();
     }
 

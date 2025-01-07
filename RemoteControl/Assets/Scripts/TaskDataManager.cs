@@ -420,7 +420,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             return;
         }
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
-        if (nearestTaskDataDic.Count <= 0)
+        if (nearestTaskDataDic.Count <5)
         {
             GetNearestTaskDataDic();
         }
@@ -447,9 +447,11 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             for (int i = 0; i < taskVariables.McData.Count; i++)
             {
+               
                 if (nearestTaskDataDic.ContainsKey(taskVariables.McData[i].TaskID))
                 {
                     TaskData taskData = nearestTaskDataDic[taskVariables.McData[i].TaskID];
+                    Debug.LogError($">>TaskEndTime: {taskVariables.McData[i].AllData.TaskEndTime}  结束状态：{taskVariables.McData[i].AllData.OperationCommandList[3]}");
                     if (taskVariables.McData[i].AllData.Code == 0)
                     {
                         if (taskVariables.McData[i].AllData.ProcessingProgress == 1 && taskData.TaskState != "1")
@@ -470,7 +472,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     }
 
                     if (taskData.State != TaskStatus.Completed &&
-                        taskVariables.McData[i].AllData.OperationCommandList[3] == 1) //任务结束更新数据库
+                        taskVariables.McData[i].AllData.OperationCommandList[3] == 1&&taskVariables.McData[i].AllData.TaskEndTime!="") //任务结束更新数据库
                     {
                         taskData.State = TaskStatus.Completed;
                         DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID,
@@ -573,7 +575,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     public Dictionary<string, TaskData> GetNearestTaskDataDic()
     {
-        if (nearestTaskDataDic.Count <= 0)
+        if (nearestTaskDataDic.Count <5)
         {
             MySqlDataReader mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(5);
             if (mySqlDataReader!=null)

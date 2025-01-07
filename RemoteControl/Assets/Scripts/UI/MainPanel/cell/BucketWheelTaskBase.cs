@@ -528,7 +528,7 @@ public class BucketWheelTaskBase : PanelBase
         confirmTurnBtn.SetSystemState(false,true);
     }
 
-    public virtual void InputFieldValueRange(InputField inputField, float min, float max,float defaultValue)
+    public virtual void InputFieldValueRange(InputField inputField, float min, float max,float defaultValue,string commandName="")
     {
         inputField.text =defaultValue.ToString();
         inputField.onEndEdit.AddListener(((string value) =>

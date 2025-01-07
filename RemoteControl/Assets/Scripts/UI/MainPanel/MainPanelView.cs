@@ -48,7 +48,7 @@ public class MainPanelView : UIView<MainPanelCtr>
         updateModelBtn.onClick.AddListener(() =>
         {
             // GameDataManager.Instance.PileTakeMaterPop(TaskType.None, 5, Machine.BucketWheel);
-            GameDataManager.Instance.PileTakeMaterPop(TaskType.PILEMATER, 15, Machine.BucketWheel);
+            // GameDataManager.Instance.PileTakeMaterPop(TaskType.PILEMATER, 15, Machine.BucketWheel);
             // if (GameDataManager.Instance.GameMain.connectionSCA.isConnect == false)
             // {
             //     UIManager.Instance.OpenUI(UIID.ConfirmPanel,

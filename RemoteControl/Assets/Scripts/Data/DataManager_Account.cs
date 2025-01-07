@@ -195,6 +195,16 @@ public partial class DataManager
     {
         if (GameDataManager.Instance.IsAdmin())
         {
+            DateTime time=DateTime.Now;
+            try
+            {
+                time=DateTime.Parse(dateTime);
+                Debug.Log($"任务格式转换成功{dateTime} {time.ToString("G")}");
+            }
+            catch (Exception e)
+            {
+               Debug.Log($"任务格式转换失败{dateTime}");
+            }
             string state = "0";
             if (completeState == TaskStatus.InProgress)
             {
@@ -203,7 +213,7 @@ public partial class DataManager
             {
                 state ="2";
             }
-            string query = $"UPDATE `{ConstStr.DATABASE_HISTORY_TASK_MC}` SET `{ConstStr.DATA_TASK_STATE2}` = '{state}' , `{ConstStr.DATA_TASK_END_TIME}`='{DateTime.Now}' WHERE `{ConstStr.DATA_TASK_ID}` = '{taskID}'";
+            string query = $"UPDATE `{ConstStr.DATABASE_HISTORY_TASK_MC}` SET `{ConstStr.DATA_TASK_STATE2}` = '{state}' , `{ConstStr.DATA_TASK_END_TIME}`='{time}' WHERE `{ConstStr.DATA_TASK_ID}` = '{taskID}'";
             bool success=MySqlHelper.ExecuteSql(query) > 0; 
             return success; 
         }

@@ -400,6 +400,88 @@ public enum COMMAND_NAME
     /// 回转编码器手动校准
     /// </summary>
     SLEW_ADJUST,
+    /// <summary>
+    /// _堆料换向
+    /// </summary>
+    CHANGE_DIRECT,
+    /// <summary>
+    /// 全自动半自动切换
+    /// </summary>
+    AUTO_ENABLE,
+    /// <summary>
+    /// 开始作业
+    /// </summary>
+    WORKING_START,
+    /// <summary>
+    /// 暂停作业
+    /// </summary>
+    WORKING_PAUSE,
+    /// <summary>
+    /// 停止作业
+    /// </summary>
+    STOP_RUNING,
+    /// <summary>
+    /// 回转堆料
+    /// </summary>
+    SLEW_SEL,
+    /// <summary>
+    /// 定点堆料
+    /// </summary>
+    POINT_SEL,
+    /// <summary>
+    /// 强制定位
+    /// </summary>
+    POS_FROCE,
+    /// <summary>
+    /// 料行程起点设定
+    /// </summary>
+    START_POS,
+    /// <summary>
+    /// 堆料行程终点设定
+    /// </summary>
+    END_POS,
+    /// <summary>
+    /// 堆料右边界设定
+    /// </summary>
+    RIGHT_BORDER_SP,
+    /// <summary>
+    /// 堆料左边界设定
+    /// </summary>
+    LEFT_BORDER_SP,
+    /// <summary>
+    /// 堆料高度设定
+    /// </summary>
+    STACK_HIGH_SET,
+    /// <summary>
+    /// 堆料右边界递增操作按钮
+    /// </summary>
+    RIGHT_BORDER_INC,
+    /// <summary>
+    /// 堆料右边界递减操作按钮
+    /// </summary>
+    RIGHT_BORDER_DES,
+    /// <summary>
+    /// 堆料左边界递增操作按钮
+    /// </summary>
+    LEFT_BORDER_INC,
+    /// <summary>
+    /// 堆料左边界递减操作按钮
+    /// </summary>
+    LEFT_BORDER_DES,
+    /// <summary>
+    /// 堆料退车步长递增操作按钮
+    /// </summary>
+    DC_REV_INC,
+    /// <summary>
+    /// 堆料退车步长递减操作按钮
+    /// </summary>
+    DC_REV_DES,
+    /// <summary>
+    /// 堆料步长设定
+    /// </summary>
+    DC_REV
+    
+    
     
     
 }

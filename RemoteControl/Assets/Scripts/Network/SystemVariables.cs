@@ -448,7 +448,27 @@ namespace ShenYangRemoteSystem.Subclass
         public bool COMM_FROM_SCADA_FAULT { get; set; }
         
         public bool COMM_TO_SCADA_HART{ get; set; }
-     
+        //1.6
+        public bool SR1_Change_Direct { get; set; }
+        public bool SR1_AutoBorder_Enable { get; set; }
+        public bool SR1_Working_Start { get; set; }
+        public bool SR1_Working_Pause { get; set; }
+        public bool SR1_Stop_Runing { get; set; }
+        public bool SR1_SlewStack_SEL { get; set; }
+        public bool SR1_PointStack_SEL { get; set; }
+        public bool SR1_Pos_Froce { get; set; }
+        public float SR1_Stack_Start_Pos { get; set; }
+        public float SR1_Stack_End_Pos { get; set; }
+        public float SR1_Stack_RightBorder_SP { get; set; }
+        public float SR1_Stack_LeftBorder_SP { get; set; }
+        public float SR1_Stack_HighSet { get; set; }
+        public bool SR1_StackRightBorder_INC { get; set; }
+        public bool SR1_StackRightBorder_DES { get; set; }
+        public bool SR1_StackLeftBorder_INC { get; set; }
+        public bool SR1_StackLeftBorder_DES { get; set; }
+        public bool SR1_Stack_DcRevSize_INC { get; set; }
+        public bool SR1_Stack_DcRevSize_DES { get; set; }
+        public float SR1_Stack_DcRevSize { get; set; }
 
 
 
