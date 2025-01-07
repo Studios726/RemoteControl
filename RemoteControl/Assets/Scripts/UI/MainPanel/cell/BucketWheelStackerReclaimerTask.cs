@@ -162,7 +162,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         }));
         pileMaterStepSubBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("DC_REV_INC_1",0);
+            GameDataManager.Instance.SendServerCommandByName("DC_REV_DES_1",0);
             Debug.Log($"命令{DateTime.Now.ToString("G")}  {"DC_REV_DES_1"}");
         }));
         ForcedPositioning.onClick.AddListener((() =>
