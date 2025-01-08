@@ -469,6 +469,10 @@ namespace ShenYangRemoteSystem.Subclass
         public bool SR1_Stack_DcRevSize_INC { get; set; }
         public bool SR1_Stack_DcRevSize_DES { get; set; }
         public float SR1_Stack_DcRevSize { get; set; }
+        public bool BUCKET_Current_Pause_SLEW { get; set; }
+        public bool Slew_Current_Pause_Slew { get; set; } 
+        public bool BUCKET_Current_Pause_SLEW_2 { get; set; }
+        public bool Slew_Current_Pause_Slew_2 { get; set; }
 
 
 

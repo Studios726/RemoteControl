@@ -387,7 +387,15 @@ public partial class DataManager
         }
       
     }
-    
+
+    public string GetInsertHistoryWarningMcSql(string des, string userName, Machine machine)
+    {
+        string tabName =machine==Machine.BucketWheelStackerReclaimer?ConstStr.DATABASE_HISTORY_WARNING1_MC:ConstStr.DATABASE_HISTORY_WARNING2_MC;
+        
+        string query = $"INSERT INTO {tabName} (`{ConstStr.DATA_HISTORY_WARNING_TIME}`,`{ConstStr.DATA_HISTORY_WARNING_INFO}`,`{ConstStr.DATA_HISTORY_WARNING_OPERATOR}`) " +
+                       $"VALUES ('{DateTime.Now}','{des}','{userName}')";
+        return query;
+    }
     public bool InsertHistoryWarningMc(string des,string userName,Machine machine,bool isRecord=false)
     {
         if (GameDataManager.Instance.IpConfig.IsRecordData==false)
@@ -408,7 +416,20 @@ public partial class DataManager
         }
       
     }
-    
+
+    public bool ExecuteSqlByAdmin(string sql,bool isRecord=false)
+    {
+        if (GameDataManager.Instance.IpConfig.IsRecordData==false)
+        {
+            return false;
+        }
+
+        if (GameDataManager.Instance.IsAdmin()||isRecord)
+        {
+            return MySqlHelper.ExecuteSql(sql) > 0;
+        }
+        return false;
+    }
     public MySqlDataReader GetTaskConfigMc(Machine machine)
     {
         int id = machine == Machine.BucketWheelStackerReclaimer ? 1 : 2;

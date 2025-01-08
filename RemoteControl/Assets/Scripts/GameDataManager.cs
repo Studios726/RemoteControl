@@ -5072,7 +5072,44 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault));
             }
-
+            
+            if (newSystemVariables.BUCKET_Current_Pause_SLEW  == true &&
+                _systemVariables.BUCKET_Current_Pause_SLEW  == false)
+            {
+                // 斗轮电流过大暂停回转
+                DataManager.Instance.InsertHistoryWarningMc("斗轮电流过大暂停回转", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.BUCKET_Current_Pause_SLEW),
+                    "斗轮电流过大暂停回转",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.BUCKET_Current_Pause_SLEW  == false &&
+                     _systemVariables.BUCKET_Current_Pause_SLEW  == true)
+            {
+                //悬臂胶带故障解除
+                DataManager.Instance.InsertHistoryWarningMc("斗轮电流过大暂停回转解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.BUCKET_Current_Pause_SLEW));
+            }
+            
+            if (newSystemVariables.Slew_Current_Pause_Slew  == true &&
+                _systemVariables.Slew_Current_Pause_Slew  == false)
+            {
+                // 回转电流过大暂停回转
+                DataManager.Instance.InsertHistoryWarningMc("回转电流过大暂停回转", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_Current_Pause_Slew),
+                    "回转电流过大暂停回转",
+                    Machine.BucketWheelStackerReclaimer, false, "");
+            }
+            else if (newSystemVariables.Slew_Current_Pause_Slew  == false &&
+                     _systemVariables.Slew_Current_Pause_Slew  == true)
+            {
+                //悬臂胶带故障解除
+                DataManager.Instance.InsertHistoryWarningMc("回转电流过大暂停回转解除", GetUserName(),
+                    Machine.BucketWheelStackerReclaimer);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_Current_Pause_Slew));
+            }
             //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>取料机报错信息<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
             //取料机
@@ -9320,6 +9357,44 @@ public class GameDataManager : Singleton<GameDataManager>
                 DataManager.Instance.InsertHistoryWarningMc("悬臂胶带故障解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltFault_2));
+            }
+            
+            if (newSystemVariables.BUCKET_Current_Pause_SLEW_2  == true &&
+                _systemVariables.BUCKET_Current_Pause_SLEW_2  == false)
+            {
+                // 斗轮电流过大暂停回转
+                DataManager.Instance.InsertHistoryWarningMc("斗轮电流过大暂停回转", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.BUCKET_Current_Pause_SLEW_2),
+                    "斗轮电流过大暂停回转",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.BUCKET_Current_Pause_SLEW_2  == false &&
+                     _systemVariables.BUCKET_Current_Pause_SLEW_2  == true)
+            {
+                //斗轮电流过大暂停回转解除
+                DataManager.Instance.InsertHistoryWarningMc("斗轮电流过大暂停回转解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.BUCKET_Current_Pause_SLEW_2));
+            }
+            
+            if (newSystemVariables.Slew_Current_Pause_Slew_2  == true &&
+                _systemVariables.Slew_Current_Pause_Slew_2  == false)
+            {
+                // 回转电流过大暂停回转
+                DataManager.Instance.InsertHistoryWarningMc("回转电流过大暂停回转", GetUserName(),
+                    Machine.BucketWheel);
+                AddOrUpdateWarningDesDict(nameof(newSystemVariables.Slew_Current_Pause_Slew_2),
+                    "回转电流过大暂停回转",
+                    Machine.BucketWheel, false, "");
+            }
+            else if (newSystemVariables.Slew_Current_Pause_Slew_2  == false &&
+                     _systemVariables.Slew_Current_Pause_Slew_2  == true)
+            {
+                //悬臂胶带故障解除
+                DataManager.Instance.InsertHistoryWarningMc("回转电流过大暂停回转解除", GetUserName(),
+                    Machine.BucketWheel);
+                RemoveWarningDesDict(nameof(newSystemVariables.Slew_Current_Pause_Slew_2));
             }
         }
 

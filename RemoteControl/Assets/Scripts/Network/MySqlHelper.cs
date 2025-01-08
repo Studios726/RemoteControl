@@ -102,35 +102,11 @@ public class MySqlHelper
     /// <returns></returns>
     public static int ExecuteSql(string sql)
     {
-         ExecuteSqlAsync(sql);
-        // using (MySqlConnection conn = new MySqlConnection(connstr))
-        // {
-        //     using (MySqlCommand cmd = new MySqlCommand(sql, conn))
-        //     {
-        //         try
-        //         {
-        //             conn.Open();
-        //             int rows = cmd.ExecuteNonQuery();
-        //             return rows;
-        //         }
-        //         catch (MySql.Data.MySqlClient.MySqlException e)
-        //         {
-        //             conn.Close();
-        //             //throw e;
-        //             Debug.LogError($"数据库连接错误{e.Message}");
-        //         }
-        //         finally
-        //         {
-        //             cmd.Dispose();
-        //             conn.Close();
-        //         }
-        //     }
-        // }
-
+        ExecuteSqlAsync(sql);
         return 1;
     }
     
-    public static async Task<int> ExecuteSqlAsync(string sql)
+    public static async void ExecuteSqlAsync(string sql)
     {
         using (MySqlConnection conn = new MySqlConnection(connstr))
         {
@@ -142,9 +118,10 @@ public class MySqlHelper
                     {
                         conn.Open();
                         count++;
+                        cmd.ExecuteNonQuery();
+                        conn.Close();
+                        conn.Dispose();
                     }));
-                    int rows = cmd.ExecuteNonQuery();
-                    return rows;
                 }
                 catch (MySql.Data.MySqlClient.MySqlException e)
                 {
@@ -160,8 +137,6 @@ public class MySqlHelper
                 }
             }
         }
-
-        return -1;
     }
     #endregion
 

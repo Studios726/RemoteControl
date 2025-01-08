@@ -223,10 +223,7 @@ namespace RemoteControl
             }
 
             Debug.Log("----------------------Success " + connectEventArgs.type);
-            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                Machine.BucketWheelStackerReclaimer,true);
-            DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                Machine.BucketWheel,true);
+            InsertHistoryWarningMc(des, true);
             GameDataManager.Instance.RemoveWarningDesDict(connectEventArgs.type.ToString());
             GameDataManager.Instance.RemoveWarningDesDict(connectEventArgs.type.ToString()+"_2");
         }
@@ -273,10 +270,7 @@ namespace RemoteControl
             {
                 GameDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString(),des,Machine.BucketWheelStackerReclaimer,false,"",false,"",false);
                 GameDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString()+"_2",des,Machine.BucketWheel,false,"",false,"",false);
-                DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                    Machine.BucketWheelStackerReclaimer,true);
-                DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                    Machine.BucketWheel,true);
+                InsertHistoryWarningMc(des, true);
             }
         }
 
@@ -307,13 +301,19 @@ namespace RemoteControl
 
             if (isInsert)
             {
-                DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                    Machine.BucketWheelStackerReclaimer,true);
-                DataManager.Instance.InsertHistoryWarningMc(des, GameDataManager.Instance.GetUserName(),
-                    Machine.BucketWheel,true);
+                InsertHistoryWarningMc(des, true);
             }
         }
 
+        public void InsertHistoryWarningMc(string des, bool isRecord)
+        {
+            string sql = "";
+            sql=DataManager.Instance.GetInsertHistoryWarningMcSql(des, GameDataManager.Instance.GetUserName(),
+                Machine.BucketWheelStackerReclaimer);
+            sql=sql+";"+DataManager.Instance.GetInsertHistoryWarningMcSql(des, GameDataManager.Instance.GetUserName(),
+                Machine.BucketWheel);
+            DataManager.Instance.ExecuteSqlByAdmin(sql, isRecord);
+        }
         public void MessageReveive(object o, EventArgs eventArgs)
         {
             MessageEventArgs messageEventArgs = (MessageEventArgs)eventArgs;
