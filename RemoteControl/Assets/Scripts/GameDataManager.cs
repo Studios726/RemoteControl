@@ -895,7 +895,7 @@ public class GameDataManager : Singleton<GameDataManager>
 
         double monthsDifference = timeDifference.TotalDays / 30.44; // 平均每个月的天数约为 30.44 天
 
-        if (Math.Abs(monthsDifference) >= 6)
+        if (Math.Abs(monthsDifference) >= 3)
         {
             PlayerPrefs.SetString("Time", DateTime.Now.ToString());
             DataManager.Instance.DeleTabData(ConstStr.DATABASE_HISTORY_LOG1_MC);
