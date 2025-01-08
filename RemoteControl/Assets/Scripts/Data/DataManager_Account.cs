@@ -275,12 +275,7 @@ public partial class DataManager
         DataSet dataSet = MySqlHelper.GetDataSet(sql);
         return  dataSet;
     }
-    // public MySqlDataReader GetHistoryTaskMcBySql(string sql)
-    // {
-    //     MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(sql);
-    //     return mySqlDataReader;
-    // }
-
+  
     public MySqlDataReader GetHistoryCartelectricity(string machine,int limit=100,bool isUseTime=false,string startTime="",string endTime="") {
         string query = "";
         if (isUseTime == false)
@@ -421,6 +416,15 @@ public partial class DataManager
         string query = $"SELECT * FROM {tabName} WHERE {ConstStr.DATA_TASK_CONFIG_ID}={id}";
         MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
         return mySqlDataReader;
+    }
+    
+    public DataSet GetTaskConfigMcData(Machine machine)
+    {
+        int id = machine == Machine.BucketWheelStackerReclaimer ? 1 : 2;
+        string tabName = ConstStr.DATABASE_TASK_CONFIG;
+        string query = $"SELECT * FROM {tabName} WHERE {ConstStr.DATA_TASK_CONFIG_ID}={id}";
+        DataSet dataSet = MySqlHelper.GetDataSet(query);
+        return  dataSet;
     }
     public bool UpdateTaskConfig(string name,string value,Machine machine)
     {

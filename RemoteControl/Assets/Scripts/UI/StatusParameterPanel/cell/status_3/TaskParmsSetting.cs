@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using MySql.Data.MySqlClient;
 using UnityEngine;
 
@@ -38,16 +39,17 @@ public class TaskParmsSetting : MonoBehaviour
 
    private void OnEnable()
    {
-      MySqlDataReader reader = DataManager.Instance.GetTaskConfigMc(Machine);
-      if (reader!=null)
+      DataSet dataSet=DataManager.Instance.GetTaskConfigMcData(Machine);
+      if (dataSet!=null)
       {
-         while (reader.Read())
+         DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
+         for (int i = 0; i < dataRowCollection.Count; i++)
          {
-            HeapDis.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString()));
-            FetchPileDepth.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString()));
+            HeapDis.SetCurValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString()));
+            FetchPileDepth.SetCurValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString()));
            
-            FetchVerticalRangeAdd.SetCurValue(float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString()));
-            FetchHorizontalRangeSub.SetCurValue( float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString()));
+            FetchVerticalRangeAdd.SetCurValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString()));
+            FetchHorizontalRangeSub.SetCurValue( float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString()));
          }
       }
    }

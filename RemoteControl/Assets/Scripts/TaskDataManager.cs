@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -344,20 +345,21 @@ public class TaskDataManager : Singleton<TaskDataManager>
     public CommonTaskParameters GetCommonTaskParameters(Machine machine)
     {
         CommonTaskParameters commonTaskParameters = new CommonTaskParameters();
-        MySqlDataReader reader = DataManager.Instance.GetTaskConfigMc(machine);
-        if (reader != null)
+        DataSet dataSet=DataManager.Instance.GetTaskConfigMcData(machine);
+        if (dataSet!=null)
         {
-            while (reader.Read())
+            DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
+            for (int i = 0; i < dataRowCollection.Count; i++)
             {
-                commonTaskParameters.HeapDis = float.Parse(reader[ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString());
-                commonTaskParameters.MoveModel = int.Parse(reader[ConstStr.DATA_TASK_CONFIG_MOVEMODEL].ToString());
+                commonTaskParameters.HeapDis = float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString());
+                commonTaskParameters.MoveModel = int.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_MOVEMODEL].ToString());
                 commonTaskParameters.FetchPileDepth =
-                    float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
                 ;
                 commonTaskParameters.FetchVerticalRangeAdd =
-                    float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString());
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString());
                 commonTaskParameters.FetchHorizontalRangeSub =
-                    float.Parse(reader[ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
             }
         }
         return commonTaskParameters;
@@ -420,7 +422,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             return;
         }
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
-        if (nearestTaskDataDic.Count <5)
+        if (nearestTaskDataDic.Count <=0)
         {
             GetNearestTaskDataDic();
         }
@@ -575,24 +577,24 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     public Dictionary<string, TaskData> GetNearestTaskDataDic()
     {
-        if (nearestTaskDataDic.Count <5)
+        if (nearestTaskDataDic.Count <=0)
         {
-            MySqlDataReader mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(5);
-            if (mySqlDataReader!=null)
+            DataSet dataSet = DataManager.Instance.GetHistoryTaskMcByLimit(5);
+            if (dataSet!=null)
             {
-                while (mySqlDataReader.Read())
+                DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
+                for (int i = 0; i < dataRowCollection.Count; i++)
                 {
-                    string taskID = mySqlDataReader[ConstStr.DATA_TASK_ID].ToString();
+                    string taskID = dataRowCollection[i][ConstStr.DATA_TASK_ID].ToString();
                     if (nearestTaskDataDic.ContainsKey(taskID) == false)
                     {
                         nearestTaskDataDic.Add(taskID,
-                            new TaskData(taskID, mySqlDataReader[ConstStr.DATA_TASK_STATE].ToString(),
+                            new TaskData(taskID, dataRowCollection[i][ConstStr.DATA_TASK_STATE].ToString(),
                                 (TaskStatus)Enum.Parse(typeof(TaskStatus),
-                                    mySqlDataReader[ConstStr.DATA_TASK_STATE2].ToString())));
+                                    dataRowCollection[i][ConstStr.DATA_TASK_STATE2].ToString())));
                     }
                 }
             }
-           
         }
 
         return nearestTaskDataDic;
