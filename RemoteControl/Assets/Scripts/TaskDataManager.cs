@@ -451,7 +451,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 if (nearestTaskDataDic.ContainsKey(taskVariables.McData[i].TaskID))
                 {
                     TaskData taskData = nearestTaskDataDic[taskVariables.McData[i].TaskID];
-                    Debug.LogError($">>TaskEndTime: {taskVariables.McData[i].AllData.TaskEndTime}  结束状态：{taskVariables.McData[i].AllData.OperationCommandList[3]}");
+                    // Debug.LogError($">>TaskEndTime: {taskVariables.McData[i].AllData.TaskEndTime}  结束状态：{taskVariables.McData[i].AllData.OperationCommandList[3]}");
                     if (taskVariables.McData[i].AllData.Code == 0)
                     {
                         if (taskVariables.McData[i].AllData.ProcessingProgress == 1 && taskData.TaskState != "1")
