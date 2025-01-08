@@ -823,40 +823,41 @@ public class GameDataManager : Singleton<GameDataManager>
         }
         if (curAccountInfo != null && curAccountInfo.isAdmin&&IpConfig.IsRecordData)
         {
-           
+            string sql = "";
             if (GameMain!=null&&GameMain.connectionRC.isConnect == true)
             {
-                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
+                string a=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
                     _systemVariables.BucketWheelElectricCurrent, "斗轮电流",
                     Machine.BucketWheelStackerReclaimer);
 
-                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
+                string b=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
                     _systemVariables.LargeCarElectricCurrent, "大车电流",
                     Machine.BucketWheelStackerReclaimer);
 
-                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
+                string c=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
                     _systemVariables.RotaryElectricCurrent, "回转电流",
                     Machine.BucketWheelStackerReclaimer);
 
-                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
+                string d=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
                     _systemVariables.SuspensionBeltElectricCurrent, "悬胶电流",
                     Machine.BucketWheelStackerReclaimer);
 
-                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
+                string e=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
                     _systemVariables.BucketWheelElectricCurrent_2, "斗轮电流",
                     Machine.BucketWheel);
 
-                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
+                string f=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
                     _systemVariables.LargeCarElectricCurrent_2, "大车电流",
                     Machine.BucketWheel);
 
-                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
+                string g=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
                     _systemVariables.RotaryElectricCurrent_2, "回转电流",
                     Machine.BucketWheel);
 
-                DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
+                string h=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
                     _systemVariables.SuspensionBeltElectricCurrent_2, "悬胶电流",
                     Machine.BucketWheel);
+                sql = $"{a};{b};{c};{d};{e};{f};{g};{h}";
             }
 
             if (GameMain!=null&&GameMain.connectionFM.isConnect == true)
@@ -865,13 +866,14 @@ public class GameDataManager : Singleton<GameDataManager>
                 {
                     for (int i = 0; i < flowMeterDataList.Count; i++)
                     {
-                        DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC,
+                        sql=sql+";"+DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_CANTILEVER_Flow_MC,
                             (float)flowMeterDataList[i].FlowRealtime, "悬臂流量",
                             (Machine)flowMeterDataList[i].id);
                     }
+                 
                 }
             }
-           
+            MySqlHelper.ExecuteSql(@sql);
         }
     }
 
