@@ -517,7 +517,7 @@ public class SearchPanel : MonoBehaviour
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,new ConfirmPanelArgs("日期无效，请重新检查日期，稍后查询","查询"));
             return;
         }
-        Debug.Log($"搜索日期 {startTime} \n {endTime}");
+        // Debug.Log($"搜索日期 {startTime} \n {endTime}");
         searchAction?.Invoke(startTime, endTime, mechanicalType,"");
        
     }

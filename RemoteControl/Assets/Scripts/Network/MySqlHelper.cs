@@ -11,7 +11,7 @@ public class MySqlHelper
     public static string Username = "root";
     public static string Password = "123456";
     public static string connstr = "server=" + IP + ";database= " + Database + ";username=" + Username + ";password=" + Password + ";ConnectionTimeout=3;Charset=utf8";
-
+    public static int count;
     private static MySqlConnection connectionReader;
     #region 执行查询语句，返回MySqlDataReader
 
@@ -28,11 +28,13 @@ public class MySqlHelper
             connectionReader = new MySqlConnection(connstr);
         }
         connectionReader.Close();
+        count--;
         MySqlCommand cmd = new MySqlCommand(sqlString, connectionReader);
         MySqlDataReader myReader = null;
         try
         {
             connectionReader.Open();
+            count++;
             myReader=cmd.ExecuteReader(CommandBehavior.CloseConnection);
             return myReader;
         }
@@ -139,6 +141,7 @@ public class MySqlHelper
                     await Task.Run((() =>
                     {
                         conn.Open();
+                        count++;
                     }));
                     int rows = cmd.ExecuteNonQuery();
                     return rows;
@@ -152,6 +155,7 @@ public class MySqlHelper
                 {
                    cmd.Dispose();
                    conn.Close();
+                   count--;
                 }
             }
         }
@@ -210,12 +214,17 @@ public class MySqlHelper
             using (MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
                 conn.Open();
+                count++;
                 using (MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd))
                 using (DataSet ds = new DataSet())
                 {
                     dataAdapter.Fill(ds);
+                    conn.Close();
+                    count--;
                     return ds;
                 }
+                conn.Close();
+                count--;
             }
         }
         catch (Exception ex)
@@ -318,10 +327,12 @@ public class MySqlHelper
         {
             DataSet dataSet = new DataSet();
             connection.Open();
+            count++;
             MySqlDataAdapter sqlDA = new MySqlDataAdapter();
             sqlDA.SelectCommand = BuildQueryCommand(connection, storedProcName, parameters);
             sqlDA.Fill(dataSet);
             connection.Close();
+            count--;
             return dataSet;
         }
     }

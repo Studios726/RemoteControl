@@ -82,6 +82,7 @@ public class TopPanelView : UIView<TopPanelCtr>
             UIManager.Instance.CloseUI(UIID.MainPanel);
             UIManager.Instance.CloseUI(UIID.HistoryPanel);
             SetSelectState(_superviseText);
+            Debug.LogError($">>>>>>>>>>>>>>>>>>count {MySqlHelper.count}");
         });
         _alarmBtn.onClick.AddListener(() => //�򿪱����������
         {
