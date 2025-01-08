@@ -93,6 +93,8 @@ public static class ConstStr
     public const string DATA_HISTORY_CARTELECTRICITY_Create_date = "create_date";
     #endregion
     #region history_logs
+
+    public const string DATA_HISTORY_LOGS_ID = "id";
     public const string DATA_HISTORY_LOGS_TIME = "time";
     public const string DATA_HISTORY_LOGS_INFO = "info";
     public const string DATA_HISTORY_LOGS_OPERATOR = "operator";

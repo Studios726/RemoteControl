@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using RemoteControl.Event;
 using UnityEngine;
@@ -63,17 +65,50 @@ public class HistoryPanelCtr :UIPresenter<HistoryPanelView>
       RequestData(sql,type,view.curPanelType);
    }
 
-   public void RequestData(string sql,MechanicalType mechanicalType,PanelType panelType)
+   public async void RequestData(string sql,MechanicalType mechanicalType,PanelType panelType)
    {
        // sql = "Select * from " + Tables + " ORDER BY id DESC LIMIT 50;";
-       _dataReader = MySqlHelper.ExecuteReader(sql);
-       if (_dataReader!=null)
+       // _dataReader = MySqlHelper.ExecuteReader(sql);
+       // Debug.LogError($">>>>>>>>>>>{sql}");
+       // if (_dataReader!=null)
+       // {
+       //     Reader(mechanicalType,panelType);
+       // }
+       DataSet dataSet = null;
+       await Task.Run((() =>
+       { 
+           dataSet = DataManager.Instance.GetHistoryLog(sql);
+       }));
+       if (dataSet!=null)
        {
-           Reader(mechanicalType,panelType);
+           ReaderLog(dataSet, mechanicalType, panelType);
        }
    
    }
-   private void Reader(MechanicalType mechanicalType,PanelType panelType)
+
+   public void ReaderLog(DataSet dataSet,MechanicalType mechanicalType,PanelType panelType)
+   {
+       List<HistoryData> _historyDatas = new List<HistoryData>();
+       DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
+       int counter = 0;
+       for (int i = 0; i < dataRowCollection.Count; i++)
+       {
+           HistoryData data = new HistoryData();
+           data.id = dataRowCollection[i][ConstStr.DATA_HISTORY_LOGS_ID].ToString();
+           data.time =  dataRowCollection[i][ConstStr.DATA_HISTORY_LOGS_TIME].ToString();
+           data.info =  dataRowCollection[i][ConstStr.DATA_HISTORY_LOGS_INFO].ToString();
+           data.user = dataRowCollection[i][ConstStr.DATA_HISTORY_LOGS_OPERATOR].ToString();
+           _historyDatas.Add(data);
+           ++counter;
+           if (counter == 1000)
+           {
+               break;
+           }
+           
+       }
+       view.RefreshList(_historyDatas,mechanicalType,panelType);
+   }
+   private  void Reader(MechanicalType mechanicalType,PanelType panelType)
    {
        int counter = 0;
        _historyDatas.Clear();

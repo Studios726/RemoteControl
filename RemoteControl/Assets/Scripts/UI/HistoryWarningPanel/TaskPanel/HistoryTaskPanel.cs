@@ -1,6 +1,8 @@
 using System;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,12 +82,13 @@ public class HistoryTaskPanel : MonoBehaviour
     {
         if (dateCell.IsDynamic)
         {
-            mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(100);
-            if (mySqlDataReader==null)
-            {
-                return;
-            }
-            ReadRecord();
+            GetHistoryTaskMcAsync(100);
+            // mySqlDataReader = DataManager.Instance.GetHistoryTaskMc(100);
+            // if (mySqlDataReader==null)
+            // {
+            //     return;
+            // }
+            // ReadRecord();
         }
         else
         {
@@ -93,7 +96,7 @@ public class HistoryTaskPanel : MonoBehaviour
         }
   
     }
-
+    
     private void OnEnable()
     {
         InitRecord();
@@ -104,6 +107,70 @@ public class HistoryTaskPanel : MonoBehaviour
         // searchPanel.Reset();
     }
 
+    public async void GetHistoryTaskMcAsync(int limit)
+    {
+        DataSet dataSet = null;
+        await Task.Run((() =>
+        {
+            dataSet=DataManager.Instance.GetHistoryTaskMcByLimit(100);
+        }));
+        if (dataSet!=null)
+        {
+            ReadRecordAsync(dataSet);
+        }
+    }
+
+    public async void GetHistoryTaskMcAsyncBySql(string sql)
+    {
+        DataSet dataSet = null;
+        await Task.Run((() =>
+        {
+            dataSet=  DataManager.Instance.GetHistoryTaskMcBySql(sql);
+        }));
+        if (dataSet!=null)
+        {
+            ReadRecordAsync(dataSet);
+        }
+      
+    }
+    public void ReadRecordAsync(DataSet dataSet)
+    {
+        List<HistoryTaskData> historyTaskDatas = new List<HistoryTaskData>();
+        DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
+        int counter = 0;
+        for (int i = 0; i < dataRowCollection.Count; i++)
+        {
+            HistoryTaskData data = new HistoryTaskData();
+            data.id = dataRowCollection[i][ConstStr.DATA_HISTORY_LOGS_ID].ToString();
+            
+            data.id = dataRowCollection[i][ConstStr.DATA_TASK_ID].ToString(); //DateTime.Now.ToString("yyMMddHHmmss");
+            data.time = dataRowCollection[i][ConstStr.DATA_TASK_CREATE_TIME].ToString();
+            data.machine = dataRowCollection[i][ConstStr.DATA_MACHINE].ToString() == Machine.BucketWheelStackerReclaimer.ToString() ? "1#" : "2#";
+            data.taskType = dataRowCollection[i][ConstStr.DATA_TASK_TYPE].ToString() == TaskType.PILEMATER.ToString() ? "堆料" : "取料";
+            data.thingRange = dataRowCollection[i][ConstStr.DATA_MATERIAL_RANGE_START].ToString() + "-" + dataRowCollection[i][ConstStr.DATA_MATERIAL_RANGE_END].ToString();
+            data.leftRightRange = dataRowCollection[i][ConstStr.DATA_LEFT_RIGHT_RANGE_START].ToString() + "-" + dataRowCollection[i][ConstStr.DATA_LEFT_RIGHT_RANGE_END].ToString();
+            data.leftRightSelect = dataRowCollection[i][ConstStr.DATA_SIDE_SELECTION].ToString()=="LEFT"?"左":"右";
+            data.takePileLength = dataRowCollection[i][ConstStr.DATA_STEP_LENGTH].ToString();
+            data.takeStepLength= dataRowCollection[i][ConstStr.DATA_STEP_LENGTH].ToString();
+            data.pileHigh=dataRowCollection[i][ConstStr.DATA_TASK_TAKE_MATE_HIGH].ToString();
+            data.layerHigh = dataRowCollection[i][ConstStr.DATA_TASK_LAYER_HIGH].ToString();
+            data.timeAt = dataRowCollection[i][ConstStr.DATA_TIMEDAT].ToString();
+            data.quantity = dataRowCollection[i][ConstStr.DATA_QUANTITY].ToString();
+            data.operationName = dataRowCollection[i][ConstStr.DATA_OPERATOR].ToString();
+            data.state = dataRowCollection[i][ConstStr.DATA_TASK_STATE2].ToString();
+            data.autoMode= dataRowCollection[i][ConstStr.DATA_TASK_AUTO_MODE].ToString()==AutoMode.SemiAuto.ToString()?"人工":"自动";
+            data.angleExpansionFactor = "0";
+          
+            historyTaskDatas.Add(data);
+            ++counter;
+            if (counter == 1000)
+            {
+                break;
+            }
+           
+        }
+          RefreshRecord(historyTaskDatas);
+    }
     public void ReadRecord()
     {
         int counter = 0;
@@ -141,11 +208,12 @@ public class HistoryTaskPanel : MonoBehaviour
     public void SearchRecord(string startTime, string endTime, MechanicalType mechanicalType,string user)
     {
         string sql = $"SELECT * FROM {ConstStr.DATABASE_HISTORY_TASK_MC} WHERE"+$"`{ConstStr.DATA_TASK_CREATE_TIME}` BETWEEN '{startTime}' AND '{endTime}' ORDER BY `{ConstStr.DATA_TASK_CREATE_TIME}` DESC;";
-        mySqlDataReader =DataManager.Instance.GetHistoryTaskMcBySql(sql);
-        if (mySqlDataReader!=null)
-        {
-            ReadRecord();
-        }
+        GetHistoryTaskMcAsyncBySql(sql);
+        // mySqlDataReader =DataManager.Instance.GetHistoryTaskMcBySql(sql);
+        // if (mySqlDataReader!=null)
+        // {
+        //     ReadRecord();
+        // }
     }
     public void RefreshRecord(List<HistoryTaskData> datas)
     {

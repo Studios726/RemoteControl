@@ -254,12 +254,32 @@ public partial class DataManager
         MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(query);
         return mySqlDataReader;
     }
-
-    public MySqlDataReader GetHistoryTaskMcBySql(string sql)
+    public DataSet GetHistoryTaskMcByLimit(int limit)
     {
-        MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(sql);
-        return mySqlDataReader;
+        string query = "";
+        if (limit == 0)
+        {
+            query= $"Select * from {ConstStr.DATABASE_HISTORY_TASK_MC} ORDER BY task_create_time DESC";
+
+        }
+        else
+        {
+            query = $"Select * from {ConstStr.DATABASE_HISTORY_TASK_MC} ORDER BY task_create_time DESC LIMIT {limit};";
+        }
+        DataSet dataSet = MySqlHelper.GetDataSet(query);
+        return  dataSet;
     }
+
+    public DataSet GetHistoryTaskMcBySql(string sql)
+    {
+        DataSet dataSet = MySqlHelper.GetDataSet(sql);
+        return  dataSet;
+    }
+    // public MySqlDataReader GetHistoryTaskMcBySql(string sql)
+    // {
+    //     MySqlDataReader mySqlDataReader = MySqlHelper.ExecuteReader(sql);
+    //     return mySqlDataReader;
+    // }
 
     public MySqlDataReader GetHistoryCartelectricity(string machine,int limit=100,bool isUseTime=false,string startTime="",string endTime="") {
         string query = "";
@@ -333,6 +353,12 @@ public partial class DataManager
             query = $"SELECT * FROM {chartName} WHERE {ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME} BETWEEN '{startTime}' AND '{endTime}' AND ({ConstStr.DATA_HISTORY_CARTELECTRICITY_MACHINE} = {machine}) ORDER BY time DESC";
         }
         DataSet dataSet = MySqlHelper.GetDataSet(query);
+        return  dataSet;
+    }
+
+    public DataSet GetHistoryLog(string sql)
+    {
+        DataSet dataSet = MySqlHelper.GetDataSet(sql);
         return  dataSet;
     }
     public bool InsertHistoryChartData(string tabName,float value,string des,Machine machine)
