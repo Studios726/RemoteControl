@@ -155,6 +155,7 @@ public class MySqlHelper
                 {
                    cmd.Dispose();
                    conn.Close();
+                   conn.Dispose();
                    count--;
                 }
             }
@@ -220,10 +221,12 @@ public class MySqlHelper
                 {
                     dataAdapter.Fill(ds);
                     conn.Close();
+                    conn.Dispose();
                     count--;
                     return ds;
                 }
                 conn.Close();
+                conn.Dispose();
                 count--;
             }
         }
@@ -332,6 +335,7 @@ public class MySqlHelper
             sqlDA.SelectCommand = BuildQueryCommand(connection, storedProcName, parameters);
             sqlDA.Fill(dataSet);
             connection.Close();
+            connection.Dispose();
             count--;
             return dataSet;
         }
