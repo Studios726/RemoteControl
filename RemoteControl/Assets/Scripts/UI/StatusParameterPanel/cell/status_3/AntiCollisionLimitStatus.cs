@@ -151,6 +151,14 @@ public class AntiCollisionLimitData
     /// 俯仰下俯限位两度预警
     /// </summary>
     public bool Luff_D_Limit_Waring;
+    /// <summary>
+    /// 回转电流过大暂停回转
+    /// </summary>
+    public bool Slew_Current_Pause_Sle;
+    /// <summary>
+    /// 斗轮电流过大暂停回转
+    /// </summary>
+    public bool BUCKET_Current_Pause_SLEW;
 }
 /// <summary>
 //防碰撞限位状态
@@ -304,6 +312,14 @@ public class AntiCollisionLimitStatus: StatusParmItemBase<AntiCollisionLimitData
     /// 俯仰下俯限位两度预警
     /// </summary>
     public ToggleDIY Luff_D_Limit_Waring;
+    /// <summary>
+    /// 回转电流过大暂停回转
+    /// </summary>
+    public ToggleDIY Slew_Current_Pause_Sle;
+    /// <summary>
+    /// 斗轮电流过大暂停回转
+    /// </summary>
+    public ToggleDIY BUCKET_Current_Pause_SLEW;
     public override void UpdateData(AntiCollisionLimitData data, bool isConnect = false)
     {
         SetToggleState(OverBelt_R_Limit,data.OverBelt_R_Limit,true,isConnect);
@@ -342,7 +358,8 @@ public class AntiCollisionLimitStatus: StatusParmItemBase<AntiCollisionLimitData
         SetToggleState(Slew_L_Limit_Waring,data.Slew_L_Limit_Waring,true,isConnect);
         SetToggleState(Luff_U_Limit_Waring,data.Luff_U_Limit_Waring,true,isConnect);
         SetToggleState(Luff_D_Limit_Waring,data.Luff_D_Limit_Waring,true,isConnect);
-        
+        SetToggleState(Slew_Current_Pause_Sle,data.Slew_Current_Pause_Sle,true,isConnect);
+        SetToggleState(BUCKET_Current_Pause_SLEW,data.BUCKET_Current_Pause_SLEW,true,isConnect);
         
         
     }

@@ -88,6 +88,10 @@ public class PileTakeMaterThirdSysStateParams : MonoBehaviour
       data.Slew_R_SoftLimit=GetToggleState(systemVariables.Slew_R_SoftLimit,systemVariables.Slew_R_SoftLimit_2);
       data.Slew_L_SoftLimit=GetToggleState(systemVariables.Slew_L_SoftLimit,systemVariables.Slew_L_SoftLimit_2);
       data.LuffDown_LimitStatus=GetToggleState(systemVariables.LuffDown_LimitStatus,systemVariables.LuffDown_LimitStatus_2);
+      data.Slew_Current_Pause_Sle = GetToggleState(systemVariables.Slew_Current_Pause_Slew,
+         systemVariables.Slew_Current_Pause_Slew_2);
+      data.BUCKET_Current_Pause_SLEW = GetToggleState(systemVariables.BUCKET_Current_Pause_SLEW,
+         systemVariables.BUCKET_Current_Pause_SLEW_2);
       AntiCollisionLimitStatus.UpdateData(data,GameDataManager.Instance.GameMain.connectionRC.isConnect);
    }
    //防碰撞设备参数设置
