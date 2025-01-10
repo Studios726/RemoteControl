@@ -61,6 +61,8 @@ public class PileTakeMaterFirstSysStateParams : MonoBehaviour
         CentralControlData centralControlData = new CentralControlData();
         centralControlData.isUnlock = GetToggleState(!data.SR1_Interlock_Swich, !data.SR1_Interlock_Swich_2);
         centralControlData.isLock = GetToggleState(data.SR1_Interlock_Swich, data.SR1_Interlock_Swich_2);
+        centralControlData.islocalUnlock = GetToggleState(!data.SystemInterlockSwitch, !data.SystemInterlockSwitch_2);
+        centralControlData.islcoalLock = GetToggleState(data.SystemInterlockSwitch, data.SystemInterlockSwitch_2);
         CentralControlRoomItem?.UpdateData(centralControlData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
     //斗轮机与中控室信号
