@@ -99481,6 +99481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: moveState
       objectReference: {fileID: 0}
+    - target: {fileID: 8214601000020700250, guid: a30e53f4afaefcd45baeac6f088b894b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -99626,12 +99630,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2349090519363802175, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349090519363802175, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2349090519363802175, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.00000037252912
+      objectReference: {fileID: 0}
+    - target: {fileID: 2349090519363802175, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -27.7
       objectReference: {fileID: 0}
     - target: {fileID: 2349090519363802175, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -99659,7 +99671,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7680790932662244152, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 43.6197
+      value: 54.4
       objectReference: {fileID: 0}
     - target: {fileID: 7680790932662244152, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_SizeDelta.y
@@ -99760,7 +99772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 0
+  m_HorizontalFit: 2
   m_VerticalFit: 2
 --- !u!114 &3217696330442256287 stripped
 MonoBehaviour:

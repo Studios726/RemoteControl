@@ -449,10 +449,18 @@ public class GameDataManager : Singleton<GameDataManager>
             error = _systemVariables.VariableAmplitudeLowerLimit ? error + "变幅下俯限位\n" : error;
             error = _systemVariables.VariableAmplitudeUpperExtremeLimit ? error + "变幅上仰极限\n" : error;
             error = _systemVariables.VariableAmplitudeLowerExtremeLimit ? error + "变幅下俯极限\n" : error;
+            
+            error = _systemVariables.LuffUp_LimitStatus ? error + "俯仰上限位集合\n" : error;
+            error = _systemVariables.LuffDown_LimitStatus ? error + "俯仰下限位集合\n" : error;
+            error = _systemVariables.DcFWD_LimitStatus ? error + "大车前进限位集合\n" : error;
+            error = _systemVariables.DcREV_LimitStatus ? error + "大车后退限位集合\n" : error;
+            error = _systemVariables.Slew_R_LimitStatus ? error + "悬臂右转限位集合\n" : error;
+            error = _systemVariables.Slew_L_LimitStatus ? error + "悬臂左转限位集合\n" : error;
+         
 
             machineMove_1.UpdateErrorText(error);
         }
-
+    
         if (machineMove_2)
         {
             string error = "";
@@ -470,6 +478,14 @@ public class GameDataManager : Singleton<GameDataManager>
             error = _systemVariables.VariableAmplitudeLowerLimit_2 ? error + "变幅下俯限位\n" : error;
             error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "变幅上仰极限\n" : error;
             error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下俯极限\n" : error;
+            
+            error = _systemVariables.LuffUp_LimitStatus_2 ? error + "俯仰上限位集合\n" : error;
+            error = _systemVariables.LuffDown_LimitStatus_2 ? error + "俯仰下限位集合\n" : error;
+            error = _systemVariables.DcFWD_LimitStatus_2 ? error + "大车前进限位集合\n" : error;
+            error = _systemVariables.DcREV_LimitStatus_2 ? error + "大车后退限位集合\n" : error;
+            error = _systemVariables.Slew_R_LimitStatus_2 ? error + "悬臂右转限位集合\n" : error;
+            error = _systemVariables.Slew_L_LimitStatus_2 ? error + "悬臂左转限位集合\n" : error;
+          
 
             machineMove_2.UpdateErrorText(error);
         }

@@ -227,7 +227,7 @@ public class AntiCollisionLimitStatus: StatusParmItemBase<AntiCollisionLimitData
     /// </summary>
     public ToggleDIY Luff_Up_SoftLimit;
     /// <summary>
-    /// 俯仰上极限限位集合
+    /// 俯仰上限位集合
     /// </summary>
     public ToggleDIY LuffUp_LimitStatus;
     /// <summary>
@@ -236,7 +236,7 @@ public class AntiCollisionLimitStatus: StatusParmItemBase<AntiCollisionLimitData
     public ToggleDIY Luff_Down_SoftLimit;
 
     /// <summary>
-    /// 俯仰下极限限位集合
+    /// 俯仰下限位集合
     /// </summary>
     public ToggleDIY LuffDown_LimitStatus;
     /// <summary>
