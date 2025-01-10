@@ -150,8 +150,9 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateData(TaskCommand taskCommand)
     {
-        startTakeMaterText.text = taskCommand.MaterialRange.startValue.ToString();
-        stopTakeMaterText.text = taskCommand.MaterialRange.endValue.ToString();
+     
+        startTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.startValue.ToString());
+        stopTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.endValue.ToString());
         if (taskCommand.SideSelection == "LEFT")
         {
             leftToggle.SetSystemState(true,true);
@@ -165,12 +166,12 @@ public class BucketWheelTaskBase : PanelBase
         AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
         SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
         confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
-        AngleEntryText.text = taskCommand.AngleEntryValue.ToString();
+        AngleEntryText.SetTextByFocused(taskCommand.AngleEntryValue.ToString());
         leftTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.LEFTTURN,true);
         rightTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.RIGHTTURN,true);
-        leftTakeMaterText.text = taskCommand.LeftRightRange.startValue.ToString();
-        rightTakeMaterText.text = taskCommand.LeftRightRange.endValue.ToString();
-        takeMaterStep.text = taskCommand.StepLength.ToString();
+        leftTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.startValue.ToString());
+        rightTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.endValue.ToString());
+        takeMaterStep.SetTextByFocused(taskCommand.StepLength.ToString());
         takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1,true);
         takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
         resetTaskBtn.SetSystemState(taskCommand.ResetState==1,true);

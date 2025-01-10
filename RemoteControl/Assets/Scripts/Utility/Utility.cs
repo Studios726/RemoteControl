@@ -56,6 +56,14 @@ namespace Utility
             }
             text.text = str;
         }
+
+        public static void SetTextByFocused(this InputField inputField, string str)
+        {
+            if (inputField.isFocused==false)
+            {
+                inputField.text = str;
+            }
+        }
         /// <summary>
         /// 根据世界空间位置设置UI在Canvas上的位置。
         /// 如果世界空间位置在世界相机正面，返回 true，否则返回 false 。
