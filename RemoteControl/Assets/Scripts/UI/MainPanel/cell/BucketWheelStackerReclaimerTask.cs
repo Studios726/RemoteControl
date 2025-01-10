@@ -4,6 +4,7 @@ using RemoteControl.Event;
 using ShenYangRemoteSystem.Subclass;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
 {
@@ -36,15 +37,18 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public ButtonCell rotaryHeap;//回转堆料
     public ButtonCell curPileTaskButtonCell;
     public Button ForcedPositioning;
+    private Timer refreshTextTimer;
+    private bool isRefreshText;
     public override void Start()
     {
         base.Start();
-        InputFieldValueRange(startPileMaterText, 0, 260,0,"START_POS_1");
-        InputFieldValueRange(endPileMaterText, 0, 260,260,"END_POS_1");
-        InputFieldValueRange(startLeftPileMaterText, 12,90,90,"LEFT_BORDER_SP_1");
-        InputFieldValueRange(endLeftPileMaterText, 12, 90,90,"RIGHT_BORDER_SP_1");
-        InputFieldValueRange(pileMaterHeightText, 0, 15,10,"STACK_HIGH_SET_1");
-        InputFieldValueRange(pileMaterStepText, 0, 3,0.7f,"DC_REV_1");
+        isRefreshText = true;
+        PileInputFieldValueRange(startPileMaterText, 0, 260,0,"START_POS_1");
+        PileInputFieldValueRange(endPileMaterText, 0, 260,260,"END_POS_1");
+        PileInputFieldValueRange(startLeftPileMaterText, 12,90,90,"LEFT_BORDER_SP_1");
+        PileInputFieldValueRange(endLeftPileMaterText, 12, 90,90,"RIGHT_BORDER_SP_1");
+        PileInputFieldValueRange(pileMaterHeightText, 0, 15,10,"STACK_HIGH_SET_1");
+        PileInputFieldValueRange(pileMaterStepText, 0, 3,0.7f,"DC_REV_1");
         AddOnClickListener(pileResetTaskBtn,(() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
@@ -214,34 +218,14 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public void RefreshPileData(object o, EventArgs eventArgs)
     {
         SystemVariables systemVariables = GameDataManager.Instance.SystemVariables;
-        if (startPileMaterText.isFocused==false)
+        if (isRefreshText)
         {
-            startPileMaterText.text = systemVariables.SR1_Stack_Start_Pos.ToString();
-        }
-
-        if (endPileMaterText.isFocused==false)
-        {
-            endPileMaterText.text = systemVariables.SR1_Stack_End_Pos.ToString();
-        }
-
-        if (startLeftPileMaterText.isFocused==false)
-        {
-            startLeftPileMaterText.text = systemVariables.SR1_Stack_LeftBorder_SP.ToString();
-        }
-
-        if (endLeftPileMaterText.isFocused==false)
-        {
-            endLeftPileMaterText.text = systemVariables.SR1_Stack_RightBorder_SP.ToString();
-        }
-
-        if (pileMaterHeightText.isFocused==false)
-        {
-            pileMaterHeightText.text = systemVariables.SR1_Stack_HighSet.ToString();
-        }
-
-        if (pileMaterStepText.isFocused==false)
-        {
-            pileMaterStepText.text = systemVariables.SR1_Stack_DcRevSize.ToString();
+            startPileMaterText.SetTextByFocused(systemVariables.SR1_Stack_Start_Pos.ToString());
+            endPileMaterText.SetTextByFocused(systemVariables.SR1_Stack_End_Pos.ToString());
+            startLeftPileMaterText.SetTextByFocused(systemVariables.SR1_Stack_LeftBorder_SP.ToString());
+            endLeftPileMaterText.SetTextByFocused(systemVariables.SR1_Stack_RightBorder_SP.ToString());
+            pileMaterHeightText.SetTextByFocused(systemVariables.SR1_Stack_HighSet.ToString());
+            pileMaterStepText.SetTextByFocused(systemVariables.SR1_Stack_DcRevSize.ToString());
         }
         
         PileAutoMaxToggle.SetSystemState(systemVariables.SR1_AutoBorder_Enable,true);
@@ -386,6 +370,39 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         {
             TaskDataManager.Instance.SendTaskCommand(taskCommand);
         }
+    }
+
+    public void PileInputFieldValueRange(InputField inputField, float min, float max, float defaultValue,
+        string commandName)
+    {
+        inputField.text =defaultValue.ToString();
+        inputField.onEndEdit.AddListener(((string value) =>
+        {
+            float num = 0;
+            if (float.TryParse(value, out num))
+            {
+                num = num < min ? min : num;
+                num = num > max ? max : num;
+            }
+
+            inputField.text = num.ToString();
+            
+            isRefreshText = false;
+            if (commandName!="")
+            {
+                GameDataManager.Instance.SendServerCommandByName(commandName,0,num);
+            }
+
+            if (refreshTextTimer!=null)
+            {
+                refreshTextTimer.Cancel();
+                refreshTextTimer = null;
+            }
+            refreshTextTimer= Timer.Register(2, (() =>
+            {
+                isRefreshText = true;
+            }));
+        }));
     }
     public override void InputFieldValueRange(InputField inputField, float min, float max,float defaultValue,string commandName)
     {
