@@ -774,6 +774,7 @@ public class GameDataManager : Singleton<GameDataManager>
         serverCommand.DATA_INT = dataInt;
         serverCommand.DATA_FLOAT = dataFloat;
         MessageCenter.Instance.SendMessage(MessageType.RC, serverCommand);
+        Debug.Log($"命令{DateTime.Now.ToString("G")} commandName: {commandName} dataInt: {dataInt} dataFloat: {dataFloat}");
     }
 
     public void SendServerCommandRC(string commandName, int dataType, int queryType, int dataInt = 0,

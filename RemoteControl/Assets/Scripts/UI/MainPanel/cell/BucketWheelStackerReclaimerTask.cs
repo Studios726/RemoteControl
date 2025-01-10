@@ -98,8 +98,6 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             // PileAutoMaxToggle.SetSystemState(true,true);
             // PileSemiAutoToggle.SetSystemState(false,true);
             GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.AUTO_ENABLE.ToString()+"_1",1);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {COMMAND_NAME.AUTO_ENABLE.ToString()+"_1"} {1}");
-            
         } ));
         AddOnClickListener(PileSemiAutoToggle,(() =>
         {
@@ -107,7 +105,6 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             // PileAutoMaxToggle.SetSystemState(false,true);
             // PileSemiAutoToggle.SetSystemState(true,true);
             GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.AUTO_ENABLE.ToString()+"_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {COMMAND_NAME.AUTO_ENABLE.ToString()+"_1"}");
         } ));
         AddOnClickListener(fixedPointHeap,(() =>
         {
@@ -115,7 +112,6 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             // fixedPointHeap.SetSystemState(true,true);
             // rotaryHeap.SetSystemState(false,true);
             GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.POINT_SEL.ToString()+"_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {COMMAND_NAME.POINT_SEL.ToString()+"_1"}");
         }));
         AddOnClickListener(rotaryHeap,(() =>
         {
@@ -123,7 +119,6 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             // rotaryHeap.SetSystemState(true,true);
             // fixedPointHeap.SetSystemState(false,true);
             GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.SLEW_SEL.ToString()+"_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {COMMAND_NAME.SLEW_SEL.ToString()+"_1"}");
         }));
         // AddOnClickListener(PileRightAngleToggle,(() =>
         // {
@@ -138,37 +133,30 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         startleftPileAddBtn.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("LEFT_BORDER_INC_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {"LEFT_BORDER_INC_1"}");
         }));
         startleftPileSubBtn.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("LEFT_BORDER_DES_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {"LEFT_BORDER_DES_1"}");
         }));
         endleftPileAddBtn.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("RIGHT_BORDER_INC_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {"RIGHT_BORDER_INC_1"}");
         }));
         endleftPileSubBtn.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("RIGHT_BORDER_DES_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {"RIGHT_BORDER_DES_1"}");
         }));
         pileMaterStepAddBtn.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("DC_REV_INC_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {"DC_REV_INC_1"}");
         }));
         pileMaterStepSubBtn.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("DC_REV_DES_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {"DC_REV_DES_1"}");
         }));
         ForcedPositioning.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("POS_FROCE_1",0);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {"POS_FROCE_1"}");
         }));
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
         EventManager.Instance.AddListener(EventName.UpdateRcData, RefreshPileData);
@@ -314,7 +302,6 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
                 : COMMAND_NAME.CHANGE_DIRECT.ToString() + "_2";
         }
         GameDataManager.Instance.SendServerCommandByName(commandName,dataInt);
-        Debug.Log($"命令{DateTime.Now.ToString("G")}  {commandName} {dataInt}");
     }
     public void SendPileMaterCommand(OperationType operationType)
     {
@@ -414,7 +401,6 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
 
             inputField.text = num.ToString();
             GameDataManager.Instance.SendServerCommandByName(commandName,0,num);
-            Debug.Log($"命令{DateTime.Now.ToString("G")}  {commandName} float {num}");
         }));
     }
     public override void ResetState()
