@@ -626,6 +626,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
                 for (int i = 0; i < taskVariables.McData.Count; i++) // 刷新code
                 {
+                    if (taskVariables.McData[i].AllData.Code==598)//任务重设成功，修改数据库数据
+                    {
+                        DataManager.Instance.UpdateResetTaskParams(taskVariables.McData[i]);
+                    }
                     AddOrUpdateTaskDesDictionary(GetDesByTaskCode(taskVariables.McData[i].AllData.Code),
                         taskVariables.McData[i]);
                 }

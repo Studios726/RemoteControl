@@ -223,14 +223,19 @@ public partial class DataManager
         }
      
     }
-    
+
+    public bool UpdateResetTaskParams(TaskCommand taskCommand)
+    {
+        string query = $"UPDATE `{ConstStr.DATABASE_HISTORY_TASK_MC}` SET `{ConstStr.DATA_MATERIAL_RANGE_START}` = '{taskCommand.MaterialRange.startValue}',`{ConstStr.DATA_MATERIAL_RANGE_END}` = '{taskCommand.MaterialRange.endValue}',`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}` = '{taskCommand.LeftRightRange.startValue}',`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}` = '{taskCommand.LeftRightRange.endValue}',`{ConstStr.DATA_STEP_LENGTH}` = '{taskCommand.StepLength}' WHERE `{ConstStr.DATA_TASK_ID}` = '{taskCommand.TaskID}'";
+        return MySqlHelper.ExecuteSql(query) > 0; 
+    }
     public bool UpdateHistoryTaskMc(string taskID,string taskState)
     {
+     
         if (GameDataManager.Instance.IsAdmin())
         {
             string query = $"UPDATE {ConstStr.DATABASE_HISTORY_TASK_MC} SET {ConstStr.DATA_TASK_STATE} = {taskState} WHERE {ConstStr.DATA_TASK_ID} = {taskID}";
             bool success=MySqlHelper.ExecuteSql(query) > 0; 
-            // Debug.LogError($"更新任务状态 { taskID } { state} {success}");
             return success; 
         }
         else

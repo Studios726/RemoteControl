@@ -400,7 +400,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             }
 
             inputField.text = num.ToString();
-            GameDataManager.Instance.SendServerCommandByName(commandName,0,num);
+            if (commandName!="")
+            {
+                GameDataManager.Instance.SendServerCommandByName(commandName,0,num);
+            }
         }));
     }
     public override void ResetState()
