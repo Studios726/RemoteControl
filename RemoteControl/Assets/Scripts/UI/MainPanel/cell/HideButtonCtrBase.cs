@@ -68,14 +68,23 @@ public class HideButtonCtrBase : PanelBase
     public ButtonCell lightCloseBrakeBtn;
 
     /// <summary>
-    /// 系统解锁
+    /// 系统解锁-远程
     /// </summary>
     public ButtonCell systemUnlockBtn;
 
     /// <summary>
-    /// 系统连锁
+    /// 系统连锁-远程
     /// </summary>
     public ButtonCell systemLockBtn;
+    /// <summary>
+    /// 系统解锁-本地
+    /// </summary>
+    public ButtonCell localSystemUnlockBtn;
+
+    /// <summary>
+    /// 系统连锁-本地
+    /// </summary>
+    public ButtonCell localSystemLockBtn;
 
     /// <summary>
     /// 变幅油泵停止
@@ -190,6 +199,8 @@ public class HideButtonCtrBase : PanelBase
         AddOnClickListener(lightCloseBrakeBtn,(() =>SendMessageToServer(COMMAND_NAME.LIGHTPOWER_ON) ));
         AddOnClickListener(systemLockBtn,(() =>SendMessageToServer( COMMAND_NAME.SYSTEM_LOCK) ));
         AddOnClickListener(systemUnlockBtn,(() =>SendMessageToServer(COMMAND_NAME.SYSTEM_UNLOCK) ));
+        // AddOnClickListener(localSystemLockBtn,(() =>SendMessageToServer( COMMAND_NAME.SYSTEM_LOCK) ));
+        // AddOnClickListener(localSystemUnlockBtn,(() =>SendMessageToServer(COMMAND_NAME.SYSTEM_UNLOCK) ));
         AddOnClickListener(oilPumpStartBtn,(() =>SendMessageToServer(COMMAND_NAME.OILBUMP_ON) ));
         AddOnClickListener(oilPumpStopBtn,(() =>SendMessageToServer(COMMAND_NAME.OILBUMP_OFF) ));
         // AddOnClickListener(wiperStartBtn,(() =>SendMessageToServer("雨刷器启动") ));
@@ -234,6 +245,10 @@ public class HideButtonCtrBase : PanelBase
             lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed==false,true);
             systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich==false,true);
             systemLockBtn.SetSystemState(data.SR1_Interlock_Swich,true);
+            
+            localSystemUnlockBtn.SetSystemState(data.SystemInterlockSwitch==false,true);
+            localSystemLockBtn.SetSystemState(data.SystemInterlockSwitch,true);
+            
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning==false,true);
             oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning,true);
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB,true);
@@ -287,6 +302,10 @@ public class HideButtonCtrBase : PanelBase
             lightOpenBrakeBtn.SetSystemState(data.LightPowerClosed_2==false,true);
             systemUnlockBtn.SetSystemState(data.SR1_Interlock_Swich_2==false,true);
             systemLockBtn.SetSystemState(data.SR1_Interlock_Swich_2,true);
+            
+            localSystemUnlockBtn.SetSystemState(data.SystemInterlockSwitch_2==false,true);
+            localSystemLockBtn.SetSystemState(data.SystemInterlockSwitch_2,true);
+            
             oilPumpStopBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2==false,true);
             oilPumpStartBtn.SetSystemState(data.VariableAmplitudeOilPumpMotorRunning_2,true);
             bypassBtn.SetSystemState(data.SR1_SCADA_ByPass_SB_2,true);

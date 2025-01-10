@@ -28,10 +28,13 @@ public class BucketWheelStateBase : MonoBehaviour
     public ToggleDIY lowVoltagePowerClosed;
 
     /// <summary>
-    /// 与系统连锁
+    /// 与系统连锁-远程
     /// </summary>
     public ToggleDIY systemChain;
-
+    /// <summary>
+    /// 与系统连锁-本地
+    /// </summary>
+    public ToggleDIY localSystemChain;
     /// <summary>
     /// 通訊状态
     /// </summary>
@@ -142,7 +145,7 @@ public class BucketWheelStateBase : MonoBehaviour
         SetToggleState(remoteControl, data.Remote_2, false, data.D1PLC1CommunicationState);
         SetToggleState(powerSupplyClose, data.LowVoltageControlPowerClosed_2, false, data.D1PLC1CommunicationState);
         SetToggleState(systemChain, data.SR1_Interlock_Swich_2, false, data.D1PLC1CommunicationState);
-        // SetToggleState(recondition, data.SystemInterlockSwitch, false, data.D1PLC1CommunicationState);
+        SetToggleState(localSystemChain, data.SystemInterlockSwitch_2, false, data.D1PLC1CommunicationState);
         SetToggleState(bucketWheelMalfunction, data.BucketWheelFault_2, true, data.D1PLC1CommunicationState,true);
         SetToggleState(buzzerAlarm, data.StartAlarmStatus_2, true, data.D1PLC1CommunicationState,true);
         // SetToggleState(buzzerAlarm, data.BucketWheelFault, true, data.D1PLC1CommunicationState);
