@@ -421,6 +421,7 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         if (machineMove_1 && machineMove_2)
         {
+            machineMove_1.SetFogfallVfxActive(SystemVariables.BucketWheelMaterialLoadingRunning);
             machineMove_1.UpdateBucketWheelPosText(
                 $"{(SystemVariables.DC_Pos + ConstStr.InitPosition_1).ToString("F2")} m");
             machineMove_2.UpdateBucketWheelPosText(

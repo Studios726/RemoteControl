@@ -13558,6 +13558,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 735692916303542289}
   - {fileID: 8771370525897074772}
   - {fileID: 1256523560527114661}
   - {fileID: 1699942610791969975}
@@ -99483,7 +99484,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8214601000020700250, guid: a30e53f4afaefcd45baeac6f088b894b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -99616,6 +99617,80 @@ Transform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1136588145438536845, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
   m_PrefabInstance: {fileID: 5846153122862961651}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6432086942901595228
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4619709880654436007}
+    m_Modifications:
+    - target: {fileID: 1553017806985460023, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1553017806985460023, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.4008
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0053
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.0178
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161147860049402040, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_Name
+      value: Fogfall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7161147860049402040, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+--- !u!4 &735692916303542289 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+  m_PrefabInstance: {fileID: 6432086942901595228}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7345131331788765793
 PrefabInstance:

@@ -4581,6 +4581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1431835160}
   - component: {fileID: 1431835159}
+  - component: {fileID: 1431835161}
   m_Layer: 0
   m_Name: ModelCamera
   m_TagString: Untagged
@@ -4654,6 +4655,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 85.5, y: 0, z: 0}
+--- !u!114 &1431835161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431835157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14bd89a4a6858a4d89737d0a4b3402b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensitivity: 1
+  CenObj: {fileID: 462563580}
 --- !u!1001 &1432222984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6407,6 +6422,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u8F68\u9053"
       objectReference: {fileID: 0}
+    - target: {fileID: 9039429520404125567, guid: a4f980d1629e34d43ae238611dce269a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6567,10 +6586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: machine1
       objectReference: {fileID: 0}
-    - target: {fileID: 5069830979874951911, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 6223018373973969197, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[0]
+      value: 
+      objectReference: {fileID: 543450653139230788}
     - target: {fileID: 8654435239851183504, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -6624,10 +6643,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 895041284}
     m_Modifications:
-    - target: {fileID: 417100038557376830, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1493983211693934968, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
       propertyPath: m_Camera
       value: 
@@ -6680,6 +6695,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6929638527049264508, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[0]
+      value: 
+      objectReference: {fileID: 543450653139230788}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
