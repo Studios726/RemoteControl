@@ -24382,6 +24382,7 @@ MonoBehaviour:
   rotationGo_z: {fileID: 8811870755815149597}
   rotationGo_y: {fileID: 8811870755815149597}
   currentCanvasTransform: {fileID: 9203708259532079851}
+  FogfallVfx: {fileID: 888688298490040501}
   errorText: {fileID: 4122887985655931800}
   errorTextRectTransform: {fileID: 5829485731187221081}
   bgRectTransform: {fileID: 1938937817105851742}
@@ -61744,6 +61745,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 42.4
       objectReference: {fileID: 0}
+    - target: {fileID: 7648725034064599144, guid: a30e53f4afaefcd45baeac6f088b894b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7965858748805339213, guid: a30e53f4afaefcd45baeac6f088b894b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.370005
@@ -61851,6 +61856,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+--- !u!1 &888688298490040501 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7161147860049402040, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+  m_PrefabInstance: {fileID: 8013244338215618573}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4342080771408288832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6014249652907988045, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
