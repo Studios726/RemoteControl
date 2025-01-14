@@ -177,6 +177,13 @@ public class GameDataManager : Singleton<GameDataManager>
 
         RecordWarning(systemVariables);
         _systemVariables = systemVariables;
+        
+        // _systemVariables.BucketWheelMaterialUnloadingRunning = false;
+        // _systemVariables.BucketWheelMaterialLoadingRunning = true;
+        // _systemVariables.BucketWheelMaterialUnloadingRunning_2 = true;
+        // _systemVariables.AllowBucketWheelMaterialUnloading = true;
+        // _systemVariables.AllowBucketWheelMaterialUnloading_2 = true;
+        
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
         if (_systemVariables.SuspensionGlueRunCommand && IsCanPop && _systemVariables.BeltRealyDis > 0 &&
             curAccountInfo != null)
@@ -601,7 +608,11 @@ public class GameDataManager : Singleton<GameDataManager>
     public void UpdateWheelAnimation()
     {
         machineMove_1.PlayRotationClip(_systemVariables.BucketWheelMotorRunning);
+        machineMove_1.PlayCantileverClipTake(_systemVariables.BucketWheelMaterialUnloadingRunning);
+        machineMove_1.PlayCantileverClipPile(_systemVariables.BucketWheelMaterialLoadingRunning);
         machineMove_2.PlayRotationClip(_systemVariables.BucketWheelMotorRunning_2);
+        machineMove_2.PlayCantileverClipTake(_systemVariables.BucketWheelMaterialUnloadingRunning_2);
+        machineMove_2.PlayCantileverClipPile(_systemVariables.BucketWheelMaterialLoadingRunning_2);
     }
 
     public void UpdateBeltAnimation()

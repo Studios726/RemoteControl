@@ -20,6 +20,8 @@ public class MachineMove : MonoBehaviour
     public TMP_Text bucketWheelHeighText;
     public Transform modelCameraTransform;
     public Animation rotClip;
+    public Animation cantileverClipTake;
+    public Animation cantileverClipPile;
     public Machine machine;
     public float speed;
     private void Start()
@@ -28,6 +30,20 @@ public class MachineMove : MonoBehaviour
         if (rotClip!=null)
         {
             foreach (AnimationState state in rotClip)
+            {
+                state.speed = speed;
+            }
+        }
+        if (cantileverClipTake!=null)
+        {
+            foreach (AnimationState state in cantileverClipTake)
+            {
+                state.speed = -1;
+            }
+        }
+        if (cantileverClipPile!=null)
+        {
+            foreach (AnimationState state in cantileverClipPile)
             {
                 state.speed = speed;
             }
@@ -95,7 +111,54 @@ public class MachineMove : MonoBehaviour
     {
         bucketWheelHeighText.text = (40 * Mathf.Sin(Luff_Angle * Mathf.Deg2Rad) + ConstStr.InitBucketWheelHeigh).ToString("F2")+" m";
     }
-    
+    /// <summary>
+    /// 是否播放取料动画
+    /// </summary>
+    /// <param name="isPlay"></param>
+    public void PlayCantileverClipTake(bool isPlay)
+    {
+        if (cantileverClipTake == null)
+        {
+            Debug.Log(" cantilever is null");
+            return;
+        }
+        if (isPlay && cantileverClipTake.isPlaying==false)
+        {
+            cantileverClipTake.gameObject.SetActive(true);
+            cantileverClipTake.Play("cantilever");
+        }else if (isPlay==false && cantileverClipTake.isPlaying==true)
+        {
+            cantileverClipTake.Stop("cantilever");
+            cantileverClipTake.gameObject.SetActive(false);
+        }
+        else
+        {
+            //不处理
+        }
+       
+    }
+    public void PlayCantileverClipPile(bool isPlay)
+    {
+        if (cantileverClipPile == null)
+        {
+            Debug.Log(" cantilever is null");
+            return;
+        }
+        if (isPlay && cantileverClipPile.isPlaying==false)
+        {
+            cantileverClipPile.gameObject.SetActive(true);
+            cantileverClipPile.Play("cantilever");
+        }else if (isPlay==false && cantileverClipPile.isPlaying==true)
+        {
+            cantileverClipPile.Stop("cantilever");
+            cantileverClipPile.gameObject.SetActive(false);
+        }
+        else
+        {
+            //不处理
+        }
+       
+    }
     public void PlayRotationClip(bool isPlay)
     {
         if (rotClip == null)
@@ -116,7 +179,6 @@ public class MachineMove : MonoBehaviour
         }
        
     }
-
     public void SetFogfallVfxActive(bool isActive)
     {
         if (FogfallVfx.activeSelf != isActive)
