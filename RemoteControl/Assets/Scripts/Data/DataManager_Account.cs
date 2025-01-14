@@ -172,6 +172,7 @@ public partial class DataManager
         }
         return "";
     }
+    //任务规划 取料 数据记录
     public bool InsertHistoryTaskMc(TaskCommand taskCommand,string userId,string taskState,string completeState="1")
     {
         if (GameDataManager.Instance.IpConfig.IsRecordData==false)
@@ -181,8 +182,8 @@ public partial class DataManager
         string name = GetUserNameByUserID(userId);
         if (GameDataManager.Instance.IsAdmin())
         {
-            string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`,`{ConstStr.DATA_TASK_AUTO_MODE}`,`{ConstStr.DATA_TASK_ANGLE_ENTRY_MODE}`,`{ConstStr.DATA_TASK_STATE2}`) " +
-                           $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{0}','{1}','{0}','{name}','{taskState}','{taskCommand.TaskID}','{0}','{0}','{taskCommand.AutoMode}','{(int)taskCommand.AngleEntryMode}','{completeState}')";
+            string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_SIDE_SELECTION}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_IS_TIMED}`,`{ConstStr.DATA_TIMEDAT}`,`{ConstStr.DATA_IS_QUANTIFIED}`,`{ConstStr.DATA_QUANTITY}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_STATE}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_TAKE_MATE_HIGH}`,`{ConstStr.DATA_TASK_LAYER_HIGH}`,`{ConstStr.DATA_TASK_AUTO_MODE}`,`{ConstStr.DATA_TASK_ANGLE_ENTRY_MODE}`,`{ConstStr.DATA_TASK_STATE2}`,`{ConstStr.DATA_TASK_TURN_MODE}`,`{ConstStr.DATA_TASK_ANGLE_ENTRY_VALUE}`,`{ConstStr.DATA_TASK_IS_CONTINUED}`) " +
+                           $"VALUES ('{taskCommand.QuerySystem}','{taskCommand.TaskCreateTime}','{taskCommand.Machine}','{taskCommand.TaskType}','{taskCommand.MaterialRange.startValue}','{taskCommand.MaterialRange.endValue}','{taskCommand.SideSelection}','{taskCommand.LeftRightRange.startValue}','{taskCommand.LeftRightRange.endValue}','{taskCommand.StepLength}','{0}','{0}','{1}','{0}','{name}','{taskState}','{taskCommand.TaskID}','{0}','{0}','{taskCommand.AutoMode}','{(int)taskCommand.AngleEntryMode}','{completeState}','{taskCommand.TurnMode}','{taskCommand.AngleEntryValue}','{taskCommand.IsTaskContinued}')";
             return MySqlHelper.ExecuteSql(query) > 0; ;
         }
         else
@@ -223,10 +224,10 @@ public partial class DataManager
         }
      
     }
-
+    //任务规划 取料 重置参数数据
     public bool UpdateResetTaskParams(TaskCommand taskCommand)
     {
-        string query = $"UPDATE `{ConstStr.DATABASE_HISTORY_TASK_MC}` SET `{ConstStr.DATA_MATERIAL_RANGE_START}` = '{taskCommand.MaterialRange.startValue}',`{ConstStr.DATA_MATERIAL_RANGE_END}` = '{taskCommand.MaterialRange.endValue}',`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}` = '{taskCommand.LeftRightRange.startValue}',`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}` = '{taskCommand.LeftRightRange.endValue}',`{ConstStr.DATA_STEP_LENGTH}` = '{taskCommand.StepLength}' WHERE `{ConstStr.DATA_TASK_ID}` = '{taskCommand.TaskID}'";
+        string query = $"UPDATE `{ConstStr.DATABASE_HISTORY_TASK_MC}` SET `{ConstStr.DATA_MATERIAL_RANGE_START}` = '{taskCommand.MaterialRange.startValue}',`{ConstStr.DATA_MATERIAL_RANGE_END}` = '{taskCommand.MaterialRange.endValue}',`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}` = '{taskCommand.LeftRightRange.startValue}',`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}` = '{taskCommand.LeftRightRange.endValue}',`{ConstStr.DATA_STEP_LENGTH}` = '{taskCommand.StepLength}',`{ConstStr.DATA_TASK_ANGLE_ENTRY_VALUE}` = '{taskCommand.AngleEntryValue}' WHERE `{ConstStr.DATA_TASK_ID}` = '{taskCommand.TaskID}'";
         return MySqlHelper.ExecuteSql(query) > 0; 
     }
     public bool UpdateHistoryTaskMc(string taskID,string taskState)

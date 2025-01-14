@@ -81,8 +81,12 @@ public static class ConstStr
     public const string DATA_TASK_LAYER_HIGH = "layer_high";
     public const string DATA_TASK_AUTO_MODE = "auto_mode";
     public const string DATA_TASK_ANGLE_ENTRY_MODE = "angle_entry_mode";
+    public const string DATA_TASK_ANGLE_ENTRY_VALUE = "angle_entry_value";
     public const string DATA_TASK_STATE2 = "state";
     public const string DATA_TASK_END_TIME = "task_end_time";
+    public const string DATA_TASK_TURN_MODE = "turn_mode";
+    public const string DATA_TASK_PILE_MODE = "pile_mode";
+    public const string DATA_TASK_IS_CONTINUED = "is_task_continued";
     #endregion
     #region history_cartelectricity
     public const string DATA_HISTORY_CARTELECTRICITY_NAME = "name";

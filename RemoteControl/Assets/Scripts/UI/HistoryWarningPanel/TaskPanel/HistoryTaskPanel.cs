@@ -159,7 +159,7 @@ public class HistoryTaskPanel : MonoBehaviour
             data.operationName = dataRowCollection[i][ConstStr.DATA_OPERATOR].ToString();
             data.state = dataRowCollection[i][ConstStr.DATA_TASK_STATE2].ToString();
             data.autoMode= dataRowCollection[i][ConstStr.DATA_TASK_AUTO_MODE].ToString()==AutoMode.SemiAuto.ToString()?"人工":"自动";
-            data.angleExpansionFactor = "0";
+            data.angleExpansionFactor =dataRowCollection[i][ConstStr.DATA_TASK_ANGLE_ENTRY_VALUE].ToString();
           
             historyTaskDatas.Add(data);
             ++counter;

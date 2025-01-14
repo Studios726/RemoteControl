@@ -798,4 +798,20 @@ public class TaskDataManager : Singleton<TaskDataManager>
             return -1;
         }
     }
+    /// <summary>
+    /// 添加堆料任务
+    /// </summary>
+    /// <param name="isPile"></param>
+    public void AddPileMaterialTask(bool isPile)
+    {
+        Debug.LogError("开始堆料任务");
+    }
+    /// <summary>
+    /// 更新堆料任务
+    /// </summary>
+    /// <param name="isEnd"></param>
+    public void UpdatePileTakeMaterialTask(bool isEnd)
+    {
+        Debug.LogError("结束堆料任务");
+    }
 }
