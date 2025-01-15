@@ -473,6 +473,9 @@ namespace ShenYangRemoteSystem.Subclass
         public bool Slew_Current_Pause_Slew { get; set; } 
         public bool BUCKET_Current_Pause_SLEW_2 { get; set; }
         public bool Slew_Current_Pause_Slew_2 { get; set; }
+        public bool SR1_Stack_Runing { get; set; }
+        public bool SR1_StackPiont_FS_Mode{ get; set; }
+        public bool SR1_Pos_Runing_Finish{ get; set;}
 
 
 

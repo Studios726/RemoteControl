@@ -38,8 +38,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public ButtonCell pileMaterReversingBtn;
     public ButtonCell fixedPointHeap;//定点堆料
     public ButtonCell rotaryHeap;//回转堆料
-    public ButtonCell curPileTaskButtonCell;
-    public Button ForcedPositioning;
+    private ButtonCell curPileTaskButtonCell;
+    public ButtonCell ForcedPositioning;
+    public ButtonCell FixedAngle;//固定角度
+    public ButtonCell MaterialJudgment;//料位判定
     private Timer refreshTextTimer;
     private bool isRefreshText;
     public override void Start()
@@ -161,9 +163,20 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         {
             GameDataManager.Instance.SendServerCommandByName("DC_REV_DES_1",0);
         }));
-        ForcedPositioning.onClick.AddListener((() =>
+        AddOnClickListener(ForcedPositioning,(() =>
         {
+            ForcedPositioning.SetSelectState(true);
             GameDataManager.Instance.SendServerCommandByName("POS_FROCE_1",0);
+        }));
+        AddOnClickListener(FixedAngle,(() =>
+        {
+            FixedAngle.SetSelectState(true);
+            GameDataManager.Instance.SendServerCommandByName("STACK_PIONT_MODE_1",1);
+        }));
+        AddOnClickListener(MaterialJudgment,(() =>
+        {
+            MaterialJudgment.SetSelectState(true);
+            GameDataManager.Instance.SendServerCommandByName("STACK_PIONT_MODE_1",0);
         }));
         takePanel.SetActive(false);
         cutModeBtn.onClick.AddListener((() =>
@@ -181,10 +194,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         if (taskCommand.TaskType == TaskType.TAKEMATER)
         {
             base.UpdateData(taskCommand);
-            pileResetTaskBtn.SetSystemState(false,true);
-            pileMaterStartBtn.SetSystemState(false,true);
-            pileMaterStopBtn.SetSystemState(false,true);
-            pileMaterEndBtn.SetSystemState(false,true);
+            // pileResetTaskBtn.SetSystemState(false,true);
+            // pileMaterStartBtn.SetSystemState(false,true);
+            // pileMaterStopBtn.SetSystemState(false,true);
+            // pileMaterEndBtn.SetSystemState(false,true);
         }
         else
         {
@@ -243,10 +256,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         rotaryHeap.SetSystemState(systemVariables.SR1_SlewStack_SEL,true);
         fixedPointHeap.SetSystemState(systemVariables.SR1_PointStack_SEL,true);
         
-        pileMaterStartBtn.SetSystemState(systemVariables.SR1_Working_Start,true);
+        pileMaterStartBtn.SetSystemState(systemVariables.SR1_Stack_Runing,true);
         pileMaterStopBtn.SetSystemState(systemVariables.SR1_Stop_Runing,true);
-        pileMaterEndBtn.SetSystemState(systemVariables.SR1_Working_Pause,true);
+        pileMaterEndBtn.SetSystemState(systemVariables.SR1_Stack_Runing==false,true);
         pileMaterReversingBtn.SetSystemState(systemVariables.SR1_Change_Direct,true);
+        ForcedPositioning.SetSystemState(systemVariables.SR1_Pos_Runing_Finish,true);
     }
     //堆料目前使用plc命令 和取料区分开
     public void SendPileMaterCommandByRc(OperationType operationType)
@@ -436,10 +450,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public override void ResetState()
     {
         base.ResetState();
-        pileResetTaskBtn.SetSystemState(false,true);
-        pileMaterStartBtn.SetSystemState(false,true);
-        pileMaterStopBtn.SetSystemState(false,true);
-        pileMaterEndBtn.SetSystemState(false,true);
+        // pileResetTaskBtn.SetSystemState(false,true);
+        // pileMaterStartBtn.SetSystemState(false,true);
+        // pileMaterStopBtn.SetSystemState(false,true);
+        // pileMaterEndBtn.SetSystemState(false,true);
         
         pileMaterStartBtn.SetSelectState(false);
         pileMaterStopBtn.SetSelectState(false);
