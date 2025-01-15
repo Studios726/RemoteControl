@@ -38,7 +38,7 @@ public class MachineMove : MonoBehaviour
         {
             foreach (AnimationState state in cantileverClipTake)
             {
-                state.speed = -1;
+                state.speed = speed;
             }
         }
         if (cantileverClipPile!=null)
