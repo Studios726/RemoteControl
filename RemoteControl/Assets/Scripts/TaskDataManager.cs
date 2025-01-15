@@ -488,14 +488,18 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     nearestTaskDataDic.Add(taskVariables.McData[i].TaskID,
                         new TaskData(taskVariables.McData[i].TaskID,
                             taskVariables.McData[i].AllData.ProcessingProgress.ToString(), TaskStatus.InProgress));
-                    DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
-                        taskVariables.McData[i].AllData.ProcessingProgress.ToString());
+                   
                     if (taskVariables.McData[i].AllData.OperationCommandList[3] == 1) //任务结束更新数据库
                     {
                         nearestTaskDataDic[taskVariables.McData[i].TaskID].State = TaskStatus.Completed;
-                        DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID,
-                            TaskStatus.Completed,
-                            taskVariables.McData[i].AllData.TaskEndTime);
+                        DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
+                            taskVariables.McData[i].AllData.ProcessingProgress.ToString(),"2");
+                    }
+                    else
+                    {
+                        nearestTaskDataDic[taskVariables.McData[i].TaskID].State = TaskStatus.InProgress;
+                        DataManager.Instance.InsertHistoryTaskMc(taskCommand, taskCommand.OperatorName,
+                            taskVariables.McData[i].AllData.ProcessingProgress.ToString());
                     }
                 }
             }
