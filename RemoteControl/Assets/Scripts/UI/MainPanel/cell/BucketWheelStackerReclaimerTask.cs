@@ -8,6 +8,9 @@ using Utility;
 
 public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
 {
+    public Button cutModeBtn;
+    public GameObject takePanel;
+    public GameObject pilePanel;
     public InputField startPileMaterText;
     public InputField endPileMaterText;
     public ButtonCell leftPileMaterToggle;
@@ -161,6 +164,13 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         ForcedPositioning.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("POS_FROCE_1",0);
+        }));
+        takePanel.SetActive(false);
+        cutModeBtn.onClick.AddListener((() =>
+        {
+            takePanel.SetActive(!takePanel.activeSelf);
+            pilePanel.SetActive(!pilePanel.activeSelf);
+            EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
         }));
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
         EventManager.Instance.AddListener(EventName.UpdateRcData, RefreshPileData);
