@@ -102,7 +102,10 @@ public class MySqlHelper
     /// <returns></returns>
     public static int ExecuteSql(string sql)
     {
-        ExecuteSqlAsync(sql);
+        if (sql!="")
+        {
+            ExecuteSqlAsync(sql);
+        }
         return 1;
     }
     

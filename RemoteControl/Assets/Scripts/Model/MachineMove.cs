@@ -11,6 +11,7 @@ public class MachineMove : MonoBehaviour
     public Transform rotationGo_y;
     public Transform currentCanvasTransform;
     public GameObject FogfallVfx;
+    public ParticleSystem FogfallVfxPs;
     public TMP_Text errorText;
     public RectTransform errorTextRectTransform;
     public RectTransform bgRectTransform;
@@ -184,6 +185,14 @@ public class MachineMove : MonoBehaviour
         if (FogfallVfx.activeSelf != isActive)
         {
             FogfallVfx.SetActive(isActive);
+            if (isActive)
+            {
+                FogfallVfxPs.Play();
+            }
+            else
+            {
+                FogfallVfxPs.Stop();
+            }
         }
     }
     private void Update()

@@ -3329,6 +3329,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3f7b428c795ea943a1cdb8386e7be27, type: 3}
   m_PrefabInstance: {fileID: 1085413562}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1107380380 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6929638527049264508, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
+  m_PrefabInstance: {fileID: 5026553665571510130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1115932232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3952,6 +3957,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d3f7b428c795ea943a1cdb8386e7be27, type: 3}
   m_PrefabInstance: {fileID: 1244064216}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1249118670 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6223018373973969197, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
+  m_PrefabInstance: {fileID: 3180020969487031119}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1264723167
 PrefabInstance:
@@ -6579,6 +6589,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 963194227}
     - target: {fileID: 2589432349100900467, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
+      propertyPath: FogfallVfxPs
+      value: 
+      objectReference: {fileID: 1249118670}
+    - target: {fileID: 2589432349100900467, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
       propertyPath: modelCameraTransform
       value: 
       objectReference: {fileID: 1431835160}
@@ -6588,6 +6602,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5069830979874951911, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6223018373973969197, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6223018373973969197, guid: 6f103202ebd715142baa6d4e3f2688a9, type: 3}
@@ -6656,6 +6674,10 @@ PrefabInstance:
       value: machine2
       objectReference: {fileID: 0}
     - target: {fileID: 4407568502695229097, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
+      propertyPath: FogfallVfxPs
+      value: 
+      objectReference: {fileID: 1107380380}
+    - target: {fileID: 4407568502695229097, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
       propertyPath: modelCameraTransform
       value: 
       objectReference: {fileID: 1431835160}
@@ -6697,6 +6719,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6034022479026651707, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929638527049264508, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6929638527049264508, guid: 9b2c8e9c8f410294cb7ef78562571328, type: 3}
