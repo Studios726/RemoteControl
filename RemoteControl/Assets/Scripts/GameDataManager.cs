@@ -1752,24 +1752,24 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.RotaryRightTurnExtremeLimit));
             }
-
-            if (newSystemVariables.RotaryRightTurnForbiddenZoneLimit &&
-                _systemVariables.RotaryRightTurnForbiddenZoneLimit == false)
-            {
-                //回转-右转禁区限位
-                DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit), "回转-右转禁区限位",
-                    Machine.BucketWheelStackerReclaimer, false, "");
-            }
-            else if (newSystemVariables.RotaryRightTurnForbiddenZoneLimit == false &&
-                     _systemVariables.RotaryRightTurnForbiddenZoneLimit == true)
-            {
-                //回转-右转禁区限位解除
-                DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位解除", GetUserName(),
-                    Machine.BucketWheelStackerReclaimer);
-                RemoveWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit));
-            }
+            //要求删除
+            // if (newSystemVariables.RotaryRightTurnForbiddenZoneLimit &&
+            //     _systemVariables.RotaryRightTurnForbiddenZoneLimit == false)
+            // {
+            //     //回转-右转禁区限位
+            //     DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit), "回转-右转禁区限位",
+            //         Machine.BucketWheelStackerReclaimer, false, "");
+            // }
+            // else if (newSystemVariables.RotaryRightTurnForbiddenZoneLimit == false &&
+            //          _systemVariables.RotaryRightTurnForbiddenZoneLimit == true)
+            // {
+            //     //回转-右转禁区限位解除
+            //     DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位解除", GetUserName(),
+            //         Machine.BucketWheelStackerReclaimer);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit));
+            // }
 
             if (newSystemVariables.RotaryRightTurnForbiddenLimit &&
                 _systemVariables.RotaryRightTurnForbiddenLimit == false)
@@ -5084,7 +5084,7 @@ public class GameDataManager : Singleton<GameDataManager>
             else if (newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0 == false &&
                      _systemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0 == true)
             {
-                // 司机室平衡油泵电机辅助触点故障解除
+                // 远程任务规划子系统通讯异常解除
                 DataManager.Instance.InsertHistoryWarningMc("远程任务规划子系统通讯异常解除", GetUserName(),
                     Machine.BucketWheelStackerReclaimer);
                 RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0));
@@ -5866,26 +5866,26 @@ public class GameDataManager : Singleton<GameDataManager>
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.RotaryRightTurnExtremeLimit_2));
             }
-
-            if (newSystemVariables.RotaryRightTurnForbiddenZoneLimit_2 &&
-                _systemVariables.RotaryRightTurnForbiddenZoneLimit_2 == false)
-            {
-                //回转-右转禁区限位
-                DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位", GetUserName(),
-                    Machine.BucketWheel);
-                AddOrUpdateWarningDesQueue("回转-右转禁区限位", Machine.BucketWheel);
-                AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit_2),
-                    "回转-右转禁区限位",
-                    Machine.BucketWheel, false, "");
-            }
-            else if (newSystemVariables.RotaryRightTurnForbiddenZoneLimit_2 == false &&
-                     _systemVariables.RotaryRightTurnForbiddenZoneLimit_2 == true)
-            {
-                //回转-右转禁区限位解除
-                DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位解除", GetUserName(),
-                    Machine.BucketWheel);
-                RemoveWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit_2));
-            }
+            //要求删除
+            // if (newSystemVariables.RotaryRightTurnForbiddenZoneLimit_2 &&
+            //     _systemVariables.RotaryRightTurnForbiddenZoneLimit_2 == false)
+            // {
+            //     //回转-右转禁区限位
+            //     DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位", GetUserName(),
+            //         Machine.BucketWheel);
+            //     AddOrUpdateWarningDesQueue("回转-右转禁区限位", Machine.BucketWheel);
+            //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit_2),
+            //         "回转-右转禁区限位",
+            //         Machine.BucketWheel, false, "");
+            // }
+            // else if (newSystemVariables.RotaryRightTurnForbiddenZoneLimit_2 == false &&
+            //          _systemVariables.RotaryRightTurnForbiddenZoneLimit_2 == true)
+            // {
+            //     //回转-右转禁区限位解除
+            //     DataManager.Instance.InsertHistoryWarningMc("回转-右转禁区限位解除", GetUserName(),
+            //         Machine.BucketWheel);
+            //     RemoveWarningDesDict(nameof(newSystemVariables.RotaryRightTurnForbiddenZoneLimit_2));
+            // }
 
             if (newSystemVariables.RotaryRightTurnForbiddenLimit_2 &&
                 _systemVariables.RotaryRightTurnForbiddenLimit_2 == false)
@@ -7674,18 +7674,18 @@ public class GameDataManager : Singleton<GameDataManager>
             if (newSystemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2 == true &&
                 _systemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2 == false)
             {
-                // 悬臂胶带取料接触器辅助触点故障
-                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带取料接触器辅助触点故障", GetUserName(),
+                //  悬臂胶带堆料接触器辅助触点故障
+                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带堆料接触器辅助触点故障", GetUserName(),
                     Machine.BucketWheel);
                 AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2),
-                    "悬臂胶带取料接触器辅助触点故障",
+                    "悬臂胶带堆料接触器辅助触点故障",
                     Machine.BucketWheel, false, "");
             }
             else if (newSystemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2 == false &&
                      _systemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2 == true)
             {
-                // 悬臂胶带取料接触器辅助触点故障解除
-                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带取料接触器辅助触点故障解除", GetUserName(),
+                // 悬臂胶带堆料接触器辅助触点故障解除
+                DataManager.Instance.InsertHistoryWarningMc("悬臂胶带堆料接触器辅助触点故障解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.SuspensionBeltLoadingContactAuxiliaryFault_2));
             }
@@ -9376,7 +9376,7 @@ public class GameDataManager : Singleton<GameDataManager>
             else if (newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2 == false &&
                      _systemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2 == true)
             {
-                // 司机室平衡油泵电机辅助触点故障解除
+                // 远程任务规划子系统通讯异常解除
                 DataManager.Instance.InsertHistoryWarningMc("远程任务规划子系统通讯异常解除", GetUserName(),
                     Machine.BucketWheel);
                 RemoveWarningDesDict(nameof(newSystemVariables.SR1_REMOTE_PLANT_COMM_FAULT_0_2));
