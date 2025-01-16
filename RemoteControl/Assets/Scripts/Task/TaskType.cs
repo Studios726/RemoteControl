@@ -66,6 +66,10 @@ public enum OperationType
     /// 边界确认
     /// </summary>
     TurnConfirm=6,
+    /// <summary>
+    /// 定位确认
+    /// </summary>
+    PositionConfirm=7,
 }
 
 public class TaskData

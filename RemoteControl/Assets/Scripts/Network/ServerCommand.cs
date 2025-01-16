@@ -500,7 +500,7 @@ public class TaskCommand
 {
     public int ID { get; set; }
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认
     public int Command_Type { get; set; }
     //0新任务 1恢复上次任务
     public int IsTaskContinued{ get; set; }
@@ -528,6 +528,8 @@ public class TaskCommand
     public int ResetState { get; set; }
     //左转右转边界确认按钮 点击发送 1
     public int TurnConfirmState{ get; set;}
+    //定位确认按钮 点击发送 1
+    public int PositionConfirmState{ get; set;}
     // 取料范围，可以是一个区间
     public TaskRange MaterialRange { get; set; }
 

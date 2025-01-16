@@ -38,6 +38,10 @@ public class BucketWheelTaskBase : PanelBase
     /// 边界确认
     /// </summary>
     public ButtonCell confirmTurnBtn;
+    /// <summary>
+    /// 定位确认
+    /// </summary>
+    public ButtonCell PositionConfirmBtn;
     public InputField leftTakeMaterText;
     public InputField rightTakeMaterText;
     public InputField takeMaterStep;
@@ -61,8 +65,8 @@ public class BucketWheelTaskBase : PanelBase
     public WarningList warningList;
     public TaskLogList taskLogList;
     public ScrollRect taskLogScrollRect;
-    public int RefrashLogCount = 0;
-    public bool isRefrash;
+    private int RefrashLogCount = 0;
+    private bool isRefrash;
     public virtual void Start()
     {
         Init();
@@ -166,6 +170,7 @@ public class BucketWheelTaskBase : PanelBase
         AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
         SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
         confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
+        PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.AUTOMAX);
         AngleEntryText.SetTextByFocused(taskCommand.AngleEntryValue.ToString());
         leftTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.LEFTTURN,true);
         rightTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.RIGHTTURN,true);
@@ -176,6 +181,7 @@ public class BucketWheelTaskBase : PanelBase
         takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
         resetTaskBtn.SetSystemState(taskCommand.ResetState==1,true);
         confirmTurnBtn.SetSystemState(taskCommand.TurnConfirmState==1,true);
+        PositionConfirmBtn.SetSystemState(taskCommand.PositionConfirmState==1,true);
         if (taskCommand.AllData.OperationCommandList[2] == 1)
         {
             if (reversingTimer != null)
@@ -233,6 +239,13 @@ public class BucketWheelTaskBase : PanelBase
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
                 new ConfirmPanelArgs("是否边界确认？",GameDataManager.Instance.GetMachineName(machine), null, () => 
                     SendTaskCommand(OperationType.TurnConfirm)));
+        }));
+        
+        AddOnClickListener(PositionConfirmBtn,(() =>
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否定位确认？",GameDataManager.Instance.GetMachineName(machine), null, () => 
+                    SendTaskCommand(OperationType.PositionConfirm)));
         }));
         AddOnClickListener(takeMaterStartBtn, (() =>
         {
@@ -307,12 +320,14 @@ public class BucketWheelTaskBase : PanelBase
             AutoMaxToggle.SetSystemState(true,true);
             SemiAutoToggle.SetSystemState(false,true);
             confirmTurnBtn.gameObject.SetActive(false);
+            PositionConfirmBtn.gameObject.SetActive(true);
         } ));
         AddOnClickListener(SemiAutoToggle,(() =>
         {
             AutoMaxToggle.SetSystemState(false,true);
             SemiAutoToggle.SetSystemState(true,true);
             confirmTurnBtn.gameObject.SetActive(true);
+            PositionConfirmBtn.gameObject.SetActive(false);
         } ));
         
         AddOnClickListener(leftTurnToggle,(() =>
@@ -335,7 +350,7 @@ public class BucketWheelTaskBase : PanelBase
             InputFieldValueRange(startTakeMaterText, 153, 330,153);
             InputFieldValueRange(stopTakeMaterText, 153, 330,330);
         }
-       
+        PositionConfirmBtn.gameObject.SetActive(false);
         InputFieldValueRange(leftTakeMaterText, 12, 90,12);
         InputFieldValueRange(rightTakeMaterText, 12, 90,90);
         InputFieldValueRange(timeHourText, 0, 99,0);
@@ -443,6 +458,11 @@ public class BucketWheelTaskBase : PanelBase
             confirmTurnBtn.SetSelectState(true);
             DataManager.Instance.InsertHistoryLogMc("自动取料-边界确认", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.TurnConfirmState = 1;
+        }else if (operationType==OperationType.PositionConfirm)
+        {
+            PositionConfirmBtn.SetSelectState(true);
+            DataManager.Instance.InsertHistoryLogMc("自动取料-定位确认", GameDataManager.Instance.GetUserName(), machine);
+            taskCommand.PositionConfirmState = 1;
         }
         taskCommand.QuerySystem = "MC";
         taskCommand.TaskType = TaskType.TAKEMATER;
@@ -473,6 +493,9 @@ public class BucketWheelTaskBase : PanelBase
         }else if (operationType == OperationType.TurnConfirm )
         {
             taskCommand.Command_Type = 3;
+        }else if (operationType==OperationType.PositionConfirm)
+        {
+            taskCommand.Command_Type = 5;
         }
         else
         {
@@ -527,6 +550,9 @@ public class BucketWheelTaskBase : PanelBase
         // leftTurnToggle.SetSystemState(false, true);
         // rightTurnToggle.SetSystemState(false, true);
         confirmTurnBtn.SetSystemState(false,true);
+        PositionConfirmBtn.SetSystemState(false,true);
+        confirmTurnBtn.gameObject.SetActive(true);
+        PositionConfirmBtn.gameObject.SetActive(false);
     }
 
     public virtual void InputFieldValueRange(InputField inputField, float min, float max,float defaultValue,string commandName="")
