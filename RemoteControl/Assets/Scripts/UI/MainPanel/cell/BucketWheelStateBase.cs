@@ -132,10 +132,24 @@ public class BucketWheelStateBase : MonoBehaviour
     /// 运行状态提示
     /// </summary>
     public RunStateTip runTip;
+    public ImportantAlarmTips alarmTips;
     
     public float pastTime = 0;
     public Machine machine;
-    
+
+    private void Start()
+    {
+        if (machine==Machine.BucketWheelStackerReclaimer)
+        {
+            alarmTips.Init(AlarmDataManager.Instance.ImportantAlarmMessageList_1,machine);
+        }
+        else
+        {
+            alarmTips.Init(AlarmDataManager.Instance.ImportantAlarmMessageList_2,machine);
+        }
+      
+    }
+
     public virtual void UpdateData(SystemVariables data)
     {
       

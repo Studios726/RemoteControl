@@ -99,3 +99,15 @@ public class UpdateModelOnClickEventArgs : EventArgs
         IsShow = isShow;
     }
 }
+
+public class UpdateImportantAlarmArgs : EventArgs
+{
+    public bool IsAdd;
+    public WarningCellData WarningCellData;
+
+    public UpdateImportantAlarmArgs(bool isAdd, WarningCellData warningCellData)
+    {
+        IsAdd = isAdd;
+        WarningCellData = warningCellData;
+    }
+}

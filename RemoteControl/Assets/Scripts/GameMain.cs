@@ -265,7 +265,7 @@ namespace RemoteControl
                 isInsert = connectionFM.ReconnectCount == 0;
             }
 
-            Debug.Log("----------------------Fail " + connectEventArgs.type);
+            Debug.Log("----------------------Fail " + connectEventArgs.type.ToString());
             if (isInsert == true)
             {
                 AlarmDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString(),des,Machine.BucketWheelStackerReclaimer,false,"",false,"",false);

@@ -10,8 +10,33 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
     public Dictionary<string, WarningCellData> WarningCellDataDict = new Dictionary<string, WarningCellData>();
     public bool IsUpdatePlcWarningRecord;
     public McWarningRecord LastMcWarningRecord;
-    public Dictionary<string, WarningCellData> ImportantAlarmMessageList_1 = new Dictionary<string, WarningCellData>();
-    public Dictionary<string, WarningCellData> ImportantAlarmMessageList_2 = new Dictionary<string, WarningCellData>();
+    public List<WarningCellData> ImportantAlarmMessageList_1 = new List<WarningCellData>();
+    public List<WarningCellData> ImportantAlarmMessageList_2 =  new List<WarningCellData>();
+    public List<string> ImportantAlarmNameList = new List<string>()
+    {
+        "TaoRC",
+        "TaoRC_2",
+        "TaskPC",
+        "TaskPC_2",
+        "StartAlarmStatus",
+        "StartAlarmStatus_2",
+        "D1PLC1CommunicationState",
+        "D1PLC2CommunicationState",
+        "D2PLC1CommunicationState",
+        "D2PLC2CommunicationState",
+        "BucketWheelFault",
+        "BucketWheelFault_2",
+        "LinkedBucketWheelNotRunning",
+        "LinkedBucketWheelNotRunning_2",
+        "RotaryFault",
+        "RotaryFault_2",
+        "SuspensionBeltFault",
+        "SuspensionBeltFault_2",
+        "BucketWheelOverTorqueSwitch",
+        "BucketWheelOverTorqueSwitch_2",
+        "LargeCarFault",
+        "LargeCarFault_2"
+    };
     public string GetUserName()
     {
         if (GameDataManager.Instance.curAccountInfo != null)
@@ -122,6 +147,7 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
             WarningCellDataDict.Add(key,
                 new WarningCellData(key, des, DateTime.Now, machine, isConfirm, isSelect, confirmTime,
                     isDataSynchronized));
+            AddImportantAlarm(machine,key,des);
             if (machine == Machine.BucketWheelStackerReclaimer)
             {
                 EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
@@ -141,9 +167,9 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
             if (WarningCellDataDict.ContainsKey(key))
             {
                 WarningCellDataDict.Remove(key);
-
                 WarningCellDataDict.Add(key,
                     new WarningCellData(key, des, TriggerTime, machine, isConfirm, isSelect, confirmTime));
+                AddImportantAlarm(machine,key,des);
                 if (machine == Machine.BucketWheelStackerReclaimer)
                 {
                     EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes1, null);
@@ -159,7 +185,9 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
         {
             if (WarningCellDataDict.ContainsKey(key))
             {
+                RemoveImportantAlarm(WarningCellDataDict[key].Machine,key);
                 WarningCellDataDict.Remove(key);
+              
                 UpdatePlcWarningRecordData();
             }
 
@@ -167,6 +195,89 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
             EventManager.Instance.TriggerEvent(EventName.RefreshWarningDes2, null);
         }
 
+        public void AddImportantAlarm(Machine machine, string name, string des)
+        {
+            if (ImportantAlarmNameList.Contains(name))
+            {
+                if (machine == Machine.BucketWheelStackerReclaimer)
+                {
+                    bool isAdd = true;
+                    for (int i = 0; i < ImportantAlarmMessageList_1.Count; i++)
+                    {
+                        if (ImportantAlarmMessageList_1[i].Des == des)
+                        {
+                            ImportantAlarmMessageList_1[i].TriggerTime = DateTime.Now.ToString("HH:mm:ss");
+                            ImportantAlarmMessageList_1[i].TriggerDateTime = DateTime.Now;
+                            isAdd = false;
+                        }
+                    }
+
+                    if (isAdd)
+                    {
+                        WarningCellData warningCellData = new WarningCellData(name, des, DateTime.Now, machine);
+                        ImportantAlarmMessageList_1.Add(warningCellData);
+                        EventManager.Instance.TriggerEvent(EventName.RefreshImportantAlarm,null,
+                            new UpdateImportantAlarmArgs(true, warningCellData));
+                    }
+                }
+                else
+                {
+                    bool isAdd = true;
+                    for (int i = 0; i < ImportantAlarmMessageList_2.Count; i++)
+                    {
+                        if (ImportantAlarmMessageList_2[i].Des == des)
+                        {
+                            ImportantAlarmMessageList_2[i].TriggerTime = DateTime.Now.ToString("HH:mm:ss");
+                            ImportantAlarmMessageList_2[i].TriggerDateTime = DateTime.Now;
+                            isAdd = false;
+                        }
+                    }
+
+                    if (isAdd)
+                    {
+                        WarningCellData warningCellData = new WarningCellData(name, des, DateTime.Now, machine);
+                        ImportantAlarmMessageList_2.Add(warningCellData);
+                        EventManager.Instance.TriggerEvent(EventName.RefreshImportantAlarm,null,
+                            new UpdateImportantAlarmArgs(true, warningCellData));
+                    }
+                }
+            }
+        }
+
+        public void RemoveImportantAlarm(Machine machine, string name)
+        {
+            if (ImportantAlarmNameList.Contains(name))
+            {
+                if (machine == Machine.BucketWheelStackerReclaimer)
+                {
+                    for (int i = 0; i < ImportantAlarmMessageList_1.Count; i++)
+                    {
+                        if (ImportantAlarmMessageList_1[i].Key == name)
+                        {
+                            WarningCellData warningCellData = ImportantAlarmMessageList_1[i];
+                            ImportantAlarmMessageList_1.RemoveAt(i);
+                            EventManager.Instance.TriggerEvent(EventName.RefreshImportantAlarm,null,
+                                new UpdateImportantAlarmArgs(false,warningCellData));
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < ImportantAlarmMessageList_2.Count; i++)
+                    {
+                        if (ImportantAlarmMessageList_2[i].Key == name)
+                        {
+                            WarningCellData warningCellData = ImportantAlarmMessageList_2[i];
+                            ImportantAlarmMessageList_2.RemoveAt(i);
+                            EventManager.Instance.TriggerEvent(EventName.RefreshImportantAlarm,null,
+                                new UpdateImportantAlarmArgs(false, warningCellData));
+                            break;
+                        }
+                    }
+                }
+            }
+        }
         public void RecordWarning(SystemVariables newSystemVariables, SystemVariables _systemVariables)
         {
             bool isUpdate = false;

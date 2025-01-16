@@ -30,6 +30,7 @@ namespace RemoteControl.Event
         public const string TestEvent = "TestEvent";
         public const string ShowTestEvent = "ShowTestEvent";
         public const string ModelOnClickEvent = "ModelOnClickEvent";
+        public const string RefreshImportantAlarm = "RefreshImportantAlarm";
 
     }
 }
