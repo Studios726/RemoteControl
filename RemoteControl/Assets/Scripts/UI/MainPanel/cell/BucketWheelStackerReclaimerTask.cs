@@ -29,6 +29,9 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public Button endleftPileSubBtn;
     public InputField pileMaterHeightText;
     public InputField pileMaterStepText;
+    public InputField pilePitchAngleText;//最大俯仰角度
+    public Button pilePitchAngleAddBtn;//最大俯仰角度
+    public Button pilePitchAngleSubBtn;//最大俯仰角度
     public Button pileMaterStepAddBtn;
     public Button pileMaterStepSubBtn;
     public ButtonCell pileResetTaskBtn;
@@ -54,6 +57,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         PileInputFieldValueRange(endLeftPileMaterText, 12, 90,90,"RIGHT_BORDER_SP_1");
         PileInputFieldValueRange(pileMaterHeightText, 0, 15,10,"STACK_HIGH_SET_1");
         PileInputFieldValueRange(pileMaterStepText, 0, 3,0.7f,"DC_REV_1");
+        PileInputFieldValueRange(pilePitchAngleText, 0, 360,0f,"STACK_LUFFMAX_1");
         AddOnClickListener(pileResetTaskBtn,(() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
@@ -146,6 +150,14 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         startleftPileSubBtn.onClick.AddListener((() =>
         {
             GameDataManager.Instance.SendServerCommandByName("LEFT_BORDER_DES_1",0);
+        }));
+        pilePitchAngleAddBtn.onClick.AddListener((() =>
+        {
+            GameDataManager.Instance.SendServerCommandByName("LUFF_MAX_INC_1",0);
+        }));
+        pilePitchAngleSubBtn.onClick.AddListener((() =>
+        {
+            GameDataManager.Instance.SendServerCommandByName("LUFF_MAX_DES_1",0);
         }));
         endleftPileAddBtn.onClick.AddListener((() =>
         {
@@ -249,6 +261,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             endLeftPileMaterText.SetTextByFocused(systemVariables.SR1_Stack_RightBorder_SP.ToString());
             pileMaterHeightText.SetTextByFocused(systemVariables.SR1_Stack_HighSet.ToString());
             pileMaterStepText.SetTextByFocused(systemVariables.SR1_Stack_DcRevSize.ToString());
+            pilePitchAngleText.SetTextByFocused(systemVariables.SR1_Stack_LuffMax.ToString());
         }
         
         PileAutoMaxToggle.SetSystemState(systemVariables.SR1_AutoBorder_Enable,true);

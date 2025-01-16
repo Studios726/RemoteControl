@@ -476,6 +476,7 @@ namespace ShenYangRemoteSystem.Subclass
         public bool SR1_Stack_Runing { get; set; }
         public bool SR1_StackPiont_FS_Mode{ get; set; }
         public bool SR1_Pos_Runing_Finish{ get; set;}
+         public float SR1_Stack_LuffMax { get; set; }
 
 
 
