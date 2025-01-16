@@ -51,6 +51,7 @@
     <Compile Include="Assets\Scripts\UI\StatusParameterPanel\cell\AngleCurrentValueItem.cs" />
     <Compile Include="Assets\Scripts\UI\StatusParameterPanel\cell\status_3\AntiCollisionDeviceParameterSetting.cs" />
     <Compile Include="Assets\Scripts\UI\Mechanism\UIConst.cs" />
+    <Compile Include="Assets\Scripts\UI\MainPanel\cell\ImportantAlarmTips.cs" />
     <Compile Include="Assets\Scripts\Utility\ObjectPool\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\UI\StatusParameterPanel\cell\status_2\VibratorMotorItem.cs" />
     <Compile Include="Assets\Scripts\Data\ThreeD\data\Status\MP_Status_List.cs" />
@@ -173,8 +174,10 @@
     <Compile Include="Assets\Scripts\Model\MachineMove.cs" />
     <Compile Include="Assets\Scripts\UI\MainPanel\MainPanelCtr.cs" />
     <Compile Include="Assets\Scripts\UI\ConfirmTaskPanel\ConfirmTaskPanelCtr.cs" />
+    <Compile Include="Assets\Scripts\AlarmDataManager.cs" />
     <Compile Include="Assets\Scripts\Network\TaskVariables.cs" />
     <Compile Include="Assets\Scripts\UI\StatusParameterPanel\PileTakeMaterThirdSysStateParams.cs" />
+    <Compile Include="Assets\Scripts\CamCtrl.cs" />
     <Compile Include="Assets\Scripts\UI\MainPanel\cell\BucketWheelCtrMoveBase.cs" />
     <Compile Include="Assets\Scripts\UI\LoginPanel\LoginPanelView.cs" />
     <Compile Include="Assets\Scripts\Data\ThreeD\data\SendAllData.cs" />
