@@ -63,7 +63,7 @@ public class ImportantAlarmTips : MonoBehaviour
             {
                 count++;
                 Text.color = Text.color != Color.red ? Color.red : Color.yellow;
-                if (count>3)
+                if (count>2)
                 {
                     index++;
                     if (index>=ImportantAlarmMessageList.Count)
