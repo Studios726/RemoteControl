@@ -224,8 +224,8 @@ namespace RemoteControl
 
             Debug.Log("----------------------Success " + connectEventArgs.type);
             InsertHistoryWarningMc(des, true);
-            GameDataManager.Instance.RemoveWarningDesDict(connectEventArgs.type.ToString());
-            GameDataManager.Instance.RemoveWarningDesDict(connectEventArgs.type.ToString()+"_2");
+            AlarmDataManager.Instance.RemoveWarningDesDict(connectEventArgs.type.ToString());
+            AlarmDataManager.Instance.RemoveWarningDesDict(connectEventArgs.type.ToString()+"_2");
         }
 
         public void ConnectionFail(object o, EventArgs eventArgs)
@@ -268,8 +268,8 @@ namespace RemoteControl
             Debug.Log("----------------------Fail " + connectEventArgs.type);
             if (isInsert == true)
             {
-                GameDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString(),des,Machine.BucketWheelStackerReclaimer,false,"",false,"",false);
-                GameDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString()+"_2",des,Machine.BucketWheel,false,"",false,"",false);
+                AlarmDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString(),des,Machine.BucketWheelStackerReclaimer,false,"",false,"",false);
+                AlarmDataManager.Instance.AddOrUpdateWarningDesDict(connectEventArgs.type.ToString()+"_2",des,Machine.BucketWheel,false,"",false,"",false);
                 InsertHistoryWarningMc(des, true);
             }
         }

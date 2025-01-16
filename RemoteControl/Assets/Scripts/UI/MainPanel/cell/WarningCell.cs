@@ -51,7 +51,7 @@ public class WarningCell : MonoBehaviour
         });
         isConfirmToggle.onValueChanged.AddListener((arg0 =>
         {
-            GameDataManager.Instance.ChangeWarningDesDict(data.Key,arg0,data.ConfirmTime);
+            AlarmDataManager.Instance.ChangeWarningDesDict(data.Key,arg0,data.ConfirmTime);
         }));
     }
 

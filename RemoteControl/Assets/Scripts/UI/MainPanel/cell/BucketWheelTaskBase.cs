@@ -274,8 +274,8 @@ public class BucketWheelTaskBase : PanelBase
         }));
         confirmWarningBtn.onClick.AddListener((() =>
         {
-             GameDataManager.Instance.UpdateWarningConfirmTime(machine);
-             GameDataManager.Instance.UpdatePlcWarningRecordData();
+             AlarmDataManager.Instance.UpdateWarningConfirmTime(machine);
+             AlarmDataManager.Instance.UpdatePlcWarningRecordData();
         }));
         quantityOpenToggle.onValueChanged.AddListener(((bool isOn) =>
         {

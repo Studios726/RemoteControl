@@ -63,9 +63,9 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
             try
             {
                 List<WarningCellData> datas = new List<WarningCellData>();
-                if (GameDataManager.Instance.WarningCellDataDict.Count > 0)
+                if (AlarmDataManager.Instance.WarningCellDataDict.Count > 0)
                 {
-                    foreach (var keyCellData in GameDataManager.Instance.WarningCellDataDict)
+                    foreach (var keyCellData in AlarmDataManager.Instance.WarningCellDataDict)
                     {
                         if (keyCellData.Value.Machine == Machine.BucketWheelStackerReclaimer)
                         {
@@ -112,9 +112,9 @@ public class MainPanelCtr : UIPresenter<MainPanelView>
             try
             {
                 List<WarningCellData> datas = new List<WarningCellData>();
-                if (GameDataManager.Instance.WarningCellDataDict.Count > 0)
+                if (AlarmDataManager.Instance.WarningCellDataDict.Count > 0)
                 {
-                    foreach (var keyCellData in GameDataManager.Instance.WarningCellDataDict)
+                    foreach (var keyCellData in AlarmDataManager.Instance.WarningCellDataDict)
                     {
                         if (keyCellData.Value.Machine == Machine.BucketWheel)
                         {
