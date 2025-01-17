@@ -305,7 +305,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// </summary>
     public ButtonCell stepBack;
     public InputField stepInputField;
-    public bool isStepInput;
+    private bool isStepInput;
     public Timer StepInputTimer;
     /// <summary>
     /// 升压电磁阀
@@ -353,8 +353,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
 
     private ButtonCell curCarRotMode;
     public Machine machine;
-    public Color normalColor = new Color(1, 1, 1, 0.6f);
-    public Color runColor = new Color(1, 0, 0.1803922f, 1);
+    private Color normalColor = new Color(1, 1, 1, 0.6f);
+    private Color runColor = new Color(1, 0, 0.1803922f, 1);
     private string pos1;
     private string pos2;
     /// <summary>

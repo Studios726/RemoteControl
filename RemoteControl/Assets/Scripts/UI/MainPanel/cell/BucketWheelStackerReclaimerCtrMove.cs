@@ -10,13 +10,17 @@ using Utility;
 public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
 {
     /// <summary>
-    /// 当次取料量
+    /// 当次堆料量
     /// </summary>
     public Text thisPileMater;
     /// <summary>
-    /// 当天取料量
+    /// 当天堆料量
     /// </summary>
     public Text dayPileMater;
+    /// <summary>
+    /// 料堆高度
+    /// </summary>
+    public Text pileMaterialHeigh;
     /// <summary>
     /// d堆料重置
     /// </summary>
@@ -83,6 +87,7 @@ public class BucketWheelStackerReclaimerCtrMove : BucketWheelCtrMoveBase
         base.UpdateData(data);
         pileMaterTakeBtn.SetSystemState(data.SR1_BeltStack_Swicth,true,false); 
         
+        SetText(pileMaterialHeigh, data.SR1_Stack_Fhigh.ToString("F2"), TextType.Meter);
         FlowMeter_data flowMeterData=GameDataManager.Instance.GetFlowMeterData(machine);
         if (flowMeterData != null)//更新流量
         {

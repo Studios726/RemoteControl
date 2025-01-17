@@ -134,7 +134,7 @@ public class BucketWheelStateBase : MonoBehaviour
     public RunStateTip runTip;
     public ImportantAlarmTips alarmTips;
     
-    public float pastTime = 0;
+    private float pastTime = 0;
     public Machine machine;
 
     private void Start()

@@ -58,7 +58,7 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell takeMaterStopBtn;
     public ButtonCell takeMaterReversingBtn;
     public ButtonCell takeMaterEndBtn;
-    public ButtonCell curTaskButtonCell;
+    private ButtonCell curTaskButtonCell;
     public Machine machine;
     private Timer reversingTimer;
     private Timer scramStopTimer;
