@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using MySql.Data.MySqlClient;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TaskParmsSetting : MonoBehaviour
@@ -27,18 +28,45 @@ public class TaskParmsSetting : MonoBehaviour
    /// 斗轮机取料时沿着轨道的工作范围每取一层左右缩减的距离（沿着轨道方向的取料范围缩减）
    /// </summary>
    public TaskParmItem FetchHorizontalRangeSub;
+   /// <summary>
+   /// 左侧臂上雷达
+   /// </summary>
+   public RadarParmItem LeftRadarPos;
+   /// <summary>
+   /// 右侧臂上雷达
+   /// </summary>
+   public RadarParmItem RightRadarPos;
 
    public Machine Machine;
-   public void Start()
+   private string machineName;
+   private Timer Timer;
+   public void Awake()
    {
       HeapDis.InitName(ConstStr.DATA_TASK_CONFIG_HEAPDOS,$"定点堆的距离（堆料间隔）",Machine);
       FetchPileDepth.InitName(ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH,"取料分层高度",Machine);
       FetchVerticalRangeAdd.InitName(ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD,"左右范围增加的长度",Machine);
       FetchHorizontalRangeSub.InitName(ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB,"沿着轨道方向的取料范围缩减",Machine);
+      LeftRadarPos.InitName(ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT,Machine);
+      RightRadarPos.InitName(ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT,Machine);
+      machineName = Machine == Machine.BucketWheelStackerReclaimer ? "堆取料机" : "取料机";
    }
 
    private void OnEnable()
    {
+      if (Timer==null)
+      {
+         Timer=Timer.Register(1, true, true, (() =>
+         {
+            LeftRadarPos.SetTextValue(GameDataManager.Instance.GetBucketLidarDisByMachine(machineName,0));
+            RightRadarPos.SetTextValue(GameDataManager.Instance.GetBucketLidarDisByMachine(machineName,1));
+            
+         }));
+      }
+      if (Timer.IsPaused)
+      {
+         Timer?.Resume();
+      }
+      
       DataSet dataSet=DataManager.Instance.GetTaskConfigMcData(Machine);
       if (dataSet!=null)
       {
@@ -50,7 +78,14 @@ public class TaskParmsSetting : MonoBehaviour
            
             FetchVerticalRangeAdd.SetCurValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString()));
             FetchHorizontalRangeSub.SetCurValue( float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString()));
+            LeftRadarPos.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT].ToString()));
+            RightRadarPos.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString()));
          }
       }
+   }
+
+   private void OnDisable()
+   {
+      Timer?.Pause();
    }
 }

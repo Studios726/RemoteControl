@@ -587,6 +587,8 @@ public class CommonTaskParameters
     /// 斗轮机取料时沿着轨道的工作范围每取一层左右缩减的距离（沿着轨道方向的取料范围缩减）
     /// </summary>
     public float FetchHorizontalRangeSub{ get; set; }
+    public float BucketLidarDisLeft{ get; set; }
+    public float BucketLidarDisRight{ get; set; }
 }
 public class TaskRange
 {

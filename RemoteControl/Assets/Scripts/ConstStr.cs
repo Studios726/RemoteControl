@@ -119,6 +119,8 @@ public static class ConstStr
     public const string DATA_TASK_CONFIG_FETCHPILEDEPTH = "fetch_pile_depth";
     public const string DATA_TASK_CONFIG_FETCHVERTICALRANGEADD = "fetch_vertical_range_add";
     public const string DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB = "fetch_horizontal_range_sub";
+    public const string DATA_TASK_CONFIG_REVERSALSETLEFT = "reversal_set_left";
+    public const string DATA_TASK_CONFIG_REVERSALSETRIGHT = "reversal_set_right";
     public const string DATA_TASK_CONFIG_CREATOR = "creator";
     public const string DATA_TASK_CONFIG_CREATE_DATE = "create_date";
     #endregion

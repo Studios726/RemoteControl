@@ -355,11 +355,14 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 commonTaskParameters.MoveModel = int.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_MOVEMODEL].ToString());
                 commonTaskParameters.FetchPileDepth =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString());
-                ;
                 commonTaskParameters.FetchVerticalRangeAdd =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString());
                 commonTaskParameters.FetchHorizontalRangeSub =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
+                commonTaskParameters.BucketLidarDisLeft =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT].ToString());
+                commonTaskParameters.BucketLidarDisRight =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString());
             }
         }
         return commonTaskParameters;

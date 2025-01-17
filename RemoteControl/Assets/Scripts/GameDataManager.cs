@@ -72,7 +72,7 @@ public class GameDataManager : Singleton<GameDataManager>
     public List<FlowMeter_data> flowMeterDataList = new List<FlowMeter_data>();
     public bool IsCanPop;
     public bool IsCanPopTakeMater;
-    
+    public BucketLidarDis[] BucketLidarDisList;
     public SystemVariables SystemVariables
     {
         get => _systemVariables;
@@ -605,7 +605,27 @@ public class GameDataManager : Singleton<GameDataManager>
             SystemCommand command = JsonMgr.DeSerialize<SystemCommand>(json);
             cursendDataReportAndDem = command.SendAllData.DEM_DATA;
         }));
-        SetScaReportAndDem(cursendDataReportAndDem);
+       
+        if (cursendDataReportAndDem==null)
+        {
+            Debug.Log($"获取三维数据 cursendDataReportAndDem is null");
+            return;
+        }
+        if (cursendDataReportAndDem.code==0||cursendDataReportAndDem.code==0)
+        {
+            SetScaReportAndDem(cursendDataReportAndDem);
+        }else if (cursendDataReportAndDem.code==2)
+        {
+            cursendDataReportAndDem.bucketLidarDisList[0].Dis = 8;
+            cursendDataReportAndDem.bucketLidarDisList[1].Dis = 10;
+            BucketLidarDisList = cursendDataReportAndDem.bucketLidarDisList;
+            // Debug.LogError($">>>>>{cursendDataReportAndDem.bucketLidarDisList[0].Dis}");
+        }
+        else
+        {
+            Debug.Log($"获取三维数据 code: {cursendDataReportAndDem.code}");
+        }
+     
     }
 
     public async Task SpawnCoalModel(Transform parent, Material material, SendDataReportAndDEM sendDataReportAndDem,
@@ -867,7 +887,27 @@ public class GameDataManager : Singleton<GameDataManager>
             MySqlHelper.ExecuteSql(@sql);
         }
     }
+    /// <summary>
+    /// 获取雷达距离
+    /// </summary>
+    /// <param name="machine">堆取料机   取料机</param>
+    /// <param name="LidarPlace">0 左 1右   取料机</param>
+    /// <returns></returns>
+    public string GetBucketLidarDisByMachine(string machine,int LidarPlace)
+    {
+        if (BucketLidarDisList!=null&&BucketLidarDisList.Length>0)
+        {
+            for (int i = 0; i < BucketLidarDisList.Length; i++)
+            {
+                if (BucketLidarDisList[i].BucketName==machine&&BucketLidarDisList[i].LidarPlace==LidarPlace)
+                {
+                    return BucketLidarDisList[i].Dis.ToString("F2");
+                }
+            }
+        }
 
+        return "0";
+    }
     public void DeleteThreeMonthData() //
     {
         if (curAccountInfo == null || curAccountInfo.isAdmin == false)
