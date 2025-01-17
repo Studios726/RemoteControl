@@ -274,6 +274,8 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         pileMaterEndBtn.SetSystemState(systemVariables.SR1_Stack_Runing==false,true);
         pileMaterReversingBtn.SetSystemState(systemVariables.SR1_Change_Direct,true);
         ForcedPositioning.SetSystemState(systemVariables.SR1_Pos_Runing_Finish,true);
+        FixedAngle.SetSystemState(systemVariables.SR1_StackPiont_FS_Mode,true);
+        MaterialJudgment.SetSystemState(systemVariables.SR1_StackPiont_FS_Mode==false,true);
     }
     //堆料目前使用plc命令 和取料区分开
     public void SendPileMaterCommandByRc(OperationType operationType)

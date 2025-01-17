@@ -26,6 +26,8 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell RightAngleToggle;
     public ButtonCell ObliqueAngleToggle;
     public InputField AngleEntryText;
+    public ButtonCell EntryModeClose;
+    public ButtonCell EntryModeOpen;
     /// <summary>
     /// 左转
     /// </summary>
@@ -182,6 +184,8 @@ public class BucketWheelTaskBase : PanelBase
         resetTaskBtn.SetSystemState(taskCommand.ResetState==1,true);
         confirmTurnBtn.SetSystemState(taskCommand.TurnConfirmState==1,true);
         PositionConfirmBtn.SetSystemState(taskCommand.PositionConfirmState==1,true);
+        EntryModeOpen.SetSystemState(taskCommand.IsUseAngleEntryValue==1,true);
+        EntryModeClose.SetSystemState(taskCommand.IsUseAngleEntryValue==0,true);
         if (taskCommand.AllData.OperationCommandList[2] == 1)
         {
             if (reversingTimer != null)
@@ -285,6 +289,16 @@ public class BucketWheelTaskBase : PanelBase
                 new ConfirmPanelArgs("是否结束自动作业？", GameDataManager.Instance.GetMachineName(machine),null, () =>    SendTaskCommand(OperationType.END)));
           
         }));
+        AddOnClickListener(EntryModeOpen,(() =>
+        {
+            EntryModeOpen.SetSystemState(true,true);
+            EntryModeClose.SetSystemState(false,true);
+        }));
+        AddOnClickListener(EntryModeClose,(() =>
+        {
+            EntryModeOpen.SetSystemState(false,true);
+            EntryModeClose.SetSystemState(true,true);
+        }));
         confirmWarningBtn.onClick.AddListener((() =>
         {
              AlarmDataManager.Instance.UpdateWarningConfirmTime(machine);
@@ -358,7 +372,7 @@ public class BucketWheelTaskBase : PanelBase
         InputFieldValueRange(takeMaterStep, 0.1f, 3,0.7f);
         InputFieldValueRange(takeMaterNum, 0, 99999,0);
         InputFieldValueRange(layerHigh, 0, 10,0);
-        InputFieldValueRange(AngleEntryText, 0, 120,2.2f);
+        InputFieldValueRange(AngleEntryText, 0, 120,1);
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 
@@ -490,6 +504,7 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.PileMateHigh = 0;
             AllData allData = new AllData();
             taskCommand.AllData = allData;
+            taskCommand.IsUseAngleEntryValue=EntryModeOpen.red.activeSelf?1:0;
         }else if (operationType == OperationType.TurnConfirm )
         {
             taskCommand.Command_Type = 3;
@@ -544,6 +559,8 @@ public class BucketWheelTaskBase : PanelBase
 
         AutoMaxToggle.SetSystemState(false, true);
         SemiAutoToggle.SetSystemState(true, true);
+        EntryModeOpen.SetSystemState(false, true);
+        EntryModeClose.SetSystemState(true, true);
         // RightAngleToggle.SetSystemState(false, true);
         // ObliqueAngleToggle.SetSystemState(true, true);
         

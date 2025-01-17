@@ -521,6 +521,8 @@ public class TaskCommand
     //自动模式
     public AutoMode AutoMode{ get; set;}
     public AngleEntryMode AngleEntryMode{ get; set; }
+    //自动模式下使用 0关闭 1打开
+    public int IsUseAngleEntryValue{ get; set; }
     public float AngleEntryValue{ get; set; }
     //启动0 暂停1 换向2 结束3,边界确认 6
     public OperationType OperationCommand { get; set; }
@@ -587,7 +589,13 @@ public class CommonTaskParameters
     /// 斗轮机取料时沿着轨道的工作范围每取一层左右缩减的距离（沿着轨道方向的取料范围缩减）
     /// </summary>
     public float FetchHorizontalRangeSub{ get; set; }
+    /// <summary>
+    /// 左侧设定
+    /// </summary>
     public float BucketLidarDisLeft{ get; set; }
+    /// <summary>
+    /// 右侧设定
+    /// </summary>
     public float BucketLidarDisRight{ get; set; }
 }
 public class TaskRange
