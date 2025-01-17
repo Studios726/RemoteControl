@@ -28,6 +28,7 @@ public class BucketWheelTaskBase : PanelBase
     public InputField AngleEntryText;
     public ButtonCell EntryModeClose;
     public ButtonCell EntryModeOpen;
+    public GameObject entryModeGo;
     /// <summary>
     /// 左转
     /// </summary>
@@ -170,6 +171,7 @@ public class BucketWheelTaskBase : PanelBase
             rightToggle.SetSystemState(true,true);
         }
         AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
+        entryModeGo.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
         SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
         confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
         PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.AUTOMAX);
@@ -333,6 +335,7 @@ public class BucketWheelTaskBase : PanelBase
         {
             AutoMaxToggle.SetSystemState(true,true);
             SemiAutoToggle.SetSystemState(false,true);
+            entryModeGo.SetActive(true);
             confirmTurnBtn.gameObject.SetActive(false);
             PositionConfirmBtn.gameObject.SetActive(true);
         } ));
@@ -340,6 +343,7 @@ public class BucketWheelTaskBase : PanelBase
         {
             AutoMaxToggle.SetSystemState(false,true);
             SemiAutoToggle.SetSystemState(true,true);
+            entryModeGo.SetActive(false);
             confirmTurnBtn.gameObject.SetActive(true);
             PositionConfirmBtn.gameObject.SetActive(false);
         } ));
@@ -558,6 +562,7 @@ public class BucketWheelTaskBase : PanelBase
         curTaskButtonCell?.SetSelectState(false);
 
         AutoMaxToggle.SetSystemState(false, true);
+        entryModeGo.SetActive(false);
         SemiAutoToggle.SetSystemState(true, true);
         EntryModeOpen.SetSystemState(false, true);
         EntryModeClose.SetSystemState(true, true);
