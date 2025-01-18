@@ -3403,7 +3403,7 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                         Machine.BucketWheelStackerReclaimer);
                     RemoveWarningDesDict(nameof(newSystemVariables.PowerReelCableOverLooseAlarm));
                 }
-
+                
                 if (newSystemVariables.PowerReelCableOverTightAlarm == true &&
                     _systemVariables.PowerReelCableOverTightAlarm == false)
                 {
@@ -4417,6 +4417,45 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                         Machine.BucketWheelStackerReclaimer);
                     RemoveWarningDesDict(nameof(newSystemVariables.Slew_Current_Pause_Slew));
                 }
+                
+                if (newSystemVariables.RotaryLeftTurnForbiddenLimit == true &&
+                    _systemVariables.RotaryLeftTurnForbiddenLimit == false)
+                {
+                    // 回转左转防撞限位
+                    DataManager.Instance.InsertHistoryWarningMc("回转-左转防撞限位", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryLeftTurnForbiddenLimit),
+                        "回转-左转防撞限位",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.RotaryLeftTurnForbiddenLimit == false &&
+                         _systemVariables.RotaryLeftTurnForbiddenLimit == true)
+                {
+                    //回转左转防撞限位解除
+                    DataManager.Instance.InsertHistoryWarningMc("回转-左转防撞限位解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.RotaryLeftTurnForbiddenLimit));
+                }
+                
+                if (newSystemVariables.CableRollerContactorAuxiliaryContactFault == true &&
+                    _systemVariables.CableRollerContactorAuxiliaryContactFault == false)
+                {
+                    // 电缆卷筒接触器辅助触点故障
+                    DataManager.Instance.InsertHistoryWarningMc("电缆卷筒接触器辅助触点故障", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.CableRollerContactorAuxiliaryContactFault),
+                        "电缆卷筒接触器辅助触点故障",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.CableRollerContactorAuxiliaryContactFault == false &&
+                         _systemVariables.CableRollerContactorAuxiliaryContactFault == true)
+                {
+                    //回转左转防撞限位解除
+                    DataManager.Instance.InsertHistoryWarningMc("电缆卷筒接触器辅助触点故障解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.CableRollerContactorAuxiliaryContactFault));
+                }
+                
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>取料机报错信息<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
                 //取料机
@@ -8742,6 +8781,44 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     DataManager.Instance.InsertHistoryWarningMc("回转电流过大暂停回转解除", GetUserName(),
                         Machine.BucketWheel);
                     RemoveWarningDesDict(nameof(newSystemVariables.Slew_Current_Pause_Slew_2));
+                }
+                
+                if (newSystemVariables.RotaryLeftTurnForbiddenLimit_2  == true &&
+                    _systemVariables.RotaryLeftTurnForbiddenLimit_2  == false)
+                {
+                    // 回转左转防撞限位
+                    DataManager.Instance.InsertHistoryWarningMc("回转-左转防撞限位", GetUserName(),
+                        Machine.BucketWheel);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryLeftTurnForbiddenLimit_2 ),
+                        "回转-左转防撞限位",
+                        Machine.BucketWheel, false, "");
+                }
+                else if (newSystemVariables.RotaryLeftTurnForbiddenLimit_2  == false &&
+                         _systemVariables.RotaryLeftTurnForbiddenLimit_2  == true)
+                {
+                    //悬臂胶带故障解除
+                    DataManager.Instance.InsertHistoryWarningMc("回转-左转防撞限位解除", GetUserName(),
+                        Machine.BucketWheel);
+                    RemoveWarningDesDict(nameof(newSystemVariables.RotaryLeftTurnForbiddenLimit_2));
+                }
+                
+                if (newSystemVariables.CableRollerContactorAuxiliaryContactFault_2 == true &&
+                    _systemVariables.CableRollerContactorAuxiliaryContactFault_2 == false)
+                {
+                    // 电缆卷筒接触器辅助触点故障
+                    DataManager.Instance.InsertHistoryWarningMc("电缆卷筒接触器辅助触点故障", GetUserName(),
+                        Machine.BucketWheel);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.CableRollerContactorAuxiliaryContactFault_2),
+                        "电缆卷筒接触器辅助触点故障",
+                        Machine.BucketWheel, false, "");
+                }
+                else if (newSystemVariables.CableRollerContactorAuxiliaryContactFault_2 == false &&
+                         _systemVariables.CableRollerContactorAuxiliaryContactFault_2 == true)
+                {
+                    //回转左转防撞限位解除
+                    DataManager.Instance.InsertHistoryWarningMc("电缆卷筒接触器辅助触点故障解除", GetUserName(),
+                        Machine.BucketWheel);
+                    RemoveWarningDesDict(nameof(newSystemVariables.CableRollerContactorAuxiliaryContactFault_2));
                 }
             }
 

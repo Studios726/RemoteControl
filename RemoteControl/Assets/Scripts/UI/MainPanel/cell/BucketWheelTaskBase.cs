@@ -369,6 +369,7 @@ public class BucketWheelTaskBase : PanelBase
             InputFieldValueRange(stopTakeMaterText, 153, 330,330);
         }
         PositionConfirmBtn.gameObject.SetActive(false);
+        entryModeGo.SetActive(false);
         InputFieldValueRange(leftTakeMaterText, 12, 90,12);
         InputFieldValueRange(rightTakeMaterText, 12, 90,90);
         InputFieldValueRange(timeHourText, 0, 99,0);
