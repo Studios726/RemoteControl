@@ -611,13 +611,11 @@ public class GameDataManager : Singleton<GameDataManager>
             Debug.Log($"获取三维数据 cursendDataReportAndDem is null");
             return;
         }
-        if (cursendDataReportAndDem.code==0||cursendDataReportAndDem.code==0)
+        if (cursendDataReportAndDem.code==0||cursendDataReportAndDem.code==1)
         {
             SetScaReportAndDem(cursendDataReportAndDem);
         }else if (cursendDataReportAndDem.code==2)
         {
-            cursendDataReportAndDem.bucketLidarDisList[0].Dis = 8;
-            cursendDataReportAndDem.bucketLidarDisList[1].Dis = 10;
             BucketLidarDisList = cursendDataReportAndDem.bucketLidarDisList;
             // Debug.LogError($">>>>>{cursendDataReportAndDem.bucketLidarDisList[0].Dis}");
         }
