@@ -31,6 +31,15 @@ public struct BucketWheelData
     /// 润滑油泵流量开关
     /// </summary>
     public bool isLubricatingOilPumpFlowSwitch;
+    
+    /// <summary>
+    ///斗轮集中润滑低油位报警
+    /// </summary>
+    public bool isBucketWheelCentralizedLubricationLowOilLevelAlarm;
+    /// <summary>
+    /// 斗轮集中润滑堵油报警
+    /// </summary>
+    public bool isBucketWheelCentralizedLubricationOilBlockageAlarm;
 }
 /// <summary>
 /// 斗轮
@@ -61,6 +70,14 @@ public class BucketWheelItem : StatusParmItemBase<BucketWheelData>
     /// 润滑油泵流量开关
     /// </summary>
     public ToggleDIY LubricatingOilPumpFlowSwitch;
+    /// <summary>
+    ///斗轮集中润滑低油位报警
+    /// </summary>
+    public ToggleDIY BucketWheelCentralizedLubricationLowOilLevelAlarm;
+    /// <summary>
+    /// 斗轮集中润滑堵油报警
+    /// </summary>
+    public ToggleDIY BucketWheelCentralizedLubricationOilBlockageAlarm;
     public override void UpdateData(BucketWheelData data,bool isConnect=false)
     {
         SetToggleState(MainCircuitBreaker,data.isMainCircuitBreaker,false,isConnect);
@@ -69,5 +86,7 @@ public class BucketWheelItem : StatusParmItemBase<BucketWheelData>
         SetToggleState(MotorOverload, data.isMotorOverload,true,isConnect);
         SetToggleState(BucketWheelOverTorqueSwitch, data.isBucketWheelOverTorqueSwitch,true,isConnect);
         SetToggleState(LubricatingOilPumpFlowSwitch, data.isLubricatingOilPumpFlowSwitch,false,isConnect);
+        SetToggleState(BucketWheelCentralizedLubricationLowOilLevelAlarm,data.isBucketWheelCentralizedLubricationLowOilLevelAlarm,true,isConnect);
+        SetToggleState(BucketWheelCentralizedLubricationOilBlockageAlarm,data.isBucketWheelCentralizedLubricationOilBlockageAlarm);
     }
 }

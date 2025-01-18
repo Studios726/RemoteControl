@@ -49,6 +49,12 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             GetToggleState(data.BucketWheelOverTorqueSwitch, data.BucketWheelOverTorqueSwitch_2);
         bucketWheelData.isLubricatingOilPumpFlowSwitch =
             GetToggleState(data.BucketWheelForcedLubricationFlowSwitch, data.BucketWheelForcedLubricationFlowSwitch_2);
+        bucketWheelData.isBucketWheelCentralizedLubricationLowOilLevelAlarm = GetToggleState(
+            data.BucketWheelCentralizedLubricationLowOilLevelAlarm,
+            data.BucketWheelCentralizedLubricationLowOilLevelAlarm_2);
+        bucketWheelData.isBucketWheelCentralizedLubricationOilBlockageAlarm = GetToggleState(
+            data.BucketWheelCentralizedLubricationOilBlockageAlarm,
+            data.BucketWheelCentralizedLubricationOilBlockageAlarm_2);
         BucketWheelItem?.UpdateData(bucketWheelData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
 
