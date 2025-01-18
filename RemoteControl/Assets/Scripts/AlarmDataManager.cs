@@ -3407,17 +3407,17 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                 if (newSystemVariables.PowerReelCableOverTightAlarm == true &&
                     _systemVariables.PowerReelCableOverTightAlarm == false)
                 {
-                    // 动力卷筒电缆过张力报警
-                    DataManager.Instance.InsertHistoryWarningMc("动力卷筒电缆过张力报警", GetUserName(),
+                    //动力卷筒电缆过紧报警报警
+                    DataManager.Instance.InsertHistoryWarningMc("动力卷筒电缆过紧报警", GetUserName(),
                         Machine.BucketWheelStackerReclaimer);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.PowerReelCableOverTightAlarm), "动力卷筒电缆过张力报警",
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.PowerReelCableOverTightAlarm), "动力卷筒电缆过紧报警",
                         Machine.BucketWheelStackerReclaimer, false, "");
                 }
                 else if (newSystemVariables.PowerReelCableOverTightAlarm == false &&
                          _systemVariables.PowerReelCableOverTightAlarm == true)
                 {
-                    // 动力卷筒电缆过张力报警解除
-                    DataManager.Instance.InsertHistoryWarningMc("动力卷筒电缆过张力报警解除", GetUserName(),
+                    // 动力卷筒电缆过紧报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("动力卷筒电缆过紧报警解除", GetUserName(),
                         Machine.BucketWheelStackerReclaimer);
                     RemoveWarningDesDict(nameof(newSystemVariables.PowerReelCableOverTightAlarm));
                 }
@@ -7662,17 +7662,17 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                 if (newSystemVariables.PowerReelCableOverTightAlarm_2 == true &&
                     _systemVariables.PowerReelCableOverTightAlarm_2 == false)
                 {
-                    // 动力卷筒电缆过张力报警
-                    DataManager.Instance.InsertHistoryWarningMc("动力卷筒电缆过张力报警", GetUserName(),
+                    // 动力卷筒电缆过紧报警
+                    DataManager.Instance.InsertHistoryWarningMc("动力卷筒电缆过紧报警", GetUserName(),
                         Machine.BucketWheel);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.PowerReelCableOverTightAlarm_2), "动力卷筒电缆过张力报警",
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.PowerReelCableOverTightAlarm_2), "动力卷筒电缆过紧报警",
                         Machine.BucketWheel, false, "");
                 }
                 else if (newSystemVariables.PowerReelCableOverTightAlarm_2 == false &&
                          _systemVariables.PowerReelCableOverTightAlarm_2 == true)
                 {
-                    // 动力卷筒电缆过张力报警解除
-                    DataManager.Instance.InsertHistoryWarningMc("动力卷筒电缆过张力报警解除", GetUserName(),
+                    // 动力卷筒电缆过紧报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("动力卷筒电缆过紧报警解除", GetUserName(),
                         Machine.BucketWheel);
                     RemoveWarningDesDict(nameof(newSystemVariables.PowerReelCableOverTightAlarm_2));
                 }
