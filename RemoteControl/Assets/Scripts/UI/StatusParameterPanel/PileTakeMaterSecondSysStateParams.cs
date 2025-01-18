@@ -268,6 +268,10 @@ public class PileTakeMaterSecondSysStateParams : MonoBehaviour
             GetToggleState(data.RollerFullDiskSwitch, data.RollerFullDiskSwitch_2);
         cableWindingDeviceData.isPowerReelRunning =
             GetToggleState(data.PowerRollerRunning, data.PowerRollerRunning_2);
+        cableWindingDeviceData.isPowerReelCableOverLooseAlarm = GetToggleState(data.PowerReelCableOverLooseAlarm,
+            data.PowerReelCableOverLooseAlarm_2);
+        cableWindingDeviceData.isPowerReelCableOverTightAlarm = GetToggleState(data.PowerReelCableOverTightAlarm,
+            data.PowerReelCableOverTightAlarm_2);
         CableWindingDeviceItem?.UpdateData(cableWindingDeviceData,GameDataManager.Instance.GameMain.connectionRC.isConnect);
     }
 

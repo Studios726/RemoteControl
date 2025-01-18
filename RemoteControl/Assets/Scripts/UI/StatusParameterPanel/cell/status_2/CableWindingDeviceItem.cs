@@ -45,6 +45,14 @@ public struct CableWindingDeviceData
     /// 动力卷筒运行
     /// </summary>
     public bool isPowerReelRunning;
+    /// <summary>
+    /// 动力卷筒电缆过松报警
+    /// </summary>
+    public bool isPowerReelCableOverLooseAlarm;
+    /// <summary>
+    /// 动力卷筒电缆过紧报警
+    /// </summary>
+    public bool isPowerReelCableOverTightAlarm;
 }
 /// <summary>
 /// 电缆卷筒
@@ -91,6 +99,14 @@ public class CableWindingDeviceItem : StatusParmItemBase<CableWindingDeviceData>
     /// 动力卷筒运行
     /// </summary>
     public ToggleDIY PowerReelRunning;
+    /// <summary>
+    /// 动力卷筒电缆过松报警
+    /// </summary>
+    public ToggleDIY PowerReelCableOverLooseAlarm;
+    /// <summary>
+    /// 动力卷筒电缆过紧报警
+    /// </summary>
+    public ToggleDIY PowerReelCableOverTightAlarm;
     public override void UpdateData(CableWindingDeviceData data,bool isConnect=false)
     {
         SetToggleState(MainCircuitBreaker, data.isMainCircuitBreaker,false,isConnect);
@@ -103,5 +119,7 @@ public class CableWindingDeviceItem : StatusParmItemBase<CableWindingDeviceData>
         SetToggleState(ReelOverLooseLimit2, data.isReelOverLooseLimit2,true,isConnect);
         SetToggleState(ReelFullDiskSwitch, data.isReelFullDiskSwitch,true,isConnect);
         SetToggleState(PowerReelRunning, data.isPowerReelRunning,false,isConnect);
+        SetToggleState(PowerReelCableOverLooseAlarm,data.isPowerReelCableOverLooseAlarm,true,isConnect);
+        SetToggleState(PowerReelCableOverTightAlarm,data.isPowerReelCableOverTightAlarm,true,isConnect);
     }
 }
