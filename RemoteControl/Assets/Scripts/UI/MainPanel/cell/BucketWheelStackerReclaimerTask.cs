@@ -47,9 +47,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public ButtonCell MaterialJudgment;//料位判定
     private Timer refreshTextTimer;
     private bool isRefreshText;
+    private bool isfrist;
     public override void Start()
     {
         base.Start();
+        isfrist = true;
         isRefreshText = true;
         PileInputFieldValueRange(startPileMaterText, 0, 260,0,"START_POS_1");
         PileInputFieldValueRange(endPileMaterText, 0, 260,260,"END_POS_1");
@@ -253,6 +255,20 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public void RefreshPileData(object o, EventArgs eventArgs)
     {
         SystemVariables systemVariables = GameDataManager.Instance.SystemVariables;
+        if (isfrist==true)
+        {
+            isfrist = false;
+            if (systemVariables.SR1_Stack_Runing)
+            {
+                takePanel.SetActive(false);
+                pilePanel.SetActive(true);
+            }
+            else
+            {
+                takePanel.SetActive(true);
+                pilePanel.SetActive(false);
+            }
+        }
         if (isRefreshText)
         {
             startPileMaterText.SetTextByFocused(systemVariables.SR1_Stack_Start_Pos.ToString());
