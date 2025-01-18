@@ -611,7 +611,7 @@ public class GameDataManager : Singleton<GameDataManager>
             Debug.Log($"获取三维数据 cursendDataReportAndDem is null");
             return;
         }
-        if (cursendDataReportAndDem.code==0||cursendDataReportAndDem.code==1)
+        if (cursendDataReportAndDem.code==1)
         {
             SetScaReportAndDem(cursendDataReportAndDem);
         }else if (cursendDataReportAndDem.code==2)

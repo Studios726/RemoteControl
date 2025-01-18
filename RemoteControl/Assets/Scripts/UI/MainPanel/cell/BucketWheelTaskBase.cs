@@ -171,7 +171,7 @@ public class BucketWheelTaskBase : PanelBase
             rightToggle.SetSystemState(true,true);
         }
         AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
-        entryModeGo.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
+        entryModeGo.SetActive(taskCommand.AutoMode==AutoMode.AUTOMAX);
         SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
         confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
         PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.AUTOMAX);
