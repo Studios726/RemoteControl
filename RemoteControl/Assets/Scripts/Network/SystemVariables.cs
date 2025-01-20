@@ -2806,6 +2806,10 @@ namespace ShenYangRemoteSystem.Subclass
         public float SR1_STACK_POS_DC { get; set; }
         public float SR1_STACK_POS_SLEW { get; set; }
         public float SR1_STACK_POS_LUFF { get; set; }
+        public short SR1_SEL_WorkArea { get; set; }
+        public float SR1_Stack_LeftBorder { get; set; }
+        public float SR1_Stack_RightBorder { get; set; }
+        public bool SR1_3D_Unusable { get; set; }
 
 
 

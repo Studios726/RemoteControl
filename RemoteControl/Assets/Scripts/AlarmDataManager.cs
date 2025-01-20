@@ -4456,6 +4456,25 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     RemoveWarningDesDict(nameof(newSystemVariables.CableRollerContactorAuxiliaryContactFault));
                 }
                 
+                if (newSystemVariables.SR1_3D_Unusable == true &&
+                    _systemVariables.SR1_3D_Unusable == false)
+                {
+                    // 三维正在盘煤，自动堆料功能不可用
+                    DataManager.Instance.InsertHistoryWarningMc("三维正在盘煤，自动堆料功能不可用", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SR1_3D_Unusable),
+                        "三维正在盘煤，自动堆料功能不可用",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.SR1_3D_Unusable == false &&
+                         _systemVariables.SR1_3D_Unusable == true)
+                {
+                    //三维正在盘煤，自动堆料功能不可用解除
+                    DataManager.Instance.InsertHistoryWarningMc("三维正在盘煤，自动堆料功能不可用解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SR1_3D_Unusable));
+                }
+                
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>取料机报错信息<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
                 //取料机
