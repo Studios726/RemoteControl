@@ -87,6 +87,7 @@ public static class ConstStr
     public const string DATA_TASK_TURN_MODE = "turn_mode";
     public const string DATA_TASK_PILE_MODE = "pile_mode";
     public const string DATA_TASK_IS_CONTINUED = "is_task_continued";
+    public const string DATA_TASK_PILE_MATE_HEIGH = "pile_mate_heigh";
     #endregion
     #region history_cartelectricity
     public const string DATA_HISTORY_CARTELECTRICITY_NAME = "name";
@@ -152,7 +153,7 @@ public static class ConstStr
     public const float InitBucketWheelHeigh = 7.48f;
     public const string BucketWheelStackerReclaimerName = "1#斗轮堆取料机";
     public const string BucketWheelName = "2#斗轮取料机";
-    public const string Version = "v0.3.20250118-m";
+    public const string Version = "v0.1.20250120-m";
 }
 
 public enum Machine

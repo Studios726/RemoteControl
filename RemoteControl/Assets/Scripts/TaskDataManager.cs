@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using MySql.Data.MySqlClient;
 using RemoteControl.Event;
+using ShenYangRemoteSystem.Subclass;
 using Unity.VisualScripting;
 using Debug = UnityEngine.Debug;
 
@@ -369,7 +370,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
     }
 
     private Dictionary<string, TaskData> nearestTaskDataDic = new Dictionary<string, TaskData>();
-
+    private Dictionary<string, TaskData> nearestPileTaskDataDic = new Dictionary<string, TaskData>();
     private Dictionary<string, TaskData> curTaskDic = new Dictionary<string, TaskData>();
 
     // private Dictionary<string,List<int>>
@@ -623,7 +624,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
     {
         if (nearestTaskDataDic.Count <=0)
         {
-            DataSet dataSet = DataManager.Instance.GetHistoryTaskMcByLimit(5);
+            DataSet dataSet = DataManager.Instance.GetHistoryTaskMcByTaskType(TaskType.TAKEMATER,5);
             if (dataSet!=null)
             {
                 DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
@@ -846,16 +847,63 @@ public class TaskDataManager : Singleton<TaskDataManager>
     /// 添加堆料任务
     /// </summary>
     /// <param name="isPile"></param>
-    public void AddPileMaterialTask(bool isPile)
+    public void AddPileMaterialTask(bool isPile,SystemVariables systemVariables )
     {
-        Debug.LogError("开始堆料任务");
+        Debug.Log("开始堆料任务");
+        GetNearestPileTaskDataDic();
+        string taskId = DateTime.Now.ToString("yyMMddHHmmss");
+        if (nearestPileTaskDataDic.ContainsKey(taskId)==false)
+        {
+            nearestPileTaskDataDic.Add(taskId,
+                new TaskData(taskId, "0"));
+        }
+        AutoMode autoMode=systemVariables.SR1_AutoBorder_Enable?AutoMode.AUTOMAX:AutoMode.SemiAuto;
+        string pileMode = systemVariables.SR1_SlewStack_SEL ? "回转堆料" : "定点堆料";
+        DataManager.Instance.InsertHistoryTaskPileMc(DateTime.Now, Machine.BucketWheelStackerReclaimer, TaskType.PILEMATER,systemVariables.SR1_Stack_Start_Pos,systemVariables.SR1_Stack_End_Pos,systemVariables.SR1_Stack_LeftBorder_SP,systemVariables.SR1_Stack_RightBorder_SP,systemVariables.SR1_Stack_DcRevSize,taskId,systemVariables.SR1_Stack_HighSet,autoMode,pileMode);
     }
     /// <summary>
     /// 更新堆料任务
     /// </summary>
     /// <param name="isEnd"></param>
-    public void UpdatePileTakeMaterialTask(bool isEnd)
+    public void UpdatePileTakeMaterialTask(bool isEnd, SystemVariables systemVariables)
     {
-        Debug.LogError("结束堆料任务");
+        if (isEnd)
+        {
+            GetNearestPileTaskDataDic();
+            Debug.Log("结束堆料任务");
+            foreach (var data in nearestPileTaskDataDic)
+            {
+                if (data.Value.State != TaskStatus.Completed)
+                {
+                    data.Value.State = TaskStatus.Completed;
+                    DataManager.Instance.UpdateHistoryTaskPileMc(data.Value.TaskID,
+                        ((int)TaskStatus.Completed).ToString(),
+                        DateTime.Now);
+                }
+            }
+        }
+    }
+    
+    public void GetNearestPileTaskDataDic()
+    {
+        if (nearestPileTaskDataDic.Count <=0)
+        {
+            DataSet dataSet = DataManager.Instance.GetHistoryTaskMcByTaskType(TaskType.PILEMATER,5);
+            if (dataSet!=null)
+            {
+                DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
+                for (int i = 0; i < dataRowCollection.Count; i++)
+                {
+                    string taskID = dataRowCollection[i][ConstStr.DATA_TASK_ID].ToString();
+                    if (nearestPileTaskDataDic.ContainsKey(taskID) == false)
+                    {
+                        nearestPileTaskDataDic.Add(taskID,
+                            new TaskData(taskID, dataRowCollection[i][ConstStr.DATA_TASK_STATE].ToString(),
+                                (TaskStatus)Enum.Parse(typeof(TaskStatus),
+                                    dataRowCollection[i][ConstStr.DATA_TASK_STATE2].ToString())));
+                    }
+                }
+            }
+        }
     }
 }

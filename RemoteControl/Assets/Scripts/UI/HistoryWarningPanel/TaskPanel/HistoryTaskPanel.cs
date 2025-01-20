@@ -152,7 +152,7 @@ public class HistoryTaskPanel : MonoBehaviour
             data.leftRightSelect = dataRowCollection[i][ConstStr.DATA_SIDE_SELECTION].ToString()=="LEFT"?"左":"右";
             data.takePileLength = dataRowCollection[i][ConstStr.DATA_STEP_LENGTH].ToString();
             data.takeStepLength= dataRowCollection[i][ConstStr.DATA_STEP_LENGTH].ToString();
-            data.pileHigh=dataRowCollection[i][ConstStr.DATA_TASK_TAKE_MATE_HIGH].ToString();
+            data.pileHigh=dataRowCollection[i][ConstStr.DATA_TASK_PILE_MATE_HEIGH].ToString();
             data.layerHigh = dataRowCollection[i][ConstStr.DATA_TASK_LAYER_HIGH].ToString();
             data.timeAt = dataRowCollection[i][ConstStr.DATA_TIMEDAT].ToString();
             data.quantity = dataRowCollection[i][ConstStr.DATA_QUANTITY].ToString();
@@ -187,7 +187,7 @@ public class HistoryTaskPanel : MonoBehaviour
             data.leftRightSelect = mySqlDataReader[ConstStr.DATA_SIDE_SELECTION].ToString()=="LEFT"?"左":"右";
             data.takePileLength = mySqlDataReader[ConstStr.DATA_STEP_LENGTH].ToString();
             data.takeStepLength= mySqlDataReader[ConstStr.DATA_STEP_LENGTH].ToString();
-            data.pileHigh=mySqlDataReader[ConstStr.DATA_TASK_TAKE_MATE_HIGH].ToString();
+            data.pileHigh=mySqlDataReader[ConstStr.DATA_TASK_PILE_MATE_HEIGH].ToString();
             data.layerHigh = mySqlDataReader[ConstStr.DATA_TASK_LAYER_HIGH].ToString();
             data.timeAt = mySqlDataReader[ConstStr.DATA_TIMEDAT].ToString();
             data.quantity = mySqlDataReader[ConstStr.DATA_QUANTITY].ToString();

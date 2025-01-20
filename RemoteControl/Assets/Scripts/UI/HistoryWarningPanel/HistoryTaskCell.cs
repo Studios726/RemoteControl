@@ -45,14 +45,23 @@ public class HistoryTaskCell : MonoBehaviour
         timeText.text = historyTaskData.time;
         machineText.text = historyTaskData.machine;
         taskTypeText.text = historyTaskData.taskType;
+        if (historyTaskData.taskType=="取料")
+        {
+            pileHighText.text ="/";
+            angleExpansionFactor.text = historyTaskData.angleExpansionFactor;
+            leftRightSelectText.text = historyTaskData.leftRightSelect;
+        }
+        else
+        {
+            pileHighText.text = historyTaskData.pileHigh;
+            angleExpansionFactor.text ="/";
+            leftRightSelectText.text = "/";
+        }
         thingRangeText.text = historyTaskData.thingRange;
-        leftRightSelectText.text = historyTaskData.leftRightSelect;
         leftRightRangeText.text = historyTaskData.leftRightRange;
         takeStepLengthText.text = historyTaskData.takeStepLength;
         // takePileLengthText.text = historyTaskData.takePileLength;
-        pileHighText.text = historyTaskData.pileHigh;
         autoModeText.text = historyTaskData.autoMode;
-        angleExpansionFactor.text = historyTaskData.angleExpansionFactor;
         operationNameText.text = historyTaskData.operationName;
         stateText.text =historyTaskData.state=="1"? "进行中":"完成";
         

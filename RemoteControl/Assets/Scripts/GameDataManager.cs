@@ -155,6 +155,7 @@ public class GameDataManager : Singleton<GameDataManager>
             }
         }
 
+        PileTaskPlc(systemVariables);
         AlarmDataManager.Instance.RecordWarning(systemVariables, _systemVariables);
         _systemVariables = systemVariables;
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
@@ -905,6 +906,25 @@ public class GameDataManager : Singleton<GameDataManager>
         }
 
         return "0";
+    }
+
+    /// <summary>
+    /// 堆料任务处理
+    /// </summary>
+    /// <param name="newSystemVariables"></param>
+    public void PileTaskPlc(SystemVariables newSystemVariables)
+    {
+        //判断堆料任务状态
+        if (_systemVariables!=null)
+        {
+            if (_systemVariables.SR1_Stack_Runing==false&&newSystemVariables.SR1_Stack_Runing)
+            {
+                TaskDataManager.Instance.AddPileMaterialTask(true,newSystemVariables);
+            }else if (_systemVariables.SR1_Stack_Runing&&newSystemVariables.SR1_Stack_Runing==false)
+            {
+                TaskDataManager.Instance.UpdatePileTakeMaterialTask(true,newSystemVariables);
+            }
+        }
     }
     public void DeleteThreeMonthData() //
     {
