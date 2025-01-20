@@ -20,6 +20,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     
     public ButtonCell PileRightAngleToggle;
     public ButtonCell PileObliqueAngleToggle;
+
+    public GameObject pilePosGo;
+    public ButtonCell PilePosStartToggle;
+    public ButtonCell PilePosStopToggle;
     
     public InputField startLeftPileMaterText;
     public Button startleftPileAddBtn;
@@ -93,9 +97,10 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         }));
         AddOnClickListener(pileMaterReversingBtn,(() =>
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否换向自动作业？", GameDataManager.Instance.GetMachineName(machine),null, () =>    SendPileMaterCommandByRc(OperationType.REVERSING)));
-        
+            // UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+            //     new ConfirmPanelArgs("是否换向自动作业？", GameDataManager.Instance.GetMachineName(machine),null, () =>    SendPileMaterCommandByRc(OperationType.REVERSING)));
+            SendPileMaterCommandByRc(OperationType.REVERSING);
+
         }));
         // AddOnClickListener(leftPileMaterToggle,(() =>
         // {
@@ -147,50 +152,60 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         // } ));
         startleftPileAddBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("LEFT_BORDER_INC_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.LEFT_BORDER_INC_1.ToString(),0);
         }));
         startleftPileSubBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("LEFT_BORDER_DES_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.LEFT_BORDER_DES_1.ToString(),0);
         }));
         pilePitchAngleAddBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("LUFF_MAX_INC_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.LUFF_MAX_INC_1.ToString(),0);
         }));
         pilePitchAngleSubBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("LUFF_MAX_DES_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.LUFF_MAX_DES_1.ToString(),0);
         }));
         endleftPileAddBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("RIGHT_BORDER_INC_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.RIGHT_BORDER_INC_1.ToString(),0);
         }));
         endleftPileSubBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("RIGHT_BORDER_DES_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.RIGHT_BORDER_DES_1.ToString(),0);
         }));
         pileMaterStepAddBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("DC_REV_INC_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.DC_REV_INC_1.ToString(),0);
         }));
         pileMaterStepSubBtn.onClick.AddListener((() =>
         {
-            GameDataManager.Instance.SendServerCommandByName("DC_REV_DES_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.DC_REV_DES_1.ToString(),0);
         }));
         AddOnClickListener(ForcedPositioning,(() =>
         {
             ForcedPositioning.SetSelectState(true);
-            GameDataManager.Instance.SendServerCommandByName("POS_FROCE_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.POS_FROCE_1.ToString(),0);
         }));
         AddOnClickListener(FixedAngle,(() =>
         {
             FixedAngle.SetSelectState(true);
-            GameDataManager.Instance.SendServerCommandByName("STACK_PIONT_MODE_1",1);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.STACK_PIONT_MODE_1.ToString(),1);
         }));
         AddOnClickListener(MaterialJudgment,(() =>
         {
             MaterialJudgment.SetSelectState(true);
-            GameDataManager.Instance.SendServerCommandByName("STACK_PIONT_MODE_1",0);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.STACK_PIONT_MODE_1.ToString(),0);
+        }));
+        AddOnClickListener(PilePosStartToggle,(() =>
+        {
+            PilePosStartToggle.SetSelectState(true);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.POS_STACK_START_1.ToString(),0);
+        }));
+        AddOnClickListener(PilePosStopToggle,(() =>
+        {
+            PilePosStopToggle.SetSelectState(true);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.POS_STACK_STOP_1.ToString(),0);
         }));
         takePanel.SetActive(false);
         cutModeBtn.onClick.AddListener((() =>
@@ -284,7 +299,9 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         PileSemiAutoToggle.SetSystemState(systemVariables.SR1_AutoBorder_Enable==false,true);
         rotaryHeap.SetSystemState(systemVariables.SR1_SlewStack_SEL,true);
         fixedPointHeap.SetSystemState(systemVariables.SR1_PointStack_SEL,true);
-        
+        pilePosGo.SetActive(systemVariables.SR1_AutoBorder_Enable);
+        PilePosStartToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_START_SB,true);
+        PilePosStopToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_STOP_SB, true);
         pileMaterStartBtn.SetSystemState(systemVariables.SR1_Stack_Runing,true);
         pileMaterStopBtn.SetSystemState(systemVariables.SR1_Stop_Runing,true);
         pileMaterEndBtn.SetSystemState(systemVariables.SR1_Stack_Runing==false,true);
@@ -292,6 +309,8 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         ForcedPositioning.SetSystemState(systemVariables.SR1_Pos_Runing_Finish,true);
         FixedAngle.SetSystemState(systemVariables.SR1_StackPiont_FS_Mode,true);
         MaterialJudgment.SetSystemState(systemVariables.SR1_StackPiont_FS_Mode==false,true);
+        PilePosStartToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_START_SB,true);
+        PilePosStopToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_STOP_SB, true);
     }
     //堆料目前使用plc命令 和取料区分开
     public void SendPileMaterCommandByRc(OperationType operationType)

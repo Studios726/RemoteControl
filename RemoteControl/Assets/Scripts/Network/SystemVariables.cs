@@ -2797,7 +2797,15 @@ namespace ShenYangRemoteSystem.Subclass
         public float SR1_EncodeSLEW_PresetValue_SCADA_2 { get; set; }
         public bool SR1_Encode_DC_Adjust_SB_2 { get; set; }
         public bool SR1_Encode_SLEW_Adjust_SB_2 { get; set; }
-
+        //1.20
+        public bool SR1_SOFT_POS_STACK_START_SB { get; set; }
+        public bool SR1_SOFT_POS_STACK_STOP_SB { get; set; }
+        public bool SR1_SOFT_POS_STACK_RUNNING { get; set; }
+        public bool SR1_SOFT_POS_STACK_Finish { get; set; }
+        public bool SR1_SOFT_POS_STACK_STARTING { get; set; }
+        public float SR1_STACK_POS_DC { get; set; }
+        public float SR1_STACK_POS_SLEW { get; set; }
+        public float SR1_STACK_POS_LUFF { get; set; }
 
 
 

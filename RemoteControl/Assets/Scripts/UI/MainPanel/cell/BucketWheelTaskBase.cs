@@ -281,9 +281,10 @@ public class BucketWheelTaskBase : PanelBase
         }));
         AddOnClickListener(takeMaterReversingBtn, (() =>
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否换向自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () =>   SendTaskCommand(OperationType.REVERSING)));
-          
+            // UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+            //     new ConfirmPanelArgs("是否换向自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () =>   SendTaskCommand(OperationType.REVERSING)));
+            SendTaskCommand(OperationType.REVERSING);
+
         }));
         AddOnClickListener(takeMaterEndBtn, (() =>
         {

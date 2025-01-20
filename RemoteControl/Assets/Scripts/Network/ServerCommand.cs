@@ -431,7 +431,7 @@ public enum COMMAND_NAME
     /// <summary>
     /// 强制定位
     /// </summary>
-    POS_FROCE,
+    POS_FROCE_1,
     /// <summary>
     /// 料行程起点设定
     /// </summary>
@@ -455,31 +455,54 @@ public enum COMMAND_NAME
     /// <summary>
     /// 堆料右边界递增操作按钮
     /// </summary>
-    RIGHT_BORDER_INC,
+    RIGHT_BORDER_INC_1,
     /// <summary>
     /// 堆料右边界递减操作按钮
     /// </summary>
-    RIGHT_BORDER_DES,
+    RIGHT_BORDER_DES_1,
     /// <summary>
     /// 堆料左边界递增操作按钮
     /// </summary>
-    LEFT_BORDER_INC,
+    LEFT_BORDER_INC_1,
     /// <summary>
     /// 堆料左边界递减操作按钮
     /// </summary>
-    LEFT_BORDER_DES,
+    LEFT_BORDER_DES_1,
     /// <summary>
     /// 堆料退车步长递增操作按钮
     /// </summary>
-    DC_REV_INC,
+    DC_REV_INC_1,
     /// <summary>
     /// 堆料退车步长递减操作按钮
     /// </summary>
-    DC_REV_DES,
+    DC_REV_DES_1,
     /// <summary>
     /// 堆料步长设定
     /// </summary>
-    DC_REV
+    DC_REV,
+    /// <summary>
+    /// 自动堆料定位开始按钮
+    /// </summary>
+    POS_STACK_START_1,
+    /// <summary>
+    /// 自动堆料定位停止按钮
+    /// </summary>
+    POS_STACK_STOP_1,
+    /// <summary>
+    /// 定点堆料回转固定角度模式（1：固定角度；0：料位判定）
+    /// </summary>
+    STACK_PIONT_MODE_1,
+    /// <summary>
+    ///  堆料最大高度递增操作
+    /// </summary>
+    LUFF_MAX_INC_1,
+    /// <summary>
+    /// 堆料最大高度递减操作
+    /// </summary>
+    LUFF_MAX_DES_1,
+    
+    
+    
     
     
     
