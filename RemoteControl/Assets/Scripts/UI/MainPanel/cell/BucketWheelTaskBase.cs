@@ -70,6 +70,7 @@ public class BucketWheelTaskBase : PanelBase
     public ScrollRect taskLogScrollRect;
     private int RefrashLogCount = 0;
     private bool isRefrash;
+    private bool isInitData;
     public virtual void Start()
     {
         Init();
@@ -157,11 +158,16 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateData(TaskCommand taskCommand)
     {
-
-        if (taskCommand.AllData.isRefreshUI==0)
+        if (taskCommand.AllData.isRefreshUI==0&&isInitData)
         {
             return;
         }
+
+        if (taskCommand.AllData.OperationCommandList[3]==1&&takeMaterEndBtn.red.activeSelf)
+        {
+            return;
+        }
+        isInitData = true;
         startTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.startValue.ToString());
         stopTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.endValue.ToString());
         if (taskCommand.SideSelection == "LEFT")
@@ -298,13 +304,28 @@ public class BucketWheelTaskBase : PanelBase
         }));
         AddOnClickListener(EntryModeOpen,(() =>
         {
-            EntryModeOpen.SetSystemState(true,true);
-            EntryModeClose.SetSystemState(false,true);
+            if (takeMaterEndBtn.red.activeSelf)
+            {
+                EntryModeOpen.SetSystemState(true,true);
+                EntryModeClose.SetSystemState(false,true);
+            }else
+            {
+                EntryModeOpen.SetSelectState(true);
+            }
+      
         }));
         AddOnClickListener(EntryModeClose,(() =>
         {
-            EntryModeOpen.SetSystemState(false,true);
-            EntryModeClose.SetSystemState(true,true);
+            if (takeMaterEndBtn.red.activeSelf)
+            {
+                EntryModeOpen.SetSystemState(false,true);
+                EntryModeClose.SetSystemState(true,true);
+            }
+            else
+            {
+                EntryModeClose.SetSelectState(true);
+            }
+          
         }));
         confirmWarningBtn.onClick.AddListener((() =>
         {
@@ -327,41 +348,90 @@ public class BucketWheelTaskBase : PanelBase
         })));
         AddOnClickListener(leftToggle,(() =>
         {
-            leftToggle.SetSystemState(true,true);
-            rightToggle.SetSystemState(false,true);
+            if (takeMaterEndBtn.red.activeSelf)
+            {
+                leftToggle.SetSystemState(true,true);
+                rightToggle.SetSystemState(false,true);
+            }
+            else
+            {
+                leftToggle.SetSelectState(true);
+            }
+         
         } ));
         AddOnClickListener(rightToggle,(() =>
         {
-            rightToggle.SetSystemState(true,true);
-            leftToggle.SetSystemState(false,true);
+            if (takeMaterEndBtn.red.activeSelf)
+            {
+                rightToggle.SetSystemState(true,true);
+                leftToggle.SetSystemState(false,true);
+            }
+            else
+            {
+                rightToggle.SetSelectState(true);
+            }
+        
         } ));
         
         AddOnClickListener(AutoMaxToggle,(() =>
         {
-            AutoMaxToggle.SetSystemState(true,true);
-            SemiAutoToggle.SetSystemState(false,true);
-            entryModeGo.SetActive(true);
-            confirmTurnBtn.gameObject.SetActive(false);
-            PositionConfirmBtn.gameObject.SetActive(true);
+            if (takeMaterEndBtn.red.activeSelf)
+            {
+                AutoMaxToggle.SetSystemState(true,true);
+                SemiAutoToggle.SetSystemState(false,true);
+                entryModeGo.SetActive(true);
+                confirmTurnBtn.gameObject.SetActive(false);
+                PositionConfirmBtn.gameObject.SetActive(true);
+            }
+            else
+            {
+                AutoMaxToggle.SetSelectState(true);
+            }
+           
         } ));
         AddOnClickListener(SemiAutoToggle,(() =>
         {
-            AutoMaxToggle.SetSystemState(false,true);
-            SemiAutoToggle.SetSystemState(true,true);
-            entryModeGo.SetActive(false);
-            confirmTurnBtn.gameObject.SetActive(true);
-            PositionConfirmBtn.gameObject.SetActive(false);
+            if (takeMaterEndBtn.red.activeSelf)
+            {
+                AutoMaxToggle.SetSystemState(false,true);
+                SemiAutoToggle.SetSystemState(true,true);
+                entryModeGo.SetActive(false);
+                confirmTurnBtn.gameObject.SetActive(true);
+                PositionConfirmBtn.gameObject.SetActive(false);
+            }
+            else
+            {
+                SemiAutoToggle.SetSelectState(true);
+            }
+           
         } ));
         
         AddOnClickListener(leftTurnToggle,(() =>
         {
-            leftTurnToggle.SetSystemState(true,true);
-            rightTurnToggle.SetSystemState(false,true);
+            if (takeMaterEndBtn.red.activeSelf)
+            {
+                leftTurnToggle.SetSystemState(true,true);
+                rightTurnToggle.SetSystemState(false,true);
+            }
+            else
+            {
+                leftTurnToggle.SetSelectState(true);
+            }
+         
         } ));
         AddOnClickListener(rightTurnToggle,(() =>
         {
-            leftTurnToggle.SetSystemState(false,true);
-            rightTurnToggle.SetSystemState(true,true);
+            
+            if (takeMaterEndBtn.red.activeSelf)
+            {
+                leftTurnToggle.SetSystemState(false,true);
+                rightTurnToggle.SetSystemState(true,true);
+            }
+            else
+            {
+                rightTurnToggle.SetSelectState(true);
+            }
+          
         } ));
         if (machine==Machine.BucketWheelStackerReclaimer)
         {

@@ -49,9 +49,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public ButtonCell ForcedPositioning;
     public ButtonCell FixedAngle;//固定角度
     public ButtonCell MaterialJudgment;//料位判定
+    public Text pileNextPos;
     private Timer refreshTextTimer;
     private bool isRefreshText;
     private bool isfrist;
+  
     public override void Start()
     {
         base.Start();
@@ -313,6 +315,9 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         PilePosStopToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_STOP_SB, true);
         leftPileMaterToggle.SetSystemState(systemVariables.SR1_SEL_WorkArea.ToString()=="2", true);
         rightPileMaterToggle.SetSystemState(systemVariables.SR1_SEL_WorkArea.ToString()=="1",true);
+        pileNextPos.gameObject.SetActive(systemVariables.SR1_AutoBorder_Enable);
+        pileNextPos.text =
+            $"大车位置:{systemVariables.SR1_STACK_POS_DC.ToString("F2")} 回转:{systemVariables.SR1_STACK_POS_SLEW.ToString("F2")} 俯仰:{systemVariables.SR1_STACK_POS_LUFF.ToString("F2")}";
     }
     //堆料目前使用plc命令 和取料区分开
     public void SendPileMaterCommandByRc(OperationType operationType)

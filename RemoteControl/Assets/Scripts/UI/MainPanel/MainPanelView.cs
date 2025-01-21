@@ -47,6 +47,16 @@ public class MainPanelView : UIView<MainPanelCtr>
         _bucketWheelCtrMove2.hideBtn.onClick.AddListener(ActiveHideBtnCtr2);
         updateModelBtn.onClick.AddListener(() =>
         {
+            // SystemVariables systemVariables = new SystemVariables();
+            // systemVariables.SR1_Stack_Start_Pos = 1;
+            // systemVariables.SR1_Stack_End_Pos = 2;
+            // systemVariables.SR1_Stack_LeftBorder_SP = 3;
+            // systemVariables.SR1_Stack_RightBorder_SP = 4;
+            // systemVariables.SR1_Stack_HighSet = 5;
+            // systemVariables.SR1_Stack_DcRevSize = 6;
+            // systemVariables.SR1_Stack_LuffMax = 7;
+            // systemVariables.SR1_SEL_WorkArea = 1;
+            // TaskDataManager.Instance.AddPileMaterialTask(true,systemVariables);
             // GameDataManager.Instance.PileTakeMaterPop(TaskType.None, 5, Machine.BucketWheel);
             // GameDataManager.Instance.PileTakeMaterPop(TaskType.PILEMATER, 15, Machine.BucketWheel);
             // if (GameDataManager.Instance.GameMain.connectionSCA.isConnect == false)
