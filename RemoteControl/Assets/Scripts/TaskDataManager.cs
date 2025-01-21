@@ -818,11 +818,15 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     {
                         return true;
                     }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
         }
 
-        return false;
+        return true;
     }
     public int IsCanSendTaskCommond(Machine machine, TaskType taskType, OperationType operationType)
     {
