@@ -157,7 +157,11 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateData(TaskCommand taskCommand)
     {
-     
+
+        if (taskCommand.AllData.isRefreshUI==0)
+        {
+            return;
+        }
         startTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.startValue.ToString());
         stopTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.endValue.ToString());
         if (taskCommand.SideSelection == "LEFT")

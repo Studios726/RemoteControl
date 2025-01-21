@@ -500,6 +500,10 @@ public enum COMMAND_NAME
     /// 堆料最大高度递减操作
     /// </summary>
     LUFF_MAX_DES_1,
+    /// <summary>
+    /// 选择煤场区域(1:北煤场;2:南煤场)
+    /// </summary>
+    WORK_AREA_SET_1,
     
     
     
@@ -582,6 +586,8 @@ public class AllData
     public int Code {  get; set; }
     //code 触发code时间
      public string CodeTime{ get; set; }
+     //是否同步刷新UI 0不刷新 1刷新
+     public int isRefreshUI{ get; set; }
      //任务结束时间
      public string TaskEndTime{ get; set; }
     // [回转，俯仰，前进]

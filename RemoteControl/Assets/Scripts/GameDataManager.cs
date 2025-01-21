@@ -142,7 +142,6 @@ public class GameDataManager : Singleton<GameDataManager>
             IsCanPop = true;
             IsCanPopTakeMater = true;
         }
-
         if (systemVariables.MCString != null)
         {
             try

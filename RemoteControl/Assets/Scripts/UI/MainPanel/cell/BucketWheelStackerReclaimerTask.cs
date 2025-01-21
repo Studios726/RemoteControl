@@ -102,16 +102,16 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             SendPileMaterCommandByRc(OperationType.REVERSING);
 
         }));
-        // AddOnClickListener(leftPileMaterToggle,(() =>
-        // {
-        //     leftPileMaterToggle.SetSystemState(true,true);
-        //     rightPileMaterToggle.SetSystemState(false,true);
-        // } ));
-        // AddOnClickListener(rightPileMaterToggle,(() =>
-        // {
-        //     rightPileMaterToggle.SetSystemState(true,true);
-        //     leftPileMaterToggle.SetSystemState(false,true);
-        // } ));
+        AddOnClickListener(leftPileMaterToggle,(() =>
+        {
+            leftPileMaterToggle.SetSelectState(true);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.WORK_AREA_SET_1.ToString(),2);
+        } ));
+        AddOnClickListener(rightPileMaterToggle,(() =>
+        {
+            rightPileMaterToggle.SetSelectState(true);
+            GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.WORK_AREA_SET_1.ToString(),1);
+        } ));
         AddOnClickListener(PileAutoMaxToggle,(() =>
         {
             PileAutoMaxToggle.SetSelectState(true);
@@ -212,7 +212,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         {
             takePanel.SetActive(!takePanel.activeSelf);
             pilePanel.SetActive(!pilePanel.activeSelf);
-            EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
+            // EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
         }));
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
         EventManager.Instance.AddListener(EventName.UpdateRcData, RefreshPileData);
@@ -311,6 +311,8 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         MaterialJudgment.SetSystemState(systemVariables.SR1_StackPiont_FS_Mode==false,true);
         PilePosStartToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_START_SB,true);
         PilePosStopToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_STOP_SB, true);
+        leftPileMaterToggle.SetSystemState(systemVariables.SR1_SEL_WorkArea.ToString()=="2", true);
+        rightPileMaterToggle.SetSystemState(systemVariables.SR1_SEL_WorkArea.ToString()=="1",true);
     }
     //堆料目前使用plc命令 和取料区分开
     public void SendPileMaterCommandByRc(OperationType operationType)
