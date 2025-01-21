@@ -204,7 +204,7 @@ public partial class DataManager
        
     }
 
-    public bool InsertHistoryTaskPileMc(DateTime taskCreateTime,Machine machine,TaskType taskType,float startPileMaterialRange,float endPileMaterialRange,float leftRightStartValue,float leftRightEndValue,float stepLength,string taskId,float pileMateHeigh,AutoMode autoMode,string pileMode,string completeState="1",DateTime taskEndTime=default,string operatorSystem="MC")
+    public bool InsertHistoryTaskPileMc(DateTime taskCreateTime,Machine machine,TaskType taskType,float startPileMaterialRange,float endPileMaterialRange,float leftRightStartValue,float leftRightEndValue,float stepLength,string taskId,float pileMateHeigh,AutoMode autoMode,string pileMode,string sideSelection,string completeState="1",DateTime taskEndTime=default,string operatorSystem="MC")
     {
         if (GameDataManager.Instance.IpConfig.IsRecordData==false)
         {
@@ -214,8 +214,8 @@ public partial class DataManager
         string name = "管理员"; //GetUserNameByUserID(userId);
         if (GameDataManager.Instance.IsAdmin())
         {
-            string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_PILE_MATE_HEIGH}`,`{ConstStr.DATA_TASK_AUTO_MODE}`,`{ConstStr.DATA_TASK_STATE2}`,`{ConstStr.DATA_TASK_END_TIME}`,`{ConstStr.DATA_TASK_PILE_MODE}`,`{ConstStr.DATA_OPERATO_RSYSTEM}`) " +
-                           $"VALUES ('{taskCreateTime}','{machine}','{taskType}','{startPileMaterialRange}','{endPileMaterialRange}','{leftRightStartValue}','{leftRightEndValue}','{stepLength}','{name}','{taskId}','{pileMateHeigh}','{autoMode}','{completeState}','{taskEndTime}','{pileMode}','{operatorSystem}')";
+            string query = $"INSERT INTO {ConstStr.DATABASE_HISTORY_TASK_MC} (`{ConstStr.DATA_TASK_CREATE_TIME}`,`{ConstStr.DATA_MACHINE}`,`{ConstStr.DATA_TASK_TYPE}`,`{ConstStr.DATA_MATERIAL_RANGE_START}`,`{ConstStr.DATA_MATERIAL_RANGE_END}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_START}`,`{ConstStr.DATA_LEFT_RIGHT_RANGE_END}`,`{ConstStr.DATA_STEP_LENGTH}`,`{ConstStr.DATA_OPERATOR}`,`{ConstStr.DATA_TASK_ID}`,`{ConstStr.DATA_TASK_PILE_MATE_HEIGH}`,`{ConstStr.DATA_TASK_AUTO_MODE}`,`{ConstStr.DATA_TASK_STATE2}`,`{ConstStr.DATA_TASK_END_TIME}`,`{ConstStr.DATA_TASK_PILE_MODE}`,`{ConstStr.DATA_OPERATO_RSYSTEM}`,`{ConstStr.DATA_SIDE_SELECTION}`) " +
+                           $"VALUES ('{taskCreateTime}','{machine}','{taskType}','{startPileMaterialRange}','{endPileMaterialRange}','{leftRightStartValue}','{leftRightEndValue}','{stepLength}','{name}','{taskId}','{pileMateHeigh}','{autoMode}','{completeState}','{taskEndTime}','{pileMode}','{operatorSystem}','{sideSelection}')";
             return MySqlHelper.ExecuteSql(query) > 0; 
         }
         else

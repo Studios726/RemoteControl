@@ -859,7 +859,8 @@ public class TaskDataManager : Singleton<TaskDataManager>
         }
         AutoMode autoMode=systemVariables.SR1_AutoBorder_Enable?AutoMode.AUTOMAX:AutoMode.SemiAuto;
         string pileMode = systemVariables.SR1_SlewStack_SEL ? "回转堆料" : "定点堆料";
-        DataManager.Instance.InsertHistoryTaskPileMc(DateTime.Now, Machine.BucketWheelStackerReclaimer, TaskType.PILEMATER,systemVariables.SR1_Stack_Start_Pos,systemVariables.SR1_Stack_End_Pos,systemVariables.SR1_Stack_LeftBorder_SP,systemVariables.SR1_Stack_RightBorder_SP,systemVariables.SR1_Stack_DcRevSize,taskId,systemVariables.SR1_Stack_HighSet,autoMode,pileMode);
+        string sideSelection=systemVariables.SR1_SEL_WorkArea.ToString()=="1"?"RIGHT" : "LEFT";
+        DataManager.Instance.InsertHistoryTaskPileMc(DateTime.Now, Machine.BucketWheelStackerReclaimer, TaskType.PILEMATER,systemVariables.SR1_Stack_Start_Pos,systemVariables.SR1_Stack_End_Pos,systemVariables.SR1_Stack_LeftBorder_SP,systemVariables.SR1_Stack_RightBorder_SP,systemVariables.SR1_Stack_DcRevSize,taskId,systemVariables.SR1_Stack_HighSet,autoMode,pileMode,sideSelection);
     }
     /// <summary>
     /// 更新堆料任务

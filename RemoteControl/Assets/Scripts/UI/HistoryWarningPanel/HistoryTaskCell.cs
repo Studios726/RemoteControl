@@ -49,14 +49,14 @@ public class HistoryTaskCell : MonoBehaviour
         {
             pileHighText.text ="/";
             angleExpansionFactor.text = historyTaskData.angleExpansionFactor;
-            leftRightSelectText.text = historyTaskData.leftRightSelect;
+     
         }
         else
         {
             pileHighText.text = historyTaskData.pileHigh;
             angleExpansionFactor.text ="/";
-            leftRightSelectText.text = "/";
         }
+        leftRightSelectText.text = historyTaskData.leftRightSelect;
         thingRangeText.text = historyTaskData.thingRange;
         leftRightRangeText.text = historyTaskData.leftRightRange;
         takeStepLengthText.text = historyTaskData.takeStepLength;
