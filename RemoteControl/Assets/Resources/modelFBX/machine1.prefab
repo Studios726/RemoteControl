@@ -41736,6 +41736,7 @@ MonoBehaviour:
   rotationGo_y: {fileID: 4619709880654436007}
   currentCanvasTransform: {fileID: 7650171982693322476}
   FogfallVfx: {fileID: 4189155757898921188}
+  FogfallVfxPs: {fileID: 6223018373973969197}
   errorText: {fileID: 3217696330442256287}
   errorTextRectTransform: {fileID: 5005332510720568926}
   bgRectTransform: {fileID: 1114782397628655961}
@@ -100801,7 +100802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8214601000020700250, guid: a30e53f4afaefcd45baeac6f088b894b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -101975,6 +101976,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4619709880654436007}
     m_Modifications:
+    - target: {fileID: 1089808178073396593, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1553017806985460023, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -102044,6 +102049,11 @@ Transform:
 --- !u!1 &4189155757898921188 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7161147860049402040, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
+  m_PrefabInstance: {fileID: 6432086942901595228}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6223018373973969197 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1089808178073396593, guid: a09ca0be589906e4d99a45640e1a6390, type: 3}
   m_PrefabInstance: {fileID: 6432086942901595228}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6639994839047693879
@@ -102425,6 +102435,14 @@ PrefabInstance:
     - target: {fileID: 5280659421407139326, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280659421407139326, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5280659421407139326, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5520357633860589377, guid: b1d0f6bc7426b684e8354c183b32d772, type: 3}
       propertyPath: m_IsActive

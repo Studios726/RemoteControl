@@ -29,22 +29,27 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell EntryModeClose;
     public ButtonCell EntryModeOpen;
     public GameObject entryModeGo;
+
     /// <summary>
     /// 左转
     /// </summary>
     public ButtonCell leftTurnToggle;
+
     /// <summary>
     /// 右转
     /// </summary>
     public ButtonCell rightTurnToggle;
+
     /// <summary>
     /// 边界确认
     /// </summary>
     public ButtonCell confirmTurnBtn;
+
     /// <summary>
     /// 定位确认
     /// </summary>
     public ButtonCell PositionConfirmBtn;
+
     public InputField leftTakeMaterText;
     public InputField rightTakeMaterText;
     public InputField takeMaterStep;
@@ -71,6 +76,7 @@ public class BucketWheelTaskBase : PanelBase
     private int RefrashLogCount = 0;
     private bool isRefrash;
     private bool isInitData;
+
     public virtual void Start()
     {
         Init();
@@ -95,18 +101,19 @@ public class BucketWheelTaskBase : PanelBase
             RefrashLogCount++;
             isRefrash = true;
             StackTrace stackTrace = new StackTrace(e, true);
-          
+
             foreach (var frame in stackTrace.GetFrames())
             {
                 Debug.LogError($"Method: {frame.GetMethod().Name}, Line: {frame.GetFileLineNumber()}>>>");
             }
+
             Debug.LogError($">>>>>>>>>>>>>>>>>>>>{e.Message} {RefrashLogCount}");
         }
 
-        if (isRefrash&&RefrashLogCount<5)
+        if (isRefrash && RefrashLogCount < 5)
         {
             taskLogList.Refrash();
-            taskLogScrollRect.verticalNormalizedPosition =0.4f;
+            taskLogScrollRect.verticalNormalizedPosition = 0.4f;
             TaskDataManager.Instance.SetTaskVariables(TaskDataManager.Instance.TaskVariables);
         }
         else
@@ -116,19 +123,20 @@ public class BucketWheelTaskBase : PanelBase
 
         isRefrash = false;
     }
+
     public void UpdatePlc(SystemVariables data)
     {
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
             scramStopBtn.SetSystemState(data.System_Emergence);
             ScramStopFicker(data.System_Emergence);
-            resetBtn.SetSystemState(data.HMI_ErrReset,true);
+            resetBtn.SetSystemState(data.HMI_ErrReset, true);
         }
         else
         {
             scramStopBtn.SetSystemState(data.System_Emergence_2);
             ScramStopFicker(data.System_Emergence_2);
-            resetBtn.SetSystemState(data.HMI_ErrReset_2,true);
+            resetBtn.SetSystemState(data.HMI_ErrReset_2, true);
         }
     }
 
@@ -142,7 +150,6 @@ public class BucketWheelTaskBase : PanelBase
                 scramStopTimer = Timer.Register(1, true, true,
                     (() => { scramStopYellowBtn.SetActive(!scramStopYellowBtn.activeSelf); }));
             }
-           
         }
         else
         {
@@ -158,66 +165,80 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateData(TaskCommand taskCommand)
     {
-        if (taskCommand.AllData.isRefreshUI==0&&isInitData)
+        if (taskCommand.AllData.isRefreshUI == 0 && isInitData)
         {
             return;
         }
 
-        if (taskCommand.AllData.OperationCommandList[3]==1&&takeMaterEndBtn.red.activeSelf)
+        if (taskCommand.AllData.OperationCommandList[3] == 1 && takeMaterEndBtn.red.activeSelf)
         {
             return;
         }
+
         isInitData = true;
-        startTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.startValue.ToString());
-        stopTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.endValue.ToString());
-        if (taskCommand.SideSelection == "LEFT")
+        if (taskCommand.AllData.OperationCommandList[3] == 1)
         {
-            leftToggle.SetSystemState(true,true);
-            rightToggle.SetSystemState(false,true);
+            takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1, true);
+            takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1, true);
+            takeMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1, true);
+            takeMaterReversingBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1, true);
+            resetTaskBtn.SetSystemState(false, true);
+            PositionConfirmBtn.SetSystemState(false, true);
         }
         else
         {
-            leftToggle.SetSystemState(false,true);
-            rightToggle.SetSystemState(true,true);
-        }
-        AutoMaxToggle.SetSystemState(taskCommand.AutoMode==AutoMode.AUTOMAX,true);
-        entryModeGo.SetActive(taskCommand.AutoMode==AutoMode.AUTOMAX);
-        SemiAutoToggle.SetSystemState(taskCommand.AutoMode==AutoMode.SemiAuto,true);
-        confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.SemiAuto);
-        PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode==AutoMode.AUTOMAX);
-        AngleEntryText.SetTextByFocused(taskCommand.AngleEntryValue.ToString());
-        leftTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.LEFTTURN,true);
-        rightTurnToggle.SetSystemState(taskCommand.TurnMode==TurnMode.RIGHTTURN,true);
-        leftTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.startValue.ToString());
-        rightTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.endValue.ToString());
-        takeMaterStep.SetTextByFocused(taskCommand.StepLength.ToString());
-        takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1,true);
-        takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1,true);
-        resetTaskBtn.SetSystemState(taskCommand.ResetState==1,true);
-        confirmTurnBtn.SetSystemState(taskCommand.TurnConfirmState==1,true);
-        PositionConfirmBtn.SetSystemState(taskCommand.PositionConfirmState==1,true);
-        EntryModeOpen.SetSystemState(taskCommand.IsUseAngleEntryValue==1,true);
-        EntryModeClose.SetSystemState(taskCommand.IsUseAngleEntryValue==0,true);
-        if (taskCommand.AllData.OperationCommandList[2] == 1)
-        {
-            if (reversingTimer != null)
+            startTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.startValue.ToString());
+            stopTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.endValue.ToString());
+            if (taskCommand.SideSelection == "LEFT")
             {
-                reversingTimer?.Cancel();
+                leftToggle.SetSystemState(true, true);
+                rightToggle.SetSystemState(false, true);
+            }
+            else
+            {
+                leftToggle.SetSystemState(false, true);
+                rightToggle.SetSystemState(true, true);
             }
 
-            reversingTimer = Timer.Register(2, () =>
+            AutoMaxToggle.SetSystemState(taskCommand.AutoMode == AutoMode.AUTOMAX, true);
+            entryModeGo.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
+            SemiAutoToggle.SetSystemState(taskCommand.AutoMode == AutoMode.SemiAuto, true);
+            confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
+            PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
+            AngleEntryText.SetTextByFocused(taskCommand.AngleEntryValue.ToString());
+            leftTurnToggle.SetSystemState(taskCommand.TurnMode == TurnMode.LEFTTURN, true);
+            rightTurnToggle.SetSystemState(taskCommand.TurnMode == TurnMode.RIGHTTURN, true);
+            leftTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.startValue.ToString());
+            rightTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.endValue.ToString());
+            takeMaterStep.SetTextByFocused(taskCommand.StepLength.ToString());
+            takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1, true);
+            takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1, true);
+            resetTaskBtn.SetSystemState(taskCommand.ResetState == 1, true);
+            confirmTurnBtn.SetSystemState(taskCommand.TurnConfirmState == 1, true);
+            PositionConfirmBtn.SetSystemState(taskCommand.PositionConfirmState == 1, true);
+            EntryModeOpen.SetSystemState(taskCommand.IsUseAngleEntryValue == 1, true);
+            EntryModeClose.SetSystemState(taskCommand.IsUseAngleEntryValue == 0, true);
+            if (taskCommand.AllData.OperationCommandList[2] == 1)
             {
-                takeMaterReversingBtn.SetSystemState(false,true);
-                curTaskButtonCell?.SetSelectState(false);
-            });
-            takeMaterReversingBtn.SetSystemState(true,true);
-        }
-        else
-        {
-            takeMaterReversingBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1,true);
-        }
+                if (reversingTimer != null)
+                {
+                    reversingTimer?.Cancel();
+                }
 
-        takeMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1,true);
+                reversingTimer = Timer.Register(2, () =>
+                {
+                    takeMaterReversingBtn.SetSystemState(false, true);
+                    curTaskButtonCell?.SetSelectState(false);
+                });
+                takeMaterReversingBtn.SetSystemState(true, true);
+            }
+            else
+            {
+                takeMaterReversingBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1, true);
+            }
+
+            takeMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1, true);
+        }
     }
 
     public virtual void Init()
@@ -228,7 +249,8 @@ public class BucketWheelTaskBase : PanelBase
                 if (scramStopBtn.red.activeSelf)
                 {
                     UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                        new ConfirmPanelArgs("是否确认复位急停？",GameDataManager.Instance.GetMachineName(machine), null, () =>  SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP)));
+                        new ConfirmPanelArgs("是否确认复位急停？", GameDataManager.Instance.GetMachineName(machine), null,
+                            () => SendPlcCommand(COMMAND_NAME.EMERGENCY_STOP)));
                 }
                 else
                 {
@@ -240,35 +262,35 @@ public class BucketWheelTaskBase : PanelBase
             (() =>
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否确认复位？",GameDataManager.Instance.GetMachineName(machine), null, () => SendPlcCommand(COMMAND_NAME.ERR_RESET)));
+                    new ConfirmPanelArgs("是否确认复位？", GameDataManager.Instance.GetMachineName(machine), null,
+                        () => SendPlcCommand(COMMAND_NAME.ERR_RESET)));
             }));
-        AddOnClickListener(resetTaskBtn,(() =>
+        AddOnClickListener(resetTaskBtn, (() =>
         {
-              UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                            new ConfirmPanelArgs("是否重置自动作业参数？", GameDataManager.Instance.GetMachineName(machine),null, () => 
-                                SendTaskCommand(OperationType.RESET)));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("是否重置自动作业参数？", GameDataManager.Instance.GetMachineName(machine), null, () =>
+                    SendTaskCommand(OperationType.RESET)));
         }));
-        
+
         AddOnClickListener(confirmTurnBtn, (() =>
         {
-            
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否边界确认？",GameDataManager.Instance.GetMachineName(machine), null, () => 
+                new ConfirmPanelArgs("是否边界确认？", GameDataManager.Instance.GetMachineName(machine), null, () =>
                     SendTaskCommand(OperationType.TurnConfirm)));
         }));
-        
-        AddOnClickListener(PositionConfirmBtn,(() =>
+
+        AddOnClickListener(PositionConfirmBtn, (() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否定位确认？",GameDataManager.Instance.GetMachineName(machine), null, () => 
+                new ConfirmPanelArgs("是否定位确认？", GameDataManager.Instance.GetMachineName(machine), null, () =>
                     SendTaskCommand(OperationType.PositionConfirm)));
         }));
         AddOnClickListener(takeMaterStartBtn, (() =>
         {
-            if (leftTurnToggle.red.activeSelf==false&&rightTurnToggle.red.activeSelf==false)
+            if (leftTurnToggle.red.activeSelf == false && rightTurnToggle.red.activeSelf == false)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("请选择初始设定，稍微重试",GameDataManager.Instance.GetMachineName(machine)));
+                    new ConfirmPanelArgs("请选择初始设定，稍微重试", GameDataManager.Instance.GetMachineName(machine)));
             }
             else
             {
@@ -280,57 +302,55 @@ public class BucketWheelTaskBase : PanelBase
             if (takeMaterStopBtn.red.activeSelf)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs(takeMaterStopBtn.red.activeSelf?"是否恢复自动作业？":"是否暂停自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () => SendTaskCommand(OperationType.PAUSE)));
+                    new ConfirmPanelArgs(takeMaterStopBtn.red.activeSelf ? "是否恢复自动作业？" : "是否暂停自动作业？",
+                        GameDataManager.Instance.GetMachineName(machine), null,
+                        () => SendTaskCommand(OperationType.PAUSE)));
             }
             else
             {
                 SendTaskCommand(OperationType.PAUSE);
             }
-       
-         
         }));
         AddOnClickListener(takeMaterReversingBtn, (() =>
         {
             // UIManager.Instance.OpenUI(UIID.ConfirmPanel,
             //     new ConfirmPanelArgs("是否换向自动作业？",GameDataManager.Instance.GetMachineName(machine), null, () =>   SendTaskCommand(OperationType.REVERSING)));
             SendTaskCommand(OperationType.REVERSING);
-
         }));
         AddOnClickListener(takeMaterEndBtn, (() =>
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否结束自动作业？", GameDataManager.Instance.GetMachineName(machine),null, () =>    SendTaskCommand(OperationType.END)));
-          
+                new ConfirmPanelArgs("是否结束自动作业？", GameDataManager.Instance.GetMachineName(machine), null,
+                    () => SendTaskCommand(OperationType.END)));
         }));
-        AddOnClickListener(EntryModeOpen,(() =>
+        AddOnClickListener(EntryModeOpen, (() =>
         {
-            if (takeMaterEndBtn.red.activeSelf)
+            if (IsCanSet())
             {
-                EntryModeOpen.SetSystemState(true,true);
-                EntryModeClose.SetSystemState(false,true);
-            }else
+                EntryModeOpen.SetSystemState(true, true);
+                EntryModeClose.SetSystemState(false, true);
+            }
+            else
             {
                 EntryModeOpen.SetSelectState(true);
             }
-      
         }));
-        AddOnClickListener(EntryModeClose,(() =>
+        AddOnClickListener(EntryModeClose, (() =>
         {
-            if (takeMaterEndBtn.red.activeSelf)
+            if (IsCanSet())
             {
-                EntryModeOpen.SetSystemState(false,true);
-                EntryModeClose.SetSystemState(true,true);
+                EntryModeOpen.SetSystemState(false, true);
+                EntryModeClose.SetSystemState(true, true);
             }
             else
             {
                 EntryModeClose.SetSelectState(true);
             }
-          
         }));
         confirmWarningBtn.onClick.AddListener((() =>
         {
-             AlarmDataManager.Instance.UpdateWarningConfirmTime(machine);
-             AlarmDataManager.Instance.UpdatePlcWarningRecordData();
+            AlarmDataManager.Instance.UpdateWarningConfirmTime(machine);
+            AlarmDataManager.Instance.UpdatePlcWarningRecordData();
         }));
         quantityOpenToggle.onValueChanged.AddListener(((bool isOn) =>
         {
@@ -346,39 +366,37 @@ public class BucketWheelTaskBase : PanelBase
                 quantityCloseToggle.isOn = true;
             }
         })));
-        AddOnClickListener(leftToggle,(() =>
+        AddOnClickListener(leftToggle, (() =>
         {
-            if (takeMaterEndBtn.red.activeSelf)
+            if (IsCanSet())
             {
-                leftToggle.SetSystemState(true,true);
-                rightToggle.SetSystemState(false,true);
+                leftToggle.SetSystemState(true, true);
+                rightToggle.SetSystemState(false, true);
             }
             else
             {
                 leftToggle.SetSelectState(true);
             }
-         
-        } ));
-        AddOnClickListener(rightToggle,(() =>
+        }));
+        AddOnClickListener(rightToggle, (() =>
         {
-            if (takeMaterEndBtn.red.activeSelf)
+            if (IsCanSet())
             {
-                rightToggle.SetSystemState(true,true);
-                leftToggle.SetSystemState(false,true);
+                rightToggle.SetSystemState(true, true);
+                leftToggle.SetSystemState(false, true);
             }
             else
             {
                 rightToggle.SetSelectState(true);
             }
-        
-        } ));
-        
-        AddOnClickListener(AutoMaxToggle,(() =>
+        }));
+
+        AddOnClickListener(AutoMaxToggle, (() =>
         {
-            if (takeMaterEndBtn.red.activeSelf)
+            if (IsCanSet())
             {
-                AutoMaxToggle.SetSystemState(true,true);
-                SemiAutoToggle.SetSystemState(false,true);
+                AutoMaxToggle.SetSystemState(true, true);
+                SemiAutoToggle.SetSystemState(false, true);
                 entryModeGo.SetActive(true);
                 confirmTurnBtn.gameObject.SetActive(false);
                 PositionConfirmBtn.gameObject.SetActive(true);
@@ -387,14 +405,13 @@ public class BucketWheelTaskBase : PanelBase
             {
                 AutoMaxToggle.SetSelectState(true);
             }
-           
-        } ));
-        AddOnClickListener(SemiAutoToggle,(() =>
+        }));
+        AddOnClickListener(SemiAutoToggle, (() =>
         {
-            if (takeMaterEndBtn.red.activeSelf)
+            if (IsCanSet())
             {
-                AutoMaxToggle.SetSystemState(false,true);
-                SemiAutoToggle.SetSystemState(true,true);
+                AutoMaxToggle.SetSystemState(false, true);
+                SemiAutoToggle.SetSystemState(true, true);
                 entryModeGo.SetActive(false);
                 confirmTurnBtn.gameObject.SetActive(true);
                 PositionConfirmBtn.gameObject.SetActive(false);
@@ -403,56 +420,53 @@ public class BucketWheelTaskBase : PanelBase
             {
                 SemiAutoToggle.SetSelectState(true);
             }
-           
-        } ));
-        
-        AddOnClickListener(leftTurnToggle,(() =>
+        }));
+
+        AddOnClickListener(leftTurnToggle, (() =>
         {
-            if (takeMaterEndBtn.red.activeSelf)
+            if (IsCanSet())
             {
-                leftTurnToggle.SetSystemState(true,true);
-                rightTurnToggle.SetSystemState(false,true);
+                leftTurnToggle.SetSystemState(true, true);
+                rightTurnToggle.SetSystemState(false, true);
             }
             else
             {
                 leftTurnToggle.SetSelectState(true);
             }
-         
-        } ));
-        AddOnClickListener(rightTurnToggle,(() =>
+        }));
+        AddOnClickListener(rightTurnToggle, (() =>
         {
-            
-            if (takeMaterEndBtn.red.activeSelf)
+            if (IsCanSet())
             {
-                leftTurnToggle.SetSystemState(false,true);
-                rightTurnToggle.SetSystemState(true,true);
+                leftTurnToggle.SetSystemState(false, true);
+                rightTurnToggle.SetSystemState(true, true);
             }
             else
             {
                 rightTurnToggle.SetSelectState(true);
             }
-          
-        } ));
-        if (machine==Machine.BucketWheelStackerReclaimer)
+        }));
+        if (machine == Machine.BucketWheelStackerReclaimer)
         {
-            InputFieldValueRange(startTakeMaterText, 0, 260,0);
-            InputFieldValueRange(stopTakeMaterText, 0, 260,0);
+            InputFieldValueRange(startTakeMaterText, 0, 260, 0);
+            InputFieldValueRange(stopTakeMaterText, 0, 260, 0);
         }
         else
         {
-            InputFieldValueRange(startTakeMaterText, 153, 330,153);
-            InputFieldValueRange(stopTakeMaterText, 153, 330,330);
+            InputFieldValueRange(startTakeMaterText, 153, 330, 153);
+            InputFieldValueRange(stopTakeMaterText, 153, 330, 330);
         }
+
         PositionConfirmBtn.gameObject.SetActive(false);
         entryModeGo.SetActive(false);
-        InputFieldValueRange(leftTakeMaterText, 12, 90,12);
-        InputFieldValueRange(rightTakeMaterText, 12, 90,90);
-        InputFieldValueRange(timeHourText, 0, 99,0);
-        InputFieldValueRange(timeMinuteText, 0, 60,0);
-        InputFieldValueRange(takeMaterStep, 0.1f, 3,0.7f);
-        InputFieldValueRange(takeMaterNum, 0, 99999,0);
-        InputFieldValueRange(layerHigh, 0, 10,0);
-        InputFieldValueRange(AngleEntryText, 0, 120,1);
+        InputFieldValueRange(leftTakeMaterText, 12, 90, 12);
+        InputFieldValueRange(rightTakeMaterText, 12, 90, 90);
+        InputFieldValueRange(timeHourText, 0, 99, 0);
+        InputFieldValueRange(timeMinuteText, 0, 60, 0);
+        InputFieldValueRange(takeMaterStep, 0.1f, 3, 0.7f);
+        InputFieldValueRange(takeMaterNum, 0, 99999, 0);
+        InputFieldValueRange(layerHigh, 0, 10, 0);
+        InputFieldValueRange(AngleEntryText, 0, 120, 1);
         EventManager.Instance.TriggerEvent(EventName.UpdatePcData, null);
     }
 
@@ -470,7 +484,7 @@ public class BucketWheelTaskBase : PanelBase
         Debug.LogError("抬起"); //0
         warningBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
         warningBtn.transform.Find("Image").gameObject.SetActive(false);
-        warningBtn.transform.FindComponent<Text>("Text").color =new Color(0.1411765f, 1, 1, 1);
+        warningBtn.transform.FindComponent<Text>("Text").color = new Color(0.1411765f, 1, 1, 1);
         SendPlcCommand(COMMAND_NAME.STARTUP_ALARM, 0);
     }
 
@@ -478,7 +492,9 @@ public class BucketWheelTaskBase : PanelBase
     {
         if (GameDataManager.Instance.GameMain.connectionRC.isConnect == false)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs(ConstStr.RC_SERVER_CONNECTION_FAIL_TIP,
+                    GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
 
@@ -509,15 +525,18 @@ public class BucketWheelTaskBase : PanelBase
         if (GameDataManager.Instance.GameMain.connectionPC.isConnect == false)
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP,GameDataManager.Instance.GetMachineName(machine)));
+                new ConfirmPanelArgs(ConstStr.TASK_SERVER_CONNECTION_FAIL_TIP,
+                    GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
 
         if (TaskDataManager.Instance.IsCanSendTaskCommond(machine, TaskType.TAKEMATER, operationType) != -1)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs("当前操作无效的",GameDataManager.Instance.GetMachineName(machine)));
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                new ConfirmPanelArgs("当前操作无效的", GameDataManager.Instance.GetMachineName(machine)));
             return;
         }
+
         TaskCommand taskCommand = new TaskCommand();
         if (operationType == OperationType.START)
         {
@@ -527,7 +546,8 @@ public class BucketWheelTaskBase : PanelBase
         }
         else if (operationType == OperationType.PAUSE)
         {
-            DataManager.Instance.InsertHistoryLogMc(takeMaterStopBtn.red.activeSelf?"自动取料-恢复任务":"自动取料-暂停任务", GameDataManager.Instance.GetUserName(), machine);
+            DataManager.Instance.InsertHistoryLogMc(takeMaterStopBtn.red.activeSelf ? "自动取料-恢复任务" : "自动取料-暂停任务",
+                GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterStopBtn);
         }
@@ -542,36 +562,40 @@ public class BucketWheelTaskBase : PanelBase
             DataManager.Instance.InsertHistoryLogMc("自动取料-任务结束", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.OperationCommand = operationType;
             UpdateCurCtrMode(ref curTaskButtonCell, takeMaterEndBtn);
-        }else if (operationType == OperationType.RESET)
+        }
+        else if (operationType == OperationType.RESET)
         {
             resetTaskBtn.SetSelectState(true);
             DataManager.Instance.InsertHistoryLogMc("自动取料-任务重置", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.ResetState = 1;
-        }else if (operationType==OperationType.TurnConfirm)
+        }
+        else if (operationType == OperationType.TurnConfirm)
         {
             confirmTurnBtn.SetSelectState(true);
             DataManager.Instance.InsertHistoryLogMc("自动取料-边界确认", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.TurnConfirmState = 1;
-        }else if (operationType==OperationType.PositionConfirm)
+        }
+        else if (operationType == OperationType.PositionConfirm)
         {
             PositionConfirmBtn.SetSelectState(true);
             DataManager.Instance.InsertHistoryLogMc("自动取料-定位确认", GameDataManager.Instance.GetUserName(), machine);
             taskCommand.PositionConfirmState = 1;
         }
+
         taskCommand.QuerySystem = "MC";
         taskCommand.TaskType = TaskType.TAKEMATER;
         taskCommand.Machine = machine;
         taskCommand.OperatorName = GameDataManager.Instance.GetUserID();
         taskCommand.TaskCreateTime = DateTime.Now; //.ToString("yyyy-MM-dd HH:mm:ss")
         taskCommand.OperatorSystem = "MC";
-        taskCommand.FinishMethod =new List<int>(){0,0};
+        taskCommand.FinishMethod = new List<int>() { 0, 0 };
         if (operationType == OperationType.START || operationType == OperationType.RESET)
         {
             taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
             // taskCommand.AngleEntryMode=RightAngleToggle.red.activeSelf?AngleEntryMode.RIGHTANGLE:AngleEntryMode.OBLIQUEANGLE;
-            taskCommand.AngleEntryValue =AngleEntryText.text == "" ? 0 : float.Parse(AngleEntryText.text);
-            taskCommand.Command_Type = operationType == OperationType.RESET?2:0;
-            taskCommand.TurnMode=leftTurnToggle.red.activeSelf?TurnMode.LEFTTURN:TurnMode.RIGHTTURN;
+            taskCommand.AngleEntryValue = AngleEntryText.text == "" ? 0 : float.Parse(AngleEntryText.text);
+            taskCommand.Command_Type = operationType == OperationType.RESET ? 2 : 0;
+            taskCommand.TurnMode = leftTurnToggle.red.activeSelf ? TurnMode.LEFTTURN : TurnMode.RIGHTTURN;
             float startValue = startTakeMaterText.text == "" ? 0 : float.Parse(startTakeMaterText.text);
             float endValue = stopTakeMaterText.text == "" ? 0 : float.Parse(stopTakeMaterText.text);
             taskCommand.MaterialRange = new TaskRange(startValue, endValue);
@@ -584,11 +608,13 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.PileMateHigh = 0;
             AllData allData = new AllData();
             taskCommand.AllData = allData;
-            taskCommand.IsUseAngleEntryValue=EntryModeOpen.red.activeSelf?1:0;
-        }else if (operationType == OperationType.TurnConfirm )
+            taskCommand.IsUseAngleEntryValue = EntryModeOpen.red.activeSelf ? 1 : 0;
+        }
+        else if (operationType == OperationType.TurnConfirm)
         {
             taskCommand.Command_Type = 3;
-        }else if (operationType==OperationType.PositionConfirm)
+        }
+        else if (operationType == OperationType.PositionConfirm)
         {
             taskCommand.Command_Type = 5;
         }
@@ -597,19 +623,20 @@ public class BucketWheelTaskBase : PanelBase
             taskCommand.Command_Type = 2;
         }
 
-        if (operationType== OperationType.END)
+        if (operationType == OperationType.END)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel, new ConfirmTaskPanelArgs(taskCommand,GameDataManager.Instance.GetMachineName(machine)));
-        }else if (operationType==OperationType.START)
+            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel,
+                new ConfirmTaskPanelArgs(taskCommand, GameDataManager.Instance.GetMachineName(machine)));
+        }
+        else if (operationType == OperationType.START)
         {
             UIManager.Instance.OpenUI(UIID.ConfirmStartTaskPanel,
-                new ConfirmTaskPanelArgs(taskCommand,GameDataManager.Instance.GetMachineName(machine)));
+                new ConfirmTaskPanelArgs(taskCommand, GameDataManager.Instance.GetMachineName(machine)));
         }
         else
         {
             TaskDataManager.Instance.SendTaskCommand(taskCommand);
         }
-     
     }
 
     public virtual void UpdateCurCtrMode(ref ButtonCell ctr, ButtonCell btn)
@@ -623,39 +650,44 @@ public class BucketWheelTaskBase : PanelBase
         ctr.SetSelectState(true);
     }
 
+    public bool IsCanSet()
+    {
+        return TaskDataManager.Instance.IsCanSet(machine);
+    }
     public virtual void ResetState()
     {
-        takeMaterStartBtn.SetSystemState(false,true);
-        takeMaterStopBtn.SetSystemState(false,true);
-        takeMaterReversingBtn.SetSystemState(false,true);
-        takeMaterEndBtn.SetSystemState(false,true);
+        takeMaterStartBtn.SetSystemState(false, true);
+        takeMaterStopBtn.SetSystemState(false, true);
+        takeMaterReversingBtn.SetSystemState(false, true);
+        takeMaterEndBtn.SetSystemState(false, true);
         takeMaterStartBtn.SetSelectState(false);
         takeMaterStopBtn.SetSelectState(false);
         takeMaterReversingBtn.SetSelectState(false);
         takeMaterEndBtn.SetSelectState(false);
         resetBtn.SetSelectState(false);
-        resetBtn.SetSystemState(false,true);
+        resetBtn.SetSystemState(false, true);
         curTaskButtonCell?.SetSelectState(false);
 
-        AutoMaxToggle.SetSystemState(false, true);
-        entryModeGo.SetActive(false);
-        SemiAutoToggle.SetSystemState(true, true);
-        EntryModeOpen.SetSystemState(false, true);
-        EntryModeClose.SetSystemState(true, true);
+        // AutoMaxToggle.SetSystemState(false, true);
+        // entryModeGo.SetActive(false);
+        // SemiAutoToggle.SetSystemState(true, true);
+        // EntryModeOpen.SetSystemState(false, true);
+        // EntryModeClose.SetSystemState(true, true);
         // RightAngleToggle.SetSystemState(false, true);
         // ObliqueAngleToggle.SetSystemState(true, true);
-        
+
         // leftTurnToggle.SetSystemState(false, true);
         // rightTurnToggle.SetSystemState(false, true);
-        confirmTurnBtn.SetSystemState(false,true);
-        PositionConfirmBtn.SetSystemState(false,true);
-        confirmTurnBtn.gameObject.SetActive(true);
-        PositionConfirmBtn.gameObject.SetActive(false);
+        confirmTurnBtn.SetSystemState(false, true);
+        PositionConfirmBtn.SetSystemState(false, true);
+        // confirmTurnBtn.gameObject.SetActive(true);
+        // PositionConfirmBtn.gameObject.SetActive(false);
     }
 
-    public virtual void InputFieldValueRange(InputField inputField, float min, float max,float defaultValue,string commandName="")
+    public virtual void InputFieldValueRange(InputField inputField, float min, float max, float defaultValue,
+        string commandName = "")
     {
-        inputField.text =defaultValue.ToString();
+        inputField.text = defaultValue.ToString();
         inputField.onEndEdit.AddListener(((string value) =>
         {
             float num = 0;

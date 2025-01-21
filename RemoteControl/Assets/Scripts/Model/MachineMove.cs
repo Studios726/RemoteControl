@@ -102,7 +102,7 @@ public class MachineMove : MonoBehaviour
     }
     public void UpdateBucketWheelPosText(string pos)
     {
-        bucketWheelPosText.text = pos;
+        // bucketWheelPosText.text = pos;
     }
     /// <summary>
     /// 

@@ -802,6 +802,28 @@ public class TaskDataManager : Singleton<TaskDataManager>
         // }
     }
 
+    public bool IsCanSet(Machine machine)
+    {
+        if (_taskVariables==null||_taskVariables.McData.Count<=0)
+        {
+            return true;
+        }
+        else
+        {
+            for (int i = 0; i < _taskVariables.McData.Count; i++)
+            {
+                if (_taskVariables.McData[i].Machine==machine)
+                {
+                    if (_taskVariables.McData[i].AllData.OperationCommandList[3]==1)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
     public int IsCanSendTaskCommond(Machine machine, TaskType taskType, OperationType operationType)
     {
         if (_taskVariables != null)

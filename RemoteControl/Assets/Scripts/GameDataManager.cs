@@ -153,7 +153,6 @@ public class GameDataManager : Singleton<GameDataManager>
                 Debug.LogError("解析失败");
             }
         }
-
         PileTaskPlc(systemVariables);
         AlarmDataManager.Instance.RecordWarning(systemVariables, _systemVariables);
         _systemVariables = systemVariables;
@@ -415,29 +414,30 @@ public class GameDataManager : Singleton<GameDataManager>
     {
         if (machineMove_1)
         {
-            string error = "";
-            error = _systemVariables.LargeCarForwardLimit ? error + "大车前进限位\n" : error;
-            error = _systemVariables.LargeCarReverseLimit ? error + "大车后退限位\n" : error;
-            error = _systemVariables.LargeCarForwardExtremeLimit ? error + "大车前进极限\n" : error;
-            error = _systemVariables.LargeCarReverseExtremeLimit ? error + "大车后退极限\n" : error;
+            string error ="";
+            error = _systemVariables.LargeCarForwardLimit ? error + "<color=red>大车前进限位</color>\n" : error;
+            error = _systemVariables.LargeCarReverseLimit ? error + "<color=red>大车后退限位</color>\n" : error;
+            error = _systemVariables.LargeCarForwardExtremeLimit ? error + "<color=red>大车前进极限</color>\n" : error;
+            error = _systemVariables.LargeCarReverseExtremeLimit ? error + "<color=red>大车后退极限</color>\n" : error;
 
-            error = _systemVariables.RotaryLeftTurnLimit ? error + "回转左转限位\n" : error;
-            error = _systemVariables.RotaryRightTurnLimit ? error + "回转右转限位\n" : error;
-            error = _systemVariables.RotaryLeftTurnExtremeLimit ? error + "回转左转极限\n" : error;
-            error = _systemVariables.RotaryRightTurnExtremeLimit ? error + "回转右转极限\n" : error;
+            error = _systemVariables.RotaryLeftTurnLimit ? error + "<color=red>回转左转限位</color>\n" : error;
+            error = _systemVariables.RotaryRightTurnLimit ? error + "<color=red>回转右转限位</color>\n" : error;
+            error = _systemVariables.RotaryLeftTurnExtremeLimit ? error + "<color=red>回转左转极限</color>\n" : error;
+            error = _systemVariables.RotaryRightTurnExtremeLimit ? error + "<color=red>回转右转极限</color>\n" : error;
 
-            error = _systemVariables.VariableAmplitudeUpperLimit ? error + "变幅上仰限位\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerLimit ? error + "变幅下俯限位\n" : error;
-            error = _systemVariables.VariableAmplitudeUpperExtremeLimit ? error + "变幅上仰极限\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerExtremeLimit ? error + "变幅下俯极限\n" : error;
+            error = _systemVariables.VariableAmplitudeUpperLimit ? error + "<color=red>变幅上仰限位</color>\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerLimit ? error + "<color=red>变幅下俯限位</color>\n" : error;
+            error = _systemVariables.VariableAmplitudeUpperExtremeLimit ? error + "<color=red>变幅上仰极限</color>\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerExtremeLimit ? error + "<color=red>变幅下俯极限</color>\n" : error;
             
-            error = _systemVariables.LuffUp_LimitStatus ? error + "俯仰上限位集合\n" : error;
-            error = _systemVariables.LuffDown_LimitStatus ? error + "俯仰下限位集合\n" : error;
-            error = _systemVariables.DcFWD_LimitStatus ? error + "大车前进限位集合\n" : error;
-            error = _systemVariables.DcREV_LimitStatus ? error + "大车后退限位集合\n" : error;
-            error = _systemVariables.Slew_R_LimitStatus ? error + "悬臂右转限位集合\n" : error;
-            error = _systemVariables.Slew_L_LimitStatus ? error + "悬臂左转限位集合\n" : error;
-         
+            error = _systemVariables.LuffUp_LimitStatus ? error + "<color=red>俯仰上限位集合</color>\n" : error;
+            error = _systemVariables.LuffDown_LimitStatus ? error + "<color=red>俯仰下限位集合</color>\n" : error;
+            error = _systemVariables.DcFWD_LimitStatus ? error + "<color=red>大车前进限位集合</color>\n" : error;
+            error = _systemVariables.DcREV_LimitStatus ? error + "<color=red>大车后退限位集合</color>\n" : error;
+            error = _systemVariables.Slew_R_LimitStatus ? error + "<color=red>悬臂右转限位集合</color>\n" : error;
+            error = _systemVariables.Slew_L_LimitStatus ? error + "<color=red>悬臂左转限位集合</color>\n" : error;
+            error = error +
+                    $"俯仰:{_systemVariables.Luff_Angle.ToString("F2")}°\n回转:{_systemVariables.SLEW_Angle.ToString("F2")}°\n行走:{(_systemVariables.DC_Pos + ConstStr.InitPosition_1).ToString("F2")}m";
 
             machineMove_1.UpdateErrorText(error);
         }
@@ -445,28 +445,28 @@ public class GameDataManager : Singleton<GameDataManager>
         if (machineMove_2)
         {
             string error = "";
-            error = _systemVariables.LargeCarForwardLimit_2 ? error + "大车前进限位\n" : error;
-            error = _systemVariables.LargeCarReverseLimit_2 ? error + "大车后退限位\n" : error;
-            error = _systemVariables.LargeCarForwardExtremeLimit_2 ? error + "大车前进极限\n" : error;
-            error = _systemVariables.LargeCarReverseExtremeLimit_2 ? error + "大车后退极限\n" : error;
+            error = _systemVariables.LargeCarForwardLimit_2 ? error + "<color=red><color=red>大车前进限位</color>\n" : error;
+            error = _systemVariables.LargeCarReverseLimit_2 ? error + "<color=red><color=red>大车后退限位</color>\n" : error;
+            error = _systemVariables.LargeCarForwardExtremeLimit_2 ? error + "<color=red>大车前进极限</color>\n" : error;
+            error = _systemVariables.LargeCarReverseExtremeLimit_2 ? error + "<color=red>大车后退极限</color>\n" : error;
 
-            error = _systemVariables.RotaryLeftTurnLimit_2 ? error + "回转左转限位\n" : error;
-            error = _systemVariables.RotaryRightTurnLimit_2 ? error + "回转右转限位\n" : error;
-            error = _systemVariables.RotaryLeftTurnExtremeLimit_2 ? error + "回转左转极限\n" : error;
-            error = _systemVariables.RotaryRightTurnExtremeLimit_2 ? error + "回转右转极限\n" : error;
+            error = _systemVariables.RotaryLeftTurnLimit_2 ? error + "<color=red>回转左转限位</color>\n" : error;
+            error = _systemVariables.RotaryRightTurnLimit_2 ? error + "<color=red>回转右转限位</color>\n" : error;
+            error = _systemVariables.RotaryLeftTurnExtremeLimit_2 ? error + "<color=red>回转左转极限</color>\n" : error;
+            error = _systemVariables.RotaryRightTurnExtremeLimit_2 ? error + "<color=red>回转右转极限</color>\n" : error;
 
-            error = _systemVariables.VariableAmplitudeUpperLimit_2 ? error + "变幅上仰限位\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerLimit_2 ? error + "变幅下俯限位\n" : error;
-            error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "变幅上仰极限\n" : error;
-            error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "变幅下俯极限\n" : error;
+            error = _systemVariables.VariableAmplitudeUpperLimit_2 ? error + "<color=red>变幅上仰限位</color>\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerLimit_2 ? error + "<color=red>变幅下俯限位</color>\n" : error;
+            error = _systemVariables.VariableAmplitudeUpperExtremeLimit_2 ? error + "<color=red>变幅上仰极限</color>\n" : error;
+            error = _systemVariables.VariableAmplitudeLowerExtremeLimit_2 ? error + "<color=red>变幅下俯极限</color>\n" : error;
             
-            error = _systemVariables.LuffUp_LimitStatus_2 ? error + "俯仰上限位集合\n" : error;
-            error = _systemVariables.LuffDown_LimitStatus_2 ? error + "俯仰下限位集合\n" : error;
-            error = _systemVariables.DcFWD_LimitStatus_2 ? error + "大车前进限位集合\n" : error;
-            error = _systemVariables.DcREV_LimitStatus_2 ? error + "大车后退限位集合\n" : error;
-            error = _systemVariables.Slew_R_LimitStatus_2 ? error + "悬臂右转限位集合\n" : error;
-            error = _systemVariables.Slew_L_LimitStatus_2 ? error + "悬臂左转限位集合\n" : error;
-          
+            error = _systemVariables.LuffUp_LimitStatus_2 ? error + "<color=red>俯仰上限位集合</color>\n" : error;
+            error = _systemVariables.LuffDown_LimitStatus_2 ? error + "<color=red>俯仰下限位集合</color>\n" : error;
+            error = _systemVariables.DcFWD_LimitStatus_2 ? error + "<color=red>大车前进限位集合</color>\n" : error;
+            error = _systemVariables.DcREV_LimitStatus_2 ? error + "<color=red>大车后退限位集合</color>\n" : error;
+            error = _systemVariables.Slew_R_LimitStatus_2 ? error + "<color=red>悬臂右转限位集合</color>\n" : error;
+            error = _systemVariables.Slew_L_LimitStatus_2 ? error + "<color=red>悬臂左转限位集合</color>\n" : error;
+            error=error+$"俯仰:{_systemVariables.Luff_Angle_2.ToString("F2")}°\n回转:{_systemVariables.SLEW_Angle_2.ToString("F2")}°\n行走:{(_systemVariables.DC_Pos_2 + ConstStr.InitPosition_2).ToString("F2")}m";
 
             machineMove_2.UpdateErrorText(error);
         }

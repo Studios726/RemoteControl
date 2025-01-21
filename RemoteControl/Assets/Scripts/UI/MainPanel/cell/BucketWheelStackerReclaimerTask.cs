@@ -24,7 +24,7 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public GameObject pilePosGo;
     public ButtonCell PilePosStartToggle;
     public ButtonCell PilePosStopToggle;
-    
+    public ToggleDIY PilePosRunToggle;
     public InputField startLeftPileMaterText;
     public Button startleftPileAddBtn;
     public Button startleftPileSubBtn;
@@ -296,14 +296,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             pileMaterStepText.SetTextByFocused(systemVariables.SR1_Stack_DcRevSize.ToString());
             pilePitchAngleText.SetTextByFocused(systemVariables.SR1_Stack_LuffMax.ToString());
         }
-        
         PileAutoMaxToggle.SetSystemState(systemVariables.SR1_AutoBorder_Enable,true);
         PileSemiAutoToggle.SetSystemState(systemVariables.SR1_AutoBorder_Enable==false,true);
         rotaryHeap.SetSystemState(systemVariables.SR1_SlewStack_SEL,true);
         fixedPointHeap.SetSystemState(systemVariables.SR1_PointStack_SEL,true);
         pilePosGo.SetActive(systemVariables.SR1_AutoBorder_Enable);
-        PilePosStartToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_START_SB,true);
-        PilePosStopToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_STOP_SB, true);
         pileMaterStartBtn.SetSystemState(systemVariables.SR1_Stack_Runing,true);
         pileMaterStopBtn.SetSystemState(systemVariables.SR1_Stop_Runing,true);
         pileMaterEndBtn.SetSystemState(systemVariables.SR1_Stack_Runing==false,true);
@@ -311,8 +308,9 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         ForcedPositioning.SetSystemState(systemVariables.SR1_Pos_Runing_Finish,true);
         FixedAngle.SetSystemState(systemVariables.SR1_StackPiont_FS_Mode,true);
         MaterialJudgment.SetSystemState(systemVariables.SR1_StackPiont_FS_Mode==false,true);
-        PilePosStartToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_START_SB,true);
-        PilePosStopToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_STOP_SB, true);
+        PilePosStartToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_STARTING,true);
+        PilePosStopToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_Finish, true);
+        PilePosRunToggle.SetState(systemVariables.SR1_SOFT_POS_STACK_RUNNING?1:0);
         leftPileMaterToggle.SetSystemState(systemVariables.SR1_SEL_WorkArea.ToString()=="2", true);
         rightPileMaterToggle.SetSystemState(systemVariables.SR1_SEL_WorkArea.ToString()=="1",true);
         pileNextPos.gameObject.SetActive(systemVariables.SR1_AutoBorder_Enable);
