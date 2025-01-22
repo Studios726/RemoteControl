@@ -24,7 +24,8 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
     public GameObject pilePosGo;
     public ButtonCell PilePosStartToggle;
     public ButtonCell PilePosStopToggle;
-    public ToggleDIY PilePosRunToggle;
+    public RunStateTip runStateTip;
+    // public ToggleDIY PilePosRunToggle;
     public InputField startLeftPileMaterText;
     public Button startleftPileAddBtn;
     public Button startleftPileSubBtn;
@@ -310,12 +311,20 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         MaterialJudgment.SetSystemState(systemVariables.SR1_StackPiont_FS_Mode==false,true);
         PilePosStartToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_STARTING,true);
         PilePosStopToggle.SetSystemState(systemVariables.SR1_SOFT_POS_STACK_Finish, true);
-        PilePosRunToggle.SetState(systemVariables.SR1_SOFT_POS_STACK_RUNNING?1:0);
+        // PilePosRunToggle.SetState(systemVariables.SR1_SOFT_POS_STACK_RUNNING?1:0);
         leftPileMaterToggle.SetSystemState(systemVariables.SR1_SEL_WorkArea.ToString()=="2", true);
         rightPileMaterToggle.SetSystemState(systemVariables.SR1_SEL_WorkArea.ToString()=="1",true);
         pileNextPos.gameObject.SetActive(systemVariables.SR1_AutoBorder_Enable);
         pileNextPos.text =
             $"大车位置:{systemVariables.SR1_STACK_POS_DC.ToString("F2")} 回转:{systemVariables.SR1_STACK_POS_SLEW.ToString("F2")} 俯仰:{systemVariables.SR1_STACK_POS_LUFF.ToString("F2")}";
+        if (systemVariables.SR1_SOFT_POS_STACK_RUNNING)
+        {
+            runStateTip.SetText("定位运行中");
+        }
+        else
+        {
+            runStateTip.Hide();
+        }
     }
     //堆料目前使用plc命令 和取料区分开
     public void SendPileMaterCommandByRc(OperationType operationType)
