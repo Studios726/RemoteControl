@@ -4474,7 +4474,101 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                         Machine.BucketWheelStackerReclaimer);
                     RemoveWarningDesDict(nameof(newSystemVariables.SR1_3D_Unusable));
                 }
+                //1.22
+                if (newSystemVariables.SuspendedBeltTemperatureUpperLimitAlarm == true &&
+                    _systemVariables.SuspendedBeltTemperatureUpperLimitAlarm == false)
+                {
+                    // 悬胶测温上限报警
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶测温上限报警", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltTemperatureUpperLimitAlarm),
+                        "悬胶测温上限报警",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.SuspendedBeltTemperatureUpperLimitAlarm == false &&
+                         _systemVariables.SuspendedBeltTemperatureUpperLimitAlarm == true)
+                {
+                    //悬胶测温上限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶测温上限报警解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltTemperatureUpperLimitAlarm));
+                }
                 
+                if (newSystemVariables.SuspendedBeltTemperatureLowerLimitAlarm == true &&
+                    _systemVariables.SuspendedBeltTemperatureLowerLimitAlarm == false)
+                {
+                    // 悬胶测温下限报警
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶测温下限报警", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltTemperatureLowerLimitAlarm),
+                        "悬胶测温下限报警",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.SuspendedBeltTemperatureLowerLimitAlarm == false &&
+                         _systemVariables.SuspendedBeltTemperatureLowerLimitAlarm == true)
+                {
+                    //悬胶测温下限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶测温下限报警解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltTemperatureLowerLimitAlarm));
+                }
+                
+                if (newSystemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm == true &&
+                    _systemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm == false)
+                {
+                    // 悬胶滚筒轴承测温上限报警
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶滚筒轴承测温上限报警", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm),
+                        "悬胶滚筒轴承测温上限报警",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm == false &&
+                         _systemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm == true)
+                {
+                    //悬胶滚筒轴承测温上限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶滚筒轴承测温上限报警解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm));
+                }
+                
+                if (newSystemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm == true &&
+                    _systemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm == false)
+                {
+                    // 悬胶滚筒轴承测温下限报警
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶滚筒轴承测温下限报警", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm),
+                        "悬胶滚筒轴承测温下限报警",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm == false &&
+                         _systemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm == true)
+                {
+                    //悬胶滚筒轴承测温下限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶滚筒轴承测温下限报警解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm));
+                }
+                
+                if (newSystemVariables.BucketWheelTemperatureLowerLimitAlarm == true &&
+                    _systemVariables.BucketWheelTemperatureLowerLimitAlarm == false)
+                {
+                    // 斗轮测温下限报警
+                    DataManager.Instance.InsertHistoryWarningMc("斗轮测温下限报警", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelTemperatureLowerLimitAlarm),
+                        "斗轮测温下限报警",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.BucketWheelTemperatureLowerLimitAlarm == false &&
+                         _systemVariables.BucketWheelTemperatureLowerLimitAlarm == true)
+                {
+                    //斗轮测温下限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("斗轮测温下限报警解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelTemperatureLowerLimitAlarm));
+                }
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>取料机报错信息<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
                 //取料机
@@ -8838,6 +8932,102 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     DataManager.Instance.InsertHistoryWarningMc("电缆卷筒接触器辅助触点故障解除", GetUserName(),
                         Machine.BucketWheel);
                     RemoveWarningDesDict(nameof(newSystemVariables.CableRollerContactorAuxiliaryContactFault_2));
+                }
+                
+                //1.22
+                if (newSystemVariables.SuspendedBeltTemperatureUpperLimitAlarm_2 == true &&
+                    _systemVariables.SuspendedBeltTemperatureUpperLimitAlarm_2 == false)
+                {
+                    // 悬胶测温上限报警
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶测温上限报警", GetUserName(),
+                        Machine.BucketWheel);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltTemperatureUpperLimitAlarm_2),
+                        "悬胶测温上限报警",
+                        Machine.BucketWheel, false, "");
+                }
+                else if (newSystemVariables.SuspendedBeltTemperatureUpperLimitAlarm_2 == false &&
+                         _systemVariables.SuspendedBeltTemperatureUpperLimitAlarm_2 == true)
+                {
+                    //悬胶测温上限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶测温上限报警解除", GetUserName(),
+                        Machine.BucketWheel);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltTemperatureUpperLimitAlarm_2));
+                }
+                
+                if (newSystemVariables.SuspendedBeltTemperatureLowerLimitAlarm_2 == true &&
+                    _systemVariables.SuspendedBeltTemperatureLowerLimitAlarm_2 == false)
+                {
+                    // 悬胶测温下限报警
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶测温下限报警", GetUserName(),
+                        Machine.BucketWheel);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltTemperatureLowerLimitAlarm_2),
+                        "悬胶测温下限报警",
+                        Machine.BucketWheel, false, "");
+                }
+                else if (newSystemVariables.SuspendedBeltTemperatureLowerLimitAlarm_2 == false &&
+                         _systemVariables.SuspendedBeltTemperatureLowerLimitAlarm_2 == true)
+                {
+                    //悬胶测温下限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶测温下限报警解除", GetUserName(),
+                        Machine.BucketWheel);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltTemperatureLowerLimitAlarm_2));
+                }
+                
+                if (newSystemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm_2 == true &&
+                    _systemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm_2 == false)
+                {
+                    // 悬胶滚筒轴承测温上限报警
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶滚筒轴承测温上限报警", GetUserName(),
+                        Machine.BucketWheel);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm_2),
+                        "悬胶滚筒轴承测温上限报警",
+                        Machine.BucketWheel, false, "");
+                }
+                else if (newSystemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm_2 == false &&
+                         _systemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm_2 == true)
+                {
+                    //悬胶滚筒轴承测温上限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶滚筒轴承测温上限报警解除", GetUserName(),
+                        Machine.BucketWheel);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltRollerBearingTemperatureUpperLimitAlarm_2));
+                }
+                
+                if (newSystemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm_2 == true &&
+                    _systemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm_2 == false)
+                {
+                    // 悬胶滚筒轴承测温下限报警
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶滚筒轴承测温下限报警", GetUserName(),
+                        Machine.BucketWheel);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm_2),
+                        "悬胶滚筒轴承测温下限报警",
+                        Machine.BucketWheel, false, "");
+                }
+                else if (newSystemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm_2 == false &&
+                         _systemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm_2 == true)
+                {
+                    //悬胶滚筒轴承测温下限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("悬胶滚筒轴承测温下限报警解除", GetUserName(),
+                        Machine.BucketWheel);
+                    RemoveWarningDesDict(nameof(newSystemVariables.SuspendedBeltRollerBearingTemperatureLowerLimitAlarm_2));
+                }
+                
+                if (newSystemVariables.BucketWheelTemperatureLowerLimitAlarm_2 == true &&
+                    _systemVariables.BucketWheelTemperatureLowerLimitAlarm_2 == false)
+                {
+                    // 斗轮测温下限报警
+                    DataManager.Instance.InsertHistoryWarningMc("斗轮测温下限报警", GetUserName(),
+                        Machine.BucketWheel);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.BucketWheelTemperatureLowerLimitAlarm),
+                        "斗轮测温下限报警",
+                        Machine.BucketWheel, false, "");
+                }
+                else if (newSystemVariables.BucketWheelTemperatureLowerLimitAlarm_2 == false &&
+                         _systemVariables.BucketWheelTemperatureLowerLimitAlarm_2 == true)
+                {
+                    //斗轮测温下限报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("斗轮测温下限报警解除", GetUserName(),
+                        Machine.BucketWheel);
+                    RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelTemperatureLowerLimitAlarm_2));
                 }
             }
 
