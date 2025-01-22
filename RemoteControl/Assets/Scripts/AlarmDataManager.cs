@@ -488,43 +488,43 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     RemoveWarningDesDict(nameof(newSystemVariables.LargeCarBrakeResistorOverheatSwitch));
                 }
 
-                if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel &&
-                    _systemVariables.LargeCarCentralizedLubricationLowOilLevel == false)
-                {
-                    //大车-大车集中润滑低油位
-                    DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel),
-                        "大车-大车集中润滑低油位",
-                        Machine.BucketWheelStackerReclaimer, false, "");
-                }
-                else if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel == false &&
-                         _systemVariables.LargeCarCentralizedLubricationLowOilLevel == true)
-                {
-                    //大车-大车集中润滑低油位解除
-                    DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位解除", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel));
-                }
+                // if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel &&
+                //     _systemVariables.LargeCarCentralizedLubricationLowOilLevel == false)
+                // {
+                //     //大车-大车集中润滑低油位
+                //     DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel),
+                //         "大车-大车集中润滑低油位",
+                //         Machine.BucketWheelStackerReclaimer, false, "");
+                // }
+                // else if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel == false &&
+                //          _systemVariables.LargeCarCentralizedLubricationLowOilLevel == true)
+                // {
+                //     //大车-大车集中润滑低油位解除
+                //     DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位解除", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel));
+                // }
 
-                if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage &&
-                    _systemVariables.LargeCarCentralizedLubricationOilBlockage == false)
-                {
-                    //大车-大车集中润滑堵油
-                    DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage),
-                        "大车-大车集中润滑堵油",
-                        Machine.BucketWheelStackerReclaimer, false, "");
-                }
-                else if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage == false &&
-                         _systemVariables.LargeCarCentralizedLubricationOilBlockage == true)
-                {
-                    //大车-大车集中润滑堵油解除
-                    DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油解除", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage));
-                }
+                // if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage &&
+                //     _systemVariables.LargeCarCentralizedLubricationOilBlockage == false)
+                // {
+                //     //大车-大车集中润滑堵油
+                //     DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage),
+                //         "大车-大车集中润滑堵油",
+                //         Machine.BucketWheelStackerReclaimer, false, "");
+                // }
+                // else if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage == false &&
+                //          _systemVariables.LargeCarCentralizedLubricationOilBlockage == true)
+                // {
+                //     //大车-大车集中润滑堵油解除
+                //     DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油解除", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage));
+                // }
 
                 if (newSystemVariables.LargeCarForwardLimit && _systemVariables.LargeCarForwardLimit == false)
                 {
@@ -1023,43 +1023,43 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     RemoveWarningDesDict(nameof(newSystemVariables.RotaryOverTorque));
                 }
 
-                if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault &&
-                    _systemVariables.RotaryCentralizedLubricationOilBlockageFault == false)
-                {
-                    //回转-回转集中润滑堵油
-                    DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault),
-                        "回转-回转集中润滑堵油",
-                        Machine.BucketWheelStackerReclaimer, false, "");
-                }
-                else if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault == false &&
-                         _systemVariables.RotaryCentralizedLubricationOilBlockageFault == true)
-                {
-                    //回转-回转集中润滑堵油解除
-                    DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油解除", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    RemoveWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault));
-                }
+                // if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault &&
+                //     _systemVariables.RotaryCentralizedLubricationOilBlockageFault == false)
+                // {
+                //     //回转-回转集中润滑堵油
+                //     DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault),
+                //         "回转-回转集中润滑堵油",
+                //         Machine.BucketWheelStackerReclaimer, false, "");
+                // }
+                // else if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault == false &&
+                //          _systemVariables.RotaryCentralizedLubricationOilBlockageFault == true)
+                // {
+                //     //回转-回转集中润滑堵油解除
+                //     DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油解除", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault));
+                // }
 
-                if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault &&
-                    _systemVariables.RotaryCentralizedLubricationLowOilLevelFault == false)
-                {
-                    //回转-回转集中润滑低油位
-                    DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault),
-                        "回转-回转集中润滑低油位",
-                        Machine.BucketWheelStackerReclaimer, false, "");
-                }
-                else if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault == false &&
-                         _systemVariables.RotaryCentralizedLubricationLowOilLevelFault == true)
-                {
-                    //回转-回转集中润滑低油位解除
-                    DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位解除", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    RemoveWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault));
-                }
+                // if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault &&
+                //     _systemVariables.RotaryCentralizedLubricationLowOilLevelFault == false)
+                // {
+                //     //回转-回转集中润滑低油位
+                //     DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault),
+                //         "回转-回转集中润滑低油位",
+                //         Machine.BucketWheelStackerReclaimer, false, "");
+                // }
+                // else if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault == false &&
+                //          _systemVariables.RotaryCentralizedLubricationLowOilLevelFault == true)
+                // {
+                //     //回转-回转集中润滑低油位解除
+                //     DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位解除", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault));
+                // }
 
                 if (newSystemVariables.BucketWheelMotorOverload && _systemVariables.BucketWheelMotorOverload == false)
                 {
@@ -4008,21 +4008,21 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     RemoveWarningDesDict(nameof(newSystemVariables.RightClampingDeviceTimeout));
                 }
 
-                if (newSystemVariables.StrongWindAlarm == true && _systemVariables.StrongWindAlarm == false)
-                {
-                    // 大风报警信号
-                    DataManager.Instance.InsertHistoryWarningMc("大风报警信号", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.StrongWindAlarm), "大风报警信号",
-                        Machine.BucketWheelStackerReclaimer, false, "");
-                }
-                else if (newSystemVariables.StrongWindAlarm == false && _systemVariables.StrongWindAlarm == true)
-                {
-                    // 大风报警信号解除
-                    DataManager.Instance.InsertHistoryWarningMc("大风报警信号解除", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    RemoveWarningDesDict(nameof(newSystemVariables.StrongWindAlarm));
-                }
+                // if (newSystemVariables.StrongWindAlarm == true && _systemVariables.StrongWindAlarm == false)
+                // {
+                //     // 大风报警信号
+                //     DataManager.Instance.InsertHistoryWarningMc("大风报警信号", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.StrongWindAlarm), "大风报警信号",
+                //         Machine.BucketWheelStackerReclaimer, false, "");
+                // }
+                // else if (newSystemVariables.StrongWindAlarm == false && _systemVariables.StrongWindAlarm == true)
+                // {
+                //     // 大风报警信号解除
+                //     DataManager.Instance.InsertHistoryWarningMc("大风报警信号解除", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.StrongWindAlarm));
+                // }
 
                 if (newSystemVariables.DryFogSystemWaterTankLowLevel == true &&
                     _systemVariables.DryFogSystemWaterTankLowLevel == false)
@@ -4242,47 +4242,47 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     RemoveWarningDesDict(nameof(newSystemVariables.PowerCableRollerNotRunning));
                 }
 
-                if (newSystemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm == true &&
-                    _systemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm == false)
-                {
-                    // 尾车从动滚筒轴承测温上限报警
-                    DataManager.Instance.InsertHistoryWarningMc("尾车从动滚筒轴承测温上限报警", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    AddOrUpdateWarningDesDict(
-                        nameof(newSystemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm),
-                        "尾车从动滚筒轴承测温上限报警",
-                        Machine.BucketWheelStackerReclaimer, false, "");
-                }
-                else if (newSystemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm == false &&
-                         _systemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm == true)
-                {
-                    // 尾车从动滚筒轴承测温上限报警解除
-                    DataManager.Instance.InsertHistoryWarningMc("尾车从动滚筒轴承测温上限报警解除", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    RemoveWarningDesDict(
-                        nameof(newSystemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm));
-                }
+                // if (newSystemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm == true &&
+                //     _systemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm == false)
+                // {
+                //     // 尾车从动滚筒轴承测温上限报警
+                //     DataManager.Instance.InsertHistoryWarningMc("尾车从动滚筒轴承测温上限报警", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     AddOrUpdateWarningDesDict(
+                //         nameof(newSystemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm),
+                //         "尾车从动滚筒轴承测温上限报警",
+                //         Machine.BucketWheelStackerReclaimer, false, "");
+                // }
+                // else if (newSystemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm == false &&
+                //          _systemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm == true)
+                // {
+                //     // 尾车从动滚筒轴承测温上限报警解除
+                //     DataManager.Instance.InsertHistoryWarningMc("尾车从动滚筒轴承测温上限报警解除", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     RemoveWarningDesDict(
+                //         nameof(newSystemVariables.TailCarDrivenRollerBearingTemperatureUpperLimitAlarm));
+                // }
 
-                if (newSystemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm == true &&
-                    _systemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm == false)
-                {
-                    // 尾车从动滚筒轴承测温下限报警
-                    DataManager.Instance.InsertHistoryWarningMc("尾车从动滚筒轴承测温下限报警", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    AddOrUpdateWarningDesDict(
-                        nameof(newSystemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm),
-                        "尾车从动滚筒轴承测温下限报警",
-                        Machine.BucketWheelStackerReclaimer, false, "");
-                }
-                else if (newSystemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm == false &&
-                         _systemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm == true)
-                {
-                    // 尾车从动滚筒轴承测温下限报警解除
-                    DataManager.Instance.InsertHistoryWarningMc("尾车从动滚筒轴承测温下限报警解除", GetUserName(),
-                        Machine.BucketWheelStackerReclaimer);
-                    RemoveWarningDesDict(
-                        nameof(newSystemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm));
-                }
+                // if (newSystemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm == true &&
+                //     _systemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm == false)
+                // {
+                //     // 尾车从动滚筒轴承测温下限报警
+                //     DataManager.Instance.InsertHistoryWarningMc("尾车从动滚筒轴承测温下限报警", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     AddOrUpdateWarningDesDict(
+                //         nameof(newSystemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm),
+                //         "尾车从动滚筒轴承测温下限报警",
+                //         Machine.BucketWheelStackerReclaimer, false, "");
+                // }
+                // else if (newSystemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm == false &&
+                //          _systemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm == true)
+                // {
+                //     // 尾车从动滚筒轴承测温下限报警解除
+                //     DataManager.Instance.InsertHistoryWarningMc("尾车从动滚筒轴承测温下限报警解除", GetUserName(),
+                //         Machine.BucketWheelStackerReclaimer);
+                //     RemoveWarningDesDict(
+                //         nameof(newSystemVariables.TailCarDrivenRollerBearingTemperatureLowerLimitAlarm));
+                // }
 
                 if (newSystemVariables.LargeVehicleMotor1OvertemperatureAlarm == true &&
                     _systemVariables.LargeVehicleMotor1OvertemperatureAlarm == false)
@@ -4569,6 +4569,26 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                         Machine.BucketWheelStackerReclaimer);
                     RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelTemperatureLowerLimitAlarm));
                 }
+                
+                 
+                if (newSystemVariables.BrokenBeltCaptureAlarming == true &&
+                    _systemVariables.BrokenBeltCaptureAlarming == false)
+                {
+                    // 断带抓捕报警
+                    DataManager.Instance.InsertHistoryWarningMc("断带抓捕报警", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.BrokenBeltCaptureAlarming),
+                        "断带抓捕报警",
+                        Machine.BucketWheelStackerReclaimer, false, "");
+                }
+                else if (newSystemVariables.BrokenBeltCaptureAlarming == false &&
+                         _systemVariables.BrokenBeltCaptureAlarming == true)
+                {
+                    //斗断带抓捕报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("断带抓捕报警解除", GetUserName(),
+                        Machine.BucketWheelStackerReclaimer);
+                    RemoveWarningDesDict(nameof(newSystemVariables.BrokenBeltCaptureAlarming));
+                }
                 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>取料机报错信息<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
                 //取料机
@@ -4774,45 +4794,45 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     RemoveWarningDesDict(nameof(newSystemVariables.LargeCarBrakeResistorOverheatSwitch_2));
                 }
 
-                if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2 &&
-                    _systemVariables.LargeCarCentralizedLubricationLowOilLevel_2 == false)
-                {
-                    //大车-大车集中润滑低油位
-                    DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位", GetUserName(),
-                        Machine.BucketWheel);
-                    AddOrUpdateWarningDesQueue("大车-大车集中润滑低油位", Machine.BucketWheel);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2),
-                        "大车-大车集中润滑低油位",
-                        Machine.BucketWheel, false, "");
-                }
-                else if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2 == false &&
-                         _systemVariables.LargeCarCentralizedLubricationLowOilLevel_2 == true)
-                {
-                    //大车-大车集中润滑低油位解除
-                    DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位解除", GetUserName(),
-                        Machine.BucketWheel);
-                    RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2));
-                }
+                // if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2 &&
+                //     _systemVariables.LargeCarCentralizedLubricationLowOilLevel_2 == false)
+                // {
+                //     //大车-大车集中润滑低油位
+                //     DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位", GetUserName(),
+                //         Machine.BucketWheel);
+                //     AddOrUpdateWarningDesQueue("大车-大车集中润滑低油位", Machine.BucketWheel);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2),
+                //         "大车-大车集中润滑低油位",
+                //         Machine.BucketWheel, false, "");
+                // }
+                // else if (newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2 == false &&
+                //          _systemVariables.LargeCarCentralizedLubricationLowOilLevel_2 == true)
+                // {
+                //     //大车-大车集中润滑低油位解除
+                //     DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑低油位解除", GetUserName(),
+                //         Machine.BucketWheel);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationLowOilLevel_2));
+                // }
 
-                if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2 &&
-                    _systemVariables.LargeCarCentralizedLubricationOilBlockage_2 == false)
-                {
-                    //大车-大车集中润滑堵油
-                    DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油", GetUserName(),
-                        Machine.BucketWheel);
-                    AddOrUpdateWarningDesQueue("大车-大车集中润滑堵油", Machine.BucketWheel);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2),
-                        "大车-大车集中润滑堵油",
-                        Machine.BucketWheel, false, "");
-                }
-                else if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2 == false &&
-                         _systemVariables.LargeCarCentralizedLubricationOilBlockage_2 == true)
-                {
-                    //大车-大车集中润滑堵油解除
-                    DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油解除", GetUserName(),
-                        Machine.BucketWheel);
-                    RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2));
-                }
+                // if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2 &&
+                //     _systemVariables.LargeCarCentralizedLubricationOilBlockage_2 == false)
+                // {
+                //     //大车-大车集中润滑堵油
+                //     DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油", GetUserName(),
+                //         Machine.BucketWheel);
+                //     AddOrUpdateWarningDesQueue("大车-大车集中润滑堵油", Machine.BucketWheel);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2),
+                //         "大车-大车集中润滑堵油",
+                //         Machine.BucketWheel, false, "");
+                // }
+                // else if (newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2 == false &&
+                //          _systemVariables.LargeCarCentralizedLubricationOilBlockage_2 == true)
+                // {
+                //     //大车-大车集中润滑堵油解除
+                //     DataManager.Instance.InsertHistoryWarningMc("大车-大车集中润滑堵油解除", GetUserName(),
+                //         Machine.BucketWheel);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.LargeCarCentralizedLubricationOilBlockage_2));
+                // }
 
                 if (newSystemVariables.LargeCarForwardLimit_2 && _systemVariables.LargeCarForwardLimit_2 == false)
                 {
@@ -5346,45 +5366,45 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     RemoveWarningDesDict(nameof(newSystemVariables.RotaryOverTorque_2));
                 }
 
-                if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2 &&
-                    _systemVariables.RotaryCentralizedLubricationOilBlockageFault_2 == false)
-                {
-                    //回转-回转集中润滑堵油
-                    DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油", GetUserName(),
-                        Machine.BucketWheel);
-                    AddOrUpdateWarningDesQueue("回转-回转集中润滑堵油", Machine.BucketWheel);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2),
-                        "回转-回转集中润滑堵油",
-                        Machine.BucketWheel, false, "");
-                }
-                else if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2 == false &&
-                         _systemVariables.RotaryCentralizedLubricationOilBlockageFault_2 == true)
-                {
-                    //回转-回转集中润滑堵油解除
-                    DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油解除", GetUserName(),
-                        Machine.BucketWheel);
-                    RemoveWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2));
-                }
+                // if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2 &&
+                //     _systemVariables.RotaryCentralizedLubricationOilBlockageFault_2 == false)
+                // {
+                //     //回转-回转集中润滑堵油
+                //     DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油", GetUserName(),
+                //         Machine.BucketWheel);
+                //     AddOrUpdateWarningDesQueue("回转-回转集中润滑堵油", Machine.BucketWheel);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2),
+                //         "回转-回转集中润滑堵油",
+                //         Machine.BucketWheel, false, "");
+                // }
+                // else if (newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2 == false &&
+                //          _systemVariables.RotaryCentralizedLubricationOilBlockageFault_2 == true)
+                // {
+                //     //回转-回转集中润滑堵油解除
+                //     DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑堵油解除", GetUserName(),
+                //         Machine.BucketWheel);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationOilBlockageFault_2));
+                // }
 
-                if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 &&
-                    _systemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 == false)
-                {
-                    //回转-回转集中润滑低油位
-                    DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位", GetUserName(),
-                        Machine.BucketWheel);
-                    AddOrUpdateWarningDesQueue("回转-回转集中润滑低油位", Machine.BucketWheel);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2),
-                        "回转-回转集中润滑低油位",
-                        Machine.BucketWheel, false, "");
-                }
-                else if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 == false &&
-                         _systemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 == true)
-                {
-                    //回转-回转集中润滑低油位解除
-                    DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位解除", GetUserName(),
-                        Machine.BucketWheel);
-                    RemoveWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2));
-                }
+                // if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 &&
+                //     _systemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 == false)
+                // {
+                //     //回转-回转集中润滑低油位
+                //     DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位", GetUserName(),
+                //         Machine.BucketWheel);
+                //     AddOrUpdateWarningDesQueue("回转-回转集中润滑低油位", Machine.BucketWheel);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2),
+                //         "回转-回转集中润滑低油位",
+                //         Machine.BucketWheel, false, "");
+                // }
+                // else if (newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 == false &&
+                //          _systemVariables.RotaryCentralizedLubricationLowOilLevelFault_2 == true)
+                // {
+                //     //回转-回转集中润滑低油位解除
+                //     DataManager.Instance.InsertHistoryWarningMc("回转-回转集中润滑低油位解除", GetUserName(),
+                //         Machine.BucketWheel);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.RotaryCentralizedLubricationLowOilLevelFault_2));
+                // }
 
                 if (newSystemVariables.BucketWheelMotorOverload_2 &&
                     _systemVariables.BucketWheelMotorOverload_2 == false)
@@ -8357,21 +8377,21 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     RemoveWarningDesDict(nameof(newSystemVariables.RightClampingDeviceTimeout_2));
                 }
 
-                if (newSystemVariables.StrongWindAlarm_2 == true && _systemVariables.StrongWindAlarm_2 == false)
-                {
-                    // 大风报警信号
-                    DataManager.Instance.InsertHistoryWarningMc("大风报警信号", GetUserName(),
-                        Machine.BucketWheel);
-                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.StrongWindAlarm_2), "大风报警信号",
-                        Machine.BucketWheel, false, "");
-                }
-                else if (newSystemVariables.StrongWindAlarm_2 == false && _systemVariables.StrongWindAlarm_2 == true)
-                {
-                    // 大风报警信号解除
-                    DataManager.Instance.InsertHistoryWarningMc("大风报警信号解除", GetUserName(),
-                        Machine.BucketWheel);
-                    RemoveWarningDesDict(nameof(newSystemVariables.StrongWindAlarm_2));
-                }
+                // if (newSystemVariables.StrongWindAlarm_2 == true && _systemVariables.StrongWindAlarm_2 == false)
+                // {
+                //     // 大风报警信号
+                //     DataManager.Instance.InsertHistoryWarningMc("大风报警信号", GetUserName(),
+                //         Machine.BucketWheel);
+                //     AddOrUpdateWarningDesDict(nameof(newSystemVariables.StrongWindAlarm_2), "大风报警信号",
+                //         Machine.BucketWheel, false, "");
+                // }
+                // else if (newSystemVariables.StrongWindAlarm_2 == false && _systemVariables.StrongWindAlarm_2 == true)
+                // {
+                //     // 大风报警信号解除
+                //     DataManager.Instance.InsertHistoryWarningMc("大风报警信号解除", GetUserName(),
+                //         Machine.BucketWheel);
+                //     RemoveWarningDesDict(nameof(newSystemVariables.StrongWindAlarm_2));
+                // }
 
                 if (newSystemVariables.DryFogSystemWaterTankLowLevel_2 == true &&
                     _systemVariables.DryFogSystemWaterTankLowLevel_2 == false)
@@ -9028,6 +9048,25 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
                     DataManager.Instance.InsertHistoryWarningMc("斗轮测温下限报警解除", GetUserName(),
                         Machine.BucketWheel);
                     RemoveWarningDesDict(nameof(newSystemVariables.BucketWheelTemperatureLowerLimitAlarm_2));
+                }
+                
+                if (newSystemVariables.BrokenBeltCaptureAlarming_2 == true &&
+                    _systemVariables.BrokenBeltCaptureAlarming_2 == false)
+                {
+                    // 断带抓捕报警
+                    DataManager.Instance.InsertHistoryWarningMc("断带抓捕报警", GetUserName(),
+                        Machine.BucketWheel);
+                    AddOrUpdateWarningDesDict(nameof(newSystemVariables.BrokenBeltCaptureAlarming_2),
+                        "断带抓捕报警",
+                        Machine.BucketWheel, false, "");
+                }
+                else if (newSystemVariables.BrokenBeltCaptureAlarming_2 == false &&
+                         _systemVariables.BrokenBeltCaptureAlarming_2 == true)
+                {
+                    //斗断带抓捕报警解除
+                    DataManager.Instance.InsertHistoryWarningMc("断带抓捕报警解除", GetUserName(),
+                        Machine.BucketWheel);
+                    RemoveWarningDesDict(nameof(newSystemVariables.BrokenBeltCaptureAlarming_2));
                 }
             }
 
