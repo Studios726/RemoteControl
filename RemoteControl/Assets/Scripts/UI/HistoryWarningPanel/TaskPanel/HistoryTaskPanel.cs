@@ -19,6 +19,7 @@ public class HistoryTaskPanel : MonoBehaviour
     public float Heigh;
     private void Awake()
     {
+        HistoryScrollViewHeighChange.Init();
         searchPanel.SetSearchAction(SearchRecord);
         historyBtn.onClick.AddListener(() =>
         {
@@ -46,7 +47,8 @@ public class HistoryTaskPanel : MonoBehaviour
 
     private void Start()
     {
-        InitRecord();
+        // dateCell.IsDynamic = true;
+        // InitRecord();
     }
 
     private void InitDateDic()
@@ -99,7 +101,9 @@ public class HistoryTaskPanel : MonoBehaviour
     
     private void OnEnable()
     {
-        InitRecord();
+        historyBtn.onClick.Invoke();
+        //
+        // InitRecord();
     }
 
     private void OnDisable()

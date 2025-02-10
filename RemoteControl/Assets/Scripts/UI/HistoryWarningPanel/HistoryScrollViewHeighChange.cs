@@ -11,8 +11,19 @@ public class HistoryScrollViewHeighChange : MonoBehaviour
     public ScrollRect ScrollRect;
     public float RectTransformHeight;
     public float ScrollViewRectTransformHeight;
-    private void Start()
+    private bool isInit;
+    private void Awake()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        if (isInit)
+        {
+            return;
+        }
+        isInit = true;
         RectTransformHeight = RectTransform.rect.height;
         ScrollViewRectTransformHeight = ScrollViewRectTransform.rect.height;
     }

@@ -197,7 +197,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         {
             _stackerReclaimer.searchBtn.onClick.Invoke();
         }
-        if (dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic)
+        if (dateDic[ConstStr.DATABASE_HISTORY_WARNING2_MC].IsDynamic)
         {
             warningSql2 = $"Select * from {ConstStr.DATABASE_HISTORY_WARNING2_MC} Order By time DESC LIMIT 100;";
             _ctr.RequestData(warningSql2, MechanicalType.Reclaimer, PanelType.AlarmPanel);
@@ -281,12 +281,14 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _parameterPanel.SetActive(false);
         dateBtnsGo.SetActive(true);
         SearchPanelActive(true);
+        //默认每次显示实时
+        dateDic[ConstStr.DATABASE_HISTORY_WARNING1_MC].IsDynamic = true;
+        dateDic[ConstStr.DATABASE_HISTORY_WARNING2_MC].IsDynamic = true;
         SetSearchPanelDate(_stackerReclaimer,ConstStr.DATABASE_HISTORY_WARNING1_MC);
         SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_WARNING2_MC);
+        historyTakeBtn.onClick.Invoke();
+        historyPileTakeBtn.onClick.Invoke();
         GetLatestWarningLogs();
-    
-        // _reclaimer.Reset();
-        // _stackerReclaimer.Reset();
     }
 
     private void ShowLogPanel()
@@ -299,12 +301,15 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         _taskPanel.SetActive(false);
         dateBtnsGo.SetActive(true);
         SearchPanelActive(true);
+        //默认每次显示实时
+        dateDic[ConstStr.DATABASE_HISTORY_LOG1_MC].IsDynamic = true;
+        dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic = true;
         SetSearchPanelDate(_stackerReclaimer,ConstStr.DATABASE_HISTORY_LOG1_MC);
         SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_LOG2_MC);
+        historyTakeBtn.onClick.Invoke();
+        historyPileTakeBtn.onClick.Invoke();
         GetLatestOperationLogs();
-     
-        // _reclaimer.Reset();
-        // _stackerReclaimer.Reset();
+      
     }
 
     private void ShowParameterPanel()
