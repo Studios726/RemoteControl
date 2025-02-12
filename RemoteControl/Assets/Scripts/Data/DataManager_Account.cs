@@ -8,12 +8,17 @@ using UnityEngine;
 
 public partial class DataManager
 {
+    public bool IsUseData;
     public List<AccountInfo> AccountInfos
     {
         get => GetAccountList();
     }
     public bool  CheckLoginInfo(string account, string password)
     {
+        if (DataManager.Instance.IsUseData==false)
+        {
+            return true;
+        }
         AccountInfo info = GetAccountInfo(account);
         if (info == null)
         {

@@ -14,7 +14,7 @@ public class AppLauncher : MonoBehaviour
     private int keyCodeCount_k;
     private void Awake()
     {
-
+        DataManager.Instance.IsUseData = false;
         Application.targetFrameRate = 60;
         UIInit();
         _gameMain=this.gameObject.AddComponent<GameMain>();

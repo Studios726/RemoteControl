@@ -102,9 +102,12 @@ public class MySqlHelper
     /// <returns></returns>
     public static int ExecuteSql(string sql)
     {
-        if (sql!="")
+        if (DataManager.Instance.IsUseData)
         {
-            ExecuteSqlAsync(sql);
+            if (sql!="")
+            {
+                ExecuteSqlAsync(sql);
+            }
         }
         return 1;
     }
@@ -187,6 +190,10 @@ public class MySqlHelper
     /// <returns></returns>
     public static DataSet GetDataSet(string sql)
     {
+        if (DataManager.Instance.IsUseData==false)
+        {
+            return null;
+        }
         try
         {
             using (MySqlConnection conn = new MySqlConnection(connstr))
