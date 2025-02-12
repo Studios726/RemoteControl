@@ -70,6 +70,11 @@ public enum OperationType
     /// 定位确认
     /// </summary>
     PositionConfirm=7,
+    /// <summary>
+    /// 2短1长
+    /// </summary>
+    TwoShortOneLong=8
+    
 }
 
 public class TaskData

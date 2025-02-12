@@ -527,7 +527,7 @@ public class TaskCommand
 {
     public int ID { get; set; }
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长
     public int Command_Type { get; set; }
     //0新任务 1恢复上次任务
     public int IsTaskContinued{ get; set; }
@@ -559,6 +559,8 @@ public class TaskCommand
     public int TurnConfirmState{ get; set;}
     //定位确认按钮 点击发送 1
     public int PositionConfirmState{ get; set;}
+    //取料半自动两短一长模式 0关闭 1打开
+    public int TwoShortOneLongState{ get; set;}
     // 取料范围，可以是一个区间
     public TaskRange MaterialRange { get; set; }
 
