@@ -293,39 +293,28 @@ public class ImportantParamsGraphPanel : MonoBehaviour
 
     public void InitChart()
     {
-        trolleyElectricityChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        trolleyElectricityChart_1.series[0].data.Clear();
-        trolleyElectricityChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-        slewingChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        slewingChart_1.series[0].data.Clear();
-        slewingChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-        suspensoidChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        suspensoidChart_1.series[0].data.Clear();
-        suspensoidChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-        cantileverChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        cantileverChart_1.series[0].data.Clear();
-        cantileverChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-        bucketWheelChart_1.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        bucketWheelChart_1.series[0].data.Clear();
-        bucketWheelChart_1.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-
-        trolleyElectricityChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        trolleyElectricityChart_2.series[0].data.Clear();
-        trolleyElectricityChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-        slewingChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        slewingChart_2.series[0].data.Clear();
-        slewingChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-        suspensoidChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        suspensoidChart_2.series[0].data.Clear();
-        suspensoidChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-        cantileverChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        cantileverChart_2.series[0].data.Clear();
-        cantileverChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
-        bucketWheelChart_2.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        bucketWheelChart_2.series[0].data.Clear();
-        bucketWheelChart_2.EnsureChartComponent<Tooltip>().itemFormatter = "{c0}\n{c1}";
+        SetLineChartParms(trolleyElectricityChart_1);
+        SetLineChartParms(slewingChart_1);
+        SetLineChartParms(suspensoidChart_1);
+        SetLineChartParms(cantileverChart_1);
+        SetLineChartParms(bucketWheelChart_1);
+        SetLineChartParms(trolleyElectricityChart_2);
+        
+        SetLineChartParms(trolleyElectricityChart_2);
+        SetLineChartParms(slewingChart_2);
+        SetLineChartParms(suspensoidChart_2);
+        SetLineChartParms(cantileverChart_2);
+        SetLineChartParms(bucketWheelChart_2);
+        SetLineChartParms(trolleyElectricityChart_2);
     }
 
+    public void SetLineChartParms(LineChart lineChart)
+    {
+        lineChart.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
+        lineChart.series[0].data.Clear();
+        lineChart.EnsureChartComponent<Tooltip>().itemFormatter = "{c1}\n{c0}";
+        lineChart.EnsureChartComponent<Tooltip>().numericFormatter = "o";
+    }
     public void ResetLastButtonState(ButtonCell btn)
     {
         if (lastButton != null)

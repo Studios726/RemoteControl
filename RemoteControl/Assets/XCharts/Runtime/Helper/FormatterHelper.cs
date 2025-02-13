@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -25,7 +26,7 @@ namespace XCharts.Runtime
         }
 
         /// <summary>
-        /// 替换字符串中的通配符，支持的通配符有{.}、{a}、{b}、{c}、{d}、{e}、{f}、{g}、{h}、{y}。
+        /// 替换字符串中的通配符，支持的通配符有{.}、{a}、{b}、{c}、{d}、{e}、{f}、{g}、{h}、{y}。{o}
         /// </summary>
         /// <param name="content">要替换的字符串</param>
         /// <param name="dataIndex">选中的数据项serieData索引</param>
@@ -279,6 +280,10 @@ namespace XCharts.Runtime
                 else if (p == 'h' || p == 'H')
                 {
                     content = content.Replace(old, "#" + ChartCached.ColorToStr(color));
+                }
+                else if (p == 'o' || p == 'O')
+                {
+                    content = content.Replace(old, ChartCached.NumberToStr(dataCount, numericFormatter));
                 }
                 else if (p == 'y' || p == 'Y')
                 {

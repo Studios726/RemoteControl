@@ -11,6 +11,8 @@ namespace XCharts.Runtime
         private const string NUMERIC_FORMATTER_d = "d";
         private const string NUMERIC_FORMATTER_X = "X";
         private const string NUMERIC_FORMATTER_x = "x";
+        private const string NUMERIC_FORMATTER_O = "O";
+        private const string NUMERIC_FORMATTER_o = "o";
         private static readonly string s_DefaultAxis = "axis_";
         private static CultureInfo ci = new CultureInfo("en-us"); // "en-us", "zh-cn", "ar-iq", "de-de"
         private static Dictionary<Color, string> s_ColorToStr = new Dictionary<Color, string>(100);
@@ -55,6 +57,20 @@ namespace XCharts.Runtime
                 if (string.IsNullOrEmpty(formatter))
                 {
                     s_NumberToStr[value][formatter] = value.ToString();
+                }else if (formatter.StartsWith(NUMERIC_FORMATTER_O)||formatter.StartsWith(NUMERIC_FORMATTER_o))
+                {
+                    if (value.ToString().Length>=9)
+                    {
+                        DateTime dateTime =
+                            new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local).AddSeconds(
+                                value);
+                        s_NumberToStr[value][formatter] = dateTime.ToString("HH:mm:ss");
+                    }
+                    else
+                    {
+                        s_NumberToStr[value][formatter] = value.ToString();
+                    }
+                   
                 }
                 else if (formatter.StartsWith(NUMERIC_FORMATTER_D) ||
                     formatter.StartsWith(NUMERIC_FORMATTER_d) ||

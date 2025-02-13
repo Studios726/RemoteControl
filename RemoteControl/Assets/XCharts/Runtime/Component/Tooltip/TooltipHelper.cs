@@ -47,12 +47,13 @@ namespace XCharts.Runtime
                         chart);
                     foreach (var item in content.Split('|'))
                     {
-                        string[] strings = item.ToString().Split("\n");
-                        DateTime dateTime =
-                            new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local).AddSeconds(
-                                double.Parse(strings[0]));
-                        string num = float.Parse(strings[1]).ToString("F2");
-                        param.columns.Add(num+"\n"+dateTime.ToString("HH:mm:ss"));
+                        // string[] strings = item.ToString().Split("\n");
+                        // DateTime dateTime =
+                        //     new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local).AddSeconds(
+                        //         double.Parse(strings[0]));
+                        // string num = float.Parse(strings[1]).ToString("F2");
+                        // param.columns.Add(num+"\n"+dateTime.ToString("HH:mm:ss"));
+                        param.columns.Add(item);
                     }
                 }
             }
