@@ -48,6 +48,8 @@ public enum ChartName
     SuspendedGelCurrent_2,
     CantileverCurrent_1,
     CantileverCurrent_2,
+    allElectricity_1,
+    allElectricity_2
 }
 
 public class HistoryChartData
@@ -86,11 +88,13 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public LineChart suspensoidChart_1;
     public LineChart cantileverChart_1;
     public LineChart bucketWheelChart_1;
+    public LineChart allChart_1;
     public LineChart trolleyElectricityChart_2;
     public LineChart slewingChart_2;
     public LineChart suspensoidChart_2;
     public LineChart cantileverChart_2;
     public LineChart bucketWheelChart_2;
+    public LineChart allChart_2;
     private MySqlDataReader _dataReader = null;
     private DataSet dataSet;
     public ButtonCell bucketWheelCurrent_1; //斗轮电流
@@ -103,18 +107,29 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public ButtonCell suspendedGelCurrent_2;
     public ButtonCell cantileverCurrent_1; //悬臂流量
     public ButtonCell cantileverCurrent_2;
+    public ButtonCell allElectricity_1; //全部电流
+    public ButtonCell allElectricity_2;
     public SearchPanel searchPanel;
 
-    public Button historyBtn;//历史记录
-    public Button dynamicBtn;//实时数据
+    public Button historyBtn; //历史记录
+    public Button dynamicBtn; //实时数据
     private ButtonCell lastButton;
     private LineChart lastChart;
     private HistoryChartData historyChartData;
     private bool dynamicUpdateData;
     private ChartName curChartName;
     private Queue<CData> tempChartData = new Queue<CData>();
+    private Dictionary<int, Queue<CData>> allTempChartData = new Dictionary<int, Queue<CData>>();
     private float tempChartValue;
     private Dictionary<string, DateCell> dateDic = new Dictionary<string, DateCell>();
+
+    public List<string> ElectricityTableNameList = new List<string>()
+    {
+        ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
+        ConstStr.DATABASE_HISTORY_CARTELECTRICITY_MC,
+        ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
+        ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC
+    };
 
     public void Start()
     {
@@ -125,7 +140,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.BucketWheelCurrent_1;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(bucketWheelCurrent_1));
-       
         });
 
         AddOnClickListener(bucketWheelCurrent_2, () =>
@@ -134,7 +148,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.BucketWheelCurrent_2;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(bucketWheelCurrent_2));
-        
         });
         AddOnClickListener(trolleyCurrent_1, () =>
         {
@@ -142,7 +155,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.TrolleyCurrent_1;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(trolleyCurrent_1));
-   
         });
         AddOnClickListener(trolleyCurrent_2, () =>
         {
@@ -150,7 +162,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.TrolleyCurrent_2;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(trolleyCurrent_2));
-        
         });
         AddOnClickListener(slewingCurrent_1, () =>
         {
@@ -158,7 +169,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.SlewingCurrent_1;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(slewingCurrent_1));
-       
         });
         AddOnClickListener(slewingCurrent_2, () =>
         {
@@ -166,7 +176,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.SlewingCurrent_2;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(slewingCurrent_2));
-        
         });
         AddOnClickListener(suspendedGelCurrent_1, () =>
         {
@@ -174,7 +183,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.SuspendedGelCurrent_1;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(suspendedGelCurrent_1));
-        
         });
         AddOnClickListener(suspendedGelCurrent_2, () =>
         {
@@ -182,7 +190,6 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.SuspendedGelCurrent_2;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(suspendedGelCurrent_2));
-          
         });
         AddOnClickListener(cantileverCurrent_1, () =>
         {
@@ -190,8 +197,8 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             curChartName = ChartName.CantileverCurrent_1;
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(cantileverCurrent_1));
-         
         });
+
         AddOnClickListener(cantileverCurrent_2, () =>
         {
             ResetLastButtonState(cantileverCurrent_2);
@@ -199,6 +206,22 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(cantileverCurrent_2));
         });
+
+        AddOnClickListener(allElectricity_1, (() =>
+        {
+            ResetLastButtonState(allElectricity_1);
+            curChartName = ChartName.allElectricity_1;
+            SetSearchPanelDate(curChartName);
+            UpdateCurChart(nameof(allElectricity_1));
+        }));
+        AddOnClickListener(allElectricity_2, (() =>
+        {
+            ResetLastButtonState(allElectricity_2);
+            curChartName = ChartName.allElectricity_2;
+            SetSearchPanelDate(curChartName);
+            UpdateCurChart(nameof(allElectricity_2));
+        }));
+
         historyBtn.onClick.AddListener((() =>
         {
             historyBtn.gameObject.SetActive(false);
@@ -207,6 +230,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             {
                 dateDic[curChartName.ToString()].IsDynamic = true;
             }
+
             dynamicUpdateData = true;
             searchPanel.gameObject.SetActive(false);
         }));
@@ -218,6 +242,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             {
                 dateDic[curChartName.ToString()].IsDynamic = false;
             }
+
             searchPanel.gameObject.SetActive(true);
             dynamicUpdateData = false;
             searchPanel.searchBtn.onClick.Invoke();
@@ -246,14 +271,16 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         dateDic.Add(ChartName.SuspendedGelCurrent_2.ToString(), new DateCell(startDate, endDate));
         dateDic.Add(ChartName.CantileverCurrent_1.ToString(), new DateCell(startDate, endDate));
         dateDic.Add(ChartName.CantileverCurrent_2.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.allElectricity_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.allElectricity_2.ToString(), new DateCell(startDate, endDate));
     }
 
     private void UpdateDateDic(ChartName chartName)
     {
         if (dateDic.ContainsKey(chartName.ToString()))
         {
-            dateDic[chartName.ToString()].StartTime =searchPanel?.GetStartDateText();
-            dateDic[chartName.ToString()].EndTime =searchPanel?.GetEndDateText();
+            dateDic[chartName.ToString()].StartTime = searchPanel?.GetStartDateText();
+            dateDic[chartName.ToString()].EndTime = searchPanel?.GetEndDateText();
         }
     }
 
@@ -265,21 +292,24 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             {
                 string[] startTime = dateDic[chartName.ToString()].StartTime.Split("-");
                 string[] endTime = dateDic[chartName.ToString()].EndTime.Split("-");
-                if (startTime.Length>=4&&endTime.Length>=4)
+                if (startTime.Length >= 4 && endTime.Length >= 4)
                 {
                     searchPanel.SetDateText(startTime, endTime);
                     dynamicUpdateData = dateDic[chartName.ToString()].IsDynamic;
                 }
-                historyBtn.gameObject.SetActive(dateDic[chartName.ToString()].IsDynamic==false);
+
+                historyBtn.gameObject.SetActive(dateDic[chartName.ToString()].IsDynamic == false);
                 dynamicBtn.gameObject.SetActive(dateDic[chartName.ToString()].IsDynamic);
-                searchPanel.gameObject.SetActive(dateDic[chartName.ToString()].IsDynamic==false);
+                searchPanel.gameObject.SetActive(dateDic[chartName.ToString()].IsDynamic == false);
             }
         }
     }
+
     private void OnEnable()
     {
         SetSearchPanelDate(curChartName);
         tempChartData.Clear();
+        allTempChartData.Clear();
         EventManager.Instance.AddListener(EventName.UpdateChartData, DynamicUpdateData);
     }
 
@@ -288,6 +318,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         dynamicUpdateData = false;
         searchPanel.Reset();
         tempChartData.Clear();
+        allTempChartData.Clear();
         EventManager.Instance.RemoveListener(EventName.UpdateChartData, DynamicUpdateData);
     }
 
@@ -298,23 +329,54 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         SetLineChartParms(suspensoidChart_1);
         SetLineChartParms(cantileverChart_1);
         SetLineChartParms(bucketWheelChart_1);
-        SetLineChartParms(trolleyElectricityChart_2);
-        
+        SetLineChartParms(bucketWheelChart_1);
+        // SetLineChartParms(allChart_1);
+
         SetLineChartParms(trolleyElectricityChart_2);
         SetLineChartParms(slewingChart_2);
         SetLineChartParms(suspensoidChart_2);
         SetLineChartParms(cantileverChart_2);
         SetLineChartParms(bucketWheelChart_2);
         SetLineChartParms(trolleyElectricityChart_2);
+        // SetLineChartParms(allChart_2);
+        SetAllChartSerie(allChart_2);
+        SetAllChartSerie(allChart_1);
+    }
+
+    //设置所有电流名字和字体大小
+    public void SetAllChartSerie(LineChart lineChart)
+    {
+        lineChart.RemoveData();
+        lineChart.AddSerie<Line>().serieName = "斗轮电流";
+        lineChart.AddSerie<Line>().serieName = "大车电流";
+        lineChart.AddSerie<Line>().serieName = "回转电流";
+        lineChart.AddSerie<Line>().serieName = "悬胶电流";
+        lineChart.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
+        ClearLineChartSeries(lineChart);
     }
 
     public void SetLineChartParms(LineChart lineChart)
     {
         lineChart.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
-        lineChart.series[0].data.Clear();
+        ClearLineChartSeries(lineChart);
+        SetLineChartTooltip(lineChart);
+    }
+
+    //清理所有series数据
+    public void ClearLineChartSeries(LineChart lineChart)
+    {
+        for (int i = 0; i < lineChart.series.Count; i++)
+        {
+            lineChart.series[i].data.Clear();
+        }
+    }
+
+    public void SetLineChartTooltip(LineChart lineChart)
+    {
         lineChart.EnsureChartComponent<Tooltip>().itemFormatter = "{c1}\n{c0}";
         lineChart.EnsureChartComponent<Tooltip>().numericFormatter = "o";
     }
+
     public void ResetLastButtonState(ButtonCell btn)
     {
         if (lastButton != null)
@@ -326,6 +388,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         lastButton.SetSelectState(true, false);
         // dynamicUpdateData = true;
         tempChartData.Clear();
+        allTempChartData.Clear();
         searchPanel.Reset();
     }
 
@@ -453,14 +516,26 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             historyChartData.SetData(slewingChart_2, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC, Machine.BucketWheel);
             if (slewingChart_2.series[0].data.Count <= 0)
             {
-                  searchPanel.searchBtn.onClick?.Invoke();
+                searchPanel.searchBtn.onClick?.Invoke();
                 // GetSqlData(slewingChart_2, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,Machine.BucketWheel,false,"","",true);
             }
+        }
+        else if (str == nameof(allElectricity_1))
+        {
+            ResetLastChart(allChart_1);
+            historyChartData.SetData(allChart_1, "ALL", Machine.BucketWheelStackerReclaimer);
+            searchPanel.searchBtn.onClick?.Invoke();
+        }
+        else if (str == nameof(allElectricity_2))
+        {
+            ResetLastChart(allChart_2);
+            historyChartData.SetData(allChart_2, "ALL", Machine.BucketWheel);
+            searchPanel.searchBtn.onClick?.Invoke();
         }
     }
 
     public async void GetSqlData(LineChart lineChart, string chartName, Machine machine, bool isUseTime = false,
-        string startTime = "", string endTime = "", bool isLimit = false, int limit = 1000)
+        string startTime = "", string endTime = "", bool isLimit = false, int limit = 1000, int serieIndex = 0)
     {
         if (isLimit == false)
         {
@@ -479,23 +554,24 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             });
         }
 
-        dynamicUpdateData = false;
+        // dynamicUpdateData = false;
         if (dataSet != null)
         {
-            lineChart.series[0].data.Clear();
+            lineChart.series[serieIndex].data.Clear();
         }
-        if (dataSet == null||dataSet.Tables.Count<=0||dataSet.Tables[0].Rows.Count<=0)
+
+        if (dataSet == null || dataSet.Tables.Count <= 0 || dataSet.Tables[0].Rows.Count <= 0)
         {
             return;
         }
-       
+
         UpdateDateDic(curChartName);
         int addNum = dataSet.Tables[0].Rows.Count / 1000;
         addNum = addNum == 0 ? 1 : addNum;
         DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
         for (int i = dataRowCollection.Count - 1; i >= 0; i -= addNum)
         {
-            lineChart.AddData(0,
+            lineChart.AddData(serieIndex,
                 DateTime.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME].ToString()),
                 float.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_VALUE].ToString()));
         }
@@ -508,8 +584,22 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             return;
         }
 
-        GetSqlData(historyChartData.linechart, historyChartData.TableName, historyChartData.Machine, true, startTime,
-            endTime);
+        if (historyChartData.TableName == "ALL") //选中电流展示数据处理
+        {
+            Debug.Log($">>>>>>>>>>>>{startTime}  {endTime} {mechanicalType}");
+            for (int i = 0; i < historyChartData.linechart.series.Count; i++)
+            {
+                GetSqlData(historyChartData.linechart, ElectricityTableNameList[i], historyChartData.Machine, true,
+                    startTime,
+                    endTime, false, 0, i);
+            }
+        }
+        else
+        {
+            GetSqlData(historyChartData.linechart, historyChartData.TableName, historyChartData.Machine, true,
+                startTime,
+                endTime);
+        }
     }
 
     public void UpdateCartElectricity()
@@ -541,7 +631,28 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             lastChart.AddData(0, data.date, data.Value);
         }
     }
-
+    private void UpdateChartData(float value,int serieIndex=0)
+    {
+        if (lastChart == null)
+        {
+            return;
+        }
+        lastChart.series[serieIndex].ClearData();
+        if (!allTempChartData.ContainsKey(serieIndex))
+        {
+            allTempChartData.Add(serieIndex,new Queue<CData>());
+        }
+        allTempChartData[serieIndex].Enqueue(new CData(DateTime.Now, value));
+        if (allTempChartData[serieIndex].Count > 200)
+        {
+            allTempChartData[serieIndex].Dequeue();
+        }
+        
+        foreach (var data in allTempChartData[serieIndex])
+        {
+            lastChart.AddData(serieIndex, data.date, data.Value);
+        }
+    }
     public void DynamicUpdateData(object sender, EventArgs e)
     {
         if (dynamicUpdateData && GameDataManager.Instance.SystemVariables != null)
@@ -588,6 +699,20 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             {
                 FlowMeter_data data = GameDataManager.Instance.GetFlowMeterData(Machine.BucketWheel);
                 tempChartValue = data == null ? 0 : (float)data.FlowRealtime;
+            }else if (curChartName== ChartName.allElectricity_1)
+            {
+                UpdateChartData(GameDataManager.Instance.SystemVariables.BucketWheelElectricCurrent, 0);
+                UpdateChartData(GameDataManager.Instance.SystemVariables.LargeCarElectricCurrent, 1);
+                UpdateChartData(GameDataManager.Instance.SystemVariables.RotaryElectricCurrent, 2);
+                UpdateChartData(GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent, 3);
+               return;
+            }else if (curChartName== ChartName.allElectricity_2)
+            {
+                UpdateChartData(GameDataManager.Instance.SystemVariables.BucketWheelElectricCurrent_2, 0);
+                UpdateChartData(GameDataManager.Instance.SystemVariables.LargeCarElectricCurrent_2, 1);
+                UpdateChartData(GameDataManager.Instance.SystemVariables.RotaryElectricCurrent_2, 2);
+                UpdateChartData(GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent_2, 3);
+                return;
             }
 
             UpdateChartData(tempChartValue);
