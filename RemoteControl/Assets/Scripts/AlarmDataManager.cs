@@ -35,7 +35,9 @@ public class AlarmDataManager : Singleton<AlarmDataManager>
         "BucketWheelOverTorqueSwitch",
         "BucketWheelOverTorqueSwitch_2",
         "LargeCarFault",
-        "LargeCarFault_2"
+        "LargeCarFault_2",
+        "SR1_REMOTE_PLANT_COMM_FAULT_0",
+        "SR1_REMOTE_PLANT_COMM_FAULT_0_2"
     };
     public string GetUserName()
     {
