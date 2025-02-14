@@ -543,6 +543,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                             taskVariables.McData[i].AllData.ProcessingProgress.ToString());
                     }
                 }
+                PopConfirmPanelByTaskCode(taskVariables.McData[i].AllData.Code);
             }
         }
         else
@@ -557,8 +558,17 @@ public class TaskDataManager : Singleton<TaskDataManager>
                 }
             }
         }
+
     }
 
+    public void PopConfirmPanelByTaskCode(int code)
+    {
+        //1002，1015，1032，826
+        if (code==1002||code==1015||code==1032||code==826)
+        {
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(GetDesByTaskCode(code),"任务规划", null, null));
+        }
+    }
     //处理定时任务
     public void AddOrUpdateTaskData(TaskCommand taskCommand)
     {
