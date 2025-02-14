@@ -109,6 +109,9 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public ButtonCell cantileverCurrent_2;
     public ButtonCell allElectricity_1; //全部电流
     public ButtonCell allElectricity_2;
+    
+    public SelectElectricityShowItem selectElectricityShowItem_1;
+    public SelectElectricityShowItem selectElectricityShowItem_2;
     public SearchPanel searchPanel;
 
     public Button historyBtn; //历史记录
@@ -248,6 +251,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             searchPanel.searchBtn.onClick.Invoke();
         }));
         InitChart();
+        InitSelectElectricityShowItem();
         lastButton = bucketWheelCurrent_1;
         historyChartData = new HistoryChartData();
         historyChartData.SetData(bucketWheelChart_1, ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
@@ -343,6 +347,42 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         SetAllChartSerie(allChart_1);
     }
 
+    public void InitSelectElectricityShowItem()
+    {
+        selectElectricityShowItem_1.BucketWheelToggleAction = (b =>
+        {
+            allChart_1.series[0].show=b;
+        });
+        selectElectricityShowItem_1.TrolleyToggleAction = (b =>
+        {
+            allChart_1.series[1].show=b;
+        });
+        selectElectricityShowItem_1.SlewingToggleAction = (b =>
+        {
+            allChart_1.series[2].show=b;
+        });
+        selectElectricityShowItem_1.SuspendedGelToggleAction = (b =>
+        {
+            allChart_1.series[3].show=b;
+        });
+        
+        selectElectricityShowItem_2.BucketWheelToggleAction = (b =>
+        {
+            allChart_2.series[0].show=b;
+        });
+        selectElectricityShowItem_2.TrolleyToggleAction = (b =>
+        {
+            allChart_2.series[1].show=b;
+        });
+        selectElectricityShowItem_2.SlewingToggleAction = (b =>
+        {
+            allChart_2.series[2].show=b;
+        });
+        selectElectricityShowItem_2.SuspendedGelToggleAction = (b =>
+        {
+            allChart_2.series[3].show=b;
+        });
+    }
     //设置所有电流名字和字体大小
     public void SetAllChartSerie(LineChart lineChart)
     {
@@ -410,6 +450,8 @@ public class ImportantParamsGraphPanel : MonoBehaviour
 
     public void UpdateCurChart(string str)
     {
+        selectElectricityShowItem_1.gameObject.SetActive(false);
+        selectElectricityShowItem_2.gameObject.SetActive(false);
         if (str == nameof(bucketWheelCurrent_1))
         {
             ResetLastChart(bucketWheelChart_1);
@@ -501,6 +543,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         }
         else if (str == nameof(slewingCurrent_1))
         {
+          
             ResetLastChart(slewingChart_1);
             historyChartData.SetData(slewingChart_1, ConstStr.DATABASE_HISTORY_ROTELECTRICITY_MC,
                 Machine.BucketWheelStackerReclaimer);
@@ -522,12 +565,14 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         }
         else if (str == nameof(allElectricity_1))
         {
+            selectElectricityShowItem_1.gameObject.SetActive(true);
             ResetLastChart(allChart_1);
             historyChartData.SetData(allChart_1, "ALL", Machine.BucketWheelStackerReclaimer);
             searchPanel.searchBtn.onClick?.Invoke();
         }
         else if (str == nameof(allElectricity_2))
         {
+            selectElectricityShowItem_2.gameObject.SetActive(true);
             ResetLastChart(allChart_2);
             historyChartData.SetData(allChart_2, "ALL", Machine.BucketWheel);
             searchPanel.searchBtn.onClick?.Invoke();
