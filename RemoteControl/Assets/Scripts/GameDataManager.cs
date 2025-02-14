@@ -156,6 +156,7 @@ public class GameDataManager : Singleton<GameDataManager>
         PileTaskPlc(systemVariables);
         AlarmDataManager.Instance.RecordWarning(systemVariables, _systemVariables);
         _systemVariables = systemVariables;
+        TestData();
         _rcConnectionState = _systemVariables.D1PLC1CommunicationState;
         if (_systemVariables.SuspensionGlueRunCommand && IsCanPop && _systemVariables.BeltRealyDis > 0 &&
             curAccountInfo != null)
@@ -179,6 +180,13 @@ public class GameDataManager : Singleton<GameDataManager>
         EventManager.Instance.TriggerEvent(EventName.UpdateRcData, null);
     }
 
+    public void TestData()
+    {
+        // _systemVariables.BucketWheelElectricCurrent = 2;
+        // _systemVariables.LargeCarElectricCurrent = 3;
+        // _systemVariables.RotaryElectricCurrent = 4;
+        // _systemVariables.SuspensionBeltElectricCurrent = 5;
+    }
     public void SetFlowMeterData(List<FlowMeter_data> datas)
     {
         flowMeterDataList = datas;
