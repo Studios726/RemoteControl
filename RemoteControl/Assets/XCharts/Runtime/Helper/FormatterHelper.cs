@@ -115,7 +115,7 @@ namespace XCharts.Runtime
                         if (p != 'J' || p != 'j')
                         {
                             DateTime dateTime = DateTimeUtil.GetDateTime((int)serie.context.param.valueX);
-                            content = content.Replace(old, dateTime.ToString("hh:mm:ss"));
+                            content = content.Replace(old, dateTime.ToString("HH:mm:ss"));
                         }
                         else
                         {

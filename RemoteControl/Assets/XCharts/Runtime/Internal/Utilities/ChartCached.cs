@@ -61,9 +61,7 @@ namespace XCharts.Runtime
                 {
                     if (value.ToString().Length>=9)
                     {
-                        DateTime dateTime =
-                            new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local).AddSeconds(
-                                value);
+                        DateTime dateTime = DateTimeUtil.GetDateTime((int)value);
                         s_NumberToStr[value][formatter] = dateTime.ToString("HH:mm:ss");
                     }
                     else

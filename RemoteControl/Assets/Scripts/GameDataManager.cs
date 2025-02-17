@@ -182,8 +182,10 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void TestData()
     {
-        // _systemVariables.BucketWheelElectricCurrent = 2;
-        // _systemVariables.LargeCarElectricCurrent = 3;
+        // _systemVariables.BucketWheelMaterialUnloadingRunning = true;
+        // _systemVariables.BucketWheelMotorRunning =true;
+        // _systemVariables.BucketWheelMaterialLoadingRunning = true;
+        // _systemVariables.AllowBucketWheelMaterialUnloading = true;
         // _systemVariables.RotaryElectricCurrent = 4;
         // _systemVariables.SuspensionBeltElectricCurrent = 5;
     }
