@@ -392,6 +392,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         lineChart.AddSerie<Line>().serieName = "回转电流";
         lineChart.AddSerie<Line>().serieName = "悬胶电流";
         lineChart.EnsureChartComponent<XAxis>().axisLabel.textStyle.fontSize = 14;
+        lineChart.EnsureChartComponent<Tooltip>().titleFormatter = "{j}";
         ClearLineChartSeries(lineChart);
     }
 

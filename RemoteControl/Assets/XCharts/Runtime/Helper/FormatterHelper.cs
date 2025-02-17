@@ -9,7 +9,7 @@ namespace XCharts.Runtime
     public static class FormatterHelper
     {
         public const string PH_NN = "\n";
-        private static Regex s_Regex = new Regex(@"{([a-h|.|y]\d*)(:\d+(-\d+)?)?(:[c-g|x|p|r]\d*|:0\.#*)?}", RegexOptions.IgnoreCase);
+        private static Regex s_Regex = new Regex(@"{([a-h|.|y|j]\d*)(:\d+(-\d+)?)?(:[c-g|x|p|r]\d*|:0\.#*)?}", RegexOptions.IgnoreCase);
         private static Regex s_RegexSub = new Regex(@"(0\.#*)|(\d+-\d+)|(\w+)|(\.)", RegexOptions.IgnoreCase);
         private static Regex s_RegexN = new Regex(@"^\d+", RegexOptions.IgnoreCase);
         private static Regex s_RegexN_N = new Regex(@"\d+-\d+", RegexOptions.IgnoreCase);
@@ -96,7 +96,7 @@ namespace XCharts.Runtime
                         content = content.Replace(old, serie.serieName);
                     }
                 }
-                else if (p == 'b' || p == 'B' || p == 'e' || p == 'E')
+                else if (p == 'b' || p == 'B' || p == 'e' || p == 'E'|| p == 'j' || p == 'J')
                 {
                     var bIndex = dataIndex;
                     if (argsCount >= 2)
@@ -104,7 +104,7 @@ namespace XCharts.Runtime
                         var args1Str = args[1].ToString();
                         if (s_RegexN.IsMatch(args1Str)) bIndex = int.Parse(args1Str);
                     }
-                    var needCategory = p != 'e' && p != 'E' && serie.defaultColorBy != SerieColorBy.Data;
+                    var needCategory = p != 'e' && p != 'E' &&p != 'j' && p != 'J'  && serie.defaultColorBy != SerieColorBy.Data;
                     if (needCategory)
                     {
                         var category = chart.GetTooltipCategory(serie);
@@ -112,8 +112,16 @@ namespace XCharts.Runtime
                     }
                     else
                     {
-                        var serieData = serie.GetSerieData(bIndex);
-                        content = content.Replace(old, serieData.name);
+                        if (p != 'J' || p != 'j')
+                        {
+                            DateTime dateTime = DateTimeUtil.GetDateTime((int)serie.context.param.valueX);
+                            content = content.Replace(old, dateTime.ToString("hh:mm:ss"));
+                        }
+                        else
+                        {
+                            var serieData = serie.GetSerieData(bIndex);
+                            content = content.Replace(old, serieData.name);
+                        }
                     }
                 }
                 else if (p == 'g' || p == 'G')

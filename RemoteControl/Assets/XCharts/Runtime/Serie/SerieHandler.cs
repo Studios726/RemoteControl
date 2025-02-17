@@ -636,6 +636,7 @@ namespace XCharts.Runtime
             param.serieData = serieData;
             param.dataCount = serie.dataCount;
             param.value = serieData.GetData(dimension);
+            serie.GetXYData(dataIndex, null, out param.valueX, out double Y );
             param.ignore = ignore;
             param.total = serie.yTotal;
             param.color = chart.GetMarkColor(serie, serieData);

@@ -15,6 +15,7 @@ namespace XCharts.Runtime
         public SerieData serieData;
         public int dataCount;
         public double value;
+        public double valueX;
         public double total;
         public Color32 color;
         public string itemFormatter;
