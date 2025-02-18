@@ -163,7 +163,7 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             IsCanPop = false;
             Timer.Register(_systemVariables.BeltRealyDis, false, false, (() => { IsCanPop = true; }));
-            PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis, Machine.BucketWheelStackerReclaimer);
+            PileTakeMaterPop(TaskType.None, _systemVariables.BeltRealyDis, Machine.BucketWheelStackerReclaimer);
         }
 
 
@@ -229,8 +229,8 @@ public class GameDataManager : Singleton<GameDataManager>
         }
         else
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("悬胶运行倒计时 {0}s", "斗轮机", null, null, time));
+            UIManager.Instance.OpenUI(uiID,
+                new ConfirmPanelArgs("悬胶运行倒计时 {0}s", title, null, null, time, 0, uiID));
         }
     }
 
