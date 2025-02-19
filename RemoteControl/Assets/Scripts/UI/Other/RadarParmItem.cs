@@ -10,7 +10,7 @@ public class RadarParmItem : MonoBehaviour
     public InputField setValueInputField;
     public Machine machine;
     private string commondName;
-
+    public Action onEndEdit;
     private void Start()
     {
         setValueInputField.onEndEdit.AddListener(((string value) =>
@@ -19,6 +19,7 @@ public class RadarParmItem : MonoBehaviour
             if (float.TryParse(value,out num))
             {
                 TaskDataManager.Instance.UpdateCommonTaskParameters(this.commondName,num.ToString(),machine);
+                onEndEdit?.Invoke();
             }
            
         }));

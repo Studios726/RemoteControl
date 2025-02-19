@@ -377,9 +377,22 @@ public class TaskDataManager : Singleton<TaskDataManager>
     public void SendTaskCommand(TaskCommand taskCommand)
     {
         taskCommand.CommonTaskParameters = GetCommonTaskParameters(taskCommand.Machine);
+        taskCommand.ReversingValueList  = new List<float>()
+        {
+            taskCommand.CommonTaskParameters.BucketLidarDisLeft, taskCommand.CommonTaskParameters.BucketLidarDisRight
+        };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
+    public void SendTaskLidarDis(float left, float right,Machine machine)
+    {
+        TaskCommand taskCommand = new TaskCommand();
+        taskCommand.Command_Type= 7;
+        taskCommand.Machine= machine;
+        taskCommand.ReversingValueList = new List<float>() { left, right };
+        MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
+        Debug.Log($"SendTaskLidarDis:{left},{right} {machine}");
+    }
     public CommonTaskParameters GetCommonTaskParameters(Machine machine)
     {
         CommonTaskParameters commonTaskParameters = new CommonTaskParameters();

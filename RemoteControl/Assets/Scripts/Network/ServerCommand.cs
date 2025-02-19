@@ -527,7 +527,7 @@ public class TaskCommand
 {
     public int ID { get; set; }
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长 7雷达左侧右侧设定
     public int Command_Type { get; set; }
     //0新任务 1恢复上次任务
     public int IsTaskContinued{ get; set; }
@@ -581,6 +581,8 @@ public class TaskCommand
     public CommonTaskParameters CommonTaskParameters{ get; set; }
     //任务结束执行方式[调零，关设备] 0 否 1 是
     public List<int> FinishMethod {  get; set; }
+    //雷达左侧右侧距离设定
+    public List<float> ReversingValueList {  get; set; }
 }
 public class AllData
 {

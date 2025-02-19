@@ -47,7 +47,15 @@ public class TaskParmsSetting : MonoBehaviour
       FetchVerticalRangeAdd.InitName(ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD,"左右范围增加的长度",Machine);
       FetchHorizontalRangeSub.InitName(ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB,"沿着轨道方向的取料范围缩减",Machine);
       LeftRadarPos.InitName(ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT,Machine);
+      LeftRadarPos.onEndEdit = (() =>
+      {
+         TaskDataManager.Instance.SendTaskLidarDis(float.Parse(LeftRadarPos.setValueInputField.text),float.Parse(RightRadarPos.setValueInputField.text),Machine);
+      });
       RightRadarPos.InitName(ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT,Machine);
+      RightRadarPos.onEndEdit = (() =>
+      {
+         TaskDataManager.Instance.SendTaskLidarDis(float.Parse(LeftRadarPos.setValueInputField.text),float.Parse(RightRadarPos.setValueInputField.text),Machine);
+      });
       machineName = Machine == Machine.BucketWheelStackerReclaimer ? "堆取料机" : "取料机";
    }
 
