@@ -517,7 +517,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                             DataManager.Instance.UpdateHistoryTaskMcCompleteState(taskVariables.McData[i].TaskID,
                                 TaskStatus.Completed,
                                 taskVariables.McData[i].AllData.TaskEndTime);
-                            GameDataManager.Instance.UpdateSCAData(1);
+                            // GameDataManager.Instance.UpdateSCAData(1);
                         }
                     }
                     else if (taskData.TaskState != taskVariables.McData[i].AllData.Code.ToString())
