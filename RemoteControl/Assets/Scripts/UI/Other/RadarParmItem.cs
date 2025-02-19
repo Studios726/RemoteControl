@@ -11,6 +11,7 @@ public class RadarParmItem : MonoBehaviour
     public Machine machine;
     private string commondName;
     public Action onEndEdit;
+    private int maxNum;
     private void Start()
     {
         setValueInputField.onEndEdit.AddListener(((string value) =>
@@ -18,6 +19,14 @@ public class RadarParmItem : MonoBehaviour
             float num = 0;
             if (float.TryParse(value,out num))
             {
+                if (maxNum!=-1)
+                {
+                    if (num>maxNum)
+                    {
+                        num=maxNum;
+                    }
+                }
+                setValueInputField.text=num.ToString();
                 TaskDataManager.Instance.UpdateCommonTaskParameters(this.commondName,num.ToString(),machine);
                 onEndEdit?.Invoke();
             }
@@ -25,8 +34,9 @@ public class RadarParmItem : MonoBehaviour
         }));
     }
 
-    public void InitName(string commondName,Machine machine)
+    public void InitName(string commondName,Machine machine,int max=-1)
     {
+        maxNum = max;
         this.commondName = commondName;
         this.machine = machine;
     }
