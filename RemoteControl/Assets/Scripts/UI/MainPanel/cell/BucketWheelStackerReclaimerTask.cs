@@ -9,6 +9,8 @@ using Utility;
 public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
 {
     public Button cutModeBtn;
+    public ButtonCell PileTaskBtn;
+    public ButtonCell takeTaskBtn;
     public GameObject takePanel;
     public GameObject pilePanel;
     public InputField startPileMaterText;
@@ -210,7 +212,21 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             PilePosStopToggle.SetSelectState(true);
             GameDataManager.Instance.SendServerCommandByName(COMMAND_NAME.POS_STACK_STOP_1.ToString(),0);
         }));
-        takePanel.SetActive(false);
+        AddOnClickListener(PileTaskBtn,(() =>
+        {
+            PileTaskBtn.SetSystemState(true,true);
+            takeTaskBtn.SetSystemState(false,true);
+            takePanel.SetActive(false);
+            pilePanel.SetActive(true);
+        }));
+        AddOnClickListener(takeTaskBtn,(() =>
+        {
+            takeTaskBtn.SetSystemState(true,true);
+            PileTaskBtn.SetSystemState(false,true);
+            takePanel.SetActive(true);
+            pilePanel.SetActive(false);
+        }));
+        PileTaskBtn?.Invoke();
         cutModeBtn.onClick.AddListener((() =>
         {
             takePanel.SetActive(!takePanel.activeSelf);
@@ -278,13 +294,11 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
             isfrist = false;
             if (systemVariables.SR1_Stack_Runing)
             {
-                takePanel.SetActive(false);
-                pilePanel.SetActive(true);
+                PileTaskBtn?.Invoke();
             }
             else
             {
-                takePanel.SetActive(true);
-                pilePanel.SetActive(false);
+                takeTaskBtn?.Invoke();
             }
         }
         if (isRefreshText)
