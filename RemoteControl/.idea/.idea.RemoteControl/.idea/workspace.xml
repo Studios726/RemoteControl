@@ -1,0 +1,1405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b5532b1c-7e78-432b-98ba-40d9beeadb73" name="Changes" comment="任务结束更新三维模型">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RemoteControl/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RemoteControl/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/modelFBX/machine1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/modelFBX/machine1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/modelFBX/machine2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/modelFBX/machine2.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/modelFBX/轨道.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/modelFBX/轨道.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AppLauncher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AppLauncher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ConstStr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ConstStr.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameDataManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Model/BeltCtrMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Model/BeltCtrMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Model/MachineMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Model/MachineMove.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/MainPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/MainPanelView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1e9eda733cd44fc894689c0ee003727617a848/fe/2b2f002a/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/1c/8e61a461/Single.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/22/2914d9e7/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/24/68b21348/AsyncMethodBuilderCore.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/4e/2302b890/Int16.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/58/d774e661/Number.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/8b/69f4e895/DateTime.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/95/1355f0fa/RuntimeType.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/a5/f96167d9/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/a6/f01a0fe1/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/b2/ab1ef851/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/c1/9f502057/SafeHandle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/f5/936fb193/Enum.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/fc/5ddb7e68/ThrowHelper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/51fded79cd284d4d911c5949aff4cb2146ac00/fe/144c707f/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/2e/fa7fef25/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/66/03a40c6e/Regex.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/7d/6fb2d2cd/LinkedList`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/7e/c5a221a1/ConnectionState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/8d/d86dfefe/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/8f/9f650f90/DbDataAdapter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/99/bb885618/EventArgs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/aa/b7bbd196/Activator.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/ab/79178af3/DbConnection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/d3/edaeadb9/DataTable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/eb/01c3c018/DbCommand.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/eb/f5b46e78/EventHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/ec/290ba4d7/CultureInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/ef/dd4586fb/DataSet.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/699dc28794d34867bd2008187eb8039cad000/5b/51eec301/MySqlDataAdapter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/699dc28794d34867bd2008187eb8039cad000/76/c65ff87a/MySqlConnection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/761cf2a144514d2291a678c334d49e9baa000/43/cb896b9f/DefaultValueHandling.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/13/3aa4daab/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/48/adbe5712/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/7a/13db699b/Color.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/b2/6eaecdc2/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/c4/4dbc73ce/Ray.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/d9/5f0cf7d8/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b864e411c2a141e09c6755e22476c8f27000/fd/76cf67f3/RectTransformUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/eed4529ba1584884954092c1bbee0d531fe00/53/7bac6c74/Physics.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/eed4529ba1584884954092c1bbee0d531fe00/96/7194084e/RaycastHit.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Documents/WeChat Files/wxid_u02ze9ljdz9a22/FileStorage/File/2024-09/SystemVariables(3).cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Documents/WeChat Files/wxid_u02ze9ljdz9a22/FileStorage/File/2024-10/SystemVariables(1).cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Documents/WeChat Files/wxid_u02ze9ljdz9a22/FileStorage/File/2024-10/SystemVariables(2).cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Documents/WeChat Files/wxid_u02ze9ljdz9a22/FileStorage/File/2024-11/SystemVariables.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Documents/WeChat Files/wxid_u02ze9ljdz9a22/FileStorage/File/2024-12/SystemVariables(1).cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/Documents/WeChat Files/wxid_u02ze9ljdz9a22/FileStorage/File/2025-01/SystemVariables.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../Study/My project/Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextInfoDebugTool.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/UI/StatusParameterPanel.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/prefabs/RadarPos.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/prefabs/SetParameterItem.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/prefabs/SetParameterItem.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/prefabs/taskParm.prefab" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/AlarmDataManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CamCtrl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/ConstStr.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/ConstStr.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/ConstStr.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/GameDataManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameDataManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/GameDataManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/GameDataManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/Network/ServerCommand.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RawImage/CustomRawImage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/TaskDataManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/TaskDataManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/TaskDataManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ConfirmStartTaskPanel/ConfirmStartTaskPanelCtr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ConfirmStartTaskPanel/ConfirmStartTaskPanelView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/SelectElectricityShowItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/ImportantAlarmTips.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/WarningCell.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/WarningList.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/Other/RadarParmItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Other/RadarParmItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/Other/RadarParmItem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Other/TaskParmItem.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/StatusParameterPanel/cell/status_3/TaskParmsSetting.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/StatusParameterPanel/cell/status_3/TaskParmsSetting.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/StatusParameterPanel/cell/status_3/TaskParmsSetting.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Helper/FormatterHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Helper/FormatterHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Internal/Utilities/ChartCached.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Serie/SerieHandler.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Serie/SerieParams.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.9/Scripts/Editor/TMPro_TexturePostProcessor.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.9/Scripts/Runtime/TMP_TextProcessingStack.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Button.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Scrollbar.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/VisualScripting.Core/Dependencies/ReorderableList/ReorderableListEvents.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.9.4/Editor/VisualScripting.Core/Utilities/BackupUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.9.4/Runtime/VisualScripting.Flow/Framework/Events/CustomEvent.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2lfwpm6LnoKyrNll5qcegER2f07" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Attach to Unity Editor.Attach to Unity Editor.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;TongChuan&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\guo_y\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\guo_y\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\guo_y\\AppData\\Local\\Symbols\\src&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="启动 Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Work\RemoteControl -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\Work\RemoteControl" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="独立播放器" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../日常包\RemoteControl.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="D:\日常包" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../package/pc/20250212-1-Test\RemoteControl.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="D:\日常包" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-projectPath D:\Work\RemoteControl -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\Work\RemoteControl" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Work\RemoteControl -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\Work\RemoteControl" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="单元测试(批处理模式)" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2022.3.33f1c1\Editor\Unity.exe" />
+      <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath D:\Work\RemoteControl -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+      <option name="WORKING_DIRECTORY" value="D:\Work\RemoteControl" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b5532b1c-7e78-432b-98ba-40d9beeadb73" name="Changes" comment="" />
+      <created>1725584624716</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1725584624716</updated>
+      <workItem from="1725584628982" duration="836000" />
+      <workItem from="1725586534879" duration="1094000" />
+      <workItem from="1725589191230" duration="216000" />
+      <workItem from="1725616752004" duration="125000" />
+      <workItem from="1725670742592" duration="1281000" />
+      <workItem from="1725672155112" duration="2699000" />
+      <workItem from="1725782192148" duration="59000" />
+      <workItem from="1725782264205" duration="2016000" />
+      <workItem from="1725937406977" duration="3818000" />
+      <workItem from="1726016502388" duration="5577000" />
+      <workItem from="1726039101859" duration="3700000" />
+      <workItem from="1726103526475" duration="6087000" />
+      <workItem from="1726117173573" duration="9534000" />
+      <workItem from="1726190547136" duration="2614000" />
+      <workItem from="1726204863664" duration="11184000" />
+      <workItem from="1726885227831" duration="1700000" />
+      <workItem from="1727158189736" duration="6959000" />
+      <workItem from="1727226420291" duration="21512000" />
+      <workItem from="1727313006155" duration="20267000" />
+      <workItem from="1727414595455" duration="12999000" />
+      <workItem from="1727489377415" duration="3621000" />
+      <workItem from="1727512646066" duration="1551000" />
+      <workItem from="1728870311126" duration="6401000" />
+      <workItem from="1729647561953" duration="714000" />
+      <workItem from="1729652031148" duration="13201000" />
+      <workItem from="1729736412415" duration="8359000" />
+      <workItem from="1729907362778" duration="6701000" />
+      <workItem from="1730009855090" duration="1458000" />
+      <workItem from="1730017221623" duration="1825000" />
+      <workItem from="1730078259220" duration="19771000" />
+      <workItem from="1730164574471" duration="16317000" />
+      <workItem from="1730251054195" duration="13629000" />
+      <workItem from="1730337338108" duration="4516000" />
+      <workItem from="1730441541307" duration="995000" />
+      <workItem from="1730769983123" duration="1948000" />
+      <workItem from="1730861239824" duration="3184000" />
+      <workItem from="1730882729365" duration="4134000" />
+      <workItem from="1730962343609" duration="25947000" />
+      <workItem from="1731059688313" duration="1217000" />
+      <workItem from="1731286927914" duration="8855000" />
+      <workItem from="1731380222790" duration="1075000" />
+      <workItem from="1731396614885" duration="24065000" />
+      <workItem from="1731545048180" duration="1747000" />
+      <workItem from="1731547949662" duration="9525000" />
+      <workItem from="1731567270277" duration="4270000" />
+      <workItem from="1731571894807" duration="20598000" />
+      <workItem from="1731894164579" duration="57317000" />
+      <workItem from="1732165991674" duration="951000" />
+      <workItem from="1732167287442" duration="8344000" />
+      <workItem from="1732500317988" duration="30187000" />
+      <workItem from="1732695038453" duration="50730000" />
+      <workItem from="1733294593902" duration="70445000" />
+      <workItem from="1733705066583" duration="8408000" />
+      <workItem from="1733720728852" duration="37704000" />
+      <workItem from="1733893438002" duration="9594000" />
+      <workItem from="1733964764369" duration="34155000" />
+      <workItem from="1734310560571" duration="11871000" />
+      <workItem from="1734483886951" duration="25510000" />
+      <workItem from="1734915437718" duration="11055000" />
+      <workItem from="1734934800269" duration="17229000" />
+      <workItem from="1735022203430" duration="22887000" />
+      <workItem from="1735434833200" duration="6040000" />
+      <workItem from="1735456520081" duration="34180000" />
+      <workItem from="1735712414930" duration="2437000" />
+      <workItem from="1735778509573" duration="5080000" />
+      <workItem from="1735795435803" duration="8000" />
+      <workItem from="1735800970807" duration="1868000" />
+      <workItem from="1735865034335" duration="3237000" />
+      <workItem from="1735872660720" duration="39799000" />
+      <workItem from="1736124620598" duration="11569000" />
+      <workItem from="1736156297646" duration="312000" />
+      <workItem from="1736210512761" duration="41528000" />
+      <workItem from="1736318173106" duration="29584000" />
+      <workItem from="1736729700123" duration="3111000" />
+      <workItem from="1736752601689" duration="46778000" />
+      <workItem from="1737013546329" duration="22242000" />
+      <workItem from="1737101822151" duration="2981000" />
+      <workItem from="1737163169416" duration="7424000" />
+      <workItem from="1737177489230" duration="8538000" />
+      <workItem from="1737333826962" duration="3216000" />
+      <workItem from="1737338987348" duration="48889000" />
+      <workItem from="1739156404405" duration="38616000" />
+      <workItem from="1739415174434" duration="5568000" />
+      <workItem from="1739424398005" duration="15496000" />
+      <workItem from="1739502228779" duration="15730000" />
+      <workItem from="1739754317661" duration="28017000" />
+    </task>
+    <task id="LOCAL-00001" summary="修改警告信息">
+      <option name="closed" value="true" />
+      <created>1726038277922</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1726038277922</updated>
+    </task>
+    <task id="LOCAL-00002" summary="修改状态参数 限位警告">
+      <option name="closed" value="true" />
+      <created>1726041218164</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1726041218165</updated>
+    </task>
+    <task id="LOCAL-00003" summary="动力卷筒电缆过紧报警报警">
+      <option name="closed" value="true" />
+      <created>1737177735737</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1737177735737</updated>
+    </task>
+    <task id="LOCAL-00004" summary="卷筒报警信息添加">
+      <option name="closed" value="true" />
+      <created>1737178749990</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1737178749990</updated>
+    </task>
+    <task id="LOCAL-00005" summary="任务规划code添加">
+      <option name="closed" value="true" />
+      <created>1737334255148</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1737334255148</updated>
+    </task>
+    <task id="LOCAL-00006" summary="堆料任务添加">
+      <option name="closed" value="true" />
+      <created>1737342505430</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1737342505430</updated>
+    </task>
+    <task id="LOCAL-00007" summary="添加堆料任务">
+      <option name="closed" value="true" />
+      <created>1737359023522</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1737359023522</updated>
+    </task>
+    <task id="LOCAL-00008" summary="报警信息添加堆料功能不可用">
+      <option name="closed" value="true" />
+      <created>1737367051473</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1737367051473</updated>
+    </task>
+    <task id="LOCAL-00009" summary="取料任务刷新逻辑修改">
+      <option name="closed" value="true" />
+      <created>1737438593175</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1737438593175</updated>
+    </task>
+    <task id="LOCAL-00010" summary="堆取料任务修改">
+      <option name="closed" value="true" />
+      <created>1737450592551</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1737450592551</updated>
+    </task>
+    <task id="LOCAL-00011" summary="main">
+      <option name="closed" value="true" />
+      <created>1737450610273</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1737450610273</updated>
+    </task>
+    <task id="LOCAL-00012" summary="任务进行中不能修改部分参数">
+      <option name="closed" value="true" />
+      <created>1737452628896</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1737452628896</updated>
+    </task>
+    <task id="LOCAL-00013" summary="报警信息添加">
+      <option name="closed" value="true" />
+      <created>1737515243521</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1737515243521</updated>
+    </task>
+    <task id="LOCAL-00014" summary="重复报警信息移除">
+      <option name="closed" value="true" />
+      <created>1737520276307</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1737520276307</updated>
+    </task>
+    <task id="LOCAL-00015" summary="历史信息显示默认实时的">
+      <option name="closed" value="true" />
+      <created>1739168663700</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1739168663700</updated>
+    </task>
+    <task id="LOCAL-00016" summary="状态参数编码修改">
+      <option name="closed" value="true" />
+      <created>1739259992630</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1739259992630</updated>
+    </task>
+    <task id="LOCAL-00017" summary="两短一长">
+      <option name="closed" value="true" />
+      <created>1739328968740</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1739328968740</updated>
+    </task>
+    <task id="LOCAL-00018" summary="数据库读取屏蔽">
+      <option name="closed" value="true" />
+      <created>1739331767357</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1739331767357</updated>
+    </task>
+    <task id="LOCAL-00019" summary="开启数据库">
+      <option name="closed" value="true" />
+      <created>1739344537626</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1739344537626</updated>
+    </task>
+    <task id="LOCAL-00020" summary="图标日期显示修改">
+      <option name="closed" value="true" />
+      <created>1739426987590</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1739426987590</updated>
+    </task>
+    <task id="LOCAL-00021" summary="重要提示信息添加 状态参数界面优化">
+      <option name="closed" value="true" />
+      <created>1739504676091</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1739504676091</updated>
+    </task>
+    <task id="LOCAL-00022" summary="多曲线展示">
+      <option name="closed" value="true" />
+      <created>1739513997040</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1739513997040</updated>
+    </task>
+    <task id="LOCAL-00023" summary="模拟数据方法添加">
+      <option name="closed" value="true" />
+      <created>1739514035027</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1739514035027</updated>
+    </task>
+    <task id="LOCAL-00024" summary="任务code弹窗提示">
+      <option name="closed" value="true" />
+      <created>1739514568176</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1739514568176</updated>
+    </task>
+    <task id="LOCAL-00025" summary="历史曲线时间展示">
+      <option name="closed" value="true" />
+      <created>1739755282530</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1739755282530</updated>
+    </task>
+    <task id="LOCAL-00026" summary="时间显示24格式">
+      <option name="closed" value="true" />
+      <created>1739774538367</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1739774538367</updated>
+    </task>
+    <task id="LOCAL-00027" summary="临时修改悬胶倒计时1#">
+      <option name="closed" value="true" />
+      <created>1739863560028</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1739863560028</updated>
+    </task>
+    <task id="LOCAL-00028" summary="悬胶运行倒计时文本提示">
+      <option name="closed" value="true" />
+      <created>1739866052635</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1739866052635</updated>
+    </task>
+    <task id="LOCAL-00029" summary="任务换向设定值修改">
+      <option name="closed" value="true" />
+      <created>1739935121607</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1739935121607</updated>
+    </task>
+    <task id="LOCAL-00030" summary="修改参数设定限制">
+      <option name="closed" value="true" />
+      <created>1739950843961</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1739950843961</updated>
+    </task>
+    <task id="LOCAL-00031" summary="修改限制输入字符">
+      <option name="closed" value="true" />
+      <created>1739951426570</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1739951426570</updated>
+    </task>
+    <task id="LOCAL-00032" summary="任务结束不需要更新模型">
+      <option name="closed" value="true" />
+      <created>1739955389872</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1739955389872</updated>
+    </task>
+    <task id="LOCAL-00033" summary="任务结束更新三维模型">
+      <option name="closed" value="true" />
+      <created>1739955849126</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1739955849126</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
+    <option name="unityProject" value="true" />
+    <option name="unityProjectFolder" value="true" />
+  </component>
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="取料任务刷新逻辑修改" />
+    <MESSAGE value="堆取料任务修改" />
+    <MESSAGE value="main" />
+    <MESSAGE value="任务进行中不能修改部分参数" />
+    <MESSAGE value="报警信息添加" />
+    <MESSAGE value="重复报警信息移除" />
+    <MESSAGE value="历史信息显示默认实时的" />
+    <MESSAGE value="状态参数编码修改" />
+    <MESSAGE value="两短一长" />
+    <MESSAGE value="数据库读取屏蔽" />
+    <MESSAGE value="开启数据库" />
+    <MESSAGE value="图标日期显示修改" />
+    <MESSAGE value="重要提示信息添加 状态参数界面优化" />
+    <MESSAGE value="多曲线展示" />
+    <MESSAGE value="模拟数据方法添加" />
+    <MESSAGE value="任务code弹窗提示" />
+    <MESSAGE value="历史曲线时间展示" />
+    <MESSAGE value="时间显示24格式" />
+    <MESSAGE value="临时修改悬胶倒计时1#" />
+    <MESSAGE value="悬胶运行倒计时文本提示" />
+    <MESSAGE value="任务换向设定值修改" />
+    <MESSAGE value="修改参数设定限制" />
+    <MESSAGE value="修改限制输入字符" />
+    <MESSAGE value="任务结束不需要更新模型" />
+    <MESSAGE value="任务结束更新三维模型" />
+    <option name="LAST_COMMIT_MESSAGE" value="任务结束更新三维模型" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelCtrMoveBase.cs</url>
+          <line>1116</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelCtrMoveBase.cs" containingFunctionPresentation="Method 'SetText'">
+            <startOffsets>
+              <option value="31378" />
+            </startOffsets>
+            <endOffsets>
+              <option value="31395" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/HideButtonCtrBase.cs</url>
+          <line>196</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\HideButtonCtrBase.cs" containingFunctionPresentation="Method 'Init'">
+            <startOffsets>
+              <option value="5010" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5080" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/ConfirmPanel/ConfirmPanelView.cs</url>
+          <line>85</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\ConfirmPanel\ConfirmPanelView.cs" containingFunctionPresentation="Lambda expression inside Method 'UpdateUI'">
+            <startOffsets>
+              <option value="3025" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3071" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/ConfirmPanel/ConfirmPanelView.cs</url>
+          <line>101</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\ConfirmPanel\ConfirmPanelView.cs" containingFunctionPresentation="Lambda expression inside Method 'UpdateUI'">
+            <startOffsets>
+              <option value="3393" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3409" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/StatusParameterPanel/PileTakeMaterThirdSysStateParams.cs</url>
+          <line>151</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\StatusParameterPanel\PileTakeMaterThirdSysStateParams.cs" containingFunctionPresentation="Method 'SetAntiCollisionDeviceParameterSetting'">
+            <startOffsets>
+              <option value="11167" />
+            </startOffsets>
+            <endOffsets>
+              <option value="11231" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/StatusParameterPanel/PileTakeMaterThirdSysStateParams.cs</url>
+          <line>100</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\StatusParameterPanel\PileTakeMaterThirdSysStateParams.cs" containingFunctionPresentation="Method 'SetAntiCollisionDeviceParameterSetting'">
+            <startOffsets>
+              <option value="7527" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7636" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/StatusParameterPanel/PileTakeMaterThirdSysStateParams.cs</url>
+          <line>107</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\StatusParameterPanel\PileTakeMaterThirdSysStateParams.cs" containingFunctionPresentation="Method 'SetAntiCollisionDeviceParameterSetting'">
+            <startOffsets>
+              <option value="8121" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8230" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/HideButtonCtrBase.cs</url>
+          <line>235</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\HideButtonCtrBase.cs" containingFunctionPresentation="Method 'UpdateData'">
+            <startOffsets>
+              <option value="7701" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7738" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/HideButtonCtrBase.cs</url>
+          <line>217</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\HideButtonCtrBase.cs" containingFunctionPresentation="Method 'UpdateData'">
+            <startOffsets>
+              <option value="6617" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6686" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/HideButtonCtrBase.cs</url>
+          <line>215</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\HideButtonCtrBase.cs" containingFunctionPresentation="Method 'UpdateData'">
+            <startOffsets>
+              <option value="6544" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6594" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelStackerReclaimerState.cs</url>
+          <line>63</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelStackerReclaimerState.cs" containingFunctionPresentation="Method 'UpdateData'">
+            <startOffsets>
+              <option value="3281" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3366" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Mechanism/UIManager.cs</url>
+          <line>52</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\Mechanism\UIManager.cs" containingFunctionPresentation="Method 'OpenUI'">
+            <startOffsets>
+              <option value="1609" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1673" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/MessageCenter.cs</url>
+          <line>165</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\MessageCenter.cs" containingFunctionPresentation="Method 'SendMessage'">
+            <startOffsets>
+              <option value="5629" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5661" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="92" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/TaskDataManager.cs</url>
+          <line>88</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\TaskDataManager.cs" containingFunctionPresentation="Method 'UpdateNextPositionList'">
+            <startOffsets>
+              <option value="1880" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1927" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/TaskDataManager.cs</url>
+          <line>107</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\TaskDataManager.cs" containingFunctionPresentation="Method 'UpdateNextPositionList'">
+            <startOffsets>
+              <option value="2577" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2597" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="113" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>746</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Method 'DynamicUpdateData'">
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="122" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/CyclicScrollView/CyclicScrollView.Pool.cs</url>
+          <line>41</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\CyclicScrollView\CyclicScrollView.Pool.cs" containingFunctionPresentation="Method 'GetViewBundle'">
+            <startOffsets>
+              <option value="1587" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1643" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/CyclicScrollView/CyclicScrollView.Pool.cs</url>
+          <line>69</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\CyclicScrollView\CyclicScrollView.Pool.cs" containingFunctionPresentation="Method 'GetViewBundle'">
+            <startOffsets>
+              <option value="2740" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2799" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/StatusParameterPanel/cell/status_3/AntiCollisionDeviceParameterSetting.cs</url>
+          <line>381</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\StatusParameterPanel\cell\status_3\AntiCollisionDeviceParameterSetting.cs" containingFunctionPresentation="Method 'UpdateParameter'">
+            <startOffsets>
+              <option value="14000" />
+            </startOffsets>
+            <endOffsets>
+              <option value="14091" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/TaskPanel/HistoryTaskPanel.cs</url>
+          <line>198</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\TaskPanel\HistoryTaskPanel.cs" containingFunctionPresentation="Method 'SearchRecord'">
+            <startOffsets>
+              <option value="8029" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8179" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="152" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/RawImage/CustomRawImage.cs</url>
+          <line>34</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\RawImage\CustomRawImage.cs" containingFunctionPresentation="Method 'OnPointerClick'">
+            <startOffsets>
+              <option value="1151" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1228" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="155" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/RawImage/CustomRawImage.cs</url>
+          <line>71</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\RawImage\CustomRawImage.cs" containingFunctionPresentation="Method 'CheckDrawRayLine'">
+            <startOffsets>
+              <option value="2874" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3029" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="156" />
+        </line-breakpoint>
+        <line-breakpoint type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelCtrMoveBase.cs</url>
+          <line>891</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelCtrMoveBase.cs" containingFunctionPresentation="Lambda expression inside Method 'SetStepInputFieldEvent'">
+            <startOffsets>
+              <option value="32770" />
+            </startOffsets>
+            <endOffsets>
+              <option value="32845" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="157" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Network/MySqlHelper.cs</url>
+          <line>38</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\Network\MySqlHelper.cs" containingFunctionPresentation="Method 'ExecuteReader'">
+            <startOffsets>
+              <option value="1302" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1320" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="169" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/TaskPanel/HistoryTaskPanel.cs</url>
+          <line>213</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\TaskPanel\HistoryTaskPanel.cs" containingFunctionPresentation="Method 'SearchRecord'">
+            <startOffsets>
+              <option value="8925" />
+            </startOffsets>
+            <endOffsets>
+              <option value="9123" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="171" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/CamCtrl.cs</url>
+          <line>53</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\CamCtrl.cs" containingFunctionPresentation="Method 'Cam_Ctrl_Rotation'">
+            <startOffsets>
+              <option value="-1" />
+            </startOffsets>
+            <endOffsets>
+              <option value="-1" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="174" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/Other/RadarParmItem.cs</url>
+          <line>29</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\Other\RadarParmItem.cs" containingFunctionPresentation="Lambda expression inside Method 'Start'">
+            <startOffsets>
+              <option value="795" />
+            </startOffsets>
+            <endOffsets>
+              <option value="888" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="189" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/TaskPanel/HistoryTaskPanel.cs</url>
+          <line>183</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\TaskPanel\HistoryTaskPanel.cs" containingFunctionPresentation="Method 'ReadRecord'">
+            <startOffsets>
+              <option value="6768" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6813" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="194" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/TaskDataManager.cs</url>
+          <line>919</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\TaskDataManager.cs" containingFunctionPresentation="Method 'UpdatePileTakeMaterialTask'">
+            <startOffsets>
+              <option value="33386" />
+            </startOffsets>
+            <endOffsets>
+              <option value="33396" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="196" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/TaskDataManager.cs</url>
+          <line>829</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\TaskDataManager.cs" containingFunctionPresentation="Method 'IsCanSet'">
+            <startOffsets>
+              <option value="30135" />
+            </startOffsets>
+            <endOffsets>
+              <option value="30192" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="199" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/HistoryPanelView.cs</url>
+          <line>261</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\HistoryPanelView.cs" containingFunctionPresentation="Method 'GetLatestOperationLogs'">
+            <startOffsets>
+              <option value="11794" />
+            </startOffsets>
+            <endOffsets>
+              <option value="11851" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="200" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/TaskPanel/HistoryTaskPanel.cs</url>
+          <line>34</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\TaskPanel\HistoryTaskPanel.cs" containingFunctionPresentation="Lambda expression inside Method 'Awake'">
+            <startOffsets>
+              <option value="1148" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1186" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="209" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/TaskPanel/HistoryTaskPanel.cs</url>
+          <line>25</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\TaskPanel\HistoryTaskPanel.cs" containingFunctionPresentation="Lambda expression inside Method 'Awake'">
+            <startOffsets>
+              <option value="799" />
+            </startOffsets>
+            <endOffsets>
+              <option value="838" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="210" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
+          <line>628</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'SendTaskCommand'">
+            <startOffsets>
+              <option value="23978" />
+            </startOffsets>
+            <endOffsets>
+              <option value="24059" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="212" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
+          <line>673</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'SendTaskCommand'">
+            <startOffsets>
+              <option value="26590" />
+            </startOffsets>
+            <endOffsets>
+              <option value="26631" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="213" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
+          <line>195</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'UpdateData'">
+            <startOffsets>
+              <option value="6109" />
+            </startOffsets>
+            <endOffsets>
+              <option value="6194" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="214" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
+          <line>618</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'SendTaskCommand'">
+            <startOffsets>
+              <option value="23490" />
+            </startOffsets>
+            <endOffsets>
+              <option value="23565" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="215" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/MessageCenter.cs</url>
+          <line>105</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\MessageCenter.cs" containingFunctionPresentation="Method 'ReadJson'">
+            <startOffsets>
+              <option value="3197" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3271" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="216" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
+          <line>172</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'UpdateData'">
+            <startOffsets>
+              <option value="4929" />
+            </startOffsets>
+            <endOffsets>
+              <option value="5140" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="219" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/XCharts/Runtime/Helper/FormatterHelper.cs</url>
+          <line>291</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\XCharts\Runtime\Helper\FormatterHelper.cs" containingFunctionPresentation="Method 'ReplaceSerieLabelContent'">
+            <startOffsets>
+              <option value="13527" />
+            </startOffsets>
+            <endOffsets>
+              <option value="13552" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="221" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/XCharts/Runtime/Helper/FormatterHelper.cs</url>
+          <line>283</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\XCharts\Runtime\Helper\FormatterHelper.cs" containingFunctionPresentation="Method 'ReplaceSerieLabelContent'">
+            <startOffsets>
+              <option value="13166" />
+            </startOffsets>
+            <endOffsets>
+              <option value="13191" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="226" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/XCharts/Runtime/Helper/FormatterHelper.cs</url>
+          <line>41</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\XCharts\Runtime\Helper\FormatterHelper.cs" containingFunctionPresentation="Method 'ReplaceContent'">
+            <startOffsets>
+              <option value="2239" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2260" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="229" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/XCharts/Runtime/Helper/FormatterHelper.cs</url>
+          <line>227</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\XCharts\Runtime\Helper\FormatterHelper.cs" containingFunctionPresentation="Method 'ReplaceSerieLabelContent'">
+            <startOffsets>
+              <option value="10649" />
+            </startOffsets>
+            <endOffsets>
+              <option value="10672" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="232" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/XCharts/Runtime/Helper/FormatterHelper.cs</url>
+          <line>231</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\XCharts\Runtime\Helper\FormatterHelper.cs" containingFunctionPresentation="Method 'ReplaceSerieLabelContent'">
+            <startOffsets>
+              <option value="10844" />
+            </startOffsets>
+            <endOffsets>
+              <option value="10874" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="233" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>236</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Lambda expression inside Method 'Start'">
+            <startOffsets>
+              <option value="7751" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7776" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="238" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>602</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Method 'GetSqlData'">
+            <startOffsets>
+              <option value="22909" />
+            </startOffsets>
+            <endOffsets>
+              <option value="22935" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="241" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>249</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Lambda expression inside Method 'Start'">
+            <startOffsets>
+              <option value="8225" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8251" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="242" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>353</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Lambda expression inside Method 'InitSelectElectricityShowItem'">
+            <startOffsets>
+              <option value="12765" />
+            </startOffsets>
+            <endOffsets>
+              <option value="12793" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="243" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>357</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Lambda expression inside Method 'InitSelectElectricityShowItem'">
+            <startOffsets>
+              <option value="12892" />
+            </startOffsets>
+            <endOffsets>
+              <option value="12920" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="244" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>361</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Lambda expression inside Method 'InitSelectElectricityShowItem'">
+            <startOffsets>
+              <option value="13019" />
+            </startOffsets>
+            <endOffsets>
+              <option value="13047" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="245" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>365</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Lambda expression inside Method 'InitSelectElectricityShowItem'">
+            <startOffsets>
+              <option value="13151" />
+            </startOffsets>
+            <endOffsets>
+              <option value="13179" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="246" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/SelectElectricityShowItem.cs</url>
+          <line>21</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\SelectElectricityShowItem.cs" containingFunctionPresentation="Lambda expression inside Method 'Awake'">
+            <startOffsets>
+              <option value="615" />
+            </startOffsets>
+            <endOffsets>
+              <option value="653" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="247" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/SelectElectricityShowItem.cs</url>
+          <line>19</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\SelectElectricityShowItem.cs" containingFunctionPresentation="Method 'Awake'">
+            <startOffsets>
+              <option value="539" />
+            </startOffsets>
+            <endOffsets>
+              <option value="667" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="248" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/SelectElectricityShowItem.cs</url>
+          <line>25</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\SelectElectricityShowItem.cs" containingFunctionPresentation="Lambda expression inside Method 'Awake'">
+            <startOffsets>
+              <option value="748" />
+            </startOffsets>
+            <endOffsets>
+              <option value="782" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="249" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/SelectElectricityShowItem.cs</url>
+          <line>29</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\SelectElectricityShowItem.cs" containingFunctionPresentation="Lambda expression inside Method 'Awake'">
+            <startOffsets>
+              <option value="877" />
+            </startOffsets>
+            <endOffsets>
+              <option value="911" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="250" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/SelectElectricityShowItem.cs</url>
+          <line>33</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\SelectElectricityShowItem.cs" containingFunctionPresentation="Lambda expression inside Method 'Awake'">
+            <startOffsets>
+              <option value="1011" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1050" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="251" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs</url>
+          <line>351</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\ImportantParamsGraphPanel\ImportantParamsGraphPanel.cs" containingFunctionPresentation="Method 'InitSelectElectricityShowItem'">
+            <startOffsets>
+              <option value="12683" />
+            </startOffsets>
+            <endOffsets>
+              <option value="12805" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="252" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

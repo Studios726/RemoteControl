@@ -613,11 +613,15 @@ public class GameDataManager : Singleton<GameDataManager>
     public void UpdateWheelAnimation()
     {
         machineMove_1.PlayRotationClip(_systemVariables.BucketWheelMotorRunning);
-        machineMove_1.PlayCantileverClipTake(_systemVariables.BucketWheelMaterialUnloadingRunning);
-        machineMove_1.PlayCantileverClipPile(_systemVariables.BucketWheelMaterialLoadingRunning);
+        // machineMove_1.PlayCantileverClipTake(_systemVariables.BucketWheelMaterialUnloadingRunning);
+        // machineMove_1.PlayCantileverClipPile(_systemVariables.BucketWheelMaterialLoadingRunning);
+        machineMove_1.PlayBeltAnimation(_systemVariables.BucketWheelMaterialUnloadingRunning,
+            _systemVariables.BucketWheelMaterialLoadingRunning);
         machineMove_2.PlayRotationClip(_systemVariables.BucketWheelMotorRunning_2);
-        machineMove_2.PlayCantileverClipTake(_systemVariables.BucketWheelMaterialUnloadingRunning_2);
-        machineMove_2.PlayCantileverClipPile(_systemVariables.BucketWheelMaterialLoadingRunning_2);
+        // machineMove_2.PlayCantileverClipTake(_systemVariables.BucketWheelMaterialUnloadingRunning_2);
+        // machineMove_2.PlayCantileverClipPile(_systemVariables.BucketWheelMaterialLoadingRunning_2);
+        machineMove_2.PlayBeltAnimation(_systemVariables.BucketWheelMaterialUnloadingRunning_2,
+            _systemVariables.BucketWheelMaterialLoadingRunning_2);
     }
 
     public void UpdateBeltAnimation()

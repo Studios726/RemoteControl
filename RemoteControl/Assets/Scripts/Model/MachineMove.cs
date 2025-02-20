@@ -7,6 +7,7 @@ using UnityEngine.PlayerLoop;
 
 public class MachineMove : MonoBehaviour
 {
+    public Transform beltAnim;
     public Transform rotationGo_z;
     public Transform rotationGo_y;
     public Transform currentCanvasTransform;
@@ -23,33 +24,55 @@ public class MachineMove : MonoBehaviour
     public Animation rotClip;
     public Animation cantileverClipTake;
     public Animation cantileverClipPile;
+    private Material[] beltMaterials;
     public Machine machine;
     public float speed;
     private void Start()
     {
+        //TODO 注释动画播放
         // mainCameraTransform = Camera.main?.transform;
-        if (rotClip!=null)
+        // if (rotClip!=null)
+        // {
+        //     foreach (AnimationState state in rotClip)
+        //     {
+        //         state.speed = speed;
+        //     }
+        // }
+        // if (cantileverClipTake!=null)
+        // {
+        //     foreach (AnimationState state in cantileverClipTake)
+        //     {
+        //         state.speed = speed;
+        //     }
+        // }
+        // if (cantileverClipPile!=null)
+        // {
+        //     foreach (AnimationState state in cantileverClipPile)
+        //     {
+        //         state.speed = speed;
+        //     }
+        // }
+
+        AddBeltMaterials();
+    }
+    public void AddBeltMaterials()
+    {
+        beltMaterials=new Material[beltAnim.childCount];
+        for (int i = 0; i < beltAnim.childCount; i++)
         {
-            foreach (AnimationState state in rotClip)
+            beltMaterials[i]=beltAnim.GetChild(i).GetChild(0).GetComponent<MeshRenderer>().materials[0];
+            beltMaterials[i].SetFloat("_FlowSpeed", 0);
+        }
+    }
+    public void SetFlowSpeed(Material[] materials, float speed)
+    {
+        for (int i = 0; i < materials.Length; i++)
+        {
+            if (materials[i].GetFloat("_FlowSpeed")!=speed)
             {
-                state.speed = speed;
+                materials[i].SetFloat("_FlowSpeed", speed);
             }
         }
-        if (cantileverClipTake!=null)
-        {
-            foreach (AnimationState state in cantileverClipTake)
-            {
-                state.speed = speed;
-            }
-        }
-        if (cantileverClipPile!=null)
-        {
-            foreach (AnimationState state in cantileverClipPile)
-            {
-                state.speed = speed;
-            }
-        }
-       
     }
     public void UpdatePosAndRotaionByMeter(float meter, float rotAngleY, float rotAngleZ)
     {
@@ -157,6 +180,21 @@ public class MachineMove : MonoBehaviour
         else
         {
             //不处理
+        }
+       
+    }
+
+    public void PlayBeltAnimation(bool isTake,bool isPile)
+    {
+        if (isTake)
+        {
+            SetFlowSpeed(beltMaterials, 1);
+        }else if (isPile)
+        {
+            SetFlowSpeed(beltMaterials, -1);
+        }else
+        {
+            SetFlowSpeed(beltMaterials, 0);
         }
        
     }
