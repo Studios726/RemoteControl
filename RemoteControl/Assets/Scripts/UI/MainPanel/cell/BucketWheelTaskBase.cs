@@ -23,12 +23,14 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell resetTaskBtn;
     public ButtonCell AutoMaxToggle;
     public ButtonCell SemiAutoToggle;
+    public ButtonCell ShuntToggle;
     public ButtonCell RightAngleToggle;
     public ButtonCell ObliqueAngleToggle;
     public InputField AngleEntryText;
     public ButtonCell EntryModeClose;
     public ButtonCell EntryModeOpen;
     public GameObject entryModeGo;
+    public GameObject rootEntryModeGo;
 
     /// <summary>
     /// 左转
@@ -209,6 +211,8 @@ public class BucketWheelTaskBase : PanelBase
             AutoMaxToggle.SetSystemState(taskCommand.AutoMode == AutoMode.AUTOMAX, true);
             entryModeGo.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
             SemiAutoToggle.SetSystemState(taskCommand.AutoMode == AutoMode.SemiAuto, true);
+            ShuntToggle.SetSystemState(taskCommand.AutoMode == AutoMode.Shunt, true);
+            rootEntryModeGo.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
             confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
             PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
             TwoShortOneLongBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
@@ -317,7 +321,7 @@ public class BucketWheelTaskBase : PanelBase
         }));
         AddOnClickListener(takeMaterStartBtn, (() =>
         {
-            if (leftTurnToggle.red.activeSelf == false && rightTurnToggle.red.activeSelf == false)
+            if (leftTurnToggle.red.activeSelf == false && rightTurnToggle.red.activeSelf == false&& ShuntToggle.red.activeSelf==false)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
                     new ConfirmPanelArgs("请选择初始设定，稍微重试", GameDataManager.Instance.GetMachineName(machine)));
@@ -427,9 +431,11 @@ public class BucketWheelTaskBase : PanelBase
             {
                 AutoMaxToggle.SetSystemState(true, true);
                 SemiAutoToggle.SetSystemState(false, true);
-                entryModeGo.SetActive(true);
+                ShuntToggle.SetSystemState(false,true);
+                entryModeGo.SetActive(false);
+                rootEntryModeGo.SetActive(false);
                 confirmTurnBtn.gameObject.SetActive(false);
-                PositionConfirmBtn.gameObject.SetActive(true);
+                PositionConfirmBtn.gameObject.SetActive(false);
                 TwoShortOneLongBtn.gameObject.SetActive(false);
             }
             else
@@ -443,7 +449,9 @@ public class BucketWheelTaskBase : PanelBase
             {
                 AutoMaxToggle.SetSystemState(false, true);
                 SemiAutoToggle.SetSystemState(true, true);
+                ShuntToggle.SetSystemState(false, true);
                 entryModeGo.SetActive(false);
+                rootEntryModeGo.SetActive(true);
                 confirmTurnBtn.gameObject.SetActive(true);
                 PositionConfirmBtn.gameObject.SetActive(false);
                 TwoShortOneLongBtn.gameObject.SetActive(true);
@@ -453,7 +461,24 @@ public class BucketWheelTaskBase : PanelBase
                 SemiAutoToggle.SetSelectState(true);
             }
         }));
-
+        AddOnClickListener(ShuntToggle,(() =>
+        {
+            if (IsCanSet())
+            {
+                AutoMaxToggle.SetSystemState(false, true);
+                SemiAutoToggle.SetSystemState(false, true);
+                ShuntToggle.SetSystemState(true, true);
+                entryModeGo.SetActive(false);
+                rootEntryModeGo.SetActive(false);
+                confirmTurnBtn.gameObject.SetActive(false);
+                PositionConfirmBtn.gameObject.SetActive(false);
+                TwoShortOneLongBtn.gameObject.SetActive(false);
+            }
+            else
+            {
+                ShuntToggle.SetSelectState(true);
+            }
+        }));
         AddOnClickListener(leftTurnToggle, (() =>
         {
             if (IsCanSet())
@@ -628,7 +653,16 @@ public class BucketWheelTaskBase : PanelBase
         taskCommand.FinishMethod = new List<int>() { 0, 0 };
         if (operationType == OperationType.START || operationType == OperationType.RESET)
         {
-            taskCommand.AutoMode = AutoMaxToggle.red.activeSelf ? AutoMode.AUTOMAX : AutoMode.SemiAuto;
+            if (AutoMaxToggle.red.activeSelf)
+            {
+                taskCommand.AutoMode = AutoMode.AUTOMAX;
+            }else if (SemiAutoToggle.red.activeSelf)
+            {
+                taskCommand.AutoMode = AutoMode.SemiAuto;
+            }else if (ShuntToggle.red.activeSelf)
+            {
+                taskCommand.AutoMode = AutoMode.Shunt;
+            }
             // taskCommand.AngleEntryMode=RightAngleToggle.red.activeSelf?AngleEntryMode.RIGHTANGLE:AngleEntryMode.OBLIQUEANGLE;
             taskCommand.AngleEntryValue = AngleEntryText.text == "" ? 0 : float.Parse(AngleEntryText.text);
             taskCommand.Command_Type = operationType == OperationType.RESET ? 2 : 0;

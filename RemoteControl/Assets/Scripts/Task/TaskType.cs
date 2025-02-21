@@ -16,7 +16,8 @@ public enum TaskStatus
 public enum AutoMode
 {
     AUTOMAX,//全自动
-    SemiAuto//半自动
+    SemiAuto,//半自动
+    Shunt//调车
 }
 
 public enum TurnMode
