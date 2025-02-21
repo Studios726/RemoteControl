@@ -381,6 +381,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             taskCommand.CommonTaskParameters.BucketLidarDisLeft, taskCommand.CommonTaskParameters.BucketLidarDisRight
         };
+        taskCommand.CollisionValueList = new List<float>()
+        {
+            taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft, taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight
+        };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
@@ -388,6 +392,16 @@ public class TaskDataManager : Singleton<TaskDataManager>
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.Command_Type= 7;
+        taskCommand.Machine= machine;
+        taskCommand.ReversingValueList = new List<float>() { left, right };
+        MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
+        Debug.Log($"SendTaskLidarDis:{left},{right} {machine}");
+    }
+    
+    public void SendTaskLidarCollisionDis(float left, float right,Machine machine)
+    {
+        TaskCommand taskCommand = new TaskCommand();
+        taskCommand.Command_Type= 8;
         taskCommand.Machine= machine;
         taskCommand.ReversingValueList = new List<float>() { left, right };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
@@ -414,6 +428,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT].ToString());
                 commonTaskParameters.BucketLidarDisRight =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString());
+                commonTaskParameters.BucketLidarCollisionValueLeft =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT].ToString());
+                commonTaskParameters.BucketLidarCollisionValueRight =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT].ToString());
             }
         }
         return commonTaskParameters;

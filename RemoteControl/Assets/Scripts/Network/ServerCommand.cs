@@ -527,7 +527,7 @@ public class TaskCommand
 {
     public int ID { get; set; }
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长 7雷达左侧右侧设定
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长 7雷达左侧右侧换向设定 8 雷达左侧右侧防撞设定
     public int Command_Type { get; set; }
     //0新任务 1恢复上次任务
     public int IsTaskContinued{ get; set; }
@@ -583,6 +583,8 @@ public class TaskCommand
     public List<int> FinishMethod {  get; set; }
     //雷达左侧右侧距离设定
     public List<float> ReversingValueList {  get; set; }
+    //雷达左侧右侧距离碰撞设定
+    public List<float> CollisionValueList {  get; set; }
 }
 public class AllData
 {
@@ -630,6 +632,14 @@ public class CommonTaskParameters
     /// 右侧设定
     /// </summary>
     public float BucketLidarDisRight{ get; set; }
+    /// <summary>
+    /// 左侧防撞设定
+    /// </summary>
+    public float BucketLidarCollisionValueLeft{ get; set; }
+    /// <summary>
+    /// 右侧防撞设定
+    /// </summary>
+    public float BucketLidarCollisionValueRight{ get; set; }
 }
 public class TaskRange
 {

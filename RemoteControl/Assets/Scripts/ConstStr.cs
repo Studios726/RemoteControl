@@ -122,6 +122,8 @@ public static class ConstStr
     public const string DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB = "fetch_horizontal_range_sub";
     public const string DATA_TASK_CONFIG_REVERSALSETLEFT = "reversal_set_left";
     public const string DATA_TASK_CONFIG_REVERSALSETRIGHT = "reversal_set_right";
+    public const string DATA_TASK_CONFIG_COLLISIONLEFT = "collision_set_left";
+    public const string DATA_TASK_CONFIG_COLLISIONRIGHT = "collision_set_right";
     public const string DATA_TASK_CONFIG_CREATOR = "creator";
     public const string DATA_TASK_CONFIG_CREATE_DATE = "create_date";
     #endregion
@@ -153,7 +155,7 @@ public static class ConstStr
     public const float InitBucketWheelHeigh = 7.48f;
     public const string BucketWheelStackerReclaimerName = "1#斗轮堆取料机";
     public const string BucketWheelName = "2#斗轮取料机";
-    public const string Version = "v0.2.20250220-m";
+    public const string Version = "v0.1.20250221-m";
 }
 
 public enum Machine

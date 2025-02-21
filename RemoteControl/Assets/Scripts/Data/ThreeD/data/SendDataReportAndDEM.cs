@@ -41,6 +41,7 @@ namespace ShangHaiPro
         public string BucketName;
         public int LidarPlace; //0是左 1是右
         public double Dis;
+        public double MinDisMean;
 
         public BucketLidarDis()
         {

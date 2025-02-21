@@ -944,6 +944,27 @@ public class GameDataManager : Singleton<GameDataManager>
     }
 
     /// <summary>
+    /// 获取雷达碰撞值
+    /// </summary>
+    /// <param name="machine"></param>
+    /// <param name="LidarPlace"></param>
+    /// <returns></returns>
+    public string GetBucketLidarCollisionValueByMachine(string machine,int LidarPlace)
+    {
+        if (BucketLidarDisList!=null&&BucketLidarDisList.Length>0)
+        {
+            for (int i = 0; i < BucketLidarDisList.Length; i++)
+            {
+                if (BucketLidarDisList[i].BucketName==machine&&BucketLidarDisList[i].LidarPlace==LidarPlace)
+                {
+                    return BucketLidarDisList[i].MinDisMean.ToString("F2");
+                }
+            }
+        }
+
+        return "0";
+    }
+    /// <summary>
     /// 堆料任务处理
     /// </summary>
     /// <param name="newSystemVariables"></param>

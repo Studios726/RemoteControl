@@ -36,6 +36,15 @@ public class TaskParmsSetting : MonoBehaviour
    /// 右侧臂上雷达
    /// </summary>
    public RadarParmItem RightRadarPos;
+   
+   /// <summary>
+   /// 左侧臂上雷达防撞
+   /// </summary>
+   public RadarParmItem LeftRadarCollision;
+   /// <summary>
+   /// 右侧臂上雷达防撞
+   /// </summary>
+   public RadarParmItem RightRadarCollision;
 
    public Machine Machine;
    private string machineName;
@@ -56,6 +65,19 @@ public class TaskParmsSetting : MonoBehaviour
       {
          TaskDataManager.Instance.SendTaskLidarDis(float.Parse(LeftRadarPos.setValueInputField.text),float.Parse(RightRadarPos.setValueInputField.text),Machine);
       });
+      
+      //防撞
+      
+      LeftRadarCollision.InitName(ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT,Machine,10);
+      LeftRadarCollision.onEndEdit = (() =>
+      {
+         TaskDataManager.Instance.SendTaskLidarCollisionDis(float.Parse(LeftRadarCollision.setValueInputField.text),float.Parse(RightRadarCollision.setValueInputField.text),Machine);
+      });
+      RightRadarCollision.InitName(ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT,Machine,10);
+      RightRadarCollision.onEndEdit = (() =>
+      {
+         TaskDataManager.Instance.SendTaskLidarCollisionDis(float.Parse(LeftRadarCollision.setValueInputField.text),float.Parse(RightRadarCollision.setValueInputField.text),Machine);
+      });
       machineName = Machine == Machine.BucketWheelStackerReclaimer ? "堆取料机" : "取料机";
    }
 
@@ -67,6 +89,8 @@ public class TaskParmsSetting : MonoBehaviour
          {
             LeftRadarPos.SetTextValue(GameDataManager.Instance.GetBucketLidarDisByMachine(machineName,0));
             RightRadarPos.SetTextValue(GameDataManager.Instance.GetBucketLidarDisByMachine(machineName,1));
+            LeftRadarCollision.SetTextValue(GameDataManager.Instance.GetBucketLidarCollisionValueByMachine(machineName,0));
+            RightRadarCollision.SetTextValue(GameDataManager.Instance.GetBucketLidarCollisionValueByMachine(machineName,1));
             
          }));
       }
@@ -88,6 +112,8 @@ public class TaskParmsSetting : MonoBehaviour
             FetchHorizontalRangeSub.SetCurValue( float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString()));
             LeftRadarPos.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT].ToString()));
             RightRadarPos.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString()));
+            LeftRadarCollision.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT].ToString()));
+            RightRadarCollision.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT].ToString()));
          }
       }
    }
