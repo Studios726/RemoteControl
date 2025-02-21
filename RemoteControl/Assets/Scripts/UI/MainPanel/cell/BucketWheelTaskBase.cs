@@ -31,6 +31,7 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell EntryModeOpen;
     public GameObject entryModeGo;
     public GameObject rootEntryModeGo;
+    public GameObject leftRightTurnGo;
 
     /// <summary>
     /// 左转
@@ -213,6 +214,7 @@ public class BucketWheelTaskBase : PanelBase
             SemiAutoToggle.SetSystemState(taskCommand.AutoMode == AutoMode.SemiAuto, true);
             ShuntToggle.SetSystemState(taskCommand.AutoMode == AutoMode.Shunt, true);
             rootEntryModeGo.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
+            leftRightTurnGo.SetActive(taskCommand.AutoMode != AutoMode.Shunt);
             confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
             PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
             TwoShortOneLongBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
@@ -434,6 +436,7 @@ public class BucketWheelTaskBase : PanelBase
                 ShuntToggle.SetSystemState(false,true);
                 entryModeGo.SetActive(false);
                 rootEntryModeGo.SetActive(false);
+                leftRightTurnGo.SetActive(true);
                 confirmTurnBtn.gameObject.SetActive(false);
                 PositionConfirmBtn.gameObject.SetActive(false);
                 TwoShortOneLongBtn.gameObject.SetActive(false);
@@ -452,6 +455,7 @@ public class BucketWheelTaskBase : PanelBase
                 ShuntToggle.SetSystemState(false, true);
                 entryModeGo.SetActive(false);
                 rootEntryModeGo.SetActive(true);
+                leftRightTurnGo.SetActive(true);
                 confirmTurnBtn.gameObject.SetActive(true);
                 PositionConfirmBtn.gameObject.SetActive(false);
                 TwoShortOneLongBtn.gameObject.SetActive(true);
@@ -470,6 +474,7 @@ public class BucketWheelTaskBase : PanelBase
                 ShuntToggle.SetSystemState(true, true);
                 entryModeGo.SetActive(false);
                 rootEntryModeGo.SetActive(false);
+                leftRightTurnGo.SetActive(false);
                 confirmTurnBtn.gameObject.SetActive(false);
                 PositionConfirmBtn.gameObject.SetActive(false);
                 TwoShortOneLongBtn.gameObject.SetActive(false);
@@ -718,6 +723,9 @@ public class BucketWheelTaskBase : PanelBase
                 {
                     TaskDataManager.Instance.SendTaskCommand(taskCommand);
                 }
+            }else if (ShuntToggle.red.activeSelf)
+            {
+                TaskDataManager.Instance.SendTaskCommand(taskCommand);
             }
             else
             {

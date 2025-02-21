@@ -386,6 +386,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
             taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft, taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight
         };
         Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0]},{taskCommand.CollisionValueList[1]}");
+        Debug.Log($"AutoMode {taskCommand.AutoMode}");
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
