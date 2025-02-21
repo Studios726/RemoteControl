@@ -653,7 +653,6 @@ public class GameDataManager : Singleton<GameDataManager>
         }else if (cursendDataReportAndDem.code==2)
         {
             BucketLidarDisList = cursendDataReportAndDem.bucketLidarDisList;
-            // Debug.LogError($">>>>>{cursendDataReportAndDem.bucketLidarDisList[0].Dis}");
         }
         else
         {

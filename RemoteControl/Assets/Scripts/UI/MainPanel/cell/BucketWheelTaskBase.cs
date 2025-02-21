@@ -170,7 +170,7 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void UpdateData(TaskCommand taskCommand)
     {
-        Debug.Log($"任务数据刷新 {taskCommand.Machine} isRefreshUI:{taskCommand.AllData.isRefreshUI} isInitData:{isInitData} List[3]:{taskCommand.AllData.OperationCommandList[3]} activeSelf：{takeMaterEndBtn.red.activeSelf}");
+        // Debug.Log($"任务数据刷新 {taskCommand.Machine} isRefreshUI:{taskCommand.AllData.isRefreshUI} isInitData:{isInitData} List[3]:{taskCommand.AllData.OperationCommandList[3]} activeSelf：{takeMaterEndBtn.red.activeSelf}");
         if (taskCommand.AllData.isRefreshUI == 0 && isInitData)
         {
             return;

@@ -385,6 +385,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft, taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight
         };
+        Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0]},{taskCommand.CollisionValueList[1]}");
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
@@ -403,9 +404,9 @@ public class TaskDataManager : Singleton<TaskDataManager>
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.Command_Type= 8;
         taskCommand.Machine= machine;
-        taskCommand.ReversingValueList = new List<float>() { left, right };
+        taskCommand.CollisionValueList = new List<float>() { left, right };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
-        Debug.Log($"SendTaskLidarDis:{left},{right} {machine}");
+        Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0]},{taskCommand.CollisionValueList[1]}");
     }
     public CommonTaskParameters GetCommonTaskParameters(Machine machine)
     {
