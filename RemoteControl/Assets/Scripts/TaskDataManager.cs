@@ -325,6 +325,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         { 1030, "取料没有三维数据，任务结束" },
         { 1031, "堆料没有三维数据，任务结束" },
         { 1032, "取料没有臂上雷达数据，任务结束" },
+        { 1033, "臂上雷达数据异常" },
         { 1500, "任务规划与远程驱动断开连接，任务结束" },
         { 2001, "取料回转电流异常解除" },
         { 2002, "堆料回转电流异常解除" },
@@ -346,7 +347,8 @@ public class TaskDataManager : Singleton<TaskDataManager>
         { 2018, "保护故障解除" },
         { 2019, "变幅油泵故障解除" },
         { 2020, "plc满足取料前提条件" },
-        { 2021, "斗轮机故障解除" }
+        { 2021, "斗轮机故障解除" },
+        { 2022, "臂上雷达数据异常解除" }
     };
     private static object o = new object();
     public ConcurrentDictionary<string, List<TaskCodeDes>> taskCodeDesDictionary =
