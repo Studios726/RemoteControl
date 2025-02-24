@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5532b1c-7e78-432b-98ba-40d9beeadb73" name="Changes" comment="任务结束更新三维模型">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RemoteControl/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RemoteControl/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp-firstpass.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/modelFBX/machine1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/modelFBX/machine1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/modelFBX/machine2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/modelFBX/machine2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/modelFBX/轨道.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/modelFBX/轨道.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/AppLauncher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AppLauncher.cs" afterDir="false" />
+    <list default="true" id="b5532b1c-7e78-432b-98ba-40d9beeadb73" name="Changes" comment="任务位置适配">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RemoteControl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RemoteControl/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ConstStr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ConstStr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameDataManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Model/BeltCtrMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Model/BeltCtrMove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Model/MachineMove.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Model/MachineMove.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/MainPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/MainPanelView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TaskDataManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TaskDataManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,56 +68,23 @@
     <setting file="file://$USER_HOME$/Documents/WeChat Files/wxid_u02ze9ljdz9a22/FileStorage/File/2024-12/SystemVariables(1).cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/Documents/WeChat Files/wxid_u02ze9ljdz9a22/FileStorage/File/2025-01/SystemVariables.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../Study/My project/Assets/TextMesh Pro/Examples &amp; Extras/Scripts/TMP_TextInfoDebugTool.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/UI/StatusParameterPanel.prefab" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/prefabs/RadarPos.prefab" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/prefabs/SetParameterItem.prefab" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/prefabs/SetParameterItem.prefab" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Resources/prefabs/taskParm.prefab" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scenes/Main.unity" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AlarmDataManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CamCtrl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/ConstStr.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/ConstStr.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/ConstStr.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/GameDataManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameDataManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/GameDataManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/GameDataManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/Network/ServerCommand.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RawImage/CustomRawImage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/TaskDataManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/TaskDataManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/TaskDataManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ConfirmStartTaskPanel/ConfirmStartTaskPanelCtr.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ConfirmStartTaskPanel/ConfirmStartTaskPanelView.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/ImportantParamsGraphPanel.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/ImportantParamsGraphPanel/SelectElectricityShowItem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/ImportantAlarmTips.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/WarningCell.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/WarningList.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/Other/RadarParmItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Other/RadarParmItem.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/Other/RadarParmItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/Other/TaskParmItem.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/StatusParameterPanel/cell/status_3/TaskParmsSetting.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/Scripts/UI/StatusParameterPanel/cell/status_3/TaskParmsSetting.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/StatusParameterPanel/cell/status_3/TaskParmsSetting.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Helper/FormatterHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Helper/FormatterHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Internal/Utilities/ChartCached.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Serie/SerieHandler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://D:/Work/RemoteControl/Assets/XCharts/Runtime/Serie/SerieParams.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.9/Scripts/Editor/TMPro_TexturePostProcessor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.9/Scripts/Runtime/TMP_TextProcessingStack.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/ExecuteEvents.cs" root0="SKIP_HIGHLIGHTING" />
@@ -186,7 +142,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../../package/pc/20250212-1-Test\RemoteControl.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../package/pc/20250221-3-m\RemoteControl.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="D:\日常包" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -331,7 +287,9 @@
       <workItem from="1739415174434" duration="5568000" />
       <workItem from="1739424398005" duration="15496000" />
       <workItem from="1739502228779" duration="15730000" />
-      <workItem from="1739754317661" duration="28017000" />
+      <workItem from="1739754317661" duration="30083000" />
+      <workItem from="1740037203994" duration="14400000" />
+      <workItem from="1740357959982" duration="1033000" />
     </task>
     <task id="LOCAL-00001" summary="修改警告信息">
       <option name="closed" value="true" />
@@ -597,7 +555,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739955849126</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="任务防撞参数修改">
+      <option name="closed" value="true" />
+      <created>1740114974670</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1740114974670</updated>
+    </task>
+    <task id="LOCAL-00035" summary="任务位置适配">
+      <option name="closed" value="true" />
+      <created>1740122674290</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1740122674290</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,8 +598,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="取料任务刷新逻辑修改" />
-    <MESSAGE value="堆取料任务修改" />
     <MESSAGE value="main" />
     <MESSAGE value="任务进行中不能修改部分参数" />
     <MESSAGE value="报警信息添加" />
@@ -649,7 +621,9 @@
     <MESSAGE value="修改限制输入字符" />
     <MESSAGE value="任务结束不需要更新模型" />
     <MESSAGE value="任务结束更新三维模型" />
-    <option name="LAST_COMMIT_MESSAGE" value="任务结束更新三维模型" />
+    <MESSAGE value="任务防撞参数修改" />
+    <MESSAGE value="任务位置适配" />
+    <option name="LAST_COMMIT_MESSAGE" value="任务位置适配" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1020,26 +994,26 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/TaskDataManager.cs</url>
-          <line>919</line>
+          <line>972</line>
           <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\TaskDataManager.cs" containingFunctionPresentation="Method 'UpdatePileTakeMaterialTask'">
             <startOffsets>
-              <option value="33386" />
+              <option value="-1" />
             </startOffsets>
             <endOffsets>
-              <option value="33396" />
+              <option value="-1" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="196" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/TaskDataManager.cs</url>
-          <line>829</line>
+          <line>882</line>
           <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\TaskDataManager.cs" containingFunctionPresentation="Method 'IsCanSet'">
             <startOffsets>
-              <option value="30135" />
+              <option value="33228" />
             </startOffsets>
             <endOffsets>
-              <option value="30192" />
+              <option value="33285" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="199" />
@@ -1085,52 +1059,52 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
-          <line>628</line>
+          <line>697</line>
           <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'SendTaskCommand'">
             <startOffsets>
-              <option value="23978" />
+              <option value="25420" />
             </startOffsets>
             <endOffsets>
-              <option value="24059" />
+              <option value="25501" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="212" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
-          <line>673</line>
+          <line>756</line>
           <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'SendTaskCommand'">
             <startOffsets>
-              <option value="26590" />
+              <option value="30421" />
             </startOffsets>
             <endOffsets>
-              <option value="26631" />
+              <option value="30462" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="213" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
-          <line>195</line>
+          <line>201</line>
           <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'UpdateData'">
             <startOffsets>
-              <option value="6109" />
+              <option value="6225" />
             </startOffsets>
             <endOffsets>
-              <option value="6194" />
+              <option value="6310" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="214" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
-          <line>618</line>
+          <line>687</line>
           <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'SendTaskCommand'">
             <startOffsets>
-              <option value="23490" />
+              <option value="24932" />
             </startOffsets>
             <endOffsets>
-              <option value="23565" />
+              <option value="25007" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="215" />
@@ -1147,19 +1121,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="216" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/cell/BucketWheelTaskBase.cs</url>
-          <line>172</line>
-          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\cell\BucketWheelTaskBase.cs" containingFunctionPresentation="Method 'UpdateData'">
-            <startOffsets>
-              <option value="4929" />
-            </startOffsets>
-            <endOffsets>
-              <option value="5140" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="219" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/XCharts/Runtime/Helper/FormatterHelper.cs</url>
@@ -1394,6 +1355,32 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="252" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/GameDataManager.cs</url>
+          <line>617</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\GameDataManager.cs" containingFunctionPresentation="Method 'UpdateWheelAnimation'">
+            <startOffsets>
+              <option value="21185" />
+            </startOffsets>
+            <endOffsets>
+              <option value="21335" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="254" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Model/BeltCtrMove.cs</url>
+          <line>36</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\Model\BeltCtrMove.cs" containingFunctionPresentation="Lambda expression inside Method 'AddListenerEvent'">
+            <startOffsets>
+              <option value="1192" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1268" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="255" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

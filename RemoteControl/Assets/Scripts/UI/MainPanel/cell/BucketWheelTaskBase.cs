@@ -191,7 +191,7 @@ public class BucketWheelTaskBase : PanelBase
             takeMaterEndBtn.SetSystemState(taskCommand.AllData.OperationCommandList[3] == 1, true);
             takeMaterReversingBtn.SetSystemState(taskCommand.AllData.OperationCommandList[2] == 1, true);
             resetTaskBtn.SetSystemState(false, true);
-            PositionConfirmBtn.SetSystemState(false, true);
+            // PositionConfirmBtn.SetSystemState(false, true);
             TwoShortOneLongBtn.SetSystemState(false, true);
         }
         else
@@ -216,7 +216,7 @@ public class BucketWheelTaskBase : PanelBase
             rootEntryModeGo.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
             leftRightTurnGo.SetActive(taskCommand.AutoMode != AutoMode.Shunt);
             confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
-            PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
+            // PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
             TwoShortOneLongBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
             AngleEntryText.SetTextByFocused(taskCommand.AngleEntryValue.ToString());
             leftTurnToggle.SetSystemState(taskCommand.TurnMode == TurnMode.LEFTTURN, true);
@@ -228,7 +228,7 @@ public class BucketWheelTaskBase : PanelBase
             takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1, true);
             resetTaskBtn.SetSystemState(taskCommand.ResetState == 1, true);
             confirmTurnBtn.SetSystemState(taskCommand.TurnConfirmState == 1, true);
-            PositionConfirmBtn.SetSystemState(taskCommand.PositionConfirmState == 1, true);
+            // PositionConfirmBtn.SetSystemState(taskCommand.PositionConfirmState == 1, true);
             TwoShortOneLongBtn.SetSystemState(taskCommand.TwoShortOneLongState==1, true);
             EntryModeOpen.SetSystemState(taskCommand.IsUseAngleEntryValue == 1, true);
             EntryModeClose.SetSystemState(taskCommand.IsUseAngleEntryValue == 0, true);
@@ -293,21 +293,21 @@ public class BucketWheelTaskBase : PanelBase
                     SendTaskCommand(OperationType.TurnConfirm)));
         }));
 
-        AddOnClickListener(PositionConfirmBtn, (() =>
-        {
-            // UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-            //     new ConfirmPanelArgs("是否定位确认？", GameDataManager.Instance.GetMachineName(machine), null, () =>
-            //         SendTaskCommand(OperationType.PositionConfirm)));
-            if (IsCanSet())
-            {
-                PositionConfirmBtn.SetSystemState(!PositionConfirmBtn.red.activeSelf, true);
-            }
-            else
-            {
-                PositionConfirmBtn.SetSelectState(true);
-            }
-          
-        }));
+        // AddOnClickListener(PositionConfirmBtn, (() =>
+        // {
+        //     // UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+        //     //     new ConfirmPanelArgs("是否定位确认？", GameDataManager.Instance.GetMachineName(machine), null, () =>
+        //     //         SendTaskCommand(OperationType.PositionConfirm)));
+        //     if (IsCanSet())
+        //     {
+        //         PositionConfirmBtn.SetSystemState(!PositionConfirmBtn.red.activeSelf, true);
+        //     }
+        //     else
+        //     {
+        //         PositionConfirmBtn.SetSelectState(true);
+        //     }
+        //   
+        // }));
         
         AddOnClickListener(TwoShortOneLongBtn,(() =>
         {
@@ -438,7 +438,7 @@ public class BucketWheelTaskBase : PanelBase
                 rootEntryModeGo.SetActive(false);
                 leftRightTurnGo.SetActive(true);
                 confirmTurnBtn.gameObject.SetActive(false);
-                PositionConfirmBtn.gameObject.SetActive(false);
+                // PositionConfirmBtn.gameObject.SetActive(false);
                 TwoShortOneLongBtn.gameObject.SetActive(false);
             }
             else
@@ -457,7 +457,7 @@ public class BucketWheelTaskBase : PanelBase
                 rootEntryModeGo.SetActive(true);
                 leftRightTurnGo.SetActive(true);
                 confirmTurnBtn.gameObject.SetActive(true);
-                PositionConfirmBtn.gameObject.SetActive(false);
+                // PositionConfirmBtn.gameObject.SetActive(false);
                 TwoShortOneLongBtn.gameObject.SetActive(true);
             }
             else
@@ -476,7 +476,7 @@ public class BucketWheelTaskBase : PanelBase
                 rootEntryModeGo.SetActive(false);
                 leftRightTurnGo.SetActive(false);
                 confirmTurnBtn.gameObject.SetActive(false);
-                PositionConfirmBtn.gameObject.SetActive(false);
+                // PositionConfirmBtn.gameObject.SetActive(false);
                 TwoShortOneLongBtn.gameObject.SetActive(false);
             }
             else
@@ -685,7 +685,7 @@ public class BucketWheelTaskBase : PanelBase
             AllData allData = new AllData();
             taskCommand.AllData = allData;
             taskCommand.IsUseAngleEntryValue = EntryModeOpen.red.activeSelf ? 1 : 0;
-            taskCommand.PositionConfirmState =PositionConfirmBtn.red.activeSelf ? 1 : 0;
+            // taskCommand.PositionConfirmState =PositionConfirmBtn.red.activeSelf ? 1 : 0;
             taskCommand.TwoShortOneLongState =TwoShortOneLongBtn.red.activeSelf ? 1 : 0;
         }
         else if (operationType == OperationType.TurnConfirm)
@@ -714,15 +714,17 @@ public class BucketWheelTaskBase : PanelBase
         {
             if ( AutoMaxToggle.red.activeSelf)
             {
-                if (PositionConfirmBtn.red.activeSelf)//定位确认需要二次弹窗
-                {
-                    UIManager.Instance.OpenUI(UIID.ConfirmStartTaskPanel,
-                        new ConfirmTaskPanelArgs(taskCommand, GameDataManager.Instance.GetMachineName(machine)));
-                }
-                else
-                {
-                    TaskDataManager.Instance.SendTaskCommand(taskCommand);
-                }
+                UIManager.Instance.OpenUI(UIID.ConfirmStartTaskPanel,
+                    new ConfirmTaskPanelArgs(taskCommand, GameDataManager.Instance.GetMachineName(machine)));
+                // if (PositionConfirmBtn.red.activeSelf)//定位确认需要二次弹窗
+                // {
+                //     UIManager.Instance.OpenUI(UIID.ConfirmStartTaskPanel,
+                //         new ConfirmTaskPanelArgs(taskCommand, GameDataManager.Instance.GetMachineName(machine)));
+                // }
+                // else
+                // {
+                //     TaskDataManager.Instance.SendTaskCommand(taskCommand);
+                // }
             }else if (ShuntToggle.red.activeSelf)
             {
                 TaskDataManager.Instance.SendTaskCommand(taskCommand);
@@ -781,7 +783,7 @@ public class BucketWheelTaskBase : PanelBase
         // leftTurnToggle.SetSystemState(false, true);
         // rightTurnToggle.SetSystemState(false, true);
         confirmTurnBtn.SetSystemState(false, true);
-        PositionConfirmBtn.SetSystemState(false, true);
+        // PositionConfirmBtn.SetSystemState(false, true);
         // confirmTurnBtn.gameObject.SetActive(true);
         // PositionConfirmBtn.gameObject.SetActive(false);
     }
