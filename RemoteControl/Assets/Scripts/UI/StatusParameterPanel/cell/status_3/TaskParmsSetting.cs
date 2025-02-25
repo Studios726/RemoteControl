@@ -89,7 +89,7 @@ public class TaskParmsSetting : MonoBehaviour
       machineName = Machine == Machine.BucketWheelStackerReclaimer ? "堆取料机" : "取料机";
 
       TwoShortOneLong.Init(ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST,
-         ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND,"两短一长缩短度数1","两短一长缩短度数2", Machine, 100, 1, 100, 1, (
+         ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND,"两短一长缩短度数1","两短一长缩短度数2", Machine, 100, 0, 100, 0, (
             () =>
             {
                TaskDataManager.Instance.SendTaskTwoShortOneLongList(float.Parse(TwoShortOneLong.FirstInputField.text),float.Parse(TwoShortOneLong.SecondInputField.text),Machine);
