@@ -73,7 +73,7 @@ public class DateCell
     public string EndTime;
     public bool IsDynamic;
 
-    public DateCell(string startTime, string endTime, bool isDynamic = false)
+    public DateCell(string startTime, string endTime, bool isDynamic = true)
     {
         StartTime = startTime;
         EndTime = endTime;
@@ -409,6 +409,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         for (int i = 0; i < lineChart.series.Count; i++)
         {
             lineChart.series[i].data.Clear();
+            lineChart.series[i].AnimationEnable(false);
         }
     }
 
