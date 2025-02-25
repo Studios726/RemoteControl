@@ -45,6 +45,14 @@ public class TaskParmsSetting : MonoBehaviour
    /// 右侧臂上雷达防撞
    /// </summary>
    public RadarParmItem RightRadarCollision;
+   /// <summary>
+   /// 两长一短设置
+   /// </summary>
+   public TwoValueChange TwoShortOneLong;
+   /// <summary>
+   /// 振打电机开始时间和循环时间设置
+   /// </summary>
+   public TwoValueChange VibrationMotor;
 
    public Machine Machine;
    private string machineName;
@@ -55,12 +63,12 @@ public class TaskParmsSetting : MonoBehaviour
       FetchPileDepth.InitName(ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH,"取料分层高度",Machine);
       FetchVerticalRangeAdd.InitName(ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD,"左右范围增加的长度",Machine);
       FetchHorizontalRangeSub.InitName(ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB,"沿着轨道方向的取料范围缩减",Machine);
-      LeftRadarPos.InitName(ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT,Machine,10);
+      LeftRadarPos.InitName(ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT,Machine,10,"左侧臂上雷达-换向设定");
       LeftRadarPos.onEndEdit = (() =>
       {
          TaskDataManager.Instance.SendTaskLidarDis(float.Parse(LeftRadarPos.setValueInputField.text),float.Parse(RightRadarPos.setValueInputField.text),Machine);
       });
-      RightRadarPos.InitName(ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT,Machine,10);
+      RightRadarPos.InitName(ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT,Machine,10,"右侧臂上雷达-换向设定");
       RightRadarPos.onEndEdit = (() =>
       {
          TaskDataManager.Instance.SendTaskLidarDis(float.Parse(LeftRadarPos.setValueInputField.text),float.Parse(RightRadarPos.setValueInputField.text),Machine);
@@ -68,17 +76,35 @@ public class TaskParmsSetting : MonoBehaviour
       
       //防撞
       
-      LeftRadarCollision.InitName(ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT,Machine,10);
+      LeftRadarCollision.InitName(ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT,Machine,10,"左侧臂上雷达-防撞设定");
       LeftRadarCollision.onEndEdit = (() =>
       {
          TaskDataManager.Instance.SendTaskLidarCollisionDis(float.Parse(LeftRadarCollision.setValueInputField.text),float.Parse(RightRadarCollision.setValueInputField.text),Machine);
       });
-      RightRadarCollision.InitName(ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT,Machine,10);
+      RightRadarCollision.InitName(ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT,Machine,10,"右侧臂上雷达-防撞设定");
       RightRadarCollision.onEndEdit = (() =>
       {
          TaskDataManager.Instance.SendTaskLidarCollisionDis(float.Parse(LeftRadarCollision.setValueInputField.text),float.Parse(RightRadarCollision.setValueInputField.text),Machine);
       });
       machineName = Machine == Machine.BucketWheelStackerReclaimer ? "堆取料机" : "取料机";
+
+      TwoShortOneLong.Init(ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST,
+         ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND,"两短一长缩短度数1","两短一长缩短度数2", Machine, 100, 1, 100, 1, (
+            () =>
+            {
+               TaskDataManager.Instance.SendTaskTwoShortOneLongList(float.Parse(TwoShortOneLong.FirstInputField.text),float.Parse(TwoShortOneLong.SecondInputField.text),Machine);
+            }), () =>
+         {
+            TaskDataManager.Instance.SendTaskTwoShortOneLongList(float.Parse(TwoShortOneLong.FirstInputField.text),float.Parse(TwoShortOneLong.SecondInputField.text),Machine);
+         });
+      VibrationMotor.Init(ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_START,ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP,"振打电机首次启动时间","振打电机循环间隔",Machine,100,1,100,1,
+         (() =>
+         {
+            TaskDataManager.Instance.SendTaskVibrationMotorList(float.Parse(VibrationMotor.FirstInputField.text),float.Parse(VibrationMotor.SecondInputField.text),Machine);
+         }), () =>
+         {
+            TaskDataManager.Instance.SendTaskVibrationMotorList(float.Parse(VibrationMotor.FirstInputField.text),float.Parse(VibrationMotor.SecondInputField.text),Machine);
+         });
    }
 
    private void OnEnable()
@@ -114,6 +140,8 @@ public class TaskParmsSetting : MonoBehaviour
             RightRadarPos.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString()));
             LeftRadarCollision.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT].ToString()));
             RightRadarCollision.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT].ToString()));
+            TwoShortOneLong.SetValue(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST].ToString(),dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND].ToString());
+            VibrationMotor.SetValue(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_START].ToString(),dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP].ToString());
          }
       }
    }

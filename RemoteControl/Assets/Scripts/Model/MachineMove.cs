@@ -218,6 +218,15 @@ public class MachineMove : MonoBehaviour
         }
        
     }
+
+    private void OnEnable()
+    {
+        if (FogfallVfx.activeSelf&&FogfallVfxPs.isPlaying==false)
+        {
+            FogfallVfxPs.Play();
+        }
+    }
+
     public void SetFogfallVfxActive(bool isActive)
     {
         if (FogfallVfx.activeSelf != isActive)

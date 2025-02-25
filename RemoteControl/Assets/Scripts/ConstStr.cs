@@ -124,6 +124,10 @@ public static class ConstStr
     public const string DATA_TASK_CONFIG_REVERSALSETRIGHT = "reversal_set_right";
     public const string DATA_TASK_CONFIG_COLLISIONLEFT = "collision_set_left";
     public const string DATA_TASK_CONFIG_COLLISIONRIGHT = "collision_set_right";
+    public const string DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST="two_short_one_long_first";
+    public const string DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND = "two_short_one_long_second";
+    public const string DATA_TASK_CONFIG_VIBRATION_MOTOR_START = "vibrationMotor_start";
+    public const string DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP = "vibrationMotor_loop";
     public const string DATA_TASK_CONFIG_CREATOR = "creator";
     public const string DATA_TASK_CONFIG_CREATE_DATE = "create_date";
     #endregion

@@ -55,6 +55,8 @@ public class TaskParmItem : MonoBehaviour
          }
 
          inputField.text = num.ToString();
+         DataManager.Instance.InsertHistoryLogMc($"{des}修改", GameDataManager.Instance.GetUserName(), Machine);
+         TaskDataManager.Instance.UpdateCommonTaskParameters(name,inputField.text,Machine);
       }));
    }
    

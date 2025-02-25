@@ -510,8 +510,8 @@ public class BucketWheelTaskBase : PanelBase
         }));
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
-            InputFieldValueRange(startTakeMaterText, 0, 260, 0);
-            InputFieldValueRange(stopTakeMaterText, 0, 260, 0);
+            InputFieldValueRange(startTakeMaterText, 0, 265, 0);
+            InputFieldValueRange(stopTakeMaterText, 0, 265, 0);
         }
         else
         {
@@ -707,8 +707,20 @@ public class BucketWheelTaskBase : PanelBase
 
         if (operationType == OperationType.END)
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel,
-                new ConfirmTaskPanelArgs(taskCommand, GameDataManager.Instance.GetMachineName(machine)));
+            if (ShuntToggle.red.activeSelf==true)
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                    new ConfirmPanelArgs("是否结束调车作业", GameDataManager.Instance.GetMachineName(machine),null,(() =>
+                    {
+                        TaskDataManager.Instance.SendTaskCommand(taskCommand);
+                    })));
+            }
+            else
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmTaskPanel,
+                    new ConfirmTaskPanelArgs(taskCommand, GameDataManager.Instance.GetMachineName(machine)));
+            }
+          
         }
         else if (operationType == OperationType.START)
         {
@@ -727,7 +739,11 @@ public class BucketWheelTaskBase : PanelBase
                 // }
             }else if (ShuntToggle.red.activeSelf)
             {
-                TaskDataManager.Instance.SendTaskCommand(taskCommand);
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                    new ConfirmPanelArgs("是否启动调车作业", GameDataManager.Instance.GetMachineName(machine),null,(() =>
+                    {
+                        TaskDataManager.Instance.SendTaskCommand(taskCommand);
+                    })));
             }
             else
             {

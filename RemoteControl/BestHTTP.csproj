@@ -1171,10 +1171,10 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\digests\Sha512Digest.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\pkix\PkixCertPathValidatorResult.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\cms\TimeStampAndCRL.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\DeferredHash.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\x509\X509CertificatePair.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x509\V2TBSCertListGenerator.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\x509\AttributeCertificateIssuer.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\DeferredHash.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x509\V2TBSCertListGenerator.cs" />
     <Compile Include="Assets\Best HTTP\Source\WebSocket\Frames\WebSocketFrame.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\crypto\generators\DHParametersGenerator.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x509\NoticeReference.cs" />
@@ -1561,10 +1561,10 @@
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\crypto\impl\bc\BcTlsEd448Signer.cs" />
     <Compile Include="Assets\Best HTTP\Source\PlatformSupport\Threading\LockHelpers.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\tls\OcspStatusRequest.cs" />
-    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\ocsp\ResponseBytes.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\Asn1Null.cs" />
     <Compile Include="Assets\Best HTTP\Source\Decompression\ZlibCodec.cs" />
     <Compile Include="Assets\Best HTTP\Source\SocketIO.3\IncomingPacket.cs" />
+    <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\ocsp\ResponseBytes.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x509\Holder.cs" />
     <Compile Include="Assets\Best HTTP\Source\SecureProtocol\asn1\x509\AttCertIssuer.cs" />
     <Compile Include="Assets\Best HTTP\Source\SocketIO\Events\EventNames.cs" />

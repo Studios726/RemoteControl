@@ -387,8 +387,14 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft, taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight
         };
-        Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0]},{taskCommand.CollisionValueList[1]}");
-        Debug.Log($"AutoMode {taskCommand.AutoMode}");
+        taskCommand.TwoShortOneLongList = new List<float>()
+        {
+            taskCommand.CommonTaskParameters.TwoShortOneLongFirst, taskCommand.CommonTaskParameters.TwoShortOneLongSecond
+        };
+        taskCommand.VibrationMotorList = new List<float>()
+        {
+            taskCommand.CommonTaskParameters.VibrationMotorStartTime, taskCommand.CommonTaskParameters.VibrationMotorLoopTime
+        };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
@@ -410,6 +416,25 @@ public class TaskDataManager : Singleton<TaskDataManager>
         taskCommand.CollisionValueList = new List<float>() { left, right };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
         Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0]},{taskCommand.CollisionValueList[1]}");
+    }
+
+    public void SendTaskTwoShortOneLongList(float first, float second, Machine machine)
+    {
+        TaskCommand taskCommand = new TaskCommand();
+        taskCommand.Command_Type=9;
+        taskCommand.Machine= machine;
+        taskCommand.TwoShortOneLongList = new List<float>() { first, second };
+        MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
+        Debug.Log($"TwoShortOneLongList:{taskCommand.TwoShortOneLongList[0]},{taskCommand.TwoShortOneLongList[1]}");
+    }
+    public void SendTaskVibrationMotorList(float startTime, float loopTime, Machine machine)
+    {
+        TaskCommand taskCommand = new TaskCommand();
+        taskCommand.Command_Type= 10;
+        taskCommand.Machine= machine;
+        taskCommand.VibrationMotorList = new List<float>() { startTime, loopTime };
+        MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
+        Debug.Log($"VibrationMotorList:{taskCommand.VibrationMotorList[0]},{taskCommand.VibrationMotorList[1]}");
     }
     public CommonTaskParameters GetCommonTaskParameters(Machine machine)
     {
@@ -436,6 +461,14 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT].ToString());
                 commonTaskParameters.BucketLidarCollisionValueRight =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT].ToString());
+                commonTaskParameters.TwoShortOneLongFirst =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST].ToString());
+                commonTaskParameters.TwoShortOneLongSecond =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND].ToString());
+                commonTaskParameters.VibrationMotorStartTime =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_START].ToString());
+                commonTaskParameters.VibrationMotorLoopTime =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP].ToString());
             }
         }
         return commonTaskParameters;

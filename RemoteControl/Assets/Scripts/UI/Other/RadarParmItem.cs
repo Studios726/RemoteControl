@@ -12,6 +12,7 @@ public class RadarParmItem : MonoBehaviour
     private string commondName;
     public Action onEndEdit;
     private int maxNum;
+    private string des;
     private void Start()
     {
         setValueInputField.onEndEdit.AddListener(((string value) =>
@@ -27,6 +28,7 @@ public class RadarParmItem : MonoBehaviour
                     }
                 }
                 setValueInputField.text=num.ToString();
+                DataManager.Instance.InsertHistoryLogMc($"{des}修改", GameDataManager.Instance.GetUserName(), machine);
                 TaskDataManager.Instance.UpdateCommonTaskParameters(this.commondName,num.ToString(),machine);
                 onEndEdit?.Invoke();
             }
@@ -34,11 +36,12 @@ public class RadarParmItem : MonoBehaviour
         }));
     }
 
-    public void InitName(string commondName,Machine machine,int max=-1)
+    public void InitName(string commondName,Machine machine,int max=-1,string des="")
     {
         maxNum = max;
         this.commondName = commondName;
         this.machine = machine;
+        this.des = des;
     }
     public void SetTextValue(string cur)
     {
