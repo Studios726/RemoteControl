@@ -12,6 +12,7 @@ public class AppLauncher : MonoBehaviour
     private int previousWidth;
     private int previousHeight;
     private int keyCodeCount_k;
+    private bool switchover;
     private void Awake()
     {
         DataManager.Instance.IsUseData = true;
@@ -27,6 +28,7 @@ public class AppLauncher : MonoBehaviour
         {
             ExitGamePop();
         });
+        Screen.SetResolution(1920, 1080, switchover);    
         FullScreen();
     }
 
@@ -52,7 +54,13 @@ public class AppLauncher : MonoBehaviour
             previousHeight = Screen.height;
             EventManager.Instance.TriggerEvent(EventName.RefreshScreen, null);
         }
-       
+
+        if (Input.GetKeyDown(KeyCode.P)&&DataManager.Instance.IsUseData==false)
+        {
+            switchover = !switchover;
+            Screen.SetResolution(1920, 1080, switchover);
+            Screen.fullScreen = switchover;  
+        }
     }
     private void OnApplicationQuit()
     {
@@ -100,6 +108,10 @@ public class AppLauncher : MonoBehaviour
 
     public void FullScreen()
     {
+        if (DataManager.Instance.IsUseData==false)
+        {
+            return;
+        }
         Resolution[] resolutions = Screen.resolutions;//获取设置当前屏幕分辩率
         //找到最大分辨率
         int width = resolutions[0].width, height = resolutions[0].height;
