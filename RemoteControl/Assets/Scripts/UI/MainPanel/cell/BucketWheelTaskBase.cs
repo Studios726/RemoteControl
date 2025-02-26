@@ -355,9 +355,17 @@ public class BucketWheelTaskBase : PanelBase
         }));
         AddOnClickListener(takeMaterEndBtn, (() =>
         {
-            UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                new ConfirmPanelArgs("是否结束自动作业？", GameDataManager.Instance.GetMachineName(machine), null,
-                    () => SendTaskCommand(OperationType.END)));
+            if (ShuntToggle.red.activeSelf==true)
+            {
+                SendTaskCommand(OperationType.END);
+            }
+            else
+            {
+                UIManager.Instance.OpenUI(UIID.ConfirmPanel,
+                    new ConfirmPanelArgs("是否结束自动作业？", GameDataManager.Instance.GetMachineName(machine), null,
+                        () => SendTaskCommand(OperationType.END)));
+            }
+          
         }));
         AddOnClickListener(EntryModeOpen, (() =>
         {
@@ -710,7 +718,7 @@ public class BucketWheelTaskBase : PanelBase
             if (ShuntToggle.red.activeSelf==true)
             {
                 UIManager.Instance.OpenUI(UIID.ConfirmPanel,
-                    new ConfirmPanelArgs("是否结束调车作业", GameDataManager.Instance.GetMachineName(machine),null,(() =>
+                    new ConfirmPanelArgs("是否结束调车作业?", GameDataManager.Instance.GetMachineName(machine),null,(() =>
                     {
                         TaskDataManager.Instance.SendTaskCommand(taskCommand);
                     })));
