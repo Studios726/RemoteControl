@@ -527,7 +527,7 @@ public class TaskCommand
 {
     public int ID { get; set; }
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长 7雷达左侧右侧换向设定 8 雷达左侧右侧防撞设定 9 两长一短 10振打电机
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长 7雷达左侧右侧换向设定 8 雷达左侧右侧防撞设定 9 两长一短 10振打电机11换层设定
     public int Command_Type { get; set; }
     //0新任务 1恢复上次任务
     public int IsTaskContinued{ get; set; }
@@ -585,6 +585,8 @@ public class TaskCommand
     public List<float> ReversingValueList {  get; set; }
     //雷达左侧右侧距离碰撞设定【左，右】
     public List<float> CollisionValueList {  get; set; }
+    //换层设定【左，右】
+    public List<float> LayerValueList {  get; set; }
     //两短一长
     public List<float> TwoShortOneLongList{  get; set;}
     //振打电机【开始时间，循环时间】
@@ -648,6 +650,8 @@ public class CommonTaskParameters
     public float TwoShortOneLongSecond{ get; set; }
     public float VibrationMotorStartTime{ get; set;}
     public float VibrationMotorLoopTime{ get; set;}
+    public float LayerLeftValue{ get; set;}
+    public float LayerRightValue{ get; set;}
 }
 public class TaskRange
 {

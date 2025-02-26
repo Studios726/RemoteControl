@@ -963,6 +963,20 @@ public class GameDataManager : Singleton<GameDataManager>
 
         return "0";
     }
+    public string GetBucketLidarVerticalDis(string machine,int LidarPlace)
+    {
+        if (BucketLidarDisList!=null&&BucketLidarDisList.Length>0)
+        {
+            for (int i = 0; i < BucketLidarDisList.Length; i++)
+            {
+                if (BucketLidarDisList[i].BucketName==machine&&BucketLidarDisList[i].LidarPlace==LidarPlace)
+                {
+                    return BucketLidarDisList[i].VerticalDis.ToString("F2");
+                }
+            }
+        }
+        return  "0";
+    }
     /// <summary>
     /// 堆料任务处理
     /// </summary>

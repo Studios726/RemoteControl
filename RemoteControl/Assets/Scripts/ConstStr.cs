@@ -124,6 +124,8 @@ public static class ConstStr
     public const string DATA_TASK_CONFIG_REVERSALSETRIGHT = "reversal_set_right";
     public const string DATA_TASK_CONFIG_COLLISIONLEFT = "collision_set_left";
     public const string DATA_TASK_CONFIG_COLLISIONRIGHT = "collision_set_right";
+    public const string DATA_TASK_CONFIG_VERTICALLEFT = "vertical_set_left";
+    public const string DATA_TASK_CONFIG_VERTICALRIGHT = "vertical_set_right";
     public const string DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST="two_short_one_long_first";
     public const string DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND = "two_short_one_long_second";
     public const string DATA_TASK_CONFIG_VIBRATION_MOTOR_START = "vibrationMotor_start";
@@ -159,7 +161,7 @@ public static class ConstStr
     public const float InitBucketWheelHeigh = 7.48f;
     public const string BucketWheelStackerReclaimerName = "1#斗轮堆取料机";
     public const string BucketWheelName = "2#斗轮取料机";
-    public const string Version = "v0.1.20250222-m";
+    public const string Version = "v0.1.20250225-Test";
 }
 
 public enum Machine

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using MySql.Data.MySqlClient;
+using ShangHaiPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -46,6 +47,14 @@ public class TaskParmsSetting : MonoBehaviour
    /// </summary>
    public RadarParmItem RightRadarCollision;
    /// <summary>
+   /// 左侧臂上雷达垂直距离
+   /// </summary>
+   public RadarParmItem LeftRadarVerticalDis;
+   /// <summary>
+   /// 右侧臂上雷达垂直距离
+   /// </summary>
+   public RadarParmItem RightRadarVerticalDis;
+   /// <summary>
    /// 两长一短设置
    /// </summary>
    public TwoValueChange TwoShortOneLong;
@@ -86,6 +95,17 @@ public class TaskParmsSetting : MonoBehaviour
       {
          TaskDataManager.Instance.SendTaskLidarCollisionDis(float.Parse(LeftRadarCollision.setValueInputField.text),float.Parse(RightRadarCollision.setValueInputField.text),Machine);
       });
+      //垂直距离
+      LeftRadarVerticalDis.InitName(ConstStr.DATA_TASK_CONFIG_VERTICALLEFT,Machine,10,"左侧臂上雷达-换层设定");
+      LeftRadarVerticalDis.onEndEdit = (() =>
+      {
+         TaskDataManager.Instance.SendTaskLidarVerticalDis(float.Parse(LeftRadarVerticalDis.setValueInputField.text),float.Parse(RightRadarVerticalDis.setValueInputField.text),Machine);
+      });
+      RightRadarVerticalDis.InitName(ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT,Machine,10,"右侧臂上雷达-换层设定");
+      RightRadarVerticalDis.onEndEdit = (() =>
+      {
+         TaskDataManager.Instance.SendTaskLidarVerticalDis(float.Parse(LeftRadarVerticalDis.setValueInputField.text),float.Parse(RightRadarVerticalDis.setValueInputField.text),Machine);
+      });
       machineName = Machine == Machine.BucketWheelStackerReclaimer ? "堆取料机" : "取料机";
 
       TwoShortOneLong.Init(ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST,
@@ -118,6 +138,9 @@ public class TaskParmsSetting : MonoBehaviour
             LeftRadarCollision.SetTextValue(GameDataManager.Instance.GetBucketLidarCollisionValueByMachine(machineName,0));
             RightRadarCollision.SetTextValue(GameDataManager.Instance.GetBucketLidarCollisionValueByMachine(machineName,1));
             
+            LeftRadarVerticalDis.SetTextValue(GameDataManager.Instance.GetBucketLidarVerticalDis(machineName,0));
+            RightRadarVerticalDis.SetTextValue(GameDataManager.Instance.GetBucketLidarVerticalDis(machineName,1));
+            
          }));
       }
       if (Timer.IsPaused)
@@ -140,6 +163,8 @@ public class TaskParmsSetting : MonoBehaviour
             RightRadarPos.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString()));
             LeftRadarCollision.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT].ToString()));
             RightRadarCollision.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT].ToString()));
+            LeftRadarVerticalDis.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALLEFT].ToString()));
+            RightRadarVerticalDis.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT].ToString()));
             TwoShortOneLong.SetValue(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST].ToString(),dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND].ToString());
             VibrationMotor.SetValue(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_START].ToString(),dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP].ToString());
          }

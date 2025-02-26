@@ -387,6 +387,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
         {
             taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft, taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight
         };
+        taskCommand.LayerValueList = new List<float>()
+        {
+            taskCommand.CommonTaskParameters.LayerLeftValue, taskCommand.CommonTaskParameters.LayerRightValue
+        };
         taskCommand.TwoShortOneLongList = new List<float>()
         {
             taskCommand.CommonTaskParameters.TwoShortOneLongFirst, taskCommand.CommonTaskParameters.TwoShortOneLongSecond
@@ -417,7 +421,15 @@ public class TaskDataManager : Singleton<TaskDataManager>
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
         Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0]},{taskCommand.CollisionValueList[1]}");
     }
-
+    public void SendTaskLidarVerticalDis(float left, float right,Machine machine)
+    {
+        TaskCommand taskCommand = new TaskCommand();
+        taskCommand.Command_Type= 11;
+        taskCommand.Machine= machine;
+        taskCommand.LayerValueList = new List<float>() { left, right };
+        MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
+        Debug.Log($"LayerValueList:{taskCommand.LayerValueList[0]},{taskCommand.LayerValueList[1]}");
+    }
     public void SendTaskTwoShortOneLongList(float first, float second, Machine machine)
     {
         TaskCommand taskCommand = new TaskCommand();
@@ -469,6 +481,10 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_START].ToString());
                 commonTaskParameters.VibrationMotorLoopTime =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP].ToString());
+                commonTaskParameters.LayerLeftValue =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALLEFT].ToString());
+                commonTaskParameters.LayerRightValue =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT].ToString());
             }
         }
         return commonTaskParameters;

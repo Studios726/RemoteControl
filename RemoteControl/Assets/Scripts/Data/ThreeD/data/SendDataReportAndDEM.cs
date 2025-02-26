@@ -42,12 +42,14 @@ namespace ShangHaiPro
         public int LidarPlace; //0是左 1是右
         public double Dis;
         public double MinDisMean;
+        public double VerticalDis;
 
         public BucketLidarDis()
         {
             BucketName = "堆取料机";
             LidarPlace = 0;
             Dis = 0.5;
+            VerticalDis = 0.5;
         }
 
     }
