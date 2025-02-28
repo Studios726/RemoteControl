@@ -646,11 +646,29 @@ public class CommonTaskParameters
     /// 右侧防撞设定
     /// </summary>
     public float BucketLidarCollisionValueRight{ get; set; }
+    /// <summary>
+    /// 两短一长设置第一个
+    /// </summary>
     public float TwoShortOneLongFirst{ get; set; }
+    /// <summary>
+    /// 两短一长设置第二个
+    /// </summary>
     public float TwoShortOneLongSecond{ get; set; }
+    /// <summary>
+    /// 振打电机开始时间
+    /// </summary>
     public float VibrationMotorStartTime{ get; set;}
+    /// <summary>
+    /// 振打电机循环时间
+    /// </summary>
     public float VibrationMotorLoopTime{ get; set;}
+    /// <summary>
+    /// 左侧换层设定
+    /// </summary>
     public float LayerLeftValue{ get; set;}
+    /// <summary>
+    /// 右侧换层设定
+    /// </summary>
     public float LayerRightValue{ get; set;}
 }
 public class TaskRange
