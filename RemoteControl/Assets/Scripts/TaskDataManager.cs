@@ -383,18 +383,18 @@ public class TaskDataManager : Singleton<TaskDataManager>
         taskCommand.CommonTaskParameters = GetCommonTaskParameters(taskCommand.Machine);
         taskCommand.ReversingValueList  = new List<List<float>>()
         {
-            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarDisLeft,taskCommand.CommonTaskParameters.BucketLidarDisLeft_Right},
-            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarDisRight,taskCommand.CommonTaskParameters.BucketLidarDisRight_Right}
+            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarDisLeft,taskCommand.CommonTaskParameters.BucketLidarDisRight},
+            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarDisLeft_Right,taskCommand.CommonTaskParameters.BucketLidarDisRight_Right}
         };
         taskCommand.CollisionValueList = new List<List<float>>()
         {
-            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft,taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft_Right},
-            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight,taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight_Right}
+            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft,taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight},
+            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft_Right,taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight_Right}
         };
         taskCommand.LayerValueList = new List<List<float>>()
         {
-            new List<float>(){taskCommand.CommonTaskParameters.LayerLeftValue,taskCommand.CommonTaskParameters.LayerLeftValue_Right},
-            new List<float>(){taskCommand.CommonTaskParameters.LayerRightValue,taskCommand.CommonTaskParameters.LayerRightValue_Right}
+            new List<float>(){taskCommand.CommonTaskParameters.LayerLeftValue,taskCommand.CommonTaskParameters.LayerRightValue},
+            new List<float>(){taskCommand.CommonTaskParameters.LayerLeftValue_Right,taskCommand.CommonTaskParameters.LayerRightValue_Right}
           
         };
         taskCommand.TwoShortOneLongList = new List<float>()
@@ -413,9 +413,9 @@ public class TaskDataManager : Singleton<TaskDataManager>
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.Command_Type= 7;
         taskCommand.Machine= machine;
-        taskCommand.ReversingValueList = new List<List<float>>() {new List<float>(){left_left,left_right},new List<float>(){right_left,right_right} };
+        taskCommand.ReversingValueList = new List<List<float>>() {new List<float>(){left_left,right_left},new List<float>(){left_right,right_right} };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
-        Debug.Log($"SendTaskLidarDis:{left_left},{left_right} {right_left},{right_right} {machine}");
+        Debug.Log($"SendTaskLidarDis:{left_left},{right_left} {left_right},{right_right} {machine}");
     }
     
     public void SendTaskLidarCollisionDis(float left_left, float left_right, float right_left,float right_right,Machine machine)
@@ -423,7 +423,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.Command_Type= 8;
         taskCommand.Machine= machine;
-        taskCommand.CollisionValueList = new List<List<float>>() { new List<float>(){left_left,left_right},new List<float>(){right_left,right_right} };
+        taskCommand.CollisionValueList = new List<List<float>>() { new List<float>(){left_left,right_left},new List<float>(){left_right,right_right} };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
         Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0][0]},{taskCommand.CollisionValueList[0][1]} ,{taskCommand.CollisionValueList[1][0]},{taskCommand.CollisionValueList[1][1]}");
     }
@@ -432,7 +432,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.Command_Type= 11;
         taskCommand.Machine= machine;
-        taskCommand.LayerValueList = new List<List<float>>() { new List<float>(){left_left,left_right},new List<float>(){right_left,right_right} };
+        taskCommand.LayerValueList = new List<List<float>>() { new List<float>(){left_left,right_left},new List<float>(){left_right,right_right} };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
         Debug.Log($"LayerValueList:{taskCommand.LayerValueList[0][0]},{taskCommand.LayerValueList[0][1]} {taskCommand.LayerValueList[1][0]},{taskCommand.LayerValueList[1][1]}");
     }
