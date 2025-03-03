@@ -473,12 +473,20 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString());
                 commonTaskParameters.BucketLidarDisLeft =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT].ToString());
+                commonTaskParameters.BucketLidarDisLeft_Right =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT_RIGHT].ToString());
                 commonTaskParameters.BucketLidarDisRight =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString());
+                commonTaskParameters.BucketLidarDisRight_Right =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT_RIGHT].ToString());
                 commonTaskParameters.BucketLidarCollisionValueLeft =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT].ToString());
+                commonTaskParameters.BucketLidarCollisionValueLeft_Right =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT_RIGHT].ToString());
                 commonTaskParameters.BucketLidarCollisionValueRight =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT].ToString());
+                commonTaskParameters.BucketLidarCollisionValueRight_Right =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT_RIGHT].ToString());
                 commonTaskParameters.TwoShortOneLongFirst =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST].ToString());
                 commonTaskParameters.TwoShortOneLongSecond =
@@ -489,8 +497,12 @@ public class TaskDataManager : Singleton<TaskDataManager>
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP].ToString());
                 commonTaskParameters.LayerLeftValue =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALLEFT].ToString());
+                commonTaskParameters.LayerLeftValue_Right =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALLEFT_RIGHT].ToString());
                 commonTaskParameters.LayerRightValue =
                     float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT].ToString());
+                commonTaskParameters.LayerRightValue_Right =
+                    float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT_RIGHT].ToString());
             }
         }
         return commonTaskParameters;
