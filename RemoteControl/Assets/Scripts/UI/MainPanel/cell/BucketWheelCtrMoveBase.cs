@@ -171,7 +171,10 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 斗轮电流
     /// </summary>
     public Text bucketWheelElectricity;
-
+    /// <summary>
+    /// 斗轮电流
+    /// </summary>
+    public Text bucketWheelElectricityName;
     /// <summary>
     /// 斗轮位置
     /// </summary>
@@ -361,6 +364,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
     /// 两机距离小于80之后距离数值红黄闪烁
     /// </summary>
     private Timer distanceOfTwoCarsTimer;
+    private Timer bucketWheelElectricityTimer;
     public virtual void Start()
     {
         Init();
@@ -642,6 +646,8 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 SetText(dayTakeMater, "0", TextType.Tonne);
                 SetText(cantileverFlow, "0", TextType.TonneHour);
             }
+
+            SetBucketWheelElectricityTimer(data.BucketWheelElectricCurrent, 120);
         }
         else
         {
@@ -788,6 +794,7 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
                 SetText(dayTakeMater, "0", TextType.Tonne);
                 SetText(cantileverFlow, "0", TextType.TonneHour);
             }
+            SetBucketWheelElectricityTimer(data.BucketWheelElectricCurrent_2, 105);
         }
 
         float dis = Mathf.Abs(data.DC_Pos + ConstStr.InitPosition_1 - data.DC_Pos_2 - ConstStr.InitPosition_2);
@@ -843,6 +850,54 @@ public class BucketWheelCtrMoveBase : MonoBehaviour
         // }
     }
 
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.P))
+    //     {
+    //         SetBucketWheelElectricityTimer(999, 120);
+    //     }else if (Input.GetKeyDown(KeyCode.O))
+    //     {
+    //         SetBucketWheelElectricityTimer(99, 120);
+    //     }
+    // }
+
+    public void SetBucketWheelElectricityTimer(float num,float criticalValue)
+    {
+        if (num<criticalValue)
+        {
+            if (bucketWheelElectricityTimer!=null)
+            {
+                bucketWheelElectricityTimer?.Cancel();
+                bucketWheelElectricityTimer = null;
+            }
+
+            if (bucketWheelElectricity.color != Color.white)
+            {
+                bucketWheelElectricity.color = Color.white;
+                bucketWheelElectricityName.color= Color.white;
+            }
+        }
+        else
+        {
+            if (bucketWheelElectricityTimer == null)
+            {
+                
+                bucketWheelElectricityTimer = Timer.Register(1, true, true, (() =>
+                {
+                    if (bucketWheelElectricity.color == Color.yellow)
+                    {
+                        bucketWheelElectricity.color = Color.red;
+                        bucketWheelElectricityName.color= Color.red;
+                    }
+                    else
+                    {
+                        bucketWheelElectricity.color= Color.yellow;
+                        bucketWheelElectricityName.color= Color.yellow;
+                    }
+                }));
+            }
+        }
+    }
     public void AddOnClickListener(Button btn, UnityAction action)
     {
         btn.onClick.AddListener(action);

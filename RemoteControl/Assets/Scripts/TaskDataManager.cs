@@ -292,6 +292,8 @@ public class TaskDataManager : Singleton<TaskDataManager>
         { 824, "悬臂回转方向到位" },
         { 825, "定位已完成，直接取料" },
         { 826, "斗轮机到达调车位置，定位完成" },
+        { 827, "当前位置取料大臂可能会撞上煤堆" },
+        { 828, "因大臂可能会撞上煤堆，取消取料任务" },
         { 1000, "与远程驱动通信中断" },
         { 1001, "堆料范围不恰当" },
         { 1002, "取料范围不恰当" },
@@ -379,17 +381,21 @@ public class TaskDataManager : Singleton<TaskDataManager>
     public void SendTaskCommand(TaskCommand taskCommand)
     {
         taskCommand.CommonTaskParameters = GetCommonTaskParameters(taskCommand.Machine);
-        taskCommand.ReversingValueList  = new List<float>()
+        taskCommand.ReversingValueList  = new List<List<float>>()
         {
-            taskCommand.CommonTaskParameters.BucketLidarDisLeft, taskCommand.CommonTaskParameters.BucketLidarDisRight
+            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarDisLeft,taskCommand.CommonTaskParameters.BucketLidarDisLeft_Right},
+            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarDisRight,taskCommand.CommonTaskParameters.BucketLidarDisRight_Right}
         };
-        taskCommand.CollisionValueList = new List<float>()
+        taskCommand.CollisionValueList = new List<List<float>>()
         {
-            taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft, taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight
+            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft,taskCommand.CommonTaskParameters.BucketLidarCollisionValueLeft_Right},
+            new List<float>(){taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight,taskCommand.CommonTaskParameters.BucketLidarCollisionValueRight_Right}
         };
-        taskCommand.LayerValueList = new List<float>()
+        taskCommand.LayerValueList = new List<List<float>>()
         {
-            taskCommand.CommonTaskParameters.LayerLeftValue, taskCommand.CommonTaskParameters.LayerRightValue
+            new List<float>(){taskCommand.CommonTaskParameters.LayerLeftValue,taskCommand.CommonTaskParameters.LayerLeftValue_Right},
+            new List<float>(){taskCommand.CommonTaskParameters.LayerRightValue,taskCommand.CommonTaskParameters.LayerRightValue_Right}
+          
         };
         taskCommand.TwoShortOneLongList = new List<float>()
         {
@@ -402,33 +408,33 @@ public class TaskDataManager : Singleton<TaskDataManager>
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
     }
 
-    public void SendTaskLidarDis(float left, float right,Machine machine)
+    public void SendTaskLidarDis(float left_left, float left_right, float right_left,float right_right,Machine machine)
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.Command_Type= 7;
         taskCommand.Machine= machine;
-        taskCommand.ReversingValueList = new List<float>() { left, right };
+        taskCommand.ReversingValueList = new List<List<float>>() {new List<float>(){left_left,left_right},new List<float>(){right_left,right_right} };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
-        Debug.Log($"SendTaskLidarDis:{left},{right} {machine}");
+        Debug.Log($"SendTaskLidarDis:{left_left},{left_right} {right_left},{right_right} {machine}");
     }
     
-    public void SendTaskLidarCollisionDis(float left, float right,Machine machine)
+    public void SendTaskLidarCollisionDis(float left_left, float left_right, float right_left,float right_right,Machine machine)
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.Command_Type= 8;
         taskCommand.Machine= machine;
-        taskCommand.CollisionValueList = new List<float>() { left, right };
+        taskCommand.CollisionValueList = new List<List<float>>() { new List<float>(){left_left,left_right},new List<float>(){right_left,right_right} };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
-        Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0]},{taskCommand.CollisionValueList[1]}");
+        Debug.Log($"CollisionValueList:{taskCommand.CollisionValueList[0][0]},{taskCommand.CollisionValueList[0][1]} ,{taskCommand.CollisionValueList[1][0]},{taskCommand.CollisionValueList[1][1]}");
     }
-    public void SendTaskLidarVerticalDis(float left, float right,Machine machine)
+    public void SendTaskLidarVerticalDis(float left_left, float left_right, float right_left,float right_right,Machine machine)
     {
         TaskCommand taskCommand = new TaskCommand();
         taskCommand.Command_Type= 11;
         taskCommand.Machine= machine;
-        taskCommand.LayerValueList = new List<float>() { left, right };
+        taskCommand.LayerValueList = new List<List<float>>() { new List<float>(){left_left,left_right},new List<float>(){right_left,right_right} };
         MessageCenter.Instance.SendMessage(MessageType.PC, taskCommand);
-        Debug.Log($"LayerValueList:{taskCommand.LayerValueList[0]},{taskCommand.LayerValueList[1]}");
+        Debug.Log($"LayerValueList:{taskCommand.LayerValueList[0][0]},{taskCommand.LayerValueList[0][1]} {taskCommand.LayerValueList[1][0]},{taskCommand.LayerValueList[1][1]}");
     }
     public void SendTaskTwoShortOneLongList(float first, float second, Machine machine)
     {
@@ -627,7 +633,7 @@ public class TaskDataManager : Singleton<TaskDataManager>
                             taskVariables.McData[i].AllData.ProcessingProgress.ToString());
                     }
                 }
-                PopConfirmPanelByTaskCode(taskVariables.McData[i].AllData.Code);
+                PopConfirmPanelByTaskCode(taskVariables.McData[i].AllData.Code,taskVariables.McData[i]);
             }
         }
         else
@@ -645,12 +651,26 @@ public class TaskDataManager : Singleton<TaskDataManager>
 
     }
 
-    public void PopConfirmPanelByTaskCode(int code)
+    public void PopConfirmPanelByTaskCode(int code,TaskCommand taskCommand)
     {
         //1002，1015，1032，826
         if (code==1002||code==1015||code==1032||code==826)
         {
             UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(GetDesByTaskCode(code),"任务规划", null, null));
+        }else if (code==827)
+        {
+            string des = $"{GetDesByTaskCode(code)},是否确定继续执行？";
+            UIManager.Instance.OpenUI(UIID.ConfirmPanel, new ConfirmPanelArgs(des,"任务规划", (() =>
+            {
+                taskCommand.Command_Type=12;
+                taskCommand.IsAutoContinued = 2;
+                SendTaskCommand(taskCommand);
+            }), (() =>
+            {
+                taskCommand.Command_Type=12;
+                taskCommand.IsAutoContinued = 1;
+                SendTaskCommand(taskCommand);
+            })));
         }
     }
     //处理定时任务

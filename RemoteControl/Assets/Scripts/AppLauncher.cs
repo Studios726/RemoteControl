@@ -28,7 +28,6 @@ public class AppLauncher : MonoBehaviour
         {
             ExitGamePop();
         });
-        Screen.SetResolution(1920, 1080, switchover);    
         FullScreen();
     }
 

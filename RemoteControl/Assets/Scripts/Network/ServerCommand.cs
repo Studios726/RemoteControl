@@ -527,10 +527,12 @@ public class TaskCommand
 {
     public int ID { get; set; }
     public string QuerySystem { get; set; }
-    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长 7雷达左侧右侧换向设定 8 雷达左侧右侧防撞设定 9 两长一短 10振打电机11换层设定
+    //任务ID 0发任务 1获取任务当前状态 2修改当前任务状态 3边界确认 4测试bug 5定位确认 6两短一长 7雷达左侧右侧换向设定 8 雷达左侧右侧防撞设定 9 两长一短 10振打电机11换层设定12强制执行任务
     public int Command_Type { get; set; }
     //0新任务 1恢复上次任务
     public int IsTaskContinued{ get; set; }
+    //0默认 1继续 2结束任务
+    public int IsAutoContinued{get; set;}
     //任务ID
     public string TaskID {  get; set; }
     //任务创建时间
@@ -582,11 +584,11 @@ public class TaskCommand
     //任务结束执行方式[调零，关设备] 0 否 1 是
     public List<int> FinishMethod {  get; set; }
     //雷达左侧右侧距离设定
-    public List<float> ReversingValueList {  get; set; }
+    public List<List<float>> ReversingValueList {  get; set; }
     //雷达左侧右侧距离碰撞设定【左，右】
-    public List<float> CollisionValueList {  get; set; }
+    public List<List<float>> CollisionValueList {  get; set; }
     //换层设定【左，右】
-    public List<float> LayerValueList {  get; set; }
+    public List<List<float>> LayerValueList {  get; set; }
     //两短一长
     public List<float> TwoShortOneLongList{  get; set;}
     //振打电机【开始时间，循环时间】
@@ -631,21 +633,37 @@ public class CommonTaskParameters
     /// </summary>
     public float FetchHorizontalRangeSub{ get; set; }
     /// <summary>
-    /// 左侧设定
+    /// 左侧设定-左
     /// </summary>
     public float BucketLidarDisLeft{ get; set; }
     /// <summary>
-    /// 右侧设定
+    /// 左侧设定-右
+    /// </summary>
+    public float BucketLidarDisLeft_Right{ get; set; }
+    /// <summary>
+    /// 右侧设定-左
     /// </summary>
     public float BucketLidarDisRight{ get; set; }
     /// <summary>
-    /// 左侧防撞设定
+    /// 右侧设定-右
+    /// </summary>
+    public float BucketLidarDisRight_Right{ get; set; }
+    /// <summary>
+    /// 左侧防撞设定-左
     /// </summary>
     public float BucketLidarCollisionValueLeft{ get; set; }
     /// <summary>
-    /// 右侧防撞设定
+    /// 左侧防撞设定-右
+    /// </summary>
+    public float BucketLidarCollisionValueLeft_Right{ get; set; }
+    /// <summary>
+    /// 右侧防撞设定-左
     /// </summary>
     public float BucketLidarCollisionValueRight{ get; set; }
+    /// <summary>
+    /// 右侧防撞设定-右
+    /// </summary>
+    public float BucketLidarCollisionValueRight_Right{ get; set; }
     /// <summary>
     /// 两短一长设置第一个
     /// </summary>
@@ -663,13 +681,21 @@ public class CommonTaskParameters
     /// </summary>
     public float VibrationMotorLoopTime{ get; set;}
     /// <summary>
-    /// 左侧换层设定
+    /// 左侧换层设定-左
     /// </summary>
     public float LayerLeftValue{ get; set;}
+    /// <summary>
+    /// 左侧换层设定-右
+    /// </summary>
+    public float LayerLeftValue_Right{ get; set;}
     /// <summary>
     /// 右侧换层设定
     /// </summary>
     public float LayerRightValue{ get; set;}
+    /// <summary>
+    /// 右侧换层设定-右
+    /// </summary>
+    public float LayerRightValue_Right{ get; set;}
 }
 public class TaskRange
 {
