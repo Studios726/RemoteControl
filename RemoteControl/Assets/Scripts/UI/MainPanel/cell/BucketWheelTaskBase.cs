@@ -8,6 +8,14 @@ using UnityEngine.UI;
 using Utility;
 using Debug = UnityEngine.Debug;
 
+public enum SymbolType
+{
+    ADD,SUB
+}
+public enum InputFieldType
+{
+    LEFTRANGE,RIGHTRANGE,STEPVALUE,ANGLEVALUE
+}
 public class BucketWheelTaskBase : PanelBase
 {
     public ButtonCell scramStopBtn;
@@ -27,6 +35,8 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell RightAngleToggle;
     public ButtonCell ObliqueAngleToggle;
     public InputField AngleEntryText;
+    public Button angleEntryAddBtn;
+    public Button angleEntrySubBtn;
     public ButtonCell EntryModeClose;
     public ButtonCell EntryModeOpen;
     public GameObject entryModeGo;
@@ -59,8 +69,14 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell TwoShortOneLongBtn;
     
     public InputField leftTakeMaterText;
+    public Button leftTakeMaterAddBtn;
+    public Button leftTakeMaterSubBtn;
     public InputField rightTakeMaterText;
+    public Button rightTakeMaterAddBtn;
+    public Button rightTakeMaterSubBtn;
     public InputField takeMaterStep;
+    public Button takeMaterStepAddBtn;
+    public Button takeMaterStepSubBtn;
     public InputField layerHigh;
     public InputField timeHourText;
     public InputField timeMinuteText;
@@ -516,6 +532,42 @@ public class BucketWheelTaskBase : PanelBase
                 rightTurnToggle.SetSelectState(true);
             }
         }));
+        leftTakeMaterAddBtn.onClick.AddListener((() =>
+        {
+            SetInputFieldByAddSubBtn(InputFieldType.LEFTRANGE, SymbolType.ADD);
+        }));
+        leftTakeMaterSubBtn.onClick.AddListener((() =>
+        {
+            SetInputFieldByAddSubBtn(InputFieldType.LEFTRANGE, SymbolType.SUB);
+        }));
+        
+        rightTakeMaterAddBtn.onClick.AddListener((() =>
+        {
+            SetInputFieldByAddSubBtn(InputFieldType.RIGHTRANGE, SymbolType.ADD);
+        }));
+        rightTakeMaterSubBtn.onClick.AddListener((() =>
+        {
+            SetInputFieldByAddSubBtn(InputFieldType.RIGHTRANGE, SymbolType.SUB);
+        }));
+        
+        takeMaterStepAddBtn.onClick.AddListener((() =>
+        {
+            SetInputFieldByAddSubBtn(InputFieldType.STEPVALUE, SymbolType.ADD);
+        }));
+        takeMaterStepSubBtn.onClick.AddListener((() =>
+        {
+            SetInputFieldByAddSubBtn(InputFieldType.STEPVALUE, SymbolType.SUB);
+        }));
+        
+        angleEntryAddBtn.onClick.AddListener((() =>
+        {
+            SetInputFieldByAddSubBtn(InputFieldType.ANGLEVALUE, SymbolType.ADD);
+        }));
+        angleEntrySubBtn.onClick.AddListener((() =>
+        {
+            SetInputFieldByAddSubBtn(InputFieldType.ANGLEVALUE, SymbolType.SUB);
+        }));
+        
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
             InputFieldValueRange(startTakeMaterText, 0, 265, 0);
@@ -812,6 +864,10 @@ public class BucketWheelTaskBase : PanelBase
         // PositionConfirmBtn.gameObject.SetActive(false);
     }
 
+    public void SetInputFieldByAddSubBtn(InputFieldType inputFieldType,SymbolType symbolType)
+    {
+        Debug.Log($">>>>>>>>>>>{ inputFieldType } {symbolType}<<<<<<<<<<<<<<<<");
+    }
     public virtual void InputFieldValueRange(InputField inputField, float min, float max, float defaultValue,
         string commandName = "")
     {
