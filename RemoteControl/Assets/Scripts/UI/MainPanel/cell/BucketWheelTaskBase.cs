@@ -90,7 +90,15 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell takeMaterStopBtn;
     public ButtonCell takeMaterReversingBtn;
     public ButtonCell takeMaterEndBtn;
+    public AddSubPanel addSubPanel;
     private ButtonCell curTaskButtonCell;
+    private Dictionary<InputFieldType,List<float>> _dictionary=new Dictionary<InputFieldType, List<float>>()
+    {
+        {InputFieldType.LEFTRANGE,new List<float>(){0.5f, 1 ,   2 ,  5   , 10}},
+        {InputFieldType.RIGHTRANGE,new List<float>(){0.5f, 1 ,   2 ,  5   , 10}},
+        {InputFieldType.STEPVALUE,new List<float>(){0.1f,   0.2f ,  0.3f,   0.4f  , 0.5f}},
+        {InputFieldType.ANGLEVALUE,new List<float>(){0.1f  , 0.2f ,  0.5f,   1f ,  2f}}
+    };
     public Machine machine;
     private Timer reversingTimer;
     private Timer scramStopTimer;
@@ -534,38 +542,38 @@ public class BucketWheelTaskBase : PanelBase
         }));
         leftTakeMaterAddBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.LEFTRANGE, SymbolType.ADD);
+            SetInputFieldByAddSubBtn(InputFieldType.LEFTRANGE, SymbolType.ADD, leftTakeMaterText.transform.position);
         }));
         leftTakeMaterSubBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.LEFTRANGE, SymbolType.SUB);
+            SetInputFieldByAddSubBtn(InputFieldType.LEFTRANGE, SymbolType.SUB,leftTakeMaterSubBtn.transform.position);
         }));
         
         rightTakeMaterAddBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.RIGHTRANGE, SymbolType.ADD);
+            SetInputFieldByAddSubBtn(InputFieldType.RIGHTRANGE, SymbolType.ADD,rightTakeMaterAddBtn.transform.position);
         }));
         rightTakeMaterSubBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.RIGHTRANGE, SymbolType.SUB);
+            SetInputFieldByAddSubBtn(InputFieldType.RIGHTRANGE, SymbolType.SUB,rightTakeMaterSubBtn.transform.position);
         }));
         
         takeMaterStepAddBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.STEPVALUE, SymbolType.ADD);
+            SetInputFieldByAddSubBtn(InputFieldType.STEPVALUE, SymbolType.ADD, takeMaterStepAddBtn.transform.position);
         }));
         takeMaterStepSubBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.STEPVALUE, SymbolType.SUB);
+            SetInputFieldByAddSubBtn(InputFieldType.STEPVALUE, SymbolType.SUB,takeMaterStepSubBtn.transform.position);
         }));
         
         angleEntryAddBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.ANGLEVALUE, SymbolType.ADD);
+            SetInputFieldByAddSubBtn(InputFieldType.ANGLEVALUE, SymbolType.ADD,angleEntryAddBtn.transform.position);
         }));
         angleEntrySubBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.ANGLEVALUE, SymbolType.SUB);
+            SetInputFieldByAddSubBtn(InputFieldType.ANGLEVALUE, SymbolType.SUB,angleEntrySubBtn.transform.position);
         }));
         
         if (machine == Machine.BucketWheelStackerReclaimer)
@@ -864,9 +872,40 @@ public class BucketWheelTaskBase : PanelBase
         // PositionConfirmBtn.gameObject.SetActive(false);
     }
 
-    public void SetInputFieldByAddSubBtn(InputFieldType inputFieldType,SymbolType symbolType)
+    public void SetInputFieldByAddSubBtn(InputFieldType inputFieldType,SymbolType symbolType,Vector3 position)
     {
-        Debug.Log($">>>>>>>>>>>{ inputFieldType } {symbolType}<<<<<<<<<<<<<<<<");
+        addSubPanel?.SetDataByAddSubBtn(inputFieldType, symbolType,position,_dictionary[inputFieldType],(
+            (i, inputField, symbolType) =>
+            {
+                SetInputFieldValue(i, inputField, symbolType);
+            } ));
+    }
+    private void SetInputFieldValue(int index,InputFieldType inputFieldType ,SymbolType symbolType)
+    {
+        InputField curInputField = null;
+        float num=symbolType == SymbolType.ADD ? (float) _dictionary[inputFieldType][index] : -(float) _dictionary[inputFieldType][index];
+        if (inputFieldType==InputFieldType.LEFTRANGE)
+        {
+            curInputField = leftTakeMaterText;
+        }else if (inputFieldType==InputFieldType.RIGHTRANGE)
+        {
+            curInputField = rightTakeMaterText;
+        }else if (inputFieldType==InputFieldType.ANGLEVALUE)
+        {
+            curInputField = AngleEntryText;
+        }else if (inputFieldType==InputFieldType.STEPVALUE)
+        {
+            curInputField = takeMaterStep;
+        }
+        else
+        {
+            Debug.LogError("未定义的InputFieldType");
+            return;
+        }
+        curInputField.text=(float.Parse(curInputField.text) + num).ToString();
+        curInputField.onEndEdit?.Invoke(curInputField.text);
+        SendTaskCommand(OperationType.RESET);
+        Debug.Log($"设置输入框的值{num} {inputFieldType} {symbolType}");
     }
     public virtual void InputFieldValueRange(InputField inputField, float min, float max, float defaultValue,
         string commandName = "")

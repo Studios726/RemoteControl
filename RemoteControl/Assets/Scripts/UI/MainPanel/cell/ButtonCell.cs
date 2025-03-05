@@ -53,7 +53,13 @@ public class ButtonCell : MonoBehaviour
             text.color = color;
         }
     }
-
+    public void SetText(string str)
+    {
+        if (text!=null&&text.text!=str)
+        {
+            text.text = str;
+        }
+    }
     public void SetBgColor(Color color)
     {
         if (bg!=null&&bg.color!=color)
