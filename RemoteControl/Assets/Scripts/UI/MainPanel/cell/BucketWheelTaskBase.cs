@@ -904,8 +904,11 @@ public class BucketWheelTaskBase : PanelBase
         }
         curInputField.text=(float.Parse(curInputField.text) + num).ToString();
         curInputField.onEndEdit?.Invoke(curInputField.text);
-        SendTaskCommand(OperationType.RESET);
-        Debug.Log($"设置输入框的值{num} {inputFieldType} {symbolType}");
+        if (IsCanSet()==false)
+        {
+            SendTaskCommand(OperationType.RESET);
+        }
+        Debug.Log($"设置输入框的值{num} {inputFieldType} {symbolType} {IsCanSet()}");
     }
     public virtual void InputFieldValueRange(InputField inputField, float min, float max, float defaultValue,
         string commandName = "")

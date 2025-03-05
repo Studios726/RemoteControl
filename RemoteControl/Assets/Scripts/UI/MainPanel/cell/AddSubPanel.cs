@@ -39,7 +39,6 @@ public class AddSubPanel :PanelBase
                 }
             }
             gameObject.SetActive(isOnClick);
-            Debug.Log($"update show addsubpanel {isOnClick} {transform.position}");
         }
     }
     private void Start()
