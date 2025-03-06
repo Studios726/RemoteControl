@@ -556,6 +556,9 @@ public class TaskDataManager : Singleton<TaskDataManager>
             else if (taskVariables.Error == 3)
             {
                 tips = $"当前任务无法执行该操作，请检查相关作业条件";
+            } else if (taskVariables.Error ==4)
+            {
+                tips = $"大臂回正中";
             }
             else
             {
