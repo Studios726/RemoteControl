@@ -46,22 +46,18 @@ public class AddSubPanel :PanelBase
         AddOnClickListener(buttonCell_1, (() =>
         {
             action?.Invoke(0, inputFieldType, symbolType);
-            gameObject.SetActive(false);
         }));
         AddOnClickListener(buttonCell_2, (() =>
         {
             action?.Invoke(1, inputFieldType, symbolType);
-            gameObject.SetActive(false);
         }));
         AddOnClickListener(buttonCell_3, (() =>
         {
             action?.Invoke(2, inputFieldType, symbolType);
-            gameObject.SetActive(false);
         }));
         AddOnClickListener(buttonCell_4, (() =>
         {
             action?.Invoke(3, inputFieldType, symbolType);
-            gameObject.SetActive(false);
         }));
     }
     public void SetDataByAddSubBtn(InputFieldType inputFieldType, SymbolType symbolType,Vector3 position,List<float> list,Action<int, InputFieldType, SymbolType> action)

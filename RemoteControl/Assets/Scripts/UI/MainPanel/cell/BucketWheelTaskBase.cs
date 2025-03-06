@@ -108,6 +108,8 @@ public class BucketWheelTaskBase : PanelBase
     private int RefrashLogCount = 0;
     private bool isRefrash;
     private bool isInitData;
+    private Timer refreshResetTextTimer;
+    private bool isRefreshResetText;
 
     public virtual void Start()
     {
@@ -220,6 +222,13 @@ public class BucketWheelTaskBase : PanelBase
         }
         else
         {
+            if (isRefreshResetText)
+            {
+                AngleEntryText.SetTextByFocused(taskCommand.AngleEntryValue.ToString());
+                leftTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.startValue.ToString());
+                rightTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.endValue.ToString());
+                takeMaterStep.SetTextByFocused(taskCommand.StepLength.ToString());
+            }
             startTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.startValue.ToString());
             stopTakeMaterText.SetTextByFocused(taskCommand.MaterialRange.endValue.ToString());
             if (taskCommand.SideSelection == "LEFT")
@@ -242,12 +251,9 @@ public class BucketWheelTaskBase : PanelBase
             confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
             // PositionConfirmBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
             TwoShortOneLongBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
-            AngleEntryText.SetTextByFocused(taskCommand.AngleEntryValue.ToString());
+            
             leftTurnToggle.SetSystemState(taskCommand.TurnMode == TurnMode.LEFTTURN, true);
             rightTurnToggle.SetSystemState(taskCommand.TurnMode == TurnMode.RIGHTTURN, true);
-            leftTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.startValue.ToString());
-            rightTakeMaterText.SetTextByFocused(taskCommand.LeftRightRange.endValue.ToString());
-            takeMaterStep.SetTextByFocused(taskCommand.StepLength.ToString());
             takeMaterStartBtn.SetSystemState(taskCommand.AllData.OperationCommandList[0] == 1, true);
             takeMaterStopBtn.SetSystemState(taskCommand.AllData.OperationCommandList[1] == 1, true);
             resetTaskBtn.SetSystemState(taskCommand.ResetState == 1, true);
@@ -281,6 +287,7 @@ public class BucketWheelTaskBase : PanelBase
 
     public virtual void Init()
     {
+        isRefreshResetText = true;
         AddOnClickListener(scramStopBtn, (() =>
         {
             {
@@ -542,7 +549,7 @@ public class BucketWheelTaskBase : PanelBase
         }));
         leftTakeMaterAddBtn.onClick.AddListener((() =>
         {
-            SetInputFieldByAddSubBtn(InputFieldType.LEFTRANGE, SymbolType.ADD, leftTakeMaterText.transform.position);
+            SetInputFieldByAddSubBtn(InputFieldType.LEFTRANGE, SymbolType.ADD, leftTakeMaterAddBtn.transform.position);
         }));
         leftTakeMaterSubBtn.onClick.AddListener((() =>
         {
@@ -906,8 +913,20 @@ public class BucketWheelTaskBase : PanelBase
         curInputField.onEndEdit?.Invoke(curInputField.text);
         if (IsCanSet()==false)
         {
+            isRefreshResetText = false;
+            if (refreshResetTextTimer!=null)
+            {
+                refreshResetTextTimer.Cancel();
+                refreshResetTextTimer = null;
+            }
+            refreshResetTextTimer= Timer.Register(2f, (() =>
+            {
+                isRefreshResetText = true;
+                TaskDataManager.Instance.UpdateTaskData();
+            }));
             SendTaskCommand(OperationType.RESET);
         }
+        
         Debug.Log($"设置输入框的值{num} {inputFieldType} {symbolType} {IsCanSet()}");
     }
     public virtual void InputFieldValueRange(InputField inputField, float min, float max, float defaultValue,
