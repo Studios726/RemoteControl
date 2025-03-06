@@ -586,7 +586,7 @@ public class BucketWheelTaskBase : PanelBase
         if (machine == Machine.BucketWheelStackerReclaimer)
         {
             InputFieldValueRange(startTakeMaterText, 0, 265, 0);
-            InputFieldValueRange(stopTakeMaterText, 0, 265, 0);
+            InputFieldValueRange(stopTakeMaterText, 0, 265, 265);
         }
         else
         {
