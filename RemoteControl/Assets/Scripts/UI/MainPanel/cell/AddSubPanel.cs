@@ -11,6 +11,7 @@ public class AddSubPanel :PanelBase
     public ButtonCell buttonCell_2;
     public ButtonCell buttonCell_3;
     public ButtonCell buttonCell_4;
+    public ButtonCell buttonCell_5;
     public Action<int, InputFieldType, SymbolType> action;
     private InputFieldType inputFieldType;
     private SymbolType symbolType;
@@ -59,18 +60,23 @@ public class AddSubPanel :PanelBase
         {
             action?.Invoke(3, inputFieldType, symbolType);
         }));
+        AddOnClickListener(buttonCell_5, (() =>
+        {
+            action?.Invoke(4, inputFieldType, symbolType);
+        }));
     }
     public void SetDataByAddSubBtn(InputFieldType inputFieldType, SymbolType symbolType,Vector3 position,List<float> list,Action<int, InputFieldType, SymbolType> action)
     {
         gameObject.SetActive(true);
         this.inputFieldType=inputFieldType;
         this.symbolType=symbolType;
-        position.y = position.y - 0.079f;
+        position.y = position.y + 0.079f;
         transform.position = position;
         this.action=action;
         buttonCell_1.SetText(list[0].ToString());
         buttonCell_2.SetText(list[1].ToString());
         buttonCell_3.SetText(list[2].ToString());
         buttonCell_4.SetText(list[3].ToString());
+        buttonCell_5.SetText(list[4].ToString());
     }
 }
