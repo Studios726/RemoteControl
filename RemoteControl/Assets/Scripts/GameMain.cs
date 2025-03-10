@@ -45,7 +45,7 @@ namespace RemoteControl
                 UpdateChart?.Cancel();
                 UpdateChart = null;
             }
-            chartTimer = Timer.Register(10, true, true, (() =>
+            chartTimer = Timer.Register(2, true, true, (() =>
             {
                 GameDataManager.Instance.RecordChart();
             }));

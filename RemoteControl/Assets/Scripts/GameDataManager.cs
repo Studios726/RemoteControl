@@ -204,12 +204,12 @@ public class GameDataManager : Singleton<GameDataManager>
 
     public void TestData()
     {
-        // _systemVariables.BucketWheelMaterialUnloadingRunning = true;
-        // _systemVariables.BucketWheelMotorRunning =true;
-        // _systemVariables.BucketWheelMaterialLoadingRunning = true;
-        // _systemVariables.AllowBucketWheelMaterialUnloading = true;
-        // _systemVariables.RotaryElectricCurrent = 4;
-        // _systemVariables.SuspensionBeltElectricCurrent = 5;
+        // _systemVariables.DC_Pos = 2;
+        // _systemVariables.DC_Pos_2 =3;
+        // _systemVariables.SLEW_Angle = 4;
+        // _systemVariables.SLEW_Angle_2 = 5;
+        // _systemVariables.Luff_Angle = 6;
+        // _systemVariables.Luff_Angle_2 = 7;
     }
     public void SetFlowMeterData(List<FlowMeter_data> datas)
     {
@@ -885,6 +885,17 @@ public class GameDataManager : Singleton<GameDataManager>
                 string d=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
                     _systemVariables.SuspensionBeltElectricCurrent, "悬胶电流",
                     Machine.BucketWheelStackerReclaimer);
+                
+                string i1=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_MACHINE_POSITION,
+                    _systemVariables.DC_Pos, "大车位置",
+                    Machine.BucketWheelStackerReclaimer);
+                
+                string j1=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_MACHINE_ROTATION_ANGLE,
+                    _systemVariables.SLEW_Angle, "回转角度",
+                    Machine.BucketWheelStackerReclaimer);
+                string k1=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_MACHINE_PITCH_ANGLE,
+                    _systemVariables.Luff_Angle, "俯仰角度",
+                    Machine.BucketWheelStackerReclaimer);
 
                 string e=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC,
                     _systemVariables.BucketWheelElectricCurrent_2, "斗轮电流",
@@ -901,7 +912,17 @@ public class GameDataManager : Singleton<GameDataManager>
                 string h=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC,
                     _systemVariables.SuspensionBeltElectricCurrent_2, "悬胶电流",
                     Machine.BucketWheel);
-                sql = $"{a};{b};{c};{d};{e};{f};{g};{h}";
+                string i=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_MACHINE_POSITION,
+                    _systemVariables.DC_Pos_2, "大车位置",
+                    Machine.BucketWheel);
+                
+                string j=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_MACHINE_ROTATION_ANGLE,
+                    _systemVariables.SLEW_Angle_2, "回转角度",
+                    Machine.BucketWheel);
+                string k=DataManager.Instance.InsertHistoryChartData(ConstStr.DATABASE_HISTORY_MACHINE_PITCH_ANGLE,
+                    _systemVariables.Luff_Angle_2, "俯仰角度",
+                    Machine.BucketWheel);
+                sql = $"{a};{b};{c};{d};{i1};{j1};{k1};{e};{f};{g};{h};{i};{j};{k};";
             }
 
             if (GameMain!=null&&GameMain.connectionFM.isConnect == true)

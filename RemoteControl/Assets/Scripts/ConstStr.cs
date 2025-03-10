@@ -39,6 +39,9 @@ public static class ConstStr
     public const string DATABASE_HISTORY_CARTELECTRICITY_MC = "history_cartElectricity";
     public const string DATABASE_HISTORY_ROTELECTRICITY_MC = "history_rotElectricity";
     public const string DATABASE_HISTORY_SUSPENSOID_ELECTRICITY_MC = "history_suspensoidElectricity";
+    public const string DATABASE_HISTORY_MACHINE_POSITION = "history_machine_position";
+    public const string DATABASE_HISTORY_MACHINE_ROTATION_ANGLE = "history_machine_rotation_angle";
+    public const string DATABASE_HISTORY_MACHINE_PITCH_ANGLE = "history_machine_pitch_angle";
     public const string DATABASE_HISTORY_BUCKETWHEEL_ELECTRICITY_MC = "history_bucketWheelElectricity";
     public const string DATABASE_HISTORY_CANTILEVER_Flow_MC = "history_cantileverFlow";
     public const string DATABASE_HISTORY_LOG1_MC = "history_logs";

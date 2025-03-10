@@ -43,13 +43,19 @@ public enum ChartName
     TrolleyCurrent_1,
     TrolleyCurrent_2,
     SlewingCurrent_1,
+    Position_1,
+    RotationAngle_1,
+    PitchAngle_1,
     SlewingCurrent_2,
     SuspendedGelCurrent_1,
     SuspendedGelCurrent_2,
     CantileverCurrent_1,
     CantileverCurrent_2,
     allElectricity_1,
-    allElectricity_2
+    allElectricity_2,
+    Position_2,
+    RotationAngle_2,
+    PitchAngle_2,
 }
 
 public class HistoryChartData
@@ -89,12 +95,18 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public LineChart cantileverChart_1;
     public LineChart bucketWheelChart_1;
     public LineChart allChart_1;
+    public LineChart positionChart_1;
+    public LineChart rotationAngleChart_1;
+    public LineChart pitchAngleChart_1;
     public LineChart trolleyElectricityChart_2;
     public LineChart slewingChart_2;
     public LineChart suspensoidChart_2;
     public LineChart cantileverChart_2;
     public LineChart bucketWheelChart_2;
     public LineChart allChart_2;
+    public LineChart positionChart_2;
+    public LineChart rotationAngleChart_2;
+    public LineChart pitchAngleChart_2;
     private MySqlDataReader _dataReader = null;
     private DataSet dataSet;
     public ButtonCell bucketWheelCurrent_1; //斗轮电流
@@ -109,6 +121,15 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     public ButtonCell cantileverCurrent_2;
     public ButtonCell allElectricity_1; //全部电流
     public ButtonCell allElectricity_2;
+    
+    public ButtonCell position_1; //大车位置
+    public ButtonCell position_2;
+    
+    public ButtonCell rotationAngel_1; //回转角度
+    public ButtonCell rotationAngel_2;
+    
+    public ButtonCell pitchAngle_1; //俯仰角度
+    public ButtonCell pitchAngle_2;
     
     public SelectElectricityShowItem selectElectricityShowItem_1;
     public SelectElectricityShowItem selectElectricityShowItem_2;
@@ -224,6 +245,54 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             SetSearchPanelDate(curChartName);
             UpdateCurChart(nameof(allElectricity_2));
         }));
+        
+        AddOnClickListener(position_1, () =>
+        {
+            ResetLastButtonState(position_1);
+            curChartName = ChartName.Position_1;
+            SetSearchPanelDate(curChartName);
+            UpdateCurChart(nameof(position_1));
+        });
+
+        AddOnClickListener(position_2, () =>
+        {
+            ResetLastButtonState(position_2);
+            curChartName = ChartName.Position_2;
+            SetSearchPanelDate(curChartName);
+            UpdateCurChart(nameof(position_2));
+        });
+        
+        AddOnClickListener(rotationAngel_1, () =>
+        {
+            ResetLastButtonState(rotationAngel_1);
+            curChartName = ChartName.RotationAngle_1;
+            SetSearchPanelDate(curChartName);
+            UpdateCurChart(nameof(rotationAngel_1));
+        });
+
+        AddOnClickListener(rotationAngel_2, () =>
+        {
+            ResetLastButtonState(rotationAngel_2);
+            curChartName = ChartName.RotationAngle_2;
+            SetSearchPanelDate(curChartName);
+            UpdateCurChart(nameof(rotationAngel_2));
+        });
+        
+        AddOnClickListener(pitchAngle_1, () =>
+        {
+            ResetLastButtonState(pitchAngle_1);
+            curChartName = ChartName.PitchAngle_1;
+            SetSearchPanelDate(curChartName);
+            UpdateCurChart(nameof(pitchAngle_1));
+        });
+
+        AddOnClickListener(pitchAngle_2, () =>
+        {
+            ResetLastButtonState(pitchAngle_2);
+            curChartName = ChartName.PitchAngle_2;
+            SetSearchPanelDate(curChartName);
+            UpdateCurChart(nameof(pitchAngle_2));
+        });
 
         historyBtn.onClick.AddListener((() =>
         {
@@ -277,6 +346,12 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         dateDic.Add(ChartName.CantileverCurrent_2.ToString(), new DateCell(startDate, endDate));
         dateDic.Add(ChartName.allElectricity_1.ToString(), new DateCell(startDate, endDate));
         dateDic.Add(ChartName.allElectricity_2.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.Position_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.Position_2.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.RotationAngle_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.RotationAngle_2.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.PitchAngle_1.ToString(), new DateCell(startDate, endDate));
+        dateDic.Add(ChartName.PitchAngle_2.ToString(), new DateCell(startDate, endDate));
     }
 
     private void UpdateDateDic(ChartName chartName)
@@ -334,6 +409,9 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         SetLineChartParms(cantileverChart_1);
         SetLineChartParms(bucketWheelChart_1);
         SetLineChartParms(bucketWheelChart_1);
+        SetLineChartParms(positionChart_1);
+        SetLineChartParms(rotationAngleChart_1);
+        SetLineChartParms(pitchAngleChart_1);
         // SetLineChartParms(allChart_1);
 
         SetLineChartParms(trolleyElectricityChart_2);
@@ -342,6 +420,9 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         SetLineChartParms(cantileverChart_2);
         SetLineChartParms(bucketWheelChart_2);
         SetLineChartParms(trolleyElectricityChart_2);
+        SetLineChartParms(positionChart_2);
+        SetLineChartParms(rotationAngleChart_2);
+        SetLineChartParms(pitchAngleChart_2);
         // SetLineChartParms(allChart_2);
         SetAllChartSerie(allChart_2);
         SetAllChartSerie(allChart_1);
@@ -578,6 +659,64 @@ public class ImportantParamsGraphPanel : MonoBehaviour
             ResetLastChart(allChart_2);
             historyChartData.SetData(allChart_2, "ALL", Machine.BucketWheel);
             searchPanel.searchBtn.onClick?.Invoke();
+        }else if (str == nameof(position_1))
+        {
+            ResetLastChart(positionChart_1);
+            historyChartData.SetData(positionChart_1, ConstStr.DATABASE_HISTORY_MACHINE_POSITION,
+                Machine.BucketWheelStackerReclaimer);
+            if (positionChart_1.series[0].data.Count <= 0)
+            {
+                searchPanel.searchBtn.onClick?.Invoke();
+            }
+        }
+        else if (str == nameof(position_2))
+        {
+            ResetLastChart(positionChart_2);
+            historyChartData.SetData(positionChart_2, ConstStr.DATABASE_HISTORY_MACHINE_POSITION,
+                Machine.BucketWheel);
+            if (positionChart_2.series[0].data.Count <= 0)
+            {
+                searchPanel.searchBtn.onClick?.Invoke();
+            }
+        }else if (str == nameof(rotationAngel_1))
+        {
+            ResetLastChart(rotationAngleChart_1);
+            historyChartData.SetData(rotationAngleChart_1, ConstStr.DATABASE_HISTORY_MACHINE_ROTATION_ANGLE,
+                Machine.BucketWheelStackerReclaimer);
+            if (rotationAngleChart_1.series[0].data.Count <= 0)
+            {
+                searchPanel.searchBtn.onClick?.Invoke();
+            }
+        }
+        else if (str == nameof(rotationAngel_2))
+        {
+            ResetLastChart(rotationAngleChart_2);
+            historyChartData.SetData(rotationAngleChart_2, ConstStr.DATABASE_HISTORY_MACHINE_ROTATION_ANGLE,
+                Machine.BucketWheel);
+            if (rotationAngleChart_2.series[0].data.Count <= 0)
+            {
+                searchPanel.searchBtn.onClick?.Invoke();
+            }
+        }
+        else if (str == nameof(pitchAngle_1))
+        {
+            ResetLastChart(pitchAngleChart_1);
+            historyChartData.SetData(pitchAngleChart_1, ConstStr.DATABASE_HISTORY_MACHINE_PITCH_ANGLE,
+                Machine.BucketWheelStackerReclaimer);
+            if (pitchAngleChart_1.series[0].data.Count <= 0)
+            {
+                searchPanel.searchBtn.onClick?.Invoke();
+            }
+        }
+        else if (str == nameof(pitchAngle_2))
+        {
+            ResetLastChart(pitchAngleChart_2);
+            historyChartData.SetData(pitchAngleChart_2, ConstStr.DATABASE_HISTORY_MACHINE_PITCH_ANGLE,
+                Machine.BucketWheel);
+            if (pitchAngleChart_2.series[0].data.Count <= 0)
+            {
+                searchPanel.searchBtn.onClick?.Invoke();
+            }
         }
     }
 
@@ -760,6 +899,27 @@ public class ImportantParamsGraphPanel : MonoBehaviour
                 UpdateChartData(GameDataManager.Instance.SystemVariables.RotaryElectricCurrent_2, 2);
                 UpdateChartData(GameDataManager.Instance.SystemVariables.SuspensionBeltElectricCurrent_2, 3);
                 return;
+            } else if (curChartName == ChartName.Position_1)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.DC_Pos;
+            }
+            else if (curChartName == ChartName.Position_2)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.DC_Pos_2;
+            }else if (curChartName == ChartName.RotationAngle_1)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.SLEW_Angle;
+            }
+            else if (curChartName == ChartName.RotationAngle_2)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.SLEW_Angle_2;
+            }else if (curChartName == ChartName.PitchAngle_1)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.Luff_Angle;
+            }
+            else if (curChartName == ChartName.PitchAngle_2)
+            {
+                tempChartValue = GameDataManager.Instance.SystemVariables.Luff_Angle_2;
             }
 
             UpdateChartData(tempChartValue);
