@@ -675,7 +675,8 @@ public class ImportantParamsGraphPanel : MonoBehaviour
 
         foreach (var data in tempChartData)
         {
-            lastChart.AddData(0, data.date, data.Value);
+            double num = Math.Floor(data.Value * 100) / 100;
+            lastChart.AddData(0, data.date, num);
         }
     }
     private void UpdateChartData(float value,int serieIndex=0)
@@ -697,7 +698,8 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         
         foreach (var data in allTempChartData[serieIndex])
         {
-            lastChart.AddData(serieIndex, data.date, data.Value);
+            double num = Math.Floor(data.Value * 100) / 100;
+            lastChart.AddData(serieIndex, data.date,num);
         }
     }
     public void DynamicUpdateData(object sender, EventArgs e)
