@@ -66,7 +66,7 @@ namespace XCharts.Runtime
                     }
                     else
                     {
-                        s_NumberToStr[value][formatter] = value.ToString("F2");
+                        s_NumberToStr[value][formatter] = value.ToString();
                     }
                    
                 }
