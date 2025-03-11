@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b5532b1c-7e78-432b-98ba-40d9beeadb73" name="Changes" comment="任务参数修改">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RemoteControl/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RemoteControl/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/UI/MainPanel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/UI/MainPanel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/AppLauncher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/AppLauncher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/HistoryPanelView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/HistoryPanelView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +55,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/761cf2a144514d2291a678c334d49e9baa000/43/cb896b9f/DefaultValueHandling.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/13/3aa4daab/Vector2.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/48/adbe5712/UnitySynchronizationContext.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/75/153bc5a1/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/7a/13db699b/Color.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/b2/6eaecdc2/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/9f3a85291030466a836f1a243152940e175e00/c4/4dbc73ce/Ray.cs" root0="SKIP_HIGHLIGHTING" />
@@ -1081,13 +1085,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/UI/HistoryWarningPanel/HistoryPanelView.cs</url>
-          <line>261</line>
+          <line>262</line>
           <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\HistoryWarningPanel\HistoryPanelView.cs" containingFunctionPresentation="Method 'GetLatestOperationLogs'">
             <startOffsets>
-              <option value="11794" />
+              <option value="11845" />
             </startOffsets>
             <endOffsets>
-              <option value="11851" />
+              <option value="11902" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="200" />
@@ -1429,6 +1433,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="265" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/UI/MainPanel/MainPanelView.cs</url>
+          <line>97</line>
+          <properties documentPath="D:\Work\RemoteControl\Assets\Scripts\UI\MainPanel\MainPanelView.cs" containingFunctionPresentation="Method 'ActiveHideBtnCtr1'">
+            <startOffsets>
+              <option value="4805" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4898" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="266" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -35,7 +35,7 @@ public class AppLauncher : MonoBehaviour
 //                              `=---='                              
 //                  ████████ 佛祖保佑 永无BUG ████████                         
 //                                                             
-        DataManager.Instance.IsUseData = true;
+        DataManager.Instance.IsUseData = false;
         Application.targetFrameRate = 60;
         UIInit();
         _gameMain=this.gameObject.AddComponent<GameMain>();

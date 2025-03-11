@@ -116,6 +116,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         });
         historyTakeBtn.onClick.AddListener(() =>
         {
+            Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>");
             historyTakeBtn.gameObject.SetActive(false);
             dynamicTakeBtn.gameObject.SetActive(true);
             if (curPanelType == PanelType.AlarmPanel)
@@ -286,7 +287,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         dateDic[ConstStr.DATABASE_HISTORY_WARNING2_MC].IsDynamic = true;
         SetSearchPanelDate(_stackerReclaimer,ConstStr.DATABASE_HISTORY_WARNING1_MC);
         SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_WARNING2_MC);
-        historyTakeBtn.onClick.Invoke();
+        // historyTakeBtn.onClick.Invoke();
         historyPileTakeBtn.onClick.Invoke();
         GetLatestWarningLogs();
     }
@@ -306,7 +307,7 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
         dateDic[ConstStr.DATABASE_HISTORY_LOG2_MC].IsDynamic = true;
         SetSearchPanelDate(_stackerReclaimer,ConstStr.DATABASE_HISTORY_LOG1_MC);
         SetSearchPanelDate(_reclaimer,ConstStr.DATABASE_HISTORY_LOG2_MC);
-        historyTakeBtn.onClick.Invoke();
+        // historyTakeBtn.onClick.Invoke();
         historyPileTakeBtn.onClick.Invoke();
         GetLatestOperationLogs();
       
@@ -448,9 +449,12 @@ public class HistoryPanelView : UIView<HistoryPanelCtr>
                     
                 }else if (key==ConstStr.DATABASE_HISTORY_WARNING2_MC||key == ConstStr.DATABASE_HISTORY_LOG2_MC)
                 {
-                    historyTakeBtn.gameObject.SetActive(dateDic[key].IsDynamic==false);
-                    dynamicTakeBtn.gameObject.SetActive(dateDic[key].IsDynamic);
-                    _reclaimer.gameObject.SetActive(dateDic[key].IsDynamic==false);
+                    // historyTakeBtn.gameObject.SetActive(dateDic[key].IsDynamic==false);
+                    // dynamicTakeBtn.gameObject.SetActive(dateDic[key].IsDynamic);
+                    // _reclaimer.gameObject.SetActive(dateDic[key].IsDynamic==false);
+                    historyTakeBtn.gameObject.SetActive(false);
+                    dynamicTakeBtn.gameObject.SetActive(false);
+                    _reclaimer.gameObject.SetActive(false);
                 }
                 else
                 {
