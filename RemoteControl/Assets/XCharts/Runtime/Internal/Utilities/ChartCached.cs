@@ -59,14 +59,14 @@ namespace XCharts.Runtime
                     s_NumberToStr[value][formatter] = value.ToString();
                 }else if (formatter.StartsWith(NUMERIC_FORMATTER_O)||formatter.StartsWith(NUMERIC_FORMATTER_o))
                 {
-                    if (value.ToString().Length>=9)
+                    if (value.ToString().Length>=9&&value>1000000)
                     {
                         DateTime dateTime = DateTimeUtil.GetDateTime((int)value);
                         s_NumberToStr[value][formatter] = dateTime.ToString("HH:mm:ss");
                     }
                     else
                     {
-                        s_NumberToStr[value][formatter] = value.ToString();
+                        s_NumberToStr[value][formatter] = value.ToString("F2");
                     }
                    
                 }
