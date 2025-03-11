@@ -358,6 +358,10 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     {
         if (dateDic.ContainsKey(chartName.ToString()))
         {
+            if (searchPanel?.GetStartDateText()=="----")
+            {
+                return;
+            }
             dateDic[chartName.ToString()].StartTime = searchPanel?.GetStartDateText();
             dateDic[chartName.ToString()].EndTime = searchPanel?.GetEndDateText();
         }
@@ -750,7 +754,7 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         {
             return;
         }
-
+        Debug.Log($"查询时间{startTime}  {endTime}");
         UpdateDateDic(curChartName);
         int addNum = dataSet.Tables[0].Rows.Count / 1000;
         addNum = addNum == 0 ? 1 : addNum;
