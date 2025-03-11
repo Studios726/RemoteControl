@@ -2810,7 +2810,9 @@ namespace ShenYangRemoteSystem.Subclass
         public float SR1_Stack_LeftBorder { get; set; }
         public float SR1_Stack_RightBorder { get; set; }
         public bool SR1_3D_Unusable { get; set; }
-
+        //2025/3/11
+        public bool BeltTAKE_Dis { get; set; }
+        public bool BeltStack_Dis{ get; set; }
 
 
 

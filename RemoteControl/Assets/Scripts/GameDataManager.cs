@@ -163,11 +163,11 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             IsCanPop = false;
             Timer.Register(_systemVariables.BeltRealyDis, false, false, (() => { IsCanPop = true; }));
-            if (_systemVariables.SuspensionBeltLoadingRunning)
+            if (_systemVariables.BeltStack_Dis)
             {
                 PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis, Machine.BucketWheelStackerReclaimer);
             }
-            else if (_systemVariables.SuspensionBeltUnloadingRunning)
+            else if (_systemVariables.BeltTAKE_Dis)
             {
                 PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis, Machine.BucketWheelStackerReclaimer);
             }else
@@ -183,17 +183,18 @@ public class GameDataManager : Singleton<GameDataManager>
         {
             IsCanPopTakeMater = false;
             Timer.Register(_systemVariables.BeltRealyDis_2, false, false, (() => { IsCanPopTakeMater = true; }));
-            if (_systemVariables.SuspensionBeltUnloadingRunning_2)
-            {
-                PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis_2, Machine.BucketWheel);
-            }else if (_systemVariables.SuspensionBeltLoadingRunning_2)
-            {
-                PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis_2, Machine.BucketWheel);
-            }
-            else
-            {
-                Debug.Log($"2#悬胶堆料:{_systemVariables.SuspensionBeltLoadingRunning_2} 悬胶取料 {_systemVariables.SuspensionBeltUnloadingRunning_2}");
-            }
+            PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis_2, Machine.BucketWheel);
+            // if (_systemVariables.SuspensionBeltUnloadingRunning_2)
+            // {
+            //     PileTakeMaterPop(TaskType.TAKEMATER, _systemVariables.BeltRealyDis_2, Machine.BucketWheel);
+            // }else if (_systemVariables.SuspensionBeltLoadingRunning_2)
+            // {
+            //     PileTakeMaterPop(TaskType.PILEMATER, _systemVariables.BeltRealyDis_2, Machine.BucketWheel);
+            // }
+            // else
+            // {
+            //     Debug.Log($"2#悬胶堆料:{_systemVariables.SuspensionBeltLoadingRunning_2} 悬胶取料 {_systemVariables.SuspensionBeltUnloadingRunning_2}");
+            // }
           
         }
 
