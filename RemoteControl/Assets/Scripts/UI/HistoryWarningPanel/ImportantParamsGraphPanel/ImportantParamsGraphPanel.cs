@@ -283,6 +283,10 @@ public class ImportantParamsGraphPanel : MonoBehaviour
     {
         if (dateDic.ContainsKey(chartName.ToString()))
         {
+            if (searchPanel?.GetStartDateText()=="----")
+            {
+                return;
+            }
             dateDic[chartName.ToString()].StartTime = searchPanel?.GetStartDateText();
             dateDic[chartName.ToString()].EndTime = searchPanel?.GetEndDateText();
         }
@@ -616,11 +620,13 @@ public class ImportantParamsGraphPanel : MonoBehaviour
         int addNum = dataSet.Tables[0].Rows.Count / 1000;
         addNum = addNum == 0 ? 1 : addNum;
         DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
+        double value = 0;
         for (int i = dataRowCollection.Count - 1; i >= 0; i -= addNum)
         {
+            value=Math.Floor(float.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_VALUE].ToString()) * 100) / 100;
             lineChart.AddData(serieIndex,
                 DateTime.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_TIME].ToString()),
-                float.Parse(dataRowCollection[i][ConstStr.DATA_HISTORY_CARTELECTRICITY_VALUE].ToString()));
+                value);
         }
     }
 
