@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using ShangHaiPro;
 using Unity.VisualScripting;
@@ -147,30 +148,55 @@ public class TaskParmsSetting : MonoBehaviour
       {
          Timer?.Resume();
       }
-      
-      DataSet dataSet=DataManager.Instance.GetTaskConfigMcData(Machine);
-      if (dataSet!=null)
+      SetTaskParms();
+   }
+
+   public async void SetTaskParms()
+   {
+      DataSet dataSet = null;
+      await Task.Run((() =>
+      {
+         dataSet = DataManager.Instance.GetTaskConfigMcData(Machine);
+      }));
+      if (dataSet != null)
       {
          DataRowCollection dataRowCollection = dataSet.Tables[0].Rows;
          for (int i = 0; i < dataRowCollection.Count; i++)
          {
             HeapDis.SetCurValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_HEAPDOS].ToString()));
-            FetchPileDepth.SetCurValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH].ToString()));
-           
-            FetchVerticalRangeAdd.SetCurValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString()));
-            FetchHorizontalRangeSub.SetCurValue( float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString()));
-            LeftRadarPos.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT].ToString()),float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT_RIGHT].ToString()));
-            RightRadarPos.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString()),float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT_RIGHT].ToString()));
-            LeftRadarCollision.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT].ToString()),float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT_RIGHT].ToString()));
-            RightRadarCollision.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT].ToString()),float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT_RIGHT].ToString()));
-            LeftRadarVerticalDis.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALLEFT].ToString()),float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALLEFT_RIGHT].ToString()));
-            RightRadarVerticalDis.SetTaskValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT].ToString()),float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT_RIGHT].ToString()));
-            TwoShortOneLong.SetValue(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST].ToString(),dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND].ToString());
-            VibrationMotor.SetValue(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_START].ToString(),dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP].ToString());
+            FetchPileDepth.SetCurValue(float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHPILEDEPTH]
+               .ToString()));
+
+            FetchVerticalRangeAdd.SetCurValue(
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHVERTICALRANGEADD].ToString()));
+            FetchHorizontalRangeSub.SetCurValue(
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_FETCHORIZONTALTANGESUB].ToString()));
+            LeftRadarPos.SetTaskValue(
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT].ToString()),
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETLEFT_RIGHT].ToString()));
+            RightRadarPos.SetTaskValue(
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT].ToString()),
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_REVERSALSETRIGHT_RIGHT].ToString()));
+            LeftRadarCollision.SetTaskValue(
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT].ToString()),
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONLEFT_RIGHT].ToString()));
+            RightRadarCollision.SetTaskValue(
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT].ToString()),
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_COLLISIONRIGHT_RIGHT].ToString()));
+            LeftRadarVerticalDis.SetTaskValue(
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALLEFT].ToString()),
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALLEFT_RIGHT].ToString()));
+            RightRadarVerticalDis.SetTaskValue(
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT].ToString()),
+               float.Parse(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VERTICALRIGHT_RIGHT].ToString()));
+            TwoShortOneLong.SetValue(
+               dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_FIRST].ToString(),
+               dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_TWO_SHORT_ONE_LONG_SECOND].ToString());
+            VibrationMotor.SetValue(dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_START].ToString(),
+               dataRowCollection[i][ConstStr.DATA_TASK_CONFIG_VIBRATION_MOTOR_LOOP].ToString());
          }
       }
    }
-
    private void OnDisable()
    {
       Timer?.Pause();

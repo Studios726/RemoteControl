@@ -170,7 +170,7 @@ public static class ConstStr
     public const float InitBucketWheelHeigh = 7.48f;
     public const string BucketWheelStackerReclaimerName = "1#斗轮堆取料机";
     public const string BucketWheelName = "2#斗轮取料机";
-    public const string Version = "v0.2.20250312-m";
+    public const string Version = "v0.1.20250313-m";
 }
 
 public enum Machine
