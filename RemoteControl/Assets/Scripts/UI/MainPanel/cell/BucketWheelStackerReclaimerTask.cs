@@ -533,13 +533,13 @@ public class BucketWheelStackerReclaimerTask : BucketWheelTaskBase
         // pileMaterStopBtn.SetSystemState(false,true);
         // pileMaterEndBtn.SetSystemState(false,true);
         
-        pileMaterStartBtn.SetSelectState(false);
-        pileMaterStopBtn.SetSelectState(false);
-        pileMaterEndBtn.SetSelectState(false);
-        pileResetTaskBtn.SetSelectState(false);
-        PileAutoMaxToggle.SetSystemState(false,true);
-        PileSemiAutoToggle.SetSystemState(true,true);
-        PileRightAngleToggle.SetSystemState(false,true);
-        PileObliqueAngleToggle.SetSystemState(true,true);
+        // pileMaterStartBtn.SetSelectState(false);
+        // pileMaterStopBtn.SetSelectState(false);
+        // pileMaterEndBtn.SetSelectState(false);
+        // pileResetTaskBtn.SetSelectState(false);
+        // PileAutoMaxToggle.SetSystemState(false,true);
+        // PileSemiAutoToggle.SetSystemState(true,true);
+        // PileRightAngleToggle.SetSystemState(false,true);
+        // PileObliqueAngleToggle.SetSystemState(true,true);
     }
 }
