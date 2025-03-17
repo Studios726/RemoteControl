@@ -31,30 +31,32 @@ public class TaskCodeDes
         {
             list = new List<float> { 0, 0, 0 };
         }
-        NextPositionList = new List<float>(list); // 或者 NextPositionList = list.ToList();
-        StringBuilder sb = new StringBuilder("下一目标点 ");
-        if (list != null)
-        {
-            for (int i = 0; i < list.Count; i++)
-            {
-                switch (i)
-                {
-                    case 0:
-                        sb.Append($"回转: {list[i].ToString("F1")}° ");
-                        break;
-                    // case 1:
-                    //     sb.Append($"俯仰: {list[i].ToString("F1")}° ");
-                    //     break;
-                    case 2:
-                        sb.Append($"前进: {list[i].ToString("F1")}m");
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
 
-        Pos = sb.ToString();
+        UpdateNextPositionList(list);
+        // NextPositionList = new List<float>(list); // 或者 NextPositionList = list.ToList();
+        // StringBuilder sb = new StringBuilder("下一目标点 ");
+        // if (list != null)
+        // {
+        //     for (int i = 0; i < list.Count; i++)
+        //     {
+        //         switch (i)
+        //         {
+        //             case 0:
+        //                 sb.Append($"回转: {list[i].ToString("F1")}° ");
+        //                 break;
+        //             // case 1:
+        //             //     sb.Append($"俯仰: {list[i].ToString("F1")}° ");
+        //             //     break;
+        //             case 2:
+        //                 sb.Append($"前进: {list[i].ToString("F1")}m");
+        //                 break;
+        //             default:
+        //                 break;
+        //         }
+        //     }
+        // }
+        //
+        // Pos = sb.ToString();
     }
 
     public void UpdateNextPositionList(List<float> list)

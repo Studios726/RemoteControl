@@ -34,6 +34,7 @@ public class BucketWheelTaskBase : PanelBase
     public ButtonCell ShuntToggle;
     public ButtonCell RightAngleToggle;
     public ButtonCell ObliqueAngleToggle;
+    public Text ShuntText;
     public InputField AngleEntryText;
     public Button angleEntryAddBtn;
     public Button angleEntrySubBtn;
@@ -246,6 +247,8 @@ public class BucketWheelTaskBase : PanelBase
             entryModeGo.SetActive(taskCommand.AutoMode == AutoMode.AUTOMAX);
             SemiAutoToggle.SetSystemState(taskCommand.AutoMode == AutoMode.SemiAuto, true);
             ShuntToggle.SetSystemState(taskCommand.AutoMode == AutoMode.Shunt, true);
+            ShuntText.gameObject.SetActive(taskCommand.AutoMode == AutoMode.Shunt);
+            ShuntText.text =taskCommand.AutoMode == AutoMode.Shunt?$"回转:{taskCommand.AllData.NextPositionList[0].ToString("F1")}° 俯仰:{taskCommand.AllData.NextPositionList[1].ToString("F1")}° 前进:{taskCommand.AllData.NextPositionList[2].ToString("F1")}m":"";
             rootEntryModeGo.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
             leftRightTurnGo.SetActive(taskCommand.AutoMode != AutoMode.Shunt);
             confirmTurnBtn.gameObject.SetActive(taskCommand.AutoMode == AutoMode.SemiAuto);
@@ -473,6 +476,7 @@ public class BucketWheelTaskBase : PanelBase
                 AutoMaxToggle.SetSystemState(true, true);
                 SemiAutoToggle.SetSystemState(false, true);
                 ShuntToggle.SetSystemState(false,true);
+                ShuntText.gameObject.SetActive(false);
                 entryModeGo.SetActive(false);
                 rootEntryModeGo.SetActive(false);
                 leftRightTurnGo.SetActive(true);
@@ -492,6 +496,7 @@ public class BucketWheelTaskBase : PanelBase
                 AutoMaxToggle.SetSystemState(false, true);
                 SemiAutoToggle.SetSystemState(true, true);
                 ShuntToggle.SetSystemState(false, true);
+                ShuntText.gameObject.SetActive(false);
                 entryModeGo.SetActive(false);
                 rootEntryModeGo.SetActive(true);
                 leftRightTurnGo.SetActive(true);
@@ -511,6 +516,8 @@ public class BucketWheelTaskBase : PanelBase
                 AutoMaxToggle.SetSystemState(false, true);
                 SemiAutoToggle.SetSystemState(false, true);
                 ShuntToggle.SetSystemState(true, true);
+                ShuntText.text = "";
+                ShuntText.gameObject.SetActive(true);
                 entryModeGo.SetActive(false);
                 rootEntryModeGo.SetActive(false);
                 leftRightTurnGo.SetActive(false);
